@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "wiki:build": "python3 scripts/build-wiki.py"
   },
   "devDependencies": {
     "vitepress": "^1.6.3"

@@ -1,3 +1,5 @@
 node_modules/
 .vitepress/dist/
 .vitepress/cache/
+.wiki/
+wiki-build/
