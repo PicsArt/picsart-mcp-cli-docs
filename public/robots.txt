@@ -1,0 +1,9 @@
+# NOTE: robots.txt is only honored at the domain ROOT. On the GitHub Pages
+# project subpath this file lives at /<repo>/robots.txt and crawlers ignore it
+# for directives — submit the sitemap to Search Console directly there. It
+# becomes fully effective once the site moves to a custom domain (where this
+# file is served at the root), so update the Sitemap URL when that happens.
+User-agent: *
+Allow: /
+
+Sitemap: https://picsart.github.io/picsart-mcp-cli-docs/sitemap.xml
