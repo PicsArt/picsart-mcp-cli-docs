@@ -35,17 +35,17 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 |---|---|---|
 | [Seedance](/reference/providers/seedance) | Seedance 2.0 (+ Fast, Edit, Extend) | Reference image, keyframes, native audio, 4–15s |
 | [Google](/reference/providers/google) | Veo 3.1 / Fast / Lite | 1080p+, native audio, chainable extend |
-| OpenAI | Sora 2, Sora 2 Pro, Sora 2 Extend | Photoreal motion + synced audio |
-| Kling | Kling V3, Video O1, Motion Control, Avatar, Effects | High-motion; motion control from a still |
-| Wan | Wan 2.7 (t2v/i2v/r2v/edit) | Versatile, crisp detail |
-| Runway | Gen 4.5, Aleph, Gen4 Ref, Avatar | Editing & reference workflows |
-| MiniMax | Hailuo 2.3 (+ Pro/Fast) | Fast, expressive motion |
-| LTX | LTX 2.3 Pro/Fast, A2V, Extend, Retake | Audio-to-video & re-takes |
-| Luma | Ray 2, Flash 2, Reframe | Reframing & fast generation |
-| Pika | Pika 2.2, Scenes, Frames | Scene & keyframe control |
-| Grok | Imagine Video, Edit, Extend | — |
-| VEED · HeyGen · Creatify | Fabric, Talking Photo, Aurora | Avatar / talking-photo |
-| ByteDance · OVI · Videography · HappyHorse | Upscaler, OmniHuman, OVI, Videography, Happy Horse | Specialized |
+| [OpenAI](/reference/providers/openai) | Sora 2, Sora 2 Pro, Sora 2 Extend | Photoreal motion + synced audio |
+| [Kling](/reference/providers/kling) | Kling V3, Video O1, Motion Control, Avatar, Effects | High-motion; motion control from a still |
+| [Wan](/reference/providers/wan) | Wan 2.7 (t2v/i2v/r2v/edit) | Versatile, crisp detail |
+| [Runway](/reference/providers/runway) | Gen 4.5, Aleph, Gen4 Ref, Avatar | Editing & reference workflows |
+| [MiniMax](/reference/providers/minimax) | Hailuo 2.3 (+ Pro/Fast) | Fast, expressive motion |
+| [LTX](/reference/providers/ltx) | LTX 2.3 Pro/Fast, A2V, Extend, Retake | Audio-to-video & re-takes |
+| [Luma](/reference/providers/luma) | Ray 2, Flash 2, Reframe | Reframing & fast generation |
+| [Pika](/reference/providers/pika) | Pika 2.2, Scenes, Frames | Scene & keyframe control |
+| [Grok](/reference/providers/grok) | Imagine Video, Edit, Extend | — |
+| [VEED](/reference/providers/veed) · [HeyGen](/reference/providers/heygen) · [Creatify](/reference/providers/creatify) | Fabric, Talking Photo, Aurora | Avatar / talking-photo |
+| [ByteDance](/reference/providers/bytedance) · [OVI](/reference/providers/ovi) · [Videography](/reference/providers/videography) · [HappyHorse](/reference/providers/happyhorse) | Upscaler, OmniHuman, OVI, Videography, Happy Horse | Specialized |
 
 ## Extending clips
 
