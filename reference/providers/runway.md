@@ -56,16 +56,53 @@ gen-ai generate -m runway-gen4-aleph -p "claymation style" --video ./clip.mp4
   } }
 ```
 
-## Parameters — `runway-gen4.5`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `runway-avatar-video` — Runway Avatar
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤ 1000 chars) |
+| `style` | `--style` | enum | `game-character` (Game Character) · `music-superstar` (Music Superstar) · `game-character-man` (Game Character Man) · `cat-character` (Cat Character) · `influencer` (Influencer) · `tennis-coach` (Tennis Coach) · `human-resource` (Human Resource) · `fashion-designer` (Fashion Designer) · `cooking-teacher` (Cooking Teacher) (default `game-character`) |
+| `voiceId` | `--voice` | enum | `victoria` (Victoria) · `vincent` (Vincent) · `clara` (Clara) · `drew` (Drew) · `skye` (Skye) · `max` (Max) · `morgan` (Morgan) · `felix` (Felix) · `mia` (Mia) · `marcus` (Marcus) · `summer` (Summer) · `ruby` (Ruby) · `aurora` (Aurora) · `jasper` (Jasper) · `leo` (Leo) · `adrian` (Adrian) · `nina` (Nina) · `emma` (Emma) · `blake` (Blake) · `david` (David) · `maya` (Maya) · `nathan` (Nathan) · `sam` (Sam) · `georgia` (Georgia) · `petra` (Petra) · `adam` (Adam) · `zach` (Zach) · `violet` (Violet) · `roman` (Roman) · `luna` (Luna) (default `victoria`) |
+| `prompt` | `-p` | text | free text (≤1500 chars) |
+| `audioUrl` | `-a` | file | audio |
+
+### `runway-gen4.5` — Runway Gen 4.5
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
 | `duration` | `-d` | enum | `5` · `8` · `10` (default `5`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `imageUrls` | `-i` | file | start image (max 1) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info runway-gen4.5 --json`. Gen 4.5 is a unified surface — passing a start image (`imageUrls`) switches it from text-to-video to image-to-video.
+### `runway-gen4-aleph` — Runway Aleph
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `runway-gen4-ref` — Runway Gen4 Ref
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+
+> **Notes:** Gen 4.5 is a unified surface — passing a start image (`imageUrls`) switches it from text-to-video to image-to-video.
 
 ## Pricing
 

@@ -57,28 +57,43 @@ gen-ai generate -m qwen-image-edit-plus \
   } }
 ```
 
-## Parameters — `qwen-image-2`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `qwen-image-2` — Qwen 2
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | optional reference image (max 1) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info qwen-image-2 --json`.
+### `qwen-image-2-pro` — Qwen 2 Pro
 
-## Parameters — `qwen-image-2-pro`
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (max 800 chars) |
-| `negativePrompt` | `--neg` | text | what to avoid |
+| `prompt` | `-p` | text | **required** (≤800 chars) |
+| `negativePrompt` | `--neg` | text | free text |
 | `resolution` | `-r` | enum | `2048x2048` · `2688x1536` · `1536x2688` · `2368x1728` · `1728x2368` (default `2048x2048`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | rewrite the prompt for richer detail (default `true`) |
-| `imageUrls` | `-i` | file | optional reference image(s) (max 3) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
 
-> Source: `gen-ai models info qwen-image-2-pro --json`. `qwen-image-edit-plus` takes `prompt` (**required**) and `imageUrls` (**required**, up to 3 source images).
+### `qwen-image-edit-plus` — Qwen Edit Plus
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+
+> **Notes:** `qwen-image-edit-plus` requires both `prompt` and `imageUrls` (up to 3 source images).
 
 ## Pricing
 

@@ -54,20 +54,38 @@ gen-ai generate -m ideogram-character \
   } }
 ```
 
-## Parameters — `ideogram-v3`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `ideogram-v3` — Ideogram v3
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `3:4` · `4:3` (default `16:9`) |
-| `renderingSpeed` | `--rendering-speed` | enum | `FLASH` · `TURBO` · `DEFAULT` · `QUALITY` (default `DEFAULT`) |
-| `style` | `--style` | enum | `GENERAL` · `REALISTIC` · `DESIGN` (default `GENERAL`) |
+| `renderingSpeed` | `--speed` | enum | `FLASH` (Flash) · `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
+| `style` | `--style` | enum | `GENERAL` (General) · `REALISTIC` (Realistic) · `DESIGN` (Design) (default `GENERAL`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `negativePrompt` | `--neg` | text | terms to exclude |
-| `imageUrls` | `-i` | file | reference image (max 1) |
-| `imageWeight` | `--image-weight` | range | `1`–`100`, step `5` (default `50`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `1`–`100`, step 5, default `50` |
 
-> Source: `gen-ai models info ideogram-v3 --json`. `ideogram-character` shares this surface and uses a reference image (`imageUrls`) to lock the subject's identity.
+### `ideogram-character` — Ideogram Character
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `1024x1024` · `1344x768` · `768x1344` · `1152x864` · `864x1152` · `832x1248` · `1280x800` (default `1024x1024`) |
+| `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
+| `style` | `--style` | enum | `AUTO` (Auto) · `REALISTIC` (Realistic) · `FICTION` (Fiction) (default `AUTO`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+> **Notes:** `ideogram-character` uses a reference image (`imageUrls`) to lock the subject’s identity.
 
 ## Pricing
 

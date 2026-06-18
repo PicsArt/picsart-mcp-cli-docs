@@ -55,24 +55,61 @@ gen-ai generate -m minimax-music-v2 \
   } }
 ```
 
-## Parameters — `hailuo-2.3`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `hailuo-2.3` — Hailuo 2.3
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `enhancePrompt` | `--enhance-prompt` | boolean | auto-optimize prompt (default `true`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
 | `duration` | `-d` | enum | `6` · `10` (default `6`) |
-| `imageUrls` | `-i` | file | start image (image-to-video edit) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info hailuo-2.3 --json`. The **Pro** variants omit `duration` (fixed 6s at 1080p). On the **Fast** image-to-video models (`hailuo-2.3-fast`, `hailuo-2.3-fast-pro`), `imageUrls` is **required**. Note: 10s is available at 768p only — 1080p is always 6s.
+### `hailuo-2.3-pro` — Hailuo 2.3 Pro
 
-## Parameters — `minimax-music-v2`
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤ 2000 chars) |
+| `prompt` | `-p` | text | **required** |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info minimax-music-v2 --json`. Generates music with vocals from a single text prompt.
+### `hailuo-2.3-fast` — Hailuo 2.3 Fast
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `duration` | `-d` | enum | `6` · `10` (default `6`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `hailuo-2.3-fast-pro` — Hailuo 2.3 Fast Pro
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `minimax-music-v2` — MiniMax Music v2
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2000 chars) |
+
+> **Notes:** Pro variants omit `duration` (fixed 6s at 1080p); 10s is available at 768p only. On the Fast image-to-video models `imageUrls` is required.
 
 ## Pricing
 

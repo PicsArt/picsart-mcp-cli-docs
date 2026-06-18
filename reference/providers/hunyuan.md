@@ -43,17 +43,23 @@ gen-ai generate -m hunyuan-v3 \
   } }
 ```
 
-## Parameters — `hunyuan-v3`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `hunyuan-v3` — Hunyuan V3
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` (default `16:9`) |
 | `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
-| `negativePrompt` | `--neg` | text | concepts to steer away from |
-| `cfgScale` | `--cfg` | number | `1`–`20`, step `0.5` (default `7.5`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `cfgScale` | `--cfg` | number | `1`–`20`, step 0.5, default `7.5` |
 
-> Source: `gen-ai models info hunyuan-v3 --json`. `aspectRatio` maps to Fal's `image_size` enum, `count`→`num_images` (capped at 4), and `cfgScale`→`guidance_scale`.
+> **Notes:** `aspectRatio` maps to Fal `image_size`, `count`→`num_images` (capped at 4), `cfgScale`→`guidance_scale`.
 
 ## Pricing
 

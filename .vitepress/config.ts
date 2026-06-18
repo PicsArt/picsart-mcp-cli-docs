@@ -116,8 +116,8 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#d946a8' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Picsart CLI & MCP' }],
-    // Absolute social-share image (1200x630). public/og.png is a built asset;
-    // regenerate from the docs-site source (ai-toolkit/docs-site/scripts/make-og-image.mjs).
+    // Absolute social-share image (1200x630). Regenerate with
+    // `node docs-site/scripts/make-og-image.mjs`.
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],

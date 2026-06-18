@@ -59,29 +59,71 @@ gen-ai generate -m gpt-image-2 \
   } }
 ```
 
-## Parameters — `sora-2`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `sora-2-pro` — Sora 2 Pro
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1024p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `4`) |
+
+### `sora-2` — Sora 2
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 1) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
 | `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `4`) |
-| `imageUrls` | `-i` | file | reference image (first-frame, max 1) |
 
-> Source: `gen-ai models info sora-2 --json`. `sora-2-pro` shares this surface and adds 1080p output. `sora-2-extend` continues an existing video (chained from a source asset).
+### `sora-2-extend` — Sora 2 Extend
 
-## Parameters — `gpt-image-2`
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `videoId` | `--video-id` | enum | dynamic value (no fixed list) |
+| `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `8`) |
+
+### `gpt-image-2` — GPT Image 2
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
 | `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
-| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | source image(s) for editing (max 5) |
+| `imageUrls` | `-i` | file | image (up to 5) |
 
-> Source: `gen-ai models info gpt-image-2 --json`. `gpt-image-2` is opaque-only (no transparent background); `gpt-image-1.5` adds a transparent `background` option.
+### `gpt-image-1.5` — GPT Image 1.5
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` (default `1:1`) |
+| `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
+| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
+| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 5) |
+
+> **Notes:** `sora-2-pro` adds 1080p output; `sora-2-extend` continues an existing video. `gpt-image-2` is opaque-only; `gpt-image-1.5` adds a transparent `background` option.
 
 ## Pricing
 

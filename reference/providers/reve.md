@@ -42,16 +42,22 @@ gen-ai generate -m reve \
   } }
 ```
 
-## Parameters — `reve`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `reve` — Reve
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | source image for editing (single) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info reve --json`. Picsart routes Reve through the fal.ai Reve wrapper, so the catalog surface is intentionally narrow — direct-API fields like `negative_prompt`, `version`, `test_time_scaling`, and `postprocessing` are not exposed.
+> **Notes:** Routed through the fal.ai Reve wrapper, so the surface is intentionally narrow — direct-API fields like `negative_prompt`, `version`, `test_time_scaling`, `postprocessing` are not exposed.
 
 ## Pricing
 

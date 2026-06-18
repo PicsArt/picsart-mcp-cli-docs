@@ -62,29 +62,79 @@ gen-ai generate -m luma-uni-1 -p "a fox in a moss-green raincoat, storybook" --a
   } }
 ```
 
-## Parameters — `luma-ray-2`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `luma-ray-2` — Luma Ray 2
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
 | `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `9` (seconds, default `5`) |
-| `startFrame` | `--start-frame` | file | first-frame keyframe (image) |
-| `endFrame` | `--end-frame` | file | last-frame keyframe (image) |
+| `duration` | `-d` | enum | `5` · `9` (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
 
-> Source: `gen-ai models info luma-ray-2 --json`. **Flash 2** shares this surface; the **reframe** variants take a required `videoUrl` (`--video`) plus `--ar`.
+### `luma-ray-flash-2` — Luma Flash 2
 
-## Parameters — `luma-uni-1`
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (max 6000 chars) |
-| `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
-| `style` | `--style` | enum | `auto` · `manga` (default `auto`) |
-| `imageUrls` | `-i` | file | reference image(s), up to 9 |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
+| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
+| `duration` | `-d` | enum | `5` · `9` (default `5`) |
+| `startFrame` | `--start-frame` | file | **required** image |
+| `endFrame` | `--end-frame` | file | image |
 
-> Source: `gen-ai models info luma-uni-1 --json`. **UNI-1 Max** shares this surface.
+### `luma-ray-2-reframe-video` — Luma Ray 2 Reframe
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `luma-ray-flash-2-reframe-video` — Luma Flash 2 Reframe
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `luma-uni-1` — Luma UNI-1
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤6000 chars) |
+| `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
+| `style` | `--style` | enum | `auto` (Auto) · `manga` (Manga) (default `auto`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+
+### `luma-uni-1-max` — Luma UNI-1 Max
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤6000 chars) |
+| `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
+| `style` | `--style` | enum | `auto` (Auto) · `manga` (Manga) (default `auto`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+
+> **Notes:** The reframe variants take a required `videoUrl` (`--video`) plus `--ar`.
 
 ## Pricing
 

@@ -52,18 +52,68 @@ gen-ai generate -m ltx-v2.3-extend -p "the scene continues into night" --video .
   } }
 ```
 
-## Parameters — `ltx-v2.3-pro`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `ltx-v2.3-pro` — LTX 2.3 Pro
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `6` · `8` · `10` (seconds, default `6`) |
+| `duration` | `-d` | enum | `6` · `8` · `10` (default `6`) |
 | `resolution` | `-r` | enum | `1080p` · `1440p` · `2160p` (default `1080p`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `generateAudio` | `--audio-gen` | boolean | native audio track (default `true`) |
-| `imageUrls` | `-i` | file | start image (image-to-video) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info ltx-v2.3-pro --json`. The **Fast** variant shares this surface (plus longer durations at 1080p); A2V/extend/retake are Pro-only and take audio/video inputs.
+### `ltx-v2.3-fast` — LTX 2.3 Fast
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `6` · `8` · `10` · `12` · `14` · `16` · `18` · `20` (default `6`) |
+| `resolution` | `-r` | enum | `1080p` · `1440p` · `2160p` (default `1080p`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
+### `ltx-2.3-a2v` — LTX 2.3 Audio-to-Video
+
+Input type: `a2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `audioUrl` | `-a` | file | **required** audio |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `cfgScale` | `--cfg` | number | `1`–`50`, default `5` |
+
+### `ltx-v2.3-extend` — LTX 2.3 Extend
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `duration` | `-d` | enum | `5` · `10` · `15` · `20` (default `5`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `ltx-v2.3-retake` — LTX 2.3 Retake
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` · `15` · `20` (default `5`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+> **Notes:** A2V / extend / retake are Pro-only and take audio/video inputs; the Fast variant adds longer durations at 1080p.
 
 ## Pricing
 

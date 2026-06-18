@@ -61,17 +61,46 @@ gen-ai generate -m pika-2.2-frames -p "smooth transition" -i ./start.jpg --image
   } }
 ```
 
-## Parameters — `pika-2.2`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `pika-2.2` — Pika
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` (seconds, default `5`) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:5` · `5:4` · `3:2` · `2:3` (default `16:9`) |
 | `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `imageUrls` | `-i` | file | start image (max 1) — animates as first frame |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info pika-2.2 --json`. With an image input, `pika-2.2` runs image-to-video and derives the output aspect from the image (no `aspectRatio`). `pika-2.2-scenes` takes multiple ingredient images; `pika-2.2-frames` morphs between keyframes.
+### `pika-2.2-scenes` — Pika Scenes
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:5` · `5:4` · `3:2` · `2:3` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+
+### `pika-2.2-frames` — Pika Frames
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `imageUrls` | `-i` | file | **required** image (up to 2) |
+
+> **Notes:** With an image input, `pika-2.2` runs image-to-video and derives aspect from the image. `pika-2.2-scenes` takes ingredient images; `pika-2.2-frames` morphs between keyframes.
 
 ## Pricing
 

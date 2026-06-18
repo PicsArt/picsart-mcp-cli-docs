@@ -49,23 +49,29 @@ gen-ai generate -m bytedance-video-upscaler --video ./clip.mp4
   } }
 ```
 
-## Parameters — `bytedance-omnihuman-v1.5`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `bytedance-video-upscaler` — ByteDance Upscaler
+
+Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `imageUrls` | `-i` | file | **required** — portrait image (max 1) |
-| `audioUrl` | `-a` | file | **required** — driving audio track |
-| `prompt` | `-p` | text | steers picture/movement/camera (not lip-sync) |
+| `videoUrl` | `--video` | file | **required** video |
 
-> Source: `gen-ai models info bytedance-omnihuman-v1.5 --json`. Emotion and lip-sync come from the audio, so a text prompt is optional and only steers camera/motion.
+### `bytedance-omnihuman-v1.5` — ByteDance OmniHuman
 
-## Parameters — `bytedance-video-upscaler`
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `videoUrl` | `--video` | file | **required** — video to upscale (→ 1080p) |
+| `prompt` | `-p` | text | free text |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `audioUrl` | `-a` | file | **required** audio |
 
-> Source: `gen-ai models info bytedance-video-upscaler --json`.
+> **Notes:** OmniHuman 1.5 derives emotion and lip-sync from the audio, so `prompt` is optional and only steers camera/motion. The video upscaler takes only a source video.
 
 ## Pricing
 

@@ -56,13 +56,83 @@ The task-shaped `picsart_enhance` tool also routes to Topaz upscaling:
   } }
 ```
 
-## Parameters — `topaz-upscale-image`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `topaz-upscale-image` — Topaz HD Upscale
+
+Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `imageUrls` | `-i` | file | **required** · single image (max 1) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
 
-> Source: `gen-ai models info topaz-upscale-image --json`. The upscale model exposes only the input image; Topaz's automatic settings handle the rest (the catalog presets `upscale_factor: 2`, `model: Standard V2`, face enhancement, and `output_format: png`). The enhance variants share this surface, differing only in the enhancement `model` they send. See the [Topaz API reference](https://developer.topazlabs.com) for the underlying `/enhance` parameters (output dimensions, `crop_to_fill`, `face_enhancement`, `subject_detection`).
+### `topaz-enhance-standard-v2` — Topaz Standard
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-low-res-v2` — Topaz Low Res
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-cgi` — Topaz CGI
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-high-fidelity-v2` — Topaz Hi-Fi
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-text-refine` — Topaz Text
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-redefine` — Topaz Redefine
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-recovery` — Topaz Recovery
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `topaz-enhance-recovery-v2` — Topaz Recovery V2
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+> **Notes:** The upscale / enhance models expose only the input image; Topaz’s automatic settings handle the rest (presets differ per enhance model). See the [Topaz API reference](https://developer.topazlabs.com) for the underlying `/enhance` parameters.
 
 ## Pricing
 

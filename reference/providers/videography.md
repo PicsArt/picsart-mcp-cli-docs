@@ -33,13 +33,19 @@ gen-ai generate -m picsart-videography --image ./portrait.jpg
   } }
 ```
 
-## Parameters — `picsart-videography`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `picsart-videography` — Videography
+
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `imageUrls` | `-i` | file | **required** — source image (1) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
 
-> Source: `gen-ai models info picsart-videography --json`. Videography is image-driven: it takes a single source image and produces a video. There is no separate text prompt parameter.
+> **Notes:** Image-driven — a single source image in, a video out; there is no text prompt parameter.
 
 ## Pricing
 

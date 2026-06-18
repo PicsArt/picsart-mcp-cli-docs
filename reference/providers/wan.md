@@ -58,20 +58,68 @@ gen-ai generate -m wan-2.7-video-edit -p "convert to hand-drawn anime style" --v
   } }
 ```
 
-## Parameters — `wan-2.7-t2v`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `wan-2.7-t2v` — Wan 2.7
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` · `15` (seconds, default `5`) |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
 | `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
-| `negativePrompt` | `--neg` | text | what to avoid |
-| `enhancePrompt` | `--enhance-prompt` | boolean | auto-expand the prompt (default `true`) |
-| `audioUrl` | `-a` | file | driving audio track |
-| `startFrame` | `--start-frame` | file | first-frame keyframe |
+| `negativePrompt` | `--neg` | text | free text |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `audioUrl` | `-a` | file | audio |
+| `startFrame` | `--start-frame` | file | image |
 
-> Source: `gen-ai models info wan-2.7-t2v --json`. The i2v / r2v / video-edit variants share this surface; `wan-2.7-i2v` keys off `startFrame`, and the edit/reference variants take a `videoUrl` input.
+### `wan-2.7-i2v` — Wan 2.7 Image-to-Video
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `startFrame` | `--start-frame` | file | **required** image |
+| `endFrame` | `--end-frame` | file | image |
+| `audioUrl` | `-a` | file | audio |
+
+### `wan-2.7-r2v` — Wan 2.7 Ref-to-Video
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `imageUrls` | `-i` | file | **required** image (up to 5) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `wan-2.7-video-edit` — Wan 2.7 Video Edit
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | image (up to 3) |
+
+> **Notes:** `wan-2.7-i2v` keys off `startFrame`; the edit / reference variants take a `videoUrl` input.
 
 ## Pricing
 

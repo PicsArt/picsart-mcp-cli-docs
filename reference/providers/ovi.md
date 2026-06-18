@@ -48,15 +48,21 @@ gen-ai generate -m ovi -p "the portrait blinks and smiles" -i ./portrait.jpg
   } }
 ```
 
-## Parameters — `ovi`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `ovi` — OVI
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** — embed `<S>…<E>` speech and `<AUDCAP>…<ENDAUDCAP>` audio cues |
+| `prompt` | `-p` | text | **required** |
 | `size` | `--size` | enum | `9:16` · `16:9` · `1:1` · `9:16+` · `16:9+` · `2:5` · `5:2` (default `16:9`) |
-| `imageUrls` | `-i` | file | start image (max 1) — presence switches to image-to-video |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info ovi --json`. `size` maps to OVI's fixed `WIDTHxHEIGHT` resolution enum; it applies to text-to-video (image-to-video derives shape from the start image).
+> **Notes:** `size` maps to OVI’s fixed `WIDTHxHEIGHT` resolution enum; it applies to text-to-video (image-to-video derives shape from the start image).
 
 ## Pricing
 

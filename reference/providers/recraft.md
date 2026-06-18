@@ -71,15 +71,211 @@ gen-ai generate -m recraft-vectorize -i ./logo.png
   } }
 ```
 
-## Parameters — `recraftv4_1`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `recraftv4_1` — Recraft V4.1
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (max 10000 chars) |
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
-> Source: `gen-ai models info recraftv4_1 --json`. The **Pro**, **Utility**, and **Vector** V4.1 variants share this surface; the `recraft-vectorize` / `*-upscale` / `replace-bg` utility models take an image input (`-i`) instead.
+### `recraftv4_1_pro` — Recraft V4.1 Pro
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_utility` — Recraft V4.1 Utility
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_utility_pro` — Recraft V4.1 Utility Pro
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_vector` — Recraft V4.1 Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_pro_vector` — Recraft V4.1 Pro Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_utility_vector` — Recraft V4.1 Utility Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_1_utility_pro_vector` — Recraft V4.1 Utility Pro Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4` — Recraft V4
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `style` | `--style` | enum | `raster` (Raster) · `vector_illustration` (Vector (SVG)) (default `raster`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv3` — Recraft V3
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `style` | `--style` | enum | `realistic_image` (Realistic) · `digital_illustration` (Illustration) · `vector_illustration` (Vector (SVG)) · `any` (Any) (default `realistic_image`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
+
+### `recraftv4_pro` — Recraft V4 Pro
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `style` | `--style` | enum | `raster` (Raster) · `vector_illustration` (Vector (SVG)) (default `raster`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_vector` — Recraft V4 Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv4_pro_vector` — Recraft V4 Pro Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+
+### `recraftv3_vector` — Recraft V3 Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `recraft-vectorize` — Recraft Vectorize
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text (≤1000 chars) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `recraft-creative-upscale` — Recraft Creative Upscale
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `recraft-crisp-upscale` — Recraft Crisp Upscale
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `recraftv3-replace-bg` — Recraft Replace Background
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text (≤1000 chars) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `recraft-explore` — Recraft Explore
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+
+### `recraft-explore-similar` — Recraft Explore Similar
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `sourceImageId` | `--source-id` | text | **required** |
+| `similarity` | `--similarity` | integer | `1`–`5`, step 1, default `3` |
+
+> **Notes:** Vector variants output SVG; the `recraft-vectorize` / `*-upscale` / `replace-bg` utility models take an image input (`-i`). `recraft-explore` returns multiple images per call.
 
 ## Pricing
 

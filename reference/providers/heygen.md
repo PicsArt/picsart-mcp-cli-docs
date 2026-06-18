@@ -47,17 +47,23 @@ gen-ai generate -m heygen-talking-photo \
   } }
 ```
 
-## Parameters — `heygen-talking-photo`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `heygen-talking-photo` — HeyGen Talking Photo
+
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** · the spoken script (min 20 / max 1500 chars) |
-| `imageUrls` | `-i` | file | **required** · portrait image (1 max) |
-| `voiceId` | `--voice` | enum | **required** · HeyGen voice id (fetched at runtime from the voices list) |
-| `aspectRatio` | `--ar` | enum | `16:9` (default) · `9:16` |
-| `resolution` | `-r` | enum | `1080p` · `720p` (default) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `resolution` | `-r` | enum | `1080p` · `720p` (default `720p`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `voiceId` | `--voice` | enum | **required** |
+| `prompt` | `-p` | text | **required** (≤1500 chars) |
 
-> Source: `gen-ai models info heygen-talking-photo --json`. Available voice ids are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
+> **Notes:** Voice ids are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
 
 ## Pricing
 

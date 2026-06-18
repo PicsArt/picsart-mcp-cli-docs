@@ -50,23 +50,103 @@ gen-ai generate -m seedance-2.0-video-edit -p "claymation style" --video ./clip.
   } }
 ```
 
-## Parameters — `seedance-2.0`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `seedance-2.0` — Seedance 2.0
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` |
-| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` |
-| `duration` | `-d` | enum | `4`–`15` (integer seconds) |
-| `generateAudio` | `--audio-gen` | boolean | native audio track |
-| `returnLastFrame` | `--return-last-frame` | boolean | return final frame as a still |
-| `imageUrls` | `-i` | file | reference image(s) |
-| `videoUrls` | `--video` | file | source video (edit/extend) |
-| `audioUrls` | `-a` | file | audio track |
-| `startFrame` | `--start-frame` | file | first-frame keyframe |
-| `endFrame` | `--end-frame` | file | last-frame keyframe |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `10`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
 
-> Source: `gen-ai models info seedance-2.0 --json`. The **Fast** variants share this surface; edit/extend variants take a `videoUrls` input.
+### `seedance-2.0-fast` — Seedance 2.0 Fast
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `10`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+
+### `seedance-2.0-video-edit` — Seedance 2.0 Video Edit
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | image (up to 9) |
+
+### `seedance-2.0-fast-video-edit` — Seedance 2.0 Fast Video Edit
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | image (up to 9) |
+
+### `seedance-2.0-video-extend` — Seedance 2.0 Video Extend
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `15`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `videoUrls` | `--video-urls` | file | **required** video (up to 3) |
+
+### `seedance-2.0-fast-video-extend` — Seedance 2.0 Fast Video Extend
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `15`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `videoUrls` | `--video-urls` | file | **required** video (up to 3) |
+
+> **Notes:** The edit / extend variants take a `videoUrls` input.
 
 ## Pricing
 

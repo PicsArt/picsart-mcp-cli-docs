@@ -46,22 +46,106 @@ gen-ai generate -m elevenlabs-sfx -p "a heavy wooden door creaking open"
   } }
 ```
 
-## Parameters — `eleven-v3`
+## Parameters
 
-| Param | CLI flag | Type | Notes |
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `eleven-v3` — Eleven v3
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** — the text to speak |
-| `voiceId` | `--voice` | enum | 20 preset voice ids (see below) |
-| `language` | `--language` | text | language / locale |
-| `accent` | `--accent` | text | accent hint |
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | **required** (≤500 chars) |
+| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
 
-List the full, current voice catalog any time:
+### `eleven-multilingual-v2` — Eleven Multilingual v2
 
-```bash
-gen-ai models info eleven-v3 --json | jq '.paramConfig.voiceId.descriptor.options'
-```
+Input type: `tts`
 
-> Source: `gen-ai models info eleven-v3 --json`. Voice ids are 20 presets such as `JBFqnCBsd6RMkjVDRZzb`, `EkK5I93UQWFDigLMpZcX`, `RILOU7YmBhvwJGDGjNmP` — verify the live list before hard-coding.
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | **required** (≤500 chars) |
+| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
+
+### `elevenlabs-sfx` — ElevenLabs SFX v2
+
+Input type: `sfx`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `1` · `3` · `5` · `8` · `10` · `15` (default `5`) |
+
+### `eleven-sts-v2` — Eleven STS v2
+
+Input type: `sts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `audioUrl` | `-a` | file | **required** audio |
+| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `removeBackgroundNoise` | `--remove-bg-noise` | boolean | `true` · `false` (default `false`) |
+
+### `eleven-multilingual-sts-v2` — Eleven Multilingual STS v2
+
+Input type: `sts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `audioUrl` | `-a` | file | **required** audio |
+| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `removeBackgroundNoise` | `--remove-bg-noise` | boolean | `true` · `false` (default `false`) |
+
+### `eleven-audio-isolation` — Eleven Audio Isolation
+
+Input type: `sts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `audioUrl` | `-a` | file | **required** audio |
+
+### `eleven-dubbing` — Eleven Dubbing
+
+Input type: `sts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `audioUrl` | `-a` | file | **required** audio |
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+
+### `eleven-voice-design-v3` — Eleven Voice Design v3
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+
+### `eleven-voice-design-v2` — Eleven Voice Design Multilingual v2
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+
+### `eleven-voice-create` — Eleven Voice Previews
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+
+> **Notes:** TTS voice ids are presets (e.g. `JBFqnCBsd6RMkjVDRZzb`); verify the live list before hard-coding. STS models clone/transform an input clip.
 
 ## Pricing
 

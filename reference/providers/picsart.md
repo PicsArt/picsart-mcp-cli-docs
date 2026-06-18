@@ -68,14 +68,75 @@ gen-ai enhance -i ./low-res.jpg
   "arguments": { "imageUrls": ["https://example.com/low-res.jpg"] } }
 ```
 
-## Parameters — `picsart-sana-sprint-v1`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `picsart-sana-sprint-v1` — Picsart SANA-Sprint
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` (default) · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 
-> Source: `gen-ai models info picsart-sana-sprint-v1 --json`. The editing models (`picsart-change-bg`, `picsart-remove-bg`, `picsart-enhance`, `picsart-qwen-image-edit`, `picsart-qwen-makeup`) take an `imageUrls` (`-i`) input; `picsart-change-bg` and the Qwen edit models also accept a `prompt`.
+### `picsart-change-bg` — Picsart Change Background
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `prompt` | `-p` | text | **required** (≤460 chars) |
+
+### `picsart-remove-bg` — Remove Background
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `picsart-enhance` — Enhance
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+### `picsart-qwen-image-edit` — Picsart Image Edit
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+| `prompt` | `-p` | text | **required** |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `picsart-qwen-makeup` — Picsart Makeup
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `prompt` | `-p` | text | **required** |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `picsart-flux-klein` — Flux 2 Klein 4B
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `5:3` · `3:5` · `4:3` · `3:4` (default `1:1`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
+
+> **Notes:** The editing models take an `imageUrls` (`-i`) input; `picsart-change-bg` and the Qwen edit models also accept a `prompt`.
 
 ## Pricing
 

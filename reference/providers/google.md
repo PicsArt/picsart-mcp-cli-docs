@@ -39,37 +39,13 @@ gen-ai generate -m veo-3.1 -p "a drone shot over a snowy ridge at golden hour" \
   "arguments": { "model": "veo-3.1", "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p", "generateAudio": true } }
 ```
 
-**Parameters — `veo-3.1`**
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` |
-| `duration` | `-d` | enum | `4` · `6` · `8` |
-| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` |
-| `generateAudio` | `--audio-gen` | boolean | native audio |
-| `negativePrompt` | `--neg` | text | what to avoid |
-| `startFrame` / `endFrame` | `--start-frame` / `--end-frame` | file | keyframes |
-| `imageUrls` | `-i` | file | reference images |
-
-Veo clips are chainable with [`gen-ai extend`](/guide/cli-quickstart) (`+7s` per segment).
+Veo clips are chainable with [`gen-ai extend`](/guide/cli-quickstart) (`+7s` per segment). Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
 
 ## Nano Banana Pro (image)
 
 ```bash
 gen-ai generate -m gemini-3-pro-image -p "a cinematic product render of a smart speaker" --ar 16:9 -r 4K
 ```
-
-**Parameters — `gemini-3-pro-image`**
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` |
-| `resolution` | `-r` | enum | `1K` · `2K` · `4K` |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` |
-| `thinkingBudget` | `--thinking` | range | reasoning depth |
-| `imageUrls` | `-i` | file | multi-image input for editing |
 
 ## Gemini TTS & Lyria (audio)
 
@@ -78,4 +54,165 @@ gen-ai generate -m gemini-2.5-pro-tts -p "Here is your daily briefing."   # spee
 gen-ai generate -m lyria-3-pro -p "uplifting cinematic orchestral score"  # music
 ```
 
-> Sources: `gen-ai models info veo-3.1 --json` and `gen-ai models info gemini-3-pro-image --json`.
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `gemini-3.1-flash-image` — Nano Banana 2
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
+| `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `imageUrls` | `-i` | file | image (up to 14) |
+
+### `veo-3.1` — Veo 3.1
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+
+### `veo-3.1-fast` — Veo 3.1 Fast
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `negativePrompt` | `--neg` | text | free text |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+
+### `gemini-3-pro-image` — Nano Banana Pro
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `thinkingBudget` | `--thinking-budget` | integer | `128`–`32768`, step 128, default `128` |
+| `imageUrls` | `-i` | file | image (up to 14) |
+
+### `gemini-2.5-flash-image` — Nano Banana
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 14) |
+
+### `veo-3.1-lite` — Veo 3.1 Lite
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `startFrame` | `--start-frame` | file | image |
+
+### `gemini-2.5-flash-tts` — Gemini 2.5 Flash TTS
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
+| `voiceId` | `--voice` | enum | `Aoede` · `Charon` · `Fenrir` · `Kore` · `Leda` · `Orus` · `Puck` · `Zephyr` · `Achernar` · `Achird` · `Algenib` · `Algieba` · `Alnilam` · `Autonoe` · `Despina` · `Enceladus` · `Erinome` · `Gacrux` · `Iapetus` · `Laomedeia` · `Pulcherrima` · `Rasalgethi` · `Sadachbia` · `Sadaltager` · `Schedar` · `Sulafat` · `Umbriel` · `Vindemiatrix` · `Zubenelgenubi` (default `Kore`) |
+
+### `gemini-2.5-pro-tts` — Gemini 2.5 Pro TTS
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
+| `voiceId` | `--voice` | enum | `Aoede` · `Charon` · `Fenrir` · `Kore` · `Leda` · `Orus` · `Puck` · `Zephyr` · `Achernar` · `Achird` · `Algenib` · `Algieba` · `Alnilam` · `Autonoe` · `Despina` · `Enceladus` · `Erinome` · `Gacrux` · `Iapetus` · `Laomedeia` · `Pulcherrima` · `Rasalgethi` · `Sadachbia` · `Sadaltager` · `Schedar` · `Sulafat` · `Umbriel` · `Vindemiatrix` · `Zubenelgenubi` (default `Kore`) |
+
+### `imagen-4.0` — Imagen 4.0
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `imagen-4.0-ultra` — Imagen 4.0 Ultra
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `imagen-4.0-fast` — Imagen 4.0 Fast
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `lyria-3-clip` — Lyria 3 Clip
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
+### `lyria-3-pro` — Lyria 3 Pro
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
+> **Notes:** Veo audio is native (`generateAudio`); Imagen and Gemini image models differ in resolution and reasoning controls (`thinkingLevel` / `thinkingBudget`). TTS `voiceId` values are Gemini voice presets.

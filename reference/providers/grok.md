@@ -77,7 +77,13 @@ gen-ai generate -m grok-tts -p "Welcome to the Picsart AI Playground." --voice e
   } }
 ```
 
-## Parameters — `grok-imagine-video`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `grok-imagine-video` — Grok
+
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
@@ -85,11 +91,42 @@ gen-ai generate -m grok-tts -p "Welcome to the Picsart AI Playground." --voice e
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
 | `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
 | `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `6`) |
-| `imageUrls` | `-i` | file | start image (max 1) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info grok-imagine-video --json`. The same model backs image-to-video (pass `-i`); the `grok-edit-video` / `grok-extend-video` variants take a `--video` input and the edit retains the source duration.
+### `grok-edit-video` — Grok Edit Video
 
-## Parameters — `grok-imagine-image-quality`
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `grok-extend-video` — Grok Extend Video
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` (default `6`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `grok-imagine-image` — Grok Imagine
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `2:1` · `1:2` · `19.5:9` · `9:19.5` · `20:9` · `9:20` (default `1:1`) |
+| `resolution` | `-r` | enum | `1k` · `2k` (default `1k`) |
+| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
+### `grok-imagine-image-quality` — Grok Imagine Quality
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
@@ -97,20 +134,20 @@ gen-ai generate -m grok-tts -p "Welcome to the Picsart AI Playground." --voice e
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `2:1` · `1:2` · `19.5:9` · `9:19.5` · `20:9` · `9:20` (default `1:1`) |
 | `resolution` | `-r` | enum | `1k` · `2k` (default `2k`) |
 | `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
-| `imageUrls` | `-i` | file | source image (max 1) |
+| `imageUrls` | `-i` | file | image (up to 1) |
 
-> Source: `gen-ai models info grok-imagine-image-quality --json`. `grok-imagine-image` shares this surface at the faster/standard tier.
+### `grok-tts` — Grok TTS
 
-## Parameters — `grok-tts`
+Input type: `tts`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (max 15000 chars) |
-| `voiceId` | `--voice` | enum | `eve` · `ara` · `rex` · `sal` · `leo` (default `eve`) |
-| `language` | `--language` | text | spoken language (default auto) |
-| `accent` | `--accent` | text | accent hint |
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | **required** (≤15000 chars) |
+| `voiceId` | `--voice` | enum | `eve` (Eve) · `ara` (Ara) · `rex` (Rex) · `sal` (Sal) · `leo` (Leo) (default `eve`) |
 
-> Source: `gen-ai models info grok-tts --json`.
+> **Notes:** `grok-imagine-video` also backs image-to-video (pass `-i`); the edit / extend variants take a `--video` input and retain the source duration.
 
 ## Pricing
 

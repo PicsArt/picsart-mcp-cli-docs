@@ -46,18 +46,37 @@ gen-ai generate -m seedream-5.0-lite -p "minimalist poster, bold typography" --a
   } }
 ```
 
-## Parameters — `seedream-4.5`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `seedream-5.0-lite` — Seedream 5.0 Lite
+
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
+| `resolution` | `-r` | enum | `2K` · `3K` (default `2K`) |
 | `prompt` | `-p` | text | **required** |
-| `resolution` | `-r` | enum | `2K` · `4K` (default `2K`) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | up to 2 source/reference images |
-| `negativePrompt` | `--neg` | text | elements to avoid |
+| `imageUrls` | `-i` | file | image (up to 2) |
+| `negativePrompt` | `--neg` | text | free text |
 
-> Source: `gen-ai models info seedream-4.5 --json`. **Seedream 5.0 Lite** shares the same surface; per the vendor worker its resolutions are gated to **2K/3K** (4K rejected).
+### `seedream-4.5` — Seedream 4.5
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `2K` · `4K` (default `2K`) |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 2) |
+| `negativePrompt` | `--neg` | text | free text |
+
+> **Notes:** Seedream 5.0 Lite shares the surface but its resolutions are gated to 2K/3K (4K rejected by the worker) even though the enum defines 4K.
 
 ## Pricing
 

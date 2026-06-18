@@ -47,17 +47,47 @@ gen-ai generate -m happyhorse-1.0-r2v -p "[Image 1] runs through [Image 2]" -i .
   } }
 ```
 
-## Parameters — `happyhorse-1.0-t2v`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `happyhorse-1.0-r2v` — Happy Horse 1.0 Ref-to-Video
+
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** (max 2500 chars) |
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
 | `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (seconds, default `5`) |
-| `startFrame` | `--start-frame` | file | first-frame keyframe (image) |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `imageUrls` | `-i` | file | **required** image (up to 9) |
 
-> Source: `gen-ai models info happyhorse-1.0-t2v --json`. The `r2v` variant takes up to 9 reference images via `imageUrls` (`-i`); the `video-edit` variant takes a source video plus reference images.
+### `happyhorse-1.0-video-edit` — Happy Horse 1.0 Video Edit
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `audioSetting` | `--audio-setting` | enum | `auto` · `origin` (default `auto`) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | image (up to 5) |
+
+### `happyhorse-1.0-t2v` — Happy Horse 1.0
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+
+> **Notes:** `r2v` takes up to 9 reference images via `imageUrls`; `video-edit` takes a source video plus reference images.
 
 ## Pricing
 

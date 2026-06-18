@@ -36,15 +36,21 @@ gen-ai generate -m creatify-aurora \
   } }
 ```
 
-## Parameters — `creatify-aurora`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `creatify-aurora` — Creatify Aurora HD
+
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `imageUrls` | `-i` | file | **required** · single portrait image (the speaker) |
-| `audioUrl` | `-a` | file | **required** · speech or song clip — drives lip-sync and duration |
-| `prompt` | `-p` | text | optional |
+| `prompt` | `-p` | text | free text |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `audioUrl` | `-a` | file | **required** audio |
 
-> Source: `gen-ai models info creatify-aurora --json`. Aurora is audio-driven: it exposes **no** resolution, duration, or aspect-ratio params — the output length equals the audio length.
+> **Notes:** Aurora is audio-driven — it exposes no resolution, duration, or aspect-ratio params; output length equals the audio length.
 
 ## Pricing
 

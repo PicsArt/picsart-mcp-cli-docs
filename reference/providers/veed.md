@@ -45,16 +45,33 @@ gen-ai generate -m veed-fabric-v1-fast \
   } }
 ```
 
-## Parameters — `veed-fabric-v1`
+## Parameters
+
+Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `veed-fabric-v1` — VEED Fabric 1.0
+
+Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `imageUrls` | `-i` (`--image`) | file | **required** — start image (1, JPG/PNG/WebP) |
-| `audioUrl` | `-a` (`--audio`) | file | **required** — audio track; drives lip-sync and output duration |
+| `prompt` | `-p` | text | free text |
 | `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `prompt` | `-p` | text | optional |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `audioUrl` | `-a` | file | **required** audio |
 
-> Source: `gen-ai models info veed-fabric-v1 --json`. Duration is **not** a parameter — it equals the audio length (up to ~5 min). The **Fast** variant (`veed-fabric-v1-fast`) shares this surface.
+### `veed-fabric-v1-fast` — VEED Fabric 1.0 Fast
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `audioUrl` | `-a` | file | **required** audio |
+
+> **Notes:** Duration is not a parameter — it equals the audio length (up to ~5 min).
 
 ## Pricing
 
