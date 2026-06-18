@@ -106,7 +106,7 @@ export default defineConfig({
     ],
     sidebar,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/PicsArt/ai-playground-docs' },
+      { icon: 'github', link: 'https://github.com/PicsArt/picsart-mcp-cli-docs' },
     ],
     search: { provider: 'local' },
     footer: {
@@ -114,7 +114,7 @@ export default defineConfig({
       copyright: '© Picsart',
     },
     editLink: {
-      pattern: 'https://github.com/PicsArt/ai-playground-docs/edit/main/:path',
+      pattern: 'https://github.com/PicsArt/picsart-mcp-cli-docs/edit/main/:path',
       text: 'Edit this page on GitHub',
     },
   },

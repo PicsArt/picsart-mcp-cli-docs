@@ -2,7 +2,7 @@
 
 Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 141 models from 28 providers, from your terminal or any AI agent.
 
-🔗 **Live site:** https://picsart.github.io/ai-playground-docs/
+🔗 **Live site:** https://picsart.github.io/picsart-mcp-cli-docs/
 
 Built with [VitePress](https://vitepress.dev/) and deployed to GitHub Pages via [`.github/workflows/deploy-docs.yml`](.github/workflows/deploy-docs.yml) on every push to `main`.
 
