@@ -1,3 +1,7 @@
+---
+description: "Reve AI models on Picsart — 1 image model(s) including Reve. CLI + MCP examples, parameters, and official docs."
+---
+
 # Reve
 
 **Mode:** image · **Models:** 1

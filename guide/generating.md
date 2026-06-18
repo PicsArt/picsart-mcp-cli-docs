@@ -1,3 +1,7 @@
+---
+description: "How generation works across image, video, and audio models — input types (t2i, i2v, tts), inputs, parameters, and outputs — in the Picsart CLI and MCP."
+---
+
 # Generating media
 
 Every model belongs to a **mode** (image / video / audio) and an **input type** that describes what goes in and what comes out. Understanding the input type tells you which inputs a model needs.

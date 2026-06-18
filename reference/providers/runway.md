@@ -1,3 +1,7 @@
+---
+description: "Runway AI models on Picsart — 4 video model(s) including Runway Aleph, Runway Avatar, Runway Gen 4.5. CLI + MCP examples, parameters, and official docs."
+---
+
 # Runway
 
 **Mode:** video · **Models:** 4

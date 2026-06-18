@@ -1,3 +1,7 @@
+---
+description: "Kling AI models on Picsart — 13 audio/image/video model(s) including Kling T2A, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+---
+
 # Kling
 
 **Modes:** video · image · audio · **Models:** 13

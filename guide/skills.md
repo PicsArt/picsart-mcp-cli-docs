@@ -1,3 +1,7 @@
+---
+description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 130+ AI models."
+---
+
 # Skills
 
 **Skills** are ready-to-use, drop-in bundles of prompts and instructions that teach an AI agent how to do a specific creative job with Picsart's models. Download a skill, hand it to **Claude Code, Cursor, Windsurf, or ChatGPT**, and the agent already knows which model to pick, how to structure the prompt, and which `gen-ai` command to run — you just ask in plain English.

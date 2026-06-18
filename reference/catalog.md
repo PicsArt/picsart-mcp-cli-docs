@@ -1,4 +1,5 @@
 ---
+description: "Browse all 141 Picsart AI models from 28 providers — search and filter image, video, and audio models for the gen-ai CLI and MCP."
 title: Model Catalog
 aside: false
 outline: false

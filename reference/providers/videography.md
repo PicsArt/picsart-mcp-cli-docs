@@ -1,3 +1,7 @@
+---
+description: "Videography AI models on Picsart — 1 video model(s) including Videography. CLI + MCP examples, parameters, and official docs."
+---
+
 # Videography
 
 **Mode:** video · **Models:** 1

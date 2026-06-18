@@ -1,3 +1,7 @@
+---
+description: "OVI AI models on Picsart — 1 video model(s) including OVI. CLI + MCP examples, parameters, and official docs."
+---
+
 # OVI
 
 **Mode:** video · **Models:** 1

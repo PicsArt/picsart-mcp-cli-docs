@@ -1,3 +1,7 @@
+---
+description: "ElevenLabs AI models on Picsart — 10 audio model(s) including Eleven Audio Isolation, Eleven Dubbing, Eleven Multilingual STS v2. CLI + MCP examples, parameters, and official docs."
+---
+
 # ElevenLabs
 
 **Mode:** audio · **Models:** 10

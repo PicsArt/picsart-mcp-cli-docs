@@ -1,3 +1,7 @@
+---
+description: "What Picsart AI Playground is and the three ways to generate AI media outside the web app — the gen-ai CLI, Skills, and MCP."
+---
+
 # Introduction
 
 **Picsart AI Playground** is a prompt interface that wraps every AI model Picsart supports — image, video, and audio — behind one consistent surface. Instead of signing up for a dozen providers, juggling API keys, and learning each one's quirks, you use a single account and one credit balance.

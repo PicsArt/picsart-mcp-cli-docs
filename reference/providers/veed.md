@@ -1,3 +1,7 @@
+---
+description: "VEED AI models on Picsart — 2 video model(s) including VEED Fabric 1.0, VEED Fabric 1.0 Fast. CLI + MCP examples, parameters, and official docs."
+---
+
 # VEED
 
 **Mode:** video · **Models:** 2

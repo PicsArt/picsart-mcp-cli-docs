@@ -1,3 +1,7 @@
+---
+description: "Run many AI generations at once with the Picsart gen-ai CLI — manifests, from-directory, and agent-driven automation."
+---
+
 # Batch & Automation
 
 For producing many assets at once, the CLI runs a **manifest** of generations in parallel, with progress tracking and resume.

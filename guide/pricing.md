@@ -1,3 +1,7 @@
+---
+description: "Pay-per-generation credit pricing for Picsart's AI models — quote costs before you generate with the CLI or MCP. No subscriptions, no API keys."
+---
+
 # Pricing & Credits
 
 AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 141 models.

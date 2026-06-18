@@ -1,3 +1,7 @@
+---
+description: "Authenticate the Picsart gen-ai CLI and MCP with OAuth web login (gen-ai login) — no API keys."
+---
+
 # Authentication
 
 All interfaces use your Picsart account via **OAuth web login** — there are no API keys to create or paste. Generation spends credits, so it always requires sign-in; browsing the catalog and inspecting models does not.

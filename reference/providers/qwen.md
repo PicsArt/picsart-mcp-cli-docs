@@ -1,3 +1,7 @@
+---
+description: "Qwen (Alibaba) AI models on Picsart — 3 image model(s) including Qwen 2, Qwen 2 Pro, Qwen Edit Plus. CLI + MCP examples, parameters, and official docs."
+---
+
 # Qwen
 
 **Mode:** image · **Models:** 3

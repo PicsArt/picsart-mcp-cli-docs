@@ -1,3 +1,7 @@
+---
+description: "Install the Picsart gen-ai CLI (npm or install script) and connect MCP and Skills to Claude Code, Cursor, Windsurf, ChatGPT, or Codex."
+---
+
 # Installation
 
 There are three ways to use AI Playground outside the web app — the **gen-ai CLI**, ready-to-use **Skills** for AI agents, and the **MCP** integration. They all build on the same account: install the CLI, run `gen-ai login` once, and everything else builds on it.

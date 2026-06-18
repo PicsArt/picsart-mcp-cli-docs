@@ -1,3 +1,7 @@
+---
+description: "Picsart AI models on Picsart — 7 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
+---
+
 # Picsart
 
 **Mode:** image · **Models:** 7

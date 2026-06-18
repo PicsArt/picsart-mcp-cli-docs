@@ -5,6 +5,24 @@ import { defineConfig } from 'vitepress'
 // For a user/org page or custom domain, leave it as '/'.
 const base = process.env.DOCS_BASE || '/'
 
+// Canonical origin for SEO (sitemap, canonical, OG urls). Override with
+// DOCS_HOSTNAME when moving to a custom domain.
+const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
+const SITE_DESC =
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 141 models from 28 providers in your terminal or any AI agent.'
+
+const SOFTWARE_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Picsart gen-ai CLI & MCP',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'macOS, Linux, Windows',
+  description: SITE_DESC,
+  url: HOSTNAME + base,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Pay-per-generation credits' },
+  publisher: { '@type': 'Organization', name: 'Picsart', url: 'https://picsart.com' },
+}
+
 // One unified sidebar shown on every page, so the Providers and Model
 // Reference are reachable from the guide pages too.
 const sidebar = [
@@ -84,15 +102,39 @@ export default defineConfig({
   base,
   lang: 'en-US',
   title: 'Picsart CLI & MCP',
-  description:
-    'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 141 models from 28 providers in your terminal or any AI agent.',
+  description: SITE_DESC,
   cleanUrls: true,
   lastUpdated: true,
+  srcExclude: ['README.md', '**/README.md'],
+  sitemap: {
+    hostname: HOSTNAME + base,
+    // page urls are absolute (/guide/x); make them relative so the base subpath
+    // in `hostname` is preserved when resolved.
+    transformItems: (items) => items.map((i) => ({ ...i, url: i.url.replace(/^\//, '') })),
+  },
   head: [
     ['meta', { name: 'theme-color', content: '#d946a8' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: 'Picsart CLI & MCP — Developer Docs' }],
+    ['meta', { property: 'og:site_name', content: 'Picsart CLI & MCP' }],
+    ['meta', { name: 'twitter:site', content: '@picsart' }],
+    ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
   ],
+  transformPageData(pageData) {
+    const cleanPath = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
+    const url = `${HOSTNAME}${base}${cleanPath}`
+    const description = pageData.frontmatter.description || SITE_DESC
+    const ogTitle = pageData.title || 'Picsart CLI & MCP'
+    pageData.frontmatter.head ??= []
+    pageData.frontmatter.head.push(
+      ['link', { rel: 'canonical', href: url }],
+      ['meta', { property: 'og:title', content: ogTitle }],
+      ['meta', { property: 'og:description', content: description }],
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+      ['meta', { name: 'twitter:title', content: ogTitle }],
+      ['meta', { name: 'twitter:description', content: description }],
+    )
+  },
   themeConfig: {
     siteTitle: 'Picsart CLI & MCP',
     nav: [

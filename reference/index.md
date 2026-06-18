@@ -1,3 +1,7 @@
+---
+description: "The full Picsart AI model catalog — 141 models from 28 providers across image, video, and audio, usable from the gen-ai CLI and MCP."
+---
+
 # Model Reference
 
 The full Picsart AI Playground catalog: **141 models** from **28 providers**, across image, video, and audio. Every model is usable from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart) with the same id.

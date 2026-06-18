@@ -1,3 +1,7 @@
+---
+description: "Hunyuan AI models on Picsart — 1 image model(s) including Hunyuan V3. CLI + MCP examples, parameters, and official docs."
+---
+
 # Hunyuan
 
 **Mode:** image · **Models:** 1

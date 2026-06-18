@@ -1,3 +1,7 @@
+---
+description: "Recraft AI models on Picsart — 20 image model(s) including Recraft Creative Upscale, Recraft Crisp Upscale, Recraft Explore. CLI + MCP examples, parameters, and official docs."
+---
+
 # Recraft
 
 **Mode:** image · **Models:** 20

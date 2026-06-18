@@ -1,3 +1,7 @@
+---
+description: "Seedance AI models on Picsart — 6 video model(s) including Seedance 2.0, Seedance 2.0 Fast, Seedance 2.0 Fast Video Edit. CLI + MCP examples, parameters, and official docs."
+---
+
 # Seedance
 
 **Mode:** video · **Models:** 6

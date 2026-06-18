@@ -1,3 +1,7 @@
+---
+description: "Flux (Black Forest Labs) AI models on Picsart — 5 image model(s) including Flux 2 Flex, Flux 2 Max, Flux 2 Pro. CLI + MCP examples, parameters, and official docs."
+---
+
 # Flux
 
 **Mode:** image · **Models:** 5

@@ -1,3 +1,7 @@
+---
+description: "Seedream AI models on Picsart — 2 image model(s) including Seedream 4.5, Seedream 5.0 Lite. CLI + MCP examples, parameters, and official docs."
+---
+
 # Seedream
 
 **Mode:** image · **Models:** 2

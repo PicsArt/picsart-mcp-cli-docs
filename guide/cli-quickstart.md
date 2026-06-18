@@ -1,3 +1,7 @@
+---
+description: "Generate AI images, video, and audio from your terminal with the Picsart gen-ai CLI — install, log in, and run your first generation. Scriptable and pipe-friendly."
+---
+
 # CLI Quickstart
 
 The `gen-ai` CLI is one terminal command for the entire model catalog. It's designed for piping and automation: anything the web app can do is scriptable.

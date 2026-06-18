@@ -1,3 +1,7 @@
+---
+description: "HeyGen AI models on Picsart — 1 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
+---
+
 # HeyGen
 
 **Mode:** video · **Models:** 1

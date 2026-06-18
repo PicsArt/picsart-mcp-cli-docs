@@ -1,3 +1,7 @@
+---
+description: "MiniMax AI models on Picsart — 5 audio/video model(s) including MiniMax Music v2, Hailuo 2.3, Hailuo 2.3 Fast. CLI + MCP examples, parameters, and official docs."
+---
+
 # MiniMax
 
 **Modes:** video, audio · **Models:** 5

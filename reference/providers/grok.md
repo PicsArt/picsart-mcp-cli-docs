@@ -1,3 +1,7 @@
+---
+description: "Grok (xAI) AI models on Picsart — 6 audio/image/video model(s) including Grok TTS, Grok Imagine, Grok Imagine Quality. CLI + MCP examples, parameters, and official docs."
+---
+
 # Grok
 
 **Modes:** video · image · audio · **Models:** 6

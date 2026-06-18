@@ -1,3 +1,7 @@
+---
+description: "Creatify AI models on Picsart — 1 video model(s) including Creatify Aurora HD. CLI + MCP examples, parameters, and official docs."
+---
+
 # Creatify
 
 **Mode:** video · **Models:** 1

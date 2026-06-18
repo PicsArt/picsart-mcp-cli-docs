@@ -1,4 +1,5 @@
 ---
+description: "Picsart CLI & MCP — generate AI images, video & audio across 141 models from 28 providers (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the gen-ai CLI, MCP, or drop-in Skills for Claude, Cursor & ChatGPT."
 layout: home
 
 hero:

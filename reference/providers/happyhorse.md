@@ -1,3 +1,7 @@
+---
+description: "Happy Horse AI models on Picsart — 3 video model(s) including Happy Horse 1.0, Happy Horse 1.0 Ref-to-Video, Happy Horse 1.0 Video Edit. CLI + MCP examples, parameters, and official docs."
+---
+
 # Happy Horse
 
 **Mode:** video · **Models:** 3

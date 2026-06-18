@@ -1,3 +1,7 @@
+---
+description: "ByteDance AI models on Picsart — 2 video model(s) including ByteDance OmniHuman, ByteDance Upscaler. CLI + MCP examples, parameters, and official docs."
+---
+
 # ByteDance
 
 **Mode:** video · **Models:** 2

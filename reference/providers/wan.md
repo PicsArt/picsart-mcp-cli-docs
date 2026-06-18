@@ -1,3 +1,7 @@
+---
+description: "Wan (Alibaba) AI models on Picsart — 4 video model(s) including Wan 2.7, Wan 2.7 Image-to-Video, Wan 2.7 Ref-to-Video. CLI + MCP examples, parameters, and official docs."
+---
+
 # Wan
 
 **Mode:** video · **Models:** 4

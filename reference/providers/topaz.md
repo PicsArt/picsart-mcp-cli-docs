@@ -1,3 +1,7 @@
+---
+description: "Topaz AI models on Picsart — 9 image model(s) including Topaz CGI, Topaz HD Upscale, Topaz Hi-Fi. CLI + MCP examples, parameters, and official docs."
+---
+
 # Topaz
 
 **Mode:** image · **Models:** 9

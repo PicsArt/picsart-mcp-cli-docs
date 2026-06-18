@@ -1,4 +1,5 @@
 ---
+description: "All 28 AI model providers on Picsart — Google, OpenAI, Kling, ByteDance, ElevenLabs, Flux, Recraft and more — with CLI and MCP examples."
 title: Providers
 aside: false
 outline: false

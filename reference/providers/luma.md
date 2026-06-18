@@ -1,3 +1,7 @@
+---
+description: "Luma AI models on Picsart — 6 image/video model(s) including Luma UNI-1, Luma UNI-1 Max, Luma Flash 2. CLI + MCP examples, parameters, and official docs."
+---
+
 # Luma
 
 **Modes:** video, image · **Models:** 6

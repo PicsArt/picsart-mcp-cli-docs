@@ -1,3 +1,7 @@
+---
+description: "Ideogram AI models on Picsart — 2 image model(s) including Ideogram Character, Ideogram v3. CLI + MCP examples, parameters, and official docs."
+---
+
 # Ideogram
 
 **Mode:** image · **Models:** 2

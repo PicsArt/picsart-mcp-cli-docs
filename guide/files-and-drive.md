@@ -1,3 +1,7 @@
+---
+description: "Save, upload, and organize AI-generated assets in Picsart Drive from the gen-ai CLI and MCP."
+---
+
 # Files & Drive
 
 Generated assets — and any files you upload — live in **Picsart Drive**, your centralized cloud library. Outputs from every model land in one place, so you don't download from one tool and re-upload to another.

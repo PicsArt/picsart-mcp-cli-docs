@@ -1,3 +1,7 @@
+---
+description: "Google AI models on Picsart — 13 audio/image/video model(s) including Gemini 2.5 Flash TTS, Gemini 2.5 Pro TTS, Lyria 3 Clip. CLI + MCP examples, parameters, and official docs."
+---
+
 # Google
 
 **Modes:** image · video · audio · **Models:** 13

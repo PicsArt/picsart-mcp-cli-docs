@@ -1,3 +1,7 @@
+---
+description: "LTX (Lightricks) AI models on Picsart — 5 video model(s) including LTX 2.3 Audio-to-Video, LTX 2.3 Extend, LTX 2.3 Fast. CLI + MCP examples, parameters, and official docs."
+---
+
 # LTX
 
 **Mode:** video · **Models:** 5

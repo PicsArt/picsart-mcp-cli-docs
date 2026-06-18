@@ -1,3 +1,7 @@
+---
+description: "Pika AI models on Picsart — 3 video model(s) including Pika, Pika Frames, Pika Scenes. CLI + MCP examples, parameters, and official docs."
+---
+
 # Pika
 
 **Mode:** video · **Models:** 3
