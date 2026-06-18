@@ -1,11 +1,11 @@
 ---
-description: "Picsart CLI & MCP — generate AI images, video & audio across 141 models from 28 providers (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the gen-ai CLI, MCP, or drop-in Skills for Claude, Cursor & ChatGPT."
+description: "Picsart CLI & MCP — generate AI images, video & audio across 176 models from 30 providers (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the gen-ai CLI, MCP, or drop-in Skills for Claude, Cursor & ChatGPT."
 layout: home
 
 hero:
   name: Picsart CLI & MCP
   text: AI generation for your terminal & agents
-  tagline: Generate image, video, and audio across 141 models from 28 providers — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP.
+  tagline: Generate image, video, and audio across 176 models from 30 providers — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP.
   actions:
     - theme: brand
       text: Get started
@@ -27,7 +27,7 @@ features:
     details: Drop-in skills + MCP for Claude Code, Cursor, Windsurf, ChatGPT & Codex — generate in plain English across 130+ models.
     link: /guide/skills
   - icon: 🎬
-    title: 141 models, 28 providers
+    title: 176 models, 30 providers
     details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, GPT Image, ElevenLabs, Recraft and more — one credit balance.
     link: /reference/
   - icon: 💳
@@ -38,7 +38,7 @@ features:
 
 ## One catalog, three interfaces
 
-These docs cover the **developer & agent** surfaces for Picsart's AI catalog. You can drive the same 141 models three ways:
+These docs cover the **developer & agent** surfaces for Picsart's AI catalog. You can drive the same 176 models three ways:
 
 - **[gen-ai CLI](/guide/cli-quickstart)** — a terminal app for the entire model catalog. Great for creators scripting their workflow and developers automating pipelines.
 - **[Skills](/guide/skills)** — drop-in `.zip` bundles that let you generate in plain English inside Claude Code, Cursor, Windsurf, or ChatGPT.

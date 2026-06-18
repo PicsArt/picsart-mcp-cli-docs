@@ -1,10 +1,10 @@
 ---
-description: "Wan (Alibaba) AI models on Picsart — 4 video model(s) including Wan 2.7, Wan 2.7 Image-to-Video, Wan 2.7 Ref-to-Video. CLI + MCP examples, parameters, and official docs."
+description: "Wan (Alibaba) AI models on Picsart — 7 video model(s) including Wan 2.7, Wan 2.7 Image-to-Video, Wan 2.7 Ref-to-Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Wan
 
-**Mode:** video · **Models:** 4
+**Modes:** video · image · **Models:** 7
 
 **Vendor:** [Alibaba Model Studio (Wan)](https://www.alibabacloud.com/help/en/model-studio/wan) · **Official API docs:** [Wan (Model Studio)](https://www.alibabacloud.com/help/en/model-studio/wan)
 
@@ -18,6 +18,9 @@ Wan 2.7 (by Alibaba) is a video model with text-to-video, image-to-video, refere
 | `wan-2.7-i2v` | Wan 2.7 Image-to-Video | `i2v` |
 | `wan-2.7-r2v` | Wan 2.7 Ref-to-Video | `v2v` |
 | `wan-2.7-video-edit` | Wan 2.7 Video Edit | `v2v` |
+| `wan-2.6-t2v` | Wan 2.6 | `t2v` |
+| `wan-2.6-r2v` | Wan 2.6 Ref-to-Video | `v2v` |
+| `wan-2.6-image` | Wan 2.6 Image | `t2i` |
 
 ## CLI
 
@@ -118,6 +121,41 @@ Input type: `v2v`
 | `negativePrompt` | `--neg` | text | free text |
 | `videoUrl` | `--video` | file | **required** video |
 | `imageUrls` | `-i` | file | image (up to 3) |
+
+### `wan-2.6-t2v` — Wan 2.6
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+| `cfgScale` | `--cfg` | range | `1`–`10`, step 0.5 (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+
+### `wan-2.6-r2v` — Wan 2.6 Ref-to-Video
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `videoUrl` | `--video` | file | **required** video |
+
+### `wan-2.6-image` — Wan 2.6 Image
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
 
 > **Notes:** `wan-2.7-i2v` keys off `startFrame`; the edit / reference variants take a `videoUrl` input.
 

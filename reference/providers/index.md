@@ -1,5 +1,5 @@
 ---
-description: "All 28 AI model providers on Picsart — Google, OpenAI, Kling, ByteDance, ElevenLabs, Flux, Recraft and more — with CLI and MCP examples."
+description: "All 30 AI model providers on Picsart — Google, OpenAI, Kling, ByteDance, ElevenLabs, Flux, Recraft and more — with CLI and MCP examples."
 title: Providers
 aside: false
 outline: false
@@ -7,7 +7,7 @@ outline: false
 
 # Providers
 
-The **28 providers** behind Picsart AI Playground — Google, OpenAI, Kling, ByteDance, ElevenLabs, Flux, Recraft and more. Each provider page lists its models with **CLI + MCP examples**, a parameters table, and links to the vendor's website and official API docs.
+The **30 providers** behind Picsart AI Playground — Google, OpenAI, Kling, ByteDance, ElevenLabs, Flux, Recraft and more. Each provider page lists its models with **CLI + MCP examples**, a parameters table, and links to the vendor's website and official API docs.
 
 <ProviderGrid />
 

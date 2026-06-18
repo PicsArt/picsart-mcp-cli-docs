@@ -1,10 +1,10 @@
 ---
-description: "Recraft AI models on Picsart — 20 image model(s) including Recraft Creative Upscale, Recraft Crisp Upscale, Recraft Explore. CLI + MCP examples, parameters, and official docs."
+description: "Recraft AI models on Picsart — 22 image model(s) including Recraft Creative Upscale, Recraft Crisp Upscale, Recraft Explore. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Recraft
 
-**Mode:** image · **Models:** 20
+**Mode:** image · **Models:** 22
 
 **Vendor:** [Recraft](https://www.recraft.ai) · **Official API docs:** [recraft.ai/docs](https://www.recraft.ai/docs)
 
@@ -34,6 +34,8 @@ Recraft is a design-focused image model with strong text rendering, long prompts
 | `recraft-creative-upscale` | Recraft Creative Upscale | `i2i` |
 | `recraft-crisp-upscale` | Recraft Crisp Upscale | `i2i` |
 | `recraftv3-replace-bg` | Recraft Replace Background | `i2i` |
+| `recraftv2` | Recraft 20B | `t2i` |
+| `recraftv2_vector` | Recraft 20B Vector | `t2i` |
 
 ## CLI
 
@@ -274,6 +276,29 @@ Input type: `i2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `sourceImageId` | `--source-id` | text | **required** |
 | `similarity` | `--similarity` | integer | `1`–`5`, step 1, default `3` |
+
+### `recraftv2` — Recraft 20B
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `style` | `--style` | enum | `realistic_image` (Realistic) · `digital_illustration` (Illustration) · `vector_illustration` (Vector (SVG)) · `icon` (Icon) (default `realistic_image`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+
+### `recraftv2_vector` — Recraft 20B Vector
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
 
 > **Notes:** Vector variants output SVG; the `recraft-vectorize` / `*-upscale` / `replace-bg` utility models take an image input (`-i`). `recraft-explore` returns multiple images per call.
 

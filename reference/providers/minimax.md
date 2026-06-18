@@ -108,6 +108,10 @@ Input type: `music`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤2000 chars) |
+| `lyricsPrompt` | `--lyrics-prompt` | text | lyrics, or a description of the lyrical theme (≤2000 chars, min 10) |
+| `lyricsOptimizer` | `--lyrics-optimizer` | boolean | `true` · `false` (default `false`) |
+| `isInstrumental` | `--is-instrumental` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--format` | enum | `url` · `hex` (default `url`) |
 
 > **Notes:** Pro variants omit `duration` (fixed 6s at 1080p); 10s is available at 768p only. On the Fast image-to-video models `imageUrls` is required.
 

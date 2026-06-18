@@ -1,10 +1,10 @@
 ---
-description: "Seedance AI models on Picsart — 6 video model(s) including Seedance 2.0, Seedance 2.0 Fast, Seedance 2.0 Fast Video Edit. CLI + MCP examples, parameters, and official docs."
+description: "Seedance AI models on Picsart — 8 video model(s) including Seedance 2.0, Seedance 2.0 Fast, Seedance 1.5 Pro. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Seedance
 
-**Mode:** video · **Models:** 6
+**Mode:** video · **Models:** 8
 
 **Vendor:** [BytePlus Seedance](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [ModelArk](https://docs.byteplus.com/en/docs/ModelArk/1824121)
 
@@ -20,6 +20,8 @@ Seedance 2.0 (by ByteDance) is a high-quality video model with reference-image a
 | `seedance-2.0-fast-video-edit` | Seedance 2.0 Fast Video Edit | `v2v` |
 | `seedance-2.0-video-extend` | Seedance 2.0 Video Extend | `v2v` |
 | `seedance-2.0-fast-video-extend` | Seedance 2.0 Fast Video Extend | `v2v` |
+| `seedance-1.5-pro` | Seedance 1.5 Pro | `t2v` |
+| `seedance-i2v` | Seedance I2V | `i2v` |
 
 ## CLI
 
@@ -145,6 +147,32 @@ Input type: `v2v`
 | `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `15`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `videoUrls` | `--video-urls` | file | **required** video (up to 3) |
+
+### `seedance-1.5-pro` — Seedance 1.5 Pro
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `8` · `10` · `12` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+
+### `seedance-i2v` — Seedance I2V
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `startFrame` | `--start-frame` | file | **required** image |
 
 > **Notes:** The edit / extend variants take a `videoUrls` input.
 

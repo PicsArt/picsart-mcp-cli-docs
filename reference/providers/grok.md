@@ -1,10 +1,10 @@
 ---
-description: "Grok (xAI) AI models on Picsart — 6 audio/image/video model(s) including Grok TTS, Grok Imagine, Grok Imagine Quality. CLI + MCP examples, parameters, and official docs."
+description: "Grok (xAI) AI models on Picsart — 7 audio/image/video model(s) including Grok Imagine 1.5, Grok TTS, Grok Imagine. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Grok
 
-**Modes:** video · image · audio · **Models:** 6
+**Modes:** video · image · audio · **Models:** 7
 
 **Vendor:** [xAI](https://x.ai) · **Official API docs:** [docs.x.ai](https://docs.x.ai/docs)
 
@@ -20,6 +20,7 @@ Grok Imagine (by xAI) is a multi-mode family on a single API: a fast image-to-vi
 | `grok-imagine-image` | Grok Imagine | `t2i` |
 | `grok-imagine-image-quality` | Grok Imagine Quality | `t2i` |
 | `grok-tts` | Grok TTS | `tts` |
+| `grok-imagine-video-1.5` | Grok Imagine 1.5 | `i2v` |
 
 ## CLI
 
@@ -146,6 +147,18 @@ Input type: `tts`
 | `accent` | `--accent` | text | free text |
 | `prompt` | `-p` | text | **required** (≤15000 chars) |
 | `voiceId` | `--voice` | enum | `eve` (Eve) · `ara` (Ara) · `rex` (Rex) · `sal` (Sal) · `leo` (Leo) (default `eve`) |
+
+### `grok-imagine-video-1.5` — Grok Imagine 1.5
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `8`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 > **Notes:** `grok-imagine-video` also backs image-to-video (pass `-i`); the edit / extend variants take a `--video` input and retain the source duration.
 

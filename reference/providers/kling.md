@@ -1,14 +1,14 @@
 ---
-description: "Kling AI models on Picsart — 13 audio/image/video model(s) including Kling T2A, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling AI models on Picsart — 19 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Kling
 
-**Modes:** video · image · audio · **Models:** 13
+**Modes:** video · image · audio · **Models:** 19
 
 **Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
 
-Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-video, start/end-frame control, motion control, talking avatars, and native audio. **Kling V3** is the flagship: the only version with multi-shot storyboards and native 4K (3–15s). The lineup also spans image generation and a TTS / video-to-audio side.
+Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-video, start/end-frame control, motion control, talking avatars, and native audio. **Kling V3** is the flagship: the only version with multi-shot storyboards and native 4K (3–15s), with **Kling V3 Turbo** as a faster variant. The lineup also spans image generation and a TTS / video-to-audio side.
 
 ## Models
 
@@ -27,6 +27,12 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 | `kling-v2-new-image` | Kling V2 New Image | `t2i` |
 | `kling-t2a` | Kling T2A | `t2a` |
 | `kling-v2a` | Kling V2A | `v2a` |
+| `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
+| `kling-v2-image` | Kling V2 Image | `t2i` |
+| `kling-v2-1-image` | Kling V2.1 Image | `t2i` |
+| `kling-v1-5-image` | Kling V1.5 Image | `t2i` |
+| `kling-multi-image` | Kling Multi-Image | `i2i` |
+| `kling-multi-image-v2-1` | Kling Multi-Image V2.1 | `i2i` |
 
 ## CLI
 
@@ -245,6 +251,89 @@ Input type: `v2a`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `videoUrl` | `--video` | file | **required** video |
+
+### `kling-v3-turbo` — Kling V3 Turbo
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
+| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `startFrame` | `--start-frame` | file | image |
+| `staticMask` | `--static-mask` | file | image |
+
+### `kling-v2-image` — Kling V2 Image
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | range | `0`–`100`, step 5 (default `50`) |
+| `humanFidelity` | `--fidelity` | range | `0`–`1`, step 0.05 (default `0.45`) |
+
+### `kling-v2-1-image` — Kling V2.1 Image
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | range | `0`–`100`, step 5 (default `50`) |
+| `humanFidelity` | `--fidelity` | range | `0`–`1`, step 0.05 (default `0.45`) |
+
+### `kling-v1-5-image` — Kling V1.5 Image
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
+| `negativePrompt` | `--neg-prompt` | text | free text |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `imageReference` | `--image-reference` | enum | `subject` (Subject) · `face` (Face) (default `subject`) |
+| `imageWeight` | `--weight` | range | `0`–`100`, step 5 (default `50`) |
+| `humanFidelity` | `--fidelity` | range | `0`–`1`, step 0.05 (default `0.45`) |
+
+### `kling-multi-image` — Kling Multi-Image
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+| `sceneImage` | `--scene-image` | file | image |
+| `styleImage` | `--style-image` | file | image |
+
+### `kling-multi-image-v2-1` — Kling Multi-Image V2.1
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+| `sceneImage` | `--scene-image` | file | image |
+| `styleImage` | `--style-image` | file | image |
 
 > **Notes:** Multi-shot is incompatible with start/end-frame images; native 4K (`renderingSpeed: 4k`) is V3-only.
 

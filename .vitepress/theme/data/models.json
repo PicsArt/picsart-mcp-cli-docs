@@ -329,13 +329,6 @@
 "inputType": "t2i"
 },
 {
-"id": "picsart-remove-bg",
-"name": "Remove Background",
-"provider": "picsart",
-"mode": "image",
-"inputType": "i2i"
-},
-{
 "id": "qwen-image-2",
 "name": "Qwen 2",
 "provider": "qwen",
@@ -985,5 +978,257 @@
 "provider": "wan",
 "mode": "video",
 "inputType": "v2v"
+},
+{
+"id": "async-flash-v1",
+"name": "Async Flash v1.0",
+"provider": "async",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "grok-imagine-video-1.5",
+"name": "Grok Imagine 1.5",
+"provider": "grok",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "ideogram-v4",
+"name": "Ideogram 4.0",
+"provider": "ideogram",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-multi-image",
+"name": "Kling Multi-Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "kling-multi-image-v2-1",
+"name": "Kling Multi-Image V2.1",
+"provider": "kling",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "kling-v1-5-image",
+"name": "Kling V1.5 Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-v2-1-image",
+"name": "Kling V2.1 Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-v2-image",
+"name": "Kling V2 Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-v3-turbo",
+"name": "Kling V3 Turbo",
+"provider": "kling",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-pro-t2v",
+"name": "LTX Pro",
+"provider": "ltx",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-v2-fast",
+"name": "LTX Fast",
+"provider": "ltx",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-v2-retake",
+"name": "LTX Retake",
+"provider": "ltx",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "luma-ray-3.2",
+"name": "Luma Ray 3.2",
+"provider": "luma",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "luma-ray-3.2-edit",
+"name": "Luma Ray 3.2 Edit",
+"provider": "luma",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "luma-ray-3.2-reframe-video",
+"name": "Luma Ray 3.2 Reframe",
+"provider": "luma",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "gpt-image-1",
+"name": "GPT Image 1",
+"provider": "openai",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "openai-tts-1",
+"name": "OpenAI TTS-1",
+"provider": "openai",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "openai-tts-1-hd",
+"name": "OpenAI TTS-1 HD",
+"provider": "openai",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "picsart-sod-v8-2",
+"name": "Remove Background",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "pixverse-c1",
+"name": "PixVerse C1",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "pixverse-c1-fusion",
+"name": "PixVerse C1 Fusion",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "pixverse-c1-image",
+"name": "PixVerse C1 Image",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "pixverse-v6",
+"name": "PixVerse V6",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "pixverse-v6-fusion",
+"name": "PixVerse V6 Fusion",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "pixverse-v6-image",
+"name": "PixVerse V6 Image",
+"provider": "pixverse",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "qwen",
+"name": "Qwen",
+"provider": "qwen",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv2",
+"name": "Recraft 20B",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv2_vector",
+"name": "Recraft 20B Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "runway-aleph2",
+"name": "Runway Aleph 2",
+"provider": "runway",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "runway-gen3a-turbo",
+"name": "Runway Gen-3 Alpha Turbo",
+"provider": "runway",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "seedance-1.5-pro",
+"name": "Seedance 1.5 Pro",
+"provider": "seedance",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "seedance-i2v",
+"name": "Seedance I2V",
+"provider": "seedance",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "seedream-4.0",
+"name": "Seedream 4.0",
+"provider": "seedream",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "wan-2.6-image",
+"name": "Wan 2.6 Image",
+"provider": "wan",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "wan-2.6-r2v",
+"name": "Wan 2.6 Ref-to-Video",
+"provider": "wan",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "wan-2.6-t2v",
+"name": "Wan 2.6",
+"provider": "wan",
+"mode": "video",
+"inputType": "t2v"
 }
 ]

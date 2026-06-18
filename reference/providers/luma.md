@@ -1,14 +1,14 @@
 ---
-description: "Luma AI models on Picsart — 6 image/video model(s) including Luma UNI-1, Luma UNI-1 Max, Luma Flash 2. CLI + MCP examples, parameters, and official docs."
+description: "Luma AI models on Picsart — 9 image/video model(s) including Luma Ray 3.2, Luma UNI-1 Max, Luma Flash 2. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Luma
 
-**Modes:** video, image · **Models:** 6
+**Modes:** video, image · **Models:** 9
 
 **Vendor:** [Luma AI](https://lumalabs.ai) · **Official API docs:** [Luma Dream Machine API](https://docs.lumalabs.ai/docs/api)
 
-Luma's Dream Machine line covers both video and image. **Ray 2** (and the faster **Flash 2**) generate video from text or a start/end frame at up to 4K, with dedicated **reframe** workflows for changing a clip's aspect ratio. **UNI-1** (and **UNI-1 Max**) is the image model, with multi-image reference input, edit, and style controls.
+Luma's Dream Machine line covers both video and image. **Ray 3.2** (with **Ray 2** and the faster **Flash 2**) generates video from text or a start/end frame at up to 4K, with dedicated **edit** and **reframe** workflows for changing a clip's aspect ratio. **UNI-1** (and **UNI-1 Max**) is the image model, with multi-image reference input, edit, and style controls.
 
 ## Models
 
@@ -20,6 +20,9 @@ Luma's Dream Machine line covers both video and image. **Ray 2** (and the faster
 | `luma-ray-flash-2-reframe-video` | Luma Flash 2 Reframe | `v2v` |
 | `luma-uni-1` | Luma UNI-1 | `t2i` |
 | `luma-uni-1-max` | Luma UNI-1 Max | `t2i` |
+| `luma-ray-3.2` | Luma Ray 3.2 | `t2v` |
+| `luma-ray-3.2-edit` | Luma Ray 3.2 Edit | `v2v` |
+| `luma-ray-3.2-reframe-video` | Luma Ray 3.2 Reframe | `v2v` |
 
 ## CLI
 
@@ -133,6 +136,47 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
 | `style` | `--style` | enum | `auto` (Auto) · `manga` (Manga) (default `auto`) |
 | `imageUrls` | `-i` | file | image (up to 9) |
+
+### `luma-ray-3.2` — Luma Ray 3.2
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤6000 chars) |
+| `aspectRatio` | `--ar` | enum | `9:16` · `3:4` · `1:1` · `4:3` · `16:9` · `21:9` (default `16:9`) |
+| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `hdr` | `--hdr` | boolean | `true` · `false` (default `false`) |
+| `exrExport` | `--exr-export` | boolean | `true` · `false` (default `false`) |
+| `loop` | `--loop` | boolean | `true` · `false` (default `false`) |
+
+### `luma-ray-3.2-edit` — Luma Ray 3.2 Edit
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤6000 chars) |
+| `videoUrl` | `--video` | file | **required** video |
+| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `editStrength` | `--edit-strength` | enum | `adhere_1` (Adhere 1) · `adhere_2` (Adhere 2) · `adhere_3` (Adhere 3) · `flex_1` (Flex 1) · `flex_2` (Flex 2) · `flex_3` (Flex 3) · `reimagine_1` (Reimagine 1) · `reimagine_2` (Reimagine 2) · `reimagine_3` (Reimagine 3) (default `flex_2`) |
+| `hdr` | `--hdr` | boolean | `true` · `false` (default `false`) |
+| `exrExport` | `--exr-export` | boolean | `true` · `false` (default `false`) |
+
+### `luma-ray-3.2-reframe-video` — Luma Ray 3.2 Reframe
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤6000 chars) |
+| `aspectRatio` | `--ar` | enum | `9:16` · `3:4` · `1:1` · `4:3` · `16:9` · `21:9` (default `16:9`) |
+| `videoUrl` | `--video` | file | **required** video |
+| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
 
 > **Notes:** The reframe variants take a required `videoUrl` (`--video`) plus `--ar`.
 

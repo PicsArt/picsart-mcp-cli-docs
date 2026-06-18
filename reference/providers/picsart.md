@@ -17,7 +17,7 @@ Picsart's own image models run on the Picsart Compute Platform (PCP). They cover
 | `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
 | `picsart-flux-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-change-bg` | Picsart Change Background | `i2i` |
-| `picsart-remove-bg` | Remove Background | `i2i` |
+| `picsart-sod-v8-2` | Remove Background | `i2i` |
 | `picsart-enhance` | Enhance | `i2i` |
 | `picsart-qwen-image-edit` | Picsart Image Edit | `i2i` |
 | `picsart-qwen-makeup` | Picsart Makeup | `i2i` |
@@ -90,7 +90,7 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 | `prompt` | `-p` | text | **required** (≤460 chars) |
 
-### `picsart-remove-bg` — Remove Background
+### `picsart-sod-v8-2` — Remove Background
 
 Input type: `i2i`
 

@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 141 models from 28 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 176 models from 30 providers in your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -66,6 +66,7 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'All providers', link: '/reference/providers/' },
+      { text: 'Async', link: '/reference/providers/async' },
       { text: 'ByteDance', link: '/reference/providers/bytedance' },
       { text: 'Creatify', link: '/reference/providers/creatify' },
       { text: 'ElevenLabs', link: '/reference/providers/elevenlabs' },
@@ -84,6 +85,7 @@ const sidebar = [
       { text: 'OVI', link: '/reference/providers/ovi' },
       { text: 'Picsart', link: '/reference/providers/picsart' },
       { text: 'Pika', link: '/reference/providers/pika' },
+      { text: 'PixVerse', link: '/reference/providers/pixverse' },
       { text: 'Qwen (Alibaba)', link: '/reference/providers/qwen' },
       { text: 'Recraft', link: '/reference/providers/recraft' },
       { text: 'Reve', link: '/reference/providers/reve' },
@@ -121,7 +123,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 141 models, 28 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 176 models, 30 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],

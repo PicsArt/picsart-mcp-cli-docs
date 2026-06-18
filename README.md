@@ -1,11 +1,11 @@
 # Picsart CLI & MCP — Docs
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 141 models from 28 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 176 models from 30 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
 
 - **Source of truth:** this folder (`docs-site/`) inside the `ai-toolkit` repo.
 - **Public repo:** https://github.com/PicsArt/picsart-mcp-cli-docs
 - **Live wiki (public, no Actions needed):** https://github.com/PicsArt/picsart-mcp-cli-docs/wiki
-- **Themed site (when Actions enabled):** https://picsart.github.io/picsart-mcp-cli-docs/
+- **Themed site (live):** https://picsart.github.io/picsart-mcp-cli-docs/
 
 ## Local development
 
@@ -54,20 +54,23 @@ git push origin main
 
 > The `ai-toolkit` monorepo is private; never push its history to the public repo. Only the `docs-site/` contents (at the public repo root) + `.github/workflows/deploy-docs.yml` belong there.
 
-### Route A — GitHub Pages (themed, interactive)
+### Route A — GitHub Pages (themed, interactive) ← live
 
-`.github/workflows/deploy-docs.yml` builds and deploys on every push to `main`.
+`.github/workflows/deploy-docs.yml` auto-builds and deploys on every push to `main`.
 It derives the base path from the repo name (`DOCS_BASE=/<repo>/`).
 
-**Requires GitHub Actions enabled for the repo.** The PicsArt org disables Actions by
-default, so a PicsArt org admin must allow it (org → Settings → Actions, or add the repo
-to the allowlist). Once enabled:
+**Actions are enabled** (an org admin allowed them on 2026-06-18 — the PicsArt org disables
+Actions by default) and Pages **Source = GitHub Actions** (`build_type: workflow`), so pushes
+to `main` deploy automatically. To run a deploy by hand:
 
 ```bash
 gh workflow run deploy-docs.yml --repo PicsArt/picsart-mcp-cli-docs --ref main
 ```
 
-### Route B — GitHub Wiki (plain, no Actions) ← currently live
+> Fallback if Actions is ever disabled again: build locally (`DOCS_BASE=/picsart-mcp-cli-docs/ npm run build`)
+> and push `.vitepress/dist` to a `gh-pages` branch with Pages set to "deploy from branch".
+
+### Route B — GitHub Wiki (plain, no Actions)
 
 GitHub renders the wiki server-side, so it needs no Actions/Pages build. Plain Markdown,
 so the interactive catalog/provider grids become **static tables**.
@@ -80,7 +83,7 @@ so the interactive catalog/provider grids become **static tables**.
 # 1. clone the wiki (separate git repo)
 git clone https://github.com/PicsArt/picsart-mcp-cli-docs.wiki.git .wiki
 
-# 2. regenerate all wiki pages from these docs (47 pages: guide + reference + 28 providers + Home/_Sidebar/_Footer)
+# 2. regenerate all wiki pages from these docs (47 pages: guide + reference + 30 providers + Home/_Sidebar/_Footer)
 npm run wiki:build -- .wiki        # = python3 scripts/build-wiki.py .wiki
 
 # 3. publish

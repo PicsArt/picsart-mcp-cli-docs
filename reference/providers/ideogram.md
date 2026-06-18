@@ -1,10 +1,10 @@
 ---
-description: "Ideogram AI models on Picsart — 2 image model(s) including Ideogram Character, Ideogram v3. CLI + MCP examples, parameters, and official docs."
+description: "Ideogram AI models on Picsart — 3 image model(s) including Ideogram 4.0, Ideogram v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Ideogram
 
-**Mode:** image · **Models:** 2
+**Mode:** image · **Models:** 3
 
 **Vendor:** [Ideogram](https://ideogram.ai) · **Official API docs:** [Ideogram API Reference](https://developer.ideogram.ai/api-reference)
 
@@ -16,6 +16,7 @@ Ideogram v3 is a text-to-image model known for strong typography and in-image te
 |---|---|---|
 | `ideogram-v3` | Ideogram v3 | `t2i` |
 | `ideogram-character` | Ideogram Character | `i2i` |
+| `ideogram-v4` | Ideogram 4.0 | `t2i` |
 
 ## CLI
 
@@ -86,6 +87,17 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 > **Notes:** `ideogram-character` uses a reference image (`imageUrls`) to lock the subject’s identity.
+
+### `ideogram-v4` — Ideogram 4.0
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `resolution` | `-r` | enum | `2048x2048` · `1440x2880` · `2880x1440` · `1664x2496` · `2496x1664` · `1792x2240` · `2240x1792` · `1440x2560` · `2560x1440` · `1600x2560` · `2560x1600` · `1728x2304` · `2304x1728` · `1296x3168` · `3168x1296` · `1152x2944` · `2944x1152` · `1248x3328` · `3328x1248` · `1280x3072` · `3072x1280` (default `2048x2048`) |
+| `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
+| `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
 
 ## Pricing
 

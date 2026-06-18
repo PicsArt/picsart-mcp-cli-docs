@@ -1,5 +1,13 @@
 [
 {
+"id": "async",
+"label": "Async",
+"count": 1,
+"modes": [
+"audio"
+]
+},
+{
 "id": "bytedance",
 "label": "ByteDance",
 "count": 2,
@@ -44,7 +52,7 @@
 {
 "id": "grok",
 "label": "Grok (xAI)",
-"count": 6,
+"count": 7,
 "modes": [
 "audio",
 "image",
@@ -78,7 +86,7 @@
 {
 "id": "ideogram",
 "label": "Ideogram",
-"count": 2,
+"count": 3,
 "modes": [
 "image"
 ]
@@ -86,7 +94,7 @@
 {
 "id": "kling",
 "label": "Kling",
-"count": 13,
+"count": 19,
 "modes": [
 "audio",
 "image",
@@ -96,7 +104,7 @@
 {
 "id": "ltx",
 "label": "LTX (Lightricks)",
-"count": 5,
+"count": 8,
 "modes": [
 "video"
 ]
@@ -104,7 +112,7 @@
 {
 "id": "luma",
 "label": "Luma",
-"count": 6,
+"count": 9,
 "modes": [
 "image",
 "video"
@@ -122,8 +130,9 @@
 {
 "id": "openai",
 "label": "OpenAI",
-"count": 5,
+"count": 8,
 "modes": [
+"audio",
 "image",
 "video"
 ]
@@ -153,9 +162,17 @@
 ]
 },
 {
+"id": "pixverse",
+"label": "PixVerse",
+"count": 6,
+"modes": [
+"video"
+]
+},
+{
 "id": "qwen",
 "label": "Qwen (Alibaba)",
-"count": 3,
+"count": 4,
 "modes": [
 "image"
 ]
@@ -163,7 +180,7 @@
 {
 "id": "recraft",
 "label": "Recraft",
-"count": 20,
+"count": 22,
 "modes": [
 "image"
 ]
@@ -179,7 +196,7 @@
 {
 "id": "runway",
 "label": "Runway",
-"count": 4,
+"count": 6,
 "modes": [
 "video"
 ]
@@ -187,7 +204,7 @@
 {
 "id": "seedance",
 "label": "Seedance",
-"count": 6,
+"count": 8,
 "modes": [
 "video"
 ]
@@ -195,7 +212,7 @@
 {
 "id": "seedream",
 "label": "Seedream",
-"count": 2,
+"count": 3,
 "modes": [
 "image"
 ]
@@ -227,8 +244,9 @@
 {
 "id": "wan",
 "label": "Wan (Alibaba)",
-"count": 4,
+"count": 7,
 "modes": [
+"image",
 "video"
 ]
 }

@@ -38,7 +38,7 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
         class="catalog-search"
         v-model="query"
         type="search"
-        placeholder="Search 141 models — name, id, or provider…"
+        placeholder="Search 176 models — name, id, or provider…"
         aria-label="Search models"
       />
       <div class="catalog-pills">
