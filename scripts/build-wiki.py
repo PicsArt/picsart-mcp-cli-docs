@@ -33,6 +33,7 @@ def prov_page(pid):
 
 
 route2page = {
+    '/changelog': 'Changelog',
     '/guide/introduction': 'Introduction',
     '/guide/installation': 'Installation',
     '/guide/authentication': 'Authentication',
@@ -56,6 +57,7 @@ for _p in providers:
     route2page[f"/reference/providers/{_p['id']}"] = prov_page(_p['id'])
 
 src2out = {
+    'changelog.md': 'Changelog.md',
     'guide/introduction.md': 'Introduction.md',
     'guide/installation.md': 'Installation.md',
     'guide/authentication.md': 'Authentication.md',
@@ -139,9 +141,9 @@ pv += ['', 'Browse individual models in the [Model Catalog](Model-Catalog).']
 open(f'{WIKI}/Providers.md', 'w').write('\n'.join(pv))
 written.append('Providers.md')
 
-home = '''# Picsart CLI & MCP
+home = f'''# Picsart CLI & MCP
 
-**AI generation for your terminal & agents.** Generate image, video, and audio across **141 models from 28 providers** — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP.
+**AI generation for your terminal & agents.** Generate image, video, and audio across **{len(models)} models from {len(providers)} providers** — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP.
 
 > 📘 This is the GitHub Wiki edition of the docs. A themed version (with interactive model catalog) lives in the [repo](https://github.com/PicsArt/picsart-mcp-cli-docs).
 
@@ -164,9 +166,13 @@ home = '''# Picsart CLI & MCP
 ## Model Reference
 
 - **[Model Reference](Model-Reference)** — overview
-- **[Model Catalog](Model-Catalog)** — all 141 models
-- **[Providers](Providers)** — all 28 providers
+- **[Model Catalog](Model-Catalog)** — all {len(models)} models
+- **[Providers](Providers)** — all {len(providers)} providers
 - By mode: [Image](Image-Generation) · [Video](Video-Generation) · [Audio](Audio-Generation)
+
+## Changelog
+
+- **[Changelog](Changelog)** — new models, providers, and docs updates
 
 > **Prefer a visual UI?** The [AI Playground app](https://picsart.com/ai-playground/) is the point-and-click web app for the same catalog.
 '''
@@ -186,6 +192,7 @@ sb = ['### Picsart CLI & MCP', '',
       '- [All providers](Providers)']
 for p in sorted(providers, key=lambda x: x['label'].lower()):
     sb.append(f"- [{p['label']}]({prov_page(p['id'])})")
+sb += ['', '**More**', '', '- [Changelog](Changelog)']
 open(f'{WIKI}/_Sidebar.md', 'w').write('\n'.join(sb) + '\n')
 written.append('_Sidebar.md')
 

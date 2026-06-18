@@ -98,6 +98,10 @@ const sidebar = [
       { text: 'Wan (Alibaba)', link: '/reference/providers/wan' },
     ],
   },
+  {
+    text: 'Changelog',
+    link: '/changelog',
+  },
 ]
 
 export default defineConfig({
@@ -153,6 +157,7 @@ export default defineConfig({
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Models', link: '/reference/catalog' },
       { text: 'Providers', link: '/reference/providers/' },
+      { text: 'Changelog', link: '/changelog' },
       { text: 'Playground App ↗', link: 'https://picsart.com/ai-playground/' },
     ],
     sidebar,
