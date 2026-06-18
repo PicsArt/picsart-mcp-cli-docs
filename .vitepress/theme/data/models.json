@@ -1,0 +1,989 @@
+[
+{
+"id": "eleven-audio-isolation",
+"name": "Eleven Audio Isolation",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "sts"
+},
+{
+"id": "eleven-dubbing",
+"name": "Eleven Dubbing",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "sts"
+},
+{
+"id": "eleven-multilingual-sts-v2",
+"name": "Eleven Multilingual STS v2",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "sts"
+},
+{
+"id": "eleven-multilingual-v2",
+"name": "Eleven Multilingual v2",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "eleven-sts-v2",
+"name": "Eleven STS v2",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "sts"
+},
+{
+"id": "eleven-voice-design-v2",
+"name": "Eleven Voice Design Multilingual v2",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "eleven-voice-design-v3",
+"name": "Eleven Voice Design v3",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "eleven-voice-create",
+"name": "Eleven Voice Previews",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "eleven-v3",
+"name": "Eleven v3",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "elevenlabs-sfx",
+"name": "ElevenLabs SFX v2",
+"provider": "elevenlabs",
+"mode": "audio",
+"inputType": "sfx"
+},
+{
+"id": "gemini-2.5-flash-tts",
+"name": "Gemini 2.5 Flash TTS",
+"provider": "google",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "gemini-2.5-pro-tts",
+"name": "Gemini 2.5 Pro TTS",
+"provider": "google",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "lyria-3-clip",
+"name": "Lyria 3 Clip",
+"provider": "google",
+"mode": "audio",
+"inputType": "music"
+},
+{
+"id": "lyria-3-pro",
+"name": "Lyria 3 Pro",
+"provider": "google",
+"mode": "audio",
+"inputType": "music"
+},
+{
+"id": "grok-tts",
+"name": "Grok TTS",
+"provider": "grok",
+"mode": "audio",
+"inputType": "tts"
+},
+{
+"id": "kling-t2a",
+"name": "Kling T2A",
+"provider": "kling",
+"mode": "audio",
+"inputType": "t2a"
+},
+{
+"id": "kling-v2a",
+"name": "Kling V2A",
+"provider": "kling",
+"mode": "audio",
+"inputType": "v2a"
+},
+{
+"id": "minimax-music-v2",
+"name": "MiniMax Music v2",
+"provider": "minimax",
+"mode": "audio",
+"inputType": "music"
+},
+{
+"id": "flux-2-flex",
+"name": "Flux 2 Flex",
+"provider": "flux",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "flux-2-max",
+"name": "Flux 2 Max",
+"provider": "flux",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "flux-2-pro",
+"name": "Flux 2 Pro",
+"provider": "flux",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "flux-kontext-max",
+"name": "Flux Kontext Max",
+"provider": "flux",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "flux-kontext-pro",
+"name": "Flux Kontext Pro",
+"provider": "flux",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "imagen-4.0",
+"name": "Imagen 4.0",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "imagen-4.0-fast",
+"name": "Imagen 4.0 Fast",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "imagen-4.0-ultra",
+"name": "Imagen 4.0 Ultra",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "gemini-2.5-flash-image",
+"name": "Nano Banana",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "gemini-3.1-flash-image",
+"name": "Nano Banana 2",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "gemini-3-pro-image",
+"name": "Nano Banana Pro",
+"provider": "google",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "grok-imagine-image",
+"name": "Grok Imagine",
+"provider": "grok",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "grok-imagine-image-quality",
+"name": "Grok Imagine Quality",
+"provider": "grok",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "hunyuan-v3",
+"name": "Hunyuan V3",
+"provider": "hunyuan",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "ideogram-character",
+"name": "Ideogram Character",
+"provider": "ideogram",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "ideogram-v3",
+"name": "Ideogram v3",
+"provider": "ideogram",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-3.0-image",
+"name": "Kling 3.0 Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-o1-image",
+"name": "Kling O1 Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "kling-v2-new-image",
+"name": "Kling V2 New Image",
+"provider": "kling",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "luma-uni-1",
+"name": "Luma UNI-1",
+"provider": "luma",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "luma-uni-1-max",
+"name": "Luma UNI-1 Max",
+"provider": "luma",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "gpt-image-1.5",
+"name": "GPT Image 1.5",
+"provider": "openai",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "gpt-image-2",
+"name": "GPT Image 2",
+"provider": "openai",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "picsart-enhance",
+"name": "Enhance",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "picsart-flux-klein",
+"name": "Flux 2 Klein 4B",
+"provider": "picsart",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "picsart-change-bg",
+"name": "Picsart Change Background",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "picsart-qwen-image-edit",
+"name": "Picsart Image Edit",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "picsart-qwen-makeup",
+"name": "Picsart Makeup",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "picsart-sana-sprint-v1",
+"name": "Picsart SANA-Sprint",
+"provider": "picsart",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "picsart-remove-bg",
+"name": "Remove Background",
+"provider": "picsart",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "qwen-image-2",
+"name": "Qwen 2",
+"provider": "qwen",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "qwen-image-2-pro",
+"name": "Qwen 2 Pro",
+"provider": "qwen",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "qwen-image-edit-plus",
+"name": "Qwen Edit Plus",
+"provider": "qwen",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "recraft-creative-upscale",
+"name": "Recraft Creative Upscale",
+"provider": "recraft",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "recraft-crisp-upscale",
+"name": "Recraft Crisp Upscale",
+"provider": "recraft",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "recraft-explore",
+"name": "Recraft Explore",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraft-explore-similar",
+"name": "Recraft Explore Similar",
+"provider": "recraft",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "recraftv3-replace-bg",
+"name": "Recraft Replace Background",
+"provider": "recraft",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "recraftv3",
+"name": "Recraft V3",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv3_vector",
+"name": "Recraft V3 Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4",
+"name": "Recraft V4",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_pro",
+"name": "Recraft V4 Pro",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_pro_vector",
+"name": "Recraft V4 Pro Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_vector",
+"name": "Recraft V4 Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1",
+"name": "Recraft V4.1",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_pro",
+"name": "Recraft V4.1 Pro",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_pro_vector",
+"name": "Recraft V4.1 Pro Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_utility",
+"name": "Recraft V4.1 Utility",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_utility_pro",
+"name": "Recraft V4.1 Utility Pro",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_utility_pro_vector",
+"name": "Recraft V4.1 Utility Pro Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_utility_vector",
+"name": "Recraft V4.1 Utility Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraftv4_1_vector",
+"name": "Recraft V4.1 Vector",
+"provider": "recraft",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "recraft-vectorize",
+"name": "Recraft Vectorize",
+"provider": "recraft",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "reve",
+"name": "Reve",
+"provider": "reve",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "seedream-4.5",
+"name": "Seedream 4.5",
+"provider": "seedream",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "seedream-5.0-lite",
+"name": "Seedream 5.0 Lite",
+"provider": "seedream",
+"mode": "image",
+"inputType": "t2i"
+},
+{
+"id": "topaz-enhance-cgi",
+"name": "Topaz CGI",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-upscale-image",
+"name": "Topaz HD Upscale",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-high-fidelity-v2",
+"name": "Topaz Hi-Fi",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-low-res-v2",
+"name": "Topaz Low Res",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-recovery",
+"name": "Topaz Recovery",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-recovery-v2",
+"name": "Topaz Recovery V2",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-redefine",
+"name": "Topaz Redefine",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-standard-v2",
+"name": "Topaz Standard",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "topaz-enhance-text-refine",
+"name": "Topaz Text",
+"provider": "topaz",
+"mode": "image",
+"inputType": "i2i"
+},
+{
+"id": "bytedance-omnihuman-v1.5",
+"name": "ByteDance OmniHuman",
+"provider": "bytedance",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "bytedance-video-upscaler",
+"name": "ByteDance Upscaler",
+"provider": "bytedance",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "creatify-aurora",
+"name": "Creatify Aurora HD",
+"provider": "creatify",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "veo-3.1",
+"name": "Veo 3.1",
+"provider": "google",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "veo-3.1-fast",
+"name": "Veo 3.1 Fast",
+"provider": "google",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "veo-3.1-lite",
+"name": "Veo 3.1 Lite",
+"provider": "google",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "grok-imagine-video",
+"name": "Grok",
+"provider": "grok",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "grok-edit-video",
+"name": "Grok Edit Video",
+"provider": "grok",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "grok-extend-video",
+"name": "Grok Extend Video",
+"provider": "grok",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "happyhorse-1.0-t2v",
+"name": "Happy Horse 1.0",
+"provider": "happyhorse",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "happyhorse-1.0-r2v",
+"name": "Happy Horse 1.0 Ref-to-Video",
+"provider": "happyhorse",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "happyhorse-1.0-video-edit",
+"name": "Happy Horse 1.0 Video Edit",
+"provider": "happyhorse",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "heygen-talking-photo",
+"name": "HeyGen Talking Photo",
+"provider": "heygen",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "kling-avatar",
+"name": "Kling Avatar",
+"provider": "kling",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "kling-motion-control",
+"name": "Kling Motion Control 2.6",
+"provider": "kling",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "kling-motion-control-v3",
+"name": "Kling Motion Control V3",
+"provider": "kling",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "kling-v2-6",
+"name": "Kling V2.6",
+"provider": "kling",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "kling-v3",
+"name": "Kling V3",
+"provider": "kling",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "kling-v3-omni",
+"name": "Kling V3 Omni",
+"provider": "kling",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "kling-video-effects",
+"name": "Kling Video Effects",
+"provider": "kling",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "kling-video-o1",
+"name": "Kling Video O1",
+"provider": "kling",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-2.3-a2v",
+"name": "LTX 2.3 Audio-to-Video",
+"provider": "ltx",
+"mode": "video",
+"inputType": "a2v"
+},
+{
+"id": "ltx-v2.3-extend",
+"name": "LTX 2.3 Extend",
+"provider": "ltx",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "ltx-v2.3-fast",
+"name": "LTX 2.3 Fast",
+"provider": "ltx",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-v2.3-pro",
+"name": "LTX 2.3 Pro",
+"provider": "ltx",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ltx-v2.3-retake",
+"name": "LTX 2.3 Retake",
+"provider": "ltx",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "luma-ray-flash-2",
+"name": "Luma Flash 2",
+"provider": "luma",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "luma-ray-flash-2-reframe-video",
+"name": "Luma Flash 2 Reframe",
+"provider": "luma",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "luma-ray-2",
+"name": "Luma Ray 2",
+"provider": "luma",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "luma-ray-2-reframe-video",
+"name": "Luma Ray 2 Reframe",
+"provider": "luma",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "hailuo-2.3",
+"name": "Hailuo 2.3",
+"provider": "minimax",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "hailuo-2.3-fast",
+"name": "Hailuo 2.3 Fast",
+"provider": "minimax",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "hailuo-2.3-fast-pro",
+"name": "Hailuo 2.3 Fast Pro",
+"provider": "minimax",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "hailuo-2.3-pro",
+"name": "Hailuo 2.3 Pro",
+"provider": "minimax",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "sora-2",
+"name": "Sora 2",
+"provider": "openai",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "sora-2-extend",
+"name": "Sora 2 Extend",
+"provider": "openai",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "sora-2-pro",
+"name": "Sora 2 Pro",
+"provider": "openai",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "ovi",
+"name": "OVI",
+"provider": "ovi",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "pika-2.2",
+"name": "Pika",
+"provider": "pika",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "pika-2.2-frames",
+"name": "Pika Frames",
+"provider": "pika",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "pika-2.2-scenes",
+"name": "Pika Scenes",
+"provider": "pika",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "runway-gen4-aleph",
+"name": "Runway Aleph",
+"provider": "runway",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "runway-avatar-video",
+"name": "Runway Avatar",
+"provider": "runway",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "runway-gen4.5",
+"name": "Runway Gen 4.5",
+"provider": "runway",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "runway-gen4-ref",
+"name": "Runway Gen4 Ref",
+"provider": "runway",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "seedance-2.0",
+"name": "Seedance 2.0",
+"provider": "seedance",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "seedance-2.0-fast",
+"name": "Seedance 2.0 Fast",
+"provider": "seedance",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "seedance-2.0-fast-video-edit",
+"name": "Seedance 2.0 Fast Video Edit",
+"provider": "seedance",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "seedance-2.0-fast-video-extend",
+"name": "Seedance 2.0 Fast Video Extend",
+"provider": "seedance",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "seedance-2.0-video-edit",
+"name": "Seedance 2.0 Video Edit",
+"provider": "seedance",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "seedance-2.0-video-extend",
+"name": "Seedance 2.0 Video Extend",
+"provider": "seedance",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "veed-fabric-v1",
+"name": "VEED Fabric 1.0",
+"provider": "veed",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "veed-fabric-v1-fast",
+"name": "VEED Fabric 1.0 Fast",
+"provider": "veed",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "picsart-videography",
+"name": "Videography",
+"provider": "videography",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "wan-2.7-t2v",
+"name": "Wan 2.7",
+"provider": "wan",
+"mode": "video",
+"inputType": "t2v"
+},
+{
+"id": "wan-2.7-i2v",
+"name": "Wan 2.7 Image-to-Video",
+"provider": "wan",
+"mode": "video",
+"inputType": "i2v"
+},
+{
+"id": "wan-2.7-r2v",
+"name": "Wan 2.7 Ref-to-Video",
+"provider": "wan",
+"mode": "video",
+"inputType": "v2v"
+},
+{
+"id": "wan-2.7-video-edit",
+"name": "Wan 2.7 Video Edit",
+"provider": "wan",
+"mode": "video",
+"inputType": "v2v"
+}
+]

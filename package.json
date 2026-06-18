@@ -1,0 +1,15 @@
+{
+  "name": "ai-playground-docs",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Public developer & consumer docs for Picsart AI Playground — gen-ai CLI and MCP server reference.",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}
