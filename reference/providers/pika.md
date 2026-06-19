@@ -67,6 +67,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `pika-2.2` — Pika
 
+[Try `pika-2.2` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -79,6 +81,8 @@ Input type: `t2v`
 
 ### `pika-2.2-scenes` — Pika Scenes
 
+[Try `pika-2.2-scenes` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2-scenes)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -90,6 +94,8 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 4) |
 
 ### `pika-2.2-frames` — Pika Frames
+
+[Try `pika-2.2-frames` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2-frames)
 
 Input type: `i2v`
 

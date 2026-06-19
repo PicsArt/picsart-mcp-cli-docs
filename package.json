@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "llms": "node scripts/build-llms.mjs",
+    "build": "npm run llms && vitepress build",
     "preview": "vitepress preview",
     "wiki:build": "python3 scripts/build-wiki.py"
   },

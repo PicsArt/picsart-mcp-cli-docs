@@ -61,6 +61,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `ltx-v2.3-pro` — LTX 2.3 Pro
 
+[Try `ltx-v2.3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2.3-pro)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -73,6 +75,8 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `ltx-v2.3-fast` — LTX 2.3 Fast
+
+[Try `ltx-v2.3-fast` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2.3-fast)
 
 Input type: `t2v`
 
@@ -87,6 +91,8 @@ Input type: `t2v`
 
 ### `ltx-2.3-a2v` — LTX 2.3 Audio-to-Video
 
+[Try `ltx-2.3-a2v` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-2.3-a2v)
+
 Input type: `a2v`
 
 | Param | CLI flag | Type | Values |
@@ -98,6 +104,8 @@ Input type: `a2v`
 
 ### `ltx-v2.3-extend` — LTX 2.3 Extend
 
+[Try `ltx-v2.3-extend` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2.3-extend)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -108,6 +116,8 @@ Input type: `v2v`
 
 ### `ltx-v2.3-retake` — LTX 2.3 Retake
 
+[Try `ltx-v2.3-retake` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2.3-retake)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -117,6 +127,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `ltx-pro-t2v` — LTX Pro
+
+[Try `ltx-pro-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-pro-t2v)
 
 Input type: `t2v`
 
@@ -130,6 +142,8 @@ Input type: `t2v`
 
 ### `ltx-v2-fast` — LTX Fast
 
+[Try `ltx-v2-fast` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2-fast)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -141,6 +155,8 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `ltx-v2-retake` — LTX Retake
+
+[Try `ltx-v2-retake` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2-retake)
 
 Input type: `v2v`
 

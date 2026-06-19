@@ -68,6 +68,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `sora-2-pro` — Sora 2 Pro
 
+[Try `sora-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2-pro)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -80,6 +82,8 @@ Input type: `t2v`
 
 ### `sora-2` — Sora 2
 
+[Try `sora-2` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -91,6 +95,8 @@ Input type: `t2v`
 
 ### `sora-2-extend` — Sora 2 Extend
 
+[Try `sora-2-extend` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2-extend)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -100,6 +106,8 @@ Input type: `v2v`
 | `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `8`) |
 
 ### `gpt-image-2` — GPT Image 2
+
+[Try `gpt-image-2` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2)
 
 Input type: `t2i`
 
@@ -113,6 +121,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 5) |
 
 ### `gpt-image-1.5` — GPT Image 1.5
+
+[Try `gpt-image-1.5` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-1.5)
 
 Input type: `t2i`
 
@@ -128,6 +138,8 @@ Input type: `t2i`
 
 ### `gpt-image-1` — GPT Image 1
 
+[Try `gpt-image-1` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-1)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -142,6 +154,8 @@ Input type: `t2i`
 
 ### `openai-tts-1` — OpenAI TTS-1
 
+[Try `openai-tts-1` in Playground ↗](https://picsart.com/ai-playground/?model=openai-tts-1)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -150,6 +164,8 @@ Input type: `tts`
 | `voiceId` | `--voice` | enum | `alloy` (Alloy) · `ash` (Ash) · `ballad` (Ballad) · `coral` (Coral) · `echo` (Echo) · `fable` (Fable) · `nova` (Nova) · `onyx` (Onyx) · `sage` (Sage) · `shimmer` (Shimmer) · `verse` (Verse) (default `alloy`) |
 
 ### `openai-tts-1-hd` — OpenAI TTS-1 HD
+
+[Try `openai-tts-1-hd` in Playground ↗](https://picsart.com/ai-playground/?model=openai-tts-1-hd)
 
 Input type: `tts`
 

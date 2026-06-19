@@ -67,6 +67,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `wan-2.7-t2v` — Wan 2.7
 
+[Try `wan-2.7-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.7-t2v)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -81,6 +83,8 @@ Input type: `t2v`
 | `startFrame` | `--start-frame` | file | image |
 
 ### `wan-2.7-i2v` — Wan 2.7 Image-to-Video
+
+[Try `wan-2.7-i2v` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.7-i2v)
 
 Input type: `i2v`
 
@@ -97,6 +101,8 @@ Input type: `i2v`
 
 ### `wan-2.7-r2v` — Wan 2.7 Ref-to-Video
 
+[Try `wan-2.7-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.7-r2v)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -111,6 +117,8 @@ Input type: `v2v`
 
 ### `wan-2.7-video-edit` — Wan 2.7 Video Edit
 
+[Try `wan-2.7-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.7-video-edit)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -123,6 +131,8 @@ Input type: `v2v`
 | `imageUrls` | `-i` | file | image (up to 3) |
 
 ### `wan-2.6-t2v` — Wan 2.6
+
+[Try `wan-2.6-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.6-t2v)
 
 Input type: `t2v`
 
@@ -138,6 +148,8 @@ Input type: `t2v`
 
 ### `wan-2.6-r2v` — Wan 2.6 Ref-to-Video
 
+[Try `wan-2.6-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.6-r2v)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -148,6 +160,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `wan-2.6-image` — Wan 2.6 Image
+
+[Try `wan-2.6-image` in Playground ↗](https://picsart.com/ai-playground/?model=wan-2.6-image)
 
 Input type: `t2i`
 

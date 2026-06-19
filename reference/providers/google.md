@@ -60,6 +60,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `gemini-3.1-flash-image` — Nano Banana 2
 
+[Try `gemini-3.1-flash-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.1-flash-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -72,6 +74,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `veo-3.1` — Veo 3.1
+
+[Try `veo-3.1` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1)
 
 Input type: `t2v`
 
@@ -89,6 +93,8 @@ Input type: `t2v`
 
 ### `veo-3.1-fast` — Veo 3.1 Fast
 
+[Try `veo-3.1-fast` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1-fast)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -105,6 +111,8 @@ Input type: `t2v`
 
 ### `gemini-3-pro-image` — Nano Banana Pro
 
+[Try `gemini-3-pro-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3-pro-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -118,6 +126,8 @@ Input type: `t2i`
 
 ### `gemini-2.5-flash-image` — Nano Banana
 
+[Try `gemini-2.5-flash-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -128,6 +138,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `veo-3.1-lite` — Veo 3.1 Lite
+
+[Try `veo-3.1-lite` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1-lite)
 
 Input type: `t2v`
 
@@ -141,6 +153,8 @@ Input type: `t2v`
 
 ### `gemini-2.5-flash-tts` — Gemini 2.5 Flash TTS
 
+[Try `gemini-2.5-flash-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash-tts)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -152,6 +166,8 @@ Input type: `tts`
 
 ### `gemini-2.5-pro-tts` — Gemini 2.5 Pro TTS
 
+[Try `gemini-2.5-pro-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-pro-tts)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -162,6 +178,8 @@ Input type: `tts`
 | `voiceId` | `--voice` | enum | `Aoede` · `Charon` · `Fenrir` · `Kore` · `Leda` · `Orus` · `Puck` · `Zephyr` · `Achernar` · `Achird` · `Algenib` · `Algieba` · `Alnilam` · `Autonoe` · `Despina` · `Enceladus` · `Erinome` · `Gacrux` · `Iapetus` · `Laomedeia` · `Pulcherrima` · `Rasalgethi` · `Sadachbia` · `Sadaltager` · `Schedar` · `Sulafat` · `Umbriel` · `Vindemiatrix` · `Zubenelgenubi` (default `Kore`) |
 
 ### `imagen-4.0` — Imagen 4.0
+
+[Try `imagen-4.0` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0)
 
 Input type: `t2i`
 
@@ -175,6 +193,8 @@ Input type: `t2i`
 
 ### `imagen-4.0-ultra` — Imagen 4.0 Ultra
 
+[Try `imagen-4.0-ultra` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0-ultra)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -186,6 +206,8 @@ Input type: `t2i`
 | `negativePrompt` | `--neg` | text | free text |
 
 ### `imagen-4.0-fast` — Imagen 4.0 Fast
+
+[Try `imagen-4.0-fast` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0-fast)
 
 Input type: `t2i`
 
@@ -199,6 +221,8 @@ Input type: `t2i`
 
 ### `lyria-3-clip` — Lyria 3 Clip
 
+[Try `lyria-3-clip` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3-clip)
+
 Input type: `music`
 
 | Param | CLI flag | Type | Values |
@@ -207,6 +231,8 @@ Input type: `music`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `lyria-3-pro` — Lyria 3 Pro
+
+[Try `lyria-3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3-pro)
 
 Input type: `music`
 

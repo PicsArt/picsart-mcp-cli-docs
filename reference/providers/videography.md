@@ -39,6 +39,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `picsart-videography` — Videography
 
+[Try `picsart-videography` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-videography)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |

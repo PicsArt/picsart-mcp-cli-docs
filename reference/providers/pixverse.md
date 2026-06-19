@@ -67,6 +67,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `pixverse-v6` — PixVerse V6
 
+[Try `pixverse-v6` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -79,6 +81,8 @@ Input type: `t2v`
 
 ### `pixverse-v6-image` — PixVerse V6 Image
 
+[Try `pixverse-v6-image` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6-image)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -90,6 +94,8 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `pixverse-v6-fusion` — PixVerse V6 Fusion
+
+[Try `pixverse-v6-fusion` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6-fusion)
 
 Input type: `i2v`
 
@@ -104,6 +110,8 @@ Input type: `i2v`
 
 ### `pixverse-c1` — PixVerse C1
 
+[Try `pixverse-c1` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -116,6 +124,8 @@ Input type: `t2v`
 
 ### `pixverse-c1-image` — PixVerse C1 Image
 
+[Try `pixverse-c1-image` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1-image)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -127,6 +137,8 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `pixverse-c1-fusion` — PixVerse C1 Fusion
+
+[Try `pixverse-c1-fusion` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1-fusion)
 
 Input type: `i2v`
 

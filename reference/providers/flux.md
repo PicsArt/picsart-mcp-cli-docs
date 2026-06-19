@@ -48,6 +48,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `flux-2-pro` — Flux 2 Pro
 
+[Try `flux-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=flux-2-pro)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -58,6 +60,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 4) |
 
 ### `flux-2-max` — Flux 2 Max
+
+[Try `flux-2-max` in Playground ↗](https://picsart.com/ai-playground/?model=flux-2-max)
 
 Input type: `t2i`
 
@@ -70,6 +74,8 @@ Input type: `t2i`
 
 ### `flux-2-flex` — Flux 2 Flex
 
+[Try `flux-2-flex` in Playground ↗](https://picsart.com/ai-playground/?model=flux-2-flex)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -81,6 +87,8 @@ Input type: `t2i`
 
 ### `flux-kontext-max` — Flux Kontext Max
 
+[Try `flux-kontext-max` in Playground ↗](https://picsart.com/ai-playground/?model=flux-kontext-max)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -91,6 +99,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 4) |
 
 ### `flux-kontext-pro` — Flux Kontext Pro
+
+[Try `flux-kontext-pro` in Playground ↗](https://picsart.com/ai-playground/?model=flux-kontext-pro)
 
 Input type: `t2i`
 

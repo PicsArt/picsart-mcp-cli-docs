@@ -79,6 +79,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `recraftv4_1` — Recraft V4.1
 
+[Try `recraftv4_1` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -88,6 +90,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv4_1_pro` — Recraft V4.1 Pro
+
+[Try `recraftv4_1_pro` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_pro)
 
 Input type: `t2i`
 
@@ -99,6 +103,8 @@ Input type: `t2i`
 
 ### `recraftv4_1_utility` — Recraft V4.1 Utility
 
+[Try `recraftv4_1_utility` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_utility)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -108,6 +114,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv4_1_utility_pro` — Recraft V4.1 Utility Pro
+
+[Try `recraftv4_1_utility_pro` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_utility_pro)
 
 Input type: `t2i`
 
@@ -119,6 +127,8 @@ Input type: `t2i`
 
 ### `recraftv4_1_vector` — Recraft V4.1 Vector
 
+[Try `recraftv4_1_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_vector)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -128,6 +138,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv4_1_pro_vector` — Recraft V4.1 Pro Vector
+
+[Try `recraftv4_1_pro_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_pro_vector)
 
 Input type: `t2i`
 
@@ -139,6 +151,8 @@ Input type: `t2i`
 
 ### `recraftv4_1_utility_vector` — Recraft V4.1 Utility Vector
 
+[Try `recraftv4_1_utility_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_utility_vector)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -148,6 +162,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv4_1_utility_pro_vector` — Recraft V4.1 Utility Pro Vector
+
+[Try `recraftv4_1_utility_pro_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_utility_pro_vector)
 
 Input type: `t2i`
 
@@ -159,6 +175,8 @@ Input type: `t2i`
 
 ### `recraftv4` — Recraft V4
 
+[Try `recraftv4` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -169,6 +187,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv3` — Recraft V3
+
+[Try `recraftv3` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv3)
 
 Input type: `t2i`
 
@@ -184,6 +204,8 @@ Input type: `t2i`
 
 ### `recraftv4_pro` — Recraft V4 Pro
 
+[Try `recraftv4_pro` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_pro)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -195,6 +217,8 @@ Input type: `t2i`
 
 ### `recraftv4_vector` — Recraft V4 Vector
 
+[Try `recraftv4_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_vector)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -205,6 +229,8 @@ Input type: `t2i`
 
 ### `recraftv4_pro_vector` — Recraft V4 Pro Vector
 
+[Try `recraftv4_pro_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_pro_vector)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -214,6 +240,8 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv3_vector` — Recraft V3 Vector
+
+[Try `recraftv3_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv3_vector)
 
 Input type: `t2i`
 
@@ -226,6 +254,8 @@ Input type: `t2i`
 
 ### `recraft-vectorize` — Recraft Vectorize
 
+[Try `recraft-vectorize` in Playground ↗](https://picsart.com/ai-playground/?model=recraft-vectorize)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -235,6 +265,8 @@ Input type: `i2i`
 
 ### `recraft-creative-upscale` — Recraft Creative Upscale
 
+[Try `recraft-creative-upscale` in Playground ↗](https://picsart.com/ai-playground/?model=recraft-creative-upscale)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -243,6 +275,8 @@ Input type: `i2i`
 
 ### `recraft-crisp-upscale` — Recraft Crisp Upscale
 
+[Try `recraft-crisp-upscale` in Playground ↗](https://picsart.com/ai-playground/?model=recraft-crisp-upscale)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -250,6 +284,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `recraftv3-replace-bg` — Recraft Replace Background
+
+[Try `recraftv3-replace-bg` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv3-replace-bg)
 
 Input type: `i2i`
 
@@ -260,6 +296,8 @@ Input type: `i2i`
 
 ### `recraft-explore` — Recraft Explore
 
+[Try `recraft-explore` in Playground ↗](https://picsart.com/ai-playground/?model=recraft-explore)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -268,6 +306,8 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 
 ### `recraft-explore-similar` — Recraft Explore Similar
+
+[Try `recraft-explore-similar` in Playground ↗](https://picsart.com/ai-playground/?model=recraft-explore-similar)
 
 Input type: `i2i`
 
@@ -278,6 +318,8 @@ Input type: `i2i`
 | `similarity` | `--similarity` | integer | `1`–`5`, step 1, default `3` |
 
 ### `recraftv2` — Recraft 20B
+
+[Try `recraftv2` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv2)
 
 Input type: `t2i`
 
@@ -290,6 +332,8 @@ Input type: `t2i`
 | `negativePrompt` | `--neg-prompt` | text | free text |
 
 ### `recraftv2_vector` — Recraft 20B Vector
+
+[Try `recraftv2_vector` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv2_vector)
 
 Input type: `t2i`
 

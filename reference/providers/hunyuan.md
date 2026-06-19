@@ -49,6 +49,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `hunyuan-v3` — Hunyuan V3
 
+[Try `hunyuan-v3` in Playground ↗](https://picsart.com/ai-playground/?model=hunyuan-v3)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |

@@ -84,6 +84,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `grok-imagine-video` — Grok
 
+[Try `grok-imagine-video` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-video)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -96,6 +98,8 @@ Input type: `t2v`
 
 ### `grok-edit-video` — Grok Edit Video
 
+[Try `grok-edit-video` in Playground ↗](https://picsart.com/ai-playground/?model=grok-edit-video)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -104,6 +108,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `grok-extend-video` — Grok Extend Video
+
+[Try `grok-extend-video` in Playground ↗](https://picsart.com/ai-playground/?model=grok-extend-video)
 
 Input type: `v2v`
 
@@ -114,6 +120,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `grok-imagine-image` — Grok Imagine
+
+[Try `grok-imagine-image` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-image)
 
 Input type: `t2i`
 
@@ -127,6 +135,8 @@ Input type: `t2i`
 
 ### `grok-imagine-image-quality` — Grok Imagine Quality
 
+[Try `grok-imagine-image-quality` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-image-quality)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -139,6 +149,8 @@ Input type: `t2i`
 
 ### `grok-tts` — Grok TTS
 
+[Try `grok-tts` in Playground ↗](https://picsart.com/ai-playground/?model=grok-tts)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -149,6 +161,8 @@ Input type: `tts`
 | `voiceId` | `--voice` | enum | `eve` (Eve) · `ara` (Ara) · `rex` (Rex) · `sal` (Sal) · `leo` (Leo) (default `eve`) |
 
 ### `grok-imagine-video-1.5` — Grok Imagine 1.5
+
+[Try `grok-imagine-video-1.5` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-video-1.5)
 
 Input type: `i2v`
 

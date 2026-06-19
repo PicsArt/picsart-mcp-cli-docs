@@ -42,6 +42,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `creatify-aurora` — Creatify Aurora HD
 
+[Try `creatify-aurora` in Playground ↗](https://picsart.com/ai-playground/?model=creatify-aurora)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |

@@ -54,6 +54,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `ovi` — OVI
 
+[Try `ovi` in Playground ↗](https://picsart.com/ai-playground/?model=ovi)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |

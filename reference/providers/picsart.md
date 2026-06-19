@@ -74,6 +74,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `picsart-sana-sprint-v1` — Picsart SANA-Sprint
 
+[Try `picsart-sana-sprint-v1` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sana-sprint-v1)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -82,6 +84,8 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 
 ### `picsart-change-bg` — Picsart Change Background
+
+[Try `picsart-change-bg` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-change-bg)
 
 Input type: `i2i`
 
@@ -92,6 +96,8 @@ Input type: `i2i`
 
 ### `picsart-sod-v8-2` — Remove Background
 
+[Try `picsart-sod-v8-2` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sod-v8-2)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -100,6 +106,8 @@ Input type: `i2i`
 
 ### `picsart-enhance` — Enhance
 
+[Try `picsart-enhance` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-enhance)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -107,6 +115,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `picsart-qwen-image-edit` — Picsart Image Edit
+
+[Try `picsart-qwen-image-edit` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-image-edit)
 
 Input type: `i2i`
 
@@ -118,6 +128,8 @@ Input type: `i2i`
 
 ### `picsart-qwen-makeup` — Picsart Makeup
 
+[Try `picsart-qwen-makeup` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-makeup)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -127,6 +139,8 @@ Input type: `i2i`
 | `negativePrompt` | `--neg` | text | free text |
 
 ### `picsart-flux-klein` — Flux 2 Klein 4B
+
+[Try `picsart-flux-klein` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flux-klein)
 
 Input type: `t2i`
 

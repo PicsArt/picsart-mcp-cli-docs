@@ -55,6 +55,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `bytedance-video-upscaler` — ByteDance Upscaler
 
+[Try `bytedance-video-upscaler` in Playground ↗](https://picsart.com/ai-playground/?model=bytedance-video-upscaler)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -62,6 +64,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `bytedance-omnihuman-v1.5` — ByteDance OmniHuman
+
+[Try `bytedance-omnihuman-v1.5` in Playground ↗](https://picsart.com/ai-playground/?model=bytedance-omnihuman-v1.5)
 
 Input type: `i2v`
 

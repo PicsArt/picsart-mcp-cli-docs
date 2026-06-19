@@ -51,6 +51,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `veed-fabric-v1` — VEED Fabric 1.0
 
+[Try `veed-fabric-v1` in Playground ↗](https://picsart.com/ai-playground/?model=veed-fabric-v1)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -61,6 +63,8 @@ Input type: `i2v`
 | `audioUrl` | `-a` | file | **required** audio |
 
 ### `veed-fabric-v1-fast` — VEED Fabric 1.0 Fast
+
+[Try `veed-fabric-v1-fast` in Playground ↗](https://picsart.com/ai-playground/?model=veed-fabric-v1-fast)
 
 Input type: `i2v`
 

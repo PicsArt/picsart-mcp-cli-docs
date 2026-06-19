@@ -62,6 +62,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `topaz-upscale-image` — Topaz HD Upscale
 
+[Try `topaz-upscale-image` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-upscale-image)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -69,6 +71,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `topaz-enhance-standard-v2` — Topaz Standard
+
+[Try `topaz-enhance-standard-v2` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-standard-v2)
 
 Input type: `i2i`
 
@@ -78,6 +82,8 @@ Input type: `i2i`
 
 ### `topaz-enhance-low-res-v2` — Topaz Low Res
 
+[Try `topaz-enhance-low-res-v2` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-low-res-v2)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -85,6 +91,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `topaz-enhance-cgi` — Topaz CGI
+
+[Try `topaz-enhance-cgi` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-cgi)
 
 Input type: `i2i`
 
@@ -94,6 +102,8 @@ Input type: `i2i`
 
 ### `topaz-enhance-high-fidelity-v2` — Topaz Hi-Fi
 
+[Try `topaz-enhance-high-fidelity-v2` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-high-fidelity-v2)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -101,6 +111,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `topaz-enhance-text-refine` — Topaz Text
+
+[Try `topaz-enhance-text-refine` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-text-refine)
 
 Input type: `i2i`
 
@@ -110,6 +122,8 @@ Input type: `i2i`
 
 ### `topaz-enhance-redefine` — Topaz Redefine
 
+[Try `topaz-enhance-redefine` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-redefine)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -118,6 +132,8 @@ Input type: `i2i`
 
 ### `topaz-enhance-recovery` — Topaz Recovery
 
+[Try `topaz-enhance-recovery` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-recovery)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -125,6 +141,8 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `topaz-enhance-recovery-v2` — Topaz Recovery V2
+
+[Try `topaz-enhance-recovery-v2` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-enhance-recovery-v2)
 
 Input type: `i2i`
 

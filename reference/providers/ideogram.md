@@ -61,6 +61,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `ideogram-v3` — Ideogram v3
 
+[Try `ideogram-v3` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-v3)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -76,6 +78,8 @@ Input type: `t2i`
 
 ### `ideogram-character` — Ideogram Character
 
+[Try `ideogram-character` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-character)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -89,6 +93,8 @@ Input type: `i2i`
 > **Notes:** `ideogram-character` uses a reference image (`imageUrls`) to lock the subject’s identity.
 
 ### `ideogram-v4` — Ideogram 4.0
+
+[Try `ideogram-v4` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-v4)
 
 Input type: `t2i`
 

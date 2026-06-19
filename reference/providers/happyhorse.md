@@ -53,6 +53,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `happyhorse-1.0-r2v` — Happy Horse 1.0 Ref-to-Video
 
+[Try `happyhorse-1.0-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-r2v)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -65,6 +67,8 @@ Input type: `i2v`
 
 ### `happyhorse-1.0-video-edit` — Happy Horse 1.0 Video Edit
 
+[Try `happyhorse-1.0-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-video-edit)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -76,6 +80,8 @@ Input type: `v2v`
 | `imageUrls` | `-i` | file | image (up to 5) |
 
 ### `happyhorse-1.0-t2v` — Happy Horse 1.0
+
+[Try `happyhorse-1.0-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-t2v)
 
 Input type: `t2v`
 

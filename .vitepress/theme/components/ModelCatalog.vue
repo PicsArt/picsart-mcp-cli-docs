@@ -62,20 +62,23 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
     </div>
 
     <div class="catalog-grid">
-      <a
-        v-for="m in filtered"
-        :key="m.id"
-        class="model-card"
-        :href="withBase(`/reference/providers/${m.provider}`)"
-      >
-        <div class="card-tags">
-          <span class="tag" :class="`mode-${m.mode}`">{{ m.mode }}</span>
-          <span class="tag io" :title="INPUT_LABELS[m.inputType] || m.inputType">{{ INPUT_LABELS[m.inputType] || m.inputType }}</span>
-        </div>
-        <div class="card-name">{{ m.name }}</div>
-        <div class="card-id">{{ m.id }}</div>
-        <div class="card-provider">{{ providerLabel[m.provider] || m.provider }}</div>
-      </a>
+      <div v-for="m in filtered" :key="m.id" class="model-card">
+        <a class="card-main" :href="withBase(`/reference/providers/${m.provider}`)">
+          <div class="card-tags">
+            <span class="tag" :class="`mode-${m.mode}`">{{ m.mode }}</span>
+            <span class="tag io" :title="INPUT_LABELS[m.inputType] || m.inputType">{{ INPUT_LABELS[m.inputType] || m.inputType }}</span>
+          </div>
+          <div class="card-name">{{ m.name }}</div>
+          <div class="card-id">{{ m.id }}</div>
+          <div class="card-provider">{{ providerLabel[m.provider] || m.provider }}</div>
+        </a>
+        <a
+          class="card-try"
+          :href="`https://picsart.com/ai-playground/?model=${m.id}`"
+          target="_blank"
+          rel="noopener"
+        >Try in Playground ↗</a>
+      </div>
     </div>
 
     <p v-if="!filtered.length" class="empty">No models match those filters.</p>
@@ -110,11 +113,19 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
 
 .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
 .model-card {
-  display: block; padding: 16px; border-radius: 12px; text-decoration: none;
+  display: flex; flex-direction: column; border-radius: 12px;
   border: 1px solid var(--vp-c-border); background: var(--vp-c-bg-soft);
-  transition: border-color .15s, transform .15s; color: inherit;
+  overflow: hidden; transition: border-color .15s, transform .15s;
 }
 .model-card:hover { border-color: var(--vp-c-brand-1); transform: translateY(-2px); }
+.card-main { display: block; flex: 1; padding: 16px; text-decoration: none; color: inherit; }
+.card-try {
+  display: block; padding: 10px 16px; text-decoration: none;
+  font-size: 13px; font-weight: 600; text-align: center;
+  color: var(--vp-c-brand-1); border-top: 1px solid var(--vp-c-border);
+  background: var(--vp-c-bg); transition: background .15s, color .15s;
+}
+.card-try:hover { background: var(--vp-c-brand-1); color: #fff; }
 .card-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
 .tag {
   font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;

@@ -71,6 +71,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `luma-ray-2` — Luma Ray 2
 
+[Try `luma-ray-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -83,6 +85,8 @@ Input type: `t2v`
 | `endFrame` | `--end-frame` | file | image |
 
 ### `luma-ray-flash-2` — Luma Flash 2
+
+[Try `luma-ray-flash-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2)
 
 Input type: `i2v`
 
@@ -97,6 +101,8 @@ Input type: `i2v`
 
 ### `luma-ray-2-reframe-video` — Luma Ray 2 Reframe
 
+[Try `luma-ray-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2-reframe-video)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -107,6 +113,8 @@ Input type: `v2v`
 
 ### `luma-ray-flash-2-reframe-video` — Luma Flash 2 Reframe
 
+[Try `luma-ray-flash-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2-reframe-video)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -116,6 +124,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `luma-uni-1` — Luma UNI-1
+
+[Try `luma-uni-1` in Playground ↗](https://picsart.com/ai-playground/?model=luma-uni-1)
 
 Input type: `t2i`
 
@@ -128,6 +138,8 @@ Input type: `t2i`
 
 ### `luma-uni-1-max` — Luma UNI-1 Max
 
+[Try `luma-uni-1-max` in Playground ↗](https://picsart.com/ai-playground/?model=luma-uni-1-max)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -138,6 +150,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 9) |
 
 ### `luma-ray-3.2` — Luma Ray 3.2
+
+[Try `luma-ray-3.2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2)
 
 Input type: `t2v`
 
@@ -155,6 +169,8 @@ Input type: `t2v`
 
 ### `luma-ray-3.2-edit` — Luma Ray 3.2 Edit
 
+[Try `luma-ray-3.2-edit` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2-edit)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -168,6 +184,8 @@ Input type: `v2v`
 | `exrExport` | `--exr-export` | boolean | `true` · `false` (default `false`) |
 
 ### `luma-ray-3.2-reframe-video` — Luma Ray 3.2 Reframe
+
+[Try `luma-ray-3.2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2-reframe-video)
 
 Input type: `v2v`
 

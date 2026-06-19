@@ -64,6 +64,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `runway-avatar-video` — Runway Avatar
 
+[Try `runway-avatar-video` in Playground ↗](https://picsart.com/ai-playground/?model=runway-avatar-video)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -74,6 +76,8 @@ Input type: `t2v`
 | `audioUrl` | `-a` | file | audio |
 
 ### `runway-gen4.5` — Runway Gen 4.5
+
+[Try `runway-gen4.5` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4.5)
 
 Input type: `t2v`
 
@@ -86,6 +90,8 @@ Input type: `t2v`
 
 ### `runway-gen4-aleph` — Runway Aleph
 
+[Try `runway-gen4-aleph` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-aleph)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -94,6 +100,8 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `runway-gen4-ref` — Runway Gen4 Ref
+
+[Try `runway-gen4-ref` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-ref)
 
 Input type: `i2v`
 
@@ -106,6 +114,8 @@ Input type: `i2v`
 
 ### `runway-gen3a-turbo` — Runway Gen-3 Alpha Turbo
 
+[Try `runway-gen3a-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen3a-turbo)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -117,6 +127,8 @@ Input type: `i2v`
 | `endFrame` | `--end-frame` | file | image |
 
 ### `runway-aleph2` — Runway Aleph 2
+
+[Try `runway-aleph2` in Playground ↗](https://picsart.com/ai-playground/?model=runway-aleph2)
 
 Input type: `v2v`
 

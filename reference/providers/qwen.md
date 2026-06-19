@@ -64,6 +64,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `qwen-image-2` — Qwen 2
 
+[Try `qwen-image-2` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -73,6 +75,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `qwen-image-2-pro` — Qwen 2 Pro
+
+[Try `qwen-image-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2-pro)
 
 Input type: `t2i`
 
@@ -87,6 +91,8 @@ Input type: `t2i`
 
 ### `qwen-image-edit-plus` — Qwen Edit Plus
 
+[Try `qwen-image-edit-plus` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-edit-plus)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -97,6 +103,8 @@ Input type: `i2i`
 > **Notes:** `qwen-image-edit-plus` requires both `prompt` and `imageUrls` (up to 3 source images).
 
 ### `qwen` — Qwen
+
+[Try `qwen` in Playground ↗](https://picsart.com/ai-playground/?model=qwen)
 
 Input type: `t2i`
 

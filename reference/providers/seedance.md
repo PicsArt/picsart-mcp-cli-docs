@@ -58,6 +58,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `seedance-2.0` — Seedance 2.0
 
+[Try `seedance-2.0` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -75,6 +77,8 @@ Input type: `t2v`
 | `endFrame` | `--end-frame` | file | image |
 
 ### `seedance-2.0-fast` — Seedance 2.0 Fast
+
+[Try `seedance-2.0-fast` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0-fast)
 
 Input type: `t2v`
 
@@ -94,6 +98,8 @@ Input type: `t2v`
 
 ### `seedance-2.0-video-edit` — Seedance 2.0 Video Edit
 
+[Try `seedance-2.0-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0-video-edit)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -108,6 +114,8 @@ Input type: `v2v`
 | `imageUrls` | `-i` | file | image (up to 9) |
 
 ### `seedance-2.0-fast-video-edit` — Seedance 2.0 Fast Video Edit
+
+[Try `seedance-2.0-fast-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0-fast-video-edit)
 
 Input type: `v2v`
 
@@ -124,6 +132,8 @@ Input type: `v2v`
 
 ### `seedance-2.0-video-extend` — Seedance 2.0 Video Extend
 
+[Try `seedance-2.0-video-extend` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0-video-extend)
+
 Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
@@ -136,6 +146,8 @@ Input type: `v2v`
 | `videoUrls` | `--video-urls` | file | **required** video (up to 3) |
 
 ### `seedance-2.0-fast-video-extend` — Seedance 2.0 Fast Video Extend
+
+[Try `seedance-2.0-fast-video-extend` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.0-fast-video-extend)
 
 Input type: `v2v`
 
@@ -150,6 +162,8 @@ Input type: `v2v`
 
 ### `seedance-1.5-pro` — Seedance 1.5 Pro
 
+[Try `seedance-1.5-pro` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-1.5-pro)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -163,6 +177,8 @@ Input type: `t2v`
 | `endFrame` | `--end-frame` | file | image |
 
 ### `seedance-i2v` — Seedance I2V
+
+[Try `seedance-i2v` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-i2v)
 
 Input type: `i2v`
 

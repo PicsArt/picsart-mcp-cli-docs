@@ -48,6 +48,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `reve` — Reve
 
+[Try `reve` in Playground ↗](https://picsart.com/ai-playground/?model=reve)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |

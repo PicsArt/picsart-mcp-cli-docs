@@ -50,6 +50,8 @@ Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags
 
 ### `async-flash-v1` — Async Flash v1.0
 
+[Try `async-flash-v1` in Playground ↗](https://picsart.com/ai-playground/?model=async-flash-v1)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |

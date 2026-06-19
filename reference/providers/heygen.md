@@ -53,6 +53,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `heygen-talking-photo` — HeyGen Talking Photo
 
+[Try `heygen-talking-photo` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-talking-photo)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |

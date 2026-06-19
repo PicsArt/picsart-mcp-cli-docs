@@ -53,6 +53,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `seedream-5.0-lite` — Seedream 5.0 Lite
 
+[Try `seedream-5.0-lite` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-5.0-lite)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -65,6 +67,8 @@ Input type: `t2i`
 | `negativePrompt` | `--neg` | text | free text |
 
 ### `seedream-4.5` — Seedream 4.5
+
+[Try `seedream-4.5` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-4.5)
 
 Input type: `t2i`
 
@@ -80,6 +84,8 @@ Input type: `t2i`
 > **Notes:** Seedream 5.0 Lite shares the surface but its resolutions are gated to 2K/3K (4K rejected by the worker) even though the enum defines 4K.
 
 ### `seedream-4.0` — Seedream 4.0
+
+[Try `seedream-4.0` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-4.0)
 
 Input type: `t2i`
 

@@ -80,6 +80,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `kling-video-o1` — Kling Video O1
 
+[Try `kling-video-o1` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-o1)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -93,6 +95,8 @@ Input type: `t2v`
 
 ### `kling-video-effects` — Kling Video Effects
 
+[Try `kling-video-effects` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-effects)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -101,6 +105,8 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 2) |
 
 ### `kling-v3` — Kling V3
+
+[Try `kling-v3` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3)
 
 Input type: `t2v`
 
@@ -123,6 +129,8 @@ Input type: `t2v`
 
 ### `kling-motion-control-v3` — Kling Motion Control V3
 
+[Try `kling-motion-control-v3` in Playground ↗](https://picsart.com/ai-playground/?model=kling-motion-control-v3)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -137,6 +145,8 @@ Input type: `i2v`
 
 ### `kling-motion-control` — Kling Motion Control 2.6
 
+[Try `kling-motion-control` in Playground ↗](https://picsart.com/ai-playground/?model=kling-motion-control)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -150,6 +160,8 @@ Input type: `i2v`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `kling-v2-6` — Kling V2.6
+
+[Try `kling-v2-6` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-6)
 
 Input type: `t2v`
 
@@ -166,6 +178,8 @@ Input type: `t2v`
 | `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
 
 ### `kling-v3-omni` — Kling V3 Omni
+
+[Try `kling-v3-omni` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3-omni)
 
 Input type: `t2v`
 
@@ -186,6 +200,8 @@ Input type: `t2v`
 
 ### `kling-avatar` — Kling Avatar
 
+[Try `kling-avatar` in Playground ↗](https://picsart.com/ai-playground/?model=kling-avatar)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -197,6 +213,8 @@ Input type: `i2v`
 | `audioId` | `--audio-id` | text | free text |
 
 ### `kling-3.0-image` — Kling 3.0 Image
+
+[Try `kling-3.0-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-3.0-image)
 
 Input type: `t2i`
 
@@ -210,6 +228,8 @@ Input type: `t2i`
 
 ### `kling-o1-image` — Kling O1 Image
 
+[Try `kling-o1-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-o1-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -221,6 +241,8 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 10) |
 
 ### `kling-v2-new-image` — Kling V2 New Image
+
+[Try `kling-v2-new-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-new-image)
 
 Input type: `t2i`
 
@@ -237,6 +259,8 @@ Input type: `t2i`
 
 ### `kling-t2a` — Kling T2A
 
+[Try `kling-t2a` in Playground ↗](https://picsart.com/ai-playground/?model=kling-t2a)
+
 Input type: `t2a`
 
 | Param | CLI flag | Type | Values |
@@ -246,6 +270,8 @@ Input type: `t2a`
 
 ### `kling-v2a` — Kling V2A
 
+[Try `kling-v2a` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2a)
+
 Input type: `v2a`
 
 | Param | CLI flag | Type | Values |
@@ -253,6 +279,8 @@ Input type: `v2a`
 | `videoUrl` | `--video` | file | **required** video |
 
 ### `kling-v3-turbo` — Kling V3 Turbo
+
+[Try `kling-v3-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3-turbo)
 
 Input type: `t2v`
 
@@ -268,6 +296,8 @@ Input type: `t2v`
 
 ### `kling-v2-image` — Kling V2 Image
 
+[Try `kling-v2-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -282,6 +312,8 @@ Input type: `t2i`
 
 ### `kling-v2-1-image` — Kling V2.1 Image
 
+[Try `kling-v2-1-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-1-image)
+
 Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
@@ -295,6 +327,8 @@ Input type: `t2i`
 | `humanFidelity` | `--fidelity` | range | `0`–`1`, step 0.05 (default `0.45`) |
 
 ### `kling-v1-5-image` — Kling V1.5 Image
+
+[Try `kling-v1-5-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v1-5-image)
 
 Input type: `t2i`
 
@@ -311,6 +345,8 @@ Input type: `t2i`
 
 ### `kling-multi-image` — Kling Multi-Image
 
+[Try `kling-multi-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-multi-image)
+
 Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
@@ -323,6 +359,8 @@ Input type: `i2i`
 | `styleImage` | `--style-image` | file | image |
 
 ### `kling-multi-image-v2-1` — Kling Multi-Image V2.1
+
+[Try `kling-multi-image-v2-1` in Playground ↗](https://picsart.com/ai-playground/?model=kling-multi-image-v2-1)
 
 Input type: `i2i`
 

@@ -61,6 +61,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `hailuo-2.3` — Hailuo 2.3
 
+[Try `hailuo-2.3` in Playground ↗](https://picsart.com/ai-playground/?model=hailuo-2.3)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -72,6 +74,8 @@ Input type: `t2v`
 
 ### `hailuo-2.3-pro` — Hailuo 2.3 Pro
 
+[Try `hailuo-2.3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=hailuo-2.3-pro)
+
 Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
@@ -81,6 +85,8 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `hailuo-2.3-fast` — Hailuo 2.3 Fast
+
+[Try `hailuo-2.3-fast` in Playground ↗](https://picsart.com/ai-playground/?model=hailuo-2.3-fast)
 
 Input type: `i2v`
 
@@ -93,6 +99,8 @@ Input type: `i2v`
 
 ### `hailuo-2.3-fast-pro` — Hailuo 2.3 Fast Pro
 
+[Try `hailuo-2.3-fast-pro` in Playground ↗](https://picsart.com/ai-playground/?model=hailuo-2.3-fast-pro)
+
 Input type: `i2v`
 
 | Param | CLI flag | Type | Values |
@@ -102,6 +110,8 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `minimax-music-v2` — MiniMax Music v2
+
+[Try `minimax-music-v2` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-music-v2)
 
 Input type: `music`
 

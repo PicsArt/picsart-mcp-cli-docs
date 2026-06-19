@@ -27,6 +27,8 @@ docs-site/
   guide/                      # getting started + CLI / MCP / Skills + concepts
   reference/                  # model reference: catalog, per-mode, per-provider
     providers/                # one page per vendor (28)
+  public/llms.txt             # generated AI-agent site map (llmstxt.org)
+  scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
   scripts/build-wiki.py       # converts these docs → GitHub Wiki markdown
 ```
 
@@ -35,6 +37,12 @@ docs-site/
 `.vitepress/theme/data/{models,providers}.json` are generated from the live catalog
 (`gen-ai models --json`). Regenerate them when the catalog changes so the Model Catalog,
 Providers grid, and the generated wiki tables stay accurate.
+
+`public/llms.txt` (the [llmstxt.org](https://llmstxt.org) agent map) is generated from those
+same JSON files, so it tracks the real model/provider counts. `npm run build` regenerates it
+automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap`, it hardcodes
+the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
+custom-domain move) and re-run.
 
 ---
 

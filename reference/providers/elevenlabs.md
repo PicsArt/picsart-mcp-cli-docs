@@ -52,6 +52,8 @@ Full parameter surface for every model, sourced from `gen-ai models info <id> --
 
 ### `eleven-v3` — Eleven v3
 
+[Try `eleven-v3` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-v3)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -62,6 +64,8 @@ Input type: `tts`
 | `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
 
 ### `eleven-multilingual-v2` — Eleven Multilingual v2
+
+[Try `eleven-multilingual-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-multilingual-v2)
 
 Input type: `tts`
 
@@ -74,6 +78,8 @@ Input type: `tts`
 
 ### `elevenlabs-sfx` — ElevenLabs SFX v2
 
+[Try `elevenlabs-sfx` in Playground ↗](https://picsart.com/ai-playground/?model=elevenlabs-sfx)
+
 Input type: `sfx`
 
 | Param | CLI flag | Type | Values |
@@ -82,6 +88,8 @@ Input type: `sfx`
 | `duration` | `-d` | enum | `1` · `3` · `5` · `8` · `10` · `15` (default `5`) |
 
 ### `eleven-sts-v2` — Eleven STS v2
+
+[Try `eleven-sts-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-sts-v2)
 
 Input type: `sts`
 
@@ -92,6 +100,8 @@ Input type: `sts`
 | `removeBackgroundNoise` | `--remove-bg-noise` | boolean | `true` · `false` (default `false`) |
 
 ### `eleven-multilingual-sts-v2` — Eleven Multilingual STS v2
+
+[Try `eleven-multilingual-sts-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-multilingual-sts-v2)
 
 Input type: `sts`
 
@@ -105,6 +115,8 @@ Input type: `sts`
 
 ### `eleven-audio-isolation` — Eleven Audio Isolation
 
+[Try `eleven-audio-isolation` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-audio-isolation)
+
 Input type: `sts`
 
 | Param | CLI flag | Type | Values |
@@ -112,6 +124,8 @@ Input type: `sts`
 | `audioUrl` | `-a` | file | **required** audio |
 
 ### `eleven-dubbing` — Eleven Dubbing
+
+[Try `eleven-dubbing` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-dubbing)
 
 Input type: `sts`
 
@@ -123,6 +137,8 @@ Input type: `sts`
 
 ### `eleven-voice-design-v3` — Eleven Voice Design v3
 
+[Try `eleven-voice-design-v3` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-voice-design-v3)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -131,6 +147,8 @@ Input type: `tts`
 
 ### `eleven-voice-design-v2` — Eleven Voice Design Multilingual v2
 
+[Try `eleven-voice-design-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-voice-design-v2)
+
 Input type: `tts`
 
 | Param | CLI flag | Type | Values |
@@ -138,6 +156,8 @@ Input type: `tts`
 | `prompt` | `-p` | text | **required** (≤1000 chars) |
 
 ### `eleven-voice-create` — Eleven Voice Previews
+
+[Try `eleven-voice-create` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-voice-create)
 
 Input type: `tts`
 
