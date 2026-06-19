@@ -1,10 +1,10 @@
 ---
-description: "Connect Picsart's 141-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
+description: "Connect Picsart's 176-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
 ---
 
 # MCP Quickstart
 
-Picsart AI Playground exposes the full model catalog to AI agents as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to **Claude Code, Cursor, Windsurf, ChatGPT, or any MCP-compatible agent** and it can generate image, video, and audio across 130+ models directly.
+Picsart AI Playground exposes the full model catalog to AI agents as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to **Claude Code, Cursor, Windsurf, ChatGPT, or any MCP-compatible agent** and it can generate image, video, and audio across 176 models directly.
 
 ## Connect
 

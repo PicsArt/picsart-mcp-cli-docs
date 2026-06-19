@@ -16,9 +16,9 @@ The full Picsart AI Playground catalog: **176 models** from **30 providers**, ac
 
 | Mode | Models | Browse |
 |---|---|---|
-| 🖼️ Image | 65 | [Image generation](/reference/image) |
-| 🎬 Video | 58 | [Video generation](/reference/video) |
-| 🔊 Audio | 18 | [Audio generation](/reference/audio) |
+| 🖼️ Image | 77 | [Image generation](/reference/image) |
+| 🎬 Video | 78 | [Video generation](/reference/video) |
+| 🔊 Audio | 21 | [Audio generation](/reference/audio) |
 
 ## Providers
 

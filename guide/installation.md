@@ -40,7 +40,7 @@ Then authenticate once with `gen-ai login` — see **[Authentication](/guide/aut
 
 ## Skills — for AI agents
 
-Picsart ships ready-to-use **Skills**: small `.zip` bundles of prompts and instructions that drop straight into **Claude Code, Cursor, Windsurf, or ChatGPT**. Download a skill, hand it to the agent, and it already knows which model to pick, how to structure the prompt, and which `gen-ai` command to run. The flagship skill, **`gen-ai-use`**, gives an agent access to all 130+ models across image, video, and audio.
+Picsart ships ready-to-use **Skills**: small `.zip` bundles of prompts and instructions that drop straight into **Claude Code, Cursor, Windsurf, or ChatGPT**. Download a skill, hand it to the agent, and it already knows which model to pick, how to structure the prompt, and which `gen-ai` command to run. The flagship skill, **`gen-ai-use`**, gives an agent access to all 176 models across image, video, and audio.
 
 Skills drive the `gen-ai` CLI under the hood, so install the CLI and run `gen-ai login` first. Full walkthrough in the **[Skills guide](/guide/skills)**.
 
@@ -48,7 +48,7 @@ Skills drive the `gen-ai` CLI under the hood, so install the CLI and run `gen-ai
 
 ## MCP & agent integrations
 
-The gen-ai integration is built on the [Model Context Protocol](https://modelcontextprotocol.io), so it works natively with **Claude Code, Cursor, Windsurf, ChatGPT, or any MCP-compatible agent** — connecting to 130+ models (Flux, Sora, Kling, Veo, ElevenLabs, and more).
+The gen-ai integration is built on the [Model Context Protocol](https://modelcontextprotocol.io), so it works natively with **Claude Code, Cursor, Windsurf, ChatGPT, or any MCP-compatible agent** — connecting to 176 models (Flux, Sora, Kling, Veo, ElevenLabs, and more).
 
 - **Claude Code / Cursor / Windsurf** — add the [`gen-ai-use` Skill](/guide/skills); it plugs the CLI into the agent.
 - **Codex (OpenAI)** — install the CLI, then add the plugin:

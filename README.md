@@ -26,9 +26,10 @@ docs-site/
   index.md                    # home (hero)
   guide/                      # getting started + CLI / MCP / Skills + concepts
   reference/                  # model reference: catalog, per-mode, per-provider
-    providers/                # one page per vendor (28)
+    providers/                # one page per vendor (30)
   public/llms.txt             # generated AI-agent site map (llmstxt.org)
   scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
+  scripts/check-counts.mjs    # fails the build if prose model/provider counts drift
   scripts/build-wiki.py       # converts these docs → GitHub Wiki markdown
 ```
 
@@ -43,6 +44,11 @@ same JSON files, so it tracks the real model/provider counts. `npm run build` re
 automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap`, it hardcodes
 the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
 custom-domain move) and re-run.
+
+The hand-written counts in prose (`176 models`, `77 image models`, `30 providers`, each
+provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
+truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
+Run it standalone with `npm run check:counts`.
 
 ---
 

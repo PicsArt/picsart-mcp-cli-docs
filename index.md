@@ -24,7 +24,7 @@ features:
     link: /guide/cli-quickstart
   - icon: 🤖
     title: Skills & MCP
-    details: Drop-in skills + MCP for Claude Code, Cursor, Windsurf, ChatGPT & Codex — generate in plain English across 130+ models.
+    details: Drop-in skills + MCP for Claude Code, Cursor, Windsurf, ChatGPT & Codex — generate in plain English across 176 models.
     link: /guide/skills
   - icon: 🎬
     title: 176 models, 30 providers

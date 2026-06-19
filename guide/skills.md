@@ -1,5 +1,5 @@
 ---
-description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 130+ AI models."
+description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 176 AI models."
 ---
 
 # Skills
@@ -18,7 +18,7 @@ A skill is the **knowledge layer**; the [gen-ai CLI](/guide/cli-quickstart) is t
 
 ## The `gen-ai-use` skill
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all **130+ models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
+The flagship skill, **`gen-ai-use`**, gives an agent access to all **176 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
 
 Once added, you drive it conversationally:
 

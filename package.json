@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vitepress dev",
     "llms": "node scripts/build-llms.mjs",
-    "build": "npm run llms && vitepress build",
+    "check:counts": "node scripts/check-counts.mjs",
+    "build": "npm run llms && npm run check:counts && vitepress build",
     "preview": "vitepress preview",
     "wiki:build": "python3 scripts/build-wiki.py"
   },
