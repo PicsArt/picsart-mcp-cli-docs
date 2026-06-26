@@ -78,6 +78,25 @@ gen-ai models compare kling-v3 veo-3.1
 gen-ai pricing seedance-2.0 -d 5 -r 1080p   # quote a cost before generating
 ```
 
+## Describe an image or video
+
+`gen-ai describe` runs the catalog's **LLM models** (Claude, GPT, Gemini) against an image or video and prints the model's **text** answer — no media is generated. Use it to caption, OCR, classify, or summarize a clip.
+
+```bash
+# Describe an image (default model)
+gen-ai describe -i photo.jpg
+
+# Ask a specific question about an image
+gen-ai describe -i photo.jpg -p "what brand is the shoe?"
+
+# Summarize a video (auto-routes to a video-capable model)
+gen-ai describe --video clip.mp4 -p "summarize what happens"
+```
+
+- The prompt (`-p`) is **optional** — without it, the model gets a default "describe this" instruction.
+- Pass `-m` to pick a model (default `claude-sonnet-4-6`). Only Gemini 3 Pro accepts video, so `--video` auto-selects it unless you force a non-video model with `-m`.
+- Output goes to **stdout** (skips download/Drive). Add `--script` for clean, pipeable text — e.g. `gen-ai describe -i photo.jpg --script | pbcopy`.
+
 ## More
 
 - **[Generating media](/guide/generating)** — inputs, outputs, and modes in depth
