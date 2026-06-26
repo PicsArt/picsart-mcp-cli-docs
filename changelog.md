@@ -9,6 +9,14 @@ Notable changes to the Picsart model catalog and these docs. Newest first. The c
 
 ## 2026-06-26
 
+**Catalog refresh — now 165 models across 31 providers** (`@picsart/ai-sdk` 3.10.0). A big lineup update since the 3.6.2 catalog:
+
+- **Seedance 2.0 family — the full lineup.** **Seedance 2.0** and **Seedance 2.0 Fast** (text-to-video with keyframe control and native audio), each with a **Video Edit** and **Video Extend** variant, plus the new **Seedance 2.0 Mini** (T2V + edit + extend). See [Seedance](/reference/providers/seedance).
+- **Text & analysis models *(new mode)*** — analyze images and video with LLMs via [`gen-ai describe`](/guide/cli-quickstart#describe-an-image-or-video): **Anthropic** *(new provider)* Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5, **OpenAI** GPT-5.5, and **Google** Gemini 3 Pro (the only one that reads video). See [Text & analysis](/reference/text).
+- **Google** — added the **Imagen 4.0** family (4.0 / Ultra / Fast) and **Gemini Omni**.
+- **Happy Horse** — added Happy Horse 1.5 (text-to-video and ref-to-video).
+- **Deprecated / retired** — removed from the catalog: GPT Image 1, OpenAI TTS-1 / TTS-1 HD, the Kling image & multi-image family, LTX Pro / Fast / Retake, Wan 2.6 (T2V / R2V / Image), Seedream 4.0, Runway Gen-3 Turbo & Aleph, Recraft v2 (+ Vector), Qwen v1, and Seedance 1.5 Pro / I2V. These stay resolvable for historical jobs and pricing but are no longer offered for new generations.
+
 **New CLI command — `gen-ai describe`.** Analyze an image or video with an LLM (Claude, GPT, or Gemini) and get a **text** answer — caption, OCR, classify, or summarize a clip. The prompt is optional, video auto-routes to a video-capable model, and output goes to stdout for easy piping. See the [CLI Quickstart](/guide/cli-quickstart#describe-an-image-or-video).
 
 ---

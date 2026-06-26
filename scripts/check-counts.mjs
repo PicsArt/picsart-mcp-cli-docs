@@ -46,6 +46,7 @@ const GLOBAL_FILES = [
   'reference/image.md',
   'reference/video.md',
   'reference/audio.md',
+  'reference/text.md',
 ]
 
 // Each pattern captures a number that must equal `expected`. Patterns are
@@ -56,6 +57,7 @@ const GLOBAL_PATTERNS = [
   { label: 'image models', re: /(\d+)\s+(?:AI\s+)?image(?:\s+generation)?\s+models/gi, expected: () => modeCount.image },
   { label: 'video models', re: /(\d+)\s+(?:AI\s+)?video(?:\s+generation)?\s+models/gi, expected: () => modeCount.video },
   { label: 'audio models', re: /(\d+)\s+(?:AI\s+)?audio\s+models/gi, expected: () => modeCount.audio },
+  { label: 'text models', re: /(\d+)\s+(?:AI\s+)?text\s+models/gi, expected: () => modeCount.text },
   { label: 'total models', re: /(\d+)\+?\s+models\b/g, expected: () => total },
   { label: 'N-model catalog', re: /(\d+)-model\b/g, expected: () => total },
   { label: 'provider count', re: /(\d+)\s+providers\b/gi, expected: () => providerCount },
@@ -101,7 +103,7 @@ for (const provider of providers) {
 
 const summary =
   `Counts: ${total} models, ${providerCount} providers ` +
-  `(image ${modeCount.image}, video ${modeCount.video}, audio ${modeCount.audio}). ` +
+  `(image ${modeCount.image}, video ${modeCount.video}, audio ${modeCount.audio}, text ${modeCount.text}). ` +
   `Checked ${checked.global} global + ${checked.provider} provider claims.`
 
 if (failures.length) {

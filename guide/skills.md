@@ -18,7 +18,7 @@ A skill is the **knowledge layer**; the [gen-ai CLI](/guide/cli-quickstart) is t
 
 ## The `gen-ai-use` skill
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all **176 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
+The flagship skill, **`gen-ai-use`**, gives an agent access to all **165 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
 
 Once added, you drive it conversationally:
 

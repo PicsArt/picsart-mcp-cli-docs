@@ -14,8 +14,8 @@ ByteDance models on the BytePlus Vision AI platform. **OmniHuman 1.5** is an aud
 
 | id | Name | Input type |
 |---|---|---|
-| `bytedance-omnihuman-v1.5` | ByteDance OmniHuman | `i2v` |
 | `bytedance-video-upscaler` | ByteDance Upscaler | `v2v` |
+| `bytedance-omnihuman-v1.5` | ByteDance OmniHuman | `i2v` |
 
 ## CLI
 

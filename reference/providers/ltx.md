@@ -1,10 +1,10 @@
 ---
-description: "LTX (Lightricks) AI models on Picsart — 8 video model(s) including LTX Pro, LTX 2.3 Extend, LTX 2.3 Fast. CLI + MCP examples, parameters, and official docs."
+description: "LTX (Lightricks) AI models on Picsart — 5 video model(s) including LTX Pro, LTX 2.3 Extend, LTX 2.3 Fast. CLI + MCP examples, parameters, and official docs."
 ---
 
 # LTX
 
-**Mode:** video · **Models:** 8
+**Mode:** video · **Models:** 5
 
 **Vendor:** [Lightricks LTX](https://www.lightricks.com/ltxv-documentation) · **Official API docs:** [docs.ltx.video](https://docs.ltx.video)
 
@@ -19,9 +19,6 @@ LTX 2.3 (by Lightricks) is a video model with synchronized native audio, first-t
 | `ltx-2.3-a2v` | LTX 2.3 Audio-to-Video | `a2v` |
 | `ltx-v2.3-extend` | LTX 2.3 Extend | `v2v` |
 | `ltx-v2.3-retake` | LTX 2.3 Retake | `v2v` |
-| `ltx-pro-t2v` | LTX Pro | `t2v` |
-| `ltx-v2-fast` | LTX Fast | `t2v` |
-| `ltx-v2-retake` | LTX Retake | `v2v` |
 
 ## CLI
 
@@ -125,48 +122,6 @@ Input type: `v2v`
 | `prompt` | `-p` | text | **required** |
 | `duration` | `-d` | enum | `5` · `10` · `15` · `20` (default `5`) |
 | `videoUrl` | `--video` | file | **required** video |
-
-### `ltx-pro-t2v` — LTX Pro
-
-[Try `ltx-pro-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-pro-t2v)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `6` · `8` · `10` (default `6`) |
-| `resolution` | `-r` | enum | `1080p` · `1440p` · `2160p` (default `1080p`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-
-### `ltx-v2-fast` — LTX Fast
-
-[Try `ltx-v2-fast` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2-fast)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `6` · `8` · `10` · `12` · `14` · `16` · `18` · `20` (default `6`) |
-| `resolution` | `-r` | enum | `1080p` · `1440p` · `2160p` (default `1080p`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-
-### `ltx-v2-retake` — LTX Retake
-
-[Try `ltx-v2-retake` in Playground ↗](https://picsart.com/ai-playground/?model=ltx-v2-retake)
-
-Input type: `v2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` · `15` · `20` (default `5`) |
-| `videoUrl` | `--video` | file | **required** video |
-
-> **Notes:** A2V / extend / retake are Pro-only and take audio/video inputs; the Fast variant adds longer durations at 1080p.
 
 ## Pricing
 

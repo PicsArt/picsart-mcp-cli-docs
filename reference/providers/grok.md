@@ -4,7 +4,7 @@ description: "Grok (xAI) AI models on Picsart — 7 audio/image/video model(s) i
 
 # Grok
 
-**Modes:** video · image · audio · **Models:** 7
+**Modes:** image · video · audio · **Models:** 7
 
 **Vendor:** [xAI](https://x.ai) · **Official API docs:** [docs.x.ai](https://docs.x.ai/docs)
 
@@ -14,13 +14,13 @@ Grok Imagine (by xAI) is a multi-mode family on a single API: a fast image-to-vi
 
 | id | Name | Input type |
 |---|---|---|
-| `grok-imagine-video` | Grok | `t2v` |
+| `grok-imagine-video` | Grok Imagine 1.0 | `t2v` |
+| `grok-imagine-video-1.5` | Grok Imagine 1.5 | `i2v` |
 | `grok-edit-video` | Grok Edit Video | `v2v` |
 | `grok-extend-video` | Grok Extend Video | `v2v` |
 | `grok-imagine-image` | Grok Imagine | `t2i` |
 | `grok-imagine-image-quality` | Grok Imagine Quality | `t2i` |
 | `grok-tts` | Grok TTS | `tts` |
-| `grok-imagine-video-1.5` | Grok Imagine 1.5 | `i2v` |
 
 ## CLI
 
@@ -96,6 +96,22 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `6`) |
 | `imageUrls` | `-i` | file | image (up to 1) |
 
+### `grok-imagine-video-1.5` — Grok Imagine 1.5
+
+[Try `grok-imagine-video-1.5` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-video-1.5)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `8`) |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+
+> **Notes:** `grok-imagine-video` also backs image-to-video (pass `-i`); the edit / extend variants take a `--video` input and retain the source duration.
+
 ### `grok-edit-video` — Grok Edit Video
 
 [Try `grok-edit-video` in Playground ↗](https://picsart.com/ai-playground/?model=grok-edit-video)
@@ -159,22 +175,6 @@ Input type: `tts`
 | `accent` | `--accent` | text | free text |
 | `prompt` | `-p` | text | **required** (≤15000 chars) |
 | `voiceId` | `--voice` | enum | `eve` (Eve) · `ara` (Ara) · `rex` (Rex) · `sal` (Sal) · `leo` (Leo) (default `eve`) |
-
-### `grok-imagine-video-1.5` — Grok Imagine 1.5
-
-[Try `grok-imagine-video-1.5` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-video-1.5)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `8`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-
-> **Notes:** `grok-imagine-video` also backs image-to-video (pass `-i`); the edit / extend variants take a `--video` input and retain the source duration.
 
 ## Pricing
 

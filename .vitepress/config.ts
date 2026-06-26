@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 176 models from 30 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 165 models from 31 providers in your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -59,6 +59,7 @@ const sidebar = [
       { text: 'Image generation', link: '/reference/image' },
       { text: 'Video generation', link: '/reference/video' },
       { text: 'Audio generation', link: '/reference/audio' },
+      { text: 'Text & analysis', link: '/reference/text' },
     ],
   },
   {
@@ -66,6 +67,7 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'All providers', link: '/reference/providers/' },
+      { text: 'Anthropic', link: '/reference/providers/anthropic' },
       { text: 'Async', link: '/reference/providers/async' },
       { text: 'ByteDance', link: '/reference/providers/bytedance' },
       { text: 'Creatify', link: '/reference/providers/creatify' },
@@ -127,7 +129,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 176 models, 30 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 165 models, 31 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],

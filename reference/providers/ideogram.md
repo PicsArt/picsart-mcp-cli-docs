@@ -14,9 +14,9 @@ Ideogram v3 is a text-to-image model known for strong typography and in-image te
 
 | id | Name | Input type |
 |---|---|---|
+| `ideogram-v4` | Ideogram 4.0 | `t2i` |
 | `ideogram-v3` | Ideogram v3 | `t2i` |
 | `ideogram-character` | Ideogram Character | `i2i` |
-| `ideogram-v4` | Ideogram 4.0 | `t2i` |
 
 ## CLI
 
@@ -59,6 +59,19 @@ gen-ai generate -m ideogram-character \
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
 
+### `ideogram-v4` — Ideogram 4.0
+
+[Try `ideogram-v4` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-v4)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `resolution` | `-r` | enum | `2048x2048` · `1440x2880` · `2880x1440` · `1664x2496` · `2496x1664` · `1792x2240` · `2240x1792` · `1440x2560` · `2560x1440` · `1600x2560` · `2560x1600` · `1728x2304` · `2304x1728` · `1296x3168` · `3168x1296` · `1152x2944` · `2944x1152` · `1248x3328` · `3328x1248` · `1280x3072` · `3072x1280` (default `2048x2048`) |
+| `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
+| `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
+
 ### `ideogram-v3` — Ideogram v3
 
 [Try `ideogram-v3` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-v3)
@@ -91,19 +104,6 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 > **Notes:** `ideogram-character` uses a reference image (`imageUrls`) to lock the subject’s identity.
-
-### `ideogram-v4` — Ideogram 4.0
-
-[Try `ideogram-v4` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-v4)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `resolution` | `-r` | enum | `2048x2048` · `1440x2880` · `2880x1440` · `1664x2496` · `2496x1664` · `1792x2240` · `2240x1792` · `1440x2560` · `2560x1440` · `1600x2560` · `2560x1600` · `1728x2304` · `2304x1728` · `1296x3168` · `3168x1296` · `1152x2944` · `2944x1152` · `1248x3328` · `3328x1248` · `1280x3072` · `3072x1280` (default `2048x2048`) |
-| `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
-| `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
 
 ## Pricing
 

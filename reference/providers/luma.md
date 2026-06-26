@@ -4,7 +4,7 @@ description: "Luma AI models on Picsart — 9 image/video model(s) including Lum
 
 # Luma
 
-**Modes:** video, image · **Models:** 9
+**Modes:** image · video · **Models:** 9
 
 **Vendor:** [Luma AI](https://lumalabs.ai) · **Official API docs:** [Luma Dream Machine API](https://docs.lumalabs.ai/docs/api)
 

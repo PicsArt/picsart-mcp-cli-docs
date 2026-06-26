@@ -1,10 +1,10 @@
 ---
-description: "Runway AI models on Picsart — 6 video model(s) including Runway Aleph 2, Runway Gen 4.5, Runway Avatar. CLI + MCP examples, parameters, and official docs."
+description: "Runway AI models on Picsart — 4 video model(s) including Runway Aleph 2, Runway Gen 4.5, Runway Avatar. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Runway
 
-**Mode:** video · **Models:** 6
+**Modes:** image · video · **Models:** 4
 
 **Official API docs:** [Runway API](https://docs.dev.runwayml.com)
 
@@ -14,12 +14,10 @@ Runway is a family of cinematic video models. The flagship **Gen 4.5** unifies t
 
 | id | Name | Input type |
 |---|---|---|
-| `runway-gen4.5` | Runway Gen 4.5 | `t2v` |
-| `runway-gen4-aleph` | Runway Aleph | `v2v` |
-| `runway-gen4-ref` | Runway Gen4 Ref | `i2v` |
 | `runway-avatar-video` | Runway Avatar | `t2v` |
-| `runway-gen3a-turbo` | Runway Gen-3 Alpha Turbo | `i2v` |
+| `runway-gen4.5` | Runway Gen 4.5 | `t2v` |
 | `runway-aleph2` | Runway Aleph 2 | `v2v` |
+| `runway-gen4-ref` | Runway Gen4 Ref | `i2i` |
 
 ## CLI
 
@@ -88,44 +86,6 @@ Input type: `t2v`
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
 | `imageUrls` | `-i` | file | image (up to 1) |
 
-### `runway-gen4-aleph` — Runway Aleph
-
-[Try `runway-gen4-aleph` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-aleph)
-
-Input type: `v2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `videoUrl` | `--video` | file | **required** video |
-
-### `runway-gen4-ref` — Runway Gen4 Ref
-
-[Try `runway-gen4-ref` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-ref)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
-
-### `runway-gen3a-turbo` — Runway Gen-3 Alpha Turbo
-
-[Try `runway-gen3a-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen3a-turbo)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `startFrame` | `--start-frame` | file | **required** image |
-| `endFrame` | `--end-frame` | file | image |
-
 ### `runway-aleph2` — Runway Aleph 2
 
 [Try `runway-aleph2` in Playground ↗](https://picsart.com/ai-playground/?model=runway-aleph2)
@@ -140,6 +100,19 @@ Input type: `v2v`
 | `endFrame` | `--end-frame` | file | image |
 
 > **Notes:** Gen 4.5 is a unified surface — passing a start image (`imageUrls`) switches it from text-to-video to image-to-video.
+
+### `runway-gen4-ref` — Runway Gen4 Ref
+
+[Try `runway-gen4-ref` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-ref)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤1000 chars) |
+| `duration` | `-d` | enum | `5` · `10` (default `5`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
 
 ## Pricing
 

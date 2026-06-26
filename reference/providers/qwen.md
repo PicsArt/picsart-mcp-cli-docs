@@ -1,10 +1,10 @@
 ---
-description: "Qwen (Alibaba) AI models on Picsart — 4 image model(s) including Qwen 2, Qwen 2 Pro, Qwen Edit Plus. CLI + MCP examples, parameters, and official docs."
+description: "Qwen (Alibaba) AI models on Picsart — 3 image model(s) including Qwen 2, Qwen 2 Pro, Qwen Edit Plus. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Qwen
 
-**Mode:** image · **Models:** 4
+**Mode:** image · **Models:** 3
 
 **Vendor:** [Qwen Cloud (Alibaba DashScope)](https://docs.qwencloud.com) · **Official API docs:** [Qwen API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-reference)
 
@@ -17,7 +17,6 @@ Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-fo
 | `qwen-image-2` | Qwen 2 | `t2i` |
 | `qwen-image-2-pro` | Qwen 2 Pro | `t2i` |
 | `qwen-image-edit-plus` | Qwen Edit Plus | `i2i` |
-| `qwen` | Qwen | `t2i` |
 
 ## CLI
 
@@ -101,18 +100,6 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 3) |
 
 > **Notes:** `qwen-image-edit-plus` requires both `prompt` and `imageUrls` (up to 3 source images).
-
-### `qwen` — Qwen
-
-[Try `qwen` in Playground ↗](https://picsart.com/ai-playground/?model=qwen)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
 
 ## Pricing
 

@@ -1,10 +1,10 @@
 ---
-description: "Happy Horse AI models on Picsart — 3 video model(s) including Happy Horse 1.0, Happy Horse 1.0 Ref-to-Video, Happy Horse 1.0 Video Edit. CLI + MCP examples, parameters, and official docs."
+description: "Happy Horse AI models on Picsart — 5 video model(s) including Happy Horse 1.0, Happy Horse 1.0 Ref-to-Video, Happy Horse 1.0 Video Edit. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Happy Horse
 
-**Mode:** video · **Models:** 3
+**Mode:** video · **Models:** 5
 
 **Vendor:** [Qwen Cloud](https://www.qwencloud.com/models/happyhorse-1.0-t2v) · **Official API docs:** [Qwen Cloud docs](https://docs.qwencloud.com/developer-guides/getting-started/introduction)
 
@@ -17,6 +17,8 @@ Happy Horse 1.0 is a text-to-video model running on Qwen Cloud (Alibaba Cloud In
 | `happyhorse-1.0-t2v` | Happy Horse 1.0 | `t2v` |
 | `happyhorse-1.0-r2v` | Happy Horse 1.0 Ref-to-Video | `i2v` |
 | `happyhorse-1.0-video-edit` | Happy Horse 1.0 Video Edit | `v2v` |
+| `happyhorse-1.5-t2v` | Happy Horse 1.1 | `t2v` |
+| `happyhorse-1.5-r2v` | Happy Horse 1.1 Ref-to-Video | `i2v` |
 
 ## CLI
 
@@ -51,6 +53,22 @@ gen-ai generate -m happyhorse-1.0-r2v -p "[Image 1] runs through [Image 2]" -i .
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
 
+### `happyhorse-1.0-t2v` — Happy Horse 1.0
+
+[Try `happyhorse-1.0-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-t2v)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+
+> **Notes:** `r2v` takes up to 9 reference images via `imageUrls`; `video-edit` takes a source video plus reference images.
+
 ### `happyhorse-1.0-r2v` — Happy Horse 1.0 Ref-to-Video
 
 [Try `happyhorse-1.0-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-r2v)
@@ -79,9 +97,9 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 | `imageUrls` | `-i` | file | image (up to 5) |
 
-### `happyhorse-1.0-t2v` — Happy Horse 1.0
+### `happyhorse-1.5-t2v` — Happy Horse 1.1
 
-[Try `happyhorse-1.0-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-t2v)
+[Try `happyhorse-1.5-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.5-t2v)
 
 Input type: `t2v`
 
@@ -93,7 +111,19 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
 | `startFrame` | `--start-frame` | file | image |
 
-> **Notes:** `r2v` takes up to 9 reference images via `imageUrls`; `video-edit` takes a source video plus reference images.
+### `happyhorse-1.5-r2v` — Happy Horse 1.1 Ref-to-Video
+
+[Try `happyhorse-1.5-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.5-r2v)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2500 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
+| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
+| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `imageUrls` | `-i` | file | **required** image (up to 9) |
 
 ## Pricing
 

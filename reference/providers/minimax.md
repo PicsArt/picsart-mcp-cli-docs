@@ -4,7 +4,7 @@ description: "MiniMax AI models on Picsart — 5 audio/video model(s) including 
 
 # MiniMax
 
-**Modes:** video, audio · **Models:** 5
+**Modes:** video · audio · **Models:** 5
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 

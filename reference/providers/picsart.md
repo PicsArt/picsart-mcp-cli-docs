@@ -14,13 +14,13 @@ Picsart's own image models run on the Picsart Compute Platform (PCP). They cover
 
 | id | Name | Input type |
 |---|---|---|
-| `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
-| `picsart-flux-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-change-bg` | Picsart Change Background | `i2i` |
 | `picsart-sod-v8-2` | Remove Background | `i2i` |
 | `picsart-enhance` | Enhance | `i2i` |
 | `picsart-qwen-image-edit` | Picsart Image Edit | `i2i` |
 | `picsart-qwen-makeup` | Picsart Makeup | `i2i` |
+| `picsart-flux-2-klein` | Flux 2 Klein 4B | `t2i` |
+| `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
 
 ## CLI
 
@@ -71,17 +71,6 @@ gen-ai enhance -i ./low-res.jpg
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
-
-### `picsart-sana-sprint-v1` — Picsart SANA-Sprint
-
-[Try `picsart-sana-sprint-v1` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sana-sprint-v1)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 
 ### `picsart-change-bg` — Picsart Change Background
 
@@ -138,9 +127,9 @@ Input type: `i2i`
 | `prompt` | `-p` | text | **required** |
 | `negativePrompt` | `--neg` | text | free text |
 
-### `picsart-flux-klein` — Flux 2 Klein 4B
+### `picsart-flux-2-klein` — Flux 2 Klein 4B
 
-[Try `picsart-flux-klein` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flux-klein)
+[Try `picsart-flux-2-klein` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flux-2-klein)
 
 Input type: `t2i`
 
@@ -150,7 +139,16 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `5:3` · `3:5` · `4:3` · `3:4` (default `1:1`) |
 | `imageUrls` | `-i` | file | image (up to 3) |
 
-> **Notes:** The editing models take an `imageUrls` (`-i`) input; `picsart-change-bg` and the Qwen edit models also accept a `prompt`.
+### `picsart-sana-sprint-v1` — Picsart SANA-Sprint
+
+[Try `picsart-sana-sprint-v1` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sana-sprint-v1)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 
 ## Pricing
 

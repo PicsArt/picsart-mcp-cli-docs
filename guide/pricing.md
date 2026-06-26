@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 176 models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 165 models.
 
 ## Check your balance
 

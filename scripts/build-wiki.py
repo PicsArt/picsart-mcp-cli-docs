@@ -50,6 +50,7 @@ route2page = {
     '/reference/image': 'Image-Generation',
     '/reference/video': 'Video-Generation',
     '/reference/audio': 'Audio-Generation',
+    '/reference/text': 'Text-And-Analysis',
     '/reference/providers': 'Providers',
     '/reference/providers/': 'Providers',
 }
@@ -72,6 +73,7 @@ src2out = {
     'reference/image.md': 'Image-Generation.md',
     'reference/video.md': 'Video-Generation.md',
     'reference/audio.md': 'Audio-Generation.md',
+    'reference/text.md': 'Text-And-Analysis.md',
 }
 for _p in providers:
     src2out[f"reference/providers/{_p['id']}.md"] = prov_page(_p['id']) + '.md'
@@ -117,12 +119,13 @@ for src, out in src2out.items():
 
 INPUT_LABELS = {'t2i': 'Text→Image', 'i2i': 'Image→Image', 't2v': 'Text→Video',
                 'i2v': 'Image→Video', 'v2v': 'Video→Video', 'a2v': 'Audio→Video',
-                'tts': 'Text→Speech', 'sts': 'Speech→Speech', 'sfx': 'Sound FX', 'music': 'Music'}
+                'tts': 'Text→Speech', 'sts': 'Speech→Speech', 'sfx': 'Sound FX', 'music': 'Music',
+                'i2t': 'Image→Text', 'v2t': 'Video→Text'}
 plabel = {p['id']: p['label'] for p in providers}
 
 cat = ['# Model Catalog', '',
        f'All **{len(models)} models** from **{len(providers)} providers**. Every model works from both the [CLI Quickstart](CLI-Quickstart) and [MCP Quickstart](MCP-Quickstart) with the same id. Click a provider for CLI + MCP examples and parameters.', '']
-for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio')]:
+for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio'), ('text', 'Text & Analysis')]:
     ms = [m for m in models if m['mode'] == mode]
     cat += [f'## {title} ({len(ms)})', '', '| Model | id | Provider | Type |', '|---|---|---|---|']
     for m in sorted(ms, key=lambda x: (x['provider'], x['name'])):

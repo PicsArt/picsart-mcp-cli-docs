@@ -4,7 +4,7 @@ description: "OpenAI AI models on Picsart — 8 image/video/audio model(s) inclu
 
 # OpenAI
 
-**Modes:** video · image · audio · **Models:** 8
+**Modes:** image · video · text · **Models:** 6
 
 **Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/video-generation)
 
@@ -14,14 +14,12 @@ OpenAI spans two media families on the Playground: **Sora 2** text-to-video (sta
 
 | id | Name | Input type |
 |---|---|---|
-| `sora-2` | Sora 2 | `t2v` |
 | `sora-2-pro` | Sora 2 Pro | `t2v` |
+| `sora-2` | Sora 2 | `t2v` |
 | `sora-2-extend` | Sora 2 Extend | `v2v` |
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
-| `gpt-image-1` | GPT Image 1 | `t2i` |
-| `openai-tts-1` | OpenAI TTS-1 | `tts` |
-| `openai-tts-1-hd` | OpenAI TTS-1 HD | `tts` |
+| `gpt-5.5` | GPT-5.5 | `i2t` |
 
 ## CLI
 
@@ -136,45 +134,17 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |
 
-### `gpt-image-1` — GPT Image 1
+### `gpt-5.5` — GPT-5.5
 
-[Try `gpt-image-1` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-1)
+[Try `gpt-5.5` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-5.5)
 
-Input type: `t2i`
+Input type: `i2t`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` (default `1:1`) |
-| `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
-| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 5) |
-
-### `openai-tts-1` — OpenAI TTS-1
-
-[Try `openai-tts-1` in Playground ↗](https://picsart.com/ai-playground/?model=openai-tts-1)
-
-Input type: `tts`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤4096 chars) |
-| `voiceId` | `--voice` | enum | `alloy` (Alloy) · `ash` (Ash) · `ballad` (Ballad) · `coral` (Coral) · `echo` (Echo) · `fable` (Fable) · `nova` (Nova) · `onyx` (Onyx) · `sage` (Sage) · `shimmer` (Shimmer) · `verse` (Verse) (default `alloy`) |
-
-### `openai-tts-1-hd` — OpenAI TTS-1 HD
-
-[Try `openai-tts-1-hd` in Playground ↗](https://picsart.com/ai-playground/?model=openai-tts-1-hd)
-
-Input type: `tts`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤4096 chars) |
-| `voiceId` | `--voice` | enum | `alloy` (Alloy) · `ash` (Ash) · `ballad` (Ballad) · `coral` (Coral) · `echo` (Echo) · `fable` (Fable) · `nova` (Nova) · `onyx` (Onyx) · `sage` (Sage) · `shimmer` (Shimmer) · `verse` (Verse) (default `alloy`) |
-
-> **Notes:** `sora-2-pro` adds 1080p output; `sora-2-extend` continues an existing video. `gpt-image-2` is opaque-only; `gpt-image-1.5` adds a transparent `background` option.
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ## Pricing
 

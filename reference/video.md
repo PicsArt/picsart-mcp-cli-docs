@@ -1,10 +1,10 @@
 ---
-description: "78 AI video generation models on Picsart — text-to-video, image-to-video, and video editing — Sora, Veo, Kling, Seedance, Wan, Runway and more."
+description: "74 video generation models on Picsart — text-to-video, image-to-video, and video editing — Sora, Veo, Kling, Seedance, Wan, Runway and more."
 ---
 
 # Video generation
 
-**78 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
+**74 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
 
 ## Quick start
 

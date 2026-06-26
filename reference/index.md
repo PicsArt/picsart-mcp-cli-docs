@@ -1,10 +1,10 @@
 ---
-description: "The full Picsart AI model catalog — 176 models from 30 providers across image, video, and audio, usable from the gen-ai CLI and MCP."
+description: "The full Picsart AI model catalog — 165 models from 31 providers across image, video, audio, and text analysis, usable from the gen-ai CLI and MCP."
 ---
 
 # Model Reference
 
-The full Picsart AI Playground catalog: **176 models** from **30 providers**, across image, video, and audio. Every model is usable from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart) with the same id.
+The full Picsart AI Playground catalog: **165 models** from **31 providers**, across image, video, audio, and text. Every model is usable from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart) with the same id.
 
 <div class="reference-cta">
 
@@ -16,13 +16,14 @@ The full Picsart AI Playground catalog: **176 models** from **30 providers**, ac
 
 | Mode | Models | Browse |
 |---|---|---|
-| 🖼️ Image | 77 | [Image generation](/reference/image) |
-| 🎬 Video | 78 | [Video generation](/reference/video) |
-| 🔊 Audio | 21 | [Audio generation](/reference/audio) |
+| 🖼️ Image | 67 | [Image generation](/reference/image) |
+| 🎬 Video | 74 | [Video generation](/reference/video) |
+| 🔊 Audio | 19 | [Audio generation](/reference/audio) |
+| 📝 Text | 5 | [Text & analysis](/reference/text) |
 
 ## Providers
 
-All **30 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
+All **31 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
 
 ## How to read a provider page
 

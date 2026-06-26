@@ -18,9 +18,9 @@ All three are powered by the same `@picsart/ai-sdk` model registry, so the model
 
 ## What you can generate
 
-- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **77 image models.**
-- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **78 video models.**
-- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **21 audio models.**
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **67 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **74 video models.**
+- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **19 audio models.**
 
 Browse the full catalog in the **[Model Reference](/reference/)**, or filter live:
 

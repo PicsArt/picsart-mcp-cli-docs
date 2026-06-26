@@ -1,253 +1,262 @@
 [
-{
-"id": "async",
-"label": "Async",
-"count": 1,
-"modes": [
-"audio"
-]
-},
-{
-"id": "bytedance",
-"label": "ByteDance",
-"count": 2,
-"modes": [
-"video"
-]
-},
-{
-"id": "creatify",
-"label": "Creatify",
-"count": 1,
-"modes": [
-"video"
-]
-},
-{
-"id": "elevenlabs",
-"label": "ElevenLabs",
-"count": 10,
-"modes": [
-"audio"
-]
-},
-{
-"id": "flux",
-"label": "Flux (Black Forest Labs)",
-"count": 5,
-"modes": [
-"image"
-]
-},
-{
-"id": "google",
-"label": "Google",
-"count": 13,
-"modes": [
-"audio",
-"image",
-"video"
-]
-},
-{
-"id": "grok",
-"label": "Grok (xAI)",
-"count": 7,
-"modes": [
-"audio",
-"image",
-"video"
-]
-},
-{
-"id": "happyhorse",
-"label": "Happy Horse",
-"count": 3,
-"modes": [
-"video"
-]
-},
-{
-"id": "heygen",
-"label": "HeyGen",
-"count": 1,
-"modes": [
-"video"
-]
-},
-{
-"id": "hunyuan",
-"label": "Hunyuan",
-"count": 1,
-"modes": [
-"image"
-]
-},
-{
-"id": "ideogram",
-"label": "Ideogram",
-"count": 3,
-"modes": [
-"image"
-]
-},
-{
-"id": "kling",
-"label": "Kling",
-"count": 19,
-"modes": [
-"audio",
-"image",
-"video"
-]
-},
-{
-"id": "ltx",
-"label": "LTX (Lightricks)",
-"count": 8,
-"modes": [
-"video"
-]
-},
-{
-"id": "luma",
-"label": "Luma",
-"count": 9,
-"modes": [
-"image",
-"video"
-]
-},
-{
-"id": "minimax",
-"label": "MiniMax",
-"count": 5,
-"modes": [
-"audio",
-"video"
-]
-},
-{
-"id": "openai",
-"label": "OpenAI",
-"count": 8,
-"modes": [
-"audio",
-"image",
-"video"
-]
-},
-{
-"id": "ovi",
-"label": "OVI",
-"count": 1,
-"modes": [
-"video"
-]
-},
-{
-"id": "picsart",
-"label": "Picsart",
-"count": 7,
-"modes": [
-"image"
-]
-},
-{
-"id": "pika",
-"label": "Pika",
-"count": 3,
-"modes": [
-"video"
-]
-},
-{
-"id": "pixverse",
-"label": "PixVerse",
-"count": 6,
-"modes": [
-"video"
-]
-},
-{
-"id": "qwen",
-"label": "Qwen (Alibaba)",
-"count": 4,
-"modes": [
-"image"
-]
-},
-{
-"id": "recraft",
-"label": "Recraft",
-"count": 22,
-"modes": [
-"image"
-]
-},
-{
-"id": "reve",
-"label": "Reve",
-"count": 1,
-"modes": [
-"image"
-]
-},
-{
-"id": "runway",
-"label": "Runway",
-"count": 6,
-"modes": [
-"video"
-]
-},
-{
-"id": "seedance",
-"label": "Seedance",
-"count": 8,
-"modes": [
-"video"
-]
-},
-{
-"id": "seedream",
-"label": "Seedream",
-"count": 3,
-"modes": [
-"image"
-]
-},
-{
-"id": "topaz",
-"label": "Topaz",
-"count": 9,
-"modes": [
-"image"
-]
-},
-{
-"id": "veed",
-"label": "VEED",
-"count": 2,
-"modes": [
-"video"
-]
-},
-{
-"id": "videography",
-"label": "Videography",
-"count": 1,
-"modes": [
-"video"
-]
-},
-{
-"id": "wan",
-"label": "Wan (Alibaba)",
-"count": 7,
-"modes": [
-"image",
-"video"
-]
-}
+  {
+    "id": "anthropic",
+    "label": "Anthropic",
+    "count": 3,
+    "modes": [
+      "text"
+    ]
+  },
+  {
+    "id": "async",
+    "label": "Async",
+    "count": 1,
+    "modes": [
+      "audio"
+    ]
+  },
+  {
+    "id": "bytedance",
+    "label": "ByteDance",
+    "count": 2,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "creatify",
+    "label": "Creatify",
+    "count": 1,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "elevenlabs",
+    "label": "ElevenLabs",
+    "count": 10,
+    "modes": [
+      "audio"
+    ]
+  },
+  {
+    "id": "flux",
+    "label": "Flux (Black Forest Labs)",
+    "count": 5,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "google",
+    "label": "Google",
+    "count": 15,
+    "modes": [
+      "image",
+      "video",
+      "audio",
+      "text"
+    ]
+  },
+  {
+    "id": "grok",
+    "label": "Grok (xAI)",
+    "count": 7,
+    "modes": [
+      "image",
+      "video",
+      "audio"
+    ]
+  },
+  {
+    "id": "happyhorse",
+    "label": "Happy Horse",
+    "count": 5,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "heygen",
+    "label": "HeyGen",
+    "count": 1,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "hunyuan",
+    "label": "Hunyuan",
+    "count": 1,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "ideogram",
+    "label": "Ideogram",
+    "count": 3,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "kling",
+    "label": "Kling",
+    "count": 14,
+    "modes": [
+      "image",
+      "video",
+      "audio"
+    ]
+  },
+  {
+    "id": "ltx",
+    "label": "LTX (Lightricks)",
+    "count": 5,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "luma",
+    "label": "Luma",
+    "count": 9,
+    "modes": [
+      "image",
+      "video"
+    ]
+  },
+  {
+    "id": "minimax",
+    "label": "MiniMax",
+    "count": 5,
+    "modes": [
+      "video",
+      "audio"
+    ]
+  },
+  {
+    "id": "openai",
+    "label": "OpenAI",
+    "count": 6,
+    "modes": [
+      "image",
+      "video",
+      "text"
+    ]
+  },
+  {
+    "id": "ovi",
+    "label": "OVI",
+    "count": 1,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "picsart",
+    "label": "Picsart",
+    "count": 7,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "pika",
+    "label": "Pika",
+    "count": 3,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "pixverse",
+    "label": "PixVerse",
+    "count": 6,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "qwen",
+    "label": "Qwen (Alibaba)",
+    "count": 3,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "recraft",
+    "label": "Recraft",
+    "count": 20,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "reve",
+    "label": "Reve",
+    "count": 1,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "runway",
+    "label": "Runway",
+    "count": 4,
+    "modes": [
+      "image",
+      "video"
+    ]
+  },
+  {
+    "id": "seedance",
+    "label": "Seedance",
+    "count": 9,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "seedream",
+    "label": "Seedream",
+    "count": 2,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "topaz",
+    "label": "Topaz",
+    "count": 9,
+    "modes": [
+      "image"
+    ]
+  },
+  {
+    "id": "veed",
+    "label": "VEED",
+    "count": 2,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "videography",
+    "label": "Videography",
+    "count": 1,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "wan",
+    "label": "Wan (Alibaba)",
+    "count": 4,
+    "modes": [
+      "video"
+    ]
+  }
 ]
