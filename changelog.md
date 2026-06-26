@@ -7,6 +7,18 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-06-26
+
+**New CLI command — `gen-ai describe`.** Analyze an image or video with an LLM (Claude, GPT, or Gemini) and get a **text** answer — caption, OCR, classify, or summarize a clip. The prompt is optional, video auto-routes to a video-capable model, and output goes to stdout for easy piping. See the [CLI Quickstart](/guide/cli-quickstart#describe-an-image-or-video).
+
+---
+
+## 2026-06-19
+
+**Try in Playground links.** Every model now has a direct *Try in Playground* link — on each provider page's parameter section and on every card in the interactive [Model Catalog](/reference/catalog) — that opens the web Playground with the model preselected.
+
+---
+
 ## 2026-06-18
 
 **Catalog — now 176 models across 30 providers** (`@picsart/ai-sdk` 3.6.2). 36 models added since the previous catalog:
