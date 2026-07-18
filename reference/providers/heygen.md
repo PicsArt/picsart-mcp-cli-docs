@@ -63,7 +63,7 @@ Input type: `i2v`
 | `resolution` | `-r` | enum | `1080p` · `720p` (default `720p`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
 | `voiceId` | `--voice` | enum | **required** |
-| `prompt` | `-p` | text | **required** (≤1500 chars) |
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
 
 > **Notes:** Voice ids are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
 

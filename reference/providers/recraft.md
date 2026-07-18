@@ -86,6 +86,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_pro` — Recraft V4.1 Pro
 
@@ -98,6 +100,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_utility` — Recraft V4.1 Utility
 
@@ -110,6 +114,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_utility_pro` — Recraft V4.1 Utility Pro
 
@@ -122,6 +128,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_vector` — Recraft V4.1 Vector
 
@@ -134,6 +142,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_pro_vector` — Recraft V4.1 Pro Vector
 
@@ -146,6 +156,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_utility_vector` — Recraft V4.1 Utility Vector
 
@@ -158,6 +170,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_1_utility_pro_vector` — Recraft V4.1 Utility Pro Vector
 
@@ -170,6 +184,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4` — Recraft V4
 
@@ -183,6 +199,8 @@ Input type: `t2i`
 | `style` | `--style` | enum | `raster` (Raster) · `vector_illustration` (Vector (SVG)) (default `raster`) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv3` — Recraft V3
 
@@ -212,6 +230,8 @@ Input type: `t2i`
 | `style` | `--style` | enum | `raster` (Raster) · `vector_illustration` (Vector (SVG)) (default `raster`) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_vector` — Recraft V4 Vector
 
@@ -224,6 +244,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv4_pro_vector` — Recraft V4 Pro Vector
 
@@ -236,6 +258,8 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** (≤10000 chars) |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `80` |
 
 ### `recraftv3_vector` — Recraft V3 Vector
 

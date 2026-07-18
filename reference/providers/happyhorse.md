@@ -17,8 +17,8 @@ Happy Horse 1.0 is a text-to-video model running on Qwen Cloud (Alibaba Cloud In
 | `happyhorse-1.0-t2v` | Happy Horse 1.0 | `t2v` |
 | `happyhorse-1.0-r2v` | Happy Horse 1.0 Ref-to-Video | `i2v` |
 | `happyhorse-1.0-video-edit` | Happy Horse 1.0 Video Edit | `v2v` |
-| `happyhorse-1.5-t2v` | Happy Horse 1.1 | `t2v` |
-| `happyhorse-1.5-r2v` | Happy Horse 1.1 Ref-to-Video | `i2v` |
+| `happyhorse-1.1-t2v` | Happy Horse 1.1 | `t2v` |
+| `happyhorse-1.1-r2v` | Happy Horse 1.1 Ref-to-Video | `i2v` |
 
 ## CLI
 
@@ -97,9 +97,9 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 | `imageUrls` | `-i` | file | image (up to 5) |
 
-### `happyhorse-1.5-t2v` — Happy Horse 1.1
+### `happyhorse-1.1-t2v` — Happy Horse 1.1
 
-[Try `happyhorse-1.5-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.5-t2v)
+[Try `happyhorse-1.1-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.1-t2v)
 
 Input type: `t2v`
 
@@ -111,9 +111,9 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
 | `startFrame` | `--start-frame` | file | image |
 
-### `happyhorse-1.5-r2v` — Happy Horse 1.1 Ref-to-Video
+### `happyhorse-1.1-r2v` — Happy Horse 1.1 Ref-to-Video
 
-[Try `happyhorse-1.5-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.5-r2v)
+[Try `happyhorse-1.1-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.1-r2v)
 
 Input type: `i2v`
 

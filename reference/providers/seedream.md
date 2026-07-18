@@ -1,10 +1,10 @@
 ---
-description: "Seedream AI models on Picsart — 2 image model(s) including Seedream 4.5, Seedream 5.0 Lite. CLI + MCP examples, parameters, and official docs."
+description: "Seedream AI models on Picsart — 3 image model(s) including Seedream 4.5, Seedream 5.0 Lite. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Seedream
 
-**Mode:** image · **Models:** 2
+**Mode:** image · **Models:** 3
 
 **Vendor:** [BytePlus ModelArk](https://docs.byteplus.com) · **Official API docs:** [Seedream on ModelArk](https://docs.byteplus.com/en/docs/ModelArk/1824121)
 
@@ -14,6 +14,7 @@ Seedream (by ByteDance, on BytePlus ModelArk) is a high-fidelity text-to-image m
 
 | id | Name | Input type |
 |---|---|---|
+| `seedream-5.0-pro` | Seedream 5.0 Pro | `t2i` |
 | `seedream-5.0-lite` | Seedream 5.0 Lite | `t2i` |
 | `seedream-4.5` | Seedream 4.5 | `t2i` |
 
@@ -49,6 +50,20 @@ gen-ai generate -m seedream-5.0-lite -p "minimalist poster, bold typography" --a
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `seedream-5.0-pro` — Seedream 5.0 Pro
+
+[Try `seedream-5.0-pro` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-5.0-pro)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `1K` · `2K` (default `1K`) |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `negativePrompt` | `--neg` | text | free text |
 
 ### `seedream-5.0-lite` — Seedream 5.0 Lite
 

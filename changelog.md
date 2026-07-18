@@ -7,6 +7,17 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-07-17
+
+**Catalog refresh — now 169 models across 31 providers** (`@picsart/ai-sdk` 3.17.0).
+
+- **New models** — **Seedream 5.0 Pro** (text-to-image, see [Seedream](/reference/providers/seedream)), **Nano Banana 2 Lite** (`gemini-3.1-flash-lite-image`, see [Google](/reference/providers/google)), **ElevenLabs Music v2** (full music tracks, see [ElevenLabs](/reference/providers/elevenlabs)), and **Picsart Angle Change** (`picsart-qwen-image-edit-angle`, image editing, see [Picsart](/reference/providers/picsart)).
+- **Recraft V4 & V4.1 image-to-image.** All 12 V4/V4.1 models (base, Pro, Utility, Utility Pro, and their vector variants) now take an optional source image (`-i`) with an adjustable image weight (`--weight`, 0–100, default 80). See [Recraft](/reference/providers/recraft).
+- **Happy Horse 1.1** — model ids renamed from `happyhorse-1.5-*` to `happyhorse-1.1-*` (same models; update any saved commands).
+- **Parameter updates** — [Grok](/reference/providers/grok) Imagine Video 1.5 adds **1080p**; [HeyGen](/reference/providers/heygen) Talking Photo prompt limit raised to **5000 chars**; [Ideogram](/reference/providers/ideogram) Character now takes a required prompt; [Seedance](/reference/providers/seedance) 2.0 reference images/videos must be at least **0.4MP**; the [ByteDance](/reference/providers/bytedance) Video Upscaler now rejects sources at or above 1080p up front (it only upscales sub-1080p video).
+
+---
+
 ## 2026-06-26
 
 **Catalog refresh — now 165 models across 31 providers** (`@picsart/ai-sdk` 3.10.0). A big lineup update since the 3.6.2 catalog:

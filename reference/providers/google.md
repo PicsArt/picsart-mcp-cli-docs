@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 15 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Imagen 4.0. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 16 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Imagen 4.0. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 15
+**Modes:** image · video · audio · text · **Models:** 16
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -20,6 +20,7 @@ Google contributes across all three modes: the **Veo** video family, the **Nano 
 | `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
 | `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
 | `gemini-3.1-flash-image` | Nano Banana 2 | image | `t2i` |
+| `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | image | `t2i` |
 | `gemini-2.5-flash-image` | Nano Banana | image | `t2i` |
 | `imagen-4.0` | Imagen 4.0 | image | `t2i` |
 | `imagen-4.0-ultra` | Imagen 4.0 Ultra | image | `t2i` |
@@ -30,7 +31,7 @@ Google contributes across all three modes: the **Veo** video family, the **Nano 
 | `lyria-3-pro` | Lyria 3 Pro | audio | `music` |
 | `gemini-3-pro` | Gemini 3 Pro | text | `v2t` |
 
-> `gen-ai models --provider google` lists the current set (15 models).
+> `gen-ai models --provider google` lists the current set (16 models).
 
 ## Veo 3.1 (video)
 
@@ -124,6 +125,20 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `imageUrls` | `-i` | file | image (up to 14) |
+
+### `gemini-3.1-flash-lite-image` — Nano Banana 2 Lite
+
+[Try `gemini-3.1-flash-lite-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.1-flash-lite-image)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
@@ -274,5 +289,6 @@ Input type: `v2t`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `videoUrl` | `--video` | file | video |
 | `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
+
 
 

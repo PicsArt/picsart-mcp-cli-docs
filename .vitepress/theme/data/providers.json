@@ -34,7 +34,7 @@
   {
     "id": "elevenlabs",
     "label": "ElevenLabs",
-    "count": 10,
+    "count": 11,
     "modes": [
       "audio"
     ]
@@ -50,7 +50,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 15,
+    "count": 16,
     "modes": [
       "image",
       "video",
@@ -157,7 +157,7 @@
   {
     "id": "picsart",
     "label": "Picsart",
-    "count": 7,
+    "count": 8,
     "modes": [
       "image"
     ]
@@ -222,7 +222,7 @@
   {
     "id": "seedream",
     "label": "Seedream",
-    "count": 2,
+    "count": 3,
     "modes": [
       "image"
     ]

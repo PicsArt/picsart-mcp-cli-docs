@@ -97,6 +97,7 @@ Input type: `i2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
+| `prompt` | `-p` | text | **required** |
 | `resolution` | `-r` | enum | `1024x1024` · `1344x768` · `768x1344` · `1152x864` · `864x1152` · `832x1248` · `1280x800` (default `1024x1024`) |
 | `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
 | `style` | `--style` | enum | `AUTO` (Auto) · `REALISTIC` (Realistic) · `FICTION` (Fiction) (default `AUTO`) |

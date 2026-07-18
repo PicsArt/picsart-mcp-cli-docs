@@ -71,8 +71,8 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `10`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `imageUrls` | `-i` | file | image (up to 9) |
-| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `imageUrls` | `-i` | file | image (up to 9, min 0.4MP each) |
+| `videoUrls` | `--video-urls` | file | video (up to 3, min 0.4MP frame size) |
 | `audioUrls` | `--audio-urls` | file | audio (up to 3) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |
@@ -91,8 +91,8 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `10`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `imageUrls` | `-i` | file | image (up to 9) |
-| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `imageUrls` | `-i` | file | image (up to 9, min 0.4MP each) |
+| `videoUrls` | `--video-urls` | file | video (up to 3, min 0.4MP frame size) |
 | `audioUrls` | `--audio-urls` | file | audio (up to 3) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |
@@ -111,8 +111,8 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `10`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `imageUrls` | `-i` | file | image (up to 9) |
-| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `imageUrls` | `-i` | file | image (up to 9, min 0.4MP each) |
+| `videoUrls` | `--video-urls` | file | video (up to 3, min 0.4MP frame size) |
 | `audioUrls` | `--audio-urls` | file | audio (up to 3) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |

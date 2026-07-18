@@ -1,10 +1,10 @@
 ---
-description: "ElevenLabs AI models on Picsart — 10 audio model(s) including Eleven Audio Isolation, Eleven Dubbing, Eleven Multilingual STS v2. CLI + MCP examples, parameters, and official docs."
+description: "ElevenLabs AI models on Picsart — 11 audio model(s) including Eleven Audio Isolation, Eleven Dubbing, Eleven Multilingual STS v2. CLI + MCP examples, parameters, and official docs."
 ---
 
 # ElevenLabs
 
-**Mode:** audio · **Models:** 10
+**Mode:** audio · **Models:** 11
 
 **Vendor:** [elevenlabs.io](https://elevenlabs.io) · **Official API docs:** [API reference](https://elevenlabs.io/docs/api-reference)
 
@@ -19,6 +19,7 @@ ElevenLabs is the most complete voice suite in the catalog: expressive text-to-s
 | `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
 | `eleven-voice-design-v2` | Voice Design Multilingual v2 | `tts` | Multilingual voice design |
 | `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` | Sound effects |
+| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Full music tracks |
 | `eleven-sts-v2` | Eleven STS v2 | `sts` | Speech-to-speech |
 | `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual STS |
 | `eleven-dubbing` | Eleven Dubbing | `sts` | Dub a track |
@@ -86,6 +87,18 @@ Input type: `sfx`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `duration` | `-d` | enum | `1` · `3` · `5` · `8` · `10` · `15` (default `5`) |
+
+### `elevenlabs-music-v2` — ElevenLabs Music v2
+
+[Try `elevenlabs-music-v2` in Playground ↗](https://picsart.com/ai-playground/?model=elevenlabs-music-v2)
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `10` · `20` · `30` · `60` · `120` · `180` · `300` · `600` (default `30`) |
+| `isInstrumental` | `--is-instrumental` | boolean | `true` · `false` (default `false`) |
 
 ### `eleven-sts-v2` — Eleven STS v2
 

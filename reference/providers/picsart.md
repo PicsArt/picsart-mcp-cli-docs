@@ -1,10 +1,10 @@
 ---
-description: "Picsart AI models on Picsart — 7 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
+description: "Picsart AI models on Picsart — 8 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Picsart
 
-**Mode:** image · **Models:** 7
+**Mode:** image · **Models:** 8
 
 **Official API docs:** [docs.picsart.io](https://docs.picsart.io)
 
@@ -19,6 +19,7 @@ Picsart's own image models run on the Picsart Compute Platform (PCP). They cover
 | `picsart-enhance` | Enhance | `i2i` |
 | `picsart-qwen-image-edit` | Picsart Image Edit | `i2i` |
 | `picsart-qwen-makeup` | Picsart Makeup | `i2i` |
+| `picsart-qwen-image-edit-angle` | Picsart Angle Change | `i2i` |
 | `picsart-flux-2-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
 
@@ -126,6 +127,21 @@ Input type: `i2i`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 | `prompt` | `-p` | text | **required** |
 | `negativePrompt` | `--neg` | text | free text |
+
+### `picsart-qwen-image-edit-angle` — Picsart Angle Change
+
+[Try `picsart-qwen-image-edit-angle` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-image-edit-angle)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+| `prompt` | `-p` | text | **required** |
+| `negativePrompt` | `--neg` | text | free text |
+| `numInferenceSteps` | `--num-inference-steps` | range | `1`–`50`, step 1 (default `16`) |
+| `cfgScale` | `--cfg` | range | `1`–`10` (default `4`) |
+| `loraWeights` | `--lora-weights` | object[] | `{lora_angle, lora_angle_lighting}` |
 
 ### `picsart-flux-2-klein` — Flux 2 Klein 4B
 

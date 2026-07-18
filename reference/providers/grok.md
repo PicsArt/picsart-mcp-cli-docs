@@ -106,7 +106,7 @@ Input type: `i2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
 | `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `8`) |
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 

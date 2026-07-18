@@ -112,6 +112,13 @@
     "inputType": "tts"
   },
   {
+    "id": "elevenlabs-music-v2",
+    "name": "ElevenLabs Music v2",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "music"
+  },
+  {
     "id": "elevenlabs-sfx",
     "name": "ElevenLabs SFX v2",
     "provider": "elevenlabs",
@@ -191,6 +198,13 @@
   {
     "id": "gemini-3.1-flash-image",
     "name": "Nano Banana 2",
+    "provider": "google",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "gemini-3.1-flash-lite-image",
+    "name": "Nano Banana 2 Lite",
     "provider": "google",
     "mode": "image",
     "inputType": "t2i"
@@ -329,14 +343,14 @@
     "inputType": "v2v"
   },
   {
-    "id": "happyhorse-1.5-r2v",
+    "id": "happyhorse-1.1-r2v",
     "name": "Happy Horse 1.1 Ref-to-Video",
     "provider": "happyhorse",
     "mode": "video",
     "inputType": "i2v"
   },
   {
-    "id": "happyhorse-1.5-t2v",
+    "id": "happyhorse-1.1-t2v",
     "name": "Happy Horse 1.1",
     "provider": "happyhorse",
     "mode": "video",
@@ -681,6 +695,13 @@
   {
     "id": "picsart-qwen-image-edit",
     "name": "Picsart Image Edit",
+    "provider": "picsart",
+    "mode": "image",
+    "inputType": "i2i"
+  },
+  {
+    "id": "picsart-qwen-image-edit-angle",
+    "name": "Picsart Angle Change",
     "provider": "picsart",
     "mode": "image",
     "inputType": "i2i"
@@ -1038,6 +1059,13 @@
   {
     "id": "seedream-5.0-lite",
     "name": "Seedream 5.0 Lite",
+    "provider": "seedream",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.0-pro",
+    "name": "Seedream 5.0 Pro",
     "provider": "seedream",
     "mode": "image",
     "inputType": "t2i"

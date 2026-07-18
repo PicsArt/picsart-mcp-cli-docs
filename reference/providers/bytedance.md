@@ -61,7 +61,7 @@ Input type: `v2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `videoUrl` | `--video` | file | **required** video |
+| `videoUrl` | `--video` | file | **required** video — short side must be under 1080px (already-1080p sources are rejected) |
 
 ### `bytedance-omnihuman-v1.5` — ByteDance OmniHuman
 
