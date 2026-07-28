@@ -55,6 +55,17 @@ const sidebar = [
       { text: 'ChatGPT', link: '/guide/integrations/chatgpt' },
       { text: 'Codex', link: '/guide/integrations/codex' },
       { text: 'VS Code', link: '/guide/integrations/vscode' },
+      { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
+      { text: 'Raycast', link: '/guide/integrations/raycast' },
+      { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
+      { text: 'Open WebUI', link: '/guide/integrations/open-webui' },
+      { text: 'AnythingLLM', link: '/guide/integrations/anythingllm' },
+      { text: 'LobeHub', link: '/guide/integrations/lobehub' },
+      { text: 'LibreChat', link: '/guide/integrations/librechat' },
+      { text: 'n8n', link: '/guide/integrations/n8n' },
+      { text: 'Dify', link: '/guide/integrations/dify' },
+      { text: 'Gumloop', link: '/guide/integrations/gumloop' },
+      { text: 'Copilot Studio', link: '/guide/integrations/copilot-studio' },
     ],
   },
   {
@@ -148,6 +159,8 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-FQMFEN0QZ1' }],
+    ['script', {}, "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-FQMFEN0QZ1');"],
   ],
   transformPageData(pageData) {
     const cleanPath = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
