@@ -1,11 +1,12 @@
 # Picsart gen-ai CLI, MCP & Skills
 
-> Developer docs for driving Picsart's AI catalog — 169 models from 31 providers across image (70), video (74), and audio (20) — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP. One OAuth login, one credit balance, pay per generation.
+> Developer docs for driving Picsart's AI catalog — 150+ models from 30+ providers across image, video, and audio — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP. One OAuth login, one credit balance, pay per generation.
 
 The same model registry powers three interfaces (CLI, Skills, MCP). Every model has a stable id usable identically from `gen-ai generate -m <id>` and the `picsart_generate` MCP tool. For a point-and-click web UI instead, see the AI Playground app (linked under Optional).
 
 ## Getting started
-- [Introduction](https://picsart.github.io/picsart-mcp-cli-docs/guide/introduction): what this is and the three interfaces
+- [Introduction](https://picsart.github.io/picsart-mcp-cli-docs/guide/introduction): what Picsart AI Playground is and which surface to use
+- [Which tool is right for me?](https://picsart.github.io/picsart-mcp-cli-docs/guide/which-tool): Playground, Skills, MCP, CLI, or API — by use case
 - [Installation](https://picsart.github.io/picsart-mcp-cli-docs/guide/installation): install the gen-ai CLI (npm or install script)
 - [Authentication](https://picsart.github.io/picsart-mcp-cli-docs/guide/authentication): `gen-ai login` OAuth web login
 
@@ -21,15 +22,15 @@ The same model registry powers three interfaces (CLI, Skills, MCP). Every model 
 - [Batch & Automation](https://picsart.github.io/picsart-mcp-cli-docs/guide/batch): manifest runner, from-dir, auto-download
 
 ## Model reference
-- [Model Reference overview](https://picsart.github.io/picsart-mcp-cli-docs/reference/): all 169 models, how to read a provider page
+- [Model Reference overview](https://picsart.github.io/picsart-mcp-cli-docs/reference/): 150+ models, how to read a provider page
 - [Model Catalog](https://picsart.github.io/picsart-mcp-cli-docs/reference/catalog): searchable, filterable catalog of every model
-- [Image generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/image): 70 image models
-- [Video generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/video): 74 video models
-- [Audio generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/audio): 20 audio models
+- [Image generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/image): image models
+- [Video generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/video): video models
+- [Audio generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/audio): audio models
 
 ## Providers
 Each provider page lists its models with CLI + MCP examples, a parameter table sourced from the live catalog, and links to official vendor docs.
-- [All providers](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/): index of all 31 providers
+- [All providers](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/): index of all 30+ providers
 - [Anthropic](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/anthropic): 3 models — text
 - [Async](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/async): 1 model — audio
 - [ByteDance](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/bytedance): 2 models — video

@@ -52,8 +52,8 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
   <div class="row">
     <div class="term"><span class="p">$</span> gen-ai generate -m flux-2-pro -p "a neon city"</div>
     <div class="stats">
-      <div class="stat"><b>141</b><span>models</span></div>
-      <div class="stat"><b>28</b><span>providers</span></div>
+      <div class="stat"><b>150+</b><span>models</span></div>
+      <div class="stat"><b>30+</b><span>providers</span></div>
     </div>
   </div>
 </body></html>`
