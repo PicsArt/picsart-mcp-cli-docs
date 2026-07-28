@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 169 models from 31 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 150+ models from 30+ providers in your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -30,6 +30,8 @@ const sidebar = [
     text: 'Getting Started',
     items: [
       { text: 'Introduction', link: '/guide/introduction' },
+      { text: 'Which tool is right for me?', link: '/guide/which-tool' },
+      { text: 'What is MCP?', link: '/guide/what-is-mcp' },
       { text: 'Installation', link: '/guide/installation' },
       { text: 'Authentication', link: '/guide/authentication' },
     ],
@@ -40,6 +42,19 @@ const sidebar = [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
+    ],
+  },
+  {
+    text: 'Integrations',
+    collapsed: false,
+    items: [
+      { text: 'All integrations', link: '/guide/integrations/' },
+      { text: 'Claude Code', link: '/guide/integrations/claude-code' },
+      { text: 'Cursor', link: '/guide/integrations/cursor' },
+      { text: 'Windsurf', link: '/guide/integrations/windsurf' },
+      { text: 'ChatGPT', link: '/guide/integrations/chatgpt' },
+      { text: 'Codex', link: '/guide/integrations/codex' },
+      { text: 'VS Code', link: '/guide/integrations/vscode' },
     ],
   },
   {
@@ -129,7 +144,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 169 models, 31 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 150+ models, 30+ providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
@@ -157,6 +172,7 @@ export default defineConfig({
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
       { text: 'Skills', link: '/guide/skills' },
+      { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },
       { text: 'Providers', link: '/reference/providers/' },
       { text: 'Changelog', link: '/changelog' },

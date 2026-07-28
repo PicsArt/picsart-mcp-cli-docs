@@ -57,3 +57,29 @@ done < prompts.txt
 ## Automating with MCP
 
 For agent-driven automation, an MCP client can loop over `picsart_generate` calls itself — pricing each with `picsart_pricing` first, validating with `picsart_validate_params`, and writing results to Drive. See the [MCP Quickstart](/guide/mcp-quickstart).
+
+## FAQ
+
+**How many jobs can I run in parallel?**
+
+Use `--concurrency <n>` on the batch command. The default is determined by your plan. Start with 4 to 8 and increase if throughput allows.
+
+**What happens if some jobs fail mid-batch?**
+
+Completed jobs are written to the output directory. Failed jobs are logged with their error. Run `gen-ai batch resume <run-id>` to re-run only the failed jobs — it does not re-run completed ones.
+
+**Can I mix models in one manifest?**
+
+Yes. Each manifest item has its own `model` field. You can run image, video, and audio generations in the same manifest file.
+
+**What is the difference between a manifest and `--input-dir`?**
+
+A manifest gives you per-item control: different models, prompts, and parameters for each item. `--input-dir` applies the same model and prompt to every file in a folder. Use a manifest for catalog jobs with varied SKUs, and `--input-dir` for uniform operations like batch enhancement or animation.
+
+**Can I use a manifest with MCP?**
+
+Not directly — the MCP tools call one generation at a time. For batch generation via MCP, have the agent loop over items and call `picsart_generate` for each, using `picsart_pricing` to check cost and `picsart_validate_params` to pre-check each payload.
+
+**Where do batch results go?**
+
+Downloaded to `./output` by default. Add `--save-to-drive` to push all results to your Picsart Drive instead. See [Files and Drive](/guide/files-and-drive).

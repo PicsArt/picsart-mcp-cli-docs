@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 165 models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 150+ models.
 
 ## Check your balance
 
@@ -56,3 +56,25 @@ gen-ai pricing sora-2 -d 8
 gen-ai pricing veo-3.1 -d 8
 gen-ai pricing seedance-2.0 -d 8
 ```
+
+## FAQ
+
+**Is `gen-ai pricing` always accurate?**
+
+It reflects the current cost for the exact model and parameters you pass. Cost can change if the model's pricing is updated, so always run a fresh quote before a large batch run.
+
+**Why does `picsart_pricing` return `null` for some models?**
+
+A few models do not expose per-call pricing. For those, `picsart_pricing` returns `null` for the credit amount. Check the model's page in the [Model Reference](/reference/) for any fixed or range-based pricing notes.
+
+**Are there per-provider contracts or subscriptions?**
+
+No. One Picsart account covers all 30+ providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
+
+**What happens if I run out of credits mid-batch?**
+
+The current generation fails and is not charged. Completed generations in the same batch are not reversed. Use `gen-ai batch resume <run-id>` to continue a batch run after topping up.
+
+**Can I set a spending limit per run?**
+
+Not directly in the CLI today. To guard against unexpected cost, run `picsart_pricing` on representative items before starting a large batch, and estimate the total from there.

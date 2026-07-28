@@ -100,6 +100,48 @@ gen-ai describe --video clip.mp4 -p "summarize what happens"
 ## More
 
 - **[Generating media](/guide/generating)** — inputs, outputs, and modes in depth
-- **[Files & Drive](/guide/files-and-drive)** — upload, download, organize
-- **[Batch & Automation](/guide/batch)** — manifests and bulk runs
+- **[Files and Drive](/guide/files-and-drive)** — upload, download, organize
+- **[Batch and Automation](/guide/batch)** — manifests and bulk runs
 - **[Model Reference](/reference/)** — per-provider model pages with CLI examples
+
+## FAQ
+
+**How do I find the right model id?**
+
+Run `gen-ai models` to browse the full catalog with descriptions and pricing badges. Use `--mode video` or `--provider google` to filter. Run `gen-ai models info <id>` to see a model's full parameters before using it.
+
+**Can I generate without downloading the file?**
+
+Yes. Add `--no-download` and the CLI prints the result URL only. Add `--script` for a clean, pipeable JSON output.
+
+**How do I set the output directory?**
+
+Use `--download <path>`, e.g. `gen-ai generate -m flux-2-pro -p "x" --download ./exports`. The default is `./output`.
+
+**My generation is running but taking a long time. Is that normal?**
+
+Video models typically take 30 to 90 seconds. Image models are faster. The CLI shows a progress bar while polling. If it times out, the job may still be running on the server — check your Drive or retry with the same command.
+
+**Can I pipe the result URL into another command?**
+
+Yes. Use `--script` to get clean JSON output:
+
+```bash
+gen-ai generate -m flux-2-pro -p "logo" --script | jq -r '.results[0].url' | xargs curl -O
+```
+
+**How do I generate multiple images at once?**
+
+Use `--count` (alias `-n`). Most image models accept up to 8 outputs per call:
+
+```bash
+gen-ai generate -m flux-2-pro -p "product concept" -n 4
+```
+
+**What does `--dry-run` do?**
+
+It prints the resolved request payload — model, prompt, parameters — without submitting the generation or spending credits. Use it to preview what the CLI will send.
+
+**Does the CLI work inside Docker or GitHub Actions?**
+
+Yes. Install via npm in a Dockerfile, or via the install script in a CI step. Set `PICSART_API_KEY` as an environment variable to skip the browser login flow. See [Authentication](/guide/authentication).
