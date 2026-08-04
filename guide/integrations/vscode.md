@@ -97,3 +97,11 @@ Yes. MCP tools and Copilot's built-in tools coexist. Copilot picks the appropria
 **Is there a Skills install for VS Code?**
 
 VS Code does not currently have a native skill/rules directory equivalent to Claude Code's plugin marketplace. Use the MCP integration for VS Code.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

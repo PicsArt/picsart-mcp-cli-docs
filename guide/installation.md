@@ -26,8 +26,6 @@ This installs the `gen-ai` binary to `~/.local/bin` (override with `GEN_AI_INSTA
 iwr https://picsart.com/gen-ai-cli/install.ps1 | iex
 ```
 
-The PowerShell installer uses winget to set up Node.js 22+ automatically if it is not already installed.
-
 ### npm (all platforms)
 
 ```bash
@@ -66,6 +64,12 @@ Skills call the CLI internally, so [install the CLI](#gen-ai-cli) and run `gen-a
 
 ```bash
 claude plugin marketplace add PicsArt/gen-ai-skills
+```
+
+Then activate it inside Claude Code:
+
+```
+/plugin install picsart@picsart
 ```
 
 Or via npx:
@@ -149,4 +153,4 @@ Yes, but only one should be on your `PATH`. Having both is not harmful, but it c
 
 **Is the CLI free?**
 
-The CLI itself costs nothing to install or run. Generations consume Picsart credits drawn from your account balance. New accounts receive a starter credit balance. Run `gen-ai pricing -m <model>` to see the cost of a specific model before generating.
+The CLI itself costs nothing to install or run. Generations consume Picsart credits drawn from your account balance. Run `gen-ai pricing <model>` to see the cost of a specific model before generating.

@@ -55,7 +55,7 @@ MCP standardizes this: one server implementation works across all MCP-compatible
 
 ## Security and authentication
 
-The Picsart MCP server uses your existing Picsart OAuth session, established by `gen-ai login`. It does not expose your credentials to the agent — the agent sends a tool call, the server handles the API request, and results are returned. Your `PICSART_API_KEY` (or the token from `gen-ai login`) stays on your machine.
+The Picsart MCP server uses your existing Picsart OAuth session, established by `gen-ai login`. It does not expose your credentials to the agent — the agent sends a tool call, the server handles the API request, and results are returned. Your token stays on your machine.
 
 ## Get started
 

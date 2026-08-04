@@ -83,7 +83,7 @@ The API uses the same model ids and parameters as every other surface. Design th
 
 **Use: AI Playground**
 
-Start at [picsart.com/ai-playground](https://picsart.com/ai-playground/). No account setup other than a Picsart login, and new accounts get a starter credit balance. Pick any model from the catalog, write a prompt, and generate. You can decide later whether you want to automate it via the CLI or connect it to your agent.
+Start at [picsart.com/ai-playground](https://picsart.com/ai-playground/). No account setup other than a Picsart login. Pick any model from the catalog, write a prompt, and generate. You can decide later whether you want to automate it via the CLI or connect it to your agent.
 
 ---
 

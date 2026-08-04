@@ -71,3 +71,11 @@ Yes. The MCP Client Tool is a sub-node designed to attach to AI Agent nodes. It 
 **Can I trigger generation automatically, for example when a new Shopify product is created?**
 
 Yes. Connect a Shopify trigger to an AI Agent (with Picsart MCP) and pass the generated image URL to your downstream node. The workflow runs end-to-end without manual intervention.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

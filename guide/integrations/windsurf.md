@@ -90,3 +90,11 @@ Yes. The `gen-ai-use` skill bundle is agent-agnostic. The only difference is the
 **Can I use Skills and MCP at the same time?**
 
 Yes. They operate independently and do not conflict.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

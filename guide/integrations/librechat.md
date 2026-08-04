@@ -85,3 +85,11 @@ Yes. LibreChat's role-based access control (RBAC) can restrict which tools appea
 
 **Is the API key exposed to end users?**
 No. The key is stored in `librechat.yaml` on the server and is not visible to regular users in the chat interface. Treat it like any other server-side secret and keep the file out of version control or redact the value using environment variable substitution.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

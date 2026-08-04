@@ -80,3 +80,11 @@ Yes. MCP servers are global in AnythingLLM. Once added, they are available in al
 
 **What LLM produces the best results with Picsart tools?**
 Any model with reliable function-calling works. OpenAI GPT-4o, Anthropic Claude, and Qwen 2.5 72B produce the most consistent tool calls. Small local models (under 7B parameters) may produce unreliable results with structured tool arguments.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

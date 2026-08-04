@@ -84,7 +84,7 @@ See [VS Code integration](/guide/integrations/vscode).
 codex mcp add picsart-gen-ai -- gen-ai-mcp
 ```
 
-Or add the curated plugin: `codex://plugins/picsart@openai-curated`. See [Codex integration](/guide/integrations/codex).
+See [Codex integration](/guide/integrations/codex).
 
 ### ChatGPT and other MCP clients
 
@@ -99,33 +99,28 @@ Every tool is available to the agent once connected. Tools that do not spend cre
 | Tool | What it does | Credits |
 |---|---|---|
 | `picsart_list_models` | Browse the catalog; filter by mode or provider | no |
-| `picsart_model_info` | Full capabilities and constraints for one model | no |
+| `picsart_model_catalog` | Full catalog as data for agent reasoning (no widget) | no |
 | `picsart_model_params` | JSON schema of a model's accepted parameters | no |
-| `picsart_validate_params` | Pre-check a payload before spending credits | no |
-| `picsart_pricing` | Quote the credit cost of a specific call | no |
+| `picsart_preflight` | Validate params and return a credit estimate (dry run) | no |
 | `picsart_generate` | Run any model end-to-end | yes |
 | `picsart_remove_bg` | Remove an image background | yes |
 | `picsart_change_bg` | Replace an image background | yes |
 | `picsart_enhance` | Upscale or enhance an image | yes |
 | `picsart_vectorize` | Convert a raster image to SVG | yes |
+| `picsart_music_studio` | Browse music models and prompt-builder metadata | no |
 | `picsart_credits` | Current credit balance | no |
-| `picsart_upload` | Upload a local file to Picsart Drive | yes |
-| `picsart_drive_list` | List files in Drive | no |
-| `picsart_drive_folders` | List Drive folders | no |
-| `picsart_drive_create_folder` | Create a Drive folder | no |
-| `picsart_materialize_url` | Copy a remote URL into Drive | yes |
+| `picsart_drive` | List, upload, organize, and manage Drive files | yes |
 
-`picsart_pricing` is a dry run — it returns the credit cost without charging, but it requires your token because cost is per-account.
+`picsart_preflight` is a dry run — it validates parameters and returns a credit estimate without invoking any model or spending credits.
 
 ## Recommended generation flow
 
 The tools are designed to chain. This sequence avoids surprises:
 
-1. `picsart_list_models` or `picsart_model_info` — pick a model.
+1. `picsart_list_models` — pick a model.
 2. `picsart_model_params` — see what parameters it accepts.
-3. `picsart_validate_params` — pre-check the payload.
-4. `picsart_pricing` — confirm the cost.
-5. `picsart_generate` — run it.
+3. `picsart_preflight` — validate the payload and confirm the credit cost.
+4. `picsart_generate` — run it.
 
 Agents that skip to step 5 directly will still work, but they may use a suboptimal model or parameter set.
 
@@ -164,7 +159,7 @@ Agents that skip to step 5 directly will still work, but they may use a suboptim
 
 ```json
 {
-  "name": "picsart_pricing",
+  "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
     "params": { "duration": 8, "resolution": "1080p" }
@@ -217,12 +212,12 @@ All 150+ models in the catalog. There is no MCP-specific subset. Use `picsart_li
 
 **Can the agent save generated files to Drive?**
 
-Yes. Pass `"saveToDrive": true` in the `picsart_generate` arguments, or use `picsart_upload` to upload a local file. See [Files and Drive](/guide/files-and-drive).
+Yes. Pass `"saveToDrive": true` in the `picsart_generate` arguments, or use `picsart_drive` to upload a local file or URL. See [Files and Drive](/guide/files-and-drive).
 
 **How do I know what a model costs before running it?**
 
-Call `picsart_pricing` with the model id and the parameters you plan to use. It returns the credit cost without running the generation.
+Call `picsart_preflight` with the model id and the parameters you plan to use. It validates the payload and returns a credit estimate without running the generation.
 
 **What happens if my credit balance runs out mid-generation?**
 
-The generation fails and credits are not charged. Check your balance with `picsart_credits` and top up at [picsart.com](https://picsart.com) before retrying.
+Check your balance with `picsart_credits` and top up at [picsart.com](https://picsart.com) before retrying.

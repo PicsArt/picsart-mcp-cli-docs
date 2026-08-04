@@ -97,3 +97,11 @@ Yes. LM Studio supports multiple MCP servers simultaneously. Add each server sep
 **Does LM Studio support streaming responses from Picsart tools?**
 
 Picsart tool responses return a result URL once generation is complete. There is no streaming mid-generation output. LM Studio displays the result when the tool call finishes.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

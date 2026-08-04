@@ -28,7 +28,7 @@ gen-ai upload ./photo.jpg --name "Hero"
 ```
 
 ```json
-{ "name": "picsart_upload", "arguments": { "filePath": "/path/to/photo.jpg", "name": "Hero" } }
+{ "name": "picsart_drive", "arguments": { "action": "upload", "filePath": "/path/to/photo.jpg", "name": "Hero" } }
 ```
 
 Uploading returns a Drive file you can then feed into a generation as an input image/video.
@@ -42,22 +42,22 @@ gen-ai download <uid>          # download a Drive file
 ```
 
 ```json
-{ "name": "picsart_drive_folders", "arguments": {} }
-{ "name": "picsart_drive_list",    "arguments": { "folderId": "<id>" } }
-{ "name": "picsart_drive_create_folder", "arguments": { "name": "Campaign Q3" } }
+{ "name": "picsart_drive", "arguments": { "action": "list_folders" } }
+{ "name": "picsart_drive", "arguments": { "action": "list", "folderId": "<id>" } }
+{ "name": "picsart_drive", "arguments": { "action": "create_folder", "name": "Campaign Q3" } }
 ```
 
 > Drive commands browse your real root folders — they are not scoped to the AI Playground folder.
 
-## Materialize a URL
+## Save a remote URL to Drive
 
-`picsart_materialize_url` turns a remote asset URL into a Drive-hosted file, which is useful when a model needs an input that lives behind a short-lived or non-public URL.
+Use `picsart_drive` with `action: upload` and a URL as the source to copy a remote asset into Drive. This is useful when a model needs an input that lives behind a short-lived URL — saving it first gives you a stable Drive URL that doesn't expire.
 
 ## FAQ
 
 **What file types can I upload?**
 
-JPEG, PNG, WebP, GIF, and MP4 are supported. Maximum file size depends on your plan. The upload returns a Drive URL you can immediately use as an input to a generation.
+The upload returns a Drive URL you can immediately use as an input to a generation.
 
 **Are generated files private?**
 
@@ -65,12 +65,12 @@ Yes. Files in your Drive are scoped to your account. The result URLs returned by
 
 **Does saving to Drive cost extra credits?**
 
-The Drive operations themselves (`picsart_upload`, `picsart_drive_list`) are charged at a low credit rate. Generation with `--save-to-drive` includes the Drive save cost in the total.
+See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing details.
 
 **Can I delete files from Drive via the CLI?**
 
 The current CLI and MCP do not expose a delete command. Manage deletion from the [AI Playground web app](https://picsart.com/ai-playground/).
 
-**What is `picsart_materialize_url` for?**
+**How do I save a remote URL to Drive?**
 
-It copies a remote URL into your Drive. This is useful when you need to pass a short-lived URL (such as a freshly generated result) as the input to another model — materializing it first gives you a stable Drive URL that does not expire.
+Call `picsart_drive` with `action: upload` and the URL as the source. This copies the remote asset into your Drive and returns a stable URL you can pass as input to another model.

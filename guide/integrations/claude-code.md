@@ -22,6 +22,12 @@ Skills give Claude Code a pre-built understanding of Picsart's models and genera
 claude plugin marketplace add PicsArt/gen-ai-skills
 ```
 
+Then activate it inside Claude Code:
+
+```
+/plugin install picsart@picsart
+```
+
 Or via npx:
 
 ```bash
@@ -58,7 +64,7 @@ gen-ai models --provider elevenlabs
 
 ## Method 2: MCP
 
-For direct tool-call access, connect the Picsart MCP server. This lets Claude Code call `picsart_generate`, `picsart_pricing`, `picsart_remove_bg`, and all other tools explicitly.
+For direct tool-call access, connect the Picsart MCP server. This lets Claude Code call `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, and all other tools explicitly.
 
 ### Add the MCP server
 
@@ -101,7 +107,11 @@ You can use both at the same time — the skill and the MCP server do not confli
 
 **Claude Code does not recognize the skill.**
 
-Run `claude plugin list` to confirm `PicsArt/gen-ai-skills` appears. If not, reinstall with `claude plugin marketplace add PicsArt/gen-ai-skills`.
+Run `claude plugin list` to confirm `picsart@picsart` appears. If not, reinstall:
+```bash
+claude plugin marketplace add PicsArt/gen-ai-skills
+```
+Then in Claude Code: `/plugin install picsart@picsart`
 
 **Claude Code calls `gen-ai` but gets "command not found".**
 
@@ -135,4 +145,16 @@ Not from within the skill configuration. To control models, be explicit in your 
 
 **How do I update the skill?**
 
-Run `claude plugin marketplace add PicsArt/gen-ai-skills` again. It installs the latest version.
+Run the two install steps again:
+```bash
+claude plugin marketplace add PicsArt/gen-ai-skills
+```
+Then in Claude Code: `/plugin install picsart@picsart`
+
+## Start creating
+
+Click below to open Claude with a ready-to-run Picsart prompt. Claude will call Picsart MCP automatically once you confirm.
+
+::: tip Ready to generate?
+[Start creating in Claude](https://claude.ai/new?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
+:::

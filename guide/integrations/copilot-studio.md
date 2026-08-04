@@ -63,3 +63,11 @@ MCP support in GCC depends on Microsoft's GCC feature roadmap. Check [learn.micr
 **Can multiple agents in the same tenant use the same Picsart MCP server?**
 
 Yes. Each agent configures its own connection, but all agents in a tenant can point to the same `mcp.picsart.io/mcp` URL.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

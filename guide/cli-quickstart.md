@@ -120,7 +120,7 @@ Use `--download <path>`, e.g. `gen-ai generate -m flux-2-pro -p "x" --download .
 
 **My generation is running but taking a long time. Is that normal?**
 
-Video models typically take 30 to 90 seconds. Image models are faster. The CLI shows a progress bar while polling. If it times out, the job may still be running on the server — check your Drive or retry with the same command.
+The CLI shows a progress bar while polling. If it times out, the job may still be running on the server — check your Drive or retry with the same command.
 
 **Can I pipe the result URL into another command?**
 
@@ -144,4 +144,4 @@ It prints the resolved request payload — model, prompt, parameters — without
 
 **Does the CLI work inside Docker or GitHub Actions?**
 
-Yes. Install via npm in a Dockerfile, or via the install script in a CI step. Set `PICSART_API_KEY` as an environment variable to skip the browser login flow. See [Authentication](/guide/authentication).
+Yes. Install via npm in a Dockerfile, or via the install script in a CI step. See [Authentication](/guide/authentication) for headless login options.

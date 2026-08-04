@@ -1,10 +1,10 @@
 ---
-description: "Connect Picsart to OpenAI Codex — install the curated plugin or MCP server to generate images, video, and audio inside Codex."
+description: "Connect Picsart to OpenAI Codex — add the MCP server or install Skills to generate images, video, and audio inside Codex."
 ---
 
 # Codex (OpenAI)
 
-Codex supports Picsart through a **curated plugin** (the simplest path) and through the **MCP server** (for direct tool-call access).
+Codex supports Picsart through two paths: **MCP** (the primary method for direct tool-call access) and **Skills** (for a conversational generation experience).
 
 ## Prerequisites
 
@@ -12,29 +12,7 @@ Codex supports Picsart through a **curated plugin** (the simplest path) and thro
 2. Run `gen-ai login` (one-time browser OAuth).
 3. Verify: `gen-ai --version` and `gen-ai credits`.
 
-## Method 1: Curated plugin (recommended)
-
-OpenAI maintains a curated plugin registry for Codex. The Picsart plugin is included.
-
-### Install
-
-```bash
-codex plugin add codex://plugins/picsart@openai-curated
-```
-
-Restart Codex after installing.
-
-### Use it
-
-In a Codex session:
-
-- *"Generate a 16:9 hero image for a Q4 campaign using Flux 2 Pro."*
-- *"Create a 9:16 social clip from this product image using Wan 2.7."*
-- *"Describe the contents of this image."*
-
-Codex calls the plugin, which runs the `gen-ai` command and returns the result.
-
-## Method 2: MCP
+## Method 1: MCP (recommended)
 
 ### Configure
 
@@ -58,13 +36,23 @@ Or add manually to your Codex MCP config:
 
 Once connected, Codex can call any Picsart MCP tool:
 
-- `picsart_generate`, `picsart_remove_bg`, `picsart_pricing`, `picsart_credits`, and the full tool list from the [MCP Quickstart](/guide/mcp-quickstart).
+- *"Generate a 16:9 hero image for a Q4 campaign using Flux 2 Pro."*
+- *"Create a 9:16 social clip from this product image using Wan 2.7."*
+- *"Quote the credit cost of an 8-second Veo 3.1 clip at 1080p."*
+
+See `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, `picsart_credits`, and the full tool list in the [MCP Quickstart](/guide/mcp-quickstart).
+
+## Method 2: Skills
+
+Install the CLI, then add the skill via npx:
+
+```bash
+npx skills add PicsArt/gen-ai-skills
+```
+
+Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and attach it to your Codex session.
 
 ## Troubleshooting
-
-**Codex says the plugin is not found.**
-
-Run `codex plugin list` to see installed plugins. If Picsart is missing, reinstall with the `codex plugin add` command above.
 
 **`gen-ai-mcp` is not found.**
 
@@ -86,10 +74,18 @@ Run `gen-ai login` in a terminal and restart Codex.
 
 ## FAQ
 
-**What is the difference between the plugin and MCP in Codex?**
+**What is the difference between MCP and Skills in Codex?**
 
-The curated plugin is a pre-configured integration maintained by OpenAI. MCP is the underlying protocol — connecting via `codex mcp add` gives you the same tools but bypasses the plugin registry. For most users the plugin is simpler.
+MCP gives Codex direct tool-call access to the full Picsart catalog — precise and scriptable. Skills give the agent pre-built generation instructions so you can drive it in plain English. Both use the same CLI and credit balance.
 
-**Does the Codex plugin cost extra?**
+**Does connecting Picsart to Codex cost extra?**
 
-No. The plugin is free to install. Generations consume Picsart credits.
+No. The MCP server and Skills are free to install. Generations consume Picsart credits.
+
+## Start creating
+
+Click below to open ChatGPT with a ready-to-run Picsart prompt. ChatGPT will invoke the Picsart plugin automatically once you confirm.
+
+::: tip Ready to generate?
+[Start creating in Codex](https://chatgpt.com/?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
+:::

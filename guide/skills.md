@@ -40,6 +40,12 @@ The fastest path is the Claude Code plugin marketplace:
 claude plugin marketplace add PicsArt/gen-ai-skills
 ```
 
+Then activate it inside Claude Code:
+
+```
+/plugin install picsart@picsart
+```
+
 Alternatively, install via npx:
 
 ```bash
@@ -64,13 +70,13 @@ Attach the skill `.zip` to a conversation or to a custom GPT configuration. Once
 
 ### Codex (OpenAI)
 
-Install the CLI, then add the curated plugin:
+Install the CLI, then add the skill via npx:
 
-```
-codex://plugins/picsart@openai-curated
+```bash
+npx skills add PicsArt/gen-ai-skills
 ```
 
-See [Codex integration](/guide/integrations/codex) for the full setup.
+Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and attach it to your Codex session. See [Codex integration](/guide/integrations/codex) for the full setup.
 
 ## What to generate with skills
 

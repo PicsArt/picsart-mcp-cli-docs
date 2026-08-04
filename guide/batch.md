@@ -56,13 +56,9 @@ done < prompts.txt
 
 ## Automating with MCP
 
-For agent-driven automation, an MCP client can loop over `picsart_generate` calls itself — pricing each with `picsart_pricing` first, validating with `picsart_validate_params`, and writing results to Drive. See the [MCP Quickstart](/guide/mcp-quickstart).
+For agent-driven automation, an MCP client can loop over `picsart_generate` calls itself — using `picsart_preflight` to validate and estimate cost before each call, and writing results to Drive. See the [MCP Quickstart](/guide/mcp-quickstart).
 
 ## FAQ
-
-**How many jobs can I run in parallel?**
-
-Use `--concurrency <n>` on the batch command. The default is determined by your plan. Start with 4 to 8 and increase if throughput allows.
 
 **What happens if some jobs fail mid-batch?**
 
@@ -78,7 +74,7 @@ A manifest gives you per-item control: different models, prompts, and parameters
 
 **Can I use a manifest with MCP?**
 
-Not directly — the MCP tools call one generation at a time. For batch generation via MCP, have the agent loop over items and call `picsart_generate` for each, using `picsart_pricing` to check cost and `picsart_validate_params` to pre-check each payload.
+Not directly — the MCP tools call one generation at a time. For batch generation via MCP, have the agent loop over items and call `picsart_generate` for each, using `picsart_preflight` to validate and estimate cost before each call.
 
 **Where do batch results go?**
 

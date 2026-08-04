@@ -70,3 +70,11 @@ LobeChat is open-source and free to self-host. The cloud version at [chat.lobehu
 
 **Can I use Picsart tools alongside other MCP servers in LobeChat?**
 Yes. LobeChat supports multiple simultaneous MCP servers. Each server appears as a separate tool group, and you can use tools from different servers in the same conversation.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

@@ -75,3 +75,11 @@ Yes. Add multiple AI Agent nodes in sequence and pass the output of one as input
 **Is there a per-call cost?**
 
 Gumloop charges for workflow runs according to their pricing plan. Picsart charges credits per generation. These are separate and billed independently.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

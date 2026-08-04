@@ -83,3 +83,11 @@ Raycast AI returns the tool result as text, which includes a URL to the generate
 **Will Picsart tools appear for every AI Chat conversation?**
 
 Tools are available globally in AI Chat once the server is added. You do not need to re-enable them per conversation.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

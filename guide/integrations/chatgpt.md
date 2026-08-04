@@ -75,3 +75,11 @@ The skill can be attached to conversations on any ChatGPT plan. However, running
 **Is the result URL private?**
 
 Result URLs are time-limited signed URLs. Download or save them to Drive promptly. See [Files and Drive](/guide/files-and-drive).
+
+## Start creating
+
+Click below to open ChatGPT with a ready-to-run Picsart prompt. ChatGPT will call the Picsart plugin automatically once you confirm.
+
+::: tip Ready to generate?
+[Start creating in ChatGPT](https://chatgpt.com/?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
+:::

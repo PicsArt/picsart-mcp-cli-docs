@@ -110,3 +110,11 @@ Yes. They do not conflict. The skill gives Cursor pre-built generation instructi
 **Do I need the Cursor Pro plan to use MCP?**
 
 MCP support is available in Cursor's agent mode. Check Cursor's plan details for any tier restrictions on agent use.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

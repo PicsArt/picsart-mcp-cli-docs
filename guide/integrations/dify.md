@@ -66,3 +66,11 @@ Yes. Once the MCP server is added under Tools, it is available across all Dify a
 **Does Dify support streaming responses from MCP tools?**
 
 Generation tools return structured data: file URLs and metadata. Streaming is not relevant for this type of output. Results appear as a complete response once generation finishes.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

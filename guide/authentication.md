@@ -28,10 +28,10 @@ Agents authenticate through the same OAuth web login. After installing the CLI, 
 | Action | CLI | MCP tool | Sign-in |
 |---|---|---|---|
 | Browse catalog | `gen-ai models` | `picsart_list_models` | ❌ no |
-| Inspect a model | `gen-ai models info <id>` | `picsart_model_info` | ❌ no |
-| Quote a cost | `gen-ai pricing <id>` | `picsart_pricing` | ✅ yes |
+| Inspect a model | `gen-ai models info <id>` | `picsart_model_params` | ❌ no |
+| Quote a cost | `gen-ai pricing <model>` | `picsart_preflight` | ✅ yes |
 | Generate | `gen-ai generate` | `picsart_generate` | ✅ yes |
-| Drive upload/list | `gen-ai upload` / `list` | `picsart_drive_*` | ✅ yes |
+| Drive upload/list | `gen-ai upload` / `list` | `picsart_drive` | ✅ yes |
 
 ## FAQ
 
@@ -42,10 +42,6 @@ No. All three surfaces — CLI, MCP, and Skills — use the same OAuth session. 
 **Where are my credentials stored?**
 
 At `~/.gen-ai/credentials.json` with permissions `600` (readable only by your user). The CLI auto-refreshes the access token when it expires. If refresh fails, run `gen-ai login` again.
-
-**How do I log in on a server or CI environment without a browser?**
-
-Set the `PICSART_API_KEY` environment variable to your API key. The CLI uses it automatically and skips the browser flow. API keys can be generated from your Picsart account settings.
 
 **Can multiple users share one machine?**
 

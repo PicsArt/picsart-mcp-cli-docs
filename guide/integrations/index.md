@@ -25,7 +25,7 @@ Both connect Picsart to an agent, but they work differently.
 
 **Skills** are pre-built instruction bundles. Install a skill and the agent already knows how to use Picsart — you just describe the task in plain English. Fastest to set up. Best when you want to generate from a conversation without managing tool schemas.
 
-**MCP** exposes every catalog tool directly: `picsart_generate`, `picsart_pricing`, `picsart_validate_params`, `picsart_remove_bg`, and more. Use MCP when you want the agent to inspect cost before generating, validate parameters, or chain multiple operations in one turn.
+**MCP** exposes every catalog tool directly: `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, and more. Use MCP when you want the agent to inspect cost before generating, validate parameters, or chain multiple operations in one turn.
 
 You can use both at the same time — they do not conflict.
 

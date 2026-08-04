@@ -27,7 +27,7 @@ gen-ai pricing --mode video --json             # all video model pricing
 ```
 
 ```json
-{ "name": "picsart_pricing",
+{ "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
     "prompt": "a drone shot over a snowy ridge",
@@ -35,7 +35,7 @@ gen-ai pricing --mode video --json             # all video model pricing
   } }
 ```
 
-`picsart_pricing` returns `{ model, credits }` where `credits` is a number, or `null` if pricing isn't available for that model.
+`picsart_preflight` validates the payload and returns a credit estimate. It does not invoke any model or spend credits.
 
 ## What drives cost
 
@@ -63,9 +63,9 @@ gen-ai pricing seedance-2.0 -d 8
 
 It reflects the current cost for the exact model and parameters you pass. Cost can change if the model's pricing is updated, so always run a fresh quote before a large batch run.
 
-**Why does `picsart_pricing` return `null` for some models?**
+**Why does `picsart_preflight` return `null` for some models?**
 
-A few models do not expose per-call pricing. For those, `picsart_pricing` returns `null` for the credit amount. Check the model's page in the [Model Reference](/reference/) for any fixed or range-based pricing notes.
+A few models do not expose per-call pricing. For those, `picsart_preflight` returns `null` for the credit amount. Check the model's page in the [Model Reference](/reference/) for any fixed or range-based pricing notes.
 
 **Are there per-provider contracts or subscriptions?**
 
@@ -73,8 +73,8 @@ No. One Picsart account covers all 30+ providers. There are no separate subscrip
 
 **What happens if I run out of credits mid-batch?**
 
-The current generation fails and is not charged. Completed generations in the same batch are not reversed. Use `gen-ai batch resume <run-id>` to continue a batch run after topping up.
+Completed generations in the same batch are not reversed. Use `gen-ai batch resume <run-id>` to continue a batch run after topping up.
 
 **Can I set a spending limit per run?**
 
-Not directly in the CLI today. To guard against unexpected cost, run `picsart_pricing` on representative items before starting a large batch, and estimate the total from there.
+Not directly in the CLI today. To guard against unexpected cost, run `picsart_preflight` on representative items before starting a large batch, and estimate the total from there.

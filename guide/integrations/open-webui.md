@@ -86,3 +86,11 @@ Open WebUI stores credentials in its database. For self-hosted deployments, secu
 **Can I restrict which users can call Picsart tools?**
 
 Yes. Open WebUI's model permissions let admins control which users or groups can access models with Picsart tools enabled. Configure this under **Workspace → Models** for each model.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

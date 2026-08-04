@@ -106,3 +106,11 @@ Yes. Add multiple entries under `mcpServers`. All tools from all servers are ava
 
 **Is a Google One AI Premium subscription required to use MCP tools?**
 No. MCP tool support is available on the free tier. A Google One AI Premium subscription increases your Gemini rate limits but is not required to use Picsart tools.
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::
