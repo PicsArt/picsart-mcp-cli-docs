@@ -6,6 +6,20 @@ description: "Authenticate the Picsart gen-ai CLI and MCP with OAuth web login (
 
 All interfaces use your Picsart account via **OAuth web login** — there are no API keys to create or paste. Generation spends credits, so it always requires sign-in; browsing the catalog and inspecting models does not.
 
+## Two authentication methods
+
+How you authenticate depends on which interface you're using.
+
+**SDK and REST API: API key**
+
+The [SDK](/guide/sdk) and [REST API](/guide/rest-api) authenticate with an API key (bearer token). Get your key from [picsart.com/settings](https://picsart.com/settings) and set it as the `PICSART_API_KEY` environment variable. There is no login flow; every request carries the key in the `Authorization` header.
+
+**CLI and MCP: OAuth web login**
+
+The [CLI](/guide/installation) and [MCP](/guide/mcp-quickstart) use OAuth web login via `gen-ai login`. You authorize once in your browser and the CLI stores a secure session token locally. No key to copy or rotate.
+
+Both methods draw from the same Picsart account and the same credit balance.
+
 ## Sign in
 
 ```bash
@@ -33,7 +47,13 @@ Agents authenticate through the same OAuth web login. After installing the CLI, 
 | Generate | `gen-ai generate` | `picsart_generate` | ✅ yes |
 | Drive upload/list | `gen-ai upload` / `list` | `picsart_drive` | ✅ yes |
 
+For the **SDK and REST API**, a valid `PICSART_API_KEY` is required on every request. There is no unauthenticated mode.
+
 ## FAQ
+
+**Do the SDK and CLI use the same credentials?**
+
+No. The SDK and REST API use an API key (bearer token) from your account settings. The CLI and MCP use an OAuth session from `gen-ai login`. Both draw from the same Picsart account and the same credit balance.
 
 **Do I need a separate API key for MCP or Skills?**
 
