@@ -12,7 +12,7 @@
 // Runs as part of `npm run build`, so a stale count blocks the deploy. When you
 // add a new global-count phrase, make sure it matches one of the patterns below
 // (or add a pattern) so it stays guarded.
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -38,15 +38,27 @@ const checked = { global: 0, provider: 0 }
 const GLOBAL_FILES = [
   'index.md',
   '.vitepress/config.ts',
+  '.vitepress/theme/components/ModelCatalog.vue',
+  'CONTRIBUTING.md',
   'guide/introduction.md',
   'guide/installation.md',
   'guide/skills.md',
   'guide/mcp-quickstart.md',
+  'guide/what-is-mcp.md',
+  'guide/which-tool.md',
+  'guide/pricing.md',
+  'guide/sdk.md',
+  'guide/rest-api.md',
   'reference/index.md',
+  'reference/catalog.md',
   'reference/image.md',
   'reference/video.md',
   'reference/audio.md',
   'reference/text.md',
+  // Every per-agent integration guide quotes the catalog size in its intro.
+  ...readdirSync(join(root, 'guide', 'integrations'))
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => `guide/integrations/${f}`),
 ]
 
 // Each pattern captures a number that must equal `expected`. Patterns are

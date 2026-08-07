@@ -7,6 +7,6 @@ outline: false
 
 # Model Catalog
 
-Browse all **168 models** from **32 providers**. Search by name, filter by mode or provider, and open a provider page for CLI + MCP examples and parameters. Every model works from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart).
+Browse all **174 models** from **32 providers**. Search by name, filter by mode or provider, and open a provider page for CLI + MCP examples and parameters. Every model works from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart).
 
 <ModelCatalog />

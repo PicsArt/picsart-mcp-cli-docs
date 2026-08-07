@@ -3,3 +3,6 @@ node_modules/
 .vitepress/cache/
 .wiki/
 wiki-build/
+
+# macOS
+.DS_Store

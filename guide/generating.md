@@ -8,7 +8,7 @@ Every model belongs to a **mode** (image / video / audio) and an **input type** 
 
 ## Input types
 
-The two-letter codes you'll see across the catalog and in `picsart_model_info`:
+The two-letter codes you'll see across the catalog and in `picsart_model_params`:
 
 | Code | Meaning | Typical inputs |
 |---|---|---|
@@ -75,5 +75,31 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 ```
 
 ```json
-{ "name": "picsart_validate_params", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
+{ "name": "picsart_preflight", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
 ```
+
+## FAQ
+
+**How do I know which input type a model needs?**
+
+Run `gen-ai models info <id>` — it shows the input type code (`t2i`, `i2v`, etc.) and which inputs are required. Via MCP, call `picsart_model_params`.
+
+**Can I pass a local file as an input image via MCP?**
+
+MCP tools require URLs, not local file paths. Upload your file first with `picsart_drive` (action: upload, returns a Drive URL), then pass that URL as `imageUrls` in `picsart_generate`.
+
+**What aspect ratios are available?**
+
+Common values are `1:1`, `4:3`, `3:4`, `16:9`, `9:16`. Not every model supports every ratio. Run `gen-ai models info <id>` to see the supported aspect ratios for a specific model.
+
+**Can I generate without a prompt?**
+
+Most models require a prompt. Some image-to-image models treat the prompt as optional — run `gen-ai models info <id>` to check. If you pass an empty prompt, the model may refuse or use a default.
+
+**What does `enhancePrompt` do?**
+
+When set to `true`, your prompt is rewritten by an LLM before being sent to the generation model. This can improve results for short or vague prompts, but it changes what is sent, so disable it if you need precise prompt control.
+
+**How many outputs can I request per call?**
+
+Most models accept `count` up to 8. Some models fix the output count at 1 regardless of what you pass. Check `picsart_model_params` or `gen-ai models info <id>` for the specific model.
