@@ -28,7 +28,9 @@ Agents authenticate through the same OAuth web login. After installing the CLI, 
 | Action | CLI | MCP tool | Sign-in |
 |---|---|---|---|
 | Browse catalog | `gen-ai models` | `picsart_list_models` | ❌ no |
-| Inspect a model | `gen-ai models info <id>` | `picsart_model_info` | ❌ no |
-| Quote a cost | `gen-ai pricing <id>` | `picsart_pricing` | ✅ yes |
+| Inspect a model | `gen-ai models info <id>` | `picsart_model_params` | ❌ no |
+| Validate + quote a cost | `gen-ai pricing <id>` | `picsart_preflight` | ✅ yes¹ |
 | Generate | `gen-ai generate` | `picsart_generate` | ✅ yes |
-| Drive upload/list | `gen-ai upload` / `list` | `picsart_drive_*` | ✅ yes |
+| Drive upload/list | `gen-ai upload` / `list` | `picsart_drive` | ✅ yes |
+
+¹ `picsart_preflight` validates params without sign-in; the credit quote is a per-user lookup, so unauthenticated calls return `credits: null`.

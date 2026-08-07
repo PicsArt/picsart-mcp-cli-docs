@@ -56,4 +56,4 @@ done < prompts.txt
 
 ## Automating with MCP
 
-For agent-driven automation, an MCP client can loop over `picsart_generate` calls itself — pricing each with `picsart_pricing` first, validating with `picsart_validate_params`, and writing results to Drive. See the [MCP Quickstart](/guide/mcp-quickstart).
+For agent-driven automation, an MCP client can loop over `picsart_generate` calls itself — validating and pricing each with `picsart_preflight` first, and writing results to Drive with `picsart_drive`. See the [MCP Quickstart](/guide/mcp-quickstart).

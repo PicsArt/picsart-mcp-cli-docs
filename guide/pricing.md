@@ -27,15 +27,14 @@ gen-ai pricing --mode video --json             # all video model pricing
 ```
 
 ```json
-{ "name": "picsart_pricing",
+{ "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
-    "prompt": "a drone shot over a snowy ridge",
-    "params": { "duration": 8, "resolution": "1080p" }
+    "params": { "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p" }
   } }
 ```
 
-`picsart_pricing` returns `{ model, credits }` where `credits` is a number, or `null` if pricing isn't available for that model.
+`picsart_preflight` validates the params **and** quotes the cost in one free call, returning `{ model, valid, errors?, credits }`. `credits` is a number, or `null` if pricing isn't available for that model or the call is unauthenticated. For the balance rather than a per-call cost, use `picsart_credits`.
 
 ## What drives cost
 

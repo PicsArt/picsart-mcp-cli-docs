@@ -8,7 +8,7 @@ Every model belongs to a **mode** (image / video / audio) and an **input type** 
 
 ## Input types
 
-The two-letter codes you'll see across the catalog and in `picsart_model_info`:
+The two-letter codes you'll see across the catalog and in `picsart_model_catalog`:
 
 | Code | Meaning | Typical inputs |
 |---|---|---|
@@ -75,5 +75,5 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 ```
 
 ```json
-{ "name": "picsart_validate_params", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
+{ "name": "picsart_preflight", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
 ```

@@ -24,33 +24,70 @@ The exact, always-current MCP endpoint and per-client config live on the officia
 
 ## Tool catalog
 
+Connecting exposes **37 tools**: the 13 generation / catalog / Drive tools below, plus the
+24-tool [`picsart_media_*` family](/guide/media-tools) for scene-graph compositing and
+motion graphics.
+
+### Generation
+
 | Tool | Purpose | Spends credits |
 |---|---|---|
-| `picsart_list_models` | Browse the catalog (filter by mode/provider) | no |
-| `picsart_model_info` | Capabilities + constraints for one model | no |
-| `picsart_model_params` | JSON schema of a model's accepted params | no |
-| `picsart_validate_params` | Pre-check a candidate payload | no |
-| `picsart_pricing` | Quote the credit cost of a call | no¹ |
-| `picsart_generate` | Run any model end-to-end | **yes** |
+| `picsart_generate` | Run any model end-to-end (image / video / audio / text) | **yes** |
 | `picsart_remove_bg` | Remove an image background | **yes** |
-| `picsart_change_bg` | Replace an image background | **yes** |
+| `picsart_change_bg` | Replace an image background from a prompt | **yes** |
 | `picsart_enhance` | Upscale / enhance an image | **yes** |
 | `picsart_vectorize` | Convert a raster image to SVG | **yes** |
-| `picsart_credits` | Current credit balance | no |
-| `picsart_upload` | Upload a local file to Drive | yes |
-| `picsart_drive_list` / `picsart_drive_folders` / `picsart_drive_create_folder` | Browse & organize Drive | yes |
+| `picsart_music_studio` | Open Music Studio (music / SFX / album art) | no¹ |
 
-¹ `picsart_pricing` is a dry run — it returns cost without charging, but the lookup is per-user so it needs the token.
+¹ Opening the studio is free; generating inside it spends credits.
+
+### Catalog & cost
+
+| Tool | Purpose | Spends credits |
+|---|---|---|
+| `picsart_list_models` | Model picker **widget** — for the user to browse visually | no |
+| `picsart_model_catalog` | The same catalog as plain data, for the agent's own reasoning | no |
+| `picsart_model_params` | Parameter schema of one model (type, required, enum, min/max) | no |
+| `picsart_preflight` | Validate a params payload **and** quote its credit cost — one free dry run | no |
+| `picsart_credits` | Current credit balance and quota breakdown | no |
+| `picsart_job_status` | Poll a job started by `picsart_generate` with `async: true` | no |
+
+### Drive
+
+| Tool | Purpose | Spends credits |
+|---|---|---|
+| `picsart_drive` | Single entry point for Picsart Drive — behavior selected by `action` | no |
+
+`picsart_drive` takes an `action` parameter; there are **no separate per-operation Drive tools**:
+
+| `action` | What it does |
+|---|---|
+| `list` | Browse a folder (`folderUid` omitted = root; `flat: true` lists every file) |
+| `create_folder` | Create a folder (`name`, optional parent `folderUid`, `description`) |
+| `upload` | Save a file — either `file` (a chat attachment) or `url` + `name` (HTTPS URL or inline `data:` URI). `result.url` is a CDN URL ready to pass to `imageUrls` |
+| `move` | Move `itemUids` into `targetFolderUid` |
+| `delete` | Soft-delete `itemUids` to trash (`permanent: true` to erase) |
+| `update` | Set custom attributes on one file (`itemUid` + `attributes`) |
+
+Every action returns the current folder listing so the Drive widget can render.
+See [Files & Drive](/guide/files-and-drive) for details, and
+[Local files → URLs](/guide/local-files) for getting a file off your disk in the first place.
+
+::: warning No tool accepts a filesystem path
+Every image/video input is a **URL**. There is no `filePath` parameter anywhere in the MCP
+contract — see [Local files → URLs](/guide/local-files) for the three paths that actually work.
+:::
 
 ## Recommended flow
 
 The tools are designed to chain. A typical agent sequence:
 
-1. `picsart_list_models` or `picsart_model_info` → pick a model
+1. `picsart_model_catalog` (or `picsart_list_models` to let the user pick visually) → pick a model
 2. `picsart_model_params` → learn its inputs
-3. `picsart_validate_params` → pre-check the payload
-4. `picsart_pricing` → quote the cost
-5. `picsart_generate` → actually run it
+3. `picsart_preflight` → validate the payload and quote the cost in one free call
+4. `picsart_generate` → actually run it
+
+If you already have a model id in hand, skip straight to `picsart_generate`.
 
 ## Example calls
 
@@ -79,14 +116,13 @@ The tools are designed to chain. A typical agent sequence:
   } }
 ```
 
-**Quote a cost first:**
+**Validate and quote a cost first:**
 
 ```json
-{ "name": "picsart_pricing",
+{ "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
-    "prompt": "a drone shot over a snowy ridge",
-    "params": { "duration": 8, "resolution": "1080p" }
+    "params": { "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p" }
   } }
 ```
 

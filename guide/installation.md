@@ -61,4 +61,4 @@ The gen-ai integration is built on the [Model Context Protocol](https://modelcon
 
 Authentication is always `gen-ai login` (one browser confirmation per machine).
 
-> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_pricing`, …) and example calls.
+> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_preflight`, …) and example calls, plus the [`picsart_media_*` family](/guide/media-tools).
