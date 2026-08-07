@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Sync each provider reference page to the SDK catalog.json, surgically and
+// Sync each provider reference page to an exported SDK catalog, surgically and
 // preserving curation.
 //
 //   node scripts/build-provider-pages.mjs <path-to-catalog.json>

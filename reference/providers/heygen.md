@@ -1,20 +1,21 @@
 ---
-description: "HeyGen AI models on Picsart — 1 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
+description: "HeyGen AI models on Picsart — 2 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
 ---
 
 # HeyGen
 
-**Mode:** video · **Models:** 1
+**Mode:** video · **Models:** 2
 
 **Official API docs:** [developers.heygen.com](https://developers.heygen.com)
 
-HeyGen Talking Photo turns a single portrait image into a lip-synced talking avatar that speaks a script you write, using a HeyGen voice. The script is read aloud via text-to-speech and the face is animated to match. Generation is asynchronous, and output runs up to 1080p in landscape or vertical.
+HeyGen turns a written script into a lip-synced presenter video. **Talking Photo** animates a single portrait image you supply; **Video Avatar** instead uses one of HeyGen's own avatars, selected by `videoId`, so it needs no input image and renders up to 4K. Both read the script aloud with a HeyGen voice and animate the face to match. Generation is asynchronous, in landscape or vertical.
 
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
 | `heygen-talking-photo` | HeyGen Talking Photo | `i2v` |
+| `heygen-video-avatar` | HeyGen Video Avatar | `t2v` |
 
 ## CLI
 
@@ -66,6 +67,22 @@ Input type: `i2v`
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 
 > **Notes:** Voice ids are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
+
+### `heygen-video-avatar` — HeyGen Video Avatar
+
+[Try `heygen-video-avatar` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-video-avatar)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `videoId` | `--video-id` | enum |  (default ``) |
+| `resolution` | `-r` | enum | `4k` · `1080p` · `720p` (default `720p`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `voiceId` | `--voice` | enum |  (default ``) |
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
+
+> **Notes:** `videoId` selects a HeyGen avatar and `voiceId` a HeyGen voice; both id sets are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
 
 ## Pricing
 

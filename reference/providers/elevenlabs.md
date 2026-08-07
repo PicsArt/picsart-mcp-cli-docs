@@ -8,7 +8,7 @@ description: "ElevenLabs AI models on Picsart — 11 audio model(s) including El
 
 **Vendor:** [elevenlabs.io](https://elevenlabs.io) · **Official API docs:** [API reference](https://elevenlabs.io/docs/api-reference)
 
-ElevenLabs is the most complete voice suite in the catalog: expressive text-to-speech, multilingual narration, sound effects, voice design, dubbing, speech-to-speech conversion, and audio isolation.
+ElevenLabs is the most complete audio suite in the catalog: expressive text-to-speech, multilingual narration, music, sound effects, voice design, dubbing, speech-to-speech conversion, and audio isolation.
 
 ## Models
 
@@ -19,7 +19,7 @@ ElevenLabs is the most complete voice suite in the catalog: expressive text-to-s
 | `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
 | `eleven-voice-design-v2` | Voice Design Multilingual v2 | `tts` | Multilingual voice design |
 | `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` | Sound effects |
-| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Full music tracks |
+| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Music generation |
 | `eleven-sts-v2` | Eleven STS v2 | `sts` | Speech-to-speech |
 | `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual STS |
 | `eleven-dubbing` | Eleven Dubbing | `sts` | Dub a track |
@@ -34,6 +34,9 @@ gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground." --voice JBFq
 
 # sound effect from a description
 gen-ai generate -m elevenlabs-sfx -p "a heavy wooden door creaking open"
+
+# instrumental music
+gen-ai generate -m elevenlabs-music-v2 -p "uplifting cinematic orchestral score" -d 30 --is-instrumental
 ```
 
 ## MCP

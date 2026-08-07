@@ -1,10 +1,10 @@
 ---
-description: "Seedream AI models on Picsart — 3 image model(s) including Seedream 4.5, Seedream 5.0 Lite. CLI + MCP examples, parameters, and official docs."
+description: "Seedream AI models on Picsart — 4 image model(s) including Seedream 4.5, Seedream 5.0 Lite. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Seedream
 
-**Mode:** image · **Models:** 3
+**Mode:** image · **Models:** 4
 
 **Vendor:** [BytePlus ModelArk](https://docs.byteplus.com) · **Official API docs:** [Seedream on ModelArk](https://docs.byteplus.com/en/docs/ModelArk/1824121)
 
@@ -16,6 +16,7 @@ Seedream (by ByteDance, on BytePlus ModelArk) is a high-fidelity text-to-image m
 |---|---|---|
 | `seedream-5.0-pro` | Seedream 5.0 Pro | `t2i` |
 | `seedream-5.0-lite` | Seedream 5.0 Lite | `t2i` |
+| `seedream-4.7` | Seedream 4.7 | `t2i` |
 | `seedream-4.5` | Seedream 4.5 | `t2i` |
 
 ## CLI
@@ -74,6 +75,21 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `resolution` | `-r` | enum | `2K` · `3K` (default `2K`) |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 2) |
+| `negativePrompt` | `--neg` | text | free text |
+
+### `seedream-4.7` — Seedream 4.7
+
+[Try `seedream-4.7` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-4.7)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |

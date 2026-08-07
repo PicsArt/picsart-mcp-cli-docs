@@ -1,6 +1,6 @@
 # Picsart CLI & MCP — Docs
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 165 models from 31 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 174 models from 32 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
 
 - **Source of truth:** this folder (`docs-site/`) inside the `ai-toolkit` repo.
 - **Public repo:** https://github.com/PicsArt/picsart-mcp-cli-docs
@@ -26,7 +26,7 @@ docs-site/
   index.md                    # home (hero)
   guide/                      # getting started + CLI / MCP / Skills + concepts
   reference/                  # model reference: catalog, per-mode, per-provider
-    providers/                # one page per vendor (30)
+    providers/                # one page per vendor (32)
   public/llms.txt             # generated AI-agent site map (llmstxt.org)
   scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
   scripts/check-counts.mjs    # fails the build if prose model/provider counts drift
@@ -35,8 +35,9 @@ docs-site/
 
 ## Data freshness
 
-`.vitepress/theme/data/{models,providers}.json` are generated from the live catalog
-(`gen-ai models --json`). Regenerate them when the catalog changes so the Model Catalog,
+`.vitepress/theme/data/{models,providers}.json` are generated from the installed SDK catalog.
+Run `node scripts/export-sdk-catalog.mjs <output.json>`, then pass that file to
+`build-catalog-data.mjs` and `build-provider-pages.mjs` when the catalog changes so the Model Catalog,
 Providers grid, and the generated wiki tables stay accurate.
 
 `public/llms.txt` (the [llmstxt.org](https://llmstxt.org) agent map) is generated from those
@@ -45,7 +46,7 @@ automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap
 the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
 custom-domain move) and re-run.
 
-The hand-written counts in prose (`165 models`, `67 image models`, `31 providers`, each
+The hand-written counts in prose (`174 models`, `64 image models`, `32 providers`, each
 provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
 truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
 Run it standalone with `npm run check:counts`.
@@ -97,7 +98,7 @@ so the interactive catalog/provider grids become **static tables**.
 # 1. clone the wiki (separate git repo)
 git clone https://github.com/PicsArt/picsart-mcp-cli-docs.wiki.git .wiki
 
-# 2. regenerate all wiki pages from these docs (47 pages: guide + reference + 31 providers + Home/_Sidebar/_Footer)
+# 2. regenerate all wiki pages from these docs (48 pages: guide + reference + 32 providers + Home/_Sidebar/_Footer)
 npm run wiki:build -- .wiki        # = python3 scripts/build-wiki.py .wiki
 
 # 3. publish
