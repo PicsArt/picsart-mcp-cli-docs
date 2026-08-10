@@ -147,6 +147,13 @@
     "inputType": "t2i"
   },
   {
+    "id": "flux-3-video",
+    "name": "Flux 3 Video",
+    "provider": "flux",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "flux-kontext-max",
     "name": "Flux Kontext Max",
     "provider": "flux",
@@ -208,6 +215,20 @@
     "provider": "google",
     "mode": "image",
     "inputType": "t2i"
+  },
+  {
+    "id": "gemini-3.5-flash-lite",
+    "name": "Gemini 3.5 Flash Lite",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gemini-3.6-flash",
+    "name": "Gemini 3.6 Flash",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
   },
   {
     "id": "gemini-omni-flash-preview",
@@ -364,6 +385,13 @@
     "inputType": "i2v"
   },
   {
+    "id": "heygen-video-avatar",
+    "name": "HeyGen Video Avatar",
+    "provider": "heygen",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "hunyuan-v3",
     "name": "Hunyuan V3",
     "provider": "hunyuan",
@@ -376,6 +404,13 @@
     "provider": "ideogram",
     "mode": "image",
     "inputType": "i2i"
+  },
+  {
+    "id": "ideogram-p-image",
+    "name": "Ideogram P-Image",
+    "provider": "ideogram",
+    "mode": "image",
+    "inputType": "t2i"
   },
   {
     "id": "ideogram-v3",
@@ -586,6 +621,13 @@
     "provider": "luma",
     "mode": "image",
     "inputType": "t2i"
+  },
+  {
+    "id": "hailuo-03",
+    "name": "Hailuo 03",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
   },
   {
     "id": "hailuo-2.3",
@@ -1050,8 +1092,50 @@
     "inputType": "v2v"
   },
   {
+    "id": "seedance-2.5",
+    "name": "Seedance 2.5",
+    "provider": "seedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "seedance-2.5-video-edit",
+    "name": "Seedance 2.5 Video Edit",
+    "provider": "seedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.5-video-extend",
+    "name": "Seedance 2.5 Video Extend",
+    "provider": "seedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seed-audio-1.0",
+    "name": "Seed Audio",
+    "provider": "seedaudio",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "seed-audio-1.0-multilingual",
+    "name": "Seed Audio Multilingual",
+    "provider": "seedaudio",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
     "id": "seedream-4.5",
     "name": "Seedream 4.5",
+    "provider": "seedream",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-4.7",
+    "name": "Seedream 4.7",
     "provider": "seedream",
     "mode": "image",
     "inputType": "t2i"
@@ -1071,67 +1155,18 @@
     "inputType": "t2i"
   },
   {
-    "id": "topaz-enhance-cgi",
-    "name": "Topaz CGI",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-high-fidelity-v2",
-    "name": "Topaz Hi-Fi",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-low-res-v2",
-    "name": "Topaz Low Res",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-recovery",
-    "name": "Topaz Recovery",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-recovery-v2",
-    "name": "Topaz Recovery V2",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-redefine",
-    "name": "Topaz Redefine",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-standard-v2",
-    "name": "Topaz Standard",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "topaz-enhance-text-refine",
-    "name": "Topaz Text",
-    "provider": "topaz",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
     "id": "topaz-upscale-image",
-    "name": "Topaz HD Upscale",
+    "name": "Topaz Image Upscale",
     "provider": "topaz",
     "mode": "image",
     "inputType": "i2i"
+  },
+  {
+    "id": "topaz-upscale-video",
+    "name": "Topaz Video Upscale",
+    "provider": "topaz",
+    "mode": "video",
+    "inputType": "v2v"
   },
   {
     "id": "veed-fabric-v1",

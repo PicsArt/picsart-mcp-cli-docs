@@ -1,14 +1,14 @@
 ---
-description: "Flux (Black Forest Labs) AI models on Picsart — 5 image model(s) including Flux 2 Flex, Flux 2 Max, Flux 2 Pro. CLI + MCP examples, parameters, and official docs."
+description: "Flux (Black Forest Labs) AI models on Picsart — 6 image and video model(s) including Flux 2 Flex, Flux 2 Max, Flux 3 Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Flux
 
-**Mode:** image · **Models:** 5
+**Modes:** image · video · **Models:** 6
 
 **Vendor:** [Black Forest Labs](https://blackforestlabs.ai) · **Official API docs:** [docs.bfl.ml](https://docs.bfl.ml)
 
-Flux (by Black Forest Labs) is a family of high-quality text-to-image models with crisp detail and strong prompt adherence. The **Kontext** models add reference-guided editing — generate from a prompt *and* one or more input images.
+Flux (by Black Forest Labs) is a family of high-quality text-to-image models with crisp detail and strong prompt adherence. The **Kontext** models add reference-guided editing — generate from a prompt *and* one or more input images. **Flux 3 Video** extends the family to motion: text-to-video and image-to-video up to 20 seconds at FHD, with native audio.
 
 ## Models
 
@@ -19,6 +19,7 @@ Flux (by Black Forest Labs) is a family of high-quality text-to-image models wit
 | `flux-2-flex` | Flux 2 Flex | `t2i` | Flexible / cost-aware |
 | `flux-kontext-max` | Flux Kontext Max | `t2i` | Reference-guided editing |
 | `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Reference-guided editing |
+| `flux-3-video` | Flux 3 Video | `t2v` | Text-to-video with native audio |
 
 ## CLI
 
@@ -112,6 +113,26 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 > **Notes:** Flux 2 Pro and Flux Kontext Max accept up to 4 reference images; Flux 2 Max / Flex and Flux Kontext Pro accept 1. Kontext models use `imageUrls` as the edit reference.
+
+### `flux-3-video` — Flux 3 Video
+
+[Try `flux-3-video` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-video)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `auto`) |
+| `resolution` | `-r` | enum | `hd` · `fhd` (default `hd`) |
+| `duration` | `-d` | enum | `auto` · `5` · `10` · `15` · `20` (default `auto`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `videoUrl` | `--video` | file | video |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
+| `draft` | `--draft` | boolean | `true` · `false` (default `false`) |
+
+> **Notes:** `flux-3-video` accepts `imageUrls` (image-to-video, up to 10 references) or `videoUrl`, so it covers `t2v`, `i2v`, and `v2v` from one id. Draft mode is HD-only — with `--draft` on, `fhd` is rejected.
 
 ## Pricing
 

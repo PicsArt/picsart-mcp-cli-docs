@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-// Regenerate the docs-site catalog data from the SDK's generated catalog.json.
+// Regenerate the docs-site catalog data from an exported SDK catalog.
 //
 //   node scripts/build-catalog-data.mjs <path-to-catalog.json>
 //
-// The SDK (`@picsart/ai-sdk`, external `pa-gen-ai-sdk` repo) ships a generated
-// `packages/ai-sdk/src/generated/catalog.json` — the same data `gen-ai models
-// --json` serves. This script projects it into the two files the docs site
-// renders from:
+// SDK 3.30.0+ exposes its catalog at runtime instead of shipping catalog.json.
+// Run export-sdk-catalog.mjs first, then pass its output here. This script
+// projects that stable interchange format into the two files the docs renders:
 //
 //   .vitepress/theme/data/models.json     [{id, name, provider, mode, inputType}]
 //   .vitepress/theme/data/providers.json  [{id, label, count, modes}]

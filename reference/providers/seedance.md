@@ -1,10 +1,10 @@
 ---
-description: "Seedance AI models on Picsart — 9 video model(s) including Seedance 2.0, Seedance 2.0 Fast, Seedance 1.5 Pro. CLI + MCP examples, parameters, and official docs."
+description: "Seedance AI models on Picsart — 12 video model(s) including Seedance 2.0, Seedance 2.0 Fast, Seedance 1.5 Pro. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Seedance
 
-**Mode:** video · **Models:** 9
+**Mode:** video · **Models:** 12
 
 **Vendor:** [BytePlus Seedance](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [ModelArk](https://docs.byteplus.com/en/docs/ModelArk/1824121)
 
@@ -14,6 +14,9 @@ Seedance 2.0 (by ByteDance) is a high-quality video model with reference-image a
 
 | id | Name | Input type |
 |---|---|---|
+| `seedance-2.5` | Seedance 2.5 | `t2v` |
+| `seedance-2.5-video-edit` | Seedance 2.5 Video Edit | `v2v` |
+| `seedance-2.5-video-extend` | Seedance 2.5 Video Extend | `v2v` |
 | `seedance-2.0` | Seedance 2.0 | `t2v` |
 | `seedance-2.0-fast` | Seedance 2.0 Fast | `t2v` |
 | `seedance-2.0-mini` | Seedance 2.0 Mini | `t2v` |
@@ -56,6 +59,60 @@ gen-ai generate -m seedance-2.0-video-edit -p "claymation style" --video ./clip.
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `seedance-2.5` — Seedance 2.5
+
+[Try `seedance-2.5` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.5)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `8` · `10` · `12` · `15` · `20` · `25` · `30` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `imageUrls` | `-i` | file | image (up to 30) |
+| `videoUrls` | `--video-urls` | file | video (up to 10) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 10) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+
+### `seedance-2.5-video-edit` — Seedance 2.5 Video Edit
+
+[Try `seedance-2.5-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.5-video-edit)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `adaptive` (default `adaptive`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | image (up to 30) |
+
+### `seedance-2.5-video-extend` — Seedance 2.5 Video Extend
+
+[Try `seedance-2.5-video-extend` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.5-video-extend)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `adaptive` (default `adaptive`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `4` · `5` · `6` · `8` · `10` · `12` · `15` · `20` · `25` · `30` (default `15`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `videoUrls` | `--video-urls` | file | **required** video (up to 10) |
 
 ### `seedance-2.0` — Seedance 2.0
 

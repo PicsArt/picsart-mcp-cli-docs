@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 169 models from 31 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 174 models from 32 providers in your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -30,6 +30,8 @@ const sidebar = [
     text: 'Getting Started',
     items: [
       { text: 'Introduction', link: '/guide/introduction' },
+      { text: 'Which tool is right for me?', link: '/guide/which-tool' },
+      { text: 'What is MCP?', link: '/guide/what-is-mcp' },
       { text: 'Installation', link: '/guide/installation' },
       { text: 'Authentication', link: '/guide/authentication' },
     ],
@@ -41,6 +43,34 @@ const sidebar = [
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
       { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
+    ],
+  },
+  {
+    text: 'Integrations',
+    collapsed: false,
+    items: [
+      { text: 'All integrations', link: '/guide/integrations/' },
+      { text: 'Claude Code', link: '/guide/integrations/claude-code' },
+      { text: 'Cursor', link: '/guide/integrations/cursor' },
+      { text: 'Windsurf', link: '/guide/integrations/windsurf' },
+      { text: 'ChatGPT', link: '/guide/integrations/chatgpt' },
+      { text: 'Codex', link: '/guide/integrations/codex' },
+      { text: 'VS Code', link: '/guide/integrations/vscode' },
+      { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
+      { text: 'Goose', link: '/guide/integrations/goose' },
+      { text: 'Raycast', link: '/guide/integrations/raycast' },
+      { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
+      { text: 'Open WebUI', link: '/guide/integrations/open-webui' },
+      { text: 'AnythingLLM', link: '/guide/integrations/anythingllm' },
+      { text: 'LobeHub', link: '/guide/integrations/lobehub' },
+      { text: 'LibreChat', link: '/guide/integrations/librechat' },
+      { text: 'Hermes Agent', link: '/guide/integrations/hermes-agent' },
+      { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
+      { text: 'OpenClaw', link: '/guide/integrations/openclaw' },
+      { text: 'n8n', link: '/guide/integrations/n8n' },
+      { text: 'Dify', link: '/guide/integrations/dify' },
+      { text: 'Gumloop', link: '/guide/integrations/gumloop' },
+      { text: 'Copilot Studio', link: '/guide/integrations/copilot-studio' },
     ],
   },
   {
@@ -95,6 +125,7 @@ const sidebar = [
       { text: 'Reve', link: '/reference/providers/reve' },
       { text: 'Runway', link: '/reference/providers/runway' },
       { text: 'Seedance', link: '/reference/providers/seedance' },
+      { text: 'Seed Audio', link: '/reference/providers/seedaudio' },
       { text: 'Seedream', link: '/reference/providers/seedream' },
       { text: 'Topaz', link: '/reference/providers/topaz' },
       { text: 'VEED', link: '/reference/providers/veed' },
@@ -131,10 +162,12 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 169 models, 31 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 174 models, 32 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-FQMFEN0QZ1' }],
+    ['script', {}, "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-FQMFEN0QZ1');"],
   ],
   transformPageData(pageData) {
     const cleanPath = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
@@ -160,6 +193,7 @@ export default defineConfig({
       { text: 'MCP', link: '/guide/mcp-quickstart' },
       { text: 'Media', link: '/guide/media-tools' },
       { text: 'Skills', link: '/guide/skills' },
+      { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },
       { text: 'Providers', link: '/reference/providers/' },
       { text: 'Changelog', link: '/changelog' },

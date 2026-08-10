@@ -1,32 +1,104 @@
 ---
-description: "Connect Picsart's 169-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
+description: "Connect Picsart's 174-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
 ---
 
 # MCP Quickstart
 
-Picsart AI Playground exposes the full model catalog to AI agents as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to **Claude Code, Cursor, Windsurf, ChatGPT, or any MCP-compatible agent** and it can generate image, video, and audio across 169 models directly.
+The Picsart MCP server exposes the full model catalog as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio across 174 models using natural language or structured tool calls.
 
-## Connect
+New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
-The integration works natively with MCP-capable agents. Pick your path:
+## Prerequisites
 
-| Agent | How to connect |
-|---|---|
-| **Claude Code · Cursor · Windsurf** | Add the [`gen-ai-use` Skill](/guide/skills) — it plugs the CLI into the agent |
-| **Codex (OpenAI)** | Install the CLI, then add the plugin `codex://plugins/picsart@openai-curated` |
-| **ChatGPT / any MCP client** | Connect Picsart as an MCP server — see [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) for the current endpoint and config |
+1. Install the gen-ai CLI — see [Installation](/guide/installation).
+2. Run `gen-ai login` once (opens your browser for OAuth).
 
-In all cases, authenticate once with `gen-ai login`.
+That is all. The MCP server (`gen-ai-mcp`) ships with the CLI and uses the same credentials.
 
-::: tip Canonical connection details
-The exact, always-current MCP endpoint and per-client config live on the official page: **[picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/)**. The tool catalog and example calls below describe what the agent can do once connected.
-:::
+## Connect to your agent
+
+### Claude Code
+
+```bash
+claude mcp add picsart-gen-ai -- gen-ai-mcp
+```
+
+Then use it in any conversation:
+
+> *"Generate a product image on a white background using Flux 2 Pro, 4:3 aspect ratio."*
+
+For full Claude Code setup including Skills and troubleshooting, see [Claude Code integration](/guide/integrations/claude-code).
+
+### Cursor
+
+Add the following to your Cursor MCP configuration file (`.cursor/mcp.json` or equivalent):
+
+```json
+{
+  "mcpServers": {
+    "picsart-gen-ai": {
+      "command": "gen-ai-mcp"
+    }
+  }
+}
+```
+
+See [Cursor integration](/guide/integrations/cursor).
+
+### Windsurf
+
+Add to your Windsurf MCP config:
+
+```json
+{
+  "mcpServers": {
+    "picsart-gen-ai": {
+      "command": "gen-ai-mcp"
+    }
+  }
+}
+```
+
+See [Windsurf integration](/guide/integrations/windsurf).
+
+### VS Code (Copilot)
+
+Add to `.vscode/mcp.json` in your workspace or to your user settings:
+
+```json
+{
+  "servers": {
+    "picsart-gen-ai": {
+      "type": "stdio",
+      "command": "gen-ai-mcp"
+    }
+  }
+}
+```
+
+See [VS Code integration](/guide/integrations/vscode).
+
+### Codex (OpenAI)
+
+```bash
+codex mcp add picsart-gen-ai -- gen-ai-mcp
+```
+
+See [Codex integration](/guide/integrations/codex).
+
+### ChatGPT and other MCP clients
+
+See [ChatGPT integration](/guide/integrations/chatgpt) or the official page at [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) for the current connector config.
+
+---
 
 ## Tool catalog
 
 Connecting exposes **37 tools**: the 13 generation / catalog / Drive tools below, plus the
 24-tool [`picsart_media_*` family](/guide/media-tools) for scene-graph compositing and
 motion graphics.
+
+Every tool is available to the agent once connected. Tools that do not spend credits are free to call as many times as needed.
 
 ### Generation
 
@@ -78,9 +150,9 @@ Every image/video input is a **URL**. There is no `filePath` parameter anywhere 
 contract — see [Local files → URLs](/guide/local-files) for the three paths that actually work.
 :::
 
-## Recommended flow
+## Recommended generation flow
 
-The tools are designed to chain. A typical agent sequence:
+The tools are designed to chain. This sequence avoids surprises:
 
 1. `picsart_model_catalog` (or `picsart_list_models` to let the user pick visually) → pick a model
 2. `picsart_model_params` → learn its inputs
@@ -89,56 +161,100 @@ The tools are designed to chain. A typical agent sequence:
 
 If you already have a model id in hand, skip straight to `picsart_generate`.
 
-## Example calls
+## Example tool calls
 
 **Generate an image:**
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "flux-2-pro",
-    "prompt": "a cat in a hat, studio lighting",
-    "aspectRatio": "16:9",
+    "prompt": "a ceramic cup, studio lighting, 4:3",
+    "aspectRatio": "4:3",
     "count": 1
-  } }
+  }
+}
 ```
 
-**Generate a video with model-specific params via `extra`:**
+**Generate a video:**
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "seedance-2.0",
     "prompt": "a cat skiing down a mountain",
     "duration": 8,
     "aspectRatio": "16:9",
     "generateAudio": true
-  } }
+  }
+}
 ```
 
 **Validate and quote a cost first:**
 
 ```json
-{ "name": "picsart_preflight",
+{
+  "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
     "params": { "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p" }
-  } }
+  }
+}
 ```
 
-**Task-shaped shortcuts** (auto-pick a fitting model):
+**Remove a background:**
 
 ```json
-{ "name": "picsart_remove_bg", "arguments": { "imageUrls": ["https://example.com/photo.jpg"] } }
+{
+  "name": "picsart_remove_bg",
+  "arguments": {
+    "imageUrls": ["https://example.com/product.jpg"]
+  }
+}
 ```
 
 ## Inputs reference
 
-`picsart_generate` takes `model` and `prompt` (required), plus common optionals: `aspectRatio`, `resolution`, `duration`, `count` (1–8), `quality`, `style`, `negativePrompt`, `imageUrls` (image-to-X), `videoUrl` (video-to-X), `generateAudio`, `enhancePrompt`, and `extra` — a free-form object for model-specific params. Discover the exact `extra` shape for any model with `picsart_model_params`.
+`picsart_generate` takes:
 
-The result includes `results: [{ url, metadata? }]`, an `id` (generation handle), and one `resource_link` per output URL (image or `video/mp4`). Clients fetch assets from URLs — never base64.
+- **Required:** `model` (model id), `prompt` (text prompt)
+- **Common optional:** `aspectRatio`, `resolution`, `duration`, `count` (1 to 8), `quality`, `style`, `negativePrompt`
+- **Image input:** `imageUrls` (array of URLs — for image-to-image or image-to-video models)
+- **Video input:** `videoUrl` (single URL — for video-to-video models)
+- **Audio generation:** `generateAudio` (boolean — for video models that support native audio)
+- **Prompt enhancement:** `enhancePrompt` (boolean — routes through an LLM before generation)
+- **Model-specific params:** `extra` (free-form object — use `picsart_model_params` to see what a model accepts)
 
-## More
+Results come back as `results: [{ url, metadata? }]`. Assets are URLs, never base64. Each result also includes a `resource_link` so the agent can reference it in follow-up tool calls.
 
-- **[Model Reference](/reference/)** — every provider's models with MCP examples
-- **[Pricing & Credits](/guide/pricing)** — how cost is computed
+## FAQ
+
+**Does the MCP server require a separate API key?**
+
+No. It uses the same OAuth session as the CLI. Run `gen-ai login` once; the MCP server picks up those credentials automatically.
+
+**Can I use MCP and the CLI on the same machine at the same time?**
+
+Yes. Both use the same credentials file (`~/.gen-ai/credentials.json`) and the same credit balance. Running them in parallel is fine.
+
+**The agent connected but the tools do not appear.**
+
+Restart the agent after adding the MCP config. Most agents load the tool list at startup, not dynamically.
+
+**Which models work via MCP?**
+
+All 174 models in the catalog. There is no MCP-specific subset. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+
+**Can the agent save generated files to Drive?**
+
+Yes. Pass `"saveToDrive": true` in the `picsart_generate` arguments, or use `picsart_drive` to upload a local file or URL. See [Files and Drive](/guide/files-and-drive).
+
+**How do I know what a model costs before running it?**
+
+Call `picsart_preflight` with the model id and the parameters you plan to use. It validates the payload and returns a credit estimate without running the generation.
+
+**What happens if my credit balance runs out mid-generation?**
+
+Check your balance with `picsart_credits` and top up at [picsart.com](https://picsart.com) before retrying.

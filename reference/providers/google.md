@@ -1,14 +1,14 @@
 ---
-description: "Google AI models on Picsart — 16 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Imagen 4.0. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 18 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Imagen 4.0, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 16
+**Modes:** image · video · audio · text · **Models:** 18
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
-Google contributes across all three modes: the **Veo** video family, the **Nano Banana** (Gemini Image) family, **Gemini TTS**, and **Lyria** music.
+Google contributes across all four modes: the **Veo** video family, the **Nano Banana** (Gemini Image) family, **Gemini TTS**, **Lyria** music, and the **Gemini 3** text-analysis family.
 
 ## Models
 
@@ -30,8 +30,10 @@ Google contributes across all three modes: the **Veo** video family, the **Nano 
 | `lyria-3-clip` | Lyria 3 Clip | audio | `music` |
 | `lyria-3-pro` | Lyria 3 Pro | audio | `music` |
 | `gemini-3-pro` | Gemini 3 Pro | text | `v2t` |
+| `gemini-3.6-flash` | Gemini 3.6 Flash | text | `i2t` |
+| `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | text | `i2t` |
 
-> `gen-ai models --provider google` lists the current set (16 models).
+> `gen-ai models --provider google` lists the current set (18 models).
 
 ## Veo 3.1 (video)
 
@@ -289,6 +291,29 @@ Input type: `v2t`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `videoUrl` | `--video` | file | video |
 | `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
+
+### `gemini-3.6-flash` — Gemini 3.6 Flash
+
+[Try `gemini-3.6-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.6-flash)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gemini-3.5-flash-lite` — Gemini 3.5 Flash Lite
+
+[Try `gemini-3.5-flash-lite` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.5-flash-lite)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
 
 
 

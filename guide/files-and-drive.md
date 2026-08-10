@@ -87,3 +87,21 @@ the generation and render services.
 { "name": "picsart_drive",
   "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
 ```
+
+## FAQ
+
+**What file types can I upload?**
+
+The upload returns a Drive URL you can immediately use as an input to a generation.
+
+**Are generated files private?**
+
+Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are time-limited signed URLs — they do not expose your files publicly. Download or save to Drive promptly if long-term access is needed.
+
+**Does saving to Drive cost extra credits?**
+
+See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing details.
+
+**Can I delete files from Drive via the CLI?**
+
+The current CLI and MCP do not expose a delete command. Manage deletion from the [AI Playground web app](https://picsart.com/ai-playground/).
