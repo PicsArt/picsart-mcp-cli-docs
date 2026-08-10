@@ -8,7 +8,7 @@ Every model belongs to a **mode** (image / video / audio) and an **input type** 
 
 ## Input types
 
-The two-letter codes you'll see across the catalog and in `picsart_model_params`:
+The two-letter codes you'll see across the catalog and in `picsart_model_catalog`:
 
 | Code | Meaning | Typical inputs |
 |---|---|---|

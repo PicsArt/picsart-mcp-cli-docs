@@ -43,9 +43,11 @@ Agents authenticate through the same OAuth web login. After installing the CLI, 
 |---|---|---|---|
 | Browse catalog | `gen-ai models` | `picsart_list_models` | ❌ no |
 | Inspect a model | `gen-ai models info <id>` | `picsart_model_params` | ❌ no |
-| Quote a cost | `gen-ai pricing <model>` | `picsart_preflight` | ✅ yes |
+| Validate + quote a cost | `gen-ai pricing <model>` | `picsart_preflight` | ✅ yes¹ |
 | Generate | `gen-ai generate` | `picsart_generate` | ✅ yes |
 | Drive upload/list | `gen-ai upload` / `list` | `picsart_drive` | ✅ yes |
+
+¹ `picsart_preflight` validates params without sign-in; the credit quote is a per-user lookup, so unauthenticated calls return `credits: null`.
 
 For the **SDK and REST API**, a valid `PICSART_API_KEY` is required on every request. There is no unauthenticated mode.
 

@@ -41,6 +41,7 @@ const sidebar = [
     items: [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
+      { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
     ],
   },
@@ -76,6 +77,7 @@ const sidebar = [
     text: 'Concepts',
     items: [
       { text: 'Generating media', link: '/guide/generating' },
+      { text: 'Local files → URLs', link: '/guide/local-files' },
       { text: 'Files & Drive', link: '/guide/files-and-drive' },
       { text: 'Pricing & Credits', link: '/guide/pricing' },
       { text: 'Batch & Automation', link: '/guide/batch' },
@@ -189,6 +191,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
+      { text: 'Media', link: '/guide/media-tools' },
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },
