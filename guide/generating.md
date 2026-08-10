@@ -78,6 +78,18 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 { "name": "picsart_preflight", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
 ```
 
+## Supported formats
+
+**Image inputs:** JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum 100 MB per file.
+
+**Image outputs:** JPEG, PNG, WEBP. HEIC is accepted as input but cannot be requested as output.
+
+**Video inputs:** MP4, MOV, WebM. Maximum 25 MB.
+
+**Result URLs:** All generated files are returned as URLs, not binary data. These URLs expire after 24 hours. If you need to keep the result, download it or save it to Picsart Drive before the window closes.
+
+For model-specific parameter constraints (aspect ratios, resolution values, duration limits), use `picsart_model_params` or `gen-ai models info <model-id>`. These vary per model and the model's schema is the authoritative source.
+
 ## FAQ
 
 **How do I know which input type a model needs?**

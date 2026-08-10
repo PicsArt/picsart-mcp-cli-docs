@@ -53,15 +53,31 @@ gen-ai download <uid>          # download a Drive file
 
 Use `picsart_drive` with `action: upload` and a URL as the source to copy a remote asset into Drive. This is useful when a model needs an input that lives behind a short-lived URL — saving it first gives you a stable Drive URL that doesn't expire.
 
+## File formats
+
+**Image**
+
+Input formats: JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum file size: 100 MB.
+
+Output formats: JPEG, PNG, WEBP. HEIC is accepted as input but is not currently available as an output format.
+
+**Video**
+
+Maximum file size: 25 MB. Input containers include MP4, MOV, and WebM. Output is delivered as a URL.
+
+**Audio**
+
+Audio generation returns a URL. Accepted input formats for audio-to-audio operations vary by model. Check the model's parameter schema with `picsart_model_params` or `gen-ai models info <model-id>`.
+
 ## FAQ
 
 **What file types can I upload?**
 
-The upload returns a Drive URL you can immediately use as an input to a generation.
+For images: JPEG, PNG, WEBP, TIFF, BMP, and HEIC are accepted. The maximum file size is 100 MB. For video uploads: 25 MB maximum. See the File formats section above for output format details.
 
 **Are generated files private?**
 
-Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are time-limited signed URLs — they do not expose your files publicly. Download or save to Drive promptly if long-term access is needed.
+Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are signed URLs that expire after 24 hours. They do not expose your files publicly. Download or save to Drive within that 24-hour window if long-term access is needed.
 
 **Does saving to Drive cost extra credits?**
 

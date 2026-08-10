@@ -33,6 +33,12 @@ features:
   - title: 166+ models, 32 providers
     details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
+  - title: Error codes
+    details: HTTP error codes for the gen-ai platform, with guidance on what each means and which are retryable.
+    link: /guide/rate-limits
+  - title: Security
+    details: TLS, encryption at rest, SOC 2 compliance, and API key best practices.
+    link: /guide/security
 ---
 
 ## One platform, six ways to use it
