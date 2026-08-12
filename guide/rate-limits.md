@@ -16,7 +16,7 @@ This page covers the HTTP error codes you may encounter when calling the Picsart
 | 403 | Forbidden | Check API key permissions |
 | 404 | Not found | Verify the endpoint URL |
 | 405 | Method not allowed | Use the correct HTTP verb for this endpoint |
-| 413 | Request entity too large | Reduce file size |
+| 413 | Request entity too large | File exceeds the 1 GB upload limit |
 | 422 | Unprocessable content | Input parameters did not pass validation |
 | 429 | Too many requests | Rate limit exceeded; wait before retrying |
 | 500 | Internal server error | Check [status.picsart.io](https://status.picsart.io) |

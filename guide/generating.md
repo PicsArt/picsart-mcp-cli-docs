@@ -80,11 +80,11 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 
 ## Supported formats
 
-**Image inputs:** JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum 100 MB per file.
+**Image inputs:** JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum 1 GB per file.
 
 **Image outputs:** JPEG, PNG, WEBP. HEIC is accepted as input but cannot be requested as output.
 
-**Video inputs:** MP4, MOV, WebM. Maximum 25 MB.
+**Video inputs:** MP4, MOV, WebM. Maximum 1 GB.
 
 **Result URLs:** All generated files are returned as URLs, not binary data. These URLs expire after 24 hours. If you need to keep the result, download it or save it to Picsart Drive before the window closes.
 

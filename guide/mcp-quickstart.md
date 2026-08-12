@@ -4,6 +4,8 @@ description: "Connect Picsart's AI catalog (150+ models) to Claude Code, Cursor,
 
 # MCP Quickstart
 
+[![smithery badge](https://smithery.ai/badge/picsart/picsart-gen-ai)](https://smithery.ai/servers/picsart/picsart-gen-ai)
+
 The Picsart MCP server exposes the full model catalog as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio across 150+ models using natural language or structured tool calls.
 
 New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.

@@ -57,13 +57,13 @@ Use `picsart_drive` with `action: upload` and a URL as the source to copy a remo
 
 **Image**
 
-Input formats: JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum file size: 100 MB.
+Input formats: JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum file size: 1 GB.
 
 Output formats: JPEG, PNG, WEBP. HEIC is accepted as input but is not currently available as an output format.
 
 **Video**
 
-Maximum file size: 25 MB. Input containers include MP4, MOV, and WebM. Output is delivered as a URL.
+Maximum file size: 1 GB. Input containers include MP4, MOV, and WebM. Output is delivered as a URL.
 
 **Audio**
 
@@ -73,7 +73,7 @@ Audio generation returns a URL. Accepted input formats for audio-to-audio operat
 
 **What file types can I upload?**
 
-For images: JPEG, PNG, WEBP, TIFF, BMP, and HEIC are accepted. The maximum file size is 100 MB. For video uploads: 25 MB maximum. See the File formats section above for output format details.
+For images: JPEG, PNG, WEBP, TIFF, BMP, and HEIC are accepted. For video: MP4, MOV, and WebM. The maximum file size for uploads is 1 GB. See the File formats section above for output format details.
 
 **Are generated files private?**
 
