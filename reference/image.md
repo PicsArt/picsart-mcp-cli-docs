@@ -1,10 +1,10 @@
 ---
-description: "70+ AI image generation models on Picsart — text-to-image, editing, inpainting, vector/SVG — Nano Banana, Flux, GPT Image, Recraft, Ideogram and more."
+description: "64 AI image generation models on Picsart — text-to-image, editing, inpainting, vector/SVG — Nano Banana, Flux, GPT Image, Recraft, Ideogram and more."
 ---
 
 # Image generation
 
-**70+ image models** spanning text-to-image, image editing, inpainting, style transfer, background tools, upscaling, and vector/SVG output.
+**64 image models** spanning text-to-image, image editing, inpainting, style transfer, background tools, upscaling, and vector/SVG output.
 
 ## Quick start
 
@@ -25,7 +25,7 @@ gen-ai generate -m flux-2-pro -p "studio shot of a ceramic cup, soft light" --ar
 | [Flux](/reference/providers/flux) | Flux 2 Pro / Max / Flex, Flux Kontext | Crisp, controllable; reference-guided editing |
 | [OpenAI](/reference/providers/openai) | GPT Image 2, GPT Image 1.5 | Strong text rendering & instruction following |
 | [Recraft](/reference/providers/recraft) | Recraft V4.1 family (20) | True vector / SVG output |
-| [Ideogram](/reference/providers/ideogram) | Ideogram v3, Character | Best-in-class typography |
+| [Ideogram](/reference/providers/ideogram) | P-Image, Ideogram 4.0, v3, Character | Best-in-class typography |
 | [Seedream](/reference/providers/seedream) | Seedream 5.0 Lite, 4.5 | High-detail photoreal |
 | [Qwen](/reference/providers/qwen) | Qwen 2 / Pro, Edit Plus | Generation + editing |
 | [Luma](/reference/providers/luma) | UNI-1, UNI-1 Max | Fast creative generation |

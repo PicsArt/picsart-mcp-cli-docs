@@ -1,20 +1,21 @@
 ---
-description: "Ideogram AI models on Picsart — 3 image model(s) including Ideogram 4.0, Ideogram v3. CLI + MCP examples, parameters, and official docs."
+description: "Ideogram AI models on Picsart — 4 image model(s) including Ideogram P-Image, Ideogram 4.0, and Ideogram v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Ideogram
 
-**Mode:** image · **Models:** 3
+**Mode:** image · **Models:** 4
 
 **Vendor:** [Ideogram](https://ideogram.ai) · **Official API docs:** [Ideogram API Reference](https://developer.ideogram.ai/api-reference)
 
-Ideogram v3 is a text-to-image model known for strong typography and in-image text rendering, with selectable rendering speeds and styles. **Ideogram Character** is the image-to-image variant that carries a reference subject across generations.
+**Ideogram P-Image** is the generally available tiered text-to-image model with outputs up to 2K and four speed/quality levels. Ideogram 4.0 and v3 provide strong typography and in-image text rendering, while **Ideogram Character** carries a reference subject across generations.
 
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
 | `ideogram-v4` | Ideogram 4.0 | `t2i` |
+| `ideogram-p-image` | Ideogram P-Image | `t2i` |
 | `ideogram-v3` | Ideogram v3 | `t2i` |
 | `ideogram-character` | Ideogram Character | `i2i` |
 
@@ -71,6 +72,18 @@ Input type: `t2i`
 | `resolution` | `-r` | enum | `2048x2048` · `1440x2880` · `2880x1440` · `1664x2496` · `2496x1664` · `1792x2240` · `2240x1792` · `1440x2560` · `2560x1440` · `1600x2560` · `2560x1600` · `1728x2304` · `2304x1728` · `1296x3168` · `3168x1296` · `1152x2944` · `2944x1152` · `1248x3328` · `3328x1248` · `1280x3072` · `3072x1280` (default `2048x2048`) |
 | `renderingSpeed` | `--speed` | enum | `TURBO` (Turbo) · `DEFAULT` (Balanced) · `QUALITY` (Quality) (default `DEFAULT`) |
 | `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
+
+### `ideogram-p-image` — Ideogram P-Image
+
+[Try `ideogram-p-image` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-p-image)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `resolution` | `-r` | enum | `2048x2048` · `1440x2880` · `2880x1440` · `1664x2496` · `2496x1664` · `1792x2240` · `2240x1792` · `1440x2560` · `2560x1440` · `1600x2560` · `2560x1600` · `1728x2304` · `2304x1728` · `1296x3168` · `3168x1296` · `1152x2944` · `2944x1152` · `1248x3328` · `3328x1248` · `1280x3072` · `3072x1280` · `1024x3072` · `3072x1024` · `1024x1024` · `896x1120` · `1120x896` · `864x1152` · `1152x864` · `832x1248` · `1248x832` · `800x1280` · `1280x800` · `720x1280` · `1280x720` · `720x1440` · `1440x720` (default `1024x1024`) |
+| `renderingSpeed` | `--speed` | enum | `very-low` (Very Low) · `low` (Low) · `medium` (Balanced) · `high` (Quality) (default `medium`) |
 
 ### `ideogram-v3` — Ideogram v3
 

@@ -1,10 +1,10 @@
 ---
-description: "70+ video generation models on Picsart — text-to-video, image-to-video, and video editing — Sora, Veo, Kling, Seedance, Wan, Runway and more."
+description: "81 video generation models on Picsart — text-to-video, image-to-video, and video editing — Sora, Veo, Kling, Seedance, Wan, Runway and more."
 ---
 
 # Video generation
 
-**70+ video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
+**81 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
 
 ## Quick start
 
@@ -39,7 +39,7 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 | [Kling](/reference/providers/kling) | Kling V3, Video O1, Motion Control, Avatar, Effects | High-motion; motion control from a still |
 | [Wan](/reference/providers/wan) | Wan 2.7 (t2v/i2v/r2v/edit) | Versatile, crisp detail |
 | [Runway](/reference/providers/runway) | Gen 4.5, Aleph, Gen4 Ref, Avatar | Editing & reference workflows |
-| [MiniMax](/reference/providers/minimax) | Hailuo 2.3 (+ Pro/Fast) | Fast, expressive motion |
+| [MiniMax](/reference/providers/minimax) | Hailuo 03, Hailuo 2.3 (+ Pro/Fast) | Up to 2K; multimodal references |
 | [LTX](/reference/providers/ltx) | LTX 2.3 Pro/Fast, A2V, Extend, Retake | Audio-to-video & re-takes |
 | [Luma](/reference/providers/luma) | Ray 2, Flash 2, Reframe | Reframing & fast generation |
 | [Pika](/reference/providers/pika) | Pika 2.2, Scenes, Frames | Scene & keyframe control |

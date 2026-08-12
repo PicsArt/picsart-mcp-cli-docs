@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 150+ models from 30+ providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 174 models from 32 providers in your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -41,6 +41,7 @@ const sidebar = [
     items: [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
+      { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
     ],
   },
@@ -56,6 +57,7 @@ const sidebar = [
       { text: 'Codex', link: '/guide/integrations/codex' },
       { text: 'VS Code', link: '/guide/integrations/vscode' },
       { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
+      { text: 'Goose', link: '/guide/integrations/goose' },
       { text: 'Raycast', link: '/guide/integrations/raycast' },
       { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
       { text: 'Open WebUI', link: '/guide/integrations/open-webui' },
@@ -75,6 +77,7 @@ const sidebar = [
     text: 'Concepts',
     items: [
       { text: 'Generating media', link: '/guide/generating' },
+      { text: 'Local files → URLs', link: '/guide/local-files' },
       { text: 'Files & Drive', link: '/guide/files-and-drive' },
       { text: 'Pricing & Credits', link: '/guide/pricing' },
       { text: 'Batch & Automation', link: '/guide/batch' },
@@ -122,6 +125,7 @@ const sidebar = [
       { text: 'Reve', link: '/reference/providers/reve' },
       { text: 'Runway', link: '/reference/providers/runway' },
       { text: 'Seedance', link: '/reference/providers/seedance' },
+      { text: 'Seed Audio', link: '/reference/providers/seedaudio' },
       { text: 'Seedream', link: '/reference/providers/seedream' },
       { text: 'Topaz', link: '/reference/providers/topaz' },
       { text: 'VEED', link: '/reference/providers/veed' },
@@ -158,7 +162,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 150+ models, 30+ providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 174 models, 32 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
@@ -187,6 +191,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
+      { text: 'Media', link: '/guide/media-tools' },
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },

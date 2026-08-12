@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 150+ models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 174 models.
 
 ## Check your balance
 
@@ -30,12 +30,11 @@ gen-ai pricing --mode video --json             # all video model pricing
 { "name": "picsart_preflight",
   "arguments": {
     "model": "veo-3.1",
-    "prompt": "a drone shot over a snowy ridge",
-    "params": { "duration": 8, "resolution": "1080p" }
+    "params": { "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p" }
   } }
 ```
 
-`picsart_preflight` validates the payload and returns a credit estimate. It does not invoke any model or spend credits.
+`picsart_preflight` validates the params **and** quotes the cost in one free call, returning `{ model, valid, errors?, credits }`. `credits` is a number, or `null` if pricing isn't available for that model or the call is unauthenticated. For the balance rather than a per-call cost, use `picsart_credits`.
 
 ## What drives cost
 
@@ -69,7 +68,7 @@ A few models do not expose per-call pricing. For those, `picsart_preflight` retu
 
 **Are there per-provider contracts or subscriptions?**
 
-No. One Picsart account covers all 30+ providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
+No. One Picsart account covers all 32 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
 
 **What happens if I run out of credits mid-batch?**
 

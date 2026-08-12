@@ -23,35 +23,70 @@ When saving, the CLI uses an LLM-generated descriptive filename and (for video) 
 
 ```bash
 gen-ai upload ./photo.jpg                  # single file
-gen-ai upload ./assets/                    # a whole folder
-gen-ai upload ./photo.jpg --name "Hero"
+gen-ai upload ./assets/ -r                 # a whole folder, recursively
+gen-ai upload ./photo.jpg -f "Campaign"    # into a named Drive folder
 ```
+
+Over MCP, upload is an **action of the single `picsart_drive` tool** (see below). It takes either
+a chat attachment or a URL — **not a filesystem path**:
 
 ```json
-{ "name": "picsart_drive", "arguments": { "action": "upload", "filePath": "/path/to/photo.jpg", "name": "Hero" } }
+{ "name": "picsart_drive",
+  "arguments": { "action": "upload", "name": "Hero", "url": "https://example.com/photo.jpg" } }
 ```
 
-Uploading returns a Drive file you can then feed into a generation as an input image/video.
+Uploading returns `result.url`, a CDN-hosted URL you can feed straight into a generation as an
+input image/video.
 
-## Browse & organize
+::: warning Local files need a URL first
+No MCP tool accepts a filesystem path. See **[Local files → URLs](/guide/local-files)** for the
+three ways to get one — CLI upload, a chat attachment, or (for small images) an inline `data:`
+URI.
+:::
+
+## The `picsart_drive` tool
+
+There is exactly **one** Drive tool. Its behavior is selected by the required `action` parameter:
+
+| `action` | Required args | What it does |
+|---|---|---|
+| `list` | — | Browse a folder. `folderUid` omitted = root; `flat: true` lists every file across all folders. Paginated via `page`, `pageSize` (≤128), with optional `sort` and `type` filter |
+| `create_folder` | `name` | Create a folder. `folderUid` = parent (omit for root), optional `description` |
+| `upload` | `file` **or** `url` + `name` | Save a file. `file` is a chat attachment; `url` is an HTTPS URL or an inline `data:` URI (pushed to the CDN first). `folderUid` = destination, `type` = resource kind |
+| `move` | `itemUids` | Move items to `targetFolderUid` (omit = root) |
+| `delete` | `itemUids` | Soft-delete to trash unless `permanent: true` |
+| `update` | `itemUid`, `attributes` | Set custom key/value attributes on a file (e.g. `{ coverUrl }`) |
+
+Every action returns the current folder listing (folders, files, page math) so the Drive widget
+can render. All actions require an authenticated call — Drive content is per-user.
+
+```json
+{ "name": "picsart_drive", "arguments": { "action": "list" } }
+{ "name": "picsart_drive", "arguments": { "action": "list", "folderUid": "<uid>" } }
+{ "name": "picsart_drive", "arguments": { "action": "create_folder", "name": "Campaign Q3" } }
+{ "name": "picsart_drive", "arguments": { "action": "move", "itemUids": ["<uid>"], "targetFolderUid": "<uid>" } }
+```
+
+## Browse & organize from the CLI
 
 ```bash
 gen-ai list --folders          # list Drive folders
-gen-ai list                    # list files (JSON-ready)
+gen-ai list --json             # list files as JSON ({ name, type, url } each)
 gen-ai download <uid>          # download a Drive file
-```
-
-```json
-{ "name": "picsart_drive", "arguments": { "action": "list_folders" } }
-{ "name": "picsart_drive", "arguments": { "action": "list", "folderId": "<id>" } }
-{ "name": "picsart_drive", "arguments": { "action": "create_folder", "name": "Campaign Q3" } }
 ```
 
 > Drive commands browse your real root folders — they are not scoped to the AI Playground folder.
 
-## Save a remote URL to Drive
+## Copy a remote URL into Drive
 
-Use `picsart_drive` with `action: upload` and a URL as the source to copy a remote asset into Drive. This is useful when a model needs an input that lives behind a short-lived URL — saving it first gives you a stable Drive URL that doesn't expire.
+To pin an asset that lives behind a short-lived or non-public URL, upload it by URL — the same
+`upload` action, with the remote URL as `url`. The returned CDN URL is stable and fetchable by
+the generation and render services.
+
+```json
+{ "name": "picsart_drive",
+  "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
+```
 
 ## File formats
 
@@ -86,7 +121,3 @@ See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing
 **Can I delete files from Drive via the CLI?**
 
 The current CLI and MCP do not expose a delete command. Manage deletion from the [AI Playground web app](https://picsart.com/ai-playground/).
-
-**How do I save a remote URL to Drive?**
-
-Call `picsart_drive` with `action: upload` and the URL as the source. This copies the remote asset into your Drive and returns a stable URL you can pass as input to another model.

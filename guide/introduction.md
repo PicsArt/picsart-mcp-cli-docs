@@ -6,7 +6,7 @@ description: "What Picsart AI Playground is, how its access layers work, and whi
 
 ## Picsart AI Playground
 
-**Picsart AI Playground** is a platform that brings together 166+ generative AI models from 32 providers under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Sora, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
+**Picsart AI Playground** is a platform that brings together 174 generative AI models from 32 providers under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Sora, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
 
 The Playground is available on **web and mobile**. For most users and most tasks, this is the right place to work. You pick a model, write a prompt, see results, iterate. If you are generating at small scale, exploring what is possible, comparing model outputs, or doing prompt engineering, the Playground web or mobile app is the most efficient tool. No setup, no code, no configuration.
 
@@ -54,7 +54,7 @@ gen-ai batch run catalog.yaml
 ---
 
 ### SDK: Node.js and TypeScript applications
-If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 166 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
+If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 174 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -90,10 +90,10 @@ Most people move between these surfaces naturally. You experiment in Playground,
 
 ## What you can generate
 
-- **Image**: text-to-image, image editing, inpainting, style transfer, background removal and replacement, upscaling, vectorization. 62 image models.
-- **Video**: text-to-video, image-to-video, video-to-video editing, clip extension. 75 video models.
-- **Audio**: text-to-speech, music generation, sound effects, voice design, speech-to-speech. 22 audio models.
-- **Text analysis**: describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. 7 text models.
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **64 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **81 video models.**
+- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **22 audio models.**
+- **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **7 text models.**
 
 Browse the full catalog in the [Model Reference](/reference/), filter live in the [Playground](https://picsart.com/ai-playground/), or query from the terminal:
 

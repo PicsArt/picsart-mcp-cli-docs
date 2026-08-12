@@ -7,6 +7,39 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-08-07
+
+**Catalog refresh** — now **174 production models across 32 providers** (`@picsart/ai-sdk` 3.35.6).
+
+### New
+
+- **Seedance 2.5** — ByteDance's next-generation video model, with companion **Seedance 2.5 Video Edit** (edit an existing clip from a prompt) and **Seedance 2.5 Video Extend** (continue a clip past its original end). See [Seedance](/reference/providers/seedance).
+- **Seedream 4.7** — text-to-image up to 4K with multi-image reference input and batch counts up to 10. See [Seedream](/reference/providers/seedream).
+- **Flux 3 Video** — Black Forest Labs' first video model on Picsart: text-to-video and image-to-video up to 20 seconds at FHD, with native audio generation and a fast `--draft` mode. This makes Flux a multi-mode provider. See [Flux](/reference/providers/flux).
+- **HeyGen Video Avatar** — pick a HeyGen avatar and voice, supply a script, and get a lip-synced presenter video up to 4K. Unlike Talking Photo it needs no input image. See [HeyGen](/reference/providers/heygen).
+
+---
+
+## 2026-07-31
+
+**AI Playground · July 31 Release** — catalog refreshed to **168 production models across 32 providers** (`@picsart/ai-sdk` 3.30.0).
+
+### New
+
+- **Hailuo 03** — MiniMax text-to-video and image-to-video with start/end frames, multimodal references, 5–15 second clips, and output up to 2K. See [MiniMax](/reference/providers/minimax).
+- **Video Enhance** — ByteDance video enhancement can denoise, color-correct, super-resolve existing footage up to 8K, and convert frame rate. The SDK definition is gated until its worker rollout completes.
+- **Ideogram P-Image** — out of preview and generally available, with four speed/quality tiers and output up to 2K. See [Ideogram](/reference/providers/ideogram).
+- **HEIC support** — iPhone and Windows HEIC/HEIF photos now upload with automatic conversion.
+- **Catalog additions** — Seed Audio and Seed Audio Multilingual add named voices and voice cloning, while Gemini 3.6 Flash and Gemini 3.5 Flash Lite expand text/image analysis. See [Seed Audio](/reference/providers/seedaudio) and [Google](/reference/providers/google).
+
+### Improvements
+
+- **Empty boards** — redesigned with a card-stack hero and a responsive “Need a spark?” inspiration strip.
+- **Explore** — the Picsart Effects strip now serves the creator and business catalog: about 950 presets across 16 categories.
+- **Topaz catalog** — Topaz Video Upscale is available with Proteus, Artemis, Nyx, Gaia, and Starlight enhancement families; eight legacy image-enhancement IDs are consolidated as presets on `topaz-upscale-image`.
+
+---
+
 ## 2026-07-17
 
 **Catalog refresh — now 169 models across 31 providers** (`@picsart/ai-sdk` 3.17.0).

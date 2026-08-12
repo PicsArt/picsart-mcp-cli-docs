@@ -21,12 +21,16 @@ Know the following facts before evaluating any file:
   - `gen-ai login` — OAuth, interactive, for local/desktop use
   - `PICSART_API_KEY` — environment variable, for CI and server contexts
   - Hosted OAuth — for the cloud-hosted MCP (https://mcp.picsart.io/mcp), distinct from the CLI flow
-- Approximate number thresholds (use these, not exact counts):
-  - 150+ models
-  - 30+ providers
-  - 70+ video tools
-  - 70+ image tools
-  - 20+ audio tools
+- Exact catalog counts, regenerated from the SDK catalog and enforced by
+  `scripts/check-counts.mjs` (which fails `npm run build` on any drift). Do not
+  hand-type or approximate these — read them from
+  `.vitepress/theme/data/{models,providers}.json`:
+  - 174 models
+  - 32 providers
+  - 81 video models
+  - 64 image models
+  - 22 audio models
+  - 7 text models
 - Copy rules enforced across all documentation:
   - Never use em dashes (word — word or word—word constructions)
   - Never use marketing filler words: powerful, seamless, cutting-edge, robust, revolutionize, game-changing, next-generation, world-class, state-of-the-art, unlock (when used metaphorically)
@@ -38,8 +42,8 @@ Know the following facts before evaluating any file:
 Evaluate every file under review against each item below.
 
 - **A1-01**: Does every page have a `description:` frontmatter field?
-- **A1-02**: Are model/provider counts expressed as approximate values ("150+", "30+") rather than exact integers?
-- **A1-03**: Is the docs repo declared as the authoritative source of truth for documentation, not described as a mirror of another system?
+- **A1-02**: Are model/provider counts exact integers matching `.vitepress/theme/data/{models,providers}.json`, with every page quoting a count listed in `check-counts.mjs`'s `GLOBAL_FILES` so the drift guard actually covers it? (Approximate forms like "150+" are not allowed: they understate the catalog and, when a word is wedged in — "150+ AI models" — they slip past the guard's pattern.)
+- **A1-03**: Are content edits made in `docs-site/` inside the private `ai-toolkit` repo — the source of truth — rather than directly against this public mirror? (Changes landed only here are overwritten by the next sync.)
 - **A1-04**: Are edit links in the docs consistent with the contribution model (i.e., they point to the correct repo and branch where contributors should actually make edits)?
 - **A1-05**: Does the gen-ai-skills repo have all four community health files: LICENSE, CONTRIBUTING.md, CODE_OF_CONDUCT.md, and a support contact (e.g., oss@picsart.com referenced in CODE_OF_CONDUCT or CONTRIBUTING)?
 - **A1-06**: Are Skills install instructions current, with `npx skills add PicsArt/gen-ai-skills` as the primary install path and ZIP download as the fallback only?

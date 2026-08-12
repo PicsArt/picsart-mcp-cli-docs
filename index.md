@@ -1,10 +1,10 @@
 ---
-description: "Picsart AI Playground — generate images, video & audio with 166+ AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
+description: "Picsart AI Playground — generate images, video & audio with 174 AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
 layout: home
 
 hero:
   name: Picsart AI Playground
-  text: One platform. 166+ models. Every interface.
+  text: One platform. 174 models. Every interface.
   tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 32 providers.
   actions:
     - theme: brand
@@ -28,9 +28,9 @@ features:
     details: One terminal command for the full catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
     link: /guide/cli-quickstart
   - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 166 models. Auto-save to Drive. API key auth.
+    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 174 models. Auto-save to Drive. API key auth.
     link: /guide/sdk
-  - title: 166+ models, 32 providers
+  - title: 174 models, 32 providers
     details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
   - title: Error codes

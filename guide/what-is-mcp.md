@@ -21,7 +21,7 @@ From your perspective: you ask in plain English, the agent figures out which too
 
 ## What the Picsart MCP server provides
 
-The Picsart MCP server (`gen-ai-mcp`) exposes the full AI Playground model catalog — **150+ models** from **30+ providers** — as MCP tools. Once connected, your agent can:
+The Picsart MCP server (`gen-ai-mcp`) exposes the full AI Playground model catalog — **174 models** from **32 providers** — as MCP tools. Once connected, your agent can:
 
 - Generate images with models like Flux 2 Pro, Recraft V4, Ideogram 4, GPT Image, and Imagen 4.
 - Generate video with Sora 2, Veo 3.1, Kling V3, Seedance 2.0, Runway, Luma Ray 3, and others.

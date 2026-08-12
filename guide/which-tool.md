@@ -93,7 +93,7 @@ If you are writing code to power a product — a web app, a mobile app, a backen
 
 ### Node.js or TypeScript
 
-Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 166 models. Results can auto-save to Picsart Drive.
+Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 174 models. Results can auto-save to Picsart Drive.
 
 ```bash
 npm install @picsart/ai-sdk

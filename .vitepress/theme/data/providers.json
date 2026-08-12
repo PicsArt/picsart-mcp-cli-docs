@@ -42,15 +42,16 @@
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 5,
+    "count": 6,
     "modes": [
-      "image"
+      "image",
+      "video"
     ]
   },
   {
     "id": "google",
     "label": "Google",
-    "count": 16,
+    "count": 18,
     "modes": [
       "image",
       "video",
@@ -79,7 +80,7 @@
   {
     "id": "heygen",
     "label": "HeyGen",
-    "count": 1,
+    "count": 2,
     "modes": [
       "video"
     ]
@@ -95,7 +96,7 @@
   {
     "id": "ideogram",
     "label": "Ideogram",
-    "count": 3,
+    "count": 4,
     "modes": [
       "image"
     ]
@@ -130,7 +131,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 5,
+    "count": 6,
     "modes": [
       "video",
       "audio"
@@ -214,15 +215,23 @@
   {
     "id": "seedance",
     "label": "Seedance",
-    "count": 9,
+    "count": 12,
     "modes": [
       "video"
     ]
   },
   {
+    "id": "seedaudio",
+    "label": "Seed Audio",
+    "count": 2,
+    "modes": [
+      "audio"
+    ]
+  },
+  {
     "id": "seedream",
     "label": "Seedream",
-    "count": 3,
+    "count": 4,
     "modes": [
       "image"
     ]
@@ -230,9 +239,10 @@
   {
     "id": "topaz",
     "label": "Topaz",
-    "count": 9,
+    "count": 2,
     "modes": [
-      "image"
+      "image",
+      "video"
     ]
   },
   {

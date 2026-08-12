@@ -56,7 +56,7 @@ gen-ai login
 
 **Skills** are `.zip` bundles that teach an AI agent how to generate media with Picsart. Drop a skill into Claude Code, Cursor, Windsurf, or ChatGPT, and the agent knows which model to pick and which command to run — you ask in plain English.
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all 150+ models across image, video, and audio.
+The flagship skill, **`gen-ai-use`**, gives an agent access to all 174 models across image, video, and audio.
 
 Skills call the CLI internally, so [install the CLI](#gen-ai-cli) and run `gen-ai login` before adding a skill.
 
@@ -125,7 +125,7 @@ codex mcp add picsart-gen-ai -- gen-ai-mcp
 
 **Cursor / Windsurf / VS Code** — add `gen-ai-mcp` as the MCP server command in the agent's MCP config file. See the individual integration guides for the exact config block.
 
-> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/)
+> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_preflight`, …) and example calls, plus the [`picsart_media_*` family](/guide/media-tools).
 
 ---
 
