@@ -147,7 +147,7 @@ See [Files & Drive](/guide/files-and-drive) for details, and
 
 ::: warning No tool accepts a filesystem path
 Every image/video input is a **URL**. There is no `filePath` parameter anywhere in the MCP
-contract — see [Local files → URLs](/guide/local-files) for the three paths that actually work.
+contract — see [Local files → URLs](/guide/local-files) for the paths that actually work.
 :::
 
 ## Recommended generation flow

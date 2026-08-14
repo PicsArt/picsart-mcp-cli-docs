@@ -40,8 +40,8 @@ input image/video.
 
 ::: warning Local files need a URL first
 No MCP tool accepts a filesystem path. See **[Local files → URLs](/guide/local-files)** for the
-three ways to get one — CLI upload, a chat attachment, or (for small images) an inline `data:`
-URI.
+ways to get one — an upload widget (if your host renders MCP Apps), CLI upload, a chat attachment,
+or (for small images) an inline `data:` URI.
 :::
 
 ## The `picsart_drive` tool

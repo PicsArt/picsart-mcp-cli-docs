@@ -1,5 +1,5 @@
 ---
-description: "No Picsart MCP tool accepts a filesystem path — here are the three ways to turn a local file into a URL an agent can pass to picsart_generate or the media tools."
+description: "No Picsart MCP tool accepts a filesystem path — here's how to turn a local file into a URL an agent can pass to picsart_generate or the media tools, whether your host renders upload widgets, forwards chat attachments, or neither."
 ---
 
 # Local files → URLs
@@ -14,17 +14,52 @@ This is not an oversight. An MCP server runs somewhere else (Picsart's infrastru
 access to the filesystem of the machine the agent is running on. So before any local file can be
 used as a generation input, **something on your side has to give it a URL.**
 
-There are exactly three ways to do that today. Pick by what your agent host can do.
+The easiest fix, where it's available, is a browser-based **upload widget** — an MCP tool that
+opens a drag-and-drop panel right in your browser and hands the resulting URL back to the agent.
+Where that's not available, the CLI and a couple of other routes still get the job done.
 
 ## Comparison
 
 | Path | Needs | Good for | Cost |
 |---|---|---|---|
-| **A. Picsart CLI upload** | Shell access | Anything — the general answer | Free, no tokens |
-| **B. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
-| **C. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
+| **A. Upload widget** | A host that renders MCP Apps widgets (Claude web/desktop/Cowork, ChatGPT, Cursor, VS Code Copilot, Goose) | The easiest path when it's available — no CLI, no shell | Free, no tokens |
+| **B. Picsart CLI upload** | Shell access | Anything — the general fallback, and the best fit for scripting/CI | Free, no tokens |
+| **C. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
+| **D. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
 
-## A. Shell-capable agent → the Picsart CLI
+## A. Upload widget → drag, drop, done
+
+If your agent host renders **MCP Apps** widgets — this includes Claude web/desktop/Cowork,
+ChatGPT, Cursor, VS Code Copilot, and Goose — this is the easiest path, with nothing to install:
+
+- **`picsart_upload_widget`** — on the **Picsart MCP** connector (tools prefixed `picsart_*`).
+  Also has a "Save to Drive" option and a Drive-browsing tab.
+- **`mp_upload`** — on the **Picsart Media Tools** connector (tools prefixed `mp_*`). No Drive
+  integration; its second tab is "Use existing" (pickable chips from URLs already produced earlier
+  in the conversation), not a Drive browser.
+
+Just ask the agent to upload a file, or call the tool directly with no arguments to open a plain
+drag-and-drop panel:
+
+```json
+{ "name": "mp_upload", "arguments": {} }
+```
+
+Both tools also take optional `purpose` (a label for the dropzone), `accept` (restrict to `image`,
+`video`, or `audio`), `detected_files` (filenames the agent can see but can't reach itself — a
+best-effort hint, not a filter), and `known_urls` (URLs already available, offered as pickable
+chips so you don't have to re-upload).
+
+The file uploads straight from **your browser** to Picsart's CDN — no auth, no tokens spent, and
+no file bytes ever pass through the tool call. The one thing to know: the widget reports the
+uploaded URL back on your **next message**, not instantly in the same turn — most agent hosts
+don't deliver it any faster than that. If the agent says it can't see the file yet, send a follow-up
+message rather than assuming the upload failed.
+
+## B. Shell-capable agent → the Picsart CLI
+
+Still the right call when there's no widget-rendering host in the loop, or you're scripting/CI —
+nothing beats a one-liner there.
 
 If your agent can run shell commands (Claude Code, Cursor, Codex, a CI job), this is the
 canonical path: upload with the [CLI](/guide/cli-quickstart), then hand the resulting URL to any
@@ -36,16 +71,29 @@ gen-ai upload ./renders/ -r               # a folder, recursively
 gen-ai upload ./photo.jpg -f "Campaign"   # into a named Drive folder
 ```
 
-`gen-ai upload` reports progress but does **not** print the resulting URL. To get the URL, list
-Drive afterwards — `gen-ai list --json` emits `{ name, type, url }` per file:
+In its default (non-JSON) mode, `gen-ai upload` only reports progress (`✓ photo.jpg`) — it does
+not print the URL. Add `--json` to get it directly: stdout carries one JSON payload with a `files`
+array, one entry per upload, each with its CDN `url`:
+
+```bash
+gen-ai upload ./photo.jpg --json
+# {"ok":true,"files":[{"path":"/abs/path/photo.jpg","url":"https://cdn.../photo.jpg","driveUid":"...","error":null}]}
+```
+
+```bash
+gen-ai upload ./photo.jpg --json | jq -r '.files[0].url'
+```
+
+If you'd rather not use `--json`, the same URL is also recoverable afterwards by listing
+Drive — `gen-ai list --json` emits `{ name, type, url }` per file:
 
 ```bash
 gen-ai upload ./photo.jpg
 gen-ai list --json | jq -r '.[] | select(.name == "photo.jpg") | .url'
 ```
 
-For a single file where you want the URL back immediately, `gen-ai upload-to-drive` prints a
-one-line JSON result containing it:
+For a single file where you want the URL back immediately without `--json`, `gen-ai upload-to-drive`
+prints a one-line JSON result containing it:
 
 ```bash
 gen-ai upload-to-drive ./clip.mp4
@@ -67,7 +115,7 @@ Then pass the URL straight through:
 
 Requires `gen-ai login` once — see [Authentication](/guide/authentication).
 
-## B. Chat attachment → `picsart_drive` upload
+## C. Chat attachment → `picsart_drive` upload
 
 Hosts that expose user attachments to MCP tools (notably the **ChatGPT app**) can pass the
 attachment handle directly to `picsart_drive`. Nothing has to touch a filesystem:
@@ -85,7 +133,7 @@ This is the best experience where it's available — the user drags a file into 
 and the agent does the rest. It is **not** available in hosts that keep attachments out of tool
 arguments, which includes most desktop MCP clients today.
 
-## C. `data:` URI → `picsart_drive` upload
+## D. `data:` URI → `picsart_drive` upload
 
 `picsart_drive`'s `upload` action accepts an inline `data:` URI in its `url` parameter (the server
 pushes it to the Picsart CDN first and returns the resulting URL). So an agent that can read the
@@ -105,9 +153,8 @@ Base64 inflates the file by ~33%, and every character of it passes through the m
 window. A **1 MB file is roughly 350,000 tokens** — likely more than the context window allows,
 and billed as model input on the agent's side even when it fits.
 
-Use this only for **small images** (icons, logos, thumbnails — tens of KB), and only when
-neither path A nor path B is available. It is a stopgap, not a general solution. Never do this
-for video.
+Use this only for **small images** (icons, logos, thumbnails — tens of KB), and only when none of
+paths A–C are available. It is a stopgap, not a general solution. Never do this for video.
 :::
 
 ## What about remote URLs behind auth?
