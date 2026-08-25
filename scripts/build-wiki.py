@@ -87,6 +87,42 @@ for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
     src2out[f'reference/providers/{_pid}.md'] = prov_page(_pid) + '.md'
 
 
+
+# --- Concept guides and per-agent integration guides -------------------------
+# These landed in the repo via PR and were originally hand-placed on the wiki,
+# so the generator did not know about them: regenerating would delete 26 live
+# pages and leave 31 dangling /guide/... links. The wiki page names below match
+# the ones already published, so this stays a no-op rename-wise.
+EXTRA_GUIDES = {
+    'guide/what-is-mcp.md': 'What-Is-MCP',
+    'guide/which-tool.md': 'Which-Tool',
+    'guide/rest-api.md': 'REST-API',
+    'guide/sdk.md': 'SDK',
+    'guide/local-files.md': 'Local-Files',
+    'guide/media-tools.md': 'Media-Tools',
+    'guide/integrations/index.md': 'Integrations',
+}
+# Vendor slug -> wiki page suffix, where simple capitalisation would be wrong.
+INTEGRATION_NAMES = {
+    'anythingllm': 'AnythingLLM', 'chatgpt': 'ChatGPT', 'claude-code': 'Claude-Code',
+    'codex': 'Codex', 'copilot-studio': 'Copilot-Studio', 'cursor': 'Cursor',
+    'dify': 'Dify', 'gemini-cli': 'Gemini-CLI', 'goose': 'Goose', 'gumloop': 'Gumloop',
+    'hermes-agent': 'Hermes-Agent', 'librechat': 'LibreChat', 'lm-studio': 'LM-Studio',
+    'lobehub': 'LobeHub', 'n8n': 'n8n', 'nemoclaw': 'NemoClaw',
+    'open-webui': 'Open-WebUI', 'openclaw': 'OpenClaw', 'raycast': 'Raycast',
+    'vscode': 'VS-Code', 'windsurf': 'Windsurf',
+}
+for _slug, _name in INTEGRATION_NAMES.items():
+    EXTRA_GUIDES[f'guide/integrations/{_slug}.md'] = f'Integration-{_name}'
+
+for _src, _page in EXTRA_GUIDES.items():
+    route2page['/' + _src[:-3]] = _page
+    src2out[_src] = _page + '.md'
+# directory-style links, e.g. [..](/guide/integrations/)
+route2page['/guide/integrations'] = 'Integrations'
+route2page['/guide/integrations/'] = 'Integrations'
+
+
 def strip_frontmatter(text):
     if text.startswith('---'):
         end = text.find('\n---', 3)
@@ -174,6 +210,15 @@ home = f'''# Picsart CLI & MCP
 
 - **[Generating media](Generating-Media)** · **[Files & Drive](Files-and-Drive)** · **[Pricing & Credits](Pricing)** · **[Batch & Automation](Batch)**
 
+## Connect your agent
+
+- **[What is MCP?](What-Is-MCP)** · **[Which tool should I use?](Which-Tool)** · **[All integrations](Integrations)**
+- Popular: [Claude Code](Integration-Claude-Code) · [Cursor](Integration-Cursor) · [VS Code](Integration-VS-Code) · [ChatGPT](Integration-ChatGPT) · [Windsurf](Integration-Windsurf) · [n8n](Integration-n8n)
+
+## Build on it
+
+- **[REST API](REST-API)** · **[SDK](SDK)** · **[Local files](Local-Files)** · **[Media tools](Media-Tools)**
+
 ## Model Reference
 
 - **[Model Reference](Model-Reference)** — overview
@@ -197,6 +242,10 @@ sb = ['### Picsart CLI & MCP', '',
       '- [CLI Quickstart](CLI-Quickstart)', '- [MCP Quickstart](MCP-Quickstart)', '- [Skills](Skills)', '',
       '**Concepts**', '',
       '- [Generating media](Generating-Media)', '- [Files & Drive](Files-and-Drive)', '- [Pricing](Pricing)', '- [Batch](Batch)', '',
+      '**Connect your agent**', '',
+      '- [What is MCP?](What-Is-MCP)', '- [Which tool?](Which-Tool)', '- [All integrations](Integrations)', '',
+      '**Build on it**', '',
+      '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '- [Media tools](Media-Tools)', '',
       '**Model Reference**', '',
       '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',
       '**Providers**', '',
