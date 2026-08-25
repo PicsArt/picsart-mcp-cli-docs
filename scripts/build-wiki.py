@@ -28,6 +28,14 @@ providers = json.load(open(f'{DATA}/providers.json'))
 models = json.load(open(f'{DATA}/models.json'))
 
 
+# Providers retired from the catalog whose reference page is kept as a tombstone
+# so existing inbound links keep resolving. They are absent from providers.json
+# by definition, so the wiki has to be told about them explicitly — otherwise the
+# page is silently dropped here while it still exists on the Pages site, and any
+# link to it (e.g. from the changelog) dangles.
+RETIRED_PROVIDERS = ['pika']
+
+
 def prov_page(pid):
     return 'Provider-' + pid.capitalize()
 
@@ -54,8 +62,8 @@ route2page = {
     '/reference/providers': 'Providers',
     '/reference/providers/': 'Providers',
 }
-for _p in providers:
-    route2page[f"/reference/providers/{_p['id']}"] = prov_page(_p['id'])
+for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+    route2page[f'/reference/providers/{_pid}'] = prov_page(_pid)
 
 src2out = {
     'changelog.md': 'Changelog.md',
@@ -75,8 +83,8 @@ src2out = {
     'reference/audio.md': 'Audio-Generation.md',
     'reference/text.md': 'Text-And-Analysis.md',
 }
-for _p in providers:
-    src2out[f"reference/providers/{_p['id']}.md"] = prov_page(_p['id']) + '.md'
+for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+    src2out[f'reference/providers/{_pid}.md'] = prov_page(_pid) + '.md'
 
 
 def strip_frontmatter(text):

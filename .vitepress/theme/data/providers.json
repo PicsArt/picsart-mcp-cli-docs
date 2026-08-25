@@ -51,7 +51,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 18,
+    "count": 16,
     "modes": [
       "image",
       "video",
@@ -62,7 +62,7 @@
   {
     "id": "grok",
     "label": "Grok (xAI)",
-    "count": 7,
+    "count": 8,
     "modes": [
       "image",
       "video",
@@ -104,7 +104,7 @@
   {
     "id": "kling",
     "label": "Kling",
-    "count": 14,
+    "count": 13,
     "modes": [
       "image",
       "video",
@@ -131,7 +131,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 6,
+    "count": 7,
     "modes": [
       "video",
       "audio"
@@ -158,16 +158,9 @@
   {
     "id": "picsart",
     "label": "Picsart",
-    "count": 8,
+    "count": 10,
     "modes": [
-      "image"
-    ]
-  },
-  {
-    "id": "pika",
-    "label": "Pika",
-    "count": 3,
-    "modes": [
+      "image",
       "video"
     ]
   },
@@ -182,7 +175,7 @@
   {
     "id": "qwen",
     "label": "Qwen (Alibaba)",
-    "count": 3,
+    "count": 2,
     "modes": [
       "image"
     ]
@@ -190,7 +183,7 @@
   {
     "id": "recraft",
     "label": "Recraft",
-    "count": 20,
+    "count": 24,
     "modes": [
       "image"
     ]
@@ -264,7 +257,7 @@
   {
     "id": "wan",
     "label": "Wan (Alibaba)",
-    "count": 4,
+    "count": 5,
     "modes": [
       "video"
     ]

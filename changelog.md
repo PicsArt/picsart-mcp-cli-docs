@@ -7,6 +7,34 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-08-25
+
+**Catalog refresh — now 176 models across 31 providers** (`@picsart/ai-sdk` 5.16.0). Eleven models added, nine retired.
+
+### New
+
+- **Wan 3.0** — an all-in-one video model taking text, image/video/audio references, and start/end frames, with adaptive ratio, intelligent duration, and audio. See [Wan](/reference/providers/wan).
+- **Picsart Effects** *(image + video)* — `picsart-flow` and `picsart-flow-video` apply curated Picsart presets as multi-step Magic Flow pipelines in one call. Preset ids come from a runtime catalog; list them with `gen-ai models info picsart-flow --json`. See [Picsart](/reference/providers/picsart).
+- **Recraft V4 Styles** — four style-reference models (**Styles**, **Styles Vector**, **Styles Pro**, **Styles Pro Vector**) with 10K-character prompts. See [Recraft](/reference/providers/recraft).
+- **Grok Imagine 2.0** — sharper detail with a low/medium quality tier. See [Grok](/reference/providers/grok).
+- **MiniMax Music v3** — text-to-music with vocals or instrumentals from a style prompt and optional lyrics, with configurable audio encoding. See [MiniMax](/reference/providers/minimax).
+- **Gemini 3.7 Flash** — low-latency multimodal text generation for [`gen-ai describe`](/reference/text). See [Google](/reference/providers/google).
+- **ByteDance Video Enhance** — now live, replacing the Video Upscaler: denoise, colour-correct and super-resolve footage up to **8K**, with frame-rate conversion. See [ByteDance](/reference/providers/bytedance).
+
+### Deprecated / retired
+
+- **Pika is retired.** `pika-2.2`, `pika-2.2-scenes` and `pika-2.2-frames` are gone and Pika is no longer a provider. The [provider page](/reference/providers/pika) is kept as a pointer to replacements — Seedance 2.5 covers multi-reference composition and start/end-frame morphs.
+- **Google Imagen 4.0 family** — `imagen-4.0`, `imagen-4.0-ultra` and `imagen-4.0-fast` removed; use the Nano Banana (Gemini Image) models instead.
+- **Also removed** — `bytedance-video-upscaler` (superseded by Video Enhance), `kling-v2-new-image`, and `qwen-image-edit-plus` (Qwen 2 Pro now covers reference-guided editing from up to 3 images).
+
+### Docs
+
+- Provider pages now render **`catalog`-kind parameters** (voice, avatar, and effect-preset pickers) instead of leaving the Values cell blank. These lists are fetched at runtime, so the docs point at `gen-ai models info <id> --json` rather than snapshotting a list that would rot.
+- The count drift guard now also covers `reference/providers/index.md` and `README.md`, and recognises the "N AI model providers" phrasing.
+- The wiki generator keeps pages for retired providers, so a tombstoned page like Pika exists on both the Pages site and the Wiki instead of silently vanishing from one.
+
+---
+
 ## 2026-08-07
 
 **Catalog refresh** — now **174 production models across 32 providers** (`@picsart/ai-sdk` 3.35.6).

@@ -56,7 +56,7 @@ gen-ai login
 
 **Skills** are `.zip` bundles that teach an AI agent how to generate media with Picsart. Drop a skill into Claude Code, Cursor, Windsurf, or ChatGPT, and the agent knows which model to pick and which command to run — you ask in plain English.
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all 174 models across image, video, and audio.
+The flagship skill, **`gen-ai-use`**, gives an agent access to all 176 models across image, video, and audio.
 
 Skills call the CLI internally, so [install the CLI](#gen-ai-cli) and run `gen-ai login` before adding a skill.
 

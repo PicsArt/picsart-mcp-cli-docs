@@ -1,10 +1,10 @@
 ---
-description: "Grok (xAI) AI models on Picsart — 7 audio/image/video model(s) including Grok Imagine 1.5, Grok TTS, Grok Imagine. CLI + MCP examples, parameters, and official docs."
+description: "Grok (xAI) AI models on Picsart — 8 audio/image/video model(s) including Grok Imagine 2.0, Grok Imagine 1.5, Grok TTS. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Grok
 
-**Modes:** image · video · audio · **Models:** 7
+**Modes:** image · video · audio · **Models:** 8
 
 **Vendor:** [xAI](https://x.ai) · **Official API docs:** [docs.x.ai](https://docs.x.ai/docs)
 
@@ -20,6 +20,7 @@ Grok Imagine (by xAI) is a multi-mode family on a single API: a fast image-to-vi
 | `grok-extend-video` | Grok Extend Video | `v2v` |
 | `grok-imagine-image` | Grok Imagine | `t2i` |
 | `grok-imagine-image-quality` | Grok Imagine Quality | `t2i` |
+| `grok-imagine-image-2.0` | Grok Imagine 2.0 | `t2i` |
 | `grok-tts` | Grok TTS | `tts` |
 
 ## CLI
@@ -160,6 +161,21 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `2:1` · `1:2` · `19.5:9` · `9:19.5` · `20:9` · `9:20` (default `1:1`) |
 | `resolution` | `-r` | enum | `1k` · `2k` (default `2k`) |
+| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
+### `grok-imagine-image-2.0` — Grok Imagine 2.0
+
+[Try `grok-imagine-image-2.0` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-image-2.0)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `2:1` · `1:2` · `19.5:9` · `9:19.5` · `20:9` · `9:20` (default `1:1`) |
+| `resolution` | `-r` | enum | `1k` · `2k` (default `1k`) |
+| `quality` | `--quality` | enum | `low` · `medium` (default `medium`) |
 | `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 1) |
 

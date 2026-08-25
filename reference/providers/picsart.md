@@ -1,10 +1,10 @@
 ---
-description: "Picsart AI models on Picsart — 8 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
+description: "Picsart AI models on Picsart — 10 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Picsart
 
-**Mode:** image · **Models:** 8
+**Modes:** image · video · **Models:** 10
 
 **Official API docs:** [docs.picsart.io](https://docs.picsart.io)
 
@@ -22,6 +22,8 @@ Picsart's own image models run on the Picsart Compute Platform (PCP). They cover
 | `picsart-qwen-image-edit-angle` | Picsart Angle Change | `i2i` |
 | `picsart-flux-2-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
+| `picsart-flow` | Picsart Effects | `i2i` |
+| `picsart-flow-video` | Picsart Effects Video | `i2v` |
 
 ## CLI
 
@@ -165,6 +167,28 @@ Input type: `t2i`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+
+### `picsart-flow` — Picsart Effects
+
+[Try `picsart-flow` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flow)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `templateId` | `--template-id` | catalog | **required** — runtime catalog; run `gen-ai models info picsart-flow --json` for current values |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+
+### `picsart-flow-video` — Picsart Effects Video
+
+[Try `picsart-flow-video` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flow-video)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `templateId` | `--template-id` | catalog | **required** — runtime catalog; run `gen-ai models info picsart-flow-video --json` for current values |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
 
 ## Pricing
 

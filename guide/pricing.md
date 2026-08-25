@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 174 models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 176 models.
 
 ## Check your balance
 
@@ -68,7 +68,7 @@ A few models do not expose per-call pricing. For those, `picsart_preflight` retu
 
 **Are there per-provider contracts or subscriptions?**
 
-No. One Picsart account covers all 32 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
+No. One Picsart account covers all 31 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
 
 **What happens if I run out of credits mid-batch?**
 

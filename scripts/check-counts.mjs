@@ -51,6 +51,8 @@ const GLOBAL_FILES = [
   'guide/rest-api.md',
   'reference/index.md',
   'reference/catalog.md',
+  'reference/providers/index.md',
+  'README.md',
   'reference/image.md',
   'reference/video.md',
   'reference/audio.md',
@@ -72,7 +74,7 @@ const GLOBAL_PATTERNS = [
   { label: 'text models', re: /(\d+)\s+(?:AI\s+)?text\s+models/gi, expected: () => modeCount.text },
   { label: 'total models', re: /(\d+)\+?\s+models\b/g, expected: () => total },
   { label: 'N-model catalog', re: /(\d+)-model\b/g, expected: () => total },
-  { label: 'provider count', re: /(\d+)\s+providers\b/gi, expected: () => providerCount },
+  { label: 'provider count', re: /(\d+)\s+(?:AI\s+model\s+)?providers\b/gi, expected: () => providerCount },
 ]
 
 for (const file of GLOBAL_FILES) {

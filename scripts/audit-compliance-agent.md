@@ -25,12 +25,12 @@ Know the following facts before evaluating any file:
   `scripts/check-counts.mjs` (which fails `npm run build` on any drift). Do not
   hand-type or approximate these — read them from
   `.vitepress/theme/data/{models,providers}.json`:
-  - 174 models
-  - 32 providers
-  - 81 video models
-  - 64 image models
-  - 22 audio models
-  - 7 text models
+  - 176 models
+  - 31 providers
+  - 80 video models
+  - 65 image models
+  - 23 audio models
+  - 8 text models
 - Copy rules enforced across all documentation:
   - Never use em dashes (word — word or word—word constructions)
   - Never use marketing filler words: powerful, seamless, cutting-edge, robust, revolutionize, game-changing, next-generation, world-class, state-of-the-art, unlock (when used metaphorically)

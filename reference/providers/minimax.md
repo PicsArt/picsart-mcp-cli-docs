@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 6 audio/video model(s) including Hailuo 03, Hailuo 2.3, and MiniMax Music v2. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 7 audio/video model(s) including Hailuo 03, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · **Models:** 6
+**Modes:** video · audio · **Models:** 7
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -20,6 +20,7 @@ MiniMax provides **Hailuo 03** for text-to-video and image-to-video at up to 2K,
 | `hailuo-2.3-fast-pro` | Hailuo 2.3 Fast Pro | `i2v` |
 | `hailuo-03` | Hailuo 03 | `t2v` |
 | `minimax-music-v2` | MiniMax Music v2 | `music` |
+| `minimax-music-v3` | MiniMax Music v3 | `music` |
 
 ## CLI
 
@@ -146,6 +147,22 @@ Input type: `music`
 | `outputFormat` | `--format` | enum | `url` · `hex` (default `url`) |
 
 > **Notes:** Pro variants omit `duration` (fixed 6s at 1080p); 10s is available at 768p only. On the Fast image-to-video models `imageUrls` is required.
+
+### `minimax-music-v3` — MiniMax Music v3
+
+[Try `minimax-music-v3` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-music-v3)
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤2000 chars) |
+| `lyricsPrompt` | `--lyrics-prompt` | text | free text (≤2000 chars) |
+| `lyricsOptimizer` | `--lyrics-optimizer` | boolean | `true` · `false` (default `false`) |
+| `isInstrumental` | `--is-instrumental` | boolean | `true` · `false` (default `false`) |
+| `sampleRate` | `--sample-rate` | enum | `16000` · `24000` · `32000` · `44100` (default `44100`) |
+| `bitrate` | `--bitrate` | enum | `32000` · `64000` · `128000` · `256000` (default `256000`) |
+| `format` | `--format` | enum | `mp3` · `wav` · `pcm` (default `mp3`) |
 
 ## Pricing
 

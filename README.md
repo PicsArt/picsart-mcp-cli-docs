@@ -1,6 +1,6 @@
 # Picsart CLI & MCP — Docs
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 174 models from 32 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 176 models from 31 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
 
 - **Source of truth:** this folder (`docs-site/`) inside the `ai-toolkit` repo.
 - **Public repo:** https://github.com/PicsArt/picsart-mcp-cli-docs
@@ -46,7 +46,7 @@ automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap
 the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
 custom-domain move) and re-run.
 
-The hand-written counts in prose (`174 models`, `64 image models`, `32 providers`, each
+The hand-written counts in prose (`176 models`, `65 image models`, `31 providers`, each
 provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
 truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
 Run it standalone with `npm run check:counts`.
@@ -98,7 +98,7 @@ so the interactive catalog/provider grids become **static tables**.
 # 1. clone the wiki (separate git repo)
 git clone https://github.com/PicsArt/picsart-mcp-cli-docs.wiki.git .wiki
 
-# 2. regenerate all wiki pages from these docs (48 pages: guide + reference + 32 providers + Home/_Sidebar/_Footer)
+# 2. regenerate all wiki pages from these docs (48 pages: guide + reference + 31 providers + Home/_Sidebar/_Footer)
 npm run wiki:build -- .wiki        # = python3 scripts/build-wiki.py .wiki
 
 # 3. publish

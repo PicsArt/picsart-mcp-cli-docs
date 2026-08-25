@@ -1,5 +1,5 @@
 ---
-description: "OpenAI AI models on Picsart — 8 image/video/audio model(s) including GPT Image 1.5, GPT Image 2, Sora 2. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI AI models on Picsart — 6 image/video/audio model(s) including GPT Image 1.5, GPT Image 2, Sora 2. CLI + MCP examples, parameters, and official docs."
 ---
 
 # OpenAI

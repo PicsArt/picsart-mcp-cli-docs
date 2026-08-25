@@ -1,10 +1,10 @@
 ---
-description: "7 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
+description: "8 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
 ---
 
 # Text & analysis
 
-**7 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
+**8 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
 
 ## Quick start
 
@@ -38,7 +38,7 @@ Only Gemini 3 Pro accepts video, so `gen-ai describe --video …` auto-selects i
 |---|---|---|
 | [Anthropic](/reference/providers/anthropic) | Claude Opus 4.8, Sonnet 4.6, Haiku 4.5 | Opus for hard reasoning; Haiku for high-volume |
 | [OpenAI](/reference/providers/openai) | GPT-5.5 | Strong general image understanding |
-| [Google](/reference/providers/google) | Gemini 3 Pro, Gemini 3.6 Flash, Gemini 3.5 Flash Lite | Pro reads video; Flash tiers handle image analysis |
+| [Google](/reference/providers/google) | Gemini 3 Pro, Gemini 3.7 Flash, Gemini 3.6 Flash, Gemini 3.5 Flash Lite | Pro reads video; Flash tiers handle image analysis |
 
 ## Common parameters
 

@@ -35,8 +35,8 @@
     "inputType": "i2v"
   },
   {
-    "id": "bytedance-video-upscaler",
-    "name": "ByteDance Upscaler",
+    "id": "bytedance-video-enhance",
+    "name": "ByteDance Video Enhance",
     "provider": "bytedance",
     "mode": "video",
     "inputType": "v2v"
@@ -231,32 +231,18 @@
     "inputType": "i2t"
   },
   {
+    "id": "gemini-3.7-flash",
+    "name": "Gemini 3.7 Flash",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "gemini-omni-flash-preview",
     "name": "Gemini Omni",
     "provider": "google",
     "mode": "video",
     "inputType": "t2v"
-  },
-  {
-    "id": "imagen-4.0",
-    "name": "Imagen 4.0",
-    "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "imagen-4.0-fast",
-    "name": "Imagen 4.0 Fast",
-    "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "imagen-4.0-ultra",
-    "name": "Imagen 4.0 Ultra",
-    "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
   },
   {
     "id": "lyria-3-clip",
@@ -310,6 +296,13 @@
   {
     "id": "grok-imagine-image",
     "name": "Grok Imagine",
+    "provider": "grok",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "grok-imagine-image-2.0",
+    "name": "Grok Imagine 2.0",
     "provider": "grok",
     "mode": "image",
     "inputType": "t2i"
@@ -474,13 +467,6 @@
     "provider": "kling",
     "mode": "video",
     "inputType": "t2v"
-  },
-  {
-    "id": "kling-v2-new-image",
-    "name": "Kling V2 New Image",
-    "provider": "kling",
-    "mode": "image",
-    "inputType": "t2i"
   },
   {
     "id": "kling-v2a",
@@ -665,6 +651,13 @@
     "inputType": "music"
   },
   {
+    "id": "minimax-music-v3",
+    "name": "MiniMax Music v3",
+    "provider": "minimax",
+    "mode": "audio",
+    "inputType": "music"
+  },
+  {
     "id": "gpt-5.5",
     "name": "GPT-5.5",
     "provider": "openai",
@@ -728,6 +721,20 @@
     "inputType": "i2i"
   },
   {
+    "id": "picsart-flow",
+    "name": "Picsart Effects",
+    "provider": "picsart",
+    "mode": "image",
+    "inputType": "i2i"
+  },
+  {
+    "id": "picsart-flow-video",
+    "name": "Picsart Effects Video",
+    "provider": "picsart",
+    "mode": "video",
+    "inputType": "i2v"
+  },
+  {
     "id": "picsart-flux-2-klein",
     "name": "Flux 2 Klein 4B",
     "provider": "picsart",
@@ -768,27 +775,6 @@
     "provider": "picsart",
     "mode": "image",
     "inputType": "i2i"
-  },
-  {
-    "id": "pika-2.2",
-    "name": "Pika",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "pika-2.2-frames",
-    "name": "Pika Frames",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "i2v"
-  },
-  {
-    "id": "pika-2.2-scenes",
-    "name": "Pika Scenes",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "i2v"
   },
   {
     "id": "pixverse-c1",
@@ -845,13 +831,6 @@
     "provider": "qwen",
     "mode": "image",
     "inputType": "t2i"
-  },
-  {
-    "id": "qwen-image-edit-plus",
-    "name": "Qwen Edit Plus",
-    "provider": "qwen",
-    "mode": "image",
-    "inputType": "i2i"
   },
   {
     "id": "recraft-creative-upscale",
@@ -982,6 +961,34 @@
   {
     "id": "recraftv4_pro_vector",
     "name": "Recraft V4 Pro Vector",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles",
+    "name": "Recraft V4 Styles",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles_pro",
+    "name": "Recraft V4 Styles Pro",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles_pro_vector",
+    "name": "Recraft V4 Styles Pro Vector",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles_vector",
+    "name": "Recraft V4 Styles Vector",
     "provider": "recraft",
     "mode": "image",
     "inputType": "t2i"
@@ -1216,5 +1223,12 @@
     "provider": "wan",
     "mode": "video",
     "inputType": "v2v"
+  },
+  {
+    "id": "wan-3.0-video",
+    "name": "Wan 3.0",
+    "provider": "wan",
+    "mode": "video",
+    "inputType": "t2v"
   }
 ]

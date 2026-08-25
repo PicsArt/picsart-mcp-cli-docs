@@ -62,8 +62,27 @@ const code = (v) => '`' + v + '`'
 const flagFor = (key) => flagMap[key] ?? '`--' + key.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()) + '`'
 const typeCell = (p) => (p.kind === 'object' ? 'object[]' : p.kind)
 
-function valueCell(p) {
+// `catalog` params are unlike every other kind: their allowed values are not in
+// the SDK catalog at all — they are fetched at runtime from a workflow endpoint
+// (p.source.workflow, e.g. "picsart-flow/v1/catalog/templates"). Any list we
+// inline here is a snapshot that rots silently, which is why the hand-written
+// pages disagree with each other: elevenlabs/google/runway/grok enumerate every
+// id, async shows 5 examples + a discovery command, seedaudio gives a bare
+// count, openai says "dynamic value (no fixed list)".
+//
+// House style: point at the discovery command rather than snapshotting a list,
+// and show the default when there is a real one. Never rots.
+function catalogCell(p, model) {
+  const lead = p.required ? '**required** — runtime catalog' : 'runtime catalog'
+  const discover = `run ${code(`gen-ai models info ${model.id} --json`)} for current values`
+  const fallback = p.default ? ` (default ${code(p.default)})` : ''
+  return `${lead}; ${discover}${fallback}`
+}
+
+function valueCell(p, model) {
   switch (p.kind) {
+    case 'catalog':
+      return catalogCell(p, model)
     case 'text':
       return (p.required ? '**required**' : 'free text') + (p.maxLength ? ` (≤${p.maxLength} chars)` : '')
     case 'enum': {
@@ -89,7 +108,7 @@ function valueCell(p) {
 
 function genParamsBlock(model) {
   const rows = (model.params ?? [])
-    .map((p) => `| ${code(p.key)} | ${flagFor(p.key)} | ${typeCell(p)} | ${valueCell(p)} |`)
+    .map((p) => `| ${code(p.key)} | ${flagFor(p.key)} | ${typeCell(p)} | ${valueCell(p, model)} |`)
     .join('\n')
   return (
     `### ${code(model.id)} — ${model.name}\n\n` +
