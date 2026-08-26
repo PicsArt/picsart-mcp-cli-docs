@@ -8,6 +8,8 @@ The Picsart MCP server exposes the full model catalog as [Model Context Protocol
 
 New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
+[![smithery badge](https://smithery.ai/badge/picsart/picsart-gen-ai)](https://smithery.ai/servers/picsart/picsart-gen-ai)
+
 ## Prerequisites
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).

@@ -88,15 +88,31 @@ the generation and render services.
   "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
 ```
 
+## File formats
+
+**Image**
+
+Input formats: JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum file size: 1 GB.
+
+Output formats: JPEG, PNG, WEBP. HEIC is accepted as input but is not currently available as an output format.
+
+**Video**
+
+Maximum file size: 1 GB. Input containers include MP4, MOV, and WebM. Output is delivered as a URL.
+
+**Audio**
+
+Audio generation returns a URL. Accepted input formats for audio-to-audio operations vary by model. Check the model's parameter schema with `picsart_model_params` or `gen-ai models info <model-id>`.
+
 ## FAQ
 
 **What file types can I upload?**
 
-The upload returns a Drive URL you can immediately use as an input to a generation.
+For images: JPEG, PNG, WEBP, TIFF, BMP, and HEIC are accepted. For video: MP4, MOV, and WebM. The maximum file size for uploads is 1 GB. See the File formats section above for output format details.
 
 **Are generated files private?**
 
-Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are time-limited signed URLs — they do not expose your files publicly. Download or save to Drive promptly if long-term access is needed.
+Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are signed URLs that expire after 24 hours. They do not expose your files publicly. Download or save to Drive within that 24-hour window if long-term access is needed.
 
 **Does saving to Drive cost extra credits?**
 
