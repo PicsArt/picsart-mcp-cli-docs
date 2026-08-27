@@ -214,6 +214,8 @@ Input type: `t2v`
 
 ### `gemini-omni-1.1-flash-preview` — Gemini Omni 1.2 Flash
 
+> The id says `1.1` and the name says `1.2`. That inconsistency is upstream's; match on `gemini-omni-1.1-flash-preview`. Despite the `-preview` suffix this is a production model.
+
 [Try `gemini-omni-1.1-flash-preview` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.1-flash-preview)
 
 Input type: `t2v`

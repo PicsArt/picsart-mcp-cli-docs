@@ -9,20 +9,23 @@ Notable changes to the Picsart model catalog and these docs. Newest first. The c
 
 ## 2026-08-27
 
-**Catalog refresh — now 178 models across 31 providers** (`@picsart/ai-sdk` 5.19.0). Two video models added, none retired.
+**Catalog refresh — now 178 models across 31 providers** (`@picsart/ai-sdk` 5.19.0). These docs were last generated from 5.16.0, so this refresh spans 5.17–5.19: two video models added, none retired.
 
 ### New
 
-- **Wan 3.0 Prime** *(video, `t2v`)* — the same all-in-one model as Wan 3.0, up to **7x faster**. Takes image, video and audio references plus start/end frames; 5/10/15/30s at up to 1080P, adaptive aspect ratio, native audio, and an optional `--enable-thinking` pass. See [Wan](/reference/providers/wan).
-- **Gemini Omni 1.2 Flash** *(video, `t2v`)* — Gemini Omni with frame interpolation, video extension and reference-guided generation, at up to **4K**. Takes a source video (`--video`, up to 30s) to extend, up to 5 reference images and 3 reference videos, and start/end frames; 3–10s. See [Google](/reference/providers/google).
+- **Wan 3.0 Prime** *(video, `t2v` — added in SDK 5.18.0)* — the same all-in-one model as Wan 3.0, up to **7x faster**. Takes image, video and audio references plus start/end frames; 5/10/15/30s at up to 1080P, adaptive aspect ratio, native audio, and an optional `--enable-thinking` pass. See [Wan](/reference/providers/wan).
+- **Gemini Omni 1.2 Flash** *(video, `t2v` — added in SDK 5.19.0)* — the more capable of the two Gemini Omni entries. Over the original it adds a `resolution` param at all (`360p` · `720p` · `1080p` · `4k`, default `720p`), start/end frame interpolation, up to 5 reference images and 3 reference videos, clip extension from a source video under 30s, and every integer duration 3–10s rather than a fixed set. See [Google](/reference/providers/google).
+
+> [!NOTE]
+> **Gemini Omni 1.2 Flash's id is `gemini-omni-1.1-flash-preview`** — the id says `1.1`, the display name says `1.2`. That mismatch comes from the upstream catalog, so anything matching on the id must use the `1.1` string. `-preview` in the id is likewise historical; the model is a production release.
 
 ### Changed
 
-- **Grok Imagine 1.5** is now classified `t2v` (was `i2v`) — its image input is optional, so it generates from a prompt alone. The CLI/MCP call is unchanged; only the input-type label moved. See [Grok](/reference/providers/grok).
+- **Grok Imagine 1.5** is now classified `t2v` (was `i2v`), as of SDK 5.18.0 — its image input is optional, so it generates from a prompt alone. The CLI and MCP call is unchanged; only the input-type label moved. See [Grok](/reference/providers/grok).
 
 ### Docs
 
-- The provider-page generator now updates the frontmatter model count on **multi-mode** provider pages. It matched only single-word mode lists, so slash-joined descriptions (`"17 image/video/audio/text model(s)"`) silently kept a stale count — Google had been carrying one across refreshes.
+- The provider-page generator now updates the frontmatter model count on **multi-mode** provider pages. Its regex matched only single-word mode lists, so slash-joined descriptions (`"17 image/video/audio/text model(s)"`) silently kept a stale count — Google had been carrying one across refreshes.
 - The same generator no longer appends a blank line at EOF on every run for pages whose `## Parameters` is the last section, so repeat refreshes are now byte-idempotent.
 
 ---
