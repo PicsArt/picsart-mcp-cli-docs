@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 16 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 17 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 16
+**Modes:** image · video · audio · text · **Models:** 17
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -18,6 +18,7 @@ Google contributes across all four modes: the **Veo** video family, the **Nano B
 | `veo-3.1-fast` | Veo 3.1 Fast | video | `t2v` |
 | `veo-3.1-lite` | Veo 3.1 Lite | video | `t2v` |
 | `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
+| `gemini-omni-1.1-flash-preview` | Gemini Omni 1.2 Flash | video | `t2v` |
 | `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
 | `gemini-3.1-flash-image` | Nano Banana 2 | image | `t2i` |
 | `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | image | `t2i` |
@@ -31,7 +32,7 @@ Google contributes across all four modes: the **Veo** video family, the **Nano B
 | `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | text | `i2t` |
 | `gemini-3.7-flash` | Gemini 3.7 Flash | text | `i2t` |
 
-> `gen-ai models --provider google` lists the current set (16 models).
+> `gen-ai models --provider google` lists the current set (17 models).
 
 ## Veo 3.1 (video)
 
@@ -211,6 +212,24 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 1) |
 | `videoUrl` | `--video` | file | video |
 
+### `gemini-omni-1.1-flash-preview` — Gemini Omni 1.2 Flash
+
+[Try `gemini-omni-1.1-flash-preview` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.1-flash-preview)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `360p` · `720p` · `1080p` · `4k` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` (default `8`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `videoUrl` | `--video` | file | video |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+
 ### `lyria-3-clip` — Lyria 3 Clip
 
 [Try `lyria-3-clip` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3-clip)
@@ -282,7 +301,3 @@ Input type: `i2t`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `imageUrls` | `-i` | file | image (up to 8) |
-
-
-
-

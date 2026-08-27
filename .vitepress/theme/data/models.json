@@ -238,6 +238,13 @@
     "inputType": "i2t"
   },
   {
+    "id": "gemini-omni-1.1-flash-preview",
+    "name": "Gemini Omni 1.2 Flash",
+    "provider": "google",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "gemini-omni-flash-preview",
     "name": "Gemini Omni",
     "provider": "google",
@@ -326,7 +333,7 @@
     "name": "Grok Imagine 1.5",
     "provider": "grok",
     "mode": "video",
-    "inputType": "i2v"
+    "inputType": "t2v"
   },
   {
     "id": "grok-tts",
@@ -1227,6 +1234,13 @@
   {
     "id": "wan-3.0-video",
     "name": "Wan 3.0",
+    "provider": "wan",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "wan-3.0-video-prime",
+    "name": "Wan 3.0 Prime",
     "provider": "wan",
     "mode": "video",
     "inputType": "t2v"

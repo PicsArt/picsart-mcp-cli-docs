@@ -51,7 +51,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 16,
+    "count": 17,
     "modes": [
       "image",
       "video",
@@ -257,7 +257,7 @@
   {
     "id": "wan",
     "label": "Wan (Alibaba)",
-    "count": 5,
+    "count": 6,
     "modes": [
       "video"
     ]

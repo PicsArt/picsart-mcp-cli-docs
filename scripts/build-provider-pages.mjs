@@ -148,8 +148,13 @@ for (const [providerId, provModels] of byProvider) {
   // header line — pages use "**Mode:**" for one mode, "**Modes:**" for several
   const modeLabel = modes.length > 1 ? 'Modes' : 'Mode'
   text = text.replace(/\*\*Modes?:\*\*[^\n]*\*\*Models:\*\*\s*\d+/, `**${modeLabel}:** ${modes.join(' · ')} · **Models:** ${count}`)
-  // frontmatter description count (number only — leave the "including …" names)
-  text = text.replace(/(\d+)(\s+(?:image|video|audio|text|media)\s+model\(s\))/, `${count}$2`)
+  // frontmatter description count (number only — leave the "including …" names).
+  // The mode list may be a single word ("6 video model(s)") or slash-joined for
+  // multi-mode providers ("17 image/video/audio/text model(s)") — match both, or
+  // multi-mode pages silently keep a stale count.
+  const MODE_WORD = '(?:image|video|audio|text|media)'
+  const descRe = new RegExp(`(\\d+)(\\s+${MODE_WORD}(?:/${MODE_WORD})*\\s+model\\(s\\))`)
+  text = text.replace(descRe, `${count}$2`)
 
   // ## Models table — standard 3-col pages only; preserve trailing curated prose
   const tableRe = /## Models\n\n\| id \| Name \| Input type \|\n\|[-| ]+\|\n(?:\|.*\n?)+/
@@ -176,7 +181,10 @@ for (const [providerId, provModels] of byProvider) {
     text = text.replace(paramsRe, `$1${blocks.join('\n\n')}\n$3`)
   }
 
-  writeFileSync(file, text)
+  // Normalise EOF to exactly one newline. The params regex captures trailing
+  // whitespace as $3 and re-emits it after a "\n", so pages whose ## Parameters
+  // is the last section would gain a blank line on every single refresh.
+  writeFileSync(file, text.replace(/\s*$/, '\n'))
   report.push(`✓ ${providerId}: ${count} models (${modes.join('/')})`)
 }
 

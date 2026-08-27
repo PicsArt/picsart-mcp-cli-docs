@@ -4,7 +4,7 @@ description: "Connect Picsart to Goose — add the MCP server as a Goose extensi
 
 # Goose
 
-Goose is an open-source AI agent that supports MCP servers as extensions. Add the Picsart MCP server once and Goose can generate image, video, and audio across 176 models from any session.
+Goose is an open-source AI agent that supports MCP servers as extensions. Add the Picsart MCP server once and Goose can generate image, video, and audio across 178 models from any session.
 
 ## Prerequisites
 
@@ -117,4 +117,4 @@ Yes. Both use the same credentials file and credit balance. Running them in para
 
 **Which models work in Goose?**
 
-All 176 models in the catalog. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+All 178 models in the catalog. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).

@@ -15,7 +15,7 @@ Grok Imagine (by xAI) is a multi-mode family on a single API: a fast image-to-vi
 | id | Name | Input type |
 |---|---|---|
 | `grok-imagine-video` | Grok Imagine 1.0 | `t2v` |
-| `grok-imagine-video-1.5` | Grok Imagine 1.5 | `i2v` |
+| `grok-imagine-video-1.5` | Grok Imagine 1.5 | `t2v` |
 | `grok-edit-video` | Grok Edit Video | `v2v` |
 | `grok-extend-video` | Grok Extend Video | `v2v` |
 | `grok-imagine-image` | Grok Imagine | `t2i` |

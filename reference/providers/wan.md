@@ -1,10 +1,10 @@
 ---
-description: "Wan (Alibaba) AI models on Picsart — 5 video model(s) including Wan 2.7, Wan 2.7 Image-to-Video, Wan 2.7 Ref-to-Video. CLI + MCP examples, parameters, and official docs."
+description: "Wan (Alibaba) AI models on Picsart — 6 video model(s) including Wan 2.7, Wan 2.7 Image-to-Video, Wan 2.7 Ref-to-Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Wan
 
-**Mode:** video · **Models:** 5
+**Mode:** video · **Models:** 6
 
 **Vendor:** [Alibaba Model Studio (Wan)](https://www.alibabacloud.com/help/en/model-studio/wan) · **Official API docs:** [Wan (Model Studio)](https://www.alibabacloud.com/help/en/model-studio/wan)
 
@@ -19,6 +19,7 @@ Wan 2.7 (by Alibaba) is a video model with text-to-video, image-to-video, refere
 | `wan-2.7-r2v` | Wan 2.7 Ref-to-Video | `v2v` |
 | `wan-2.7-video-edit` | Wan 2.7 Video Edit | `v2v` |
 | `wan-3.0-video` | Wan 3.0 | `t2v` |
+| `wan-3.0-video-prime` | Wan 3.0 Prime | `t2v` |
 
 ## CLI
 
@@ -131,6 +132,28 @@ Input type: `v2v`
 ### `wan-3.0-video` — Wan 3.0
 
 [Try `wan-3.0-video` in Playground ↗](https://picsart.com/ai-playground/?model=wan-3.0-video)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `duration` | `-d` | enum | `5` · `10` · `15` · `30` (default `5`) |
+| `resolution` | `-r` | enum | `480P` · `720P` · `1080P` (default `1080P`) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `adaptive` (default `16:9`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `videoUrls` | `--video-urls` | file | video (up to 5) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 5) |
+| `enableThinking` | `--enable-thinking` | boolean | `true` · `false` (default `false`) |
+| `watermark` | `--watermark` | boolean | `true` · `false` (default `false`) |
+| `seed` | `--seed` | range | `0`–`2147483647` (default `0`) |
+
+### `wan-3.0-video-prime` — Wan 3.0 Prime
+
+[Try `wan-3.0-video-prime` in Playground ↗](https://picsart.com/ai-playground/?model=wan-3.0-video-prime)
 
 Input type: `t2v`
 
