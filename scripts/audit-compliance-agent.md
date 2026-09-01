@@ -25,10 +25,10 @@ Know the following facts before evaluating any file:
   `scripts/check-counts.mjs` (which fails `npm run build` on any drift). Do not
   hand-type or approximate these — read them from
   `.vitepress/theme/data/{models,providers}.json`:
-  - 178 models
+  - 181 models
   - 31 providers
-  - 82 video models
-  - 65 image models
+  - 84 video models
+  - 66 image models
   - 23 audio models
   - 8 text models
 - Copy rules enforced across all documentation:

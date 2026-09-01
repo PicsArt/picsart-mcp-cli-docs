@@ -1,10 +1,10 @@
 ---
-description: "Connect Picsart's 178-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
+description: "Connect Picsart's 181-model AI catalog to Claude Code, Cursor, Windsurf, ChatGPT, or any MCP client and generate image, video, and audio as agent tools."
 ---
 
 # MCP Quickstart
 
-The Picsart MCP server exposes the full model catalog as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio across 178 models using natural language or structured tool calls.
+The Picsart MCP server exposes the full model catalog as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio across 181 models using natural language or structured tool calls.
 
 New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
@@ -245,7 +245,7 @@ Restart the agent after adding the MCP config. Most agents load the tool list at
 
 **Which models work via MCP?**
 
-All 178 models in the catalog. There is no MCP-specific subset. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+All 181 models in the catalog. There is no MCP-specific subset. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
 
 **Can the agent save generated files to Drive?**
 

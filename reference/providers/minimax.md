@@ -1,14 +1,14 @@
 ---
-description: "MiniMax AI models on Picsart — 7 audio/video model(s) including Hailuo 03, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 8 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · **Models:** 7
+**Modes:** video · audio · **Models:** 8
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
-MiniMax provides **Hailuo 03** for text-to-video and image-to-video at up to 2K, with start/end frames plus image, video, and audio references. The catalog also includes the **Hailuo 2.3** family and **MiniMax Music v2** for prompt-driven music with vocals.
+MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image-to-video at up to 2K, with start/end frames plus image, video, and audio references. The catalog also includes **MiniMax H3 Max**, the **Hailuo 2.3** family, and **MiniMax Music v2** for prompt-driven music with vocals.
 
 ## Models
 
@@ -18,9 +18,10 @@ MiniMax provides **Hailuo 03** for text-to-video and image-to-video at up to 2K,
 | `hailuo-2.3-pro` | Hailuo 2.3 Pro | `t2v` |
 | `hailuo-2.3-fast` | Hailuo 2.3 Fast | `i2v` |
 | `hailuo-2.3-fast-pro` | Hailuo 2.3 Fast Pro | `i2v` |
-| `hailuo-03` | Hailuo 03 | `t2v` |
+| `minimax-h3` | MiniMax H3 | `t2v` |
 | `minimax-music-v2` | MiniMax Music v2 | `music` |
 | `minimax-music-v3` | MiniMax Music v3 | `music` |
+| `minimax-h3-max` | MiniMax H3 Max | `t2v` |
 
 ## CLI
 
@@ -115,9 +116,9 @@ Input type: `i2v`
 | `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
-### `hailuo-03` — Hailuo 03
+### `minimax-h3` — MiniMax H3
 
-[Try `hailuo-03` in Playground ↗](https://picsart.com/ai-playground/?model=hailuo-03)
+[Try `minimax-h3` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3)
 
 Input type: `t2v`
 
@@ -163,6 +164,24 @@ Input type: `music`
 | `sampleRate` | `--sample-rate` | enum | `16000` · `24000` · `32000` · `44100` (default `44100`) |
 | `bitrate` | `--bitrate` | enum | `32000` · `64000` · `128000` · `256000` (default `256000`) |
 | `format` | `--format` | enum | `mp3` · `wav` · `pcm` (default `mp3`) |
+
+### `minimax-h3-max` — MiniMax H3 Max
+
+[Try `minimax-h3-max` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `resolution` | `-r` | enum | `480p` · `768p` (default `768p`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `promptExpansionMode` | `--prompt-expansion-mode` | enum | `disabled` · `balanced` · `quality` (default `balanced`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
 
 ## Pricing
 

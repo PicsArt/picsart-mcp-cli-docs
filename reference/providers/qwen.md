@@ -1,10 +1,10 @@
 ---
-description: "Qwen (Alibaba) AI models on Picsart — 2 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
+description: "Qwen (Alibaba) AI models on Picsart — 3 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Qwen
 
-**Mode:** image · **Models:** 2
+**Mode:** image · **Models:** 3
 
 **Vendor:** [Qwen Cloud (Alibaba DashScope)](https://docs.qwencloud.com) · **Official API docs:** [Qwen API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-reference)
 
@@ -16,6 +16,7 @@ Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-fo
 |---|---|---|
 | `qwen-image-2` | Qwen 2 | `t2i` |
 | `qwen-image-2-pro` | Qwen 2 Pro | `t2i` |
+| `qwen-image-3.0-pro` | Qwen 3.0 Pro | `t2i` |
 
 ## CLI
 
@@ -86,6 +87,23 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 | `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
 | `imageUrls` | `-i` | file | image (up to 3) |
+
+### `qwen-image-3.0-pro` — Qwen 3.0 Pro
+
+[Try `qwen-image-3.0-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-3.0-pro)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤800 chars) |
+| `negativePrompt` | `--neg` | text | free text |
+| `resolution` | `-r` | enum | `2048x2048` · `2688x1536` · `1536x2688` · `2368x1728` · `1728x2368` (default `2048x2048`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
+| `promptExtendMode` | `--prompt-extend-mode` | enum | `direct` · `agent` (default `direct`) |
+| `enableThinking` | `--enable-thinking` | boolean | `true` · `false` (default `true`) |
 
 ## Pricing
 

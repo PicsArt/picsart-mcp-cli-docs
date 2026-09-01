@@ -168,6 +168,13 @@
     "inputType": "t2i"
   },
   {
+    "id": "flux-video-upscale",
+    "name": "Flux Video Upscale",
+    "provider": "flux",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
     "id": "gemini-2.5-flash-image",
     "name": "Nano Banana",
     "provider": "google",
@@ -239,7 +246,7 @@
   },
   {
     "id": "gemini-omni-1.1-flash-preview",
-    "name": "Gemini Omni 1.2 Flash",
+    "name": "Gemini Omni 1.1 Flash",
     "provider": "google",
     "mode": "video",
     "inputType": "t2v"
@@ -616,13 +623,6 @@
     "inputType": "t2i"
   },
   {
-    "id": "hailuo-03",
-    "name": "Hailuo 03",
-    "provider": "minimax",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
     "id": "hailuo-2.3",
     "name": "Hailuo 2.3",
     "provider": "minimax",
@@ -646,6 +646,20 @@
   {
     "id": "hailuo-2.3-pro",
     "name": "Hailuo 2.3 Pro",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3",
+    "name": "MiniMax H3",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3-max",
+    "name": "MiniMax H3 Max",
     "provider": "minimax",
     "mode": "video",
     "inputType": "t2v"
@@ -835,6 +849,13 @@
   {
     "id": "qwen-image-2-pro",
     "name": "Qwen 2 Pro",
+    "provider": "qwen",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "qwen-image-3.0-pro",
+    "name": "Qwen 3.0 Pro",
     "provider": "qwen",
     "mode": "image",
     "inputType": "t2i"

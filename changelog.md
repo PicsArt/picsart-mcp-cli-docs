@@ -7,6 +7,23 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-09-01
+
+**Catalog refresh — now 181 models across 31 providers** (`@picsart/ai-sdk` 5.24.0). These docs were last generated from 5.19.0, so this refresh spans 5.20–5.24: three video/image models added, one renamed, none retired.
+
+### New
+
+- **Flux Video Upscale** *(video, `v2v` — added in SDK 5.20.0)* — upscales an existing clip toward 4K at `1.5x`–`3x`, in either precise (source-faithful) or creative (detail-enhancing) mode. Source clips up to 20 seconds and 2K. See [Flux](/reference/providers/flux).
+- **MiniMax H3 Max** *(video, `t2v` — added in SDK 5.22.0)* — the top tier of the H3 family: text-to-video or start/end-frame interpolation with a `promptExpansionMode` pass, up to 15s at `768p`. Image-to-video is available as an edit workflow. See [MiniMax](/reference/providers/minimax).
+- **Qwen 3.0 Pro** *(image, `t2i` — added in SDK 5.22.1)* — the GA flagship Qwen-Image 3.0 Pro, covering text-to-image and image editing with prompt-rewrite modes (`promptExtendMode`) and an optional `enableThinking` pass. See [Qwen](/reference/providers/qwen).
+
+### Changed
+
+- **Hailuo 03 is now MiniMax H3** *(SDK 5.21.1)* — the catalog id changed from `hailuo-03` to `minimax-h3`. This moves a **public identifier**: `?model=hailuo-03` deeplinks and any saved reference to the old id no longer resolve. The workflow (`minimax/v2/video-generation`) and pricing key (`minimax-h3`) are unchanged, and no parameters moved.
+- **Gemini Omni 1.2 Flash is now displayed as Gemini Omni 1.1 Flash** *(SDK 5.21.2)* — this resolves the id/name mismatch flagged in the 2026-08-27 entry above. The id was always `gemini-omni-1.1-flash-preview`; the display name has been corrected to agree with it rather than the id being changed, so nothing matching on the id is affected.
+
+---
+
 ## 2026-08-27
 
 **Catalog refresh — now 178 models across 31 providers** (`@picsart/ai-sdk` 5.19.0). These docs were last generated from 5.16.0, so this refresh spans 5.17–5.19: two video models added, none retired.

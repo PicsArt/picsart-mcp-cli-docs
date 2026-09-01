@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: Picsart AI Playground
-  text: One platform. 178 models. Every interface.
+  text: One platform. 181 models. Every interface.
   tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 31 providers.
   actions:
     - theme: brand
@@ -28,9 +28,9 @@ features:
     details: One terminal command for the full catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
     link: /guide/cli-quickstart
   - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 178 models. Auto-save to Drive. API key auth.
+    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 181 models. Auto-save to Drive. API key auth.
     link: /guide/sdk
-  - title: 178 models, 31 providers
+  - title: 181 models, 31 providers
     details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
 ---

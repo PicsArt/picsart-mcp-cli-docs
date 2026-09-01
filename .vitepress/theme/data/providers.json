@@ -42,7 +42,7 @@
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 6,
+    "count": 7,
     "modes": [
       "image",
       "video"
@@ -131,7 +131,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 7,
+    "count": 8,
     "modes": [
       "video",
       "audio"
@@ -175,7 +175,7 @@
   {
     "id": "qwen",
     "label": "Qwen (Alibaba)",
-    "count": 2,
+    "count": 3,
     "modes": [
       "image"
     ]

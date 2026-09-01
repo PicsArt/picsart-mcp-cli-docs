@@ -1,6 +1,6 @@
 # Picsart gen-ai CLI, MCP & Skills
 
-> Developer docs for driving Picsart's AI catalog — 178 models from 31 providers across image (65), video (82), and audio (23) — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP. One OAuth login, one credit balance, pay per generation.
+> Developer docs for driving Picsart's AI catalog — 181 models from 31 providers across image (66), video (84), and audio (23) — from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP. One OAuth login, one credit balance, pay per generation.
 
 The same model registry powers three interfaces (CLI, Skills, MCP). Every model has a stable id usable identically from `gen-ai generate -m <id>` and the `picsart_generate` MCP tool. For a point-and-click web UI instead, see the AI Playground app (linked under Optional).
 
@@ -21,10 +21,10 @@ The same model registry powers three interfaces (CLI, Skills, MCP). Every model 
 - [Batch & Automation](https://picsart.github.io/picsart-mcp-cli-docs/guide/batch): manifest runner, from-dir, auto-download
 
 ## Model reference
-- [Model Reference overview](https://picsart.github.io/picsart-mcp-cli-docs/reference/): all 178 models, how to read a provider page
+- [Model Reference overview](https://picsart.github.io/picsart-mcp-cli-docs/reference/): all 181 models, how to read a provider page
 - [Model Catalog](https://picsart.github.io/picsart-mcp-cli-docs/reference/catalog): searchable, filterable catalog of every model
-- [Image generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/image): 65 image models
-- [Video generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/video): 82 video models
+- [Image generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/image): 66 image models
+- [Video generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/video): 84 video models
 - [Audio generation](https://picsart.github.io/picsart-mcp-cli-docs/reference/audio): 23 audio models
 
 ## Providers
@@ -35,7 +35,7 @@ Each provider page lists its models with CLI + MCP examples, a parameter table s
 - [ByteDance](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/bytedance): 2 models — video
 - [Creatify](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/creatify): 1 model — video
 - [ElevenLabs](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/elevenlabs): 11 models — audio
-- [Flux (Black Forest Labs)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/flux): 6 models — image, video
+- [Flux (Black Forest Labs)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/flux): 7 models — image, video
 - [Google](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/google): 17 models — text, image, video, audio
 - [Grok (xAI)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/grok): 8 models — image, video, audio
 - [Happy Horse](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/happyhorse): 5 models — video
@@ -45,12 +45,12 @@ Each provider page lists its models with CLI + MCP examples, a parameter table s
 - [Kling](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/kling): 13 models — image, video, audio
 - [LTX (Lightricks)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/ltx): 5 models — video
 - [Luma](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/luma): 9 models — image, video
-- [MiniMax](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/minimax): 7 models — video, audio
+- [MiniMax](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/minimax): 8 models — video, audio
 - [OpenAI](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/openai): 6 models — text, image, video
 - [OVI](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/ovi): 1 model — video
 - [Picsart](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/picsart): 10 models — image, video
 - [PixVerse](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/pixverse): 6 models — video
-- [Qwen (Alibaba)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/qwen): 2 models — image
+- [Qwen (Alibaba)](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/qwen): 3 models — image
 - [Recraft](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/recraft): 24 models — image
 - [Reve](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/reve): 1 model — image
 - [Runway](https://picsart.github.io/picsart-mcp-cli-docs/reference/providers/runway): 4 models — image, video

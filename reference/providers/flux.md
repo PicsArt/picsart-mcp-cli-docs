@@ -1,10 +1,10 @@
 ---
-description: "Flux (Black Forest Labs) AI models on Picsart — 6 image and video model(s) including Flux 2 Flex, Flux 2 Max, Flux 3 Video. CLI + MCP examples, parameters, and official docs."
+description: "Flux (Black Forest Labs) AI models on Picsart — 7 image and video model(s) including Flux 2 Flex, Flux 2 Max, Flux 3 Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Flux
 
-**Modes:** image · video · **Models:** 6
+**Modes:** image · video · **Models:** 7
 
 **Vendor:** [Black Forest Labs](https://blackforestlabs.ai) · **Official API docs:** [docs.bfl.ml](https://docs.bfl.ml)
 
@@ -20,6 +20,7 @@ Flux (by Black Forest Labs) is a family of high-quality text-to-image models wit
 | `flux-kontext-max` | Flux Kontext Max | `t2i` | Reference-guided editing |
 | `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Reference-guided editing |
 | `flux-3-video` | Flux 3 Video | `t2v` | Text-to-video with native audio |
+| `flux-video-upscale` | Flux Video Upscale | `v2v` | Upscales an existing video up to 3x |
 
 ## CLI
 
@@ -133,6 +134,20 @@ Input type: `t2v`
 | `draft` | `--draft` | boolean | `true` · `false` (default `false`) |
 
 > **Notes:** `flux-3-video` accepts `imageUrls` (image-to-video, up to 10 references) or `videoUrl`, so it covers `t2v`, `i2v`, and `v2v` from one id. Draft mode is HD-only — with `--draft` on, `fhd` is rejected.
+
+### `flux-video-upscale` — Flux Video Upscale
+
+[Try `flux-video-upscale` in Playground ↗](https://picsart.com/ai-playground/?model=flux-video-upscale)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `videoUrl` | `--video` | file | **required** video |
+| `upscaleFactor` | `--upscale-factor` | range | `1.5`–`3`, step 0.5 (default `2`) |
+| `creativity` | `--creativity` | enum | `0` (Precise) · `1` (Creative) (default `1`) |
+| `prompt` | `-p` | text | free text |
+| `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
 
 ## Pricing
 

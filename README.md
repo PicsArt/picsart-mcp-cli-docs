@@ -1,6 +1,6 @@
 # Picsart CLI & MCP — Docs
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 178 models from 31 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 181 models from 31 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
 
 - **Authoritative copy:** the public repo, https://github.com/PicsArt/picsart-mcp-cli-docs — it accepts pull requests directly, so it **can and does run ahead** of the mirror below.
 - **Mirror:** `docs-site/` inside the private `ai-toolkit` monorepo. Catalog refreshes are usually authored here, but this folder goes stale the moment a PR lands publicly. **Always reconcile before publishing** — see [Publishing](#publishing).
@@ -46,7 +46,7 @@ automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap
 the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
 custom-domain move) and re-run.
 
-The hand-written counts in prose (`178 models`, `65 image models`, `31 providers`, each
+The hand-written counts in prose (`181 models`, `66 image models`, `31 providers`, each
 provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
 truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
 Run it standalone with `npm run check:counts`.

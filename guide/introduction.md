@@ -54,7 +54,7 @@ gen-ai batch run catalog.yaml
 ---
 
 ### SDK: Node.js and TypeScript applications
-If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 178 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
+If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 181 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -90,8 +90,8 @@ Most people move between these surfaces naturally. You experiment in Playground,
 
 ## What you can generate
 
-- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **65 image models.**
-- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **82 video models.**
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **66 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **84 video models.**
 - **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **23 audio models.**
 - **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **8 text models.**
 
