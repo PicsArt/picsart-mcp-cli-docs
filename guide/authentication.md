@@ -20,7 +20,7 @@ The [CLI](/guide/installation) and [MCP](/guide/mcp-quickstart) use OAuth web lo
 
 **Picsart Media Studio: sign in through your client**
 
-[Media Studio](/guide/media-tools) runs on Picsart's servers rather than on your machine, so it does not use the CLI at all. You add it to your client once and sign in to Picsart in the browser window it opens. There is nothing to install and **no `gen-ai login` step**.
+[Media Studio](/guide/media-studio/) runs on Picsart's servers rather than on your machine, so it does not use the CLI at all. You add it to your client once and sign in to Picsart in the browser window it opens. There is nothing to install and **no `gen-ai login` step**.
 
 All three methods draw from the same Picsart account and the same credit balance.
 
@@ -41,7 +41,7 @@ This single sign-in covers all three surfaces — the CLI, [Skills](/guide/skill
 
 For the CLI-backed surfaces, agents authenticate through the same OAuth web login. After installing the CLI, run `gen-ai login` once on the machine; the agent (Claude Code, Cursor, Windsurf, ChatGPT, Codex) then generates using that authorized session. There are no separate keys to configure in the agent — see [Installation](/guide/installation) and the [MCP Quickstart](/guide/mcp-quickstart).
 
-[Media Studio](/guide/media-tools) is the exception: it is a remote connector, so the agent signs in to it directly and `gen-ai login` plays no part.
+[Media Studio](/guide/media-studio/) is the exception: it is a remote connector, so the agent signs in to it directly and `gen-ai login` plays no part.
 
 ## What needs sign-in?
 
@@ -67,7 +67,7 @@ No. The SDK and REST API use an API key (bearer token) from your account setting
 
 No. The CLI, the gen-ai MCP server, and Skills all share one OAuth session — run `gen-ai login` once and it covers all three.
 
-[Media Studio](/guide/media-tools) is separate: you add it to your client and sign in to Picsart there. It needs neither the CLI nor an API key.
+[Media Studio](/guide/media-studio/) is separate: you add it to your client and sign in to Picsart there. It needs neither the CLI nor an API key.
 
 **Where are my credentials stored?**
 

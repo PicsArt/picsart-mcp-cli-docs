@@ -98,7 +98,7 @@ Connecting exposes the generation, catalog and Drive tools below, plus `picsart_
 building video and images out of material you already have.
 
 ::: tip Building rather than generating?
-**[Picsart Media Studio](/guide/media-tools)** is a connector dedicated to that kind of work. It is
+**[Picsart Media Studio](/guide/media-studio/)** is a connector dedicated to that kind of work. It is
 added and signed in to separately, and sits happily alongside this one.
 :::
 

@@ -48,12 +48,12 @@ A generative model is the wrong tool for this. If you need clips joined, caption
 card over your own footage, a slideshow from a template, or a video reframed for a phone screen, you
 want something that assembles material you already have.
 
-[Media Studio](/guide/media-tools) is a separate MCP connector: you ask Claude for what you want, it
+[Media Studio](/guide/media-studio/) is a separate MCP connector: you ask Claude for what you want, it
 builds the piece from your files and its templates, and renders the result. It works alongside the
 generative tools rather than replacing them — make an asset with the
 [Picsart MCP server](/guide/mcp-quickstart), then build it into something here.
 
-- [Media Studio overview](/guide/media-tools)
+- [Media Studio overview](/guide/media-studio/)
 - [What you can do](/guide/media-studio/tools)
 
 ---

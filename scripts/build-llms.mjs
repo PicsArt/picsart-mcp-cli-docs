@@ -76,7 +76,7 @@ out.push('## Picsart Media Studio (separate MCP connector)')
 out.push(
   link(
     'Media Studio overview',
-    '/guide/media-tools',
+    '/guide/media-studio/',
     'build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai CLI',
   ),
 )

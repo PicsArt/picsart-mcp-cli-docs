@@ -91,5 +91,5 @@ These three read a video you supply and report back on it. They don't change it.
 
 ## More
 
-- **[Overview](/guide/media-tools)** — what Media Studio is, and how to connect
+- **[Overview](/guide/media-studio/)** — what Media Studio is, and how to connect
 - **[Troubleshooting](/guide/media-studio/troubleshooting)** — what to do when something doesn't work
