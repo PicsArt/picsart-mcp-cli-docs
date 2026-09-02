@@ -18,9 +18,9 @@ The [SDK](/guide/sdk) and [REST API](/guide/rest-api) authenticate with an API k
 
 The [CLI](/guide/installation) and [MCP](/guide/mcp-quickstart) use OAuth web login via `gen-ai login`. You authorize once in your browser and the CLI stores a secure session token locally. No key to copy or rotate.
 
-**Picsart Media Studio: in-client OAuth**
+**Picsart Media Studio: sign in through your client**
 
-[Media Studio](/guide/media-tools) is a **remote** connector, not a local process, so it does not use the CLI at all. You point your client at its server URL and the client runs the OAuth flow itself — sign-in happens in your browser at connect time, and the client holds the token. There is nothing to install and **no `gen-ai login` step**. For headless use it also accepts a Picsart workspace personal access token (`paat-…`) as a bearer token.
+[Media Studio](/guide/media-tools) runs on Picsart's servers rather than on your machine, so it does not use the CLI at all. You add it to your client once and sign in to Picsart in the browser window it opens. There is nothing to install and **no `gen-ai login` step**.
 
 All three methods draw from the same Picsart account and the same credit balance.
 
@@ -67,7 +67,7 @@ No. The SDK and REST API use an API key (bearer token) from your account setting
 
 No. The CLI, the gen-ai MCP server, and Skills all share one OAuth session — run `gen-ai login` once and it covers all three.
 
-[Media Studio](/guide/media-tools) is separate: it is a remote connector, so your client signs in to it on its own. It needs neither the CLI nor an API key, though it will accept a `paat-` workspace token for headless use.
+[Media Studio](/guide/media-tools) is separate: you add it to your client and sign in to Picsart there. It needs neither the CLI nor an API key.
 
 **Where are my credentials stored?**
 

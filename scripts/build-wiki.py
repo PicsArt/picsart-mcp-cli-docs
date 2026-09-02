@@ -104,7 +104,6 @@ EXTRA_GUIDES = {
     # handles automatically because it derives the route by stripping '.md'.
     'guide/media-tools.md': 'Media-Tools',
     'guide/media-studio/tools.md': 'Media-Studio-Tools',
-    'guide/media-studio/scenes.md': 'Media-Studio-Scenes',
     'guide/media-studio/troubleshooting.md': 'Media-Studio-Troubleshooting',
     'guide/integrations/index.md': 'Integrations',
 }
@@ -227,9 +226,9 @@ home = f'''# Picsart CLI & MCP
 
 ## Picsart Media Studio
 
-A separate MCP connector: a scene-graph compositor for building and rendering video, decks and captions.
+Build videos, slideshows and captioned clips from your own footage and ready-made templates, by asking Claude.
 
-- **[Overview](Media-Tools)** · **[Tool reference](Media-Studio-Tools)** · **[Scenes & authoring](Media-Studio-Scenes)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
+- **[Overview](Media-Tools)** · **[What you can do](Media-Studio-Tools)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
 
 ## Model Reference
 
@@ -259,8 +258,8 @@ sb = ['### Picsart CLI & MCP', '',
       '**Build on it**', '',
       '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '',
       '**Picsart Media Studio**', '',
-      '- [Overview](Media-Tools)', '- [Tool reference](Media-Studio-Tools)',
-      '- [Scenes & authoring](Media-Studio-Scenes)', '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
+      '- [Overview](Media-Tools)', '- [What you can do](Media-Studio-Tools)',
+      '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
       '**Model Reference**', '',
       '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',
       '**Providers**', '',

@@ -9,9 +9,9 @@ Every file input across the whole MCP contract — `imageUrls`, `videoUrl`, the 
 references, `picsart_drive`'s `url` — is an **HTTP(S) URL**. There is no `filePath` parameter
 anywhere. `/Users/me/photo.jpg` will never work.
 
-Some gen-ai tools additionally accept an inline `data:` URI. **Picsart Media Studio does not** —
-`picsart_media_*` tools reject both local paths and `data:` URIs with `local_source_not_supported`,
-because that surface takes media by reference rather than as bytes pasted into a tool call.
+Some gen-ai tools additionally accept an inline `data:` URI. On
+[Picsart Media Studio](/guide/media-tools) you don't need either — it has its own uploader, which is
+route **D** below.
 :::
 
 This is not an oversight. An MCP server runs somewhere else (Picsart's infrastructure); it has no
@@ -20,11 +20,8 @@ used as a generation input, **something on your side has to give it a URL.**
 
 Pick by which connector you are using, and by what your agent host can do.
 
-::: tip Using Picsart Media Studio? Use its own upload widget
-[Media Studio](/guide/media-tools) ships `picsart_media_upload`, which opens a drag-and-drop widget
-right in the conversation — no CLI, no shell, no `data:` URI. That is route **D** below, and it is
-the only one of the four that works there. Routes A–C all depend on the gen-ai CLI or the
-`picsart_drive` tool, neither of which exists on the Media Studio connector.
+::: tip Using Picsart Media Studio? It has its own uploader
+Just ask Claude to open it — route **D** below. Routes A–C are for the gen-ai CLI and MCP server.
 :::
 
 ## Comparison
@@ -135,31 +132,13 @@ remote URL instead of a `data:` URI:
 
 The returned CDN URL is stable and publicly fetchable by the generation and render services.
 
-## D. Media Studio → `picsart_media_upload`
+## D. Media Studio → the built-in uploader
 
-On the [Picsart Media Studio](/guide/media-tools) connector, `picsart_media_upload` opens a
-drag-and-drop widget in the conversation. The file uploads **straight from your browser** — no bytes
-pass through the tool, and no shell or CLI is involved. A "Use existing" tab also lets you pick a
-file already in your Picsart Drive.
+[Picsart Media Studio](/guide/media-tools) has its own uploader. Ask Claude to open it, drop the file
+in, and carry on — it uploads straight from your browser, and you can also pick a file already in
+your Picsart Drive.
 
-```json
-{ "name": "picsart_media_upload",
-  "arguments": { "purpose": "the clip you want to caption", "accept": "video" } }
-```
-
-Two things to know:
-
-- **It is a two-turn handshake.** The call only *opens* the widget and returns no URL. The URLs
-  arrive with your **next** message, so the agent must wait for you before continuing.
-- `detected_files` is a display hint only. It labels the dropzone ("Drop clip.mp4 here") and never
-  filters or rejects what you actually drop.
-
-This is also the remediation the server itself recommends: any `picsart_media_*` call given a local
-path or a `data:` URI comes back with `local_source_not_supported` and a hint pointing here.
-
-Alternatively, if the file is already in your Picsart Drive, skip uploading entirely —
-`picsart_media_drive_list` returns file URLs you can pass straight to any tool that takes a media
-URL.
+Nothing to install, and no URL to produce yourself.
 
 ## More
 

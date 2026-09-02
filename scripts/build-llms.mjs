@@ -77,12 +77,11 @@ out.push(
   link(
     'Media Studio overview',
     '/guide/media-tools',
-    'scene-graph compositor over MCP; remote connector at api.picsart.com, in-client OAuth, not the gen-ai CLI',
+    'build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai CLI',
   ),
 )
-out.push(link('Tool reference', '/guide/media-studio/tools', `all ${mediaTools.tools.length} picsart_media_* tools, behaviour and cost`))
-out.push(link('Scenes & authoring', '/guide/media-studio/scenes', 'the MP Scene document model: layers, templates, patching, limits'))
-out.push(link('Troubleshooting', '/guide/media-studio/troubleshooting', 'connector install, sign-in, credits, fonts, local files, egress'))
+out.push(link('What you can do', '/guide/media-studio/tools', `all ${mediaTools.tools.length} picsart_media_* tools and what each is for`))
+out.push(link('Troubleshooting', '/guide/media-studio/troubleshooting', 'connecting, signing in, files from your computer, blank text, credits, previews'))
 out.push('')
 
 out.push('## Concepts')
