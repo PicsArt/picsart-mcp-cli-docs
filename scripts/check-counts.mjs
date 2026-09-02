@@ -135,7 +135,6 @@ const MEDIA_ALLOWED = new Set(mediaTools.tools)
 const MEDIA_PAGES = [
   'guide/media-tools.md',
   'guide/media-studio/tools.md',
-  'guide/media-studio/scenes.md',
   'guide/media-studio/troubleshooting.md',
   'guide/mcp-quickstart.md',
   'guide/local-files.md',

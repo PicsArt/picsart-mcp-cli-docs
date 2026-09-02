@@ -125,7 +125,7 @@ codex mcp add picsart-gen-ai -- gen-ai-mcp
 
 **Cursor / Windsurf / VS Code** — add `gen-ai-mcp` as the MCP server command in the agent's MCP config file. See the individual integration guides for the exact config block.
 
-> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_preflight`, …) and example calls. The `picsart_media_*` scene-compositing tools are documented separately under
+> Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_preflight`, …) and example calls. The `picsart_media_*` tools for building video and images from existing material are documented separately under
 > **[Picsart Media Studio](/guide/media-tools)**, which is its own remote connector rather than part of the CLI.
 
 ---

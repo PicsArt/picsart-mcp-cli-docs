@@ -49,8 +49,7 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'Overview', link: '/guide/media-tools' },
-      { text: 'Tool reference', link: '/guide/media-studio/tools' },
-      { text: 'Scenes & authoring', link: '/guide/media-studio/scenes' },
+      { text: 'What you can do', link: '/guide/media-studio/tools' },
       { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
     ],
   },

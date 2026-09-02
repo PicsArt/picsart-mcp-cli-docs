@@ -1,166 +1,100 @@
 ---
 title: "Media Studio troubleshooting"
-description: "Errors you can hit with Picsart Media Studio — connector install, sign-in, credits, fonts, local files, egress, validation — and what to do about each."
+description: "What to do when Picsart Media Studio doesn't work as expected — connecting, signing in, files from your computer, blank text, credits, and previews."
 ---
 
 # Troubleshooting
 
-Symptom, cause, fix. If something here does not match what you are seeing, ask the agent to call
-`picsart_media_quickstart` — it returns the current recommended sequence for the task.
+If something here doesn't match what you're seeing, ask Claude directly — *"why did that not
+work?"* It can look up the recommended steps and often tell you what it hit.
 
 ## Connecting
 
-### "Contact an organization owner to install connectors"
+**"Contact an organization owner to install connectors"**
 
-On Claude **Team or Enterprise**, custom connectors are added at the organization level:
-*Organization settings → Connectors → Add custom connector*. Installing anything on your own account
-does not help — the connector has to exist at the org level first.
+You're on a Claude Team or Enterprise plan, where connectors are added for the whole organization
+rather than one person at a time. Ask whoever administers your Claude organization to add Media
+Studio; once they have, it appears for everyone.
 
-Adding it requires an elevated role, and if you cannot see that menu you do not hold it. Anthropic's
-own documentation is the authority on exactly which role qualifies; ask whoever administers your
-Claude organization to add it.
+**The connector is listed but shows as unavailable**
 
-### The connector is listed but shows as disabled
+It was most likely added to your own account on a plan that manages connectors centrally. It needs
+adding at the organization level instead — see above.
 
-Same cause as above: it was added personally rather than at the organization level, or the
-org-level entry has not been enabled for your workspace.
+**Claude says a Media Studio tool isn't available**
 
-### Sign-in fails, or you are asked to authorize repeatedly
+Either the connector isn't added yet, or you haven't signed in to Picsart since adding it. Open the
+connector's settings and sign in, then start a new conversation.
 
-Media Studio is a remote server, so sign-in happens in your browser at connect time and the client
-holds the token. If it loops:
+**You're asked to sign in over and over**
 
-- Remove and re-add the connector, then authorize again. The second connect should be as clean as
-  the first.
-- Confirm the URL is exactly `https://api.picsart.com/connectors/media-tools/mcp`.
-- Do **not** run `gen-ai login` — that is for the separate, locally-run
-  [Picsart MCP server](/guide/mcp-quickstart) and has no effect here.
+Remove the connector, add it again, and sign in once more — the second time should stick. Check the
+address is exactly:
 
-### A tool you read about is not in the list
-
-It is a `preview`-channel tool. Media Studio's production surface is exactly the
-[29 GA tools](/guide/media-studio/tools); preview tools are served only on internal environments and
-will never appear on the production connector.
-
-## Credits
-
-### `NOT_ENOUGH_AVAILABLE_CREDITS - Not enough available credits`
-
-This comes back as an ordinary tool result flagged as an error, not as an HTTP failure — so the
-agent will usually report it as text rather than a crash.
-
-Top up in your Picsart account. **This connector has no balance tool**: `picsart_credits` belongs to
-the [Picsart MCP server](/guide/mcp-quickstart), not here, so neither you nor the agent can read your
-balance through Media Studio.
-
-The tools most likely to hit this are the three that draw on credits —
-`picsart_media_transcribe`, `picsart_media_describe_video` and `picsart_media_reframe_video`.
-Authoring, validating and layout checks dispatch no remote work at all, so they will not. Note that
-`picsart_media_export` and `picsart_media_contact_sheet` run through the same credit-accounting path
-even though they are not currently metered, so a zero balance can surface here too. See
-[Cost](/guide/media-tools#cost).
-
-## Media in
-
-### `local_source_not_supported` — "is a local filesystem path (or `file://` URI)"
-
-The server and the renderer have no access to your filesystem, so a path can never be fetched. The
-fix is `picsart_media_upload`: it opens a drag-and-drop widget, the file uploads straight from your
-browser, and you get a URL back.
-
-Note the **two-turn handshake** — the upload tool call only *opens* the widget and returns no URL
-itself. The URLs arrive with your next message, so the agent has to wait for you before it can
-continue.
-
-### `local_source_not_supported` — "is an inline `data:` URI"
-
-Also refused, deliberately: this surface takes media **by reference**, not as file bytes pasted into
-a tool call. Use `picsart_media_upload` here too.
-
-### "SSRF egress guard: host … resolved to a non-public address"
-
-Every URL these tools fetch is validated before connection, and private, loopback, link-local, CGNAT,
-multicast and metadata addresses are all refused — including when a public hostname resolves to one
-(DNS rebinding). A URL on your own machine or private network cannot be used; upload the file
-instead.
-
-### A URL behind authentication does not work
-
-The renderer fetches assets anonymously. Signed URLs work only while their signature is valid, and
-anything requiring a header or cookie will fail. Save the file to your Picsart Drive, or upload it.
-
-## Authoring
-
-### Text renders as nothing at all
-
-The font did not resolve, and this fails silently rather than erroring. There is **no system-font
-fallback** — `Inter`, `Arial`, `Helvetica` and friends are not present. Call
-`picsart_media_list_fonts` and use a `key` from the catalog.
-
-### The scene will not validate
-
-`picsart_media_validate_scene` returns structured diagnostics, each with a JSON path and a stable
-code. Anything at `error` severity blocks a render; warnings do not. Fix the paths it names, then
-re-validate — it is free, so there is no reason to skip it before exporting.
-
-### A patch failed partway
-
-`picsart_media_patch_scene` returns a structured failure rather than a flat message:
-
-```jsonc
-{ "ok": false, "error": { "code": "…", "message": "…", "opIndex": 2, "diagnostics": [ … ] } }
+```
+https://api.picsart.com/connectors/media-tools/mcp
 ```
 
-`opIndex` is the position of the failing op in your batch. Ops are ID-anchored, so the usual cause is
-a layer `id` that does not exist in the scene you passed.
+## Files
 
-### A layer is off-canvas, or the wrong thing is on top
+**Claude says it can't use a file from your computer**
 
-`picsart_media_query_layout` reports each layer's real box, centre, rotation, z-index and on-canvas
-coverage at a given time, without rendering. Cheaper and more precise than eyeballing a thumbnail.
+Ask it to **open the uploader**. Media Studio runs on Picsart's servers and has no way to reach your
+computer directly, so a file needs adding through the drop area first. Once you've dropped it in,
+ask Claude to carry on — the file arrives with your next message, so it may need a nudge.
 
-### Clips overlap when they should run in sequence
+**A file on your own network won't load**
 
-Sequencing and overlay are different constructs. Back-to-back clips need a single `track` layer;
-separate top-level entries in `layers[]` each have their own `start` and `duration` and will stack.
-See [Sequencing versus overlay](/guide/media-studio/scenes#sequencing-versus-overlay).
+Same fix: use the uploader. Addresses that only exist inside your own network or on your own machine
+aren't reachable from Picsart's servers.
 
-## Rendering
+**A link that needs a login won't load**
 
-### The composition is too large
+Files are fetched without signing in anywhere, so anything behind a login or a password won't work.
+Save it to your Picsart Drive first, or use the uploader.
 
-Maximum composition size is reported by `picsart_media_get_capabilities` under `limits` — currently
-1920 × 1920, alongside caps on duration, layer count and audio tracks. Read them at runtime rather
-than assuming; they are engine configuration.
+## Making things
 
-### `picsart_media_contact_sheet` returned fewer pictures than requested
+**Text comes out blank**
 
-Expected, not a failure — at most **8** inline images come back per call. What you can do about the
-rest depends on the mode:
+The font wasn't recognised. Media Studio has its own font list and doesn't fall back to the fonts on
+your computer, so a name like Arial or Helvetica won't render. Ask Claude which fonts are available
+and pick one. Asking it to check the piece before rendering also flags an unrecognised font.
 
-- If you passed **`frames: N`**, the extras are in the JSON with their `url` and `inline: false`.
-  They were rendered, so open those URLs; retrying only re-renders them.
-- If you passed **`times: [...]`**, the extras were **never rendered and have no URL**. The tool
-  clamps to 8 before dispatching and keeps an evenly-spaced subset, so you may not get the specific
-  moments you asked for. The response lists which times were dropped. Split the request into calls
-  of 8 times or fewer.
+**Clips play on top of each other instead of one after another**
 
-### The result panel does not render
+Playing in sequence and stacking on screen are two different arrangements, and it's easy to end up
+with the wrong one. Ask Claude to put the clips in sequence, one after the other.
 
-The two interactive panels are versioned MCP App resources. Retired URIs are still served through
-compatibility aliases, so an older client keeps working, but a client pinned to a very old URI should
-be pointed at the current one. If the panel is blank, the underlying URLs are still in the tool's
-JSON result.
+**Something is off the edge of the frame, or the wrong thing is in front**
 
-### `picsart_media_get_capabilities` blew up the response
+Ask Claude to check the layout before rendering. It can report exactly where everything sits and
+what's in front of what, without rendering anything, and fix it from there.
 
-The full document is roughly 135 KB. Called with no arguments it returns only the section index —
-then ask for the sections you need. `looks` alone is about 62 KB; ask for `looksCompact` first to see
-what exists, then fetch the one look you actually want.
+**A change you asked for didn't appear**
+
+Ask Claude to check the piece and try again. Parts are tracked individually, so a change aimed at
+something that's since been replaced can quietly miss.
+
+**You got fewer preview pictures than you asked for**
+
+That's expected, not a failure — you get up to eight preview pictures per request. If you want other
+moments, ask for them in a second batch.
+
+## Credits and results
+
+**Claude says you've run out of credits**
+
+Top up your Picsart account and ask again. Rendering and the video tools use credits; building,
+checking and previewing a layout don't.
+
+**The result panel didn't appear**
+
+The links to the finished file are still in Claude's reply, so you can download it from there. Files
+you've rendered are also in your Picsart Drive.
 
 ## Still stuck?
 
-- `picsart_media_quickstart` — the current recommended call sequence per task
-- `picsart_media_list_recipes` / `picsart_media_get_recipe` — longer authoring guides
-- [Tool reference](/guide/media-studio/tools) — what each tool does and costs
-- [Scenes and authoring](/guide/media-studio/scenes) — the document model
+- Ask Claude *"what can Picsart Media Studio do?"* — it can list the jobs it knows how to do
+- **[What you can do](/guide/media-studio/tools)** — every tool and what it's for
+- **[Overview](/guide/media-tools)** — what Media Studio is, and how to connect
