@@ -14,12 +14,13 @@ page uses Claude for the setup examples because it is the most common, but nothi
 to it.
 
 Everything Media Studio makes is built from what you give it and the templates, effects and fonts it
-offers. If you want an image or a video created from a written description instead, that is the
-[Picsart MCP server](/guide/mcp-quickstart) — a different connector, with its own tools.
+offers.
 
-::: tip Two separate connectors
-Media Studio and the Picsart MCP server are added separately and do different things. Connecting
-one does not connect the other.
+::: tip Want to generate images and video too?
+If you also want media created from a written description, the
+**[Picsart MCP server](/guide/mcp-quickstart)** does that — and it comes with media tools as well.
+Either connector is useful on its own, and you can add both. They are added and signed in to
+separately.
 :::
 
 ## What you can ask for

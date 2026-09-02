@@ -94,14 +94,12 @@ See [ChatGPT integration](/guide/integrations/chatgpt) or the official page at [
 
 ## Tool catalog
 
-Connecting exposes the generation, catalog and Drive tools below, plus some of the
-`picsart_media_*` tools for building video and images out of existing material.
+Connecting exposes the generation, catalog and Drive tools below, plus `picsart_media_*` tools for
+building video and images out of material you already have.
 
-::: tip Media Studio is a separate connector
-Only some of the `picsart_media_*` tools are here. The full set of 29 — including Drive browsing,
-transcription and video description — comes with
-**[Picsart Media Studio](/guide/media-tools)**, which is added and signed in to separately.
-Connecting this server does not connect that one.
+::: tip Building rather than generating?
+**[Picsart Media Studio](/guide/media-tools)** is a connector dedicated to that kind of work. It is
+added and signed in to separately, and sits happily alongside this one.
 :::
 
 Every tool is available to the agent once connected. Tools that do not spend credits are free to call as many times as needed.
