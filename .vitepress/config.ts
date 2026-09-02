@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 181 models from 31 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, and Media Studio — generate image, video, and audio across 181 models from 31 providers, and composite scenes into video, from your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -41,8 +41,17 @@ const sidebar = [
     items: [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
-      { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
+    ],
+  },
+  {
+    text: 'Picsart Media Studio',
+    collapsed: false,
+    items: [
+      { text: 'Overview', link: '/guide/media-tools' },
+      { text: 'Tool reference', link: '/guide/media-studio/tools' },
+      { text: 'Scenes & authoring', link: '/guide/media-studio/scenes' },
+      { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
     ],
   },
   {
@@ -190,7 +199,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
-      { text: 'Media', link: '/guide/media-tools' },
+      { text: 'Media Studio', link: '/guide/media-tools' },
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },
@@ -204,7 +213,7 @@ export default defineConfig({
     ],
     search: { provider: 'local' },
     footer: {
-      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Skills',
+      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Media Studio · Skills',
       copyright: '© Picsart',
     },
     editLink: {

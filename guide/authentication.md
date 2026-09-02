@@ -1,12 +1,12 @@
 ---
-description: "Authenticate the Picsart gen-ai CLI and MCP with OAuth web login (gen-ai login) — no API keys."
+description: "Authenticate the Picsart gen-ai CLI and MCP with OAuth web login, the SDK with an API key, and Picsart Media Studio with in-client OAuth."
 ---
 
 # Authentication
 
-All interfaces use your Picsart account via **OAuth web login** — there are no API keys to create or paste. Generation spends credits, so it always requires sign-in; browsing the catalog and inspecting models does not.
+Every interface authenticates against your Picsart account, and all of them draw on the same credit balance. Which mechanism you use depends on the interface. Generation spends credits, so it always requires sign-in; browsing the catalog and inspecting models does not.
 
-## Two authentication methods
+## Three authentication methods
 
 How you authenticate depends on which interface you're using.
 
@@ -18,7 +18,11 @@ The [SDK](/guide/sdk) and [REST API](/guide/rest-api) authenticate with an API k
 
 The [CLI](/guide/installation) and [MCP](/guide/mcp-quickstart) use OAuth web login via `gen-ai login`. You authorize once in your browser and the CLI stores a secure session token locally. No key to copy or rotate.
 
-Both methods draw from the same Picsart account and the same credit balance.
+**Picsart Media Studio: in-client OAuth**
+
+[Media Studio](/guide/media-tools) is a **remote** connector, not a local process, so it does not use the CLI at all. You point your client at its server URL and the client runs the OAuth flow itself — sign-in happens in your browser at connect time, and the client holds the token. There is nothing to install and **no `gen-ai login` step**. For headless use it also accepts a Picsart workspace personal access token (`paat-…`) as a bearer token.
+
+All three methods draw from the same Picsart account and the same credit balance.
 
 ## Sign in
 
@@ -35,7 +39,9 @@ This single sign-in covers all three surfaces — the CLI, [Skills](/guide/skill
 
 ## Agents (Skills & MCP)
 
-Agents authenticate through the same OAuth web login. After installing the CLI, run `gen-ai login` once on the machine; the agent (Claude Code, Cursor, Windsurf, ChatGPT, Codex) then generates using that authorized session. There are no separate keys to configure in the agent — see [Installation](/guide/installation) and the [MCP Quickstart](/guide/mcp-quickstart).
+For the CLI-backed surfaces, agents authenticate through the same OAuth web login. After installing the CLI, run `gen-ai login` once on the machine; the agent (Claude Code, Cursor, Windsurf, ChatGPT, Codex) then generates using that authorized session. There are no separate keys to configure in the agent — see [Installation](/guide/installation) and the [MCP Quickstart](/guide/mcp-quickstart).
+
+[Media Studio](/guide/media-tools) is the exception: it is a remote connector, so the agent signs in to it directly and `gen-ai login` plays no part.
 
 ## What needs sign-in?
 
@@ -59,7 +65,9 @@ No. The SDK and REST API use an API key (bearer token) from your account setting
 
 **Do I need a separate API key for MCP or Skills?**
 
-No. All three surfaces — CLI, MCP, and Skills — use the same OAuth session. Run `gen-ai login` once; the session is shared.
+No. The CLI, the gen-ai MCP server, and Skills all share one OAuth session — run `gen-ai login` once and it covers all three.
+
+[Media Studio](/guide/media-tools) is separate: it is a remote connector, so your client signs in to it on its own. It needs neither the CLI nor an API key, though it will accept a `paat-` workspace token for headless use.
 
 **Where are my credentials stored?**
 
