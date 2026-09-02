@@ -5,8 +5,8 @@ description: "What to do when Picsart Media Studio doesn't work as expected — 
 
 # Troubleshooting
 
-If something here doesn't match what you're seeing, ask Claude directly — *"why did that not
-work?"* It can look up the recommended steps and often tell you what it hit.
+If something here doesn't match what you're seeing, just ask — *"why did that not work?"* Your
+assistant can look up the recommended steps and often tell you what it hit.
 
 ## Connecting
 
@@ -21,7 +21,7 @@ Studio; once they have, it appears for everyone.
 It was most likely added to your own account on a plan that manages connectors centrally. It needs
 adding at the organization level instead — see above.
 
-**Claude says a Media Studio tool isn't available**
+**Your assistant says a Media Studio tool isn't available**
 
 Either the connector isn't added yet, or you haven't signed in to Picsart since adding it. Open the
 connector's settings and sign in, then start a new conversation.
@@ -37,11 +37,11 @@ https://api.picsart.com/connectors/media-tools/mcp
 
 ## Files
 
-**Claude says it can't use a file from your computer**
+**Your assistant says it can't use a file from your computer**
 
 Ask it to **open the uploader**. Media Studio runs on Picsart's servers and has no way to reach your
 computer directly, so a file needs adding through the drop area first. Once you've dropped it in,
-ask Claude to carry on — the file arrives with your next message, so it may need a nudge.
+ask it to carry on — the file arrives with your next message, so it may need a nudge.
 
 **A file on your own network won't load**
 
@@ -58,23 +58,23 @@ Save it to your Picsart Drive first, or use the uploader.
 **Text comes out blank**
 
 The font wasn't recognised. Media Studio has its own font list and doesn't fall back to the fonts on
-your computer, so a name like Arial or Helvetica won't render. Ask Claude which fonts are available
+your computer, so a name like Arial or Helvetica won't render. Ask which fonts are available
 and pick one. Asking it to check the piece before rendering also flags an unrecognised font.
 
 **Clips play on top of each other instead of one after another**
 
 Playing in sequence and stacking on screen are two different arrangements, and it's easy to end up
-with the wrong one. Ask Claude to put the clips in sequence, one after the other.
+with the wrong one. Ask for the clips to be put in sequence, one after the other.
 
 **Something is off the edge of the frame, or the wrong thing is in front**
 
-Ask Claude to check the layout before rendering. It can report exactly where everything sits and
+Ask for the layout to be checked before rendering. It can report exactly where everything sits and
 what's in front of what, without rendering anything, and fix it from there.
 
 **A change you asked for didn't appear**
 
-Ask Claude to check the piece and try again. Parts are tracked individually, so a change aimed at
-something that's since been replaced can quietly miss.
+Ask for the piece to be checked, then try again. Parts are tracked individually, so a change aimed
+at something that's since been replaced can quietly miss.
 
 **You got fewer preview pictures than you asked for**
 
@@ -83,18 +83,18 @@ moments, ask for them in a second batch.
 
 ## Credits and results
 
-**Claude says you've run out of credits**
+**You're told you've run out of credits**
 
 Top up your Picsart account and ask again. Rendering and the video tools use credits; building,
 checking and previewing a layout don't.
 
 **The result panel didn't appear**
 
-The links to the finished file are still in Claude's reply, so you can download it from there. Files
+The links to the finished file are still in the reply, so you can download it from there. Files
 you've rendered are also in your Picsart Drive.
 
 ## Still stuck?
 
-- Ask Claude *"what can Picsart Media Studio do?"* — it can list the jobs it knows how to do
+- Ask *"what can Picsart Media Studio do?"* — it can list the jobs it knows how to do
 - **[What you can do](/guide/media-studio/tools)** — every tool and what it's for
 - **[Overview](/guide/media-tools)** — what Media Studio is, and how to connect

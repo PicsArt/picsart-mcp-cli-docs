@@ -5,12 +5,12 @@ description: "Every Picsart Media Studio tool and what it is for — getting fil
 
 # What you can do
 
-Media Studio gives Claude **29 tools**. You never call them yourself — you ask for what you want and
-Claude picks the ones it needs. This page is here so you can see what is possible, and so you can
-recognise a name when Claude asks your permission to use one.
+Media Studio provides **29 tools**. You never call them yourself — you ask for what you want and
+your assistant picks the ones it needs. This page is here so you can see what is possible, and so
+you can recognise a name when you are asked to approve one.
 
 ::: tip Three worth knowing by name
-`picsart_media_quickstart` is where Claude looks up how to do a job. `picsart_media_list_fonts`
+`picsart_media_quickstart` is where your assistant looks up how to do a job. `picsart_media_list_fonts`
 matters before any styled text. `picsart_media_export` is the one that makes the finished file.
 :::
 
@@ -18,9 +18,9 @@ matters before any styled text. `picsart_media_export` is the one that makes the
 
 | Tool | What it does |
 |---|---|
-| `picsart_media_quickstart` | The starting point — gives Claude the recommended steps for common jobs like joining clips, previewing, or rendering. |
+| `picsart_media_quickstart` | The starting point — supplies the recommended steps for common jobs like joining clips, previewing, or rendering. |
 | `picsart_media_get_capabilities` | Lists what the renderer supports: the available effects, transitions, looks, and motion and text animations. |
-| `picsart_media_get_scene_schema` | Gives Claude the precise structure of a piece, so it can build one correctly. |
+| `picsart_media_get_scene_schema` | Supplies the precise structure of a piece, so it can be built correctly. |
 | `picsart_media_list_fonts` | Lists the fonts available. Worth asking for before styled text — a font that isn't on the list comes out blank. |
 | `picsart_media_list_recipes` | Lists step-by-step guides for longer jobs. |
 | `picsart_media_get_recipe` | Opens one of those guides in full. |
@@ -30,7 +30,7 @@ matters before any styled text. `picsart_media_export` is the one that makes the
 | Tool | What it does |
 |---|---|
 | `picsart_media_upload` | Opens a drop area so you can add an image, video or audio file from your computer. It uploads straight from your browser, and you can also pick something already in your Picsart Drive. |
-| `picsart_media_probe_media` | Checks a file's size, shape and length before Claude builds around it, without downloading the whole thing. |
+| `picsart_media_probe_media` | Checks a file's size, shape and length before anything is built around it, without downloading the whole thing. |
 
 ## Starting from a template
 
@@ -39,7 +39,7 @@ matters before any styled text. `picsart_media_export` is the one that makes the
 | `picsart_media_list_scene_templates` | Lists the ready-made templates — title cards, name strips, product cards and so on. |
 | `picsart_media_describe_scene_template` | Shows what one template lets you change: its text, colours, sizes and timings. |
 | `picsart_media_apply_scene_template` | Fills a template in with your text, colours and images. |
-| `picsart_media_expand_scene_ref` | Breaks a template open into its separate parts, so Claude can change something the template doesn't offer as an option. |
+| `picsart_media_expand_scene_ref` | Breaks a template open into its separate parts, so something the template doesn't offer as an option can still be changed. |
 
 ## Building and styling
 
@@ -59,7 +59,7 @@ All three are free, and worth doing.
 | Tool | What it does |
 |---|---|
 | `picsart_media_validate_scene` | Checks the piece for problems and reports exactly what is wrong and where. |
-| `picsart_media_query_layout` | Reports where everything actually sits on screen at a given moment, so Claude can catch anything overlapping or running off the edge — without rendering. |
+| `picsart_media_query_layout` | Reports where everything actually sits on screen at a given moment, catching anything overlapping or running off the edge — without rendering. |
 | `picsart_media_translate_scene` | Converts the piece into the format Picsart's editor opens, if you would rather carry on editing it by hand. |
 
 ## Previewing and rendering
@@ -72,7 +72,7 @@ All three are free, and worth doing.
 
 ## Working with video you already have
 
-These three read a video you supply and tell Claude about it. They don't change it.
+These three read a video you supply and report back on it. They don't change it.
 
 | Tool | What it does |
 |---|---|
@@ -86,7 +86,7 @@ These three read a video you supply and tell Claude about it. They don't change 
 
 | Tool | What it does |
 |---|---|
-| `picsart_media_drive_list` | Browses your Drive — folders to open, and files Claude can use straight away. |
+| `picsart_media_drive_list` | Browses your Drive — folders to open, and files that can be used straight away. |
 | `picsart_media_drive_save` | Saves a file into your Drive. If it is already there, you get the existing one back rather than a duplicate. |
 
 ## More
