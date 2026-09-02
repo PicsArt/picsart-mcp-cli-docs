@@ -14,6 +14,12 @@ The same model registry powers three interfaces (CLI, Skills, MCP). Every model 
 - [MCP Quickstart](https://picsart.github.io/picsart-mcp-cli-docs/guide/mcp-quickstart): expose the catalog to any MCP-compatible agent
 - [Skills](https://picsart.github.io/picsart-mcp-cli-docs/guide/skills): drop-in skills for Claude Code, Cursor, Windsurf, ChatGPT
 
+## Picsart Media Studio (separate MCP connector)
+- [Media Studio overview](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-tools): scene-graph compositor over MCP; remote connector at api.picsart.com, in-client OAuth, not the gen-ai CLI
+- [Tool reference](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/tools): all 29 picsart_media_* tools, behaviour and cost
+- [Scenes & authoring](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/scenes): the MP Scene document model: layers, templates, patching, limits
+- [Troubleshooting](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/troubleshooting): connector install, sign-in, credits, fonts, local files, egress
+
 ## Concepts
 - [Generating media](https://picsart.github.io/picsart-mcp-cli-docs/guide/generating): prompts, inputs, aspect ratio, duration, outputs
 - [Files & Drive](https://picsart.github.io/picsart-mcp-cli-docs/guide/files-and-drive): upload, download, and list files on Picsart Drive

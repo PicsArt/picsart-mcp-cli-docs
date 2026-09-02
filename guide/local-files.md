@@ -1,20 +1,31 @@
 ---
-description: "No Picsart MCP tool accepts a filesystem path — here are the three ways to turn a local file into a URL an agent can pass to picsart_generate or the media tools."
+description: "No Picsart MCP tool accepts a filesystem path — here are the ways to turn a local file into a URL, for both the gen-ai MCP server and Picsart Media Studio."
 ---
 
 # Local files → URLs
 
 ::: danger No MCP tool accepts a filesystem path
 Every file input across the whole MCP contract — `imageUrls`, `videoUrl`, the media tools' asset
-references, `picsart_drive`'s `url` — is an **HTTP(S) URL** or an inline `data:` URI. There is no
-`filePath` parameter anywhere. `/Users/me/photo.jpg` will never work.
+references, `picsart_drive`'s `url` — is an **HTTP(S) URL**. There is no `filePath` parameter
+anywhere. `/Users/me/photo.jpg` will never work.
+
+Some gen-ai tools additionally accept an inline `data:` URI. **Picsart Media Studio does not** —
+`picsart_media_*` tools reject both local paths and `data:` URIs with `local_source_not_supported`,
+because that surface takes media by reference rather than as bytes pasted into a tool call.
 :::
 
 This is not an oversight. An MCP server runs somewhere else (Picsart's infrastructure); it has no
 access to the filesystem of the machine the agent is running on. So before any local file can be
 used as a generation input, **something on your side has to give it a URL.**
 
-There are exactly three ways to do that today. Pick by what your agent host can do.
+Pick by which connector you are using, and by what your agent host can do.
+
+::: tip Using Picsart Media Studio? Use its own upload widget
+[Media Studio](/guide/media-tools) ships `picsart_media_upload`, which opens a drag-and-drop widget
+right in the conversation — no CLI, no shell, no `data:` URI. That is route **D** below, and it is
+the only one of the four that works there. Routes A–C all depend on the gen-ai CLI or the
+`picsart_drive` tool, neither of which exists on the Media Studio connector.
+:::
 
 ## Comparison
 
@@ -23,6 +34,7 @@ There are exactly three ways to do that today. Pick by what your agent host can 
 | **A. Picsart CLI upload** | Shell access | Anything — the general answer | Free, no tokens |
 | **B. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
 | **C. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
+| **D. Media Studio upload widget** | The [Media Studio](/guide/media-tools) connector | Any local file, on the `picsart_media_*` surface | Free, no tokens |
 
 ## A. Shell-capable agent → the Picsart CLI
 
@@ -122,6 +134,32 @@ remote URL instead of a `data:` URI:
 ```
 
 The returned CDN URL is stable and publicly fetchable by the generation and render services.
+
+## D. Media Studio → `picsart_media_upload`
+
+On the [Picsart Media Studio](/guide/media-tools) connector, `picsart_media_upload` opens a
+drag-and-drop widget in the conversation. The file uploads **straight from your browser** — no bytes
+pass through the tool, and no shell or CLI is involved. A "Use existing" tab also lets you pick a
+file already in your Picsart Drive.
+
+```json
+{ "name": "picsart_media_upload",
+  "arguments": { "purpose": "the clip you want to caption", "accept": "video" } }
+```
+
+Two things to know:
+
+- **It is a two-turn handshake.** The call only *opens* the widget and returns no URL. The URLs
+  arrive with your **next** message, so the agent must wait for you before continuing.
+- `detected_files` is a display hint only. It labels the dropzone ("Drop clip.mp4 here") and never
+  filters or rejects what you actually drop.
+
+This is also the remediation the server itself recommends: any `picsart_media_*` call given a local
+path or a `data:` URI comes back with `local_source_not_supported` and a hint pointing here.
+
+Alternatively, if the file is already in your Picsart Drive, skip uploading entirely —
+`picsart_media_drive_list` returns file URLs you can pass straight to any tool that takes a media
+URL.
 
 ## More
 

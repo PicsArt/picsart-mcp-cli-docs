@@ -40,6 +40,25 @@ Typical workflow: validate the prompt in Playground, connect the agent, then gen
 
 ---
 
+## I need to build a video, deck, or captioned clip from media I already have
+
+**Use: Picsart Media Studio**
+
+Generative models are the wrong tool for composition. If you need clips concatenated, captions burnt
+in, a title card over your own footage, a slideshow from a template, or a video reframed to vertical,
+you want a compositor, not a prompt.
+
+[Media Studio](/guide/media-tools) is a separate MCP connector that authors a structured **scene
+document** — layers, timing, text, effects — and then renders it. Same input, same output, every
+time. It works alongside the generative tools rather than replacing them: generate an asset with the
+[Picsart MCP server](/guide/mcp-quickstart), then composite it here.
+
+- [Media Studio overview](/guide/media-tools)
+- [Tool reference](/guide/media-studio/tools)
+- [Scenes and authoring](/guide/media-studio/scenes)
+
+---
+
 ## I need to run generations on a schedule or as part of a script
 
 **Use: CLI**
@@ -128,6 +147,10 @@ Start at [picsart.com/ai-playground](https://picsart.com/ai-playground/). No acc
 | Iterating on a prompt until it's right | AI Playground |
 | Generating inside Claude or ChatGPT | Skills or MCP |
 | Generating inside Cursor or Windsurf | Skills or MCP |
+| Concatenating clips or building a slideshow | Media Studio |
+| Burning captions or titles over your own footage | Media Studio |
+| Reframing a video to vertical or square | Media Studio |
+| Transcribing speech or describing a video's content | Media Studio |
 | Batch-generating a product catalog | CLI |
 | Scheduling weekly or daily asset creation | CLI |
 | Building a CI/CD pipeline with media generation | CLI |

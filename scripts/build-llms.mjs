@@ -28,6 +28,7 @@ const origin = HOSTNAME + base.replace(/\/$/, '') // no trailing slash; paths ad
 
 const url = (path) => `${origin}${path}`
 
+const mediaTools = JSON.parse(readFileSync(join(dataDir, 'media-tools.json'), 'utf8'))
 const byMode = models.reduce((acc, m) => ((acc[m.mode] = (acc[m.mode] || 0) + 1), acc), {})
 const total = models.length
 const providerCount = providers.length
@@ -66,6 +67,22 @@ out.push('## Interfaces')
 out.push(link('CLI Quickstart', '/guide/cli-quickstart', 'generate, batch, pipe, upload from the terminal'))
 out.push(link('MCP Quickstart', '/guide/mcp-quickstart', 'expose the catalog to any MCP-compatible agent'))
 out.push(link('Skills', '/guide/skills', 'drop-in skills for Claude Code, Cursor, Windsurf, ChatGPT'))
+out.push('')
+
+// Media Studio is a separate remote connector, not one of the three CLI-backed
+// interfaces above — it gets its own section so an agent reading this map does
+// not assume `gen-ai login` or `gen-ai-mcp` apply to it.
+out.push('## Picsart Media Studio (separate MCP connector)')
+out.push(
+  link(
+    'Media Studio overview',
+    '/guide/media-tools',
+    'scene-graph compositor over MCP; remote connector at api.picsart.com, in-client OAuth, not the gen-ai CLI',
+  ),
+)
+out.push(link('Tool reference', '/guide/media-studio/tools', `all ${mediaTools.tools.length} picsart_media_* tools, behaviour and cost`))
+out.push(link('Scenes & authoring', '/guide/media-studio/scenes', 'the MP Scene document model: layers, templates, patching, limits'))
+out.push(link('Troubleshooting', '/guide/media-studio/troubleshooting', 'connector install, sign-in, credits, fonts, local files, egress'))
 out.push('')
 
 out.push('## Concepts')

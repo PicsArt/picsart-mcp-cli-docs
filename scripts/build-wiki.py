@@ -99,7 +99,13 @@ EXTRA_GUIDES = {
     'guide/rest-api.md': 'REST-API',
     'guide/sdk.md': 'SDK',
     'guide/local-files.md': 'Local-Files',
+    # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
+    # stability; the three sub-pages are nested sources, which route2page
+    # handles automatically because it derives the route by stripping '.md'.
     'guide/media-tools.md': 'Media-Tools',
+    'guide/media-studio/tools.md': 'Media-Studio-Tools',
+    'guide/media-studio/scenes.md': 'Media-Studio-Scenes',
+    'guide/media-studio/troubleshooting.md': 'Media-Studio-Troubleshooting',
     'guide/integrations/index.md': 'Integrations',
 }
 # Vendor slug -> wiki page suffix, where simple capitalisation would be wrong.
@@ -217,7 +223,13 @@ home = f'''# Picsart CLI & MCP
 
 ## Build on it
 
-- **[REST API](REST-API)** · **[SDK](SDK)** · **[Local files](Local-Files)** · **[Media tools](Media-Tools)**
+- **[REST API](REST-API)** · **[SDK](SDK)** · **[Local files](Local-Files)**
+
+## Picsart Media Studio
+
+A separate MCP connector: a scene-graph compositor for building and rendering video, decks and captions.
+
+- **[Overview](Media-Tools)** · **[Tool reference](Media-Studio-Tools)** · **[Scenes & authoring](Media-Studio-Scenes)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
 
 ## Model Reference
 
@@ -245,7 +257,10 @@ sb = ['### Picsart CLI & MCP', '',
       '**Connect your agent**', '',
       '- [What is MCP?](What-Is-MCP)', '- [Which tool?](Which-Tool)', '- [All integrations](Integrations)', '',
       '**Build on it**', '',
-      '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '- [Media tools](Media-Tools)', '',
+      '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '',
+      '**Picsart Media Studio**', '',
+      '- [Overview](Media-Tools)', '- [Tool reference](Media-Studio-Tools)',
+      '- [Scenes & authoring](Media-Studio-Scenes)', '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
       '**Model Reference**', '',
       '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',
       '**Providers**', '',
