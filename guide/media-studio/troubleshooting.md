@@ -97,4 +97,4 @@ you've rendered are also in your Picsart Drive.
 
 - Ask *"what can Picsart Media Studio do?"* — it can list the jobs it knows how to do
 - **[What you can do](/guide/media-studio/tools)** — every tool and what it's for
-- **[Overview](/guide/media-tools)** — what Media Studio is, and how to connect
+- **[Overview](/guide/media-studio/)** — what Media Studio is, and how to connect

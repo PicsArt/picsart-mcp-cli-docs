@@ -48,7 +48,7 @@ const sidebar = [
     text: 'Picsart Media Studio',
     collapsed: false,
     items: [
-      { text: 'Overview', link: '/guide/media-tools' },
+      { text: 'Overview', link: '/guide/media-studio/' },
       { text: 'What you can do', link: '/guide/media-studio/tools' },
       { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
     ],
@@ -198,7 +198,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
-      { text: 'Media Studio', link: '/guide/media-tools' },
+      { text: 'Media Studio', link: '/guide/media-studio/' },
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },

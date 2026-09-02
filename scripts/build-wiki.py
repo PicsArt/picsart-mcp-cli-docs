@@ -102,7 +102,7 @@ EXTRA_GUIDES = {
     # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
     # stability; the three sub-pages are nested sources, which route2page
     # handles automatically because it derives the route by stripping '.md'.
-    'guide/media-tools.md': 'Media-Tools',
+    'guide/media-studio/index.md': 'Media-Studio',
     'guide/media-studio/tools.md': 'Media-Studio-Tools',
     'guide/media-studio/troubleshooting.md': 'Media-Studio-Troubleshooting',
     'guide/integrations/index.md': 'Integrations',
@@ -126,6 +126,8 @@ for _src, _page in EXTRA_GUIDES.items():
 # directory-style links, e.g. [..](/guide/integrations/)
 route2page['/guide/integrations'] = 'Integrations'
 route2page['/guide/integrations/'] = 'Integrations'
+route2page['/guide/media-studio'] = 'Media-Studio'
+route2page['/guide/media-studio/'] = 'Media-Studio'
 
 
 def strip_frontmatter(text):
@@ -228,7 +230,7 @@ home = f'''# Picsart CLI & MCP
 
 Build videos, slideshows and captioned clips from your own footage and ready-made templates, by asking Claude.
 
-- **[Overview](Media-Tools)** · **[What you can do](Media-Studio-Tools)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
+- **[Overview](Media-Studio)** · **[What you can do](Media-Studio-Tools)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
 
 ## Model Reference
 
@@ -258,7 +260,7 @@ sb = ['### Picsart CLI & MCP', '',
       '**Build on it**', '',
       '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '',
       '**Picsart Media Studio**', '',
-      '- [Overview](Media-Tools)', '- [What you can do](Media-Studio-Tools)',
+      '- [Overview](Media-Studio)', '- [What you can do](Media-Studio-Tools)',
       '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
       '**Model Reference**', '',
       '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',

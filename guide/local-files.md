@@ -10,7 +10,7 @@ references, `picsart_drive`'s `url` — is an **HTTP(S) URL**. There is no `file
 anywhere. `/Users/me/photo.jpg` will never work.
 
 Some gen-ai tools additionally accept an inline `data:` URI. On
-[Picsart Media Studio](/guide/media-tools) you don't need either — it has its own uploader, which is
+[Picsart Media Studio](/guide/media-studio/) you don't need either — it has its own uploader, which is
 route **D** below.
 :::
 
@@ -31,7 +31,7 @@ Just ask Claude to open it — route **D** below. Routes A–C are for the gen-a
 | **A. Picsart CLI upload** | Shell access | Anything — the general answer | Free, no tokens |
 | **B. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
 | **C. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
-| **D. Media Studio upload widget** | The [Media Studio](/guide/media-tools) connector | Any local file, on the `picsart_media_*` surface | Free, no tokens |
+| **D. Media Studio upload widget** | The [Media Studio](/guide/media-studio/) connector | Any local file, on the `picsart_media_*` surface | Free, no tokens |
 
 ## A. Shell-capable agent → the Picsart CLI
 
@@ -134,7 +134,7 @@ The returned CDN URL is stable and publicly fetchable by the generation and rend
 
 ## D. Media Studio → the built-in uploader
 
-[Picsart Media Studio](/guide/media-tools) has its own uploader. Ask Claude to open it, drop the file
+[Picsart Media Studio](/guide/media-studio/) has its own uploader. Ask Claude to open it, drop the file
 in, and carry on — it uploads straight from your browser, and you can also pick a file already in
 your Picsart Drive.
 

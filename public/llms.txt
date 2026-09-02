@@ -15,7 +15,7 @@ The same model registry powers three interfaces (CLI, Skills, MCP). Every model 
 - [Skills](https://picsart.github.io/picsart-mcp-cli-docs/guide/skills): drop-in skills for Claude Code, Cursor, Windsurf, ChatGPT
 
 ## Picsart Media Studio (separate MCP connector)
-- [Media Studio overview](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-tools): build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai CLI
+- [Media Studio overview](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/): build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai CLI
 - [What you can do](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/tools): all 29 picsart_media_* tools and what each is for
 - [Troubleshooting](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/troubleshooting): connecting, signing in, files from your computer, blank text, credits, previews
 

@@ -133,7 +133,7 @@ const MEDIA_ALLOWED = new Set(mediaTools.tools)
 // section — mcp-quickstart.md describes the mirrored subset on the gen-AI
 // server and so can advertise a demoted tool just as easily.
 const MEDIA_PAGES = [
-  'guide/media-tools.md',
+  'guide/media-studio/index.md',
   'guide/media-studio/tools.md',
   'guide/media-studio/troubleshooting.md',
   'guide/mcp-quickstart.md',
