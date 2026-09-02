@@ -16,7 +16,7 @@ You're on a Claude Team or Enterprise plan, where connectors are added for the w
 rather than one person at a time. Ask whoever administers your Claude organization to add Media
 Studio; once they have, it appears for everyone.
 
-**The connector is listed but shows as unavailable**
+**It's been added but shows as unavailable**
 
 It was most likely added to your own account on a plan that manages connectors centrally. It needs
 adding at the organization level instead — see above.

@@ -68,9 +68,9 @@ The server address is:
 https://api.picsart.com/connectors/media-tools/mcp
 ```
 
-**In Claude** — add it from the connector directory, or go to Settings → Connectors and add it with
-the address above. A browser window opens for you to sign in to Picsart, and the tools show up in
-your next conversation.
+**In Claude** — go to Settings → Connectors → **Add custom connector** and paste the address above.
+A browser window opens for you to sign in to Picsart, and the tools show up in your next
+conversation.
 
 **On a Claude Team or Enterprise plan**, connectors are added for the whole organization rather
 than per person. If you see *"Contact an organization owner to install connectors"*, ask whoever
