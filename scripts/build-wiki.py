@@ -103,8 +103,6 @@ EXTRA_GUIDES = {
     # stability; the three sub-pages are nested sources, which route2page
     # handles automatically because it derives the route by stripping '.md'.
     'guide/media-studio/index.md': 'Media-Studio',
-    # Tombstone for the old /guide/media-tools URL, kept so inbound links resolve.
-    'guide/media-tools.md': 'Media-Tools',
     'guide/media-studio/tools.md': 'Media-Studio-Tools',
     'guide/media-studio/troubleshooting.md': 'Media-Studio-Troubleshooting',
     'guide/integrations/index.md': 'Integrations',

@@ -134,7 +134,6 @@ const MEDIA_ALLOWED = new Set(mediaTools.tools)
 // server and so can advertise a demoted tool just as easily.
 const MEDIA_PAGES = [
   'guide/media-studio/index.md',
-  'guide/media-tools.md', // tombstone for the old URL
   'guide/media-studio/tools.md',
   'guide/media-studio/troubleshooting.md',
   'guide/mcp-quickstart.md',
