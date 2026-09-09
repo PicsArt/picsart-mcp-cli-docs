@@ -147,7 +147,7 @@ export default defineConfig({
   description: SITE_DESC,
   cleanUrls: true,
   lastUpdated: true,
-  srcExclude: ['README.md', '**/README.md'],
+  srcExclude: ['README.md', '**/README.md', 'CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'scripts/**'],
   sitemap: {
     hostname: HOSTNAME + base,
     // page urls are absolute (/guide/x); make them relative so the base subpath
