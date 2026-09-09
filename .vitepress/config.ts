@@ -58,6 +58,7 @@ const sidebar = [
       { text: 'VS Code', link: '/guide/integrations/vscode' },
       { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
       { text: 'Goose', link: '/guide/integrations/goose' },
+      { text: 'Replit', link: '/guide/integrations/replit' },
       { text: 'Raycast', link: '/guide/integrations/raycast' },
       { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
       { text: 'Open WebUI', link: '/guide/integrations/open-webui' },

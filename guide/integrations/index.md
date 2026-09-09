@@ -15,6 +15,7 @@ These guides cover the exact setup for each agent.
 | Claude Code | [Claude Code](/guide/integrations/claude-code) |
 | Cursor | [Cursor](/guide/integrations/cursor) |
 | Windsurf | [Windsurf](/guide/integrations/windsurf) |
+| Replit | [Replit](/guide/integrations/replit) |
 | ChatGPT | [ChatGPT](/guide/integrations/chatgpt) |
 | Codex (OpenAI) | [Codex](/guide/integrations/codex) |
 | VS Code Copilot | [VS Code](/guide/integrations/vscode) |
