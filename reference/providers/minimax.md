@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 8 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 10 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · **Models:** 8
+**Modes:** video · audio · **Models:** 10
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -22,6 +22,8 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `minimax-music-v2` | MiniMax Music v2 | `music` |
 | `minimax-music-v3` | MiniMax Music v3 | `music` |
 | `minimax-h3-max` | MiniMax H3 Max | `t2v` |
+| `minimax-h3-max-turbo` | MiniMax H3 Max Turbo | `t2v` |
+| `minimax-h3-max-camera-controls` | MiniMax H3 Max Camera Controls | `i2v` |
 
 ## CLI
 
@@ -180,6 +182,41 @@ Input type: `t2v`
 | `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
 | `aspectRatio` | `--ar` | enum | `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
 | `promptExpansionMode` | `--prompt-expansion-mode` | enum | `disabled` · `balanced` · `quality` (default `balanced`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-max-turbo` — MiniMax H3 Max Turbo
+
+[Try `minimax-h3-max-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-turbo)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤50000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` (default `768p`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `promptExpansionMode` | `--prompt-expansion-mode` | enum | `balanced` · `quality` (default `balanced`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-max-camera-controls` — MiniMax H3 Max Camera Controls
+
+[Try `minimax-h3-max-camera-controls` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-camera-controls)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text (≤50000 chars) |
+| `startFrame` | `--start-frame` | file | **required** image |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` (default `480p`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `cameraTrajectory` | `--camera-trajectory` | object[] | `{time, azimuth, elevation, distance}` |
+| `promptExpansionMode` | `--prompt-expansion-mode` | enum | `balanced` · `quality` (default `balanced`) |
 | `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
 

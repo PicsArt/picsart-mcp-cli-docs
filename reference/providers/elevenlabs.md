@@ -12,18 +12,18 @@ ElevenLabs is the most complete audio suite in the catalog: expressive text-to-s
 
 ## Models
 
-| id | Name | Input type | Use |
+| id | Name | Input type | Notes |
 |---|---|---|---|
 | `eleven-v3` | Eleven v3 | `tts` | Most expressive TTS |
 | `eleven-multilingual-v2` | Eleven Multilingual v2 | `tts` | Many languages |
-| `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
-| `eleven-voice-design-v2` | Voice Design Multilingual v2 | `tts` | Multilingual voice design |
 | `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` | Sound effects |
 | `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Music generation |
 | `eleven-sts-v2` | Eleven STS v2 | `sts` | Speech-to-speech |
 | `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual STS |
-| `eleven-dubbing` | Eleven Dubbing | `sts` | Dub a track |
 | `eleven-audio-isolation` | Eleven Audio Isolation | `sts` | Isolate voice from noise |
+| `eleven-dubbing` | Eleven Dubbing | `sts` | Dub a track |
+| `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
+| `eleven-voice-design-v2` | Eleven Voice Design Multilingual v2 | `tts` | Multilingual voice design |
 | `eleven-voice-create` | Eleven Voice Previews | `tts` | Preview voices |
 
 ## CLI

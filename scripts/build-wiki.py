@@ -33,7 +33,7 @@ models = json.load(open(f'{DATA}/models.json'))
 # by definition, so the wiki has to be told about them explicitly — otherwise the
 # page is silently dropped here while it still exists on the Pages site, and any
 # link to it (e.g. from the changelog) dangles.
-RETIRED_PROVIDERS = ['pika']
+RETIRED_PROVIDERS = ['pika', 'reve']
 
 
 def prov_page(pid):
@@ -98,6 +98,7 @@ EXTRA_GUIDES = {
     'guide/which-tool.md': 'Which-Tool',
     'guide/rest-api.md': 'REST-API',
     'guide/sdk.md': 'SDK',
+    'guide/sdk-6-2-update.md': 'SDK-6-2-Update',
     'guide/local-files.md': 'Local-Files',
     # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
     # stability; the three sub-pages are nested sources, which route2page

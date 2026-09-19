@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 181 models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 201 models.
 
 ## Check your balance
 
@@ -51,7 +51,7 @@ Because pricing is resolved per-model and per-params, the only reliable number i
 Quote the same prompt across candidates to find the best value:
 
 ```bash
-gen-ai pricing sora-2 -d 8
+gen-ai pricing seedance-2.5 -d 8
 gen-ai pricing veo-3.1 -d 8
 gen-ai pricing seedance-2.0 -d 8
 ```

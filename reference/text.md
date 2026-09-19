@@ -1,10 +1,10 @@
 ---
-description: "8 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
+description: "27 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
 ---
 
 # Text & analysis
 
-**8 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
+**27 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
 
 ## Quick start
 
@@ -27,7 +27,7 @@ From an MCP client, the same models are reachable through `picsart_generate` wit
 
 | Type | Meaning | Models |
 |---|---|---|
-| `i2t` | image → text | Claude Opus / Sonnet / Haiku, GPT-5.5 |
+| `i2t` | image → text | Claude Fable / Opus / Sonnet / Haiku, GPT, Gemini Flash |
 | `v2t` | video (or image) → text | Gemini 3 Pro |
 
 Only Gemini 3 Pro accepts video, so `gen-ai describe --video …` auto-selects it unless you force another model with `-m`.
@@ -36,9 +36,9 @@ Only Gemini 3 Pro accepts video, so `gen-ai describe --video …` auto-selects i
 
 | Provider | Models | Highlights |
 |---|---|---|
-| [Anthropic](/reference/providers/anthropic) | Claude Opus 4.8, Sonnet 4.6, Haiku 4.5 | Opus for hard reasoning; Haiku for high-volume |
-| [OpenAI](/reference/providers/openai) | GPT-5.5 | Strong general image understanding |
-| [Google](/reference/providers/google) | Gemini 3 Pro, Gemini 3.7 Flash, Gemini 3.6 Flash, Gemini 3.5 Flash Lite | Pro reads video; Flash tiers handle image analysis |
+| [Anthropic](/reference/providers/anthropic) | Claude Fable, Opus, Sonnet, Haiku | Opus for hard reasoning; Haiku for high-volume |
+| [OpenAI](/reference/providers/openai) | GPT-6 Astra, GPT-5.6 family, GPT-5 and GPT-4 families | Strong general image understanding |
+| [Google](/reference/providers/google) | Gemini 3 Pro, Gemini 3.8 / 3.7 / 3.6 Flash, 3.5 Flash Lite, 2.5 Flash | Pro reads video; Flash tiers handle image analysis |
 
 ## Common parameters
 

@@ -4,7 +4,7 @@ description: "Flux (Black Forest Labs) AI models on Picsart — 7 image and vide
 
 # Flux
 
-**Modes:** image · video · **Models:** 7
+**Modes:** image · video · **Models:** 8
 
 **Vendor:** [Black Forest Labs](https://blackforestlabs.ai) · **Official API docs:** [docs.bfl.ml](https://docs.bfl.ml)
 
@@ -21,6 +21,7 @@ Flux (by Black Forest Labs) is a family of high-quality text-to-image models wit
 | `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Reference-guided editing |
 | `flux-3-video` | Flux 3 Video | `t2v` | Text-to-video with native audio |
 | `flux-video-upscale` | Flux Video Upscale | `v2v` | Upscales an existing video up to 3x |
+| `flux-video-edit` | FLUX Video Edit | `v2v` | Edit videos with a text instruction — change objects, styles or scenes while preserving motion, timing and audio. Source clips up to 15 seconds; output at 24 fps, up to 720p. |
 
 ## CLI
 
@@ -147,6 +148,18 @@ Input type: `v2v`
 | `upscaleFactor` | `--upscale-factor` | range | `1.5`–`3`, step 0.5 (default `2`) |
 | `creativity` | `--creativity` | enum | `0` (Precise) · `1` (Creative) (default `1`) |
 | `prompt` | `-p` | text | free text |
+| `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
+
+### `flux-video-edit` — FLUX Video Edit
+
+[Try `flux-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=flux-video-edit)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `videoUrl` | `--video` | file | **required** video |
+| `prompt` | `-p` | text | **required** (≤4096 chars) |
 | `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
 
 ## Pricing

@@ -73,7 +73,7 @@ const GLOBAL_PATTERNS = [
   { label: 'video models', re: /(\d+)\s+(?:AI\s+)?video(?:\s+generation)?\s+models/gi, expected: () => modeCount.video },
   { label: 'audio models', re: /(\d+)\s+(?:AI\s+)?audio\s+models/gi, expected: () => modeCount.audio },
   { label: 'text models', re: /(\d+)\s+(?:AI\s+)?text\s+models/gi, expected: () => modeCount.text },
-  { label: 'total models', re: /(\d+)\+?\s+models\b/g, expected: () => total },
+  { label: 'total models', re: /(\d+)\+?\s+(?:(?:Picsart\s+AI|generative\s+AI|AI)\s+)?models\b/g, expected: () => total },
   { label: 'N-model catalog', re: /(\d+)-model\b/g, expected: () => total },
   { label: 'provider count', re: /(\d+)\s+(?:AI\s+model\s+)?providers\b/gi, expected: () => providerCount },
 ]

@@ -49,6 +49,7 @@ Object.assign(flagMap, {
   omniImageList: '`--omni-image-list`',
   omniVideoList: '`--omni-video-list`',
   thinking: '`--thinking`',
+  colorDepth: 'SDK only',
 })
 const OBJECT_VALUE = {
   multiPrompt: 'up to 6 `{index, prompt, duration}`',
@@ -100,7 +101,7 @@ function valueCell(p, model) {
     case 'file':
       return (p.required ? '**required** ' : '') + p.accept + (p.array && p.array.max ? ` (up to ${p.array.max})` : '')
     case 'object':
-      return OBJECT_VALUE[p.key] ?? `\`{${(p.fields ?? []).join(', ')}}\``
+      return OBJECT_VALUE[p.key] ?? `\`{${(Array.isArray(p.fields) ? p.fields : Object.keys(p.fields ?? {})).join(', ')}}\``
     default:
       return ''
   }

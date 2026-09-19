@@ -7,6 +7,10 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-09-19
+
+**SDK 6.2.3 catalog refresh — 201 models across 31 providers.** Compared with the previously published catalog: 26 additions, 6 removals; Meta joins and Reve leaves the active provider list. The SDK upgrade from 6.0.0 adds 11 text models and changes result metadata and Seedance color-depth handling. See the [complete update and migration guide](/guide/sdk-6-2-update).
+
 ## 2026-09-01
 
 **Catalog refresh — now 181 models across 31 providers** (`@picsart/ai-sdk` 5.24.0). These docs were last generated from 5.19.0, so this refresh spans 5.20–5.24: three video/image models added, one renamed, none retired.

@@ -1,10 +1,10 @@
 ---
-description: "Qwen (Alibaba) AI models on Picsart — 3 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
+description: "Qwen (Alibaba) AI models on Picsart — 2 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Qwen
 
-**Mode:** image · **Models:** 3
+**Mode:** image · **Models:** 2
 
 **Vendor:** [Qwen Cloud (Alibaba DashScope)](https://docs.qwencloud.com) · **Official API docs:** [Qwen API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-reference)
 
@@ -14,7 +14,6 @@ Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-fo
 
 | id | Name | Input type |
 |---|---|---|
-| `qwen-image-2` | Qwen 2 | `t2i` |
 | `qwen-image-2-pro` | Qwen 2 Pro | `t2i` |
 | `qwen-image-3.0-pro` | Qwen 3.0 Pro | `t2i` |
 
@@ -22,7 +21,7 @@ Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-fo
 
 ```bash
 # text-to-image
-gen-ai generate -m qwen-image-2 \
+gen-ai generate -m qwen-image-3-pro \
   -p "a neon ramen shop sign at night, bold typography, rain reflections" -n 4
 
 # 2K with a negative prompt
@@ -41,7 +40,7 @@ gen-ai generate -m qwen-image-2-pro \
 ```json
 { "name": "picsart_generate",
   "arguments": {
-    "model": "qwen-image-2",
+    "model": "qwen-image-3-pro",
     "prompt": "a neon ramen shop sign at night, bold typography, rain reflections",
     "count": 4
   } }
@@ -60,18 +59,6 @@ gen-ai generate -m qwen-image-2-pro \
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
-
-### `qwen-image-2` — Qwen 2
-
-[Try `qwen-image-2` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
 
 ### `qwen-image-2-pro` — Qwen 2 Pro
 
@@ -108,7 +95,7 @@ Input type: `t2i`
 ## Pricing
 
 ```bash
-gen-ai pricing qwen-image-2 -n 4
+gen-ai pricing qwen-image-3-pro -n 4
 ```
 
 Cost scales with the number of images (**count**); on **Qwen 2 Pro** the chosen **resolution** is the other driver.

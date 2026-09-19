@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 3,
+    "count": 8,
     "modes": [
       "text"
     ]
@@ -42,7 +42,7 @@
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 7,
+    "count": 8,
     "modes": [
       "image",
       "video"
@@ -51,7 +51,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 17,
+    "count": 20,
     "modes": [
       "image",
       "video",
@@ -129,9 +129,17 @@
     ]
   },
   {
+    "id": "meta",
+    "label": "Meta",
+    "count": 1,
+    "modes": [
+      "image"
+    ]
+  },
+  {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 8,
+    "count": 10,
     "modes": [
       "video",
       "audio"
@@ -140,10 +148,9 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 6,
+    "count": 17,
     "modes": [
       "image",
-      "video",
       "text"
     ]
   },
@@ -158,7 +165,7 @@
   {
     "id": "picsart",
     "label": "Picsart",
-    "count": 10,
+    "count": 9,
     "modes": [
       "image",
       "video"
@@ -175,7 +182,7 @@
   {
     "id": "qwen",
     "label": "Qwen (Alibaba)",
-    "count": 3,
+    "count": 2,
     "modes": [
       "image"
     ]
@@ -184,14 +191,6 @@
     "id": "recraft",
     "label": "Recraft",
     "count": 24,
-    "modes": [
-      "image"
-    ]
-  },
-  {
-    "id": "reve",
-    "label": "Reve",
-    "count": 1,
     "modes": [
       "image"
     ]
