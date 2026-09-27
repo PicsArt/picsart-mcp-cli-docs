@@ -69,6 +69,10 @@ No. The CLI, the gen-ai MCP server, and Skills all share one OAuth session — r
 
 [Media Studio](/guide/media-studio/) is separate: you add it to your client and sign in to Picsart there. It needs neither the CLI nor an API key.
 
+**How do I rotate or revoke an API key?**
+
+Rotation is recommended monthly to limit exposure. To revoke a key immediately (for example, if it was accidentally committed to a repository), go to your account dashboard. Rotating a key invalidates the old one immediately: update any integrations before revoking. OAuth2 support is in development.
+
 **Where are my credentials stored?**
 
 At `~/.gen-ai/credentials.json` with permissions `600` (readable only by your user). The CLI auto-refreshes the access token when it expires. If refresh fails, run `gen-ai login` again.

@@ -144,4 +144,5 @@ It prints the resolved request payload — model, prompt, parameters — without
 
 **Does the CLI work inside Docker or GitHub Actions?**
 
-Yes. Install via npm in a Dockerfile, or via the install script in a CI step. See [Authentication](/guide/authentication) for headless login options.
+The CLI uses an OAuth web flow that requires a browser for the initial login. For CI environments, authenticate on a developer machine first, then copy the credentials file (`~/.gen-ai/credentials.json`) to the CI environment as a secret. For REST API or SDK-based CI workflows, use an API key instead. See the [SDK](/guide/sdk) and [REST API](/guide/rest-api) pages.
+
