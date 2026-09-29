@@ -1,82 +1,213 @@
 ---
-description: "Topaz AI models on Picsart — image and video upscaling with selectable enhancement models. CLI + MCP examples, parameters, and official docs."
+description: "Topaz model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Topaz
 
-**Modes:** image · video · **Models:** 2
+**Modes:** image, video · **Models:** 2
 
-**Vendor:** [Topaz Labs](https://docs.topazlabs.com) · **Official API docs:** [developer.topazlabs.com](https://developer.topazlabs.com)
-
-Topaz Labs provides AI image and video enhancement. `topaz-upscale-image` exposes selectable presets for low-resolution photos, CGI/3D renders, high-fidelity preservation, text/graphics, and generative recovery. `topaz-upscale-video` offers the Proteus, Artemis, Nyx, Gaia, and Starlight model families for video sources.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `topaz-upscale-image` | Topaz Image Upscale | `i2i` |
 | `topaz-upscale-video` | Topaz Video Upscale | `v2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# upscale a low-resolution photo
-gen-ai generate -m topaz-upscale-image -i ./old-scan.jpg --model "Low Resolution V2"
-
-# upscale a video with the Proteus model
-gen-ai generate -m topaz-upscale-video --video ./clip.mp4 --model Proteus
+gen-ai models info topaz-upscale-image --json
+gen-ai validate -m topaz-upscale-image --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m topaz-upscale-image --image "https://example.com/input.jpg" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "topaz-upscale-image",
-    "imageUrls": ["https://example.com/portrait.jpg"]
-  } }
+    "prompt": "",
+    "async": true,
+    "imageUrls": [
+      "https://example.com/input.jpg"
+    ]
+  }
+}
 ```
 
-The task-shaped `picsart_enhance` tool also routes to Topaz upscaling:
-
-```json
-{ "name": "picsart_enhance",
-  "arguments": {
-    "imageUrls": ["https://example.com/portrait.jpg"]
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `topaz-upscale-image` — Topaz Image Upscale
+### `topaz-upscale-image`
 
-[Try `topaz-upscale-image` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-upscale-image)
+Topaz Image Upscale; input type `i2i`.
 
-Input type: `i2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `model` | `--model-version` | No | enum | `Standard V2`, `Standard MAX`, `Low Resolution V2`, `High Fidelity V2`, `CGI`, `Text Refine`, `Redefine`, `Recovery`, `Recovery V2`, `Wonder`, `Wonder 3`; default `Standard V2` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `model` | `--model` | enum | `Standard V2` · `Standard MAX` · `Low Resolution V2` · `High Fidelity V2` · `CGI` · `Text Refine` · `Redefine` · `Recovery` · `Recovery V2` · `Wonder` · `Wonder 3` (default `Standard V2`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `topaz-upscale-video` — Topaz Video Upscale
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "model",
+    "label": "Model",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "Standard V2"
+      },
+      {
+        "id": "Standard MAX"
+      },
+      {
+        "id": "Low Resolution V2"
+      },
+      {
+        "id": "High Fidelity V2"
+      },
+      {
+        "id": "CGI"
+      },
+      {
+        "id": "Text Refine"
+      },
+      {
+        "id": "Redefine"
+      },
+      {
+        "id": "Recovery"
+      },
+      {
+        "id": "Recovery V2"
+      },
+      {
+        "id": "Wonder"
+      },
+      {
+        "id": "Wonder 3"
+      }
+    ],
+    "default": "Standard V2"
+  }
+]
+```
 
-[Try `topaz-upscale-video` in Playground ↗](https://picsart.com/ai-playground/?model=topaz-upscale-video)
+</details>
 
-Input type: `v2v`
+### `topaz-upscale-video`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `videoUrl` | `--video` | file | **required** video |
-| `model` | `--model` | enum | `Proteus` · `Artemis HQ` · `Artemis MQ` · `Artemis LQ` · `Nyx` · `Nyx Fast` · `Nyx XL` · `Nyx HF` · `Gaia HQ` · `Gaia CG` · `Gaia 2` · `Starlight Precise 1` · `Starlight Precise 2` · `Starlight Precise 2.5` · `Starlight HQ` · `Starlight Mini` · `Starlight Sharp` · `Starlight Fast 1` · `Starlight Fast 2` (default `Proteus`) |
+Topaz Video Upscale; input type `v2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `videoUrl` | `--video` | Yes | file | video input |
+| `model` | `--model-version` | No | enum | 16 choices; see descriptor below; default `Proteus` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "model",
+    "label": "Model",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "Proteus"
+      },
+      {
+        "id": "Artemis HQ"
+      },
+      {
+        "id": "Artemis MQ"
+      },
+      {
+        "id": "Artemis LQ"
+      },
+      {
+        "id": "Nyx"
+      },
+      {
+        "id": "Nyx Fast"
+      },
+      {
+        "id": "Nyx XL"
+      },
+      {
+        "id": "Nyx HF"
+      },
+      {
+        "id": "Gaia HQ"
+      },
+      {
+        "id": "Gaia CG"
+      },
+      {
+        "id": "Gaia 2"
+      },
+      {
+        "id": "Starlight Precise 2.5"
+      },
+      {
+        "id": "Starlight HQ"
+      },
+      {
+        "id": "Starlight Mini"
+      },
+      {
+        "id": "Starlight Sharp"
+      },
+      {
+        "id": "Starlight Fast 2"
+      }
+    ],
+    "default": "Proteus"
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing topaz-upscale-image
-gen-ai pricing topaz-upscale-video
-```
-
-Run `gen-ai pricing` for the selected model and input before generating; image and video upscaling use separate pricing entries.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

@@ -1,18 +1,16 @@
 ---
-description: "PixVerse AI models on Picsart — 6 video model(s) including PixVerse V6, PixVerse C1, PixVerse V6 Fusion. CLI + MCP examples, parameters, and official docs."
+description: "PixVerse model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # PixVerse
 
-**Mode:** video · **Models:** 6
+**Modes:** video · **Models:** 6
 
-**Vendor:** [PixVerse](https://pixverse.ai) · **Official API docs:** [PixVerse Platform Docs](https://docs.platform.pixverse.ai)
-
-PixVerse is a video model family with text-to-video, image-to-video (start-frame), and **Fusion** reference-to-video (compose from up to several reference images). Two lines are available: **V6** and **C1**, each spanning text, image, and fusion inputs, with quality up to 1080p, durations of 5–15s, and optional native audio.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `pixverse-v6` | PixVerse V6 | `t2v` |
 | `pixverse-v6-image` | PixVerse V6 Image | `i2v` |
@@ -21,140 +19,784 @@ PixVerse is a video model family with text-to-video, image-to-video (start-frame
 | `pixverse-c1-image` | PixVerse C1 Image | `i2v` |
 | `pixverse-c1-fusion` | PixVerse C1 Fusion | `i2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video with native audio
-gen-ai generate -m pixverse-v6 \
-  -p "a paper boat sailing down a rain-soaked city gutter, cinematic" \
-  --ar 16:9 --quality 1080p -d 8 --audio-gen true
-
-# image-to-video from a start frame
-gen-ai generate -m pixverse-c1-image -i ./start.jpg \
-  -p "the camera slowly pulls back to reveal the skyline"
-
-# reference-to-video (Fusion) from multiple images
-gen-ai generate -m pixverse-v6-fusion -i ./ref1.jpg -i ./ref2.jpg \
-  -p "blend the subjects into one continuous scene"
+gen-ai models info pixverse-v6 --json
+gen-ai validate -m pixverse-v6 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m pixverse-v6 --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "pixverse-v6",
-    "prompt": "a paper boat sailing down a rain-soaked city gutter, cinematic",
-    "aspectRatio": "16:9",
-    "quality": "1080p",
-    "duration": 8,
-    "generateAudio": true
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "pixverse-v6-fusion",
-    "prompt": "blend the subjects into one continuous scene",
-    "imageUrls": ["https://example.com/ref1.jpg", "https://example.com/ref2.jpg"]
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `pixverse-v6` — PixVerse V6
+### `pixverse-v6`
 
-[Try `pixverse-v6` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6)
+PixVerse V6; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `pixverse-v6-image` — PixVerse V6 Image
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  }
+]
+```
 
-[Try `pixverse-v6-image` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6-image)
+</details>
 
-Input type: `i2v`
+### `pixverse-v6-image`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
+PixVerse V6 Image; input type `i2v`.
 
-### `pixverse-v6-fusion` — PixVerse V6 Fusion
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
-[Try `pixverse-v6-fusion` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-v6-fusion)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
-| `imageUrls` | `-i` | file | **required** image (up to 7) |
+</details>
 
-### `pixverse-c1` — PixVerse C1
+### `pixverse-v6-fusion`
 
-[Try `pixverse-c1` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1)
+PixVerse V6 Fusion; input type `i2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 7 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `pixverse-c1-image` — PixVerse C1 Image
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 7
+    }
+  }
+]
+```
 
-[Try `pixverse-c1-image` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1-image)
+</details>
 
-Input type: `i2v`
+### `pixverse-c1`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
+PixVerse C1; input type `t2v`.
 
-### `pixverse-c1-fusion` — PixVerse C1 Fusion
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 
-[Try `pixverse-c1-fusion` in Playground ↗](https://picsart.com/ai-playground/?model=pixverse-c1-fusion)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
-| `imageUrls` | `-i` | file | **required** image (up to 7) |
+</details>
+
+### `pixverse-c1-image`
+
+PixVerse C1 Image; input type `i2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
+
+</details>
+
+### `pixverse-c1-fusion`
+
+PixVerse C1 Fusion; input type `i2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
+| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 7 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "540p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 7
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing pixverse-v6 -d 8
-```
-
-Cost scales with **quality** and **duration**. Cost is resolved per `modelId` via the backend `/options` call.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

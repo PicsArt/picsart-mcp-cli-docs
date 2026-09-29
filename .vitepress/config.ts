@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 174 models from 32 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills: generate image, video, and audio across the versioned model catalog in your terminal or a supported AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -43,6 +43,8 @@ const sidebar = [
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
       { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
+      { text: 'TypeScript SDK', link: '/guide/sdk' },
+      { text: 'REST API', link: '/guide/rest-api' },
     ],
   },
   {
@@ -81,6 +83,8 @@ const sidebar = [
       { text: 'Local files → URLs', link: '/guide/local-files' },
       { text: 'Files & Drive', link: '/guide/files-and-drive' },
       { text: 'Pricing & Credits', link: '/guide/pricing' },
+      { text: 'Errors and rate limits', link: '/guide/rate-limits' },
+      { text: 'Security', link: '/guide/security' },
       { text: 'Batch & Automation', link: '/guide/batch' },
     ],
   },
@@ -115,6 +119,7 @@ const sidebar = [
       { text: 'Kling', link: '/reference/providers/kling' },
       { text: 'LTX (Lightricks)', link: '/reference/providers/ltx' },
       { text: 'Luma', link: '/reference/providers/luma' },
+      { text: 'Meta', link: '/reference/providers/meta' },
       { text: 'MiniMax', link: '/reference/providers/minimax' },
       { text: 'OpenAI', link: '/reference/providers/openai' },
       { text: 'OVI', link: '/reference/providers/ovi' },
@@ -147,7 +152,7 @@ export default defineConfig({
   description: SITE_DESC,
   cleanUrls: true,
   lastUpdated: true,
-  srcExclude: ['README.md', '**/README.md', 'CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'scripts/**'],
+  srcExclude: ['README.md', '**/README.md', 'CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'scripts/**', 'audit/**'],
   sitemap: {
     hostname: HOSTNAME + base,
     // page urls are absolute (/guide/x); make them relative so the base subpath
@@ -159,11 +164,11 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Picsart CLI & MCP' }],
     // Absolute social-share image (1200x630). Regenerate with
-    // `node docs-site/scripts/make-og-image.mjs`.
+    // `node scripts/make-og-image.mjs`.
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 174 models, 32 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills: model reference' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],

@@ -1,90 +1,34 @@
 ---
-description: Add Picsart's MCP server to AnythingLLM to generate images, videos, and audio directly inside your AnythingLLM workspaces.
+description: "Picsart MCP transport and OAuth compatibility in AnythingLLM."
 ---
 
 # AnythingLLM
 
-AnythingLLM is an all-in-one desktop AI application with support for RAG, agents, and MCP servers ([anythingllm.com](https://anythingllm.com)). It is available as a desktop app and as a self-hosted Docker deployment. Picsart connects via a remote HTTP URL, so no additional local process is required.
+AnythingLLM stores MCP definitions in `plugins/anythingllm_mcp_servers.json` under its storage directory. Open that file through the Agent Skills MCP controls for your installation and merge:
 
-## Prerequisites
-
-- AnythingLLM 1.6.0 or later. MCP support was added in version 1.6.0.
-- A Picsart API key. Get one at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under **API Settings**.
-- An LLM with reliable function-calling configured in AnythingLLM (GPT-4o, Claude, or Qwen 2.5 72B recommended).
-
-## Setup
-
-**1. Open AnythingLLM settings**
-
-Click the gear icon to open **Settings**.
-
-**2. Navigate to Agent Tools**
-
-Select **Agent Skills** or **Agent Tools** (the label varies by version).
-
-**3. Add the MCP server**
-
-Find the **MCP Servers** section and click **Add Server**. Enter the following:
-
-| Field | Value |
-|---|---|
-| Name | Picsart Gen AI |
-| Type | Streamable HTTP |
-| URL | `https://mcp.picsart.io/mcp` |
-| Authorization header | `Bearer YOUR_PICSART_API_KEY` |
-
-Replace `YOUR_PICSART_API_KEY` with your key from [picsart.com/ai-playground/](https://picsart.com/ai-playground/).
-
-**4. Save and verify**
-
-Click **Save**. AnythingLLM connects to the server and lists the available Picsart tools.
-
-**5. Test in chat**
-
-Open any workspace, enable agent mode (the wand icon), and send:
-
-```
-What Picsart tools do I have access to?
+```json
+{
+  "mcpServers": {
+    "picsart": {
+      "type": "streamable",
+      "url": "https://api.picsart.com/gen-ai/mcp"
+    }
+  }
+}
 ```
 
-The agent should respond with the full list of available tools.
+Refresh the server from Agent Skills and inspect its status. The transport value is `streamable`.
 
-For the full MCP configuration reference, see the [AnythingLLM MCP documentation](https://docs.anythingllm.com/agent/custom/mcp-servers).
+The linked host guide documents remote transport and headers, but does not establish a verified Picsart OAuth sign-in flow. Treat this configuration as a transport setup, not a working authenticated integration. If your release cannot complete Picsart OAuth, use an [OAuth-capable client](/guide/integrations/claude-code). A CLI login or SDK API key is not a substitute.
 
-## Use it
+## Compatibility status
 
-With agent mode enabled in any workspace:
+If your release supports the required OAuth flow and reports a signed-in Picsart connection, verify access as follows.
 
-- "Generate a product image for a new sneaker launch using Flux 2 Pro."
-- "Create a 5-second promo video from this product image."
-- "Generate a podcast-style voiceover for this script using ElevenLabs."
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-## Troubleshooting
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-**MCP section not visible in settings**
-Update AnythingLLM to 1.6.0 or later. Versions before 1.6.0 do not include MCP support.
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-**Server saved but no tools appear**
-Restart AnythingLLM. The tool manifest is fetched at app startup, not immediately on save.
-
-**"Network error" when connecting**
-Confirm the URL is exactly `https://mcp.picsart.io/mcp`. Self-hosted instances require outbound HTTPS access to `mcp.picsart.io` on port 443.
-
-## FAQ
-
-**Does AnythingLLM work offline with Picsart MCP tools?**
-AnythingLLM can run local LLMs without an internet connection, but Picsart MCP tools require an active internet connection to reach `mcp.picsart.io`. Offline use of local models is unaffected.
-
-**Can multiple workspaces use Picsart tools?**
-Yes. MCP servers are global in AnythingLLM. Once added, they are available in all workspaces without any per-workspace configuration.
-
-**What LLM produces the best results with Picsart tools?**
-Any model with reliable function-calling works. OpenAI GPT-4o, Anthropic Claude, and Qwen 2.5 72B produce the most consistent tool calls. Small local models (under 7B parameters) may produce unreliable results with structured tool arguments.
-
-## Start creating
-
-The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
-
-::: tip Ready to generate?
-[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [AnythingLLM documentation](https://docs.anythingllm.com/mcp-compatibility/overview), checked September 29, 2026. The host reference was checked for MCP transport support; a complete Picsart OAuth credential flow has not been established.

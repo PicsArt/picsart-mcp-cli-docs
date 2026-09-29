@@ -1,156 +1,1446 @@
 ---
-description: "OpenAI AI models on Picsart — 8 image/video/audio model(s) including GPT Image 1.5, GPT Image 2, Sora 2. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # OpenAI
 
-**Modes:** image · video · text · **Models:** 6
+**Modes:** image, text · **Models:** 19
 
-**Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/video-generation)
-
-OpenAI spans two media families on the Playground: **Sora 2** text-to-video (standard and **Pro**, plus a chainable **Extend** workflow) and **GPT Image** text-to-image (`gpt-image-2`, `gpt-image-1.5`). Sora renders up to 720p (1080p on `sora-2-pro`) with native audio and optional first-frame image conditioning.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
-| `sora-2-pro` | Sora 2 Pro | `t2v` |
-| `sora-2` | Sora 2 | `t2v` |
-| `sora-2-extend` | Sora 2 Extend | `v2v` |
+| `gpt-image-2.5-sunburst` | GPT Image 2.5 Sunburst | `t2i` |
+| `gpt-image-2.5-flare` | GPT Image 2.5 Flare | `t2i` |
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
+| `gpt-6-astra` | GPT-6 Astra | `i2t` |
+| `gpt-6-sol` | GPT-6 Sol | `i2t` |
+| `gpt-6-luna` | GPT-6 Luna | `i2t` |
+| `gpt-5.6-sol` | GPT-5.6 Sol | `i2t` |
+| `gpt-5.6-terra` | GPT-5.6 Terra | `i2t` |
+| `gpt-5.6-luna` | GPT-5.6 Luna | `i2t` |
 | `gpt-5.5` | GPT-5.5 | `i2t` |
+| `gpt-5.2` | GPT-5.2 | `i2t` |
+| `gpt-5.1` | GPT-5.1 | `i2t` |
+| `gpt-5` | GPT-5 | `i2t` |
+| `gpt-5-mini` | GPT-5 Mini | `i2t` |
+| `gpt-4o` | GPT-4o | `i2t` |
+| `gpt-4o-mini` | GPT-4o Mini | `i2t` |
+| `gpt-4.1-mini` | GPT-4.1 Mini | `i2t` |
+| `gpt-4.1-nano` | GPT-4.1 Nano | `i2t` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video
-gen-ai generate -m sora-2 \
-  -p "a paper boat drifting down a rain-soaked city gutter, cinematic, slow motion" \
-  --ar 16:9 -d 8
-
-# image-anchored video (first-frame conditioning)
-gen-ai generate -m sora-2-pro -p "the boat sets sail into open water" -i ./boat.jpg --ar 16:9 -d 12
-
-# text-to-image
-gen-ai generate -m gpt-image-2 \
-  -p "an isometric cutaway of a cozy bookshop, warm lighting" \
-  --ar 16:9 -n 2
+gen-ai models info gpt-image-2 --json
+gen-ai validate -m gpt-image-2 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "sora-2",
-    "prompt": "a paper boat drifting down a rain-soaked city gutter, cinematic, slow motion",
-    "aspectRatio": "16:9",
-    "duration": 8
-  } }
+```bash
+gen-ai generate -m gpt-image-2 --prompt "A quiet forest at sunrise" --download ./output
 ```
 
+Equivalent hosted MCP request:
+
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "gpt-image-2",
-    "prompt": "an isometric cutaway of a cozy bookshop, warm lighting",
-    "aspectRatio": "16:9",
-    "count": 2
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `sora-2-pro` — Sora 2 Pro
+### `gpt-image-2.5-sunburst`
 
-[Try `sora-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2-pro)
+GPT Image 2.5 Sunburst; input type `t2i`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 32000 characters |
+| `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`, `auto`; default `1:1` |
+| `quality` | Use SDK or MCP | No | enum | `max`, `xhigh`, `high`, `medium`, `low`; default `high` |
+| `background` | Use SDK or MCP | No | enum | `opaque`, `transparent`; default `opaque` |
+| `outputFormat` | Use SDK or MCP | No | enum | `png`, `jpeg`, `webp`; default `png` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 16 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 1) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `resolution` | `-r` | enum | `720p` · `1024p` · `1080p` (default `720p`) |
-| `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `4`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `sora-2` — Sora 2
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 32000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "max"
+      },
+      {
+        "id": "xhigh"
+      },
+      {
+        "id": "high"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "low"
+      }
+    ],
+    "default": "high"
+  },
+  {
+    "key": "background",
+    "label": "Background",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "opaque"
+      },
+      {
+        "id": "transparent"
+      }
+    ],
+    "default": "opaque"
+  },
+  {
+    "key": "outputFormat",
+    "label": "Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "png"
+      },
+      {
+        "id": "jpeg"
+      },
+      {
+        "id": "webp"
+      }
+    ],
+    "default": "png"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 16
+    }
+  }
+]
+```
 
-[Try `sora-2` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2)
+</details>
 
-Input type: `t2v`
+### `gpt-image-2.5-flare`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 1) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `4`) |
+GPT Image 2.5 Flare; input type `t2i`.
 
-### `sora-2-extend` — Sora 2 Extend
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 32000 characters |
+| `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`, `auto`; default `1:1` |
+| `quality` | Use SDK or MCP | No | enum | `max`, `xhigh`, `high`, `medium`, `low`; default `high` |
+| `background` | Use SDK or MCP | No | enum | `opaque`, `transparent`; default `opaque` |
+| `outputFormat` | Use SDK or MCP | No | enum | `png`, `jpeg`, `webp`; default `png` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 16 |
 
-[Try `sora-2-extend` in Playground ↗](https://picsart.com/ai-playground/?model=sora-2-extend)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `v2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 32000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "max"
+      },
+      {
+        "id": "xhigh"
+      },
+      {
+        "id": "high"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "low"
+      }
+    ],
+    "default": "high"
+  },
+  {
+    "key": "background",
+    "label": "Background",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "opaque"
+      },
+      {
+        "id": "transparent"
+      }
+    ],
+    "default": "opaque"
+  },
+  {
+    "key": "outputFormat",
+    "label": "Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "png"
+      },
+      {
+        "id": "jpeg"
+      },
+      {
+        "id": "webp"
+      }
+    ],
+    "default": "png"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 16
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `videoId` | `--video-id` | enum | dynamic value (no fixed list) |
-| `duration` | `-d` | enum | `4` · `8` · `12` · `16` · `20` (default `8`) |
+</details>
 
-### `gpt-image-2` — GPT Image 2
+### `gpt-image-2`
 
-[Try `gpt-image-2` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2)
+GPT Image 2; input type `t2i`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 32000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`, `auto`; default `1:1` |
+| `quality` | `--quality` | No | enum | `high`, `medium`, `low`; default `high` |
+| `outputFormat` | `--output-format` | No | enum | `png`, `jpeg`, `webp`; default `png` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 5 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
-| `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 5) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gpt-image-1.5` — GPT Image 1.5
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 32000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "high"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "low"
+      }
+    ],
+    "default": "high"
+  },
+  {
+    "key": "outputFormat",
+    "label": "Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "png"
+      },
+      {
+        "id": "jpeg"
+      },
+      {
+        "id": "webp"
+      }
+    ],
+    "default": "png"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 5
+    }
+  }
+]
+```
 
-[Try `gpt-image-1.5` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-1.5)
+</details>
 
-Input type: `t2i`
+### `gpt-image-1.5`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` (default `1:1`) |
-| `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
-| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 5) |
+GPT Image 1.5; input type `t2i`.
 
-### `gpt-5.5` — GPT-5.5
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 32000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`; default `1:1` |
+| `quality` | `--quality` | No | enum | `high`, `medium`, `low`; default `high` |
+| `background` | `--background` | No | enum | `opaque`, `transparent`; default `opaque` |
+| `outputFormat` | `--output-format` | No | enum | `png`, `jpeg`, `webp`; default `png` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 5 |
 
-[Try `gpt-5.5` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-5.5)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2t`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 32000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "high"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "low"
+      }
+    ],
+    "default": "high"
+  },
+  {
+    "key": "background",
+    "label": "Background",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "opaque"
+      },
+      {
+        "id": "transparent"
+      }
+    ],
+    "default": "opaque"
+  },
+  {
+    "key": "outputFormat",
+    "label": "Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "png"
+      },
+      {
+        "id": "jpeg"
+      },
+      {
+        "id": "webp"
+      }
+    ],
+    "default": "png"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 5
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+</details>
+
+### `gpt-6-astra`
+
+GPT-6 Astra; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-6-sol`
+
+GPT-6 Sol; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-6-luna`
+
+GPT-6 Luna; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.6-sol`
+
+GPT-5.6 Sol; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.6-terra`
+
+GPT-5.6 Terra; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.6-luna`
+
+GPT-5.6 Luna; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.5`
+
+GPT-5.5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.2`
+
+GPT-5.2; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5.1`
+
+GPT-5.1; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5`
+
+GPT-5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-5-mini`
+
+GPT-5 Mini; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gpt-4o`
+
+GPT-4o; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `gpt-4o-mini`
+
+GPT-4o Mini; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `gpt-4.1-mini`
+
+GPT-4.1 Mini; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `gpt-4.1-nano`
+
+GPT-4.1 Nano; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing sora-2 -d 8 --ar 16:9
-gen-ai pricing gpt-image-2 --quality high -n 2
-```
-
-Sora cost scales with **duration**, **resolution** (720p vs 1080p on Pro), and **tier** (`sora-2` vs `sora-2-pro`). GPT Image cost scales with **quality**, output **size**, and **count**.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

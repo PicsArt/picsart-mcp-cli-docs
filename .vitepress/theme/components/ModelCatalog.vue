@@ -10,13 +10,15 @@ const INPUT_LABELS = {
   t2i: 'Text → Image', i2i: 'Image → Image',
   t2v: 'Text → Video', i2v: 'Image → Video', v2v: 'Video → Video', a2v: 'Audio → Video',
   tts: 'Text → Speech', sts: 'Speech → Speech', sfx: 'Sound FX', music: 'Music',
+  t2t: 'Text → Text', i2t: 'Image → Text', v2t: 'Video → Text', a2t: 'Audio → Text',
+  t2a: 'Text → Audio', v2a: 'Video → Audio', a2a: 'Audio → Audio',
 }
 
 const query = ref('')
 const mode = ref('all')
 const provider = ref('all')
 
-const modes = ['all', 'image', 'video', 'audio']
+const modes = ['all', 'image', 'video', 'audio', 'text']
 
 const filtered = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -38,7 +40,7 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
         class="catalog-search"
         v-model="query"
         type="search"
-        placeholder="Search 174 models — name, id, or provider…"
+        placeholder="Search catalog models: name, id, or provider…"
         aria-label="Search models"
       />
       <div class="catalog-pills">
@@ -133,6 +135,7 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
 }
 .tag.mode-image { background: #10b981; }
 .tag.mode-video { background: #3b82f6; }
+.tag.mode-text { background: #7c3aed; }
 .tag.mode-audio { background: #ec4899; }
 .tag.io { background: transparent; color: var(--vp-c-text-2); border: 1px solid var(--vp-c-border); text-transform: none; font-weight: 500; }
 .card-name { font-weight: 600; font-size: 15px; color: var(--vp-c-text-1); }

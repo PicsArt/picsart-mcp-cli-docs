@@ -1,112 +1,71 @@
-# Picsart CLI & MCP — Docs
+# Picsart CLI and MCP documentation
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 174 models from 32 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Read the [published documentation](https://picsart.github.io/picsart-mcp-cli-docs/), starting with the [CLI quickstart](https://picsart.github.io/picsart-mcp-cli-docs/guide/cli-quickstart) or [MCP connection guide](https://picsart.github.io/picsart-mcp-cli-docs/guide/mcp-quickstart).
 
-- **Source of truth:** this folder (`docs-site/`) inside the `ai-toolkit` repo.
-- **Public repo:** https://github.com/PicsArt/picsart-mcp-cli-docs
-- **Live wiki (public, no Actions needed):** https://github.com/PicsArt/picsart-mcp-cli-docs/wiki
-- **Themed site (live):** https://picsart.github.io/picsart-mcp-cli-docs/
+This public repository is the source for the VitePress site and generated GitHub Wiki. Submit documentation changes here.
 
 ## Local development
 
+From the repository root, with Node.js 20 or newer and Python 3.10 or newer:
+
 ```bash
-cd docs-site
-npm install
-npm run dev        # http://localhost:5173 (or --port 4600)
-npm run build      # static build → .vitepress/dist
-npm run preview    # preview the production build
+npm ci
+npm run dev
+npm run build
+npm run preview
 ```
 
-## Structure
+The development server prints its local URL. The production build is written to `.vitepress/dist`. These commands build documentation; installing the Picsart CLI separately requires Node.js 22 or newer.
 
-```
-docs-site/
-  .vitepress/config.ts        # nav, sidebar (unified), theme
-  .vitepress/theme/           # Picsart brand + ModelCatalog / ProviderGrid Vue components + data/
-  index.md                    # home (hero)
-  guide/                      # getting started + CLI / MCP / Skills + concepts
-  reference/                  # model reference: catalog, per-mode, per-provider
-    providers/                # one page per vendor (32)
-  public/llms.txt             # generated AI-agent site map (llmstxt.org)
-  scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
-  scripts/check-counts.mjs    # fails the build if prose model/provider counts drift
-  scripts/build-wiki.py       # converts these docs → GitHub Wiki markdown
+## Catalog data
+
+`scripts/data/catalog.json` records the SDK version and exported model descriptors. The CLI command and model snapshots alongside it document the release used for example validation. The hosted server can differ from both.
+
+Regenerate the catalog and provider pages with:
+
+```bash
+node scripts/build-catalog-data.mjs scripts/data/catalog.json
+node scripts/build-provider-pages.mjs scripts/data/catalog.json
+npm run build
 ```
 
-## Data freshness
-
-`.vitepress/theme/data/{models,providers}.json` are generated from the installed SDK catalog.
-Run `node scripts/export-sdk-catalog.mjs <output.json>`, then pass that file to
-`build-catalog-data.mjs` and `build-provider-pages.mjs` when the catalog changes so the Model Catalog,
-Providers grid, and the generated wiki tables stay accurate.
-
-`public/llms.txt` (the [llmstxt.org](https://llmstxt.org) agent map) is generated from those
-same JSON files, so it tracks the real model/provider counts. `npm run build` regenerates it
-automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap`, it hardcodes
-the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
-custom-domain move) and re-run.
-
-The hand-written counts in prose (`174 models`, `64 image models`, `32 providers`, each
-provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
-truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
-Run it standalone with `npm run check:counts`.
-
----
+The provider generator replaces generated provider pages. Edit its templates to change those pages. To obtain a new SDK snapshot, install the intended `@picsart/ai-sdk` version in a development environment, then run `node scripts/export-sdk-catalog.mjs scripts/data/catalog.json`. Review the version, model changes, CLI compatibility, and examples before accepting the update.
 
 ## Publishing
 
-The docs live in **`PicsArt/picsart-mcp-cli-docs`** (public). There are two delivery surfaces; keep both in sync from this `docs-site/` source.
+The checked-in GitHub Actions workflow builds and deploys pushes to `main` when Actions and GitHub Pages are enabled for the repository. Open a pull request and follow the repository's review process.
 
-### One-time / occasional: sync source to the public repo
-
-The public repo's `main` mirrors this `docs-site/` folder at its root. To update it:
+To test the production subpath locally:
 
 ```bash
-# from a clean checkout of docs-site/ contents (root of the public repo)
-git add -A && git commit -m "docs: <what changed>"
-git push origin main
+DOCS_BASE=/picsart-mcp-cli-docs/ npm run build
 ```
 
-> The `ai-toolkit` monorepo is private; never push its history to the public repo. Only the `docs-site/` contents (at the public repo root) + `.github/workflows/deploy-docs.yml` belong there.
-
-### Route A — GitHub Pages (themed, interactive) ← live
-
-`.github/workflows/deploy-docs.yml` auto-builds and deploys on every push to `main`.
-It derives the base path from the repo name (`DOCS_BASE=/<repo>/`).
-
-**Actions are enabled** (an org admin allowed them on 2026-06-18 — the PicsArt org disables
-Actions by default) and Pages **Source = GitHub Actions** (`build_type: workflow`), so pushes
-to `main` deploy automatically. To run a deploy by hand:
+For a local Wiki export:
 
 ```bash
-gh workflow run deploy-docs.yml --repo PicsArt/picsart-mcp-cli-docs --ref main
+npm run wiki:build -- wiki-build
 ```
 
-> Fallback if Actions is ever disabled again: build locally (`DOCS_BASE=/picsart-mcp-cli-docs/ npm run build`)
-> and push `.vitepress/dist` to a `gh-pages` branch with Pages set to "deploy from branch".
+Review the generated Markdown before copying it into the separately managed Wiki repository. Exporting files does not publish them.
 
-### Route B — GitHub Wiki (plain, no Actions)
+See [CONTRIBUTING.md](CONTRIBUTING.md) for validation and style requirements.
 
-GitHub renders the wiki server-side, so it needs no Actions/Pages build. Plain Markdown,
-so the interactive catalog/provider grids become **static tables**.
+## Browser and regression checks
 
-> **First-page caveat:** GitHub has no API to create a wiki's *first* page. Create one page
-> via the web UI once (`/wiki` → "Create the first page" → Save). After that, `.wiki.git` is
-> pushable and the steps below keep it in sync.
+After `npm run build`, run `npm run test:docs` to test the documentation guards. To open every built page in Chromium, install the browser once and start the preview:
 
 ```bash
-# 1. clone the wiki (separate git repo)
-git clone https://github.com/PicsArt/picsart-mcp-cli-docs.wiki.git .wiki
-
-# 2. regenerate all wiki pages from these docs (48 pages: guide + reference + 32 providers + Home/_Sidebar/_Footer)
-npm run wiki:build -- .wiki        # = python3 scripts/build-wiki.py .wiki
-
-# 3. publish
-cd .wiki
-git add -A && git commit -m "docs: sync wiki"
-git push origin master             # GitHub wikis use the 'master' branch
+npx playwright install chromium
+npm run preview
 ```
 
-`scripts/build-wiki.py` strips VitePress frontmatter, rewrites `/guide` and `/reference`
-links to wiki page names, converts `:::tip/warning` containers to blockquotes, and replaces
-the `<ModelCatalog>` / `<ProviderGrid>` components with static tables built from the data JSON.
+In another terminal, use the URL printed by the preview server:
+
+```bash
+npm run check:site -- http://localhost:4173/ /tmp/docs-browser-report.json
+```
+
+For a build using `DOCS_BASE=/picsart-mcp-cli-docs/`, start the preview with `DOCS_BASE=/picsart-mcp-cli-docs/ npm run preview` and include that subpath in the URL. Restart the preview after rebuilding so it serves the new asset filenames. The browser check verifies pages, local links and anchors, catalog controls, and mobile overflow. It does not test paid generation or external host sign-ins.
+
+To regenerate the social image after installing Chromium, run `node scripts/make-og-image.mjs`. The build pins Vite 6.4.3 through an override because the current VitePress release requests an older affected Vite series. Recheck the build and browser checks before changing that override.

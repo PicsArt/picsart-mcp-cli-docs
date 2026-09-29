@@ -2,7 +2,7 @@
 import { withBase } from 'vitepress'
 import providers from '../data/providers.json'
 
-const MODE_ORDER = { image: 0, video: 1, audio: 2 }
+const MODE_ORDER = { image: 0, video: 1, audio: 2, text: 3 }
 const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
 </script>
 
@@ -54,6 +54,7 @@ const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.locale
 }
 .pc-mode.mode-image { background: #10b981; }
 .pc-mode.mode-video { background: #3b82f6; }
+.pc-mode.mode-text { background: #7c3aed; }
 .pc-mode.mode-audio { background: #ec4899; }
 .pc-link { font-size: 13px; font-weight: 500; color: var(--vp-c-brand-1); margin-top: auto; }
 </style>

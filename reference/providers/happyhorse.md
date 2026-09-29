@@ -1,18 +1,16 @@
 ---
-description: "Happy Horse AI models on Picsart — 5 video model(s) including Happy Horse 1.0, Happy Horse 1.0 Ref-to-Video, Happy Horse 1.0 Video Edit. CLI + MCP examples, parameters, and official docs."
+description: "Happy Horse model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Happy Horse
 
-**Mode:** video · **Models:** 5
+**Modes:** video · **Models:** 5
 
-**Vendor:** [Qwen Cloud](https://www.qwencloud.com/models/happyhorse-1.0-t2v) · **Official API docs:** [Qwen Cloud docs](https://docs.qwencloud.com/developer-guides/getting-started/introduction)
-
-Happy Horse 1.0 is a text-to-video model running on Qwen Cloud (Alibaba Cloud Intl / DashScope), with highly realistic dynamic rendering, accurate text-semantic comprehension, and fluid, detail-rich motion. Resolutions up to 1080P and 5/10/15-second durations. The catalog also exposes backend-enabled **reference-to-video** and **video-edit** variants alongside the base text-to-video model.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `happyhorse-1.0-t2v` | Happy Horse 1.0 | `t2v` |
 | `happyhorse-1.0-r2v` | Happy Horse 1.0 Ref-to-Video | `i2v` |
@@ -20,115 +18,496 @@ Happy Horse 1.0 is a text-to-video model running on Qwen Cloud (Alibaba Cloud In
 | `happyhorse-1.1-t2v` | Happy Horse 1.1 | `t2v` |
 | `happyhorse-1.1-r2v` | Happy Horse 1.1 Ref-to-Video | `i2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video
-gen-ai generate -m happyhorse-1.0-t2v \
-  -p "a wild horse galloping across a misty meadow at dawn, cinematic" \
-  --ar 16:9 -r 1080P -d 10
-
-# first-frame guidance: animate from a still
-gen-ai generate -m happyhorse-1.0-t2v -p "the horse rears up and breaks into a gallop" \
-  --start-frame ./horse.jpg
-
-# reference-to-video: drive the scene from reference images
-gen-ai generate -m happyhorse-1.0-r2v -p "[Image 1] runs through [Image 2]" -i ./subject.jpg -i ./field.jpg
+gen-ai models info happyhorse-1.0-t2v --json
+gen-ai validate -m happyhorse-1.0-t2v --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m happyhorse-1.0-t2v --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "happyhorse-1.0-t2v",
-    "prompt": "a wild horse galloping across a misty meadow at dawn, cinematic",
-    "aspectRatio": "16:9",
-    "resolution": "1080P",
-    "duration": 10
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `happyhorse-1.0-t2v` — Happy Horse 1.0
+### `happyhorse-1.0-t2v`
 
-[Try `happyhorse-1.0-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-t2v)
+Happy Horse 1.0; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `720P`, `1080P`; default `720P` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
+<details>
+<summary>Full parameter descriptors</summary>
 
-> **Notes:** `r2v` takes up to 9 reference images via `imageUrls`; `video-edit` takes a source video plus reference images.
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720P"
+      },
+      {
+        "id": "1080P"
+      }
+    ],
+    "default": "720P"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-### `happyhorse-1.0-r2v` — Happy Horse 1.0 Ref-to-Video
+</details>
 
-[Try `happyhorse-1.0-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-r2v)
+### `happyhorse-1.0-r2v`
 
-Input type: `i2v`
+Happy Horse 1.0 Ref-to-Video; input type `i2v`.
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
-| `imageUrls` | `-i` | file | **required** image (up to 9) |
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `720P`, `1080P`; default `720P` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 9 |
 
-### `happyhorse-1.0-video-edit` — Happy Horse 1.0 Video Edit
+<details>
+<summary>Full parameter descriptors</summary>
 
-[Try `happyhorse-1.0-video-edit` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.0-video-edit)
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720P"
+      },
+      {
+        "id": "1080P"
+      }
+    ],
+    "default": "720P"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  }
+]
+```
 
-Input type: `v2v`
+</details>
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `audioSetting` | `--audio-setting` | enum | `auto` · `origin` (default `auto`) |
-| `videoUrl` | `--video` | file | **required** video |
-| `imageUrls` | `-i` | file | image (up to 5) |
+### `happyhorse-1.0-video-edit`
 
-### `happyhorse-1.1-t2v` — Happy Horse 1.1
+Happy Horse 1.0 Video Edit; input type `v2v`.
 
-[Try `happyhorse-1.1-t2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.1-t2v)
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `resolution` | `--resolution` | No | enum | `720P`, `1080P`; default `720P` |
+| `audioSetting` | `--audio-setting` | No | enum | `auto`, `origin`; default `auto` |
+| `videoUrl` | `--video` | Yes | file | video input |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 5 |
 
-Input type: `t2v`
+<details>
+<summary>Full parameter descriptors</summary>
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720P"
+      },
+      {
+        "id": "1080P"
+      }
+    ],
+    "default": "720P"
+  },
+  {
+    "key": "audioSetting",
+    "label": "Audio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto"
+      },
+      {
+        "id": "origin"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 5
+    }
+  }
+]
+```
 
-### `happyhorse-1.1-r2v` — Happy Horse 1.1 Ref-to-Video
+</details>
 
-[Try `happyhorse-1.1-r2v` in Playground ↗](https://picsart.com/ai-playground/?model=happyhorse-1.1-r2v)
+### `happyhorse-1.1-t2v`
 
-Input type: `i2v`
+Happy Horse 1.1; input type `t2v`.
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `720P` · `1080P` (default `720P`) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
-| `imageUrls` | `-i` | file | **required** image (up to 9) |
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `720P`, `1080P`; default `720P` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720P"
+      },
+      {
+        "id": "1080P"
+      }
+    ],
+    "default": "720P"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
+
+</details>
+
+### `happyhorse-1.1-r2v`
+
+Happy Horse 1.1 Ref-to-Video; input type `i2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `720P`, `1080P`; default `720P` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 9 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720P"
+      },
+      {
+        "id": "1080P"
+      }
+    ],
+    "default": "720P"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing happyhorse-1.0-t2v -d 10 -r 1080P
-```
-
-Cost scales with **duration** and **resolution** (1080P costs roughly 1.7× the 720P rate).
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

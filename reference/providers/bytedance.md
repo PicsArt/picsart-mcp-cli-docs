@@ -1,86 +1,264 @@
 ---
-description: "ByteDance AI models on Picsart — 2 video model(s) including ByteDance OmniHuman, ByteDance Upscaler. CLI + MCP examples, parameters, and official docs."
+description: "ByteDance model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # ByteDance
 
-**Mode:** video · **Models:** 2
+**Modes:** video · **Models:** 2
 
-**Vendor:** [BytePlus](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [OmniHuman 1.5 overview](https://docs.byteplus.com/en/docs/byteplus-vision/omnihuman1_5overview)
-
-ByteDance models on the BytePlus Vision AI platform. **OmniHuman 1.5** is an audio-driven avatar model — give it a single portrait image plus an audio clip and it generates a talking/performing video (expression and motion are driven by the audio, not a text prompt). A separate **ByteDance Upscaler** restores and upscales an existing clip to 1080p.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
-| `bytedance-video-upscaler` | ByteDance Upscaler | `v2v` |
 | `bytedance-omnihuman-v1.5` | ByteDance OmniHuman | `i2v` |
+| `bytedance-video-enhance` | ByteDance Video Enhance | `v2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# audio-driven talking avatar: portrait image + audio clip
-gen-ai generate -m bytedance-omnihuman-v1.5 \
-  -i ./portrait.jpg -a ./speech.mp3 \
-  -p "subtle head movement, slow camera push-in"
-
-# upscale an existing clip to 1080p
-gen-ai generate -m bytedance-video-upscaler --video ./clip.mp4
+gen-ai models info bytedance-omnihuman-v1.5 --json
+gen-ai validate -m bytedance-omnihuman-v1.5 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m bytedance-omnihuman-v1.5 --prompt "A quiet forest at sunrise" --image "https://example.com/input.jpg" --audio "https://example.com/input.mp3" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "bytedance-omnihuman-v1.5",
-    "imageUrls": ["https://example.com/portrait.jpg"],
-    "audioUrl": "https://example.com/speech.mp3",
-    "prompt": "subtle head movement, slow camera push-in"
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true,
+    "imageUrls": [
+      "https://example.com/input.jpg"
+    ],
+    "extra": {
+      "audioUrl": "https://example.com/input.mp3"
+    }
+  }
+}
 ```
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "bytedance-video-upscaler",
-    "videoUrl": "https://example.com/clip.mp4"
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `bytedance-video-upscaler` — ByteDance Upscaler
+### `bytedance-omnihuman-v1.5`
 
-[Try `bytedance-video-upscaler` in Playground ↗](https://picsart.com/ai-playground/?model=bytedance-video-upscaler)
+ByteDance OmniHuman; input type `i2v`.
 
-Input type: `v2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 300 characters |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `audioUrl` | `--audio` | Yes | file | audio input |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`; default `1080p` |
+| `turboMode` | `--turbo-mode` | No | boolean | true or false; default `false` |
+| `seed` | `--seed` | No | range | -1 to 2147483647; default `-1` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `videoUrl` | `--video` | file | **required** video — short side must be under 1080px (already-1080p sources are rejected) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `bytedance-omnihuman-v1.5` — ByteDance OmniHuman
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 300
+  },
+  {
+    "key": "imageUrls",
+    "label": "Portrait Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "audioUrl",
+    "label": "Audio Track",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "audio"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "1080p"
+  },
+  {
+    "key": "turboMode",
+    "label": "Turbo Mode",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "seed",
+    "kind": "range",
+    "min": -1,
+    "max": 2147483647,
+    "default": -1
+  }
+]
+```
 
-[Try `bytedance-omnihuman-v1.5` in Playground ↗](https://picsart.com/ai-playground/?model=bytedance-omnihuman-v1.5)
+</details>
 
-Input type: `i2v`
+### `bytedance-video-enhance`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `audioUrl` | `-a` | file | **required** audio |
+ByteDance Video Enhance; input type `v2v`.
 
-> **Notes:** OmniHuman 1.5 derives emotion and lip-sync from the audio, so `prompt` is optional and only steers camera/motion. The video upscaler takes only a source video.
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `videoUrl` | `--video` | Yes | file | video input |
+| `quality` | `--quality` | No | enum | `standard`, `professional`; default `standard` |
+| `resolution` | `--resolution` | No | enum | `source`, `720p`, `1080p`, `2k`, `4k`, `8k`; default `source` |
+| `fps` | `--fps` | No | enum | `30`, `60`, `120`; default `30` |
+| `scene` | `--scene` | No | enum | `common`, `ugc`, `short_series`, `aigc`, `old_film`; default `common` |
+| `bitrateLevel` | `--bitrate-level` | No | enum | `low`, `medium`, `high`; default `medium` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "standard"
+      },
+      {
+        "id": "professional"
+      }
+    ],
+    "default": "standard"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "source"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "2k"
+      },
+      {
+        "id": "4k"
+      },
+      {
+        "id": "8k"
+      }
+    ],
+    "default": "source"
+  },
+  {
+    "key": "fps",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 30
+      },
+      {
+        "id": 60
+      },
+      {
+        "id": 120
+      }
+    ],
+    "default": 30
+  },
+  {
+    "key": "scene",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "common"
+      },
+      {
+        "id": "ugc"
+      },
+      {
+        "id": "short_series"
+      },
+      {
+        "id": "aigc"
+      },
+      {
+        "id": "old_film"
+      }
+    ],
+    "default": "common"
+  },
+  {
+    "key": "bitrateLevel",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "medium"
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing bytedance-omnihuman-v1.5
-```
-
-Cost scales with the **duration** of the generated video (driven by the length of the input audio clip).
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

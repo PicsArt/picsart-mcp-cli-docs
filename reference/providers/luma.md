@@ -1,18 +1,16 @@
 ---
-description: "Luma AI models on Picsart — 9 image/video model(s) including Luma Ray 3.2, Luma UNI-1 Max, Luma Flash 2. CLI + MCP examples, parameters, and official docs."
+description: "Luma model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Luma
 
-**Modes:** image · video · **Models:** 9
+**Modes:** image, video · **Models:** 9
 
-**Vendor:** [Luma AI](https://lumalabs.ai) · **Official API docs:** [Luma Dream Machine API](https://docs.lumalabs.ai/docs/api)
-
-Luma's Dream Machine line covers both video and image. **Ray 3.2** (with **Ray 2** and the faster **Flash 2**) generates video from text or a start/end frame at up to 4K, with dedicated **edit** and **reframe** workflows for changing a clip's aspect ratio. **UNI-1** (and **UNI-1 Max**) is the image model, with multi-image reference input, edit, and style controls.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `luma-ray-2` | Luma Ray 2 | `t2v` |
 | `luma-ray-flash-2` | Luma Flash 2 | `i2v` |
@@ -24,184 +22,895 @@ Luma's Dream Machine line covers both video and image. **Ray 3.2** (with **Ray 2
 | `luma-ray-3.2-edit` | Luma Ray 3.2 Edit | `v2v` |
 | `luma-ray-3.2-reframe-video` | Luma Ray 3.2 Reframe | `v2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video at 4K
-gen-ai generate -m luma-ray-2 \
-  -p "a paper boat drifting down a rain-soaked city gutter, cinematic" \
-  --ar 16:9 -r 4k -d 9
-
-# image-to-video from a start frame
-gen-ai generate -m luma-ray-2 -p "slow zoom out, drifting clouds" --start-frame ./hero.jpg
-
-# reframe an existing clip to vertical
-gen-ai generate -m luma-ray-2-reframe-video --video ./clip.mp4 --ar 9:16
-
-# text-to-image with a reference
-gen-ai generate -m luma-uni-1 -p "a fox in a moss-green raincoat, storybook" --ar 1:1 -i ./ref.jpg
+gen-ai models info luma-ray-2 --json
+gen-ai validate -m luma-ray-2 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m luma-ray-2 --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "luma-ray-2",
-    "prompt": "a paper boat drifting down a rain-soaked city gutter, cinematic",
-    "aspectRatio": "16:9",
-    "resolution": "4k",
-    "duration": 9
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "luma-uni-1",
-    "prompt": "a fox in a moss-green raincoat, storybook",
-    "aspectRatio": "1:1",
-    "style": "auto"
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `luma-ray-2` — Luma Ray 2
+### `luma-ray-2`
 
-[Try `luma-ray-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2)
+Luma Ray 2; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`, `4k`; default `720p` |
+| `duration` | `--duration` | No | enum | `5`, `9`; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `9` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `luma-ray-flash-2` — Luma Flash 2
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "9:21"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 9
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-[Try `luma-ray-flash-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2)
+</details>
 
-Input type: `i2v`
+### `luma-ray-flash-2`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `9` (default `5`) |
-| `startFrame` | `--start-frame` | file | **required** image |
-| `endFrame` | `--end-frame` | file | image |
+Luma Flash 2; input type `i2v`.
 
-### `luma-ray-2-reframe-video` — Luma Ray 2 Reframe
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`, `4k`; default `720p` |
+| `duration` | `--duration` | No | enum | `5`, `9`; default `5` |
+| `startFrame` | `--start-frame` | Yes | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
 
-[Try `luma-ray-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2-reframe-video)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `v2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "9:21"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 9
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `videoUrl` | `--video` | file | **required** video |
+</details>
 
-### `luma-ray-flash-2-reframe-video` — Luma Flash 2 Reframe
+### `luma-ray-2-reframe-video`
 
-[Try `luma-ray-flash-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2-reframe-video)
+Luma Ray 2 Reframe; input type `v2v`.
 
-Input type: `v2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
+| `videoUrl` | `--video` | Yes | file | video input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `videoUrl` | `--video` | file | **required** video |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `luma-uni-1` — Luma UNI-1
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "9:21"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  }
+]
+```
 
-[Try `luma-uni-1` in Playground ↗](https://picsart.com/ai-playground/?model=luma-uni-1)
+</details>
 
-Input type: `t2i`
+### `luma-ray-flash-2-reframe-video`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤6000 chars) |
-| `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
-| `style` | `--style` | enum | `auto` (Auto) · `manga` (Manga) (default `auto`) |
-| `imageUrls` | `-i` | file | image (up to 9) |
+Luma Flash 2 Reframe; input type `v2v`.
 
-### `luma-uni-1-max` — Luma UNI-1 Max
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
+| `videoUrl` | `--video` | Yes | file | video input |
 
-[Try `luma-uni-1-max` in Playground ↗](https://picsart.com/ai-playground/?model=luma-uni-1-max)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `t2i`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "9:21"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤6000 chars) |
-| `aspectRatio` | `--ar` | enum | `3:1` · `2:1` · `16:9` · `3:2` · `1:1` · `2:3` · `9:16` · `1:2` · `1:3` (default `1:1`) |
-| `style` | `--style` | enum | `auto` (Auto) · `manga` (Manga) (default `auto`) |
-| `imageUrls` | `-i` | file | image (up to 9) |
+</details>
 
-### `luma-ray-3.2` — Luma Ray 3.2
+### `luma-uni-1`
 
-[Try `luma-ray-3.2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2)
+Luma UNI-1; input type `t2i`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `3:1`, `2:1`, `16:9`, `3:2`, `1:1`, `2:3`, `9:16`, `1:2`, `1:3`; default `1:1` |
+| `style` | `--style` | No | enum | `auto`, `manga`; default `auto` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 9 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤6000 chars) |
-| `aspectRatio` | `--ar` | enum | `9:16` · `3:4` · `1:1` · `4:3` · `16:9` · `21:9` (default `16:9`) |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-| `hdr` | `--hdr` | boolean | `true` · `false` (default `false`) |
-| `exrExport` | `--exr-export` | boolean | `true` · `false` (default `false`) |
-| `loop` | `--loop` | boolean | `true` · `false` (default `false`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `luma-ray-3.2-edit` — Luma Ray 3.2 Edit
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "3:1"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:2"
+      },
+      {
+        "id": "1:3"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "style",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto",
+        "label": "Auto"
+      },
+      {
+        "id": "manga",
+        "label": "Manga"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  }
+]
+```
 
-[Try `luma-ray-3.2-edit` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2-edit)
+</details>
 
-Input type: `v2v`
+### `luma-uni-1-max`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤6000 chars) |
-| `videoUrl` | `--video` | file | **required** video |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `editStrength` | `--edit-strength` | enum | `adhere_1` (Adhere 1) · `adhere_2` (Adhere 2) · `adhere_3` (Adhere 3) · `flex_1` (Flex 1) · `flex_2` (Flex 2) · `flex_3` (Flex 3) · `reimagine_1` (Reimagine 1) · `reimagine_2` (Reimagine 2) · `reimagine_3` (Reimagine 3) (default `flex_2`) |
-| `hdr` | `--hdr` | boolean | `true` · `false` (default `false`) |
-| `exrExport` | `--exr-export` | boolean | `true` · `false` (default `false`) |
+Luma UNI-1 Max; input type `t2i`.
 
-### `luma-ray-3.2-reframe-video` — Luma Ray 3.2 Reframe
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `3:1`, `2:1`, `16:9`, `3:2`, `1:1`, `2:3`, `9:16`, `1:2`, `1:3`; default `1:1` |
+| `style` | `--style` | No | enum | `auto`, `manga`; default `auto` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 9 |
 
-[Try `luma-ray-3.2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-3.2-reframe-video)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `v2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "3:1"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:2"
+      },
+      {
+        "id": "1:3"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "style",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto",
+        "label": "Auto"
+      },
+      {
+        "id": "manga",
+        "label": "Manga"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤6000 chars) |
-| `aspectRatio` | `--ar` | enum | `9:16` · `3:4` · `1:1` · `4:3` · `16:9` · `21:9` (default `16:9`) |
-| `videoUrl` | `--video` | file | **required** video |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` (default `720p`) |
+</details>
 
-> **Notes:** The reframe variants take a required `videoUrl` (`--video`) plus `--ar`.
+### `luma-ray-3.2`
+
+Luma Ray 3.2; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `9:16`, `3:4`, `1:1`, `4:3`, `16:9`, `21:9`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`; default `720p` |
+| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
+| `hdr` | `--hdr` | No | boolean | true or false; default `false` |
+| `exrExport` | `--exr-export` | No | boolean | true or false; default `false` |
+| `loop` | `--loop` | No | boolean | true or false; default `false` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "hdr",
+    "label": "HDR",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "exrExport",
+    "label": "EXR Export",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "loop",
+    "label": "Loop",
+    "kind": "boolean",
+    "default": false
+  }
+]
+```
+
+</details>
+
+### `luma-ray-3.2-edit`
+
+Luma Ray 3.2 Edit; input type `v2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `videoUrl` | `--video` | Yes | file | video input |
+| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`; default `720p` |
+| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
+| `editStrength` | `--edit-strength` | No | enum | `adhere_1`, `adhere_2`, `adhere_3`, `flex_1`, `flex_2`, `flex_3`, `reimagine_1`, `reimagine_2`, `reimagine_3`; default `flex_2` |
+| `hdr` | `--hdr` | No | boolean | true or false; default `false` |
+| `exrExport` | `--exr-export` | No | boolean | true or false; default `false` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 30
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "editStrength",
+    "label": "Edit Strength",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "adhere_1",
+        "label": "Adhere 1"
+      },
+      {
+        "id": "adhere_2",
+        "label": "Adhere 2"
+      },
+      {
+        "id": "adhere_3",
+        "label": "Adhere 3"
+      },
+      {
+        "id": "flex_1",
+        "label": "Flex 1"
+      },
+      {
+        "id": "flex_2",
+        "label": "Flex 2"
+      },
+      {
+        "id": "flex_3",
+        "label": "Flex 3"
+      },
+      {
+        "id": "reimagine_1",
+        "label": "Reimagine 1"
+      },
+      {
+        "id": "reimagine_2",
+        "label": "Reimagine 2"
+      },
+      {
+        "id": "reimagine_3",
+        "label": "Reimagine 3"
+      }
+    ],
+    "default": "flex_2"
+  },
+  {
+    "key": "hdr",
+    "label": "HDR",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "exrExport",
+    "label": "EXR Export",
+    "kind": "boolean",
+    "default": false
+  }
+]
+```
+
+</details>
+
+### `luma-ray-3.2-reframe-video`
+
+Luma Ray 3.2 Reframe; input type `v2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `9:16`, `3:4`, `1:1`, `4:3`, `16:9`, `21:9`; default `16:9` |
+| `videoUrl` | `--video` | Yes | file | video input |
+| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`; default `720p` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 30
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "540p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing luma-ray-2 -d 9 -r 4k
-```
-
-Video cost scales with **duration** and **resolution**. UNI-1 image cost is per generation.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

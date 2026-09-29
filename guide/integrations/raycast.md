@@ -1,93 +1,21 @@
 ---
-description: Connect Picsart MCP to Raycast AI on Mac for image generation, video creation, and creative tools directly from your launcher.
+description: "Connect Raycast to Picsart with a hosted MCP connection."
 ---
 
 # Raycast
 
-[Raycast](https://raycast.com) is a Mac launcher used by over 100,000 developers daily. Its AI Chat feature supports MCP servers via remote HTTP, so you can call Picsart tools without any local server setup.
+Raycast documents MCP as a Pro feature. In Raycast, run **Install MCP Server** or use **Install New Server** from **Manage MCP Servers**.
 
-## Prerequisites
+Set the name to Picsart, transport to **HTTP**, and URL to `https://api.picsart.com/gen-ai/mcp`. Use OAuth discovery and complete **Sign In**. If your deployment requires static client registration, obtain its client details from the service administrator rather than inventing them.
 
-- Raycast with an active [Raycast Pro](https://raycast.com/pro) subscription (required for AI features)
-- A Picsart API key, available from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under API settings
-- macOS (Raycast is Mac-only)
+Use **Manage MCP Servers** to inspect the status and tool list. Mention `@picsart` in AI Chat or Quick AI to select the connection.
 
-## Setup
+## Verify the connection
 
-1. Open Raycast (Cmd+Space or your configured hotkey).
-2. Type **Manage MCP Servers** and press Enter.
-3. Click **Add Server**.
-4. Fill in the following fields:
-   - **Name:** `Picsart Gen AI`
-   - **URL:** `https://mcp.picsart.io/mcp`
-   - **Authorization header:** `Bearer YOUR_PICSART_API_KEY`
-5. Click **Save**.
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-Raycast fetches the tool list from the server. Once loaded, available Picsart tools appear in the server entry.
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-6. Open Raycast AI Chat (Cmd+Space, then select **AI Chat**).
-7. Type `@Picsart` to address the Picsart server directly in your message.
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-For the full MCP setup reference, see the [Raycast MCP documentation](https://manual.raycast.com/model-context-protocol).
-
-## Use it
-
-Once connected, address Picsart in any AI Chat conversation:
-
-```
-@Picsart generate a product shot of red sneakers on a white background
-```
-
-```
-@Picsart create a 5-second cinematic video of a city at night using Kling V3
-```
-
-```
-@Picsart check my credit balance
-```
-
-Raycast sends your prompt to the AI model, which calls the relevant Picsart tool and returns the result inline.
-
-## Troubleshooting
-
-**"Server not found" on save**
-
-Confirm the URL is entered as `https://mcp.picsart.io/mcp` with no trailing slash and no extra characters.
-
-**Tools not loading after save**
-
-Quit Raycast fully (Cmd+Q from the menu bar icon) and relaunch it. The tool list is fetched on startup.
-
-**Authentication error**
-
-Check the Authorization header value for leading or trailing spaces. If the error persists, generate a new API key from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) and update the server entry.
-
-**@Picsart not appearing as an option**
-
-The server must have loaded its tool list successfully. Open **Manage MCP Servers**, select the Picsart entry, and verify the tools are listed. If the list is empty, check your network connection and re-save the server.
-
-## FAQ
-
-**Does this work on Raycast for Linux or Windows?**
-
-No. Raycast is Mac-only.
-
-**Do I need Raycast Pro to use MCP?**
-
-Yes. MCP is part of Raycast AI, which requires a Pro subscription. Free accounts do not have access to AI features.
-
-**Can Raycast download generated files automatically?**
-
-Raycast AI returns the tool result as text, which includes a URL to the generated file. You can open the link directly or chain it with a Raycast script to automate the download.
-
-**Will Picsart tools appear for every AI Chat conversation?**
-
-Tools are available globally in AI Chat once the server is added. You do not need to re-enable them per conversation.
-
-## Start creating
-
-The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
-
-::: tip Ready to generate?
-[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [Raycast documentation](https://manual.raycast.com/ai/model-context-protocol), checked September 29, 2026. These steps are based on the host's documented configuration; a complete Picsart sign-in was not exercised in each host during this audit.

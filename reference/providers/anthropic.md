@@ -1,90 +1,347 @@
 ---
-description: "Anthropic Claude models on Picsart — Claude Opus 4.8, Sonnet 4.6, and Haiku 4.5 for image and video analysis via the gen-ai describe command. CLI + MCP examples and parameters."
+description: "Anthropic model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Anthropic
 
-**Mode:** text · **Models:** 3
+**Modes:** text · **Models:** 8
 
-**Vendor:** [Anthropic](https://www.anthropic.com) · **Official API docs:** [docs.anthropic.com](https://docs.anthropic.com)
-
-Anthropic's **Claude** models are large language models for analysis, not media generation: give them an image (and an optional question) and they return **text** — captions, OCR, classification, or a description. They power the [`gen-ai describe`](/guide/cli-quickstart#describe-an-image-or-video) command. Three tiers trade capability for speed and cost: **Opus** (most capable), **Sonnet** (balanced, the default), and **Haiku** (fastest).
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
+| `claude-fable-5-1` | Claude Fable 5.1 | `i2t` |
+| `claude-fable-5` | Claude Fable 5 | `i2t` |
+| `claude-opus-5` | Claude Opus 5 | `i2t` |
 | `claude-opus-4-8` | Claude Opus 4.8 | `i2t` |
+| `claude-sonnet-5` | Claude Sonnet 5 | `i2t` |
 | `claude-sonnet-4-6` | Claude Sonnet 4.6 | `i2t` |
+| `claude-sonnet-4-5` | Claude Sonnet 4.5 | `i2t` |
 | `claude-haiku-4-5` | Claude Haiku 4.5 | `i2t` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# describe an image (Sonnet is the default model)
-gen-ai describe -i photo.jpg
-
-# ask a specific question with the most capable model
-gen-ai describe -m claude-opus-4-8 -i receipt.jpg -p "extract the total and tax"
-
-# fast, high-volume captioning — pipe clean text out
-gen-ai describe -m claude-haiku-4-5 -i product.jpg --script | pbcopy
+gen-ai models info claude-opus-4-8 --json
+gen-ai validate -m claude-opus-4-8 --schema
 ```
 
-These models return text, so they run through `gen-ai describe` (not `generate`) and print to stdout — no download or Drive save.
+The following requests return text and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
 
-## MCP
+```bash
+gen-ai generate -m claude-opus-4-8 --prompt "Describe a quiet forest at sunrise in two sentences."
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
-    "model": "claude-sonnet-4-6",
-    "prompt": "What brand is the shoe?",
-    "imageUrls": ["https://example.com/photo.jpg"]
-  } }
+    "model": "claude-opus-4-8",
+    "prompt": "Describe a quiet forest at sunrise in two sentences."
+  }
+}
 ```
+
+Text results are returned synchronously.
 
 ## Parameters
 
-Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `claude-opus-4-8` — Claude Opus 4.8
+### `claude-fable-5-1`
 
-[Try `claude-opus-4-8` in Playground ↗](https://picsart.com/ai-playground/?model=claude-opus-4-8)
+Claude Fable 5.1; input type `i2t`.
 
-Input type: `i2t`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `claude-sonnet-4-6` — Claude Sonnet 4.6
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
 
-[Try `claude-sonnet-4-6` in Playground ↗](https://picsart.com/ai-playground/?model=claude-sonnet-4-6)
+</details>
 
-Input type: `i2t`
+### `claude-fable-5`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
+Claude Fable 5; input type `i2t`.
 
-### `claude-haiku-4-5` — Claude Haiku 4.5
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
 
-[Try `claude-haiku-4-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-haiku-4-5)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2t`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
+</details>
+
+### `claude-opus-5`
+
+Claude Opus 5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-opus-4-8`
+
+Claude Opus 4.8; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-sonnet-5`
+
+Claude Sonnet 5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-sonnet-4-6`
+
+Claude Sonnet 4.6; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-sonnet-4-5`
+
+Claude Sonnet 4.5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-haiku-4-5`
+
+Claude Haiku 4.5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing claude-sonnet-4-6
-```
-
-Claude analysis is priced per generation; cost is resolved per `modelId` via the backend `/options` call.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

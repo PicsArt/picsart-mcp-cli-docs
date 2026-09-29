@@ -1,58 +1,85 @@
 ---
-description: "Videography AI models on Picsart — 1 video model(s) including Videography. CLI + MCP examples, parameters, and official docs."
+description: "Videography model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Videography
 
-**Mode:** video · **Models:** 1
+**Modes:** video · **Models:** 1
 
-**Vendor:** [Picsart](https://docs.picsart.io) · **Official API docs:** [Picsart Developers](https://docs.picsart.io)
-
-Videography is Picsart's first-party image-to-video model. It animates a single source image into a short clip, making it a fast way to bring a still into motion without writing a separate motion prompt.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `picsart-videography` | Videography | `i2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# animate a still into a short video
-gen-ai generate -m picsart-videography --image ./portrait.jpg
+gen-ai models info picsart-videography --json
+gen-ai validate -m picsart-videography --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m picsart-videography --image "https://example.com/input.jpg" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "picsart-videography",
-    "imageUrls": ["https://example.com/portrait.jpg"]
-  } }
+    "prompt": "",
+    "async": true,
+    "imageUrls": [
+      "https://example.com/input.jpg"
+    ]
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `picsart-videography` — Videography
+### `picsart-videography`
 
-[Try `picsart-videography` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-videography)
+Videography; input type `i2v`.
 
-Input type: `i2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-> **Notes:** Image-driven — a single source image in, a video out; there is no text prompt parameter.
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing picsart-videography
-```
-
-Videography is priced per generation.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

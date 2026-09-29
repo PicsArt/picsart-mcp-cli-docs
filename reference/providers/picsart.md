@@ -1,175 +1,449 @@
 ---
-description: "Picsart AI models on Picsart — 8 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
+description: "Picsart model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Picsart
 
-**Mode:** image · **Models:** 8
+**Modes:** image, video · **Models:** 9
 
-**Official API docs:** [docs.picsart.io](https://docs.picsart.io)
-
-Picsart's own image models run on the Picsart Compute Platform (PCP). They cover fast text-to-image generation (**SANA-Sprint**, **Flux 2 Klein 4B**) plus a set of task-shaped image-editing operations — background change/removal, enhance/upscale, natural-language image edit, and makeup. SANA-Sprint executes synchronously for near-instant results.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `picsart-change-bg` | Picsart Change Background | `i2i` |
 | `picsart-sod-v8-2` | Remove Background | `i2i` |
 | `picsart-enhance` | Enhance | `i2i` |
 | `picsart-qwen-image-edit` | Picsart Image Edit | `i2i` |
 | `picsart-qwen-makeup` | Picsart Makeup | `i2i` |
-| `picsart-qwen-image-edit-angle` | Picsart Angle Change | `i2i` |
 | `picsart-flux-2-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
+| `picsart-flow` | Picsart Effects | `i2i` |
+| `picsart-flow-video` | Picsart Effects Video | `i2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# fast text-to-image (synchronous)
-gen-ai generate -m picsart-sana-sprint-v1 \
-  -p "a neon koi fish swimming through a misty bamboo forest, dramatic lighting" \
-  --ar 16:9 -s
-
-# text-to-image with Flux 2 Klein
-gen-ai generate -m picsart-flux-klein -p "isometric cozy reading nook, soft pastel palette"
-
-# task-shaped image editing
-gen-ai remove-bg -i ./portrait.jpg
-gen-ai change-bg -i ./product.jpg -p "marble countertop, soft studio light"
-gen-ai enhance -i ./low-res.jpg
+gen-ai models info picsart-change-bg --json
+gen-ai validate -m picsart-change-bg --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m picsart-change-bg --image "https://example.com/input.jpg" --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
-    "model": "picsart-sana-sprint-v1",
-    "prompt": "a neon koi fish swimming through a misty bamboo forest",
-    "aspectRatio": "16:9"
-  } }
+    "model": "picsart-change-bg",
+    "prompt": "A quiet forest at sunrise",
+    "async": true,
+    "imageUrls": [
+      "https://example.com/input.jpg"
+    ]
+  }
+}
 ```
 
-```json
-{ "name": "picsart_remove_bg",
-  "arguments": { "imageUrls": ["https://example.com/portrait.jpg"] } }
-```
-
-```json
-{ "name": "picsart_change_bg",
-  "arguments": {
-    "imageUrls": ["https://example.com/product.jpg"],
-    "prompt": "marble countertop, soft studio light"
-  } }
-```
-
-```json
-{ "name": "picsart_enhance",
-  "arguments": { "imageUrls": ["https://example.com/low-res.jpg"] } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `picsart-change-bg` — Picsart Change Background
+### `picsart-change-bg`
 
-[Try `picsart-change-bg` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-change-bg)
+Picsart Change Background; input type `i2i`.
 
-Input type: `i2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `prompt` | `--prompt` | Yes | text | maximum 460 characters |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `prompt` | `-p` | text | **required** (≤460 chars) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `picsart-sod-v8-2` — Remove Background
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 460
+  }
+]
+```
 
-[Try `picsart-sod-v8-2` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sod-v8-2)
+</details>
 
-Input type: `i2i`
+### `picsart-sod-v8-2`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
+Remove Background; input type `i2i`.
 
-### `picsart-enhance` — Enhance
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
-[Try `picsart-enhance` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-enhance)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2i`
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
+</details>
 
-### `picsart-qwen-image-edit` — Picsart Image Edit
+### `picsart-enhance`
 
-[Try `picsart-qwen-image-edit` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-image-edit)
+Enhance; input type `i2i`.
 
-Input type: `i2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
-| `prompt` | `-p` | text | **required** |
-| `negativePrompt` | `--neg` | text | free text |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `picsart-qwen-makeup` — Picsart Makeup
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
 
-[Try `picsart-qwen-makeup` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-makeup)
+</details>
 
-Input type: `i2i`
+### `picsart-qwen-image-edit`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `prompt` | `-p` | text | **required** |
-| `negativePrompt` | `--neg` | text | free text |
+Picsart Image Edit; input type `i2i`.
 
-### `picsart-qwen-image-edit-angle` — Picsart Angle Change
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 3 |
+| `prompt` | `--prompt` | Yes | text | Text |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
 
-[Try `picsart-qwen-image-edit-angle` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-image-edit-angle)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2i`
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
-| `prompt` | `-p` | text | **required** |
-| `negativePrompt` | `--neg` | text | free text |
-| `numInferenceSteps` | `--num-inference-steps` | range | `1`–`50`, step 1 (default `16`) |
-| `cfgScale` | `--cfg` | range | `1`–`10` (default `4`) |
-| `loraWeights` | `--lora-weights` | object[] | `{lora_angle, lora_angle_lighting}` |
+</details>
 
-### `picsart-flux-2-klein` — Flux 2 Klein 4B
+### `picsart-qwen-makeup`
 
-[Try `picsart-flux-2-klein` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flux-2-klein)
+Picsart Makeup; input type `i2i`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `prompt` | `--prompt` | Yes | text | Text |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `5:3` · `3:5` · `4:3` · `3:4` (default `1:1`) |
-| `imageUrls` | `-i` | file | image (up to 3) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `picsart-sana-sprint-v1` — Picsart SANA-Sprint
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Portrait",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  }
+]
+```
 
-[Try `picsart-sana-sprint-v1` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-sana-sprint-v1)
+</details>
 
-Input type: `t2i`
+### `picsart-flux-2-klein`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+Flux 2 Klein 4B; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `5:3`, `3:5`, `4:3`, `3:4`; default `1:1` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 3 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "5:3"
+      },
+      {
+        "id": "3:5"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  }
+]
+```
+
+</details>
+
+### `picsart-sana-sprint-v1`
+
+Picsart SANA-Sprint; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `4:3`, `3:4`, `3:2`, `2:3`, `16:9`, `9:16`, `2:1`, `1:2`; default `1:1` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "1:2"
+      }
+    ],
+    "default": "1:1"
+  }
+]
+```
+
+</details>
+
+### `picsart-flow`
+
+Picsart Effects; input type `i2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `templateId` | `--template-id` | Yes | catalog | Account-dependent ID; see catalog source below |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 3 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "templateId",
+    "label": "Effect Preset",
+    "required": true,
+    "kind": "catalog",
+    "source": {
+      "workflow": "picsart-flow/v1/catalog/templates",
+      "modelId": "picsart-flow"
+    },
+    "default": ""
+  },
+  {
+    "key": "imageUrls",
+    "label": "Your Photo",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `picsart-flow-video`
+
+Picsart Effects Video; input type `i2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `templateId` | `--template-id` | Yes | catalog | Account-dependent ID; see catalog source below |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 3 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "templateId",
+    "label": "Effect Preset",
+    "required": true,
+    "kind": "catalog",
+    "source": {
+      "workflow": "picsart-flow/v1/catalog/templates",
+      "modelId": "picsart-flow-video"
+    },
+    "default": ""
+  },
+  {
+    "key": "imageUrls",
+    "label": "Your Photo",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
 
 ## Pricing
 
-```bash
-gen-ai pricing picsart-sana-sprint-v1
-```
-
-Picsart image models are flat-rate per image — there are no duration or resolution drivers. Cost is resolved per `modelId` via the backend `/options` call.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

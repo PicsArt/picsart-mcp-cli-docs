@@ -1,85 +1,28 @@
 ---
-description: "Connect Picsart to ChatGPT via MCP or Skills — generate images, video, and audio from ChatGPT conversations."
+description: "Connect ChatGPT to Picsart with a hosted MCP connection."
 ---
 
 # ChatGPT
 
-ChatGPT supports Picsart through MCP (for ChatGPT with MCP connector support) and through Skills (as an attached file in a conversation or custom GPT).
+Use a hosted connection. ChatGPT does not run a local `gen-ai-mcp` process just because a JSON configuration or skill ZIP is attached to a conversation.
 
-## Prerequisites
+If Picsart is available in your account's plugin directory, connect that listing. For a custom connection, your account and workspace policy must permit developer mode:
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
+1. Open **Settings**, then **Security and login**, and enable **Developer mode**.
+2. Open [ChatGPT Plugins](https://chatgpt.com/plugins) and select the plus button.
+3. Enter a name such as Picsart and a description of its media tools.
+4. Enter `https://api.picsart.com/gen-ai/mcp` as the public MCP endpoint and create the connection.
+5. Complete Picsart OAuth sign-in and review the discovered tools.
+6. Add the connection to a conversation from the tools menu.
 
-## Method 1: MCP
+If these controls are unavailable, check your workspace's policy and the current OpenAI instructions linked below.
 
-ChatGPT's MCP connector lets you connect an external MCP server to a conversation or a custom GPT.
+## Verify the connection
 
-### Configure
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-In ChatGPT's MCP settings, add the Picsart server:
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-- **Server name:** `picsart-gen-ai`
-- **Command:** `gen-ai-mcp`
-- **Transport:** stdio
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-Refer to [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) for the exact config block for your ChatGPT version, as the connector UI evolves.
-
-### Use it
-
-Once connected:
-
-- *"Generate a product image using Flux 2 Pro, white background, 1:1."*
-- *"How many credits does a Veo 3.1 video cost at 8 seconds?"*
-- *"Remove the background from this image URL."*
-
-ChatGPT calls the Picsart tools, runs the generation, and returns the result URL.
-
-## Method 2: Skills (via attachment)
-
-### Install
-
-1. Download the skill ZIP from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/).
-2. Attach the ZIP to a ChatGPT conversation, or include it in a Custom GPT's knowledge files.
-3. ChatGPT reads the skill instructions and uses them when you describe a generation task.
-
-### Use it
-
-In the conversation:
-
-- *"Generate three hero image concepts for a skincare brand in 16:9."*
-- *"Create a 9:16 teaser video from this product image."*
-
-ChatGPT reads the skill instructions and runs the corresponding `gen-ai` commands.
-
-## Troubleshooting
-
-**ChatGPT cannot run `gen-ai-mcp`.**
-
-The MCP server must run as a local process. Make sure the CLI is installed (`gen-ai --version`) and the MCP server binary is on your PATH (`which gen-ai-mcp`). ChatGPT's MCP connector requires a running local server, not a remote URL.
-
-**Generation fails with "unauthorized".**
-
-Run `gen-ai login` in a terminal and retry.
-
-## FAQ
-
-**Does ChatGPT support MCP natively?**
-
-ChatGPT supports MCP via its connector feature. Availability may depend on your ChatGPT plan. Check OpenAI's documentation for the current connector setup.
-
-**Can I use the skill with a free ChatGPT account?**
-
-The skill can be attached to conversations on any ChatGPT plan. However, running `gen-ai` commands requires a Picsart account with credits — the ChatGPT plan tier does not affect Picsart billing.
-
-**Is the result URL private?**
-
-Result URLs are time-limited signed URLs. Download or save them to Drive promptly. See [Files and Drive](/guide/files-and-drive).
-
-## Start creating
-
-Click below to open ChatGPT with a ready-to-run Picsart prompt. ChatGPT will call the Picsart plugin automatically once you confirm.
-
-::: tip Ready to generate?
-[Start creating in ChatGPT](https://chatgpt.com/?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [ChatGPT documentation](https://developers.openai.com/plugins/deploy/connect-chatgpt), checked September 29, 2026. These steps are based on the host's documented configuration; a complete Picsart sign-in was not exercised in each host during this audit.

@@ -1,117 +1,43 @@
 ---
-description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 174 AI models."
+description: "Install Picsart CLI workflow instructions in an agent with shell access."
 ---
 
 # Skills
 
-**Skills** are ready-to-use bundles of prompts and instructions that teach an AI agent how to generate media with Picsart's models. Add a skill to Claude Code, Cursor, Windsurf, or ChatGPT, and the agent knows which model to use, how to structure the request, and which command to run — you just describe what you want.
+A skill supplies workflow instructions to an agent. It does not install an execution environment or authenticate a tool connection.
 
-> Official page: [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/)
-
-## How skills relate to the CLI and MCP
-
-A skill is the **knowledge layer** — it tells the agent what Picsart can do and how to call it. The [gen-ai CLI](/guide/cli-quickstart) is the **execution engine** that runs the actual generation. Skills drive the CLI under the hood, and the whole stack speaks [MCP](/guide/mcp-quickstart) so it works natively inside agents.
-
-Setup order:
-
-1. Install the CLI — see [Installation](/guide/installation).
-2. Authenticate once: `gen-ai login`.
-3. Add a skill to your agent (see below).
-
-## The `gen-ai-use` skill
-
-The flagship skill, **`gen-ai-use`**, gives an agent access to all **174 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
-
-Once added, you drive it in plain English:
-
-- *"Make three banner concepts for the spring sale in 16:9 and 1:1."*
-- *"Animate these 10 product stills into a 9:16 reel with background music."*
-- *"Generate a hero image in the style of the reference shot, then upscale it to 4K."*
-
-The agent picks the right model, builds the prompt, and runs the generation in the background.
-
-## Installing a skill
-
-### Claude Code
-
-The fastest path is the Claude Code plugin marketplace:
+For Picsart CLI skills, the agent needs shell access to the machine where `gen-ai` is installed and authenticated. Check both from that environment:
 
 ```bash
-claude plugin marketplace add PicsArt/gen-ai-skills
+gen-ai --version
+gen-ai whoami
 ```
 
-Then activate it inside Claude Code:
+The version command verifies installation; `whoami` checks the CLI session. Neither generates media. See [Installation](/guide/installation) and [Authentication](/guide/authentication) if a check fails.
 
-```
-/plugin install picsart@picsart
-```
+## Install the bundled CLI skills
 
-Alternatively, install via npx:
+For Claude Code, run:
 
 ```bash
-npx skills add PicsArt/gen-ai-skills
+gen-ai install-skills
+gen-ai check-skills
 ```
 
-Or download the `.zip` manually from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and place it in `~/.claude/skills/`.
+In CLI 2.78.0, the default installation directory is `~/.claude/skills/`. The installer writes skill directories containing `SKILL.md`; placing a ZIP in that directory is not equivalent. Use `gen-ai install-skills --help` to inspect the destination option. Do not use `--force` unless you intend to replace existing skill files.
 
-After installing, invoke the skill with `/gen-ai-use` or just describe a task — Claude Code picks it up automatically.
+For another agent, first confirm its supported skill directory and format in that agent's documentation. The CLI's `--to` option accepts a custom destination, but a directory path alone does not establish host compatibility. Check the host's skill list after installation.
 
-### Cursor and Windsurf
+[The Picsart skills page](https://picsart.com/gen-ai-skills/) describes separately distributed skills. Their names and requirements can differ from the bundled CLI skills.
 
-1. Download the skill `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/).
-2. Place it in the agent's skill or rules directory (see your agent's settings for the exact path).
-3. Ask in plain English: *"Generate a product photo on a white background using Flux 2 Pro."*
+## Verify a workflow
 
-For a dedicated Cursor or Windsurf setup guide, see [Cursor integration](/guide/integrations/cursor) or [Windsurf integration](/guide/integrations/windsurf).
+Ask the agent to inspect the schema for `flux-2-pro` without generating. Confirm that it actually runs the installed CLI or uses a connected Picsart tool. Then ask for a cost estimate before a generation task.
 
-### ChatGPT
+An attached ZIP can provide instructions in a chat, but does not let ChatGPT execute a local command. Use the [hosted ChatGPT connection](/guide/integrations/chatgpt) for Picsart tools there.
 
-Attach the skill `.zip` to a conversation or to a custom GPT configuration. Once attached, ChatGPT can call `gen-ai` commands directly when you describe a generation task.
+## Files and automation
 
-### Codex (OpenAI)
+CLI media generation normally downloads to `./output` and also attempts to save to Drive. These are separate destinations. See [Files and Drive](/guide/files-and-drive) for options and [Batch](/guide/batch) for JSON job manifests.
 
-Install the CLI, then add the skill via npx:
-
-```bash
-npx skills add PicsArt/gen-ai-skills
-```
-
-Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and attach it to your Codex session. See [Codex integration](/guide/integrations/codex) for the full setup.
-
-## What to generate with skills
-
-Skills are particularly effective for:
-
-- **Hero images** — on-brand key art in multiple aspect ratios from a single prompt.
-- **Reels and short video** — chain stills into social video with motion models and an AI audio track.
-- **Batch catalogs** — generate or edit assets across many SKUs with a single instruction to the agent.
-- **Background removal and replacement** — swap out image backgrounds without leaving the agent conversation.
-- **Voice and narration** — generate voiceovers with ElevenLabs voices directly from a script.
-
-Browse the full model catalog — which the skill has access to — at [picsart.com/ai-playground](https://picsart.com/ai-playground/) or via `gen-ai models`.
-
-## FAQ
-
-**Do I need to run `gen-ai login` if I install via the Claude plugin marketplace?**
-
-Yes. Skills call the gen-ai CLI internally, and the CLI needs an authenticated session. Run `gen-ai login` once on your machine before using any skill, regardless of which install method you used.
-
-**Can I add more than one skill?**
-
-Yes. Each skill is a separate bundle. You can have `gen-ai-use` for general generation plus any specialized skills alongside it. Skills do not conflict with each other.
-
-**The agent says it can't find `gen-ai`. What do I do?**
-
-The CLI is not installed or is not on the `PATH` the agent sees. Run `gen-ai --version` in a terminal to verify the install, then restart your agent. See [Installation](/guide/installation) for install steps.
-
-**Is there a skill specifically for Cursor vs. one for Claude Code?**
-
-The same `gen-ai-use` skill bundle works across all supported agents. The skill itself is agent-agnostic — the differences are only in how you install it (marketplace command vs. ZIP drop).
-
-**Do skills work offline?**
-
-No. Skills call the Picsart platform for every generation. An internet connection and a valid Picsart account with credits are required.
-
-**Where are the generated files saved?**
-
-By default, files are downloaded to `./output` in the directory the CLI was invoked from. Pass `--save-to-drive` to push results to your Picsart Drive instead. See [Files and Drive](/guide/files-and-drive).
+Model generation needs a network connection and authorized account. Skill text and some local schema checks can be read offline.

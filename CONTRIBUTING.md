@@ -1,108 +1,38 @@
-# Contributing to picsart-mcp-cli-docs
+# Contributing
 
-## Source of truth
+Edit documentation in this public repository. Open a pull request with the affected reader task, the correction, and evidence of validation.
 
-This repository (`PicsArt/picsart-mcp-cli-docs`) is the source of truth for all published documentation at https://picsart.github.io/picsart-mcp-cli-docs/. Edit pages here. The GitHub Pages site is rebuilt automatically on every push to `main` via `.github/workflows/deploy-docs.yml`. Do not treat any other location as authoritative for prose, structure, or navigation.
+## Development
 
-## Development setup
+Use Node.js 20 or newer and Python 3.10 or newer to build the docs:
 
 ```bash
-npm install
-npm run dev      # local dev server at http://localhost:5173
-npm run build    # full production build (runs lint checks before vitepress build)
-npm run preview  # serve the production build locally
+npm ci
+npm run dev
+npm run build
+npm run preview
 ```
 
-The build will fail if content rules are violated. Fix all errors before opening a PR.
+Run the commands from the repository root. Build checks validate the documented examples and content rules; they do not prove that a third-party host completes OAuth or that a paid generation succeeds.
 
-## Content rules (CI-enforced)
+## Technical accuracy
 
-The following rules are checked automatically during `npm run build`. A violation fails the build and blocks the deploy.
+State the package version or server evidence used for a claim. Do not assume the SDK, CLI, and hosted MCP catalogs are identical. Keep CLI login, hosted OAuth, and application API credentials distinct.
 
-### No exact model or provider counts
+Use real command flags and model IDs. Label placeholder files, URLs, and returned IDs. Start setup guides with a check that does not generate media. Explain when the next step consumes credits. Never recommend repeating a submission merely because its response timed out.
 
-Do not write exact numbers for model or provider counts. Use the approved approximate thresholds instead.
+Exact catalog counts are allowed when they describe the checked-in snapshot and pass `npm run check:counts`. Avoid hand-maintained counts in marketing copy. Historical release notes describe their original release, not the current catalog.
 
-| Metric | Approved wording |
-|---|---|
-| Total models | 174 models |
-| Total providers | 32 providers |
-| Video models | 70+ video |
-| Image models | 70+ image |
-| Audio models | 20+ audio |
+## Generated files
 
-**Reason:** The catalog updates continuously. An exact number is wrong within days of writing it. Approximate thresholds stay accurate across multiple catalog releases.
+Regenerate `.vitepress/theme/data/` and provider reference pages using the scripts documented in README. Change the generator when changing provider-page wording. `public/llms.txt` is regenerated during the build. Review generated differences alongside the source change.
 
-Checked by: `scripts/check-counts.mjs`
+## Writing
 
-### No em dashes
+Use direct instructions, concrete outcomes, and plain words. Remove unsupported superiority claims, repeated introductions, and decorative emoji. Do not use em dashes or prose double hyphens; use a colon, comma, or separate sentence. Preserve command flags, Markdown syntax, and other required technical punctuation.
 
-Do not use em dashes (`—`) in prose. Rewrite the sentence using a comma, colon, or two separate sentences.
+Prefer a precise description over promotional adjectives. Avoid canned transitions and unsupported promises of success. A word or punctuation mark does not prove that text was written by AI; these are editorial rules for this repository.
 
-Incorrect: `The CLI supports batch mode — useful for pipelines.`
-Correct: `The CLI supports batch mode, which is useful for pipelines.`
+Published Markdown pages need a frontmatter description. Root contributor files and audit records do not need site metadata. Keep commands inside correctly labelled code fences and JSON examples valid JSON.
 
-**Reason:** House style, consistent with copy across all Picsart surfaces.
-
-### Frontmatter `description:` required on every page
-
-Every `.md` file must include a `description` field in its YAML frontmatter.
-
-```yaml
----
-title: CLI Quickstart
-description: Install the Picsart gen-ai CLI and run your first generation in under five minutes.
----
-```
-
-**Reason:** The `description` field populates OG tags, the `llms.txt` agent map, and directory listings. A missing description causes those surfaces to fall back to empty or incorrect text.
-
-Checked by: `scripts/add-seo-descriptions.py`
-
-### No marketing filler
-
-Do not use the following words or phrases: "powerful", "seamless", "cutting-edge", "robust", "best-in-class", "innovative", "state-of-the-art".
-
-Write what the feature does, not how impressive it is.
-
-## Generated content: do not hand-edit
-
-The following files and directories are generated by scripts in `scripts/`. Any manual edits will be overwritten on the next build.
-
-| Generated output | Script |
-|---|---|
-| `public/llms.txt` | `scripts/build-llms.mjs` |
-| `reference/providers/` (per-provider pages) | `scripts/build-provider-pages.mjs` |
-| `.vitepress/theme/data/models.json` | `scripts/build-catalog-data.mjs` |
-| `.vitepress/theme/data/providers.json` | `scripts/build-catalog-data.mjs` |
-| `public/og/` (OG images) | `scripts/make-og-image.mjs` |
-
-If you need to change the content of a generated page, edit the template or data source inside the relevant script, not the output file.
-
-## PR flow
-
-1. Fork the repository and create a branch from `main`.
-2. Make your changes. Run `npm run dev` to verify the site renders correctly before committing.
-3. Run `npm run build` locally and confirm it exits without errors.
-4. Open a PR against `main`. Write a one-line description in the PR title: what changed and why.
-5. In the PR body, list which pages changed. If you added or removed a page, note the effect on the sidebar.
-
-Keep PRs focused. One logical change per PR makes review faster.
-
-## What a reviewer checks
-
-- Frontmatter `description:` is present on every new or modified page.
-- No exact model or provider counts appear in prose.
-- No em dashes in prose.
-- All internal links resolve (no 404s in the build output).
-- No generated files were hand-edited.
-- No marketing filler words.
-
-## Enforcement scripts
-
-Two scripts act as automated drift guards and run as part of every build:
-
-- `scripts/add-seo-descriptions.py`: audits every `.md` file for a `description:` frontmatter field and reports any missing ones.
-- `scripts/check-counts.mjs`: recomputes model and provider counts from the live data JSON and fails the build if any prose count does not match an approved threshold.
-
-These scripts catch the most common sources of stale or inconsistent content before they reach the live site.
+See [the audit style research](audit/style-research.md) for the sources and rationale behind the current checks.

@@ -1,18 +1,16 @@
 ---
-description: "Kling AI models on Picsart — 19 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Kling
 
-**Modes:** image · video · audio · **Models:** 14
+**Modes:** image, video, audio · **Models:** 13
 
-**Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
-
-Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-video, start/end-frame control, motion control, talking avatars, and native audio. **Kling V3** is the flagship: the only version with multi-shot storyboards and native 4K (3–15s), with **Kling V3 Turbo** as a faster variant. The lineup also spans image generation and a TTS / video-to-audio side.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `kling-v3` | Kling V3 | `t2v` |
 | `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
@@ -24,275 +22,1413 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 | `kling-avatar` | Kling Avatar | `i2v` |
 | `kling-3.0-image` | Kling 3.0 Image | `t2i` |
 | `kling-o1-image` | Kling O1 Image | `t2i` |
-| `kling-v2-new-image` | Kling V2 New Image | `t2i` |
 | `kling-video-effects` | Kling Video Effects | `i2v` |
 | `kling-t2a` | Kling T2A | `t2a` |
 | `kling-v2a` | Kling V2A | `v2a` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video with native audio
-gen-ai generate -m kling-v3 \
-  -p "a designer opening Picsart on a sunlit desk, cinematic, shallow depth of field" \
-  --ar 16:9 -d 5 --audio-gen
-
-# image-to-video from a start frame
-gen-ai generate -m kling-v3 -p "camera slowly pushes in, she smiles" --start-frame ./hero.jpg
-
-# image generation
-gen-ai generate -m kling-3.0-image -p "a neon koi pond at dusk, ultra detailed" --ar 1:1
-
-# text-to-audio
-gen-ai generate -m kling-t2a -p "warm narrator voice reading a product tagline"
+gen-ai models info kling-v3 --json
+gen-ai validate -m kling-v3 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m kling-v3 --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "kling-v3",
-    "prompt": "a designer opening Picsart on a sunlit desk, cinematic",
-    "aspectRatio": "16:9",
-    "duration": 5,
-    "generateAudio": true
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "kling-3.0-image",
-    "prompt": "a neon koi pond at dusk, ultra detailed",
-    "aspectRatio": "1:1"
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `kling-v3` — Kling V3
+### `kling-v3`
 
-[Try `kling-v3` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3)
+Kling V3; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
+| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
+| `multiShot` | `--multi-shot` | No | boolean | true or false; default `false` |
+| `shotType` | `--shot-type` | No | enum | `customize`, `intelligence`; default `customize` |
+| `multiPrompt` | `--multi-prompt-index`, `--multi-prompt-prompt`, `--multi-prompt-duration` | No | object | Structured input; see descriptor below; array; maximum 6 |
+| `voiceList` | `--voice-list` | No | object | Structured input; see descriptor below; array; maximum 2 |
+| `elementList` | `--element-list` | No | object | Structured input; see descriptor below; array; maximum 3 |
+| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`, `4k`; default `4k` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-| `negativePrompt` | `--neg` | text | free text |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
-| `shotType` | `--shot-type` | enum | `customize` (Customize) · `intelligence` (AI Auto) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
-| `voiceList` | `--voice-list` | object[] | up to 2 `{voice_id}` |
-| `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
-| `staticMask` | `--static-mask` | file | image |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) · `4k` (4K) (default `std`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kling-v3-turbo` — Kling V3 Turbo
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "multiShot",
+    "label": "Multi-Shot Mode",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "shotType",
+    "label": "Shot Segmentation",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "customize",
+        "label": "Customize"
+      },
+      {
+        "id": "intelligence",
+        "label": "AI Auto"
+      }
+    ],
+    "default": "customize"
+  },
+  {
+    "key": "multiPrompt",
+    "label": "Multi-Shot Prompts",
+    "kind": "object",
+    "array": {
+      "max": 6
+    },
+    "fields": {
+      "index": {
+        "kind": "range",
+        "min": 0,
+        "max": 5,
+        "default": 0
+      },
+      "prompt": {
+        "kind": "text",
+        "maxLength": 512
+      },
+      "duration": {
+        "kind": "text"
+      }
+    }
+  },
+  {
+    "key": "voiceList",
+    "label": "Voice References",
+    "kind": "object",
+    "array": {
+      "max": 2
+    },
+    "fields": {
+      "voice_id": {
+        "kind": "text"
+      }
+    }
+  },
+  {
+    "key": "elementList",
+    "label": "Element References",
+    "kind": "object",
+    "array": {
+      "max": 3
+    },
+    "fields": {
+      "element_id": {
+        "kind": "text"
+      }
+    }
+  },
+  {
+    "key": "renderingSpeed",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "std",
+        "label": "Standard"
+      },
+      {
+        "id": "pro",
+        "label": "Pro"
+      },
+      {
+        "id": "4k",
+        "label": "4K"
+      }
+    ],
+    "default": "4k"
+  }
+]
+```
 
-[Try `kling-v3-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3-turbo)
+</details>
 
-Input type: `t2v`
+### `kling-v3-turbo`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
-| `negativePrompt` | `--neg-prompt` | text | free text |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `startFrame` | `--start-frame` | file | image |
-| `staticMask` | `--static-mask` | file | image |
+Kling V3 Turbo; input type `t2v`.
 
-### `kling-v2-6` — Kling V2.6
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
+| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`; default `720p` |
+| `startFrame` | `--start-frame` | No | file | image input |
 
-[Try `kling-v2-6` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-6)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `t2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-| `negativePrompt` | `--neg` | text | free text |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `cfgScale` | `--cfg` | number | `0`–`1`, step 0.1, default `0.5` |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
+</details>
 
-### `kling-v3-omni` — Kling V3 Omni
+### `kling-v2-6`
 
-[Try `kling-v3-omni` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3-omni)
+Kling V2.6; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
+| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
-| `shotType` | `--shot-type` | enum | `customize` (Customize) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
-| `omniImageList` | `--omni-image-list` | object[] | up to 10 `{image_url, type}` |
-| `omniVideoList` | `--omni-video-list` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
-| `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kling-video-o1` — Kling Video O1
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": true
+  }
+]
+```
 
-[Try `kling-video-o1` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-o1)
+</details>
 
-Input type: `t2v`
+### `kling-v3-omni`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+Kling V3 Omni; input type `t2v`.
 
-### `kling-motion-control-v3` — Kling Motion Control V3
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
+| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`, `4k`; default `720p` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 7 |
+| `videoUrl` | `--video` | No | file | video input |
+| `referType` | `--refer-type` | No | enum | `feature`, `base`; default `feature` |
+| `keepOriginalSound` | `--keep-original-sound` | No | enum | `yes`, `no`; default `yes` |
+| `multiShot` | `--multi-shot` | No | boolean | true or false; default `false` |
+| `shotType` | `--shot-type` | No | enum | `customize`; default `customize` |
+| `multiPrompt` | `--multi-prompt-index`, `--multi-prompt-prompt`, `--multi-prompt-duration` | No | object | Structured input; see descriptor below; array; maximum 6 |
+| `elementList` | `--element-list` | No | object | Structured input; see descriptor below; array; maximum 3 |
 
-[Try `kling-motion-control-v3` in Playground ↗](https://picsart.com/ai-playground/?model=kling-motion-control-v3)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "startFrame",
+    "label": "First Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 7
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Reference Video",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "referType",
+    "label": "Reference Video Mode",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "feature",
+        "label": "Feature Reference"
+      },
+      {
+        "id": "base",
+        "label": "Base Edit"
+      }
+    ],
+    "default": "feature"
+  },
+  {
+    "key": "keepOriginalSound",
+    "label": "Keep Original Sound",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "yes",
+        "label": "Yes"
+      },
+      {
+        "id": "no",
+        "label": "No"
+      }
+    ],
+    "default": "yes"
+  },
+  {
+    "key": "multiShot",
+    "label": "Multi-Shot Mode",
+    "kind": "boolean",
+    "default": false
+  },
+  {
+    "key": "shotType",
+    "label": "Shot Segmentation",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "customize",
+        "label": "Customize"
+      }
+    ],
+    "default": "customize"
+  },
+  {
+    "key": "multiPrompt",
+    "label": "Multi-Shot Prompts",
+    "kind": "object",
+    "array": {
+      "max": 6
+    },
+    "fields": {
+      "index": {
+        "kind": "range",
+        "min": 0,
+        "max": 5,
+        "default": 0
+      },
+      "prompt": {
+        "kind": "text",
+        "maxLength": 512
+      },
+      "duration": {
+        "kind": "text"
+      }
+    }
+  },
+  {
+    "key": "elementList",
+    "label": "Element References",
+    "kind": "object",
+    "array": {
+      "max": 3
+    },
+    "fields": {
+      "element_id": {
+        "kind": "text"
+      }
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text (≤2500 chars) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `characterOrientation` | `--orientation` | enum | `image` (Match Image (≤10s ref video)) · `video` (Match Video (≤30s ref video)) (default `video`) |
-| `keepOriginalSound` | `--keep-audio` | enum | `yes` (Yes) · `no` (No) (default `yes`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `videoUrl` | `--video` | file | **required** video |
+</details>
 
-### `kling-motion-control` — Kling Motion Control 2.6
+### `kling-video-o1`
 
-[Try `kling-motion-control` in Playground ↗](https://picsart.com/ai-playground/?model=kling-motion-control)
+Kling Video O1; input type `t2v`.
 
-Input type: `i2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
+| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
+| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text (≤2500 chars) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `characterOrientation` | `--orientation` | enum | `image` (Match Image (≤10s ref video)) · `video` (Match Video (≤30s ref video)) (default `video`) |
-| `keepOriginalSound` | `--keep-audio` | enum | `yes` (Yes) · `no` (No) (default `yes`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `videoUrl` | `--video` | file | **required** video |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kling-avatar` — Kling Avatar
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "renderingSpeed",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "std",
+        "label": "Standard"
+      },
+      {
+        "id": "pro",
+        "label": "Pro"
+      }
+    ],
+    "default": "std"
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": false
+  }
+]
+```
 
-[Try `kling-avatar` in Playground ↗](https://picsart.com/ai-playground/?model=kling-avatar)
+</details>
 
-Input type: `i2v`
+### `kling-motion-control-v3`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text (≤2500 chars) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `audioUrl` | `-a` | file | **required** audio |
-| `audioId` | `--audio-id` | text | free text |
+Kling Motion Control V3; input type `i2v`.
 
-### `kling-3.0-image` — Kling 3.0 Image
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 2500 characters |
+| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
+| `characterOrientation` | `--character-orientation` | No | enum | `image`, `video`; default `video` |
+| `keepOriginalSound` | `--keep-original-sound` | No | enum | `yes`, `no`; default `yes` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `videoUrl` | `--video` | Yes | file | video input |
 
-[Try `kling-3.0-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-3.0-image)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `t2i`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "renderingSpeed",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "std",
+        "label": "Standard"
+      },
+      {
+        "id": "pro",
+        "label": "Pro"
+      }
+    ],
+    "default": "std"
+  },
+  {
+    "key": "characterOrientation",
+    "label": "Character Orientation",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "image",
+        "label": "Match Image (≤10s ref video)"
+      },
+      {
+        "id": "video",
+        "label": "Match Video (≤30s ref video)"
+      }
+    ],
+    "default": "video"
+  },
+  {
+    "key": "keepOriginalSound",
+    "label": "Keep Original Sound",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "yes",
+        "label": "Yes"
+      },
+      {
+        "id": "no",
+        "label": "No"
+      }
+    ],
+    "default": "yes"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Person Photo (upper body)",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Motion Reference Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `1k` · `2k` · `4k` (default `1k`) |
-| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 10) |
+</details>
 
-### `kling-o1-image` — Kling O1 Image
+### `kling-motion-control`
 
-[Try `kling-o1-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-o1-image)
+Kling Motion Control 2.6; input type `i2v`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 2500 characters |
+| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
+| `characterOrientation` | `--character-orientation` | No | enum | `image`, `video`; default `video` |
+| `keepOriginalSound` | `--keep-original-sound` | No | enum | `yes`, `no`; default `yes` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `videoUrl` | `--video` | Yes | file | video input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
-| `resolution` | `-r` | enum | `1k` · `2k` (default `1k`) |
-| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 10) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kling-v2-new-image` — Kling V2 New Image
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "renderingSpeed",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "std",
+        "label": "Standard"
+      },
+      {
+        "id": "pro",
+        "label": "Pro"
+      }
+    ],
+    "default": "std"
+  },
+  {
+    "key": "characterOrientation",
+    "label": "Character Orientation",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "image",
+        "label": "Match Image (≤10s ref video)"
+      },
+      {
+        "id": "video",
+        "label": "Match Video (≤30s ref video)"
+      }
+    ],
+    "default": "video"
+  },
+  {
+    "key": "keepOriginalSound",
+    "label": "Keep Original Sound",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "yes",
+        "label": "Yes"
+      },
+      {
+        "id": "no",
+        "label": "No"
+      }
+    ],
+    "default": "yes"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Person Photo (upper body)",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Motion Reference Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  }
+]
+```
 
-[Try `kling-v2-new-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-new-image)
+</details>
 
-Input type: `t2i`
+### `kling-avatar`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
-| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
-| `negativePrompt` | `--neg` | text | free text |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `imageReference` | `--image-reference` | enum | `subject` (Subject) · `face` (Face) (default `subject`) |
-| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `50` |
-| `humanFidelity` | `--fidelity` | number | `0`–`1`, step 0.05, default `0.45` |
+Kling Avatar; input type `i2v`.
 
-### `kling-video-effects` — Kling Video Effects
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | maximum 2500 characters |
+| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `audioUrl` | `--audio` | Yes | file | audio input |
+| `audioId` | `--audio-id` | No | text | Text |
 
-[Try `kling-video-effects` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-effects)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "renderingSpeed",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "std",
+        "label": "Standard"
+      },
+      {
+        "id": "pro",
+        "label": "Pro"
+      }
+    ],
+    "default": "std"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Face Portrait",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "audioUrl",
+    "label": "Speech Audio",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "audio"
+  },
+  {
+    "key": "audioId",
+    "label": "TTS Audio ID",
+    "kind": "text",
+    "placeholder": "audio_id from Kling TTS API"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `style` | `--style` | enum | `korean_baseball` (Korean Baseball) · `pet_skateboard` (Pet Skateboard) · `daily_ootd` (Daily Ootd) · `tiny_beast_printer` (Tiny Beast Printer) · `landmark_reveal` (Landmark Reveal) · `winter_charm` (Winter Charm) · `flash_ride` (Flash Ride) · `maestro_of_magic` (Maestro Of Magic) · `magic_carpet_ride` (Magic Carpet Ride) · `good_luck_spirit` (Good Luck Spirit) · `shooting_star` (Shooting Star) · `sparkler_wand` (Sparkler Wand) · `sovereign_scepter` (Sovereign Scepter) · `dirt_rush` (Dirt Rush) · `return_of_the_king` (Return Of The King) · `dance_with_dragon` (Dance With Dragon) · `minimalist_light` (Minimalist Light) · `martial_meow` (Martial Meow) · `sassy_shake` (Sassy Shake) · `knock_at_a_door_revenge` (Knock At A Door Revenge) · `palm_sized_figure_pro` (Palm Sized Figure Pro) · `prank_box` (Prank Box) · `perler_beads` (Perler Beads) · `spring_bloom` (Spring Bloom) · `toss_run` (Toss Run) · `switch_to_silk` (Switch To Silk) · `get_rich_quick` (Get Rich Quick) · `make_it_rain` (Make It Rain) · `twist_shake` (Twist Shake) · `the_hip_sway` (The Hip Sway) · `send_my_love` (Send My Love) · `funky_martian` (Funky Martian) · `wealth_drive` (Wealth Drive) · `the_high_kick` (The High Kick) · `the_exercise` (The Exercise) · `lucky_veggie` (Lucky Veggie) · `studio_look` (Studio Look) · `flash_drive` (Flash Drive) · `shush_my_dreams` (Shush My Dreams) · `french_elegance` (French Elegance) · `finger_swipe` (Finger Swipe) · `advent_of_flora` (Advent Of Flora) · `smooth_transition` (Smooth Transition) · `kiss_pro` (Kiss Pro) · `raid_check` (Raid Check) · `snow_night_kiss` (Snow Night Kiss) · `eternal_kiss` (Eternal Kiss) · `fortune_in_motion` (Fortune In Motion) · `chinese_trend` (Chinese Trend) · `sedan_chair_dance` (Sedan Chair Dance) · `skyfall` (Skyfall) · `good_luck_dance` (Good Luck Dance) · `laicai_dance` (Laicai Dance) · `yangge_dance` (Yangge Dance) · `color_mixing` (Color Mixing) · `palm_sized_figure` (Palm Sized Figure) · `lantern_festival_cuju` (Lantern Festival Cuju) · `unique_firework` (Unique Firework) · `unique_spring_couplets` (Unique Spring Couplets) · `horse_mask` (Horse Mask) · `fortune_knocks_cartoon` (Fortune Knocks Cartoon) · `tangyuan_to_animal` (Tangyuan To Animal) · `hot_feet_dance` (Hot Feet Dance) · `swag_dance` (Swag Dance) · `pigeon_dance` (Pigeon Dance) · `bloodline_dance` (Bloodline Dance) · `chanel_dance` (Chanel Dance) · `cute_dance` (Cute Dance) · `love_theme_song` (Love Theme Song) · `pumpitup_dance` (Pumpitup Dance) · `city_to_village` (City To Village) · `fortune_god_transform` (Fortune God Transform) · `new_year_feast` (New Year Feast) · `ring_in_new` (Ring In New) · `horse_year_firework` (Horse Year Firework) · `pet_vlogger` (Pet Vlogger) · `crystal_horse` (Crystal Horse) · `lateral_shift_transition` (Lateral Shift Transition) · `drunk_dance` (Drunk Dance) · `drunk_dance_pet` (Drunk Dance Pet) · `daoma_dance` (Daoma Dance) · `bouncy_dance` (Bouncy Dance) · `smooth_sailing_dance` (Smooth Sailing Dance) · `new_year_greeting` (New Year Greeting) · `lion_dance` (Lion Dance) · `prosperity` (Prosperity) · `great_success` (Great Success) · `golden_horse_fortune` (Golden Horse Fortune) · `red_packet_box` (Red Packet Box) · `lucky_horse_year` (Lucky Horse Year) · `lucky_red_packet` (Lucky Red Packet) · `lucky_money_come` (Lucky Money Come) · `lion_dance_pet` (Lion Dance Pet) · `dumpling_making_pet` (Dumpling Making Pet) · `fish_making_pet` (Fish Making Pet) · `pet_red_packet` (Pet Red Packet) · `lantern_glow` (Lantern Glow) · `expression_challenge` (Expression Challenge) · `overdrive` (Overdrive) · `heart_gesture_dance` (Heart Gesture Dance) · `poping` (Poping) · `martial_arts` (Martial Arts) · `running` (Running) · `nezha` (Nezha) · `motorcycle_dance` (Motorcycle Dance) · `subject_3_dance` (Subject 3 Dance) · `ghost_step_dance` (Ghost Step Dance) · `phantom_jewel` (Phantom Jewel) · `zoom_out` (Zoom Out) · `cheers_2026` (Cheers 2026) · `fight_pro` (Fight Pro) · `hug_pro` (Hug Pro) · `heart_gesture_pro` (Heart Gesture Pro) · `dollar_rain_pro` (Dollar Rain Pro) · `pet_bee_pro` (Pet Bee Pro) · `countdown_teleport` (Countdown Teleport) · `santa_random_surprise` (Santa Random Surprise) · `magic_match_tree` (Magic Match Tree) · `bullet_time_360` (Bullet Time 360) · `happy_birthday` (Happy Birthday) · `birthday_star` (Birthday Star) · `thumbs_up_pro` (Thumbs Up Pro) · `tiger_hug_pro` (Tiger Hug Pro) · `pet_lion_pro` (Pet Lion Pro) · `surprise_bouquet` (Surprise Bouquet) · `bouquet_drop` (Bouquet Drop) · `3d_cartoon_1_pro` (3d Cartoon 1 Pro) · `firework_2026` (Firework 2026) · `glamour_photo_shoot` (Glamour Photo Shoot) · `box_of_joy` (Box Of Joy) · `first_toast_of_the_year` (First Toast Of The Year) · `my_santa_pic` (My Santa Pic) · `santa_gift` (Santa Gift) · `steampunk_christmas` (Steampunk Christmas) · `snowglobe` (Snowglobe) · `christmas_photo_shoot` (Christmas Photo Shoot) · `ornament_crash` (Ornament Crash) · `santa_express` (Santa Express) · `instant_christmas` (Instant Christmas) · `particle_santa_surround` (Particle Santa Surround) · `coronation_of_frost` (Coronation Of Frost) · `building_sweater` (Building Sweater) · `spark_in_the_snow` (Spark In The Snow) · `scarlet_and_snow` (Scarlet And Snow) · `cozy_toon_wrap` (Cozy Toon Wrap) · `bullet_time_lite` (Bullet Time Lite) · `magic_cloak` (Magic Cloak) · `balloon_parade` (Balloon Parade) · `jumping_ginger_joy` (Jumping Ginger Joy) · `bullet_time` (Bullet Time) · `c4d_cartoon_pro` (C4d Cartoon Pro) · `pure_white_wings` (Pure White Wings) · `black_wings` (Black Wings) · `golden_wing` (Golden Wing) · `pink_pink_wings` (Pink Pink Wings) · `venomous_spider` (Venomous Spider) · `throne_of_king` (Throne Of King) · `luminous_elf` (Luminous Elf) · `woodland_elf` (Woodland Elf) · `japanese_anime_1` (Japanese Anime 1) · `american_comics` (American Comics) · `guardian_spirit` (Guardian Spirit) · `swish_swish` (Swish Swish) · `snowboarding` (Snowboarding) · `witch_transform` (Witch Transform) · `vampire_transform` (Vampire Transform) · `pumpkin_head_transform` (Pumpkin Head Transform) · `demon_transform` (Demon Transform) · `mummy_transform` (Mummy Transform) · `zombie_transform` (Zombie Transform) · `cute_pumpkin_transform` (Cute Pumpkin Transform) · `cute_ghost_transform` (Cute Ghost Transform) · `knock_knock_halloween` (Knock Knock Halloween) · `halloween_escape` (Halloween Escape) · `baseball` (Baseball) · `inner_voice` (Inner Voice) · `a_list_look` (A List Look) · `memory_alive` (Memory Alive) · `trampoline` (Trampoline) · `trampoline_night` (Trampoline Night) · `pucker_up` (Pucker Up) · `guess_what` (Guess What) · `feed_mooncake` (Feed Mooncake) · `rampage_ape` (Rampage Ape) · `flyer` (Flyer) · `dishwasher` (Dishwasher) · `pet_chinese_opera` (Pet Chinese Opera) · `magic_fireball` (Magic Fireball) · `gallery_ring` (Gallery Ring) · `pet_moto_rider` (Pet Moto Rider) · `muscle_pet` (Muscle Pet) · `squeeze_scream` (Squeeze Scream) · `pet_delivery` (Pet Delivery) · `running_man` (Running Man) · `disappear` (Disappear) · `mythic_style` (Mythic Style) · `steampunk` (Steampunk) · `3d_cartoon_2` (3d Cartoon 2) · `eagle_snatch` (Eagle Snatch) · `hug_from_past` (Hug From Past) · `firework` (Firework) · `media_interview` (Media Interview) · `pet_chef` (Pet Chef) · `santa_gifts` (Santa Gifts) · `santa_hug` (Santa Hug) · `heart_gesture_1` (Heart Gesture 1) · `pet_wizard` (Pet Wizard) · `smoke_smoke` (Smoke Smoke) · `instant_kid` (Instant Kid) · `dollar_rain` (Dollar Rain) · `cry_cry` (Cry Cry) · `building_collapse` (Building Collapse) · `gun_shot` (Gun Shot) · `mushroom` (Mushroom) · `double_gun` (Double Gun) · `pet_warrior` (Pet Warrior) · `lightning_power` (Lightning Power) · `jesus_hug` (Jesus Hug) · `shark_alert` (Shark Alert) · `long_hair` (Long Hair) · `lie_flat` (Lie Flat) · `polar_bear_hug` (Polar Bear Hug) · `brown_bear_hug` (Brown Bear Hug) · `jazz_jazz` (Jazz Jazz) · `office_escape_plow` (Office Escape Plow) · `fly_fly` (Fly Fly) · `watermelon_bomb` (Watermelon Bomb) · `pet_dance` (Pet Dance) · `boss_coming` (Boss Coming) · `wool_curly` (Wool Curly) · `pet_bee` (Pet Bee) · `marry_me` (Marry Me) · `swing_swing` (Swing Swing) · `day_to_night` (Day To Night) · `piggy_morph` (Piggy Morph) · `wig_out` (Wig Out) · `car_explosion` (Car Explosion) · `ski_ski` (Ski Ski) · `siblings` (Siblings) · `construction_worker` (Construction Worker) · `let's_ride` (Let's Ride) · `snatched` (Snatched) · `magic_broom` (Magic Broom) · `felt_felt` (Felt Felt) · `jumpdrop` (Jumpdrop) · `surfsurf` (Surfsurf) · `fairy_wing` (Fairy Wing) · `angel_wing` (Angel Wing) · `dark_wing` (Dark Wing) · `skateskate` (Skateskate) · `plushcut` (Plushcut) · `jelly_press` (Jelly Press) · `jelly_slice` (Jelly Slice) · `jelly_squish` (Jelly Squish) · `jelly_jiggle` (Jelly Jiggle) · `pixelpixel` (Pixelpixel) · `yearbook` (Yearbook) · `instant_film` (Instant Film) · `anime_figure` (Anime Figure) · `rocketrocket` (Rocketrocket) · `bloombloom` (Bloombloom) · `dizzydizzy` (Dizzydizzy) · `fuzzyfuzzy` (Fuzzyfuzzy) · `squish` (Squish) · `expansion` (Expansion) · `emoji` (Emoji) (default `korean_baseball`) |
-| `imageUrls` | `-i` | file | **required** image (up to 2) |
+</details>
 
-### `kling-t2a` — Kling T2A
+### `kling-3.0-image`
 
-[Try `kling-t2a` in Playground ↗](https://picsart.com/ai-playground/?model=kling-t2a)
+Kling 3.0 Image; input type `t2i`.
 
-Input type: `t2a`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `21:9`, `4:3`, `3:2`, `2:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `1k`, `2k`, `4k`; default `1k` |
+| `count` | `--count` | No | enum | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`; default `1` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 10 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `duration` | `-d` | number | `3`–`10`, step 0.5, default `5` |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kling-v2a` — Kling V2A
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1k"
+      },
+      {
+        "id": "2k"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "1k"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  }
+]
+```
 
-[Try `kling-v2a` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2a)
+</details>
 
-Input type: `v2a`
+### `kling-o1-image`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `videoUrl` | `--video` | file | **required** video |
+Kling O1 Image; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `21:9`, `4:3`, `3:2`, `2:3`, `3:4`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `1k`, `2k`; default `1k` |
+| `count` | `--count` | No | enum | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`; default `1` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 10 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "3:4"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1k"
+      },
+      {
+        "id": "2k"
+      }
+    ],
+    "default": "1k"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  }
+]
+```
+
+</details>
+
+### `kling-video-effects`
+
+Kling Video Effects; input type `i2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `templateId` | `--template-id` | No | catalog | Account-dependent ID; see catalog source below; default `korean_baseball` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 2 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "templateId",
+    "label": "Effect",
+    "kind": "catalog",
+    "source": {
+      "workflow": "kling/v1/catalog/templates"
+    },
+    "default": "korean_baseball"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Effect Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 2
+    },
+    "minSidePixels": 300
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `kling-t2a`
+
+Kling T2A; input type `t2a`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
+| `duration` | `--duration` | No | range | 3 to 10; step 0.5; default `5` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 2500
+  },
+  {
+    "key": "duration",
+    "label": "Duration (s)",
+    "kind": "range",
+    "min": 3,
+    "max": 10,
+    "step": 0.5,
+    "default": 5
+  }
+]
+```
+
+</details>
+
+### `kling-v2a`
+
+Kling V2A; input type `v2a`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `videoUrl` | `--video` | Yes | file | video input |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "videoUrl",
+    "label": "Source Video (3-20s, ≤100MB)",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 20,
+    "maxBytes": 104857600
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing kling-v3 -d 5 --rendering-speed pro
-```
-
-Cost scales with **duration**, **rendering speed / resolution** (`std` 720p · `pro` 1080p · `4k`), and **audio**.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

@@ -1,85 +1,21 @@
 ---
-description: "Connect Picsart to Gumloop via MCP credentials to generate images, video, and audio inside no-code automation workflows."
+description: "Connect Gumloop to Picsart with a hosted MCP connection."
 ---
 
 # Gumloop
 
-Gumloop connects to Picsart through its MCP Server credentials setting. No code is required. You paste the server URL and auth header in Settings, and Gumloop fetches the tool list automatically. Tools then appear in the node picker for any AI Agent node in your workflows.
+In **Settings > Connectors**, open the menu next to **Add Connector** and choose **Add MCP Connector**.
 
-Official Gumloop MCP docs: [Gumloop MCP documentation](https://www.gumloop.com/blog/mcp)
+Select **Public URL**, enter `https://api.picsart.com/gen-ai/mcp`, and choose **Connect**. When OAuth is detected, select **Authenticate** and sign in to Picsart. Choose the credential scope appropriate to the account that should use it.
 
-## Prerequisites
+Return to your agent's **Connectors** section, select **Add Connector**, and add the saved Picsart connection. Check the available tools before including generation in a recurring workflow.
 
-- A Gumloop account at [gumloop.com](https://www.gumloop.com).
-- A Picsart API key. Find it at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under API settings.
+## Verify the connection
 
-## Setup
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-1. Log in to [Gumloop](https://www.gumloop.com).
-2. Open **Settings** from the top-right menu.
-3. Go to **Credentials**.
-4. Find the **MCP Server** section and click **Add Server**.
-5. Fill in the following fields:
-   - **Name:** `Picsart Gen AI`
-   - **URL:** `https://mcp.picsart.io/mcp`
-   - **Auth header:** `Authorization: Bearer YOUR_PICSART_API_KEY`
-6. Click **Save**. Gumloop fetches the tool list automatically.
-7. Open any workflow, add an **AI Agent** node, and select Picsart tools from the tool picker.
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-## Use it
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-Use the AI Agent node in a Gumloop workflow and instruct it in plain language. Gumloop calls the selected Picsart tool and passes the result to the next node.
-
-**E-commerce:** Trigger on a new Shopify product, generate a product image with the AI Agent, and save the URL to Airtable.
-
-**Marketing:** Pull a campaign brief from Google Sheets, generate a hero image, and post it to Slack.
-
-**Content:** Input article text, generate a matching illustration, and upload it to WordPress.
-
-For a full list of available tools, see the [MCP Quickstart](/guide/mcp-quickstart).
-
-### Gumloop Creator Program
-
-Gumloop offers a 20% revenue share for creators who publish public workflow templates. Building a Picsart workflow template and publishing it to the Gumloop template library qualifies for this program. See [gumloop.com/creator-program](https://www.gumloop.com/creator-program).
-
-## Troubleshooting
-
-**URL not recognized.**
-
-Gumloop requires HTTPS. Confirm the URL is `https://mcp.picsart.io/mcp` exactly, including the protocol.
-
-**Tools do not appear in the node picker.**
-
-Go back to Settings, delete the MCP Server entry, and re-add it. Gumloop refreshes the tool list each time an entry is saved.
-
-**Auth error during a workflow run.**
-
-Confirm the API key is valid by testing it directly:
-
-```bash
-curl -H "Authorization: Bearer YOUR_KEY" https://mcp.picsart.io/mcp
-```
-
-If the request fails, generate a new API key at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) and update the credential in Gumloop.
-
-## FAQ
-
-**Do I need to write any code in Gumloop?**
-
-No. The entire setup is done through Gumloop's visual interface. No code, no CLI, no config files.
-
-**Can I call multiple Picsart tools in one workflow?**
-
-Yes. Add multiple AI Agent nodes in sequence and pass the output of one as input to the next. For example, generate an image in the first node and then use a second node to create a video from that image.
-
-**Is there a per-call cost?**
-
-Gumloop charges for workflow runs according to their pricing plan. Picsart charges credits per generation. These are separate and billed independently.
-
-## Start creating
-
-The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
-
-::: tip Ready to generate?
-[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [Gumloop documentation](https://docs.gumloop.com/nodes/mcp/custom_mcp_servers), checked September 29, 2026. These steps are based on the host's documented configuration; a complete Picsart sign-in was not exercised in each host during this audit.

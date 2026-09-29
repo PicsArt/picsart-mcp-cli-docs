@@ -1,86 +1,180 @@
 ---
-description: "VEED AI models on Picsart — 2 video model(s) including VEED Fabric 1.0, VEED Fabric 1.0 Fast. CLI + MCP examples, parameters, and official docs."
+description: "VEED model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # VEED
 
-**Mode:** video · **Models:** 2
+**Modes:** video · **Models:** 2
 
-**Vendor:** [VEED](https://www.veed.io/ai/avatars) · **Official API docs:** [Fabric 1.0 API](https://www.veed.io/tools/fabric-1.0-api)
-
-VEED Fabric 1.0 is an **image-to-video** model that makes any still talk: an image plus an audio track produces a lip-synced MP4. There are no preset avatars — any photo, illustration, mascot, or 3D render works. Output is 480p or 720p, with duration following the audio length (up to ~5 minutes). It comes in a standard and a **Fast** variant.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `veed-fabric-v1` | VEED Fabric 1.0 | `i2v` |
 | `veed-fabric-v1-fast` | VEED Fabric 1.0 Fast | `i2v` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# make a portrait talk from a voiceover track
-gen-ai generate -m veed-fabric-v1 \
-  --image ./portrait.png \
-  -a ./voiceover.mp3 \
-  -r 720p
-
-# faster, cheaper draft at 480p
-gen-ai generate -m veed-fabric-v1-fast \
-  --image ./mascot.png \
-  -a ./speech.wav \
-  -r 480p
+gen-ai models info veed-fabric-v1 --json
+gen-ai validate -m veed-fabric-v1 --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m veed-fabric-v1 --prompt "A quiet forest at sunrise" --image "https://example.com/input.jpg" --audio "https://example.com/input.mp3" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "veed-fabric-v1",
-    "imageUrls": ["https://example.com/portrait.png"],
-    "audioUrl": "https://example.com/voiceover.mp3",
-    "resolution": "720p"
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true,
+    "imageUrls": [
+      "https://example.com/input.jpg"
+    ],
+    "extra": {
+      "audioUrl": "https://example.com/input.mp3"
+    }
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `veed-fabric-v1` — VEED Fabric 1.0
+### `veed-fabric-v1`
 
-[Try `veed-fabric-v1` in Playground ↗](https://picsart.com/ai-playground/?model=veed-fabric-v1)
+VEED Fabric 1.0; input type `i2v`.
 
-Input type: `i2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | Text |
+| `resolution` | `--resolution` | No | enum | `480p`, `720p`; default `720p` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `audioUrl` | `--audio` | Yes | file | audio input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `audioUrl` | `-a` | file | **required** audio |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `veed-fabric-v1-fast` — VEED Fabric 1.0 Fast
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "480p"
+      },
+      {
+        "id": "720p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Start Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "audioUrl",
+    "label": "Audio Track",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "audio"
+  }
+]
+```
 
-[Try `veed-fabric-v1-fast` in Playground ↗](https://picsart.com/ai-playground/?model=veed-fabric-v1-fast)
+</details>
 
-Input type: `i2v`
+### `veed-fabric-v1-fast`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `audioUrl` | `-a` | file | **required** audio |
+VEED Fabric 1.0 Fast; input type `i2v`.
 
-> **Notes:** Duration is not a parameter — it equals the audio length (up to ~5 min).
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | No | text | Text |
+| `resolution` | `--resolution` | No | enum | `480p`, `720p`; default `720p` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `audioUrl` | `--audio` | Yes | file | audio input |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "480p"
+      },
+      {
+        "id": "720p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Start Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "audioUrl",
+    "label": "Audio Track",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "audio"
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing veed-fabric-v1 -r 720p
-```
-
-Cost is billed **per second** and scales with **resolution** (480p is cheaper than 720p) and the **audio length**, which sets the output duration.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

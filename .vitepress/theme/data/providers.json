@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 3,
+    "count": 8,
     "modes": [
       "text"
     ]
@@ -26,7 +26,7 @@
   {
     "id": "creatify",
     "label": "Creatify",
-    "count": 1,
+    "count": 2,
     "modes": [
       "video"
     ]
@@ -34,15 +34,16 @@
   {
     "id": "elevenlabs",
     "label": "ElevenLabs",
-    "count": 11,
+    "count": 17,
     "modes": [
-      "audio"
+      "audio",
+      "text"
     ]
   },
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 6,
+    "count": 8,
     "modes": [
       "image",
       "video"
@@ -51,7 +52,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 18,
+    "count": 22,
     "modes": [
       "image",
       "video",
@@ -62,7 +63,7 @@
   {
     "id": "grok",
     "label": "Grok (xAI)",
-    "count": 7,
+    "count": 8,
     "modes": [
       "image",
       "video",
@@ -104,7 +105,7 @@
   {
     "id": "kling",
     "label": "Kling",
-    "count": 14,
+    "count": 13,
     "modes": [
       "image",
       "video",
@@ -114,7 +115,7 @@
   {
     "id": "ltx",
     "label": "LTX (Lightricks)",
-    "count": 5,
+    "count": 9,
     "modes": [
       "video"
     ]
@@ -129,9 +130,17 @@
     ]
   },
   {
+    "id": "meta",
+    "label": "Meta",
+    "count": 1,
+    "modes": [
+      "image"
+    ]
+  },
+  {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 6,
+    "count": 12,
     "modes": [
       "video",
       "audio"
@@ -140,10 +149,9 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 6,
+    "count": 19,
     "modes": [
       "image",
-      "video",
       "text"
     ]
   },
@@ -158,16 +166,9 @@
   {
     "id": "picsart",
     "label": "Picsart",
-    "count": 8,
+    "count": 9,
     "modes": [
-      "image"
-    ]
-  },
-  {
-    "id": "pika",
-    "label": "Pika",
-    "count": 3,
-    "modes": [
+      "image",
       "video"
     ]
   },
@@ -182,7 +183,7 @@
   {
     "id": "qwen",
     "label": "Qwen (Alibaba)",
-    "count": 3,
+    "count": 2,
     "modes": [
       "image"
     ]
@@ -190,15 +191,7 @@
   {
     "id": "recraft",
     "label": "Recraft",
-    "count": 20,
-    "modes": [
-      "image"
-    ]
-  },
-  {
-    "id": "reve",
-    "label": "Reve",
-    "count": 1,
+    "count": 25,
     "modes": [
       "image"
     ]
@@ -231,7 +224,7 @@
   {
     "id": "seedream",
     "label": "Seedream",
-    "count": 4,
+    "count": 5,
     "modes": [
       "image"
     ]
@@ -264,7 +257,7 @@
   {
     "id": "wan",
     "label": "Wan (Alibaba)",
-    "count": 4,
+    "count": 6,
     "modes": [
       "video"
     ]

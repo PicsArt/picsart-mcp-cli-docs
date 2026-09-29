@@ -1,8 +1,8 @@
-// Regenerates docs-site/public/og.png — the 1200x630 social-share card used for
+// Regenerates public/og.png — the 1200x630 social-share card used for
 // og:image / twitter:image (wired in .vitepress/config.ts).
 //
 // Run from the repo root (Playwright + chromium live in the root node_modules):
-//   node docs-site/scripts/make-og-image.mjs
+//   node scripts/make-og-image.mjs
 //
 // Edit the HTML below and re-run to update the card. Keep it 1200x630.
 import { chromium } from 'playwright'
@@ -47,18 +47,18 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
   <div class="brand"><div class="dot"></div><b>Picsart</b><span>Developer Docs</span></div>
   <div>
     <h1>gen-ai <em>CLI · MCP · Skills</em></h1>
-    <p class="sub">Generate image, video &amp; audio from your terminal or any AI agent — one id, every model.</p>
+    <p class="sub">Generate images, video, audio, and text. CLI reference and hosted MCP connection guides.</p>
   </div>
   <div class="row">
     <div class="term"><span class="p">$</span> gen-ai generate -m flux-2-pro -p "a neon city"</div>
     <div class="stats">
-      <div class="stat"><b>150+</b><span>models</span></div>
-      <div class="stat"><b>30+</b><span>providers</span></div>
+      <div class="stat"><b>CLI</b><span>reference</span></div>
+      <div class="stat"><b>MCP</b><span>guides</span></div>
     </div>
   </div>
 </body></html>`
 
-const browser = await chromium.launch()
+const browser = await chromium.launch({ executablePath: process.env.DOCS_BROWSER_EXECUTABLE || undefined })
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 })
 await page.setContent(html, { waitUntil: 'networkidle' })
 await page.screenshot({ path: outPath, type: 'png' })

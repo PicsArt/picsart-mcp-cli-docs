@@ -1,52 +1,53 @@
 ---
-description: "22 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
+description: "Picsart audio models, examples, and input requirements."
 ---
 
 # Audio generation
 
-**22 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
+The SDK 6.18.0 snapshot contains 31 audio models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
 
-## Quick start
+## Inspect the inputs
 
 ```bash
-gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
+gen-ai models info eleven-v3 --json
+gen-ai validate -m eleven-v3 --schema
+```
+
+These commands inspect metadata without submitting a generation. Follow [authentication](/guide/authentication) and [pricing](/guide/pricing) before the next step.
+
+## Generate
+
+This example consumes credits:
+
+```bash
+gen-ai generate -m eleven-v3 -p "Welcome to the audio guide."
 ```
 
 ```json
-{ "name": "picsart_generate",
-  "arguments": { "model": "eleven-v3", "prompt": "Welcome to Picsart AI Playground." } }
+{
+  "name": "picsart_generate",
+  "arguments": {
+    "model": "eleven-v3",
+    "prompt": "Welcome to the audio guide.",
+    "async": true
+  }
+}
 ```
 
-## Input types
+For MCP media requests, retain the returned job and [poll its status](/guide/mcp-quickstart#wait-for-the-existing-job). Replace example input paths and URLs with your own media before using an editing model.
 
-| Type | Meaning | Models |
-|---|---|---|
-| `tts` | text → speech | Eleven v3, Multilingual v2, Voice Design v3, Gemini 2.5 Flash/Pro TTS, Grok TTS |
-| `music` | music generation | MiniMax Music v2, Lyria 3 Clip/Pro, Kling T2A |
-| `sfx` | sound effects | ElevenLabs SFX v2 |
-| `sts` | speech → speech / transform | Eleven STS v2, Multilingual STS, Audio Isolation, Dubbing |
+Voice and avatar IDs are model-specific. Static choices appear in the parameter descriptors. A dynamic catalog requires a current ID from the account catalog named in its descriptor; an empty list is not a usable voice ID.
 
 ## Providers
 
-| Provider | Models | Highlights |
-|---|---|---|
-| [ElevenLabs](/reference/providers/elevenlabs) | 10 — v3, Multilingual v2, SFX, STS, Dubbing, Voice Design, Audio Isolation, Voice Previews | The most complete voice suite |
-| [Google](/reference/providers/google) | Gemini 2.5 Flash/Pro TTS, Lyria 3 Clip/Pro | High-quality TTS + music |
-| [Kling](/reference/providers/kling) | Kling T2A, V2A | Text-to-audio & video-to-audio scoring |
-| [MiniMax](/reference/providers/minimax) | MiniMax Music v2 | Full original tracks from a prompt |
-| [Grok](/reference/providers/grok) | Grok TTS | Fast natural speech |
-| [Seed Audio](/reference/providers/seedaudio) | Seed Audio, Seed Audio Multilingual | 20 languages, named voices, and voice cloning |
+- [Async AI](/reference/providers/async)
+- [ElevenLabs](/reference/providers/elevenlabs)
+- [Google](/reference/providers/google)
+- [Grok](/reference/providers/grok)
+- [Kling](/reference/providers/kling)
+- [MiniMax](/reference/providers/minimax)
+- [Seed Audio](/reference/providers/seedaudio)
 
-## Common audio parameters
+## Parameters
 
-| Param | CLI flag | Notes |
-|---|---|---|
-| `prompt` | `-p` | Text to speak, or the music/SFX description |
-| `voiceId` | `--voice` | TTS voice selection (model-dependent set) |
-| `language` | `--language` | Language / locale (model-dependent) |
-
-Voice catalogs differ per model — list a model's accepted `voiceId` values with `gen-ai models info <id> --json` or `picsart_model_params`.
-
-## Pairs with video
-
-Generate a voiceover or score here, then drop it onto a video you made in the same app — or use a `v2a` model like Kling V2A to score an existing clip.
+Each provider page lists required inputs, accepted values, defaults, and limits for its models. A prompt is not required by every model, and counts, resolutions, duration, and file types vary. Use `picsart_model_params` for the connected server's schema and `picsart_preflight` to validate the complete request.

@@ -1,48 +1,24 @@
 ---
-description: "The full Picsart AI model catalog — 174 models from 32 providers across image, video, audio, and text analysis, usable from the gen-ai CLI and MCP."
+description: "Read the versioned Picsart model catalog and discover current model inputs."
 ---
 
-# Model Reference
+# Model reference
 
-The full Picsart AI Playground catalog: **174 models** from **32 providers**, across image, video, audio, and text. Every model is usable from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart) with the same id.
+This reference contains the `@picsart/ai-sdk` 6.18.0 snapshot: 220 models from 31 providers. The CLI and hosted MCP server can expose different catalogs. Check your runtime before submitting a generation.
 
-<div class="reference-cta">
-
-[**🔎 Browse the Model Catalog →**](/reference/catalog) &nbsp;·&nbsp; [**🏷️ All Providers →**](/reference/providers/)
-
-</div>
-
-## By mode
-
-| Mode | Models | Browse |
+| Mode | Models | Reference |
 |---|---|---|
-| 🖼️ Image | 67 | [Image generation](/reference/image) |
-| 🎬 Video | 74 | [Video generation](/reference/video) |
-| 🔊 Audio | 19 | [Audio generation](/reference/audio) |
-| 📝 Text | 5 | [Text & analysis](/reference/text) |
+| Image | 68 | [Image](/reference/image) |
+| Video | 91 | [Video](/reference/video) |
+| Audio | 31 | [Audio](/reference/audio) |
+| Text | 30 | [Text and analysis](/reference/text) |
 
-## Providers
+The [catalog](/reference/catalog) supports filtering. [Provider pages](/reference/providers/) list model IDs, required inputs, values, defaults, and the complete exported parameter descriptors. Their CLI flag mappings use version 2.78.0; a mapping does not guarantee a newer model exists in an older CLI.
 
-All **32 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
-
-## How to read a provider page
-
-Each provider page lists its models with:
-
-- a **models table** (id, display name, mode, input type),
-- a **CLI example** and an **MCP example** for the flagship model,
-- a **key parameters** table sourced from the live catalog,
-- vendor-specific notes and constraints.
-
-## Discover live
-
-The catalog evolves as new models ship. Query it directly:
+## Inspect your runtime
 
 ```bash
-gen-ai models --json | jq '.[] | {id, provider, mode}'
-gen-ai models --provider kling
+gen-ai models info flux-2-pro --json
 ```
 
-```json
-{ "name": "picsart_list_models", "arguments": { "provider": "kling" } }
-```
+For MCP, call `picsart_model_catalog` to find models and `picsart_model_params` to read the selected model's schema. Validate a candidate request with `picsart_preflight` before generating. Dynamic catalog IDs and media accessibility can require additional account-specific checks.

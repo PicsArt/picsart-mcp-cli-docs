@@ -1,100 +1,29 @@
 ---
-description: "Connect Picsart to Windsurf (Cascade) — install the gen-ai-use Skill or MCP server to generate images, video, and audio inside Windsurf."
+description: "Connect Windsurf to Picsart with a hosted MCP connection."
 ---
 
 # Windsurf
 
-Windsurf (Cascade) supports both **Skills** (ZIP install) and **MCP** via the Windsurf MCP config. The setup is nearly identical to Cursor.
-
-## Prerequisites
-
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
-
-## Method 1: Skills (recommended)
-
-### Install
-
-1. Download the skill ZIP from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/).
-2. In Windsurf, locate the rules or skills import in Settings.
-3. Place the unzipped skill folder in the designated directory.
-4. Restart Windsurf.
-
-### Use it
-
-In the Cascade agent panel:
-
-- *"Generate a 16:9 product image with a gradient background using Ideogram 4."*
-- *"Animate this still into a 5-second clip with subtle parallax."*
-- *"Generate a voiceover for this script using an ElevenLabs voice."*
-
-Cascade picks the appropriate model and runs the `gen-ai` command.
-
-## Method 2: MCP
-
-### Configure
-
-Open Windsurf's MCP settings and add:
+Open Cascade's MCP settings and its configuration editor. Merge this entry into `~/.codeium/windsurf/mcp_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "picsart-gen-ai": {
-      "command": "gen-ai-mcp"
+    "picsart": {
+      "serverUrl": "https://api.picsart.com/gen-ai/mcp"
     }
   }
 }
 ```
 
-Save and restart Windsurf.
+Save, refresh the MCP connection in Cascade, and complete OAuth sign-in when prompted. A team administrator may need to allow the server.
 
-### Use it
+## Verify the connection
 
-Once connected, Cascade can call Picsart tools directly:
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-- *"What does a Veo 3.1 video cost at 8 seconds and 1080p?"*
-- *"Generate a batch of 4 hero images for this brief and save to Drive."*
-- *"Remove the background from this URL and return the cleaned image."*
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-See the [MCP Quickstart](/guide/mcp-quickstart) for the full tool catalog.
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-## Troubleshooting
-
-**Windsurf cannot find `gen-ai-mcp`.**
-
-Use the absolute binary path:
-
-```json
-{
-  "mcpServers": {
-    "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
-    }
-  }
-}
-```
-
-Find the path with `which gen-ai-mcp` in a terminal.
-
-**Generation fails with "unauthorized".**
-
-Run `gen-ai login` in a terminal and restart Windsurf.
-
-## FAQ
-
-**Is the Picsart skill the same for Windsurf and Cursor?**
-
-Yes. The `gen-ai-use` skill bundle is agent-agnostic. The only difference is the directory where you place the skill — check Windsurf's current documentation for the exact path.
-
-**Can I use Skills and MCP at the same time?**
-
-Yes. They operate independently and do not conflict.
-
-## Start creating
-
-The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
-
-::: tip Ready to generate?
-[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [Windsurf documentation](https://docs.devin.ai/desktop/cascade/mcp), checked September 29, 2026. These steps are based on the host's documented configuration; a complete Picsart sign-in was not exercised in each host during this audit.

@@ -1,91 +1,32 @@
 ---
-description: "Connect Picsart to OpenAI Codex — add the MCP server or install Skills to generate images, video, and audio inside Codex."
+description: "Connect Codex to Picsart with a hosted MCP connection."
 ---
 
-# Codex (OpenAI)
+# Codex
 
-Codex supports Picsart through two paths: **MCP** (the primary method for direct tool-call access) and **Skills** (for a conversational generation experience).
-
-## Prerequisites
-
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
-
-## Method 1: MCP (recommended)
-
-### Configure
+Add the remote server, then sign in:
 
 ```bash
-codex mcp add picsart-gen-ai -- gen-ai-mcp
+codex mcp add picsart --url https://api.picsart.com/gen-ai/mcp
+codex mcp login picsart
+codex mcp list
 ```
 
-Or add manually to your Codex MCP config:
+Alternatively, merge this entry into `~/.codex/config.toml` and run the login command:
 
-```json
-{
-  "mcpServers": {
-    "picsart-gen-ai": {
-      "command": "gen-ai-mcp"
-    }
-  }
-}
+```toml
+[mcp_servers.picsart]
+url = "https://api.picsart.com/gen-ai/mcp"
 ```
 
-### Use it
+The configuration format is TOML. Preserve existing server entries. Use `/mcp` in Codex CLI to inspect the connection and tools.
 
-Once connected, Codex can call any Picsart MCP tool:
+## Verify the connection
 
-- *"Generate a 16:9 hero image for a Q4 campaign using Flux 2 Pro."*
-- *"Create a 9:16 social clip from this product image using Wan 2.7."*
-- *"Quote the credit cost of an 8-second Veo 3.1 clip at 1080p."*
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-See `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, `picsart_credits`, and the full tool list in the [MCP Quickstart](/guide/mcp-quickstart).
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-## Method 2: Skills
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-Install the CLI, then add the skill via npx:
-
-```bash
-npx skills add PicsArt/gen-ai-skills
-```
-
-Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and attach it to your Codex session.
-
-## Troubleshooting
-
-**`gen-ai-mcp` is not found.**
-
-Use the absolute path:
-
-```json
-{
-  "mcpServers": {
-    "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
-    }
-  }
-}
-```
-
-**Generation fails with "unauthorized".**
-
-Run `gen-ai login` in a terminal and restart Codex.
-
-## FAQ
-
-**What is the difference between MCP and Skills in Codex?**
-
-MCP gives Codex direct tool-call access to the full Picsart catalog — precise and scriptable. Skills give the agent pre-built generation instructions so you can drive it in plain English. Both use the same CLI and credit balance.
-
-**Does connecting Picsart to Codex cost extra?**
-
-No. The MCP server and Skills are free to install. Generations consume Picsart credits.
-
-## Start creating
-
-Click below to open ChatGPT with a ready-to-run Picsart prompt. ChatGPT will invoke the Picsart plugin automatically once you confirm.
-
-::: tip Ready to generate?
-[Start creating in Codex](https://chatgpt.com/?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup reference: [Codex documentation](https://developers.openai.com/codex/mcp), checked September 29, 2026. These steps are based on the host's documented configuration; a complete Picsart sign-in was not exercised in each host during this audit.

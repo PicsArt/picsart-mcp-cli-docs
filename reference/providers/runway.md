@@ -1,123 +1,323 @@
 ---
-description: "Runway AI models on Picsart — 4 video model(s) including Runway Aleph 2, Runway Gen 4.5, Runway Avatar. CLI + MCP examples, parameters, and official docs."
+description: "Runway model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Runway
 
-**Modes:** image · video · **Models:** 4
+**Modes:** image, video · **Models:** 4
 
-**Official API docs:** [Runway API](https://docs.dev.runwayml.com)
-
-Runway is a family of cinematic video models. The flagship **Gen 4.5** unifies text-to-video and image-to-video (pass a start image to drive it from a still), **Aleph** restyles an existing clip (video-to-video), **Gen4 Ref** generates from reference images, and **Avatar** produces a talking-avatar clip from a preset character plus text or audio.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `runway-avatar-video` | Runway Avatar | `t2v` |
 | `runway-gen4.5` | Runway Gen 4.5 | `t2v` |
 | `runway-aleph2` | Runway Aleph 2 | `v2v` |
 | `runway-gen4-ref` | Runway Gen4 Ref | `i2i` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-video
-gen-ai generate -m runway-gen4.5 \
-  -p "a lighthouse on a storm-battered cliff, cinematic, slow dolly in" \
-  --ar 16:9 -d 8
-
-# image-to-video: drive Gen 4.5 from a start image
-gen-ai generate -m runway-gen4.5 -p "slow push in, drifting fog" --image ./start.jpg -d 5
-
-# restyle an existing clip (Aleph, video-to-video)
-gen-ai generate -m runway-gen4-aleph -p "claymation style" --video ./clip.mp4
+gen-ai models info runway-avatar-video --json
+gen-ai validate -m runway-avatar-video --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m runway-avatar-video --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
-    "model": "runway-gen4.5",
-    "prompt": "a lighthouse on a storm-battered cliff, cinematic, slow dolly in",
-    "aspectRatio": "16:9",
-    "duration": 8
-  } }
+    "model": "runway-avatar-video",
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "runway-gen4.5",
-    "prompt": "slow push in, drifting fog",
-    "imageUrls": ["https://example.com/start.jpg"],
-    "duration": 5
-  } }
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `runway-avatar-video` — Runway Avatar
+### `runway-avatar-video`
 
-[Try `runway-avatar-video` in Playground ↗](https://picsart.com/ai-playground/?model=runway-avatar-video)
+Runway Avatar; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `style` | `--style` | No | enum | `game-character`, `music-superstar`, `game-character-man`, `cat-character`, `influencer`, `tennis-coach`, `human-resource`, `fashion-designer`, `cooking-teacher`; default `game-character` |
+| `voiceId` | `--voice` | No | catalog | Account-dependent ID; see catalog source below; default `victoria` |
+| `prompt` | `--prompt` | No | text | maximum 1500 characters |
+| `audioUrl` | `--audio` | No | file | audio input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `style` | `--style` | enum | `game-character` (Game Character) · `music-superstar` (Music Superstar) · `game-character-man` (Game Character Man) · `cat-character` (Cat Character) · `influencer` (Influencer) · `tennis-coach` (Tennis Coach) · `human-resource` (Human Resource) · `fashion-designer` (Fashion Designer) · `cooking-teacher` (Cooking Teacher) (default `game-character`) |
-| `voiceId` | `--voice` | enum | `victoria` (Victoria) · `vincent` (Vincent) · `clara` (Clara) · `drew` (Drew) · `skye` (Skye) · `max` (Max) · `morgan` (Morgan) · `felix` (Felix) · `mia` (Mia) · `marcus` (Marcus) · `summer` (Summer) · `ruby` (Ruby) · `aurora` (Aurora) · `jasper` (Jasper) · `leo` (Leo) · `adrian` (Adrian) · `nina` (Nina) · `emma` (Emma) · `blake` (Blake) · `david` (David) · `maya` (Maya) · `nathan` (Nathan) · `sam` (Sam) · `georgia` (Georgia) · `petra` (Petra) · `adam` (Adam) · `zach` (Zach) · `violet` (Violet) · `roman` (Roman) · `luna` (Luna) (default `victoria`) |
-| `prompt` | `-p` | text | free text (≤1500 chars) |
-| `audioUrl` | `-a` | file | audio |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `runway-gen4.5` — Runway Gen 4.5
+```json
+[
+  {
+    "key": "style",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "game-character",
+        "label": "Game Character"
+      },
+      {
+        "id": "music-superstar",
+        "label": "Music Superstar"
+      },
+      {
+        "id": "game-character-man",
+        "label": "Game Character Man"
+      },
+      {
+        "id": "cat-character",
+        "label": "Cat Character"
+      },
+      {
+        "id": "influencer",
+        "label": "Influencer"
+      },
+      {
+        "id": "tennis-coach",
+        "label": "Tennis Coach"
+      },
+      {
+        "id": "human-resource",
+        "label": "Human Resource"
+      },
+      {
+        "id": "fashion-designer",
+        "label": "Fashion Designer"
+      },
+      {
+        "id": "cooking-teacher",
+        "label": "Cooking Teacher"
+      }
+    ],
+    "default": "game-character"
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "runway/v1/catalog/voices"
+    },
+    "default": "victoria"
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 1500,
+    "placeholder": "Write the script your avatar will speak..."
+  },
+  {
+    "key": "audioUrl",
+    "label": "Audio Track",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "audio"
+  }
+]
+```
 
-[Try `runway-gen4.5` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4.5)
+</details>
 
-Input type: `t2v`
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `duration` | `-d` | enum | `5` · `8` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
+### `runway-gen4.5`
 
-### `runway-aleph2` — Runway Aleph 2
+Runway Gen 4.5; input type `t2v`.
 
-[Try `runway-aleph2` in Playground ↗](https://picsart.com/ai-playground/?model=runway-aleph2)
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 1000 characters |
+| `duration` | `--duration` | No | enum | `5`, `8`, `10`; default `5` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 1 |
 
-Input type: `v2v`
+<details>
+<summary>Full parameter descriptors</summary>
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `videoUrl` | `--video` | file | **required** video |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 1000
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 5
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 5
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Start Image",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
 
-> **Notes:** Gen 4.5 is a unified surface — passing a start image (`imageUrls`) switches it from text-to-video to image-to-video.
+</details>
 
-### `runway-gen4-ref` — Runway Gen4 Ref
+### `runway-aleph2`
 
-[Try `runway-gen4-ref` in Playground ↗](https://picsart.com/ai-playground/?model=runway-gen4-ref)
+Runway Aleph 2; input type `v2v`.
 
-Input type: `i2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 1000 characters |
+| `videoUrl` | `--video` | Yes | file | video input |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤1000 chars) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 1000
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 30
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
+
+</details>
+
+### `runway-gen4-ref`
+
+Runway Gen4 Ref; input type `i2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 1000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 3 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 1000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing runway-gen4.5 -d 8 --ar 16:9
-```
-
-Cost scales with **duration** (5 / 8 / 10 s). Gen 4.5 outputs at 1080p; aspect ratio does not change the price.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

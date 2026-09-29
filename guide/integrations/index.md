@@ -1,52 +1,36 @@
 ---
-description: "Connect Picsart to Claude Code, Cursor, Windsurf, ChatGPT, Codex, or VS Code — generate images, video, and audio without leaving your AI agent."
+description: "Choose a host and configure a Picsart MCP connection."
 ---
 
 # Integrations
 
-Once you have validated a prompt or workflow in the [AI Playground](https://picsart.com/ai-playground/), you can bring Picsart into the AI agent or coding assistant you already work in. Generate images, animate a video, remove a background, or synthesize audio without switching windows.
+Use Picsart's hosted endpoint with a client that supports Streamable HTTP and OAuth. No CLI installation is required for a remote connection. CLI skills require a separate execution environment and CLI login.
 
-These guides cover the exact setup for each agent.
+The guides distinguish documented setup from an end-to-end sign-in test. Check the limitation noted on a host's page before configuring it.
 
-## Supported agents
-
-| Agent | Guide |
+| Host | Review status |
 |---|---|
-| Claude Code | [Claude Code](/guide/integrations/claude-code) |
-| Cursor | [Cursor](/guide/integrations/cursor) |
-| Windsurf | [Windsurf](/guide/integrations/windsurf) |
-| Replit | [Replit](/guide/integrations/replit) |
-| ChatGPT | [ChatGPT](/guide/integrations/chatgpt) |
-| Codex (OpenAI) | [Codex](/guide/integrations/codex) |
-| VS Code Copilot | [VS Code](/guide/integrations/vscode) |
+| [AnythingLLM](/guide/integrations/anythingllm) | Compatibility limitation documented |
+| [ChatGPT](/guide/integrations/chatgpt) | Setup checked against host documentation |
+| [Claude Code](/guide/integrations/claude-code) | Setup checked against host documentation |
+| [Codex](/guide/integrations/codex) | Setup checked against host documentation |
+| [Copilot Studio](/guide/integrations/copilot-studio) | Setup checked against host documentation |
+| [Cursor](/guide/integrations/cursor) | Setup checked against host documentation |
+| [Dify](/guide/integrations/dify) | Setup checked against host documentation |
+| [Gemini CLI](/guide/integrations/gemini-cli) | Setup checked against host documentation |
+| [Goose](/guide/integrations/goose) | Setup checked against host documentation |
+| [Gumloop](/guide/integrations/gumloop) | Setup checked against host documentation |
+| [Hermes Agent](/guide/integrations/hermes-agent) | Setup checked against host documentation |
+| [LibreChat](/guide/integrations/librechat) | Setup checked against host documentation |
+| [LM Studio](/guide/integrations/lm-studio) | Compatibility limitation documented |
+| [LobeHub](/guide/integrations/lobehub) | Compatibility limitation documented |
+| [n8n](/guide/integrations/n8n) | Setup checked against host documentation |
+| [NemoClaw](/guide/integrations/nemoclaw) | Compatibility limitation documented |
+| [Open WebUI](/guide/integrations/open-webui) | Setup checked against host documentation |
+| [OpenClaw](/guide/integrations/openclaw) | Setup checked against host documentation |
+| [Raycast](/guide/integrations/raycast) | Setup checked against host documentation |
+| [Replit](/guide/integrations/replit) | Setup checked against host documentation |
+| [VS Code](/guide/integrations/vscode) | Setup checked against host documentation |
+| [Windsurf](/guide/integrations/windsurf) | Setup checked against host documentation |
 
-## Skills vs MCP: which to connect
-
-Both connect Picsart to an agent, but they work differently.
-
-**Skills** are pre-built instruction bundles. Install a skill and the agent already knows how to use Picsart — you just describe the task in plain English. Fastest to set up. Best when you want to generate from a conversation without managing tool schemas.
-
-**MCP** exposes every catalog tool directly: `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, and more. Use MCP when you want the agent to inspect cost before generating, validate parameters, or chain multiple operations in one turn.
-
-You can use both at the same time — they do not conflict.
-
-| | Skills | MCP |
-|---|---|---|
-| Install | One command or ZIP | One config block |
-| Agent knows Picsart | Yes, pre-built | Via tool schema only |
-| Can quote cost before generating | No | Yes |
-| Can chain tools | No | Yes |
-| Best for | Conversational generation | Workflow automation inside the agent |
-
-## Prerequisites for all integrations
-
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Authenticate once: `gen-ai login` (browser OAuth).
-
-Skills and MCP both drive the CLI internally. The session from step 2 covers all surfaces — no separate credential per agent.
-
-## Not using an agent?
-
-- **Want to experiment first?** Use the [AI Playground](https://picsart.com/ai-playground/) — no install required.
-- **Need scheduled or batch generation?** Use the [CLI](/guide/cli-quickstart).
-- **Building a product?** Use the [API](https://picsart.com/gen-ai-mcp/).
+Start with a free schema check, then [validate a request before generation](/guide/mcp-quickstart).

@@ -1,12 +1,9 @@
 ---
-description: "Browse all 168 Picsart AI models from 32 providers — search and filter image, video, audio, and text models for the gen-ai CLI and MCP."
-title: Model Catalog
-aside: false
-outline: false
+description: "Search the versioned Picsart SDK model catalog."
 ---
 
-# Model Catalog
+# Model catalog
 
-Browse all **174 models** from **32 providers**. Search by name, filter by mode or provider, and open a provider page for CLI + MCP examples and parameters. Every model works from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart).
+Browse the 220 models from 31 providers in SDK 6.18.0. This is a snapshot, not a live server inventory. Confirm availability in your CLI or MCP connection before using an ID.
 
 <ModelCatalog />

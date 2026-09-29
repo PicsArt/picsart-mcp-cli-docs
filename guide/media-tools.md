@@ -1,112 +1,71 @@
 ---
-description: "The 24 picsart_media_* MCP tools — a scene-graph compositor for building, validating, and rendering videos, decks, and motion graphics from an agent."
+description: "Compose, inspect, validate, and render layered media through Picsart MCP."
 ---
 
-# Media Tools (`picsart_media_*`)
+# Media tools
 
-Alongside the [generation tools](/guide/mcp-quickstart#tool-catalog), the MCP server exposes a
-second family of **24 tools prefixed `picsart_media_`**. Where `picsart_generate` runs a *model*,
-these tools drive a **scene-graph compositor**: you author an **MP Scene** document (layers,
-timing, text, effects, transitions) and then render it to an MP4 or PNG.
+The `picsart_media_*` tools work with layered scene documents: media, text, timing, effects, and transitions. Use them to assemble existing assets, add captions, or render a composition. Model generation is a separate operation.
 
-Use them for the things a text-to-video model can't do reliably: slideshows and decks from
-templates, montages and concatenation, captions and lower thirds over the user's own footage,
-contact sheets, and 4K motion graphics.
+## Recommended workflow
 
-::: tip The whole family is one workflow
-Almost every tool takes a scene in and returns a scene out. Nothing is persisted server-side —
-the agent holds the scene document between calls and passes it along.
-:::
+1. Call `picsart_media_quickstart` for the relevant recipe.
+2. Request the needed capability sections with `picsart_media_get_capabilities`. Start with `limits` and the features you plan to use. Omitting `sections` returns an index, not every capability.
+3. Inspect unknown source dimensions and duration with `picsart_media_probe_media`. A missing duration is unknown, not zero.
+4. Call `picsart_media_list_fonts` before adding text. Use a returned font key or an accepted font URL; the renderer does not provide a system-font fallback.
+5. Build from a template or author a scene using the current schema. Use `picsart_media_get_scene_schema` for structure and `picsart_media_validate_scene` for semantic checks.
+6. Check placement with `picsart_media_query_layout`, then inspect a rendered frame with `picsart_media_contact_sheet`.
+7. Export the validated composition with `picsart_media_export`.
 
-## Recommended flow
+Schema validation and layout geometry do not prove that assets, fonts, effects, and codecs render correctly. Inspect pixels before a final export.
 
-1. `picsart_media_quickstart` — **call this first.** Returns ready-to-run call sequences for
-   common tasks (merge/concat, contact sheet, export).
-2. `picsart_media_get_capabilities` / `picsart_media_get_scene_schema` — learn the supported
-   layer kinds, effects, limits, and the exact scene shape.
-3. `picsart_media_probe_media` — size the composition against the real dimensions and duration
-   of the user's input URLs.
-4. Author: start from a template (`picsart_media_apply_scene_template`) or build layers, then
-   refine with `picsart_media_patch_scene` and the `apply_*` tools.
-5. Check: `picsart_media_validate_scene`, `picsart_media_query_layout`,
-   `picsart_media_contact_sheet`.
-6. Render: `picsart_media_export`.
+## Discover capabilities
 
-## Orientation
+```json
+{
+  "name": "picsart_media_get_capabilities",
+  "arguments": { "sections": ["limits", "export", "layerContentKinds"] }
+}
+```
 
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_quickstart` | Ready-to-run tool sequences per recipe; omit `recipe` for the index | no |
-| `picsart_media_get_capabilities` | Supported layer kinds, animatable properties, effect/transition ids, limits (pass `sections` — the full doc is ~8K tokens) | no |
-| `picsart_media_get_scene_schema` | JSON Schema of an MP Scene document | no |
-| `picsart_media_list_fonts` | Curated font catalog. **Required** before authoring text — there is no system-font fallback, so `Inter`/`Arial` produce empty text | no |
+Read the returned `build` and limits. Different server versions can support different scene features and output sizes; do not assume a universal 1920-pixel cap.
 
-## Inspect inputs
+## Tool groups
 
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_probe_media` | Metadata for a remote media URL (kind, display width/height, duration, content type, bytes) from ≤256KiB of ranged fetches — no download | no |
+| Task | Tools |
+|---|---|
+| Learn the format | `picsart_media_quickstart`, `picsart_media_get_capabilities`, `picsart_media_get_scene_schema` |
+| Inspect inputs and fonts | `picsart_media_probe_media`, `picsart_media_list_fonts` |
+| Use templates | `picsart_media_list_scene_templates`, `picsart_media_describe_scene_template`, `picsart_media_apply_scene_template`, `picsart_media_expand_scene_ref` |
+| Edit layers | `picsart_media_patch_scene`, `picsart_media_apply_effect`, `picsart_media_apply_look` |
+| Animate | `picsart_media_apply_motion_preset`, `picsart_media_apply_text_animation` |
+| Inspect a composition | `picsart_media_validate_scene`, `picsart_media_query_layout`, `picsart_media_contact_sheet` |
+| Produce output | `picsart_media_export`, `picsart_media_translate_scene` |
 
-## Templates
+Use the connected server's tool list for availability and the exact input schema. Scene transformations return updated documents for the caller to retain. Probing can fetch remote assets, and export runs on the server; the entire tool family is not a set of local, stateless transformations.
 
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_list_scene_templates` | Enumerate the curated template catalog (title cards, lower thirds, product cards…) | no |
-| `picsart_media_describe_scene_template` | One template's declared parameters, defaults, ranges, and dimensions | no |
-| `picsart_media_apply_scene_template` | Instantiate a template with bindings — by default as a `scene_ref` layer to drop into a parent scene | no |
-| `picsart_media_expand_scene_ref` | Detach a `scene_ref` into concrete editable layers, inlined in place | no |
+## Export
 
-## Author and edit a scene
+`picsart_media_export` accepts a scene object or a directly accessible scene URL. Use `mediaType` to choose the output: `mp4` by default, or a supported still, video, or image-sequence format. For a still, set `startTime` to the frame's time. The optional `resolution` supplies width and height for server-side downscaling.
 
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_patch_scene` | Batch of ID-anchored `set` / `remove` / `add` edit ops — the token-cheap alternative to re-emitting the whole scene | no |
-| `picsart_media_apply_effect` | Apply a named effect (`gaussian_blur`, `drop_shadow`, `stroke`, …) to a layer; re-applying the same id replaces it | no |
-| `picsart_media_apply_look` | Apply a composite look (`vintage_bw`, `light_leak`, `shimmer`, …) to a media or `scene_ref` layer | no |
-| `picsart_media_apply_motion_preset` | Apply a motion preset (`ken_burns`, `glow_pulse`, `scale_pop`, …); presets declare which layer kinds they accept | no |
-| `picsart_media_apply_text_animation` | Apply a text-animation preset (`typewriter`, `fade_in_chars`, `slide_up_lines`, …) to a text layer | no |
-| `picsart_media_resolve_looks` | Bake every by-reference look into its nested composition, returning a self-contained scene | no |
+This request is a template and spends credits when run with a real scene. Replace the placeholder URL with your validated scene:
 
-## Check before rendering
+```json
+{
+  "name": "picsart_media_export",
+  "arguments": {
+    "scene": "https://example.com/validated-scene.json",
+    "mediaType": "png",
+    "startTime": 0
+  }
+}
+```
 
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_validate_scene` | Structured diagnostics with JSON paths and stable codes; valid = no `error` severity | no |
-| `picsart_media_query_layout` | Where every layer actually lands at a given time — box, center, rotation, z-index, on-canvas coverage — without rendering pixels | no |
-| `picsart_media_contact_sheet` | Low-res jpeg thumbnails at given `times` (or evenly spaced `frames`) — a cheap visual check before a full render | **yes** |
-| `picsart_media_translate_scene` | Translate a scene to an engine project file on disk, returning `{ path, cached, summary }` | no |
+Use the returned asset URL for subsequent tool calls. If `downloadUrls` are provided, they are intended for saving the files. Only report a successful Drive save when the response confirms it; rendering can succeed even if that save fails.
 
-## Render
-
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_export` | Render a finished scene to a real file — `format: "video"` (MP4, default) or `"image"` (PNG). Caps at 1920×1920 | **yes** |
-| `picsart_media_overview` | Compile a deck (a scene of `scene_ref` slides) into a single grid-of-thumbnails board scene | no |
-
-## Motion graphics above 1920×1920
-
-The scene tools cap at 1920×1920. These three generate and render code-based motion graphics
-(title cards, animated logos, ambient loops, kinetic typography) up to 3840×2160 — and are the
-only way to get `ultra_hd` output.
-
-| Tool | Purpose | Spends credits |
-|---|---|---|
-| `picsart_media_video_create` | Generate a new motion-graphics clip from a natural-language brief | **yes** |
-| `picsart_media_video_revise` | Edit or fix an existing `code_url` output (pass `error` when fixing a broken render) | **yes** |
-| `picsart_media_video_render` | Render a `code_url` to MP4 — `hd` / `full_hd` (default) / `ultra_hd` | **yes** |
-
-Not for template slideshows, montage/concat, contact sheets, or captions over user media — use
-the scene tools above for those.
+`picsart_media_translate_scene` returns the full engine project inline. Its default engine is `v3`; `jet` is also supported. It does not return a local project path, and it does not replace scene validation.
 
 ## Credits
 
-Only five media tools spend credits: `picsart_media_contact_sheet`, `picsart_media_export`,
-`picsart_media_video_create`, `picsart_media_video_render`, `picsart_media_video_revise`.
-Every other tool in the family is a free, pure scene transformation — so authoring, validating,
-and layout-checking are all free, and you only pay when pixels are produced.
+Rendering and media generation can spend credits. Check the selected tool's current description and pricing before calling it. Capability discovery, schema inspection, and validation do not generate media. Avoid assuming every newly added tool is free based on its name.
 
-## More
-
-- **[MCP Quickstart](/guide/mcp-quickstart)** — connecting, and the generation tool catalog
-- **[Local files → URLs](/guide/local-files)** — these tools take URLs, never filesystem paths
-- **[Pricing & Credits](/guide/pricing)** — how cost is computed
+See [MCP setup](/guide/mcp-quickstart), [file uploads](/guide/local-files), and [pricing](/guide/pricing).
