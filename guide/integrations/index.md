@@ -41,8 +41,9 @@ You can use both at the same time — they do not conflict.
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Authenticate once: `gen-ai login` (browser OAuth).
+3. For MCP hosts that run the server locally, install it: `npm install -g @picsart/gen-ai-mcp`.
 
-Skills and MCP both drive the CLI internally. The session from step 2 covers all surfaces — no separate credential per agent.
+Skills run `gen-ai` commands, and the MCP server reads the same stored credentials. The session from step 2 covers all surfaces — no separate credential per agent.
 
 ## Not using an agent?
 

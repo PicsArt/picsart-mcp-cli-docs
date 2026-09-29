@@ -33,7 +33,7 @@ gen-ai describe -i photo.jpg
 gen-ai describe -m claude-opus-4-8 -i receipt.jpg -p "extract the total and tax"
 
 # fast, high-volume captioning — pipe clean text out
-gen-ai describe -m claude-haiku-4-5 -i product.jpg --script | pbcopy
+gen-ai describe -m claude-haiku-4-5 -i product.jpg -q | pbcopy
 ```
 
 These models return text, so they run through `gen-ai describe` (not `generate`) and print to stdout — no download or Drive save.

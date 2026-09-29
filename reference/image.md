@@ -37,13 +37,13 @@ gen-ai generate -m flux-2-pro -p "studio shot of a ceramic cup, soft light" --ar
 
 ## Editing shortcuts
 
-Some tasks have dedicated, model-agnostic commands/tools that auto-pick a fitting model:
+Some tasks have dedicated, task-shaped commands/tools. The MCP shortcuts auto-pick a fitting model; the CLI commands show a picker limited to fitting models (pass `-m` to choose one directly, which scripts must do):
 
 ```bash
-gen-ai remove-bg ./photo.jpg
-gen-ai change-bg ./photo.jpg -p "a sunny beach"
-gen-ai enhance ./photo.jpg
-gen-ai vectorize ./logo.png
+gen-ai remove-bg -i ./photo.jpg
+gen-ai change-bg -i ./photo.jpg -p "a sunny beach"
+gen-ai enhance -i ./photo.jpg
+gen-ai vectorize -m recraft-vectorize -i ./logo.png
 ```
 
 ```json

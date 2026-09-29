@@ -4,13 +4,14 @@ description: "Connect Picsart to Claude Code — install via the plugin marketpl
 
 # Claude Code
 
-Claude Code supports two connection methods: **Skills** (the recommended path) and **MCP** (for direct tool-call access). Both use the same `gen-ai` CLI under the hood.
+Claude Code supports two connection methods: **Skills** (the recommended path) and **MCP** (for direct tool-call access). Both use the same `gen-ai login` session.
 
 ## Prerequisites
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
 
 ## Method 1: Skills (recommended)
 

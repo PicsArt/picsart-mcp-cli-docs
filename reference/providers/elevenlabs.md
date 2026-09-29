@@ -186,7 +186,7 @@ Input type: `tts`
 ## Pricing
 
 ```bash
-gen-ai pricing eleven-v3 -p "your script here"
+gen-ai pricing eleven-v3
 ```
 
 Cost scales with the **length** of the generated audio.

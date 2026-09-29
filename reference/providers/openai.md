@@ -66,7 +66,7 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
 | `quality` | `--quality` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
 | `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 16) |
 
@@ -82,7 +82,7 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
 | `quality` | `--quality` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
 | `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 16) |
 
@@ -97,7 +97,7 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
 | `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |
 
@@ -113,7 +113,7 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` (default `1:1`) |
 | `quality` | `--quality` | enum | `high` · `medium` · `low` (default `high`) |
 | `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |
 

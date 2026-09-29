@@ -165,7 +165,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing flux-2-pro -n 4
+gen-ai pricing flux-2-pro
 ```
 
 Cost scales with **resolution/quality** and the **number of outputs** (`count`).

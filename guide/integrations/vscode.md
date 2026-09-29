@@ -10,8 +10,9 @@ VS Code Copilot supports MCP servers in agent mode. Connect the Picsart MCP serv
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
-4. VS Code 1.99 or later with the GitHub Copilot extension and agent mode enabled.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
+5. VS Code 1.99 or later with the GitHub Copilot extension and agent mode enabled.
 
 ## Configure
 
@@ -74,7 +75,7 @@ Use the absolute binary path in the config:
   "servers": {
     "picsart-gen-ai": {
       "type": "stdio",
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
+      "command": "/usr/local/bin/gen-ai-mcp"
     }
   }
 }

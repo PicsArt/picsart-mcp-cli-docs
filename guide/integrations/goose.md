@@ -10,7 +10,8 @@ Goose is an open-source AI agent that supports MCP servers as extensions. Add th
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
 
 ## Method 1: goose configure (recommended)
 

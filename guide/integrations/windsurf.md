@@ -10,7 +10,8 @@ Windsurf (Cascade) supports both **Skills** (ZIP install) and **MCP** via the Wi
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
 
 ## Method 1: Skills (recommended)
 
@@ -69,7 +70,7 @@ Use the absolute binary path:
 {
   "mcpServers": {
     "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
+      "command": "/usr/local/bin/gen-ai-mcp"
     }
   }
 }

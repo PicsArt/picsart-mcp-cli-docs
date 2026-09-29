@@ -10,6 +10,7 @@ ChatGPT supports Picsart through MCP (for ChatGPT with MCP connector support) an
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
 
 ## Method 1: MCP
 
@@ -56,7 +57,7 @@ ChatGPT reads the skill instructions and runs the corresponding `gen-ai` command
 
 **ChatGPT cannot run `gen-ai-mcp`.**
 
-The MCP server must run as a local process. Make sure the CLI is installed (`gen-ai --version`) and the MCP server binary is on your PATH (`which gen-ai-mcp`). ChatGPT's MCP connector requires a running local server, not a remote URL.
+The MCP server must run as a local process. Make sure the MCP server package is installed (`npm install -g @picsart/gen-ai-mcp`) and its binary is on your PATH (`which gen-ai-mcp`). ChatGPT's MCP connector requires a running local server, not a remote URL.
 
 **Generation fails with "unauthorized".**
 

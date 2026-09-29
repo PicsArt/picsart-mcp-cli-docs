@@ -176,7 +176,7 @@ Input type: `t2v`
 ## Pricing
 
 ```bash
-gen-ai pricing wan-2.7-t2v -d 10 -r 1080P
+gen-ai pricing wan-2.7-t2v --duration 10 --resolution 1080P
 ```
 
 Cost scales with **duration** and **resolution**.

@@ -7,6 +7,10 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-09-29
+
+**CLI docs checked against `@picsart/gen-ai` 2.78.0.** Removed flags and commands the CLI does not have (`--script`, `--dry-run` and `--no-download` on `generate`, short flags on `pricing`, `gen-ai extend`), documented that generations save to Drive by default, rewrote the batch guide for the real JSON manifest format (`jobs[]` with `id`) and output folder, added CI authentication via `PICSART_ACCESS_TOKEN` / `PICSART_USER_ID`, and corrected the MCP install step — the server is the separate `@picsart/gen-ai-mcp` package.
+
 ## 2026-09-19
 
 **SDK 6.2.3 catalog refresh — 201 models across 31 providers.** Compared with the previously published catalog: 26 additions, 6 removals; Meta joins and Reve leaves the active provider list. The SDK upgrade from 6.0.0 adds 11 text models and changes result metadata and Seedance color-depth handling. See the [complete update and migration guide](/guide/sdk-6-2-update).

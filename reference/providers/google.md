@@ -47,7 +47,7 @@ gen-ai generate -m veo-3.1 -p "a drone shot over a snowy ridge at golden hour" \
   "arguments": { "model": "veo-3.1", "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p", "generateAudio": true } }
 ```
 
-Veo clips are chainable with [`gen-ai extend`](/guide/cli-quickstart) (`+7s` per segment). Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
+Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
 
 ## Nano Banana Pro (image)
 
@@ -128,7 +128,7 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-3.1-flash-lite-image` — Nano Banana 2 Lite
@@ -142,7 +142,7 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-3-pro-image` — Nano Banana Pro

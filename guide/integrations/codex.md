@@ -10,7 +10,8 @@ Codex supports Picsart through two paths: **MCP** (the primary method for direct
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
 
 ## Method 1: MCP (recommended)
 
@@ -56,13 +57,13 @@ Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-
 
 **`gen-ai-mcp` is not found.**
 
-Use the absolute path:
+Install it with `npm install -g @picsart/gen-ai-mcp`, or use the absolute path (find it with `which gen-ai-mcp`):
 
 ```json
 {
   "mcpServers": {
     "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
+      "command": "/usr/local/bin/gen-ai-mcp"
     }
   }
 }

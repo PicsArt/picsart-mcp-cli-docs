@@ -4,13 +4,14 @@ description: "Connect Picsart to Cursor — add the gen-ai-use Skill or MCP serv
 
 # Cursor
 
-Cursor supports two connection methods: **Skills** (ZIP install) and **MCP** (via the Cursor MCP config). Both drive the same `gen-ai` CLI.
+Cursor supports two connection methods: **Skills** (ZIP install) and **MCP** (via the Cursor MCP config). Both use the same `gen-ai login` session.
 
 ## Prerequisites
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
+4. Verify: `gen-ai --version` and `gen-ai credits`.
 
 ## Method 1: Skills (recommended)
 
@@ -77,13 +78,13 @@ See the [MCP Quickstart](/guide/mcp-quickstart) for the full tool list.
 
 **Cursor says it cannot find `gen-ai`.**
 
-The CLI is not on Cursor's PATH. Run `which gen-ai` in a terminal to get the full path, then update the MCP config to use the absolute path:
+`gen-ai-mcp` is not on Cursor's PATH. Run `which gen-ai-mcp` in a terminal to get the full path, then update the MCP config to use the absolute path:
 
 ```json
 {
   "mcpServers": {
     "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
+      "command": "/usr/local/bin/gen-ai-mcp"
     }
   }
 }

@@ -33,7 +33,7 @@ gen-ai generate -m picsart-sana-sprint-v1 \
   --ar 16:9 -s
 
 # text-to-image with Flux 2 Klein
-gen-ai generate -m picsart-flux-klein -p "isometric cozy reading nook, soft pastel palette"
+gen-ai generate -m picsart-flux-2-klein -p "isometric cozy reading nook, soft pastel palette"
 
 # task-shaped image editing
 gen-ai remove-bg -i ./portrait.jpg

@@ -46,7 +46,7 @@ The `gen-ai` CLI exposes the full catalog as a single terminal command. It is pi
 
 ```bash
 gen-ai generate -m flux-2-pro -p "product on white background" -n 4
-gen-ai batch run catalog.yaml
+gen-ai batch run catalog.json
 ```
 
 [CLI Quickstart](/guide/cli-quickstart) · [Batch and Automation](/guide/batch)
@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills and MCP drive the `gen-ai` CLI internally. Install the CLI once, run `gen-ai login` once, and those surfaces work. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
+They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills run `gen-ai` commands and the MCP server (`@picsart/gen-ai-mcp`) reads the same stored credentials, so one `gen-ai login` signs in the CLI, Skills, and MCP. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|

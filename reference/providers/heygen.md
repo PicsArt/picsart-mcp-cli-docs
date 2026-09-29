@@ -87,7 +87,7 @@ Input type: `t2v`
 ## Pricing
 
 ```bash
-gen-ai pricing heygen-talking-photo -r 720p
+gen-ai pricing heygen-talking-photo --resolution 720p
 ```
 
 Cost scales with **resolution** and the **length of the generated video** (driven by your script). Trial/free credits burn a HeyGen watermark into the output and may cap resolution — production videos require paid credits.

@@ -201,7 +201,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing luma-ray-2 -d 9 -r 4k
+gen-ai pricing luma-ray-2 --duration 9 --resolution 4k
 ```
 
 Video cost scales with **duration** and **resolution**. UNI-1 image cost is per generation.

@@ -76,7 +76,7 @@ Input type: `t2v`
 | `duration` | `-d` | range | `4`–`30`, step 1 (default `5`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
 | `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `imageUrls` | `-i` | file | image (up to 30) |
 | `videoUrls` | `--video-urls` | file | video (up to 10) |
@@ -97,7 +97,7 @@ Input type: `v2v`
 | `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `1080p`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
 | `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `videoUrl` | `--video` | file | **required** video |
 | `imageUrls` | `-i` | file | image (up to 30) |
@@ -115,7 +115,7 @@ Input type: `v2v`
 | `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `1080p`) |
 | `duration` | `-d` | range | `4`–`30`, step 1 (default `15`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
 | `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `videoUrls` | `--video-urls` | file | **required** video (up to 10) |
 
@@ -278,7 +278,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing seedance-2.0 -d 8 -r 1080p
+gen-ai pricing seedance-2.0 --duration 8 --resolution 1080p
 ```
 
 Cost scales with **duration**, **resolution**, and **audio**.

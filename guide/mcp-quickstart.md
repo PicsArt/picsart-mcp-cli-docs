@@ -12,8 +12,13 @@ New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
 1. Install the gen-ai CLI — see [Installation](/guide/installation).
 2. Run `gen-ai login` once (opens your browser for OAuth).
+3. Install the MCP server, which is a separate npm package:
 
-That is all. The MCP server (`gen-ai-mcp`) ships with the CLI and uses the same credentials.
+```bash
+npm install -g @picsart/gen-ai-mcp     # provides the gen-ai-mcp command
+```
+
+The MCP server uses the same credentials as the CLI.
 
 ## Connect to your agent
 
