@@ -9,9 +9,9 @@ Every file input across the whole MCP contract — `imageUrls`, `videoUrl`, the 
 references, `picsart_drive`'s `url` — is an **HTTP(S) URL**. There is no `filePath` parameter
 anywhere. `/Users/me/photo.jpg` will never work.
 
-Some gen-ai tools additionally accept an inline `data:` URI. On
-[Picsart Media Studio](/guide/media-studio/) you don't need either — it has its own uploader, which is
-route **D** below.
+Some gen-ai tools additionally accept an inline `data:` URI. Both the gen-ai MCP server and
+[Picsart Media Studio](/guide/media-studio/) also have a built-in uploader that produces the URL for
+you, which is route **D** below.
 :::
 
 This is not an oversight. An MCP server runs somewhere else (Picsart's infrastructure); it has no
@@ -20,8 +20,9 @@ used as a generation input, **something on your side has to give it a URL.**
 
 Pick by which connector you are using, and by what your agent host can do.
 
-::: tip Using Picsart Media Studio? It has its own uploader
-Just ask Claude to open it — route **D** below. Routes A–C are for the gen-ai CLI and MCP server.
+::: tip The easiest route: the built-in uploader
+Ask your agent to open the Picsart uploader (route **D** below). It works on both the gen-ai MCP
+server and Media Studio, and needs no shell or CLI.
 :::
 
 ## Comparison
@@ -31,13 +32,13 @@ Just ask Claude to open it — route **D** below. Routes A–C are for the gen-a
 | **A. Picsart CLI upload** | Shell access | Anything — the general answer | Free, no tokens |
 | **B. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
 | **C. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
-| **D. Media Studio upload widget** | The [Media Studio](/guide/media-studio/) connector | Any local file, on the `picsart_media_*` surface | Free, no tokens |
+| **D. Built-in uploader (`picsart_media_upload`)** | The gen-ai MCP server or the [Media Studio](/guide/media-studio/) connector, in a host that shows interactive panels | Any local file, dropped in from your browser | Free, no tokens |
 
 ## A. Shell-capable agent → the Picsart CLI
 
-If your agent can run shell commands (Claude Code, Cursor, Codex, a CI job), this is the
-canonical path: upload with the [CLI](/guide/cli-quickstart), then hand the resulting URL to any
-MCP tool.
+If your agent can run shell commands (Claude Code, Cursor, Codex, a CI job) and you have the
+[CLI](/guide/cli-quickstart) installed, you can upload with it, then hand the resulting URL to any
+MCP tool. The CLI is optional: MCP itself never needs it.
 
 ```bash
 gen-ai upload ./photo.jpg                 # single file
@@ -66,10 +67,10 @@ Then pass the URL straight through:
 
 ```json
 { "name": "picsart_remove_bg",
-  "arguments": { "imageUrls": ["https://cdn.picsart.com/.../photo.jpg"] } }
+  "arguments": { "image": "https://cdn.picsart.com/.../photo.jpg" } }
 ```
 
-Requires `gen-ai login` once — see [Authentication](/guide/authentication).
+The CLI requires `gen-ai login` once, see [Authentication](/guide/authentication). This sign-in is for the CLI only.
 
 ## B. Chat attachment → `picsart_drive` upload
 
@@ -127,13 +128,14 @@ remote URL instead of a `data:` URI:
 
 The returned CDN URL is stable and publicly fetchable by the generation and render services.
 
-## D. Media Studio → the built-in uploader
+## D. The built-in uploader
 
-[Picsart Media Studio](/guide/media-studio/) has its own uploader. Ask Claude to open it, drop the file
-in, and carry on — it uploads straight from your browser, and you can also pick a file already in
-your Picsart Drive.
+The gen-ai MCP server and [Picsart Media Studio](/guide/media-studio/) both include an uploader
+(`picsart_media_upload`). Ask your agent to open it, drop the file in, and carry on. It uploads
+straight from your browser, and you can also pick a file already in your Picsart Drive.
 
-Nothing to install, and no URL to produce yourself.
+Nothing to install, and no URL to produce yourself. It needs a host that can show interactive
+panels in the conversation, such as Claude or ChatGPT.
 
 ## More
 

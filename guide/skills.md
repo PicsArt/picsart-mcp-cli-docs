@@ -10,7 +10,7 @@ description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and Chat
 
 ## How skills relate to the CLI and MCP
 
-A skill is the **knowledge layer** — it tells the agent what Picsart can do and how to call it. The [gen-ai CLI](/guide/cli-quickstart) is the **execution engine** that runs the actual generation. Skills drive the CLI under the hood. If you prefer direct tool calls instead, the [MCP server](/guide/mcp-quickstart) exposes the same catalog as MCP tools.
+A skill is the **knowledge layer**: it tells the agent what Picsart can do and how to call it. The [gen-ai CLI](/guide/cli-quickstart) is the **execution engine** that runs the actual generation. Skills drive the CLI under the hood, so the CLI must be installed for a skill to work. The [MCP server](/guide/mcp-quickstart) is a separate, hosted option: it needs no CLI, and your agent signs in to it directly.
 
 Setup order:
 

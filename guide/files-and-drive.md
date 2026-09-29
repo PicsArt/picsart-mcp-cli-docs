@@ -45,8 +45,8 @@ input image/video.
 
 ::: warning Local files need a URL first
 No MCP tool accepts a filesystem path. See **[Local files → URLs](/guide/local-files)** for the
-three ways to get one — CLI upload, a chat attachment, or (for small images) an inline `data:`
-URI.
+ways to get one: the built-in uploader, a chat attachment, a CLI upload, or (for small images) an
+inline `data:` URI.
 :::
 
 ## The `picsart_drive` tool
@@ -110,6 +110,6 @@ Yes. Files in your Drive are scoped to your account. The result URLs returned by
 
 See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing details.
 
-**Can I delete files from Drive via the CLI?**
+**Can I delete files from Drive?**
 
-No — the CLI has no delete command. Over MCP, use the `picsart_drive` tool's `delete` action (see above), or manage files from the [AI Playground web app](https://picsart.com/ai-playground/).
+Over MCP, yes: `picsart_drive` with `action: "delete"` moves items to the trash, or erases them with `permanent: true`. The CLI does not have a delete command; manage deletion there from the [AI Playground web app](https://picsart.com/ai-playground/).

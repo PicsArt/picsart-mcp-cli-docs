@@ -76,7 +76,7 @@ A manifest gives you per-item control: different models, prompts, and parameters
 
 **Can I use a manifest with MCP?**
 
-Not directly — the MCP tools call one generation at a time. For batch generation via MCP, have the agent loop over items and call `picsart_generate` for each, using `picsart_preflight` to validate and estimate cost before each call.
+Not directly. Each `picsart_generate` call runs one model and prompt (up to 10 outputs with `count`). For batch generation via MCP, have the agent loop over items and call `picsart_generate` for each, using `picsart_preflight` to validate and estimate cost before each call.
 
 **Where do batch results go?**
 

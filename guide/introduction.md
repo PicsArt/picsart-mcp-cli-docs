@@ -30,7 +30,7 @@ Once you have validated a prompt or workflow in Playground, connect Picsart to t
 
 When the connection is active, you can generate images, animate a video, remove a background, or synthesize audio **without leaving your agent conversation**. The agent handles the model selection, parameter construction, and result retrieval. You stay in Claude or ChatGPT and issue natural-language instructions: *"Generate three hero images for this brief in 16:9."*
 
-**Skills** are pre-built instruction bundles that give the agent knowledge about Picsart's models and workflows. Install once and describe tasks in plain English. **MCP** is the underlying protocol that exposes every catalog tool directly, useful when you want the agent to reason about cost, validate parameters, or chain multiple operations.
+**Skills** are pre-built instruction bundles that give the agent knowledge about Picsart's models and workflows. Install once and describe tasks in plain English. **MCP** is the protocol that exposes every catalog tool directly, useful when you want the agent to reason about cost, validate parameters, or chain multiple operations. The Picsart MCP server is hosted, so you only add its address to your agent and sign in; there is nothing to install.
 
 [Skills guide](/guide/skills) · [MCP Quickstart](/guide/mcp-quickstart) · [Integrations](/guide/integrations/)
 
@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills run `gen-ai` commands, so they need the CLI and its `gen-ai login`. The MCP server is independent of the CLI — neither requires the other — and signs in through your client or a token. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
+They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|
@@ -109,7 +109,7 @@ gen-ai models info seedance-2.0
 
 Not sure which surface to start with? Read [Which tool is right for me?](/guide/which-tool).
 
-- **[Installation](/guide/installation)**: install the CLI and connect any surface.
+- **[Installation](/guide/installation)**: install the CLI, add Skills, or connect the MCP server.
 - **[Authentication](/guide/authentication)**: sign in once.
 - **[CLI Quickstart](/guide/cli-quickstart)** · **[MCP Quickstart](/guide/mcp-quickstart)** · **[Skills](/guide/skills)**
 - **[SDK](/guide/sdk)** · **[REST API](/guide/rest-api)**

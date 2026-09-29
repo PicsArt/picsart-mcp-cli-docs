@@ -1,14 +1,18 @@
 ---
-description: "Connect Picsart to Goose — add the MCP server as a Goose extension and generate images, video, and audio directly inside your agent session."
+description: "Connect Picsart to Goose: add the hosted Picsart MCP server as a remote extension, sign in with your Picsart account, and generate images, video, and audio inside your agent session."
 ---
 
 # Goose
 
-Goose is an open-source AI agent that supports MCP servers as extensions. Add the Picsart MCP server once and Goose can generate image, video, and audio across 201 models from any session.
+Goose is an open-source AI agent that supports MCP servers as extensions ([Goose extensions documentation](https://goose-docs.ai/docs/getting-started/using-extensions/)). The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`, so you add it to Goose as a remote (Streamable HTTP) extension. There is nothing to install locally. Add it once and Goose can generate image, video, and audio across 201 models from any session.
 
 ## Prerequisites
 
-**For MCP** (no CLI needed): install the server package — `npm install -g @picsart/gen-ai-mcp`, which provides the `gen-ai-mcp` command — and authenticate it as described in [MCP authentication](/guide/mcp-quickstart#authentication).
+1. A Picsart account. You sign in with it the first time Goose connects.
+2. Goose installed (CLI or Desktop).
+3. Credits on your Picsart account for generations.
+
+You do not need the gen-ai CLI or an API key to use the Picsart MCP server.
 
 ## Method 1: goose configure (recommended)
 
@@ -18,13 +22,17 @@ Run the interactive setup:
 goose configure
 ```
 
-Select **Add Extension**, then **Command-line Extension**. When prompted for a command, enter:
+1. Select **Add Extension**, then **Remote Extension (Streamable HTTP)**.
+2. Name it `picsart-gen-ai`.
+3. When prompted for the URL, enter:
 
 ```
-gen-ai-mcp
+https://api.picsart.com/gen-ai/mcp
 ```
 
-Provide a name (`picsart-gen-ai`) and description when asked. Goose saves the extension and enables it for all future sessions.
+4. Accept the defaults for the remaining prompts. You do not need to add any headers.
+
+Goose saves the extension and enables it for future sessions. The first time Goose connects, it opens a Picsart sign-in page in your browser. Sign in and approve access, then return to Goose.
 
 ## Method 2: Config file
 
@@ -33,33 +41,41 @@ Add the following entry to `~/.config/goose/config.yaml`:
 ```yaml
 extensions:
   picsart-gen-ai:
-    type: stdio
     name: picsart-gen-ai
+    type: streamable_http
+    uri: https://api.picsart.com/gen-ai/mcp
     enabled: true
-    cmd: gen-ai-mcp
-    args: []
-    env_keys: []
-    envs: {}
     timeout: 300
 ```
 
-Restart Goose after saving.
+Goose uses `uri` (not `url`) and `streamable_http` (with an underscore) for remote extensions. Goose obtains an OAuth client automatically, so you do not need to set `client_id` or any headers.
 
-## Method 3: Mid-session (current session only)
+Restart Goose after saving. Sign in to Picsart in the browser window that opens on first connect.
 
-To add Picsart tools to an active Goose session without changing your default config:
+## Method 3: Goose Desktop
 
-```
-/extension gen-ai-mcp
-```
-
-Note: this only applies to the current session. To keep the extension enabled between sessions, use Method 1 or 2.
+1. Open the sidebar and click **Extensions**.
+2. Click **Add custom extension**.
+3. Choose the Streamable HTTP type, name it `picsart-gen-ai`, and enter `https://api.picsart.com/gen-ai/mcp` as the endpoint.
+4. Click **Add**, then sign in to Picsart when the browser window opens.
 
 ## Method 4: Start a session with the extension
 
+To use Picsart tools in one session without changing your default config:
+
 ```bash
-goose session --with-extension "gen-ai-mcp"
+goose session --with-streamable-http-extension "https://api.picsart.com/gen-ai/mcp"
 ```
+
+This only applies to that session. To keep the extension enabled between sessions, use Method 1, 2, or 3.
+
+### Verify the connection
+
+Start a Goose session and ask:
+
+> *"List the available Picsart video models."*
+
+Goose should call `picsart_model_catalog` or `picsart_list_models` and return results. If it does not, see [Troubleshooting](#troubleshooting).
 
 ## Use it
 
@@ -76,43 +92,48 @@ See the [MCP Quickstart](/guide/mcp-quickstart) for the full tool catalog and ex
 
 ## Troubleshooting
 
-**`gen-ai-mcp` is not found.**
+**The Picsart sign-in window did not open.**
 
-The binary is not on the PATH Goose sees. Use the absolute path instead:
-
-```yaml
-extensions:
-  picsart-gen-ai:
-    type: stdio
-    name: picsart-gen-ai
-    enabled: true
-    cmd: /Users/you/.local/bin/gen-ai-mcp
-    args: []
-    env_keys: []
-    envs: {}
-    timeout: 300
-```
-
-Find the path with `which gen-ai-mcp`.
+Restart Goose so it reconnects to the extension. If the browser still does not open, remove the extension and add it again. Goose serves the OAuth callback on `127.0.0.1`, so make sure nothing on your machine blocks local loopback connections.
 
 **Tools do not appear after adding the extension.**
 
-Restart Goose after modifying the config file. Extensions added via `goose configure` take effect on the next session start.
+Restart Goose after modifying the config file. Extensions added via `goose configure` take effect on the next session start. Confirm the entry uses `type: streamable_http` and `uri:`, not `url:`.
 
 **Generation fails with "unauthorized".**
 
-For MCP, check the server's authentication — set or refresh `PICSART_TOKEN` in its config (see [MCP authentication](/guide/mcp-quickstart#authentication)) and restart Goose.
+Your Picsart sign-in has expired. Restart Goose, or remove and re-add the extension, and sign in again when the browser window opens.
+
+**Generation fails with insufficient credits.**
+
+Ask Goose *"What's my Picsart credit balance?"*. It calls `picsart_credits`. Top up at [picsart.com](https://picsart.com) if needed.
+
+**Connection times out.**
+
+Your network must allow outbound HTTPS to `api.picsart.com` on port 443. On a corporate network, check your proxy or firewall settings.
 
 ## FAQ
 
-**Does Goose need a separate Picsart account or API key?**
+**Does Goose need a Picsart API key?**
 
-No. It uses your Picsart account: pass `PICSART_TOKEN` in the extension's environment, or let the server reuse a signed-in gen-ai CLI session if you have one. See [MCP authentication](/guide/mcp-quickstart#authentication).
+No. Goose signs in with your Picsart account through OAuth the first time it connects. There is no API key to copy.
+
+**Do I need the gen-ai CLI?**
+
+No. The Picsart MCP server is hosted, so Goose connects to it directly. The CLI is a separate tool for the terminal.
 
 **Can I use Goose and the CLI at the same time?**
 
-Yes. They are independent and draw on the same credit balance. Running them in parallel is fine.
+Yes. Both draw from the same Picsart credit balance when you sign in with the same account.
 
 **Which models work in Goose?**
 
 All 201 models in the catalog. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

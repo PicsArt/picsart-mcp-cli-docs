@@ -1,32 +1,36 @@
 ---
-description: "Connect Picsart to Microsoft Copilot Studio via MCP — generate images, video, and audio inside enterprise AI agents built on Microsoft 365."
+description: "Connect Picsart's hosted MCP server to Microsoft Copilot Studio with OAuth 2.0 sign-in to generate images, video, and audio inside enterprise AI agents on Microsoft 365."
 ---
 
 # Microsoft Copilot Studio
 
-Microsoft Copilot Studio is an enterprise no-code platform for building custom AI agents on the Microsoft 365 ecosystem. It supports MCP servers as Actions, letting you expose Picsart image, video, and audio tools directly inside any Copilot Studio agent.
+Microsoft Copilot Studio is an enterprise no-code platform for building custom AI agents on the Microsoft 365 ecosystem. It connects to MCP servers as tools, letting you expose Picsart image, video, and audio tools directly inside any Copilot Studio agent. The Picsart MCP server is hosted by Picsart and uses the Streamable transport, which Copilot Studio supports. There is nothing to install.
 
-Official MCP documentation: https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp
+Official MCP documentation: https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent
 
 ## Prerequisites
 
-- Microsoft 365 license with Copilot Studio access (Power Platform).
-- Picsart API key from [picsart.com/ai-playground](https://picsart.com/ai-playground/).
+- A Copilot Studio license (trial or paid) with Power Platform access.
+- A Picsart account. You sign in when you create the connection. Generations spend credits from the signed-in account.
 
 ## Setup
 
 1. Log in to [Copilot Studio](https://copilotstudio.microsoft.com) with your Microsoft 365 account.
 2. Open an existing agent or create a new one.
-3. Go to the **Actions** tab.
-4. Click **Add an action** and select **Model Context Protocol (MCP)**.
-5. Fill in the connection fields:
-   - **Server URL:** `https://mcp.picsart.io/mcp`
-   - **Authentication:** API Key
-   - **Header name:** `Authorization`
-   - **Header value:** `Bearer YOUR_PICSART_API_KEY`
-6. Click **Test connection**. Copilot Studio fetches the tool manifest and lists the available Picsart actions.
-7. Select which Picsart tools to expose in this agent and click **Save**.
-8. Publish the agent.
+3. Go to the **Tools** page for the agent.
+4. Select **Add a tool**, then **New tool**, then **Model Context Protocol**. The MCP onboarding wizard opens.
+5. Fill in the fields:
+   - **Server name:** `Picsart Gen AI`
+   - **Server description:** `Generates and edits images, video, and audio with Picsart models.`
+   - **Server URL:** `https://api.picsart.com/gen-ai/mcp`
+   - **Authentication:** OAuth 2.0
+   - **Type:** Dynamic discovery
+6. Select **Create**, then **Next**. Copilot Studio discovers Picsart's sign-in settings and registers itself automatically.
+7. On **Add tool**, select **Create a new connection** and sign in with your Picsart account in the window that opens.
+8. Select **Add to agent**.
+9. Test the agent: "List the available Picsart video models." Then publish the agent.
+
+Don't choose **API key** as the authentication type. The Picsart MCP server uses OAuth sign-in and does not accept API keys.
 
 ## Use it
 
@@ -38,17 +42,21 @@ Once the agent is published, users can prompt it with natural language:
 
 ## Troubleshooting
 
-**Test connection failed.**
+**Sign-in does not complete.**
 
-Verify that the Server URL is exactly `https://mcp.picsart.io/mcp` and that the API key is valid. Copilot Studio requires HTTPS with a valid TLS certificate; `mcp.picsart.io` satisfies both requirements.
+Allow pop-ups for Copilot Studio, then select **Create a new connection** again. Confirm the Server URL is exactly `https://api.picsart.com/gen-ai/mcp` and the OAuth 2.0 type is **Dynamic discovery**.
 
 **Tools not appearing after a successful connection.**
 
-Some Microsoft 365 tenant policies restrict outbound connections to unlisted URLs. Ask your IT admin to allowlist `mcp.picsart.io`.
+Access to MCP servers in Copilot Studio goes through Power Platform connectors, so a data policy in your tenant can block it. Ask your Power Platform admin to review the data policies in the Power Platform admin center.
 
-**"Action not available" error.**
+**"Unauthorized" or the agent asks you to sign in again.**
 
-MCP actions require Copilot Studio's paid plan. The free trial also supports MCP. The error typically means the tenant has not yet been provisioned for MCP Actions; contact Microsoft support or check the Power Platform admin center.
+The Picsart sign-in has expired or was revoked. Sign in again when the agent shows the sign-in prompt, or open the agent's **Tools** page and reconnect the Picsart connection.
+
+**"Insufficient credits."**
+
+Ask the agent "What's my Picsart credit balance?" (the `picsart_credits` tool). Top up at [picsart.com](https://picsart.com).
 
 ## FAQ
 
@@ -62,7 +70,7 @@ MCP support in GCC depends on Microsoft's GCC feature roadmap. Check [learn.micr
 
 **Can multiple agents in the same tenant use the same Picsart MCP server?**
 
-Yes. Each agent configures its own connection, but all agents in a tenant can point to the same `mcp.picsart.io/mcp` URL.
+Yes. Each agent configures its own connection, but all agents in a tenant can point to the same `https://api.picsart.com/gen-ai/mcp` URL.
 
 ## Start creating
 

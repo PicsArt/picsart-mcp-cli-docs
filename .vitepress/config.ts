@@ -73,12 +73,18 @@ const sidebar = [
       { text: 'LobeHub', link: '/guide/integrations/lobehub' },
       { text: 'LibreChat', link: '/guide/integrations/librechat' },
       { text: 'Hermes Agent', link: '/guide/integrations/hermes-agent' },
-      { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
       { text: 'OpenClaw', link: '/guide/integrations/openclaw' },
       { text: 'n8n', link: '/guide/integrations/n8n' },
       { text: 'Dify', link: '/guide/integrations/dify' },
       { text: 'Gumloop', link: '/guide/integrations/gumloop' },
       { text: 'Copilot Studio', link: '/guide/integrations/copilot-studio' },
+      {
+        text: 'Not supported yet',
+        collapsed: true,
+        items: [
+          { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
+        ],
+      },
     ],
   },
   {
