@@ -10,14 +10,37 @@ These guides cover the exact setup for each agent.
 
 ## Supported agents
 
-| Agent | Guide |
-|---|---|
-| Claude Code | [Claude Code](/guide/integrations/claude-code) |
-| Cursor | [Cursor](/guide/integrations/cursor) |
-| Windsurf | [Windsurf](/guide/integrations/windsurf) |
-| ChatGPT | [ChatGPT](/guide/integrations/chatgpt) |
-| Codex (OpenAI) | [Codex](/guide/integrations/codex) |
-| VS Code Copilot | [VS Code](/guide/integrations/vscode) |
+| Agent | Guide | Notes |
+|---|---|---|
+| Claude Code | [Claude Code](/guide/integrations/claude-code) | |
+| Cursor | [Cursor](/guide/integrations/cursor) | |
+| Windsurf | [Windsurf](/guide/integrations/windsurf) | Now called Devin Desktop |
+| ChatGPT | [ChatGPT](/guide/integrations/chatgpt) | Needs developer mode on a paid plan |
+| Codex (OpenAI) | [Codex](/guide/integrations/codex) | |
+| VS Code Copilot | [VS Code](/guide/integrations/vscode) | VS Code 1.101 or later |
+| Gemini CLI | [Gemini CLI](/guide/integrations/gemini-cli) | |
+| Goose | [Goose](/guide/integrations/goose) | |
+| Raycast | [Raycast](/guide/integrations/raycast) | |
+| LM Studio | [LM Studio](/guide/integrations/lm-studio) | 0.4.10 or later (0.4.12 on Windows) |
+| Open WebUI | [Open WebUI](/guide/integrations/open-webui) | 0.6.31 or later |
+| AnythingLLM | [AnythingLLM](/guide/integrations/anythingllm) | Desktop only, through the `mcp-remote` bridge |
+| LobeHub | [LobeHub](/guide/integrations/lobehub) | Needs a version with the OAuth auth type |
+| LibreChat | [LibreChat](/guide/integrations/librechat) | |
+| Hermes Agent | [Hermes Agent](/guide/integrations/hermes-agent) | |
+| OpenClaw | [OpenClaw](/guide/integrations/openclaw) | |
+| n8n | [n8n](/guide/integrations/n8n) | |
+| Dify | [Dify](/guide/integrations/dify) | 1.6.0 or later |
+| Gumloop | [Gumloop](/guide/integrations/gumloop) | |
+| Copilot Studio | [Copilot Studio](/guide/integrations/copilot-studio) | |
+
+## Not supported yet
+
+These agents cannot connect to the Picsart MCP server today, because they cannot run the Picsart sign-in (OAuth) for a remote server. The Picsart MCP server does not accept API keys, so there is no header-based workaround.
+
+| Agent | Why | Use instead |
+|---|---|---|
+| [NemoClaw](/guide/integrations/nemoclaw) | Accepts remote servers only with one static credential, and cannot run a local bridge | [OpenClaw](/guide/integrations/openclaw), which NemoClaw is built on |
+| AnythingLLM (Docker) | No browser inside the container to complete sign-in | [AnythingLLM Desktop](/guide/integrations/anythingllm) with the bridge |
 
 ## Skills vs MCP: which to connect
 
