@@ -8,20 +8,16 @@ description: "Connect Picsart to Claude Code: install the Skills plugin or add t
 
 ## Prerequisites
 
-For both methods:
-
 1. A Picsart account with credits for generations.
 2. Claude Code installed and signed in.
 
-For the Skills method only:
-
-3. Install the gen-ai CLI. See [Installation](/guide/installation).
-4. Run `gen-ai login` (one-time browser OAuth).
-5. Verify: `gen-ai --version` and `gen-ai credits`.
-
-The MCP method does not use the CLI. You sign in to Picsart from Claude Code instead.
+That is all for MCP: the server is hosted by Picsart and you sign in from Claude Code. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-1-skills-recommended).
 
 ## Method 1: Skills (recommended)
+
+::: info Skills need the gen-ai CLI
+Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. Check with `gen-ai --version` and `gen-ai credits`. The MCP method does not need this.
+:::
 
 Skills give Claude Code a pre-built understanding of Picsart's models and generation patterns. You describe what you want; Claude Code handles the rest.
 

@@ -8,17 +8,10 @@ ChatGPT supports Picsart through MCP (a [developer-mode](https://developers.open
 
 ## Prerequisites
 
-For both methods:
-
 1. A Picsart account with credits for generations.
 2. A ChatGPT plan with developer mode: Plus, Pro, Business, Enterprise, or Edu, on the web. On Business and Enterprise workspaces, an admin may need to allow developer mode and custom MCP apps.
 
-For the Skills method only:
-
-3. Install the gen-ai CLI. See [Installation](/guide/installation).
-4. Run `gen-ai login` (one-time browser OAuth).
-
-The MCP method does not use the CLI. You sign in to Picsart from ChatGPT instead.
+That is all for MCP: the server is hosted by Picsart and you sign in from ChatGPT. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-2-skills-via-attachment).
 
 ## Method 1: MCP
 
@@ -51,6 +44,10 @@ Start a conversation, open the plus menu in the composer, choose **Developer mod
 ChatGPT calls the Picsart tools, runs the generation, and returns the result URL. If ChatGPT does not pick the right tool, name it: *"Use the Picsart app's picsart_generate tool to..."*
 
 ## Method 2: Skills (via attachment)
+
+::: info Skills need the gen-ai CLI
+Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. The MCP method does not need this.
+:::
 
 ### Install
 

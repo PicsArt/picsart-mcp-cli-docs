@@ -8,18 +8,10 @@ description: "Connect Picsart to OpenAI Codex: add the hosted Picsart MCP server
 
 ## Prerequisites
 
-For both methods:
-
 1. A Picsart account with credits for generations.
 2. A recent version of the Codex CLI. Remote MCP servers and OAuth sign-in need a current release, so update Codex if `codex mcp login` is not available.
 
-For the Skills method only:
-
-3. Install the gen-ai CLI. See [Installation](/guide/installation).
-4. Run `gen-ai login` (one-time browser OAuth).
-5. Verify: `gen-ai --version` and `gen-ai credits`.
-
-The MCP method does not use the CLI. You sign in to Picsart from Codex instead.
+That is all for MCP: the server is hosted by Picsart and you sign in from Codex. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-2-skills).
 
 ## Method 1: MCP (recommended)
 
@@ -58,7 +50,11 @@ See `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, `picsart_credi
 
 ## Method 2: Skills
 
-Install the gen-ai CLI and run `gen-ai login` (see [Prerequisites](#prerequisites)), then add the skill via npx:
+::: info Skills need the gen-ai CLI
+Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. Check with `gen-ai --version` and `gen-ai credits`. The MCP method does not need this.
+:::
+
+Add the skill via npx:
 
 ```bash
 npx skills add PicsArt/gen-ai-skills

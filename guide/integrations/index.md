@@ -37,16 +37,13 @@ You can use both at the same time — they do not conflict.
 | Can chain tools | No | Yes |
 | Best for | Conversational generation | Workflow automation inside the agent |
 
-## Prerequisites for all integrations
+## Prerequisites
 
 **For MCP** you need only a Picsart account. The server is hosted by Picsart at `https://api.picsart.com/gen-ai/mcp`, so there is nothing to install. Your agent opens a browser window the first time it connects, and you sign in to Picsart there. Your agent must support remote (HTTP) MCP servers with OAuth sign-in.
 
-**For Skills** you also need the gen-ai CLI, because Skills run it to do the work:
+You do not need the gen-ai CLI, `gen-ai login`, or an API key for MCP.
 
-1. Install the gen-ai CLI, see [Installation](/guide/installation).
-2. Authenticate once: `gen-ai login` (browser OAuth).
-
-The CLI is not required for MCP.
+**For Skills only:** Skills run the gen-ai CLI, so [install the CLI](/guide/installation) and run `gen-ai login` once before adding a skill.
 
 ## Not using an agent?
 

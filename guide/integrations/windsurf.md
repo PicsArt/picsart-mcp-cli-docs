@@ -10,20 +10,16 @@ Windsurf is now called Devin Desktop, and Cascade is its legacy agent. The steps
 
 ## Prerequisites
 
-For both methods:
-
 1. A Picsart account with credits for generations.
 2. A recent version of Windsurf (Devin Desktop).
 
-For the Skills method only:
-
-3. Install the gen-ai CLI. See [Installation](/guide/installation).
-4. Run `gen-ai login` (one-time browser OAuth).
-5. Verify: `gen-ai --version` and `gen-ai credits`.
-
-The MCP method does not use the CLI. You sign in to Picsart from Windsurf instead.
+That is all for MCP: the server is hosted by Picsart and you sign in from Windsurf. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-1-skills-recommended).
 
 ## Method 1: Skills (recommended)
+
+::: info Skills need the gen-ai CLI
+Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. Check with `gen-ai --version` and `gen-ai credits`. The MCP method does not need this.
+:::
 
 ### Install
 
