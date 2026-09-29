@@ -64,7 +64,7 @@ In the CLI, model-specific params are flags (`--start-frame`, `--voice`, …). V
 A generation returns one or more result URLs. Control delivery:
 
 - **CLI**: downloaded to `./output` by default; use `--no-download` (URL only), `--download <dir>`, or `--save-to-drive`.
-- **MCP**: `results: [{ url }]` plus a `resource_link` per output. Optionally written to Drive when enabled.
+- **MCP**: `assets: [{ id, type, url, ... }]` plus a `resource_link` per output. Media models run asynchronously by default: `picsart_generate` returns a job handle and the agent collects the result with `picsart_job_status`. Results are saved to Drive by default (`saveToDrive: false` to skip).
 
 Some models return **multiple results** from one call (e.g. an Explore model returning several images) — the result `items` array simply has more than one entry.
 
@@ -86,7 +86,7 @@ Run `gen-ai models info <id>` — it shows the input type code (`t2i`, `i2v`, et
 
 **Can I pass a local file as an input image via MCP?**
 
-MCP tools require URLs, not local file paths. Upload your file first with `picsart_drive` (action: upload, returns a Drive URL), then pass that URL as `imageUrls` in `picsart_generate`.
+MCP tools require URLs, not local file paths. Ask the agent to open the Picsart uploader (`picsart_media_upload`), or upload with `picsart_drive` (action: upload, returns a Drive URL), then pass that URL as `imageUrls` in `picsart_generate`. See [Local files → URLs](/guide/local-files).
 
 **What aspect ratios are available?**
 

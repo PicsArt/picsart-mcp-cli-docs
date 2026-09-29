@@ -31,7 +31,7 @@ You can use both at the same time — they do not conflict.
 
 | | Skills | MCP |
 |---|---|---|
-| Install | One command or ZIP | One config block |
+| Install | One command or ZIP, plus the gen-ai CLI | One config block, nothing to install |
 | Agent knows Picsart | Yes, pre-built | Via tool schema only |
 | Can quote cost before generating | No | Yes |
 | Can chain tools | No | Yes |
@@ -39,13 +39,17 @@ You can use both at the same time — they do not conflict.
 
 ## Prerequisites for all integrations
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
+**For MCP** you need only a Picsart account. The server is hosted by Picsart at `https://api.picsart.com/gen-ai/mcp`, so there is nothing to install. Your agent opens a browser window the first time it connects, and you sign in to Picsart there. Your agent must support remote (HTTP) MCP servers with OAuth sign-in.
+
+**For Skills** you also need the gen-ai CLI, because Skills run it to do the work:
+
+1. Install the gen-ai CLI, see [Installation](/guide/installation).
 2. Authenticate once: `gen-ai login` (browser OAuth).
 
-Skills and MCP both drive the CLI internally. The session from step 2 covers all surfaces — no separate credential per agent.
+The CLI is not required for MCP.
 
 ## Not using an agent?
 
 - **Want to experiment first?** Use the [AI Playground](https://picsart.com/ai-playground/) — no install required.
 - **Need scheduled or batch generation?** Use the [CLI](/guide/cli-quickstart).
-- **Building a product?** Use the [API](https://picsart.com/gen-ai-mcp/).
+- **Building a product?** Use the [SDK](/guide/sdk) or the [REST API](/guide/rest-api).

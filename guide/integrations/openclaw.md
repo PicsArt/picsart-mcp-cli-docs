@@ -1,60 +1,66 @@
 ---
-description: "Connect Picsart to OpenClaw by adding the MCP server to config.yaml — generate images, video, and audio inside your OpenClaw AI agent workflows."
+description: "Connect Picsart to OpenClaw by adding the hosted Picsart MCP server with OAuth sign-in, then generate images, video, and audio inside your OpenClaw agent workflows."
 ---
 
 # OpenClaw
 
-OpenClaw is an open-source AI agent framework ([github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)) that became one of the fastest-growing repositories in GitHub history after its January 2026 launch. It supports MCP servers via both Streamable HTTP and stdio transport, configured in a single `config.yaml` file.
+OpenClaw is an open-source AI agent framework ([github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)) that became one of the fastest-growing repositories in GitHub history after its January 2026 launch. It connects to remote MCP servers over Streamable HTTP and supports OAuth sign-in for them. MCP servers are saved under `mcp.servers` in your OpenClaw config and managed with the `openclaw mcp` command. See the [OpenClaw MCP transports and OAuth documentation](https://docs.openclaw.ai/cli/mcp/transports).
 
 ## Prerequisites
 
-1. An OpenClaw installation (any release from January 2026 or later).
-2. A Picsart API key. Get one at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under **API Settings**.
-3. The `@picsart/gen-ai-mcp` package installed globally if you plan to use stdio transport:
+1. An OpenClaw installation with the `openclaw mcp` command available.
+2. A Picsart account. You sign in with it when you run `openclaw mcp login`.
+3. Credits on your Picsart account for generations.
 
-```bash
-npm install -g @picsart/gen-ai-mcp
-```
+The Picsart MCP server is hosted, so there is nothing to install locally. You do not need the gen-ai CLI or an API key.
 
 ## Setup
 
-### Method 1: Streamable HTTP (recommended)
+### Step 1: Add the server
 
-Open `config.yaml` in your OpenClaw project directory and add a `picsart` entry under `mcp_servers`:
+Save the Picsart MCP server with OAuth enabled:
 
-```yaml
-mcp_servers:
-  picsart:
-    url: https://mcp.picsart.io/mcp
-    headers:
-      Authorization: "Bearer YOUR_PICSART_TOKEN"
+```bash
+openclaw mcp add picsart-gen-ai \
+  --url https://api.picsart.com/gen-ai/mcp \
+  --transport streamable-http \
+  --auth oauth
 ```
 
-Replace `YOUR_PICSART_TOKEN` with your API key from [picsart.com/ai-playground/](https://picsart.com/ai-playground/).
+Or set the same entry as JSON:
 
-Save the file and restart your OpenClaw agent. No CLI install is required for this method.
-
-### Method 2: stdio
-
-If your environment does not have outbound HTTPS access to `mcp.picsart.io`, use the stdio transport instead:
-
-```yaml
-mcp_servers:
-  picsart:
-    command: gen-ai-mcp
-    env:
-      PICSART_TOKEN: "YOUR_PICSART_TOKEN"
+```bash
+openclaw mcp set picsart-gen-ai '{"url":"https://api.picsart.com/gen-ai/mcp","transport":"streamable-http","auth":"oauth"}'
 ```
 
-OpenClaw spawns the `gen-ai-mcp` process locally and communicates over stdio. Ensure `gen-ai-mcp` is on your PATH (verify with `which gen-ai-mcp`).
+Do not add an `Authorization` header. OpenClaw sends the OAuth token for you after you sign in.
+
+### Step 2: Sign in to Picsart
+
+```bash
+openclaw mcp login picsart-gen-ai
+```
+
+OpenClaw prints an authorization URL. Open it in your browser, sign in with your Picsart account, and approve access. OpenClaw completes the token exchange and stores the credentials.
+
+::: info OAuth client registration
+The Picsart MCP server expects the host to register itself as an OAuth client during sign-in. If `openclaw mcp login` stops and asks you for a client ID or secret, your OpenClaw version cannot sign in to the Picsart MCP server yet. There is no API-key alternative.
+:::
 
 ### Verify the connection
 
-Start an OpenClaw agent session and ask:
+Check the saved entry and probe the server:
 
-> *"List available Picsart image models."*
+```bash
+openclaw mcp status --verbose
+openclaw mcp probe
+```
 
-The agent should call `picsart_list_models` and return results. If it does not, see [Troubleshooting](#troubleshooting).
+Then start an OpenClaw agent session and ask:
+
+> *"List the available Picsart video models."*
+
+The agent should call `picsart_model_catalog` or `picsart_list_models` and return results. If it does not, see [Troubleshooting](#troubleshooting).
 
 ## Use it
 
@@ -62,59 +68,51 @@ Once connected, ask your OpenClaw agent in plain English:
 
 - *"Generate a product shot on a white background using Flux 2 Pro."*
 - *"Create a 9:16 social video from this landscape image using Kling V3."*
-- *"Remove the background from ./product.png and return the URL."*
+- *"Remove the background from this product photo and return the URL."*
 - *"How many Picsart credits do I have left?"*
 
 For a full list of available tools, see the [MCP Quickstart](/guide/mcp-quickstart).
 
 ## Troubleshooting
 
-**`gen-ai-mcp: command not found`**
+**The sign-in page did not open**
 
-Install the package globally and confirm it is on your PATH:
-
-```bash
-npm install -g @picsart/gen-ai-mcp
-which gen-ai-mcp
-```
-
-If the binary is found but OpenClaw cannot locate it, use the absolute path in `config.yaml`:
-
-```yaml
-mcp_servers:
-  picsart:
-    command: /usr/local/bin/gen-ai-mcp
-    env:
-      PICSART_TOKEN: "YOUR_PICSART_TOKEN"
-```
+`openclaw mcp login picsart-gen-ai` prints the authorization URL rather than always opening a browser. Copy the URL from the terminal and open it yourself. Keep the command running until sign-in finishes, since OpenClaw waits on a local loopback callback.
 
 **"Unauthorized" or 401 errors**
 
-Verify that `YOUR_PICSART_TOKEN` is correct. Copy it fresh from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) and confirm there are no extra spaces around the value in the YAML file.
+Your Picsart sign-in has expired or was never completed. Run `openclaw mcp login picsart-gen-ai` again. To start fresh, run `openclaw mcp logout picsart-gen-ai` first. Confirm the entry has `"auth":"oauth"` with `openclaw mcp status --verbose`.
 
-**YAML parse error on startup**
+**Tools do not appear in the agent**
 
-YAML is whitespace-sensitive. Indentation must use spaces, not tabs. Validate your file:
-
-```bash
-python3 -c "import yaml; yaml.safe_load(open('config.yaml'))"
-```
+Run `openclaw mcp probe` to confirm OpenClaw can reach the server and see its tools. Then restart your OpenClaw agent so it loads the updated server list.
 
 **Tools listed but generation fails**
 
-Confirm your Picsart account has credits. Run a quick check by asking the agent: *"How many Picsart credits do I have?"*
+Confirm your Picsart account has credits. Ask the agent *"What's my Picsart credit balance?"*. It calls `picsart_credits`. Top up at [picsart.com](https://picsart.com) if needed.
+
+**Connection times out**
+
+Your network must allow outbound HTTPS to `api.picsart.com` on port 443. If the probe times out, check your proxy or firewall settings.
 
 ## FAQ
 
 **Which transport should I use?**
 
-Streamable HTTP is simpler: no local package install, and authentication is handled via the `Authorization` header. Use stdio if your network restricts outbound HTTPS or if you prefer a fully local setup.
+Streamable HTTP. The Picsart MCP server is a hosted remote server and does not offer a local (stdio) option.
 
 **Can I use Picsart alongside other MCP servers in OpenClaw?**
 
-Yes. Add multiple entries under `mcp_servers`. All tools from all servers are available in the same agent session.
+Yes. Add each server with its own name. All tools from all servers are available in the same agent session.
 
 **Does OpenClaw support streaming responses from Picsart tools?**
 
 Picsart tool responses return a result URL once generation is complete. There is no mid-generation streaming output. Results appear as a complete response when the generation finishes.
 
+## Start creating
+
+The Picsart MCP server is now connected. Visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

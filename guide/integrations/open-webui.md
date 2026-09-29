@@ -1,33 +1,39 @@
 ---
-description: Add Picsart MCP to Open WebUI so any model in your self-hosted instance can generate images, videos, and audio via Picsart tools.
+description: Add Picsart's hosted MCP server to Open WebUI with OAuth 2.1 sign-in so any tool-capable model in your instance can generate images, videos, and audio.
 ---
 
 # Open WebUI
 
-[Open WebUI](https://openwebui.com) is a self-hosted web interface for local LLMs with over 90,000 GitHub stars. It works with Ollama, any OpenAI-compatible API, and LiteLLM. Version 0.4.0 added support for MCP tool servers via HTTP, allowing models in your instance to call external tools including Picsart.
+[Open WebUI](https://openwebui.com) is a self-hosted web interface for local LLMs with over 90,000 GitHub stars. It works with Ollama, any OpenAI-compatible API, and LiteLLM. Version 0.6.31 added native support for MCP servers over Streamable HTTP, including OAuth 2.1 sign-in. The Picsart MCP server is hosted by Picsart, so there is nothing to install.
 
 ## Prerequisites
 
-- Open WebUI 0.4.0 or later ([upgrade guide](https://docs.openwebui.com))
+- Open WebUI 0.6.31 or later ([upgrade guide](https://docs.openwebui.com))
 - Admin access to your Open WebUI instance
+- The `WEBUI_SECRET_KEY` environment variable set in your deployment. Without it, OAuth sign-ins break every time the container restarts.
 - A model that supports tool/function calling (check your Ollama or OpenAI model's specifications)
-- A Picsart API key, available from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under API settings
+- A Picsart account for each user who will generate. Users sign in when they first enable the tools.
+- Outbound HTTPS access from your Open WebUI host to `api.picsart.com` on port 443
 
 ## Setup
 
 1. Log in to your Open WebUI instance as an admin.
-2. Open the **Admin Panel** from the top-right menu.
-3. Select **Tools** from the sidebar.
-4. Click **Add Tool Server** (labeled "MCP Server" in some versions).
-5. Fill in the following fields:
+2. Open **Settings > Admin > Integrations**.
+3. Under **External Tool Servers**, click **+ Add Connection**.
+4. Fill in the following fields:
+   - **Type:** `MCP (Streamable HTTP)` (not OpenAPI)
+   - **URL:** `https://api.picsart.com/gen-ai/mcp`
+   - **Auth:** `OAuth 2.1`
    - **Name:** `Picsart Gen AI`
-   - **URL:** `https://mcp.picsart.io/mcp`
-   - **Auth header:** `Authorization: Bearer YOUR_PICSART_API_KEY`
-6. Click **Save**. Open WebUI fetches the tool manifest from the Picsart MCP server.
-7. Go to **Workspace → Models**, select a model, and enable Picsart tools for it.
-8. Open any chat with that model, enable tools, and send: `List Picsart image models.`
+5. Click **Register Client**. Open WebUI registers itself with Picsart automatically. Optionally click **Check OAuth Discovery** to confirm Picsart's sign-in server was found.
+6. Click **Save**.
+7. Open a chat with a tool-capable model and click **+ > Integrations > Tools**. Enable Picsart Gen AI.
+8. Open WebUI sends you to Picsart's sign-in page. Sign in and approve access. Each user does this once with their own Picsart account.
+9. Send: `List the available Picsart video models.`
 
-For the full Tools reference, see the [Open WebUI Tools documentation](https://docs.openwebui.com/features/plugin/tools/).
+Do not set Picsart tools as default (pre-enabled) tools on a model. OAuth sign-in needs an interactive browser step, so each user enables the tools from the chat instead.
+
+For the full MCP reference, see the [Open WebUI MCP documentation](https://docs.openwebui.com/features/extensibility/mcp/).
 
 ## Use it
 
@@ -49,25 +55,29 @@ The model invokes the appropriate Picsart tool and returns the result, including
 
 ## Troubleshooting
 
-**"Add Tool Server" option not visible**
+**"External Tool Servers" has no MCP type**
 
-Upgrade Open WebUI to 0.4.0 or later. The MCP tool server feature is not available in earlier versions.
+Upgrade Open WebUI to 0.6.31 or later. Native MCP support is not available in earlier versions.
 
 **Tools not available in chat**
 
-Tool availability is configured per model. Go to **Workspace → Models**, open the model you are using, and confirm that Picsart tools are enabled. Also check that the chat's tool toggle is turned on for that session.
+Enable Picsart from **+ > Integrations > Tools** in the chat, and complete the sign-in if prompted. Also confirm the model you selected supports tool calling.
+
+**Sign-in does not complete**
+
+Finish the sign-in in the same browser, signed in to Open WebUI as the same user, at the address set in `WEBUI_URL`. If the flow is interrupted, enable the tool again to retry.
+
+**"Unauthorized" or "Error decrypting tokens"**
+
+Your Picsart sign-in has expired or can no longer be read. Enable the tool again from the chat to sign in again. If this happens after every restart, set a fixed `WEBUI_SECRET_KEY`.
+
+**"Insufficient credits"**
+
+Ask "What's my Picsart credit balance?" (the `picsart_credits` tool). Top up at [picsart.com](https://picsart.com).
 
 **Outbound connection fails on self-hosted**
 
-Your Open WebUI server must be able to reach `mcp.picsart.io` on port 443. If it is behind a firewall or proxy, update the network rules or configure Open WebUI's proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`) as appropriate for your deployment.
-
-**Authentication error (401)**
-
-Check the auth header value for extra whitespace. If the error persists, regenerate your API key from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) and update the tool server entry.
-
-**Tool manifest fetch fails on save**
-
-Confirm your Open WebUI server has internet access and is not blocking outbound HTTPS. Test by running `curl -I https://mcp.picsart.io/mcp` from the host machine.
+Your Open WebUI server must be able to reach `api.picsart.com` on port 443. If it is behind a firewall or proxy, update the network rules or configure Open WebUI's proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`) as appropriate for your deployment.
 
 ## FAQ
 
@@ -77,15 +87,15 @@ Yes. Open WebUI routes tool calls through whichever model backend is active, whe
 
 **Can regular users (non-admins) add MCP servers?**
 
-No. MCP server configuration is admin-only. An admin adds the Picsart server once and it becomes available to all users the admin grants access to.
+No. MCP server configuration is admin-only. An admin adds the Picsart server once, and each user who has access signs in with their own Picsart account.
 
-**Is the API key stored securely?**
+**Whose credits are used, and where are sign-ins stored?**
 
-Open WebUI stores credentials in its database. For self-hosted deployments, security depends on your infrastructure. If your deployment supports it, inject the API key as an environment variable rather than entering it directly in the UI, to avoid storing it as plaintext in the database.
+Each user's own. Sign-in is per user, so generations spend credits from the account that signed in, and nobody else inherits that access. Open WebUI stores the sign-in in its database, encrypted with `WEBUI_SECRET_KEY`.
 
 **Can I restrict which users can call Picsart tools?**
 
-Yes. Open WebUI's model permissions let admins control which users or groups can access models with Picsart tools enabled. Configure this under **Workspace → Models** for each model.
+Yes. Use **Access Control** on the Picsart connection under **Settings > Admin > Integrations** to limit it to specific users or groups.
 
 ## Start creating
 

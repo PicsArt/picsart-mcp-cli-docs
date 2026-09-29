@@ -92,12 +92,13 @@ Install with `npm install @picsart/ai-sdk`. Auth is an API key from your account
 
 ## Agent quickstart
 
-Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call:
+Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call. The MCP server is hosted: there is nothing to install, and you sign in to Picsart in your browser when the agent first connects.
 
 | Agent | Connect |
 |---|---|
-| Claude Code | `claude mcp add picsart-gen-ai -- gen-ai-mcp` |
-| Cursor / Windsurf / VS Code | Add `gen-ai-mcp` to MCP config |
+| Claude | Settings → Connectors → Add custom connector → `https://api.picsart.com/gen-ai/mcp` |
+| Claude Code | `claude mcp add --transport http picsart-gen-ai https://api.picsart.com/gen-ai/mcp` |
+| Cursor / Windsurf / VS Code | Add `https://api.picsart.com/gen-ai/mcp` as a remote MCP server |
 | Codex | `codex://plugins/picsart@openai-curated` |
 | ChatGPT | See [ChatGPT integration](/guide/integrations/chatgpt) |
 
