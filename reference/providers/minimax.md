@@ -36,8 +36,8 @@ gen-ai generate -m hailuo-2.3 \
 # image-to-video from a start frame (Fast variant)
 gen-ai generate -m hailuo-2.3-fast -p "she turns and smiles" -i ./frame.png -d 6
 
-# Hailuo 03 at up to 2K with a start frame
-gen-ai generate -m hailuo-03 -p "the camera circles the subject" \
+# MiniMax H3 with a start frame
+gen-ai generate -m minimax-h3 -p "the camera circles the subject" \
   --start-frame ./frame.png -d 10
 
 # music with vocals
@@ -147,7 +147,7 @@ Input type: `music`
 | `lyricsPrompt` | `--lyrics-prompt` | text | lyrics, or a description of the lyrical theme (≤2000 chars, min 10) |
 | `lyricsOptimizer` | `--lyrics-optimizer` | boolean | `true` · `false` (default `false`) |
 | `isInstrumental` | `--is-instrumental` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `url` · `hex` (default `url`) |
+| `outputFormat` | `--output-format` | enum | `url` · `hex` (default `url`) |
 
 > **Notes:** Pro variants omit `duration` (fixed 6s at 1080p); 10s is available at 768p only. On the Fast image-to-video models `imageUrls` is required.
 
@@ -215,7 +215,7 @@ Input type: `i2v`
 | `startFrame` | `--start-frame` | file | **required** image |
 | `resolution` | `-r` | enum | `480p` · `768p` · `1080p` (default `480p`) |
 | `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
-| `cameraTrajectory` | `--camera-trajectory` | object[] | `{time, azimuth, elevation, distance}` |
+| `cameraTrajectory` | `--camera-trajectory-time` · `--camera-trajectory-azimuth` · `--camera-trajectory-elevation` · `--camera-trajectory-distance` | object[] | `{time, azimuth, elevation, distance}` |
 | `promptExpansionMode` | `--prompt-expansion-mode` | enum | `balanced` · `quality` (default `balanced`) |
 | `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
@@ -223,7 +223,7 @@ Input type: `i2v`
 ## Pricing
 
 ```bash
-gen-ai pricing hailuo-2.3 -d 10
+gen-ai pricing hailuo-2.3 --duration 10
 ```
 
 Cost scales with **duration** and **resolution** (the Pro variants run at 1080p; 10s is 768p only). Music is priced per generated track.

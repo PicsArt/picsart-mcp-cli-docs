@@ -4,7 +4,7 @@ description: "Install the Picsart gen-ai CLI, add Skills, or connect the hosted 
 
 # Installation
 
-There are three ways to use AI Playground from outside the web app: the **gen-ai CLI**, drop-in **Skills** for AI agents, and the **MCP server**. All three share the same account, model catalog, and credit balance.
+There are three ways to use AI Playground from outside the web app: the **gen-ai CLI**, drop-in **Skills** for AI agents, and the **MCP server**. All three share the same account and credit balance.
 
 This page covers installation for each surface. If you want a quickstart instead, go to [CLI Quickstart](/guide/cli-quickstart) or [MCP Quickstart](/guide/mcp-quickstart).
 
@@ -34,6 +34,8 @@ This installs the `gen-ai` binary to `~/.local/bin` (override with `GEN_AI_INSTA
 iwr https://picsart.com/gen-ai-cli/install.ps1 | iex
 ```
 
+On Windows the script installs the npm package: it installs or upgrades Node.js 22+ first if needed (via `winget`, or the official MSI), runs `npm install -g @picsart/gen-ai`, and sets the PowerShell execution policy to `RemoteSigned` for your user if it was `Restricted`.
+
 ### npm (all platforms)
 
 ```bash
@@ -48,13 +50,15 @@ Requires Node.js 22 or later. Works on macOS, Linux, and Windows.
 gen-ai --version
 ```
 
+Keep it current with `gen-ai update`.
+
 Then sign in once:
 
 ```bash
 gen-ai login
 ```
 
-`gen-ai login` opens your browser for a one-time OAuth confirmation and stores a secure token at `~/.gen-ai/credentials.json`. This sign-in covers the CLI and Skills. The MCP server signs in separately, inside your agent. See [Authentication](/guide/authentication) for details.
+`gen-ai login` opens your browser for a one-time OAuth confirmation and stores a secure token at `~/.gen-ai/credentials.json`. This sign-in covers the CLI and Skills. The MCP server signs in separately, inside your agent. For CI or other headless machines, use [environment variables](/guide/authentication#ci-and-headless-environments) instead of `gen-ai login`. See [Authentication](/guide/authentication) for details.
 
 > Official product page: [picsart.com/gen-ai-cli](https://picsart.com/gen-ai-cli/)
 
@@ -84,6 +88,13 @@ Or via npx:
 
 ```bash
 npx skills add PicsArt/gen-ai-skills
+```
+
+Or copy the skills bundled with the CLI straight into `~/.claude/skills/`:
+
+```bash
+gen-ai install-skills        # --force to overwrite, --to <dir> for another location
+gen-ai check-skills          # see which are installed
 ```
 
 ### Install — Cursor and Windsurf
@@ -160,7 +171,7 @@ Yes. Skills run the `gen-ai` binary to do the work. Install the CLI and run `gen
 
 **Which install method should I use — curl, PowerShell, or npm?**
 
-Use the curl script on macOS/Linux and the PowerShell script on Windows unless you are already managing a Node.js project. The curl/PowerShell paths install a self-contained binary and do not require Node.js. The npm path installs the pure-JavaScript distribution and requires Node.js 22+.
+Use the curl script on macOS/Linux and the PowerShell script on Windows unless you are already managing a Node.js project. The curl script installs a self-contained binary and does not require Node.js. The PowerShell script and the npm path both install the npm package, which runs on Node.js 22+ (the PowerShell script installs Node.js for you if it is missing).
 
 **What does `GEN_AI_INSTALL_DIR` do?**
 

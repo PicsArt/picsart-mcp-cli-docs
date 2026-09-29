@@ -43,11 +43,12 @@ for (const file of readdirSync(providersDir).filter((f) => f.endsWith('.md'))) {
   }
 }
 Object.assign(flagMap, {
-  multiPrompt: '`--multi-prompt`',
+  // Multi-field object arrays become one repeatable flag per field (`--<flag>-<field>`).
+  multiPrompt: '`--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration`',
   voiceList: '`--voice-list`',
   elementList: '`--element-list`',
-  omniImageList: '`--omni-image-list`',
-  omniVideoList: '`--omni-video-list`',
+  omniImageList: '`--omni-image-list-image-url` · `--omni-image-list-type`',
+  omniVideoList: '`--omni-video-list-video-url` · `--omni-video-list-refer-type` · `--omni-video-list-keep-original-sound`',
   thinking: '`--thinking`',
   colorDepth: 'SDK only',
 })

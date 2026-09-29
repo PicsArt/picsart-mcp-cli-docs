@@ -154,7 +154,7 @@ Input type: `i2v`
 ## Pricing
 
 ```bash
-gen-ai pricing pixverse-v6 -d 8
+gen-ai pricing pixverse-v6 --duration 8
 ```
 
 Cost scales with **quality** and **duration**. Cost is resolved per `modelId` via the backend `/options` call.

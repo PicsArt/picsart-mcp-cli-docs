@@ -21,7 +21,7 @@ Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-fo
 
 ```bash
 # text-to-image
-gen-ai generate -m qwen-image-3-pro \
+gen-ai generate -m qwen-image-3.0-pro \
   -p "a neon ramen shop sign at night, bold typography, rain reflections" -n 4
 
 # 2K with a negative prompt
@@ -40,7 +40,7 @@ gen-ai generate -m qwen-image-2-pro \
 ```json
 { "name": "picsart_generate",
   "arguments": {
-    "model": "qwen-image-3-pro",
+    "model": "qwen-image-3.0-pro",
     "prompt": "a neon ramen shop sign at night, bold typography, rain reflections",
     "count": 4
   } }
@@ -95,7 +95,7 @@ Input type: `t2i`
 ## Pricing
 
 ```bash
-gen-ai pricing qwen-image-3-pro -n 4
+gen-ai pricing qwen-image-3.0-pro
 ```
 
 Cost scales with the number of images (**count**); on **Qwen 2 Pro** the chosen **resolution** is the other driver.

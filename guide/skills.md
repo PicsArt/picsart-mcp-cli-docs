@@ -52,7 +52,7 @@ Alternatively, install via npx:
 npx skills add PicsArt/gen-ai-skills
 ```
 
-Or download the `.zip` manually from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and place it in `~/.claude/skills/`.
+Or download the `.zip` manually from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and place it in `~/.claude/skills/` — or let the CLI copy its bundled skills there with `gen-ai install-skills` (check with `gen-ai check-skills`).
 
 After installing, invoke the skill with `/gen-ai-use` or just describe a task — Claude Code picks it up automatically.
 
@@ -114,4 +114,4 @@ No. Skills call the Picsart platform for every generation. An internet connectio
 
 **Where are the generated files saved?**
 
-By default, files are downloaded to `./output` in the directory the CLI was invoked from. Pass `--save-to-drive` to push results to your Picsart Drive instead. See [Files and Drive](/guide/files-and-drive).
+By default, files are downloaded to `./output` in the directory the CLI was invoked from, and a copy is saved to your Picsart Drive (`gen-ai-cli` folder; pass `--no-save-to-drive` to skip it). See [Files and Drive](/guide/files-and-drive).

@@ -195,7 +195,7 @@ Input type: `tts`
 ## Pricing
 
 ```bash
-gen-ai pricing grok-imagine-video -d 6 -r 720p
+gen-ai pricing grok-imagine-video --duration 6 --resolution 720p
 ```
 
 Video cost scales with **duration** (priced per second); image cost scales with the **Quality vs. standard** tier and **count**; TTS is priced per character.

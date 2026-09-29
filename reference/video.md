@@ -27,14 +27,14 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 |---|---|---|
 | `t2v` text→video | `gen-ai generate` | Seedance 2.5 / 2.0, Kling V3, Veo 3.1, Gemini Omni, Wan 3.0 / 3.0 Prime, Flux 3 Video, Hailuo 2.3, LTX, Luma Ray 2, HeyGen Video Avatar |
 | `i2v` image→video | `gen-ai generate -i` | Kling Motion Control, Wan 2.7 I2V, Runway Gen4 Ref, Picsart Effects Video, VEED Fabric, HeyGen, Creatify |
-| `v2v` video→video | `gen-ai generate --video` / `gen-ai extend` | Seedance Video Edit/Extend, Wan Video Edit, Runway Aleph, Grok Edit/Extend, LTX Extend/Retake |
+| `v2v` video→video | `gen-ai generate --video` (or `--video-urls`) | Seedance Video Edit/Extend, Wan Video Edit, Runway Aleph, Grok Edit/Extend, LTX Extend/Retake |
 
 ## Providers
 
 | Provider | Models | Highlights |
 |---|---|---|
 | [Seedance](/reference/providers/seedance) | Seedance 2.5 / 2.0 (+ Fast, Edit, Extend) | Reference image, keyframes, native audio; 2.5 supports 4–30s |
-| [Google](/reference/providers/google) | Veo 3.1 / Fast / Lite, Gemini Omni | 1080p+, native audio, chainable extend; Omni adds 4K + video extension |
+| [Google](/reference/providers/google) | Veo 3.1 / Fast / Lite, Gemini Omni | 1080p+, native audio; Omni adds 4K + video extension |
 | [Kling](/reference/providers/kling) | Kling V3, Video O1, Motion Control, Avatar, Effects | High-motion; motion control from a still |
 | [Wan](/reference/providers/wan) | Wan 3.0, Wan 3.0 Prime, Wan 2.7 (t2v/i2v/r2v/edit) | Versatile, crisp detail; Prime is up to 7x faster |
 | [Runway](/reference/providers/runway) | Gen 4.5, Aleph, Gen4 Ref, Avatar | Editing & reference workflows |
@@ -48,11 +48,13 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 
 ## Extending clips
 
+Use a dedicated extend model through `gen-ai generate` — Seedance, Grok, and LTX each have one:
+
 ```bash
-gen-ai extend --video ./clip.mp4 -p "the camera keeps panning right" --times 2
+gen-ai generate -m seedance-2.0-video-extend -p "the camera keeps panning right" --video-urls ./clip.mp4
 ```
 
-The Veo family extends `+7s` per segment; Seedance, Grok, and LTX expose dedicated extend models.
+Run `gen-ai models info <id>` to see which video flag an extend model takes (`--video` or `--video-urls`).
 
 ## Common video parameters
 

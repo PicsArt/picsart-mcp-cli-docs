@@ -89,7 +89,7 @@ Input type: `t2v`
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) · `intelligence` (AI Auto) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
+| `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
 | `voiceList` | `--voice-list` | object[] | up to 2 `{voice_id}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 | `staticMask` | `--static-mask` | file | image |
@@ -145,9 +145,9 @@ Input type: `t2v`
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
-| `omniImageList` | `--omni-image-list` | object[] | up to 10 `{image_url, type}` |
-| `omniVideoList` | `--omni-video-list` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
+| `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
+| `omniImageList` | `--omni-image-list-image-url` · `--omni-image-list-type` | object[] | up to 10 `{image_url, type}` |
+| `omniVideoList` | `--omni-video-list-video-url` · `--omni-video-list-refer-type` · `--omni-video-list-keep-original-sound` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-video-o1` — Kling Video O1
@@ -274,7 +274,7 @@ Input type: `v2a`
 ## Pricing
 
 ```bash
-gen-ai pricing kling-v3 -d 5 --rendering-speed pro
+gen-ai pricing kling-v3 --duration 5
 ```
 
 Cost scales with **duration**, **rendering speed / resolution** (`std` 720p · `pro` 1080p · `4k`), and **audio**.

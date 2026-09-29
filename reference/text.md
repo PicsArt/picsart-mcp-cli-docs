@@ -49,4 +49,4 @@ Only Gemini 3 Pro accepts video, so `gen-ai describe --video …` auto-selects i
 | `videoUrl` | `--video` | Video to analyze (Gemini 3 Pro only) |
 | `thinking` | `--thinking` | Reasoning depth, where the model supports it |
 
-These models return text, so the CLI prints the result and skips download / Drive save. Add `--script` for clean, pipeable output.
+These models return text, so the CLI prints the answer to stdout and skips download / Drive save. Add `-q` to drop the model/time header (printed to stderr), or `--json` for `{ text, model, durationMs }`.

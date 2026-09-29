@@ -10,12 +10,15 @@ Generated assets — and any files you upload — live in **Picsart Drive**, you
 
 **CLI:**
 
+The CLI saves every generation to Drive by default, in a `gen-ai-cli` folder:
+
 ```bash
-gen-ai generate -m flux-2-pro -p "a poster" --save-to-drive
-gen-ai generate -m flux-2-pro -p "a poster" --drive-folder "Campaign Q3"
+gen-ai generate -m flux-2-pro -p "a poster"                              # saved to Drive/gen-ai-cli
+gen-ai generate -m flux-2-pro -p "a poster" --drive-folder "Campaign Q3"  # a different folder
+gen-ai generate -m flux-2-pro -p "a poster" --no-save-to-drive           # local download only
 ```
 
-When saving, the CLI uses an LLM-generated descriptive filename and (for video) an ffmpeg thumbnail — matching the web app's behavior.
+When saving, the CLI uses an LLM-generated descriptive filename and (for video, when `ffmpeg` is installed) a first-frame thumbnail — matching the web app's behavior.
 
 **MCP:** generation tools write to Drive when the Drive option is enabled for the call.
 
@@ -25,6 +28,8 @@ When saving, the CLI uses an LLM-generated descriptive filename and (for video) 
 gen-ai upload ./photo.jpg                  # single file
 gen-ai upload ./assets/ -r                 # a whole folder, recursively
 gen-ai upload ./photo.jpg -f "Campaign"    # into a named Drive folder
+gen-ai upload ./assets/ -r --dry-run       # list what would be uploaded
+gen-ai upload ./photo.jpg --json           # { ok, files: [{ path, url, driveUid, error }] }
 ```
 
 Over MCP, upload is an **action of the single `picsart_drive` tool** (see below). It takes either
@@ -70,9 +75,12 @@ can render. All actions require an authenticated call — Drive content is per-u
 ## Browse & organize from the CLI
 
 ```bash
-gen-ai list --folders          # list Drive folders
-gen-ai list --json             # list files as JSON ({ name, type, url } each)
-gen-ai download <uid>          # download a Drive file
+gen-ai list --folders                          # list Drive folders
+gen-ai list --json                             # list files as JSON ({ name, type, url, … } each)
+gen-ai list -f "Campaign" --type video --json  # one folder, one media type
+gen-ai download                                # interactive file picker
+gen-ai download -f "Campaign" --all -o ./out   # everything in a folder (default ./downloads)
+gen-ai download -f "Campaign" --list --json    # list without downloading
 ```
 
 > Drive commands browse your real root folders — they are not scoped to the AI Playground folder.
@@ -92,7 +100,7 @@ the generation and render services.
 
 **What file types can I upload?**
 
-The upload returns a Drive URL you can immediately use as an input to a generation.
+`gen-ai upload` accepts images (`jpg`, `jpeg`, `png`, `webp`, `gif`, `bmp`, `tiff`, `svg`, `heic`, `heif`, `avif`), video (`mp4`, `mov`, `avi`, `mkv`, `webm`, `m4v`, `wmv`), and audio (`mp3`, `wav`, `m4a`, `aac`, `ogg`, `flac`, `wma`); other files are skipped. Filter with `-t image|video|audio`. The upload returns a URL you can immediately use as an input to a generation.
 
 **Are generated files private?**
 

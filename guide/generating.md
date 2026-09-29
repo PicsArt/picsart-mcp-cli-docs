@@ -50,7 +50,7 @@ Discover the exact surface:
 
 ```bash
 gen-ai models info veo-3.1 --json          # full paramConfig
-gen-ai generate -m veo-3.1 -p "x" --dry-run  # preview the resolved payload
+gen-ai validate -m veo-3.1 --schema        # the model's parameter schema as JSON
 ```
 
 ```json
@@ -63,7 +63,7 @@ In the CLI, model-specific params are flags (`--start-frame`, `--voice`, …). V
 
 A generation returns one or more result URLs. Control delivery:
 
-- **CLI**: downloaded to `./output` by default; use `--no-download` (URL only), `--download <dir>`, or `--save-to-drive`.
+- **CLI**: downloaded to `./output` by default (or `--download <dir>`) and saved to Picsart Drive by default (`--no-save-to-drive` to skip, `--drive-folder` to choose the folder). `-q` prints just the URL; `--json` prints `{ url, model, results, durationMs }`.
 - **MCP**: `assets: [{ id, type, url, ... }]` plus a `resource_link` per output. Media models run asynchronously by default: `picsart_generate` returns a job handle and the agent collects the result with `picsart_job_status`. Results are saved to Drive by default (`saveToDrive: false` to skip).
 
 Some models return **multiple results** from one call (e.g. an Explore model returning several images) — the result `items` array simply has more than one entry.
@@ -102,4 +102,4 @@ When set to `true`, your prompt is rewritten by an LLM before being sent to the 
 
 **How many outputs can I request per call?**
 
-Most models accept `count` up to 8. Some models fix the output count at 1 regardless of what you pass. Check `picsart_model_params` or `gen-ai models info <id>` for the specific model.
+It depends on the model: many image models accept a `count` parameter (the CLI's `-n` takes 1–10, and each model narrows that), while others always return one output. Check `picsart_model_params` or `gen-ai models info <id>` for the specific model.

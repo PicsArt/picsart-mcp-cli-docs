@@ -80,7 +80,7 @@ Input type: `i2v`
 ## Pricing
 
 ```bash
-gen-ai pricing veed-fabric-v1 -r 720p
+gen-ai pricing veed-fabric-v1 --resolution 720p
 ```
 
 Cost is billed **per second** and scales with **resolution** (480p is cheaper than 720p) and the **audio length**, which sets the output duration.

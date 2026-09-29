@@ -44,6 +44,6 @@ Input type: `t2i`
 | `enableImageSearch` | `--enable-image-search` | boolean | `true` · `false` (default `true`) |
 | `enableWebSearch` | `--enable-web-search` | boolean | `true` · `false` (default `true`) |
 | `enableShell` | `--enable-shell` | boolean | `true` · `false` (default `true`) |
-| `outputFormat` | `--format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |

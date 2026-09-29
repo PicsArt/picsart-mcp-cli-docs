@@ -398,7 +398,7 @@ Input type: `i2i`
 ## Pricing
 
 ```bash
-gen-ai pricing recraftv4_1 -n 2
+gen-ai pricing recraftv4_1
 ```
 
 Cost scales with the **number of images** (`count`) and the **model tier** — Pro variants cost more than standard, and vector output is priced separately.

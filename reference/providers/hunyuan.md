@@ -66,7 +66,7 @@ Input type: `t2i`
 ## Pricing
 
 ```bash
-gen-ai pricing hunyuan-v3 -n 1
+gen-ai pricing hunyuan-v3
 ```
 
 Cost scales with **count** (number of images generated per call).

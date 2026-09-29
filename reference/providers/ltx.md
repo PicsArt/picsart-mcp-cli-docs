@@ -126,7 +126,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing ltx-v2.3-pro -d 8 -r 1080p
+gen-ai pricing ltx-v2.3-pro --duration 8 --resolution 1080p
 ```
 
 Cost scales with **duration**, **resolution**, and **audio**.

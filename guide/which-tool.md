@@ -68,16 +68,16 @@ Examples:
 
 ```bash
 # Scheduled catalog refresh via cron
-0 6 * * 1 gen-ai batch run /home/user/weekly-catalog.yaml
+0 6 * * 1 gen-ai batch run /home/user/weekly-catalog.json
 
 # Generate assets as a CI step
-gen-ai generate -m flux-2-pro -p "product hero" --script | jq '.results[0].url'
+gen-ai generate -m flux-2-pro -p "product hero" -s --json | jq -r '.url'
 
 # Process a folder of images
-gen-ai generate -m wan-2.7-i2v -p "subtle animation" --input-dir ./stills/
+gen-ai generate -m wan-2.7-i2v -p "subtle animation" --input-dir ./stills/ --batch
 ```
 
-You can also quote costs before a batch run, resume failed jobs, and write results directly to Picsart Drive.
+You can also quote costs before a batch run, cap a single generation's cost with `--max-cost`, and resume failed batch jobs. Single generations are saved to Picsart Drive automatically; batch runs write to a local folder.
 
 - [CLI Quickstart](/guide/cli-quickstart)
 - [Batch and Automation](/guide/batch)

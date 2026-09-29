@@ -116,7 +116,7 @@ Input type: `t2i`
 ## Pricing
 
 ```bash
-gen-ai pricing seedream-4.5 -r 4K -n 4
+gen-ai pricing seedream-4.5 --resolution 4K
 ```
 
 Cost scales with **resolution** and the **count** of images generated.

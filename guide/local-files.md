@@ -46,27 +46,22 @@ gen-ai upload ./renders/ -r               # a folder, recursively
 gen-ai upload ./photo.jpg -f "Campaign"   # into a named Drive folder
 ```
 
-`gen-ai upload` reports progress but does **not** print the resulting URL. To get the URL, list
-Drive afterwards — `gen-ai list --json` emits `{ name, type, url }` per file:
+Add `--json` to get the resulting URL back — `gen-ai upload` prints
+`{ ok, files: [{ path, url, driveUid, error }] }`:
 
 ```bash
-gen-ai upload ./photo.jpg
-gen-ai list --json | jq -r '.[] | select(.name == "photo.jpg") | .url'
+gen-ai upload ./photo.jpg --json | jq -r '.files[0].url'
 ```
 
-For a single file where you want the URL back immediately, `gen-ai upload-to-drive` prints a
-one-line JSON result containing it:
+For a single file, `gen-ai upload-to-drive` always prints a one-line JSON result:
 
 ```bash
 gen-ai upload-to-drive ./clip.mp4
 # {"status":"ok","drive_url":"https://cdn.../clip.mp4","drive_uid":"...","file_name":"clip.mp4","elapsed_ms":812}
 ```
 
-::: warning `upload-to-drive` is video-shaped
-It saves the file as a `VIDEO` resource and appends `.mp4` to the display name. The returned CDN
-URL is a plain URL and works fine as an image input too, but the Drive entry will be
-mislabelled. For images prefer `gen-ai upload` + `gen-ai list --json`.
-:::
+It sets the Drive resource type (photo, video, or audio) from the file extension; `--name` sets
+the display name and `--folder` the Drive folder.
 
 Then pass the URL straight through:
 

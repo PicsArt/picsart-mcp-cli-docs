@@ -46,7 +46,7 @@ The `gen-ai` CLI exposes the full catalog as a single terminal command. It is pi
 
 ```bash
 gen-ai generate -m flux-2-pro -p "product on white background" -n 4
-gen-ai batch run catalog.yaml
+gen-ai batch run catalog.json
 ```
 
 [CLI Quickstart](/guide/cli-quickstart) · [Batch and Automation](/guide/batch)
