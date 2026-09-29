@@ -92,7 +92,7 @@ Install with `npm install @picsart/ai-sdk`. Auth is an API key from your account
 
 ## Agent quickstart
 
-Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call. For the local MCP server, install it first with `npm install -g @picsart/gen-ai-mcp` and sign in with `gen-ai login`:
+Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call. MCP doesn't need the CLI: use the remote server `https://api.picsart.com/gen-ai/mcp`, or install the local one with `npm install -g @picsart/gen-ai-mcp` (see [MCP Quickstart](/guide/mcp-quickstart)):
 
 | Agent | Connect |
 |---|---|

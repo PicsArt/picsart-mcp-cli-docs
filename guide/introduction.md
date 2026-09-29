@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills run `gen-ai` commands and the MCP server (`@picsart/gen-ai-mcp`) reads the same stored credentials, so one `gen-ai login` signs in the CLI, Skills, and MCP. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
+They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills run `gen-ai` commands, so they need the CLI and its `gen-ai login`. The MCP server is independent of the CLI — neither requires the other — and signs in through your client or a token. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|

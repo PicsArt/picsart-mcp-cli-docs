@@ -6,11 +6,13 @@ description: "Install the Picsart gen-ai CLI, connect Skills or MCP to Claude Co
 
 There are three ways to use AI Playground from outside the web app: the **gen-ai CLI**, drop-in **Skills** for AI agents, and the **MCP server**. All three share the same account and credit balance.
 
+The CLI and the MCP server are independent — install either one without the other. Skills are the exception: they run `gen-ai` commands, so they need the CLI.
+
 This page covers installation for each surface. If you want a quickstart instead, go to [CLI Quickstart](/guide/cli-quickstart) or [MCP Quickstart](/guide/mcp-quickstart).
 
 ## gen-ai CLI
 
-Skills run `gen-ai` commands, and `gen-ai login` is how you sign in for Skills and the MCP server, so start here.
+The terminal tool for scripting and automation. Install it if you want to run `gen-ai` yourself or use [Skills](/guide/skills); the MCP server does not need it.
 
 ### macOS and Linux
 
@@ -50,7 +52,7 @@ Then sign in once:
 gen-ai login
 ```
 
-`gen-ai login` opens your browser for a one-time OAuth confirmation and stores a secure token at `~/.gen-ai/credentials.json`. This single sign-in covers the CLI, Skills, and MCP — you do not need to log in again per surface. For CI or other headless machines, use [environment variables](/guide/authentication#ci-and-headless-environments) instead. See [Authentication](/guide/authentication) for details.
+`gen-ai login` opens your browser for a one-time OAuth confirmation and stores a secure token at `~/.gen-ai/credentials.json`. This sign-in also covers Skills, which run `gen-ai` commands. For CI or other headless machines, use [environment variables](/guide/authentication#ci-and-headless-environments) instead. See [Authentication](/guide/authentication) for details.
 
 > Official product page: [picsart.com/gen-ai-cli](https://picsart.com/gen-ai-cli/)
 
@@ -120,19 +122,23 @@ Each host has a dedicated setup guide:
 | Codex (OpenAI) | [Codex integration](/guide/integrations/codex) |
 | VS Code Copilot | [VS Code integration](/guide/integrations/vscode) |
 
-The MCP server is its own npm package, separate from the CLI:
+The MCP server does not need the CLI. Choose how to run it:
+
+- **Remote (HTTP)** — nothing to install. Point your client at `https://api.picsart.com/gen-ai/mcp` and sign in with your Picsart account when prompted.
+- **Local (stdio)** — install the server package, which provides the `gen-ai-mcp` command:
 
 ```bash
-npm install -g @picsart/gen-ai-mcp     # provides the gen-ai-mcp command
+npm install -g @picsart/gen-ai-mcp
 ```
 
-Then run `gen-ai login` once (the server reads the same stored credentials). Authentication is the same across every host — one credential, one balance.
+The local server authenticates with a `PICSART_TOKEN` in its MCP config (or reuses a signed-in CLI session if you have one). See [MCP authentication](/guide/mcp-quickstart#authentication). Either way it is one Picsart account and one credit balance.
 
 ### Quick reference — add the MCP server
 
 **Claude Code:**
 ```bash
-claude mcp add picsart-gen-ai -- gen-ai-mcp
+claude mcp add picsart-gen-ai -- gen-ai-mcp                                        # local
+claude mcp add --transport http picsart-gen-ai https://api.picsart.com/gen-ai/mcp   # remote
 ```
 
 **Codex:**
@@ -143,7 +149,7 @@ codex mcp add picsart-gen-ai -- gen-ai-mcp
 **Cursor / Windsurf / VS Code** — add `gen-ai-mcp` as the MCP server command in the agent's MCP config file. See the individual integration guides for the exact config block.
 
 > Official page: [picsart.com/gen-ai-mcp](https://picsart.com/gen-ai-mcp/) — the canonical, always-current connection details live here. The **[MCP Quickstart](/guide/mcp-quickstart)** documents the agent-facing tools (`picsart_generate`, `picsart_preflight`, …) and example calls. The `picsart_media_*` tools for building video and images from existing material are documented separately under
-> **[Picsart Media Studio](/guide/media-studio/)**, which is its own remote connector rather than part of the CLI.
+> **[Picsart Media Studio](/guide/media-studio/)**, which is its own remote connector rather than part of the gen-ai MCP server.
 
 ---
 
@@ -151,7 +157,7 @@ codex mcp add picsart-gen-ai -- gen-ai-mcp
 
 **Do I need to install the CLI to use Skills or MCP?**
 
-For Skills, yes: skills run `gen-ai` commands, so the CLI must be installed and signed in. The MCP server is a separate package (`@picsart/gen-ai-mcp`) that runs on its own; the simplest way to sign it in is still `gen-ai login`, since it reads the same `~/.gen-ai` credentials.
+For Skills, yes: skills run `gen-ai` commands, so the CLI must be installed and signed in. For MCP, no: the remote server needs nothing installed, and the local server is its own package (`@picsart/gen-ai-mcp`) with its own authentication. Likewise, the CLI never needs the MCP server.
 
 **Which install method should I use — curl, PowerShell, or npm?**
 

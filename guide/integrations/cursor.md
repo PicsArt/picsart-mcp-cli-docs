@@ -4,14 +4,13 @@ description: "Connect Picsart to Cursor — add the gen-ai-use Skill or MCP serv
 
 # Cursor
 
-Cursor supports two connection methods: **Skills** (ZIP install) and **MCP** (via the Cursor MCP config). Both use the same `gen-ai login` session.
+Cursor supports two connection methods: **Skills** (ZIP install) and **MCP** (via the Cursor MCP config). Skills run the gen-ai CLI; MCP runs on its own and does not need the CLI.
 
 ## Prerequisites
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
-3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
-4. Verify: `gen-ai --version` and `gen-ai credits`.
+**For Skills**: install the gen-ai CLI ([Installation](/guide/installation)), run `gen-ai login` once (browser OAuth), and verify with `gen-ai --version` and `gen-ai credits`.
+
+**For MCP** (no CLI needed): install the server package — `npm install -g @picsart/gen-ai-mcp`, which provides the `gen-ai-mcp` command — and authenticate it as described in [MCP authentication](/guide/mcp-quickstart#authentication).
 
 ## Method 1: Skills (recommended)
 
@@ -96,7 +95,7 @@ Restart Cursor. The tool list is loaded at startup.
 
 **Generation fails with "unauthorized".**
 
-Run `gen-ai login` in a terminal and restart Cursor.
+For MCP, check the server's authentication — set or refresh `PICSART_TOKEN` in its config (see [MCP authentication](/guide/mcp-quickstart#authentication)) and restart Cursor. For Skills, run `gen-ai login` in a terminal and retry.
 
 ## FAQ
 

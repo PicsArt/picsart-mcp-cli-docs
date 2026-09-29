@@ -39,11 +39,10 @@ You can use both at the same time — they do not conflict.
 
 ## Prerequisites for all integrations
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Authenticate once: `gen-ai login` (browser OAuth).
-3. For MCP hosts that run the server locally, install it: `npm install -g @picsart/gen-ai-mcp`.
+- **Skills** need the gen-ai CLI: install it ([Installation](/guide/installation)) and run `gen-ai login` once.
+- **MCP** does not need the CLI: use the remote server (`https://api.picsart.com/gen-ai/mcp`, sign in through your client) or install the local one with `npm install -g @picsart/gen-ai-mcp`. See [MCP authentication](/guide/mcp-quickstart#authentication).
 
-Skills run `gen-ai` commands, and the MCP server reads the same stored credentials. The session from step 2 covers all surfaces — no separate credential per agent.
+Every surface uses the same Picsart account and credit balance.
 
 ## Not using an agent?
 

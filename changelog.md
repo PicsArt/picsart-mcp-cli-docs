@@ -9,7 +9,7 @@ Notable changes to the Picsart model catalog and these docs. Newest first. The c
 
 ## 2026-09-29
 
-**CLI docs checked against `@picsart/gen-ai` 2.78.0.** Removed flags and commands the CLI does not have (`--script`, `--dry-run` and `--no-download` on `generate`, short flags on `pricing`, `gen-ai extend`), documented that generations save to Drive by default, rewrote the batch guide for the real JSON manifest format (`jobs[]` with `id`) and output folder, added CI authentication via `PICSART_ACCESS_TOKEN` / `PICSART_USER_ID`, and corrected the MCP install step — the server is the separate `@picsart/gen-ai-mcp` package.
+**CLI docs checked against `@picsart/gen-ai` 2.78.0.** Removed flags and commands the CLI does not have (`--script`, `--dry-run` and `--no-download` on `generate`, short flags on `pricing`, `gen-ai extend`), documented that generations save to Drive by default, rewrote the batch guide for the real JSON manifest format (`jobs[]` with `id`) and output folder, added CI authentication via `PICSART_ACCESS_TOKEN` / `PICSART_USER_ID`, and made the MCP server independent of the CLI — use the remote server (`https://api.picsart.com/gen-ai/mcp`) or the separate `@picsart/gen-ai-mcp` package; neither needs the CLI.
 
 ## 2026-09-19
 

@@ -41,7 +41,7 @@ The same models are accessible from the [AI Playground web app](https://picsart.
 | **CLI** | A terminal command for the full catalog | Direct generation, scripting, CI/CD, automation |
 | **Skills** | Pre-built agent instructions that drive the CLI | Conversational generation in Claude Code, Cursor, Windsurf |
 
-Skills are a layer on top of the CLI and MCP — they give the agent pre-written instructions about how to use Picsart, so you don't have to prompt it yourself. If you want the agent to generate with minimal friction, Skills are the fastest path. If you want fine-grained tool-call control, use MCP directly.
+Skills are a layer on top of the CLI — they give the agent pre-written instructions about how to use Picsart, so you don't have to prompt it yourself. If you want the agent to generate with minimal friction, Skills are the fastest path. If you want fine-grained tool-call control, use MCP directly.
 
 ## Before MCP existed
 
@@ -55,7 +55,7 @@ MCP standardizes this: one server implementation works across all MCP-compatible
 
 ## Security and authentication
 
-The Picsart MCP server uses your existing Picsart OAuth session, established by `gen-ai login`. It does not expose your credentials to the agent — the agent sends a tool call, the server handles the API request, and results are returned. Your token stays on your machine.
+The Picsart MCP server authenticates with your Picsart account and does not require the gen-ai CLI. With the remote server, your client runs the Picsart OAuth sign-in; with the local server, you pass a `PICSART_TOKEN` in its config (see [MCP authentication](/guide/mcp-quickstart#authentication)). Either way the server does not expose your credentials to the agent — the agent sends a tool call, the server handles the API request, and results are returned.
 
 ## Get started
 
@@ -69,7 +69,7 @@ The Picsart MCP server uses your existing Picsart OAuth session, established by 
 
 **Do I need to know how MCP works to use it?**
 
-No. Install the CLI, run `gen-ai login`, add the server to your agent's config, and ask the agent to generate something. The protocol runs in the background.
+No. Add the server to your agent (the remote URL, or the local `gen-ai-mcp` command), sign in, and ask the agent to generate something. The protocol runs in the background.
 
 **Is MCP specific to Anthropic or Claude?**
 
@@ -77,7 +77,7 @@ MCP was introduced by Anthropic but is an open standard. It is now implemented b
 
 **Does each agent need its own Picsart account?**
 
-No. One Picsart account, one `gen-ai login`, one credit balance — regardless of which agent you use.
+No. One Picsart account, one credit balance — regardless of which agent you use.
 
 **Is MCP the same as a plugin or an extension?**
 

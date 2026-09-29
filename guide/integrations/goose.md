@@ -8,10 +8,7 @@ Goose is an open-source AI agent that supports MCP servers as extensions. Add th
 
 ## Prerequisites
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
-3. For the MCP method, install the server package: `npm install -g @picsart/gen-ai-mcp` (provides the `gen-ai-mcp` command).
-4. Verify: `gen-ai --version` and `gen-ai credits`.
+**For MCP** (no CLI needed): install the server package — `npm install -g @picsart/gen-ai-mcp`, which provides the `gen-ai-mcp` command — and authenticate it as described in [MCP authentication](/guide/mcp-quickstart#authentication).
 
 ## Method 1: goose configure (recommended)
 
@@ -104,17 +101,17 @@ Restart Goose after modifying the config file. Extensions added via `goose confi
 
 **Generation fails with "unauthorized".**
 
-Your session has expired. Run `gen-ai login` in a terminal and restart Goose.
+For MCP, check the server's authentication — set or refresh `PICSART_TOKEN` in its config (see [MCP authentication](/guide/mcp-quickstart#authentication)) and restart Goose.
 
 ## FAQ
 
 **Does Goose need a separate Picsart account or API key?**
 
-No. It uses the same OAuth session as the CLI. Run `gen-ai login` once; Goose picks up those credentials automatically.
+No. It uses your Picsart account: pass `PICSART_TOKEN` in the extension's environment, or let the server reuse a signed-in gen-ai CLI session if you have one. See [MCP authentication](/guide/mcp-quickstart#authentication).
 
 **Can I use Goose and the CLI at the same time?**
 
-Yes. Both use the same credentials file and credit balance. Running them in parallel is fine.
+Yes. They are independent and draw on the same credit balance. Running them in parallel is fine.
 
 **Which models work in Goose?**
 

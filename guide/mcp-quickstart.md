@@ -10,22 +10,29 @@ New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
 ## Prerequisites
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` once (opens your browser for OAuth).
-3. Install the MCP server, which is a separate npm package:
+The MCP server is independent of the [gen-ai CLI](/guide/cli-quickstart): you don't need the CLI to use MCP, and you don't need MCP to use the CLI. They only share your Picsart account and credit balance.
+
+Pick the transport your agent supports:
+
+- **Remote (HTTP)** — nothing to install. Add the server URL `https://api.picsart.com/gen-ai/mcp` to your client and sign in with your Picsart account when it asks.
+- **Local (stdio)** — for agents that launch MCP servers as a local command (Claude Code, Codex, Cursor, Windsurf, VS Code). Install the server package, which provides the `gen-ai-mcp` command:
 
 ```bash
-npm install -g @picsart/gen-ai-mcp     # provides the gen-ai-mcp command
+npm install -g @picsart/gen-ai-mcp
 ```
 
-The MCP server uses the same credentials as the CLI.
+## Authentication
+
+- **Remote:** your client runs the Picsart OAuth sign-in in the browser the first time it connects. No token or CLI involved.
+- **Local:** after connecting, ask your agent to check your credit balance (`picsart_credits`). If that reports you aren't signed in, pass your Picsart token to the server as `PICSART_TOKEN` in the `env` block of its MCP config. If the gen-ai CLI is also installed and signed in on the same machine, the local server can reuse that session — optional, not required.
 
 ## Connect to your agent
 
 ### Claude Code
 
 ```bash
-claude mcp add picsart-gen-ai -- gen-ai-mcp
+claude mcp add picsart-gen-ai -- gen-ai-mcp                                        # local
+claude mcp add --transport http picsart-gen-ai https://api.picsart.com/gen-ai/mcp   # remote
 ```
 
 Then use it in any conversation:
@@ -240,13 +247,17 @@ Results come back as `results: [{ url, metadata? }]`. Assets are URLs, never bas
 
 ## FAQ
 
+**Do I need the gen-ai CLI to use MCP?**
+
+No. The remote server needs nothing installed, and the local server is its own package (`@picsart/gen-ai-mcp`). See [Authentication](#authentication) for how each one signs in.
+
 **Does the MCP server require a separate API key?**
 
-No. It uses the same OAuth session as the CLI. Run `gen-ai login` once; the MCP server picks up those credentials automatically.
+Not for the remote server — you sign in with your Picsart account. The local server takes a `PICSART_TOKEN` in its config, unless it can reuse a signed-in gen-ai CLI session on the same machine.
 
 **Can I use MCP and the CLI on the same machine at the same time?**
 
-Yes. Both use the same credentials file (`~/.gen-ai/credentials.json`) and the same credit balance. Running them in parallel is fine.
+Yes. They are independent tools that draw on the same Picsart account and credit balance. Running them in parallel is fine.
 
 **The agent connected but the tools do not appear.**
 
