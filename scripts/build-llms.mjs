@@ -46,38 +46,41 @@ out.push('')
 out.push(
   `> Developer docs for driving Picsart's AI catalog — ${total} models from ${providerCount} ` +
     `providers across image (${byMode.image}), video (${byMode.video}), and audio (${byMode.audio}) — ` +
-    'from your terminal with the gen-ai CLI, or from any AI agent via Skills and MCP. One OAuth ' +
-    'login, one credit balance, pay per generation.',
+    'from your terminal with the gen-ai CLI, or from any AI agent via Skills and the hosted MCP server. ' +
+    'One Picsart account, one credit balance, pay per generation.',
 )
 out.push('')
 out.push(
   'The same model registry powers three interfaces (CLI, Skills, MCP). Every model has a stable ' +
     'id usable identically from `gen-ai generate -m <id>` and the `picsart_generate` MCP tool. ' +
+    'The MCP server is hosted at https://api.picsart.com/gen-ai/mcp: agents connect over HTTP and sign in ' +
+    'with Picsart OAuth in the browser, so it needs no CLI install, no `gen-ai login` and no API key. ' +
+    'Skills run the gen-ai CLI and need `gen-ai login`. ' +
     'For a point-and-click web UI instead, see the AI Playground app (linked under Optional).',
 )
 out.push('')
 
 out.push('## Getting started')
 out.push(link('Introduction', '/guide/introduction', 'what this is and the three interfaces'))
-out.push(link('Installation', '/guide/installation', 'install the gen-ai CLI (npm or install script)'))
-out.push(link('Authentication', '/guide/authentication', '`gen-ai login` OAuth web login'))
+out.push(link('Installation', '/guide/installation', 'install the gen-ai CLI, add Skills, or connect the hosted MCP server'))
+out.push(link('Authentication', '/guide/authentication', '`gen-ai login` for the CLI and Skills; in-agent OAuth for MCP; API key for the SDK'))
 out.push('')
 
 out.push('## Interfaces')
 out.push(link('CLI Quickstart', '/guide/cli-quickstart', 'generate, batch, pipe, upload from the terminal'))
-out.push(link('MCP Quickstart', '/guide/mcp-quickstart', 'expose the catalog to any MCP-compatible agent'))
+out.push(link('MCP Quickstart', '/guide/mcp-quickstart', 'connect the hosted MCP server (https://api.picsart.com/gen-ai/mcp) to any MCP-compatible agent; nothing to install'))
 out.push(link('Skills', '/guide/skills', 'drop-in skills for Claude Code, Cursor, Windsurf, ChatGPT'))
 out.push('')
 
-// Media Studio is a separate remote connector, not one of the three CLI-backed
+// Media Studio is a separate remote connector, not one of the three
 // interfaces above — it gets its own section so an agent reading this map does
-// not assume `gen-ai login` or `gen-ai-mcp` apply to it.
+// not confuse its address with the gen-ai MCP server's.
 out.push('## Picsart Media Studio (separate MCP connector)')
 out.push(
   link(
     'Media Studio overview',
     '/guide/media-studio/',
-    'build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai CLI',
+    'build video, slideshows and captions from your own footage and templates; remote connector, added and signed in separately from the gen-ai MCP server',
   ),
 )
 out.push(link('What you can do', '/guide/media-studio/tools', `all ${mediaTools.tools.length} picsart_media_* tools and what each is for`))

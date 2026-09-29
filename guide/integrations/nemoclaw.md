@@ -1,122 +1,84 @@
 ---
-description: "Connect Picsart to NemoClaw by adding the MCP server to your container config — generate images, video, and audio inside NemoClaw's isolated Docker agent environment."
+description: "NemoClaw and the Picsart MCP server: why NemoClaw's managed MCP servers, which need a static bearer credential, cannot connect to Picsart's OAuth-only server today, and what to use instead."
 ---
 
 # NemoClaw
 
-NemoClaw is an AI agent framework in the OpenClaw ecosystem ([docs.nemoclaw.dev](https://docs.nemoclaw.dev)). It runs AI agents inside Docker containers for security isolation, making it well-suited for personal and team agent setups. MCP servers are configured via the `ncl` CLI or directly in the container config file. NemoClaw uses stdio transport for MCP, as servers run inside the container environment alongside the agent.
+NemoClaw is NVIDIA's framework for running OpenClaw agents inside OpenShell sandboxes ([NemoClaw: Add an MCP Server](https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server)). A sandboxed agent can use remote Streamable HTTP MCP servers, and OpenShell injects the server's credential on the way out so the credential never enters the sandbox.
+
+::: warning NemoClaw cannot connect to the Picsart MCP server today
+NemoClaw's managed MCP servers require exactly one static bearer credential per server, passed with `--env`. The Picsart MCP server at `https://api.picsart.com/gen-ai/mcp` authenticates with OAuth sign-in only and does not issue API keys or static tokens for MCP. Until NemoClaw supports OAuth sign-in for managed MCP servers, there is no supported way to connect the two.
+:::
 
 ## Prerequisites
 
-1. NemoClaw installed with Docker available on your system.
-2. A Picsart API key. Get one at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under **API Settings**.
-3. The `@picsart/gen-ai-mcp` package available inside the container. Install it globally on your host — NemoClaw mounts the node_modules path into the container — or include it in your container image.
+To use the Picsart MCP server from any host, you need:
 
-```bash
-npm install -g @picsart/gen-ai-mcp
-```
+1. A Picsart account. You sign in with it when the host connects.
+2. Credits on your Picsart account for generations.
+3. A host that supports remote (Streamable HTTP) MCP servers with OAuth sign-in.
+
+NemoClaw meets the first half of item 3 (remote Streamable HTTP over HTTPS) but not the OAuth half.
 
 ## Setup
 
-### Method 1: `ncl` CLI (recommended)
+NemoClaw registers a managed MCP server with a command of this shape:
 
-Use the `ncl` command to add the Picsart MCP server to your group configuration. Replace `YOUR_GROUP_ID` with your NemoClaw group ID and `YOUR_TOKEN` with your Picsart API key:
-
-```sh
-ncl groups config add-mcp-server \
-  --id YOUR_GROUP_ID \
-  --name picsart \
-  --command gen-ai-mcp \
-  --env '{"PICSART_TOKEN":"YOUR_TOKEN"}'
+```bash
+nemoclaw <sandbox-name> mcp add <server-name> --url <https-endpoint> --env <CREDENTIAL_KEY>
 ```
 
-NemoClaw applies the change on the next agent session start. No container rebuild is required.
+The `--env` credential is required, and Picsart has no static credential to put there. Do not paste a Picsart API key or a copied OAuth token into it: the Picsart MCP server does not accept API keys, and OAuth tokens expire.
 
-### Method 2: Container config file
+NemoClaw also does not run stdio MCP servers, and the Picsart MCP server has no stdio or locally installed version. There is no `gen-ai-mcp` binary or `@picsart/gen-ai-mcp` package.
 
-Alternatively, edit the container config file directly. Locate your NemoClaw container config and add the following under `mcp_servers`:
+### Use OpenClaw directly instead
 
-```yaml
-mcp_servers:
-  - name: picsart
-    command: gen-ai-mcp
-    env:
-      PICSART_TOKEN: "YOUR_PICSART_TOKEN"
-```
-
-Replace `YOUR_PICSART_TOKEN` with your API key. Save the file and restart the container for the change to take effect.
-
-### Verify the connection
-
-Start a NemoClaw agent session and ask:
-
-> *"List available Picsart image models."*
-
-The agent should call `picsart_list_models` and return results. If it does not, see [Troubleshooting](#troubleshooting).
+If you want Picsart tools in an OpenClaw-based agent today, run OpenClaw outside NemoClaw. OpenClaw supports OAuth sign-in for remote MCP servers. See the [OpenClaw integration guide](/guide/integrations/openclaw).
 
 ## Use it
 
-Once connected, ask your NemoClaw agent in plain English:
+Once your agent is connected through a host that supports OAuth, ask it in plain English:
 
 - *"Generate a product shot on a white background using Flux 2 Pro."*
 - *"Create a 9:16 social video from this image using Kling V3."*
-- *"Remove the background from /workspace/product.png."*
+- *"Remove the background from this product photo."*
 - *"How many Picsart credits do I have left?"*
 
 For a full list of available tools, see the [MCP Quickstart](/guide/mcp-quickstart).
 
 ## Troubleshooting
 
-**`gen-ai-mcp: command not found` inside the container**
+**`nemoclaw mcp add` asks for an `--env` credential**
 
-The container cannot find the `gen-ai-mcp` binary. Confirm the package is installed globally on the host and that NemoClaw is mounting the global node_modules path into the container. Alternatively, use the absolute binary path in your config:
+This is expected. NemoClaw requires a bearer credential for every managed MCP server, and the Picsart MCP server does not provide one. See the warning at the top of this page.
 
-```yaml
-mcp_servers:
-  - name: picsart
-    command: /usr/local/bin/gen-ai-mcp
-    env:
-      PICSART_TOKEN: "YOUR_PICSART_TOKEN"
-```
+**"Unauthorized" or 401 errors after adding the server with a token**
 
-Or use `npx` to avoid a global install dependency:
+The Picsart MCP server only accepts tokens issued through its OAuth sign-in, and those expire. A static value in `--env` will stop working or never work. Use a host with OAuth support instead.
 
-```yaml
-mcp_servers:
-  - name: picsart
-    command: npx
-    args: ["-y", "@picsart/gen-ai-mcp"]
-    env:
-      PICSART_TOKEN: "YOUR_PICSART_TOKEN"
-```
+**Stdio server rejected**
 
-**"Unauthorized" or authentication errors**
-
-Verify your Picsart API key. Copy it fresh from [picsart.com/ai-playground/](https://picsart.com/ai-playground/) and update the `PICSART_TOKEN` value in your config. If you used the `ncl` CLI to set the env, re-run the `add-mcp-server` command with the corrected token.
-
-**Config changes not taking effect**
-
-Changes made via the `ncl` CLI take effect on the next agent session. If you edited the container config file directly, restart the container to apply changes.
-
-**YAML parse error**
-
-YAML is whitespace-sensitive. Use spaces, not tabs, for indentation. Validate the file:
-
-```bash
-python3 -c "import yaml; yaml.safe_load(open('your-config.yaml'))"
-```
+NemoClaw does not start, wrap, or translate stdio MCP servers. The Picsart MCP server is remote only, so no stdio configuration applies.
 
 ## FAQ
 
-**Why does NemoClaw use stdio instead of HTTP for MCP?**
+**Will NemoClaw support the Picsart MCP server in the future?**
 
-NemoClaw runs agents inside Docker containers. The MCP server process runs in the same container as the agent, so communication over stdio is direct and avoids exposing an HTTP port. This matches NemoClaw's security isolation model.
+It will work once NemoClaw supports OAuth sign-in for managed MCP servers. Check the [NemoClaw documentation](https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server) for changes to supported authentication.
 
-**Can I add multiple MCP servers to NemoClaw?**
+**Can I use a Picsart API key with NemoClaw?**
 
-Yes. Add multiple entries under `mcp_servers`, or run `ncl groups config add-mcp-server` multiple times with different `--name` values. All servers are available to the agent simultaneously.
+No. The Picsart MCP server does not accept API keys. It uses OAuth sign-in with your Picsart account.
 
-**Can I use different API keys for different NemoClaw groups?**
+**Which hosts work with the Picsart MCP server today?**
 
-Yes. Each group has its own config, so you can configure a different `PICSART_TOKEN` per group. This is useful for teams where each group has separate Picsart billing.
+Any host that supports remote MCP servers with OAuth sign-in, such as [OpenClaw](/guide/integrations/openclaw), [Claude Code](/guide/integrations/claude-code), and [Cursor](/guide/integrations/cursor). See the [integrations index](/guide/integrations/) for the full list.
 
+## Start creating
+
+Connect the Picsart MCP server through a supported host, then visit the documentation for examples, available models, and prompt ideas.
+
+::: tip Ready to generate?
+[View documentation](https://picsart.github.io/picsart-mcp-cli-docs/){ .btn-primary target="_blank" rel="noopener" }
+:::

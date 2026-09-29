@@ -7,6 +7,10 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-09-29
+
+**MCP docs corrected to match the live server.** The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`. Agents connect to it over HTTP and sign in to Picsart in the browser, so it needs **no gen-ai CLI, no `gen-ai login` and no API key**. Earlier pages described a local `gen-ai-mcp` command, required the CLI as a prerequisite, or pointed some integrations at a different address with an API key. All of those instructions were wrong and have been replaced on the [MCP Quickstart](/guide/mcp-quickstart), [Installation](/guide/installation), [Authentication](/guide/authentication) and every [integration guide](/guide/integrations/). The tool catalog also drops `picsart_music_studio` (not available), adds the viewing and progress tools, and fixes the `picsart_remove_bg` example (it takes one `image` URL). AnythingLLM Desktop now connects through the `mcp-remote` bridge, and the [integrations index](/guide/integrations/) lists every supported agent plus the ones that cannot connect yet (NemoClaw, AnythingLLM Docker).
+
 ## 2026-09-19
 
 **SDK 6.2.3 catalog refresh — 201 models across 31 providers.** Compared with the previously published catalog: 26 additions, 6 removals; Meta joins and Reve leaves the active provider list. The SDK upgrade from 6.0.0 adds 11 text models and changes result metadata and Seedance color-depth handling. See the [complete update and migration guide](/guide/sdk-6-2-update).

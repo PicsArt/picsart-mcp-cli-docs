@@ -21,7 +21,7 @@ From your perspective: you ask in plain English, the agent figures out which too
 
 ## What the Picsart MCP server provides
 
-The Picsart MCP server (`gen-ai-mcp`) exposes the full AI Playground model catalog — **201 models** from **31 providers** — as MCP tools. Once connected, your agent can:
+The Picsart MCP server is hosted by Picsart at `https://api.picsart.com/gen-ai/mcp`. It exposes the full AI Playground model catalog, **201 models** from **31 providers**, as MCP tools. Once connected, your agent can:
 
 - Generate images with models like Flux 2 Pro, Recraft V4, Ideogram 4, GPT Image, and Imagen 4.
 - Generate video with Seedance 2.5, Veo 3.1, Kling V3, Seedance 2.0, Runway, Luma Ray 3, and others.
@@ -29,7 +29,7 @@ The Picsart MCP server (`gen-ai-mcp`) exposes the full AI Playground model catal
 - Remove or replace image backgrounds.
 - Upscale and enhance images.
 - Vectorize raster images to SVG.
-- Browse, quote, and manage all of the above without leaving the agent conversation.
+- Browse the catalog, quote costs, check your credit balance, and manage files in Picsart Drive without leaving the agent conversation.
 
 The same models are accessible from the [AI Playground web app](https://picsart.com/ai-playground/) — MCP is the programmatic and agent-native way to reach them.
 
@@ -41,7 +41,7 @@ The same models are accessible from the [AI Playground web app](https://picsart.
 | **CLI** | A terminal command for the full catalog | Direct generation, scripting, CI/CD, automation |
 | **Skills** | Pre-built agent instructions that drive the CLI | Conversational generation in Claude Code, Cursor, Windsurf |
 
-Skills are a layer on top of the CLI and MCP — they give the agent pre-written instructions about how to use Picsart, so you don't have to prompt it yourself. If you want the agent to generate with minimal friction, Skills are the fastest path. If you want fine-grained tool-call control, use MCP directly.
+MCP and the CLI are independent. MCP runs on Picsart's servers and needs nothing installed on your machine; the CLI is a terminal program you install yourself. Skills give the agent pre-written instructions about how to use Picsart and run the CLI to do the work, so they are the one surface that needs the CLI. If you want fine-grained tool-call control without installing anything, use MCP.
 
 ## Before MCP existed
 
@@ -55,7 +55,7 @@ MCP standardizes this: one server implementation works across all MCP-compatible
 
 ## Security and authentication
 
-The Picsart MCP server uses your existing Picsart OAuth session, established by `gen-ai login`. It does not expose your credentials to the agent — the agent sends a tool call, the server handles the API request, and results are returned. Your token stays on your machine.
+The Picsart MCP server uses OAuth. The first time your agent connects, it opens a browser window where you sign in to Picsart and approve access. Your password goes only to Picsart, never to the agent or the MCP server. The agent keeps the resulting access token and sends it with each tool call, so every generation runs as you and draws on your credit balance. To revoke access, remove or sign out of the server in your agent's settings.
 
 ## Get started
 
@@ -69,7 +69,7 @@ The Picsart MCP server uses your existing Picsart OAuth session, established by 
 
 **Do I need to know how MCP works to use it?**
 
-No. Install the CLI, run `gen-ai login`, add the server to your agent's config, and ask the agent to generate something. The protocol runs in the background.
+No. Add the server address to your agent, sign in to Picsart when the browser window opens, and ask the agent to generate something. The protocol runs in the background. You do not need to install the CLI.
 
 **Is MCP specific to Anthropic or Claude?**
 
@@ -77,12 +77,12 @@ MCP was introduced by Anthropic but is an open standard. It is now implemented b
 
 **Does each agent need its own Picsart account?**
 
-No. One Picsart account, one `gen-ai login`, one credit balance — regardless of which agent you use.
+No. You use the same Picsart account and the same credit balance in every agent. Each agent signs in on its own the first time it connects.
 
 **Is MCP the same as a plugin or an extension?**
 
 MCP is a protocol. Plugins and extensions are typically agent-specific formats. The advantage of MCP is that one server implementation works across all supporting agents, whereas a plugin is usually built for one platform.
 
-**What happens if the MCP server crashes?**
+**What happens if the MCP server is unreachable?**
 
-The agent loses access to the Picsart tools until the server restarts. The agent itself keeps running. Restart the server by re-running the agent's MCP setup or restarting the agent application.
+The agent loses access to the Picsart tools until the connection comes back. The agent itself keeps running. The server is hosted, so there is no local process to restart: check your network can reach `api.picsart.com`, then reconnect the server from your agent's MCP settings or restart the agent.
