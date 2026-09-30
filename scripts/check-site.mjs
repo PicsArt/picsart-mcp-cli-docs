@@ -12,6 +12,13 @@ const routes = files(root).filter(p=>p.endsWith('.html') && !p.endsWith('/404.ht
 const browser = await chromium.launch({ executablePath: process.env.DOCS_BROWSER_EXECUTABLE || undefined })
 const page = await browser.newPage({ viewport: {width:1440,height:1000} })
 let current;const errors=[];const pages=[];const targets=new Map()
+async function ready() {
+ await page.waitForFunction(() => Boolean(document.querySelector('#app')?.__vue_app__))
+ await page.evaluate(() => document.fonts.ready)
+}
+async function cardCount(count) {
+ await page.waitForFunction(n => document.querySelectorAll('.model-card').length === n, count)
+}
 page.on('response', response=>{if(response.status()>=400 && new URL(response.url()).origin===origin.origin)errors.push({page:current,error:`HTTP ${response.status()}: ${response.url()}`})})
 page.on('pageerror', error=>errors.push({page:current,error:error.message}))
 for(const route of routes) {
@@ -20,6 +27,7 @@ for(const route of routes) {
  const url=new URL(route,origin)
  const response=await page.goto(url.href,{waitUntil:'domcontentloaded'})
  await page.locator('main, .VPHome').first().waitFor({state:'visible'})
+ await ready()
  if(response.status()!==200)errors.push({page:route,error:'HTTP '+response.status()})
  const result=await page.evaluate(()=>({title:document.title,headings:[...document.querySelectorAll('main h1, .VPHome h1')].map(e=>e.textContent),text:document.querySelector('main, .VPHome')?.innerText.length??0,ids:[...document.querySelectorAll('[id]')].map(e=>e.id),links:[...document.querySelectorAll('a[href]')].map(e=>e.href),overflow:document.documentElement.scrollWidth>innerWidth+2}))
  if(!result.text || !result.title || !result.headings.length)errors.push({page:route,error:'Missing page title or main content'})
@@ -39,15 +47,19 @@ for(const p of pages)for(const href of p.links){
 }
 if(process.argv[3])writeFileSync(process.argv[3],JSON.stringify({pages:pages.map(({links,...p})=>p),localLinks,errors,interactiveChecks:'pending'},null,2)+'\n')
 await page.goto(new URL('reference/catalog.html',origin).href,{waitUntil:'domcontentloaded'})
+await ready()
 await page.getByRole('button',{name:'text',exact:true}).click()
 const models=JSON.parse(readFileSync('.vitepress/theme/data/models.json'))
 const expected=models.filter(m=>m.mode==='text').length
+await cardCount(expected)
 if(await page.locator('.model-card').count()!==expected)errors.push({page:'catalog',error:'Text filter count differs'})
 const badges=await page.locator('.mode-text').evaluateAll(elements=>elements.map(e=>({bg:getComputedStyle(e).backgroundColor,fg:getComputedStyle(e).color})))
 if(badges.some(b=>b.bg==='rgba(0, 0, 0, 0)' || b.fg===b.bg))errors.push({page:'catalog',error:'Text badge unreadable'})
 await page.getByRole('searchbox',{name:'Search models'}).fill('zz-no-such-model')
+await cardCount(0)
 if(await page.locator('.model-card').count()!==0)errors.push({page:'catalog',error:'Search filter does not narrow results'})
 await page.getByRole('button',{name:'Clear filters',exact:true}).click()
+await cardCount(models.length)
 if(await page.locator('.model-card').count()!==models.length)errors.push({page:'catalog',error:'Reset failed'})
 for(const theme of ['light','dark']) {
  await page.evaluate(t=>document.documentElement.classList.toggle('dark',t==='dark'),theme)
@@ -58,6 +70,7 @@ for(const width of [390,768]) {
 await page.setViewportSize({width,height:844})
 for(const route of ['index.html','guide/mcp-quickstart.html','reference/providers/anthropic.html','reference/catalog.html']){
  await page.goto(new URL(route,origin).href,{waitUntil:'domcontentloaded'})
+ await ready()
  if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))errors.push({page:route,error:`Page overflow at ${width}px`})
 }
 }

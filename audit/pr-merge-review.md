@@ -41,3 +41,10 @@ Local branches `docs/validated-documentation`, `docs/upload-widget`, `intro-medi
 The rebuilt release passes count, documentation, style, and regression checks: 91 Markdown pages, 273 JSON blocks, 114 shell blocks, and 161 CLI examples. The earlier 87-page browser sweep remains evidence for the full rendering/navigation pass; this follow-up only changes local-file prose and one validated CLI example.
 
 Pushes to both the fork and upstream failed with invalid GitHub credentials. Therefore remote branch conflicts, remote CI, and final merge readiness remain unverified after these local corrections. No remote branch or release was changed. The existing GitHub Desktop stashes remain preserved; the older stash's Replit additions are already present in the release documentation.
+
+
+## Remote verification after the first push
+
+GitHub received `a95cea3` on PR #13 and reported it mergeable without conflicts. Its first CI run passed installation, regression tests, and build, but failed the rendered-page step. The detailed log requires authentication, so the exact failing assertion remains unconfirmed. PR #5 and the older upstream branch heads had not been pushed; PR #5 still reported conflicts.
+
+The browser checker now waits for Vue hydration, fonts, and reactive catalog results before asserting. The revised checker passes locally across 87 pages and 9,919 links with zero errors. CI actions were updated to current official major versions, the test Node runtime to 24, and browser reports are uploaded even on failure. These changes need to be pushed and rerun on GitHub before claiming CI success. CLI and Git push authentication still failed during this verification.
