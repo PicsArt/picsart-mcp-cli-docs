@@ -8,6 +8,10 @@ Hosted generation tools cannot read an arbitrary path on your computer. Their mo
 
 Some host integrations accept a local path in a `file` attachment parameter and upload the file before calling the server. This is a host capability, not permission for a remote model to read your filesystem.
 
+## Upload through the host
+
+If the host exposes attachments or a file-upload control, use that mechanism. For example, the connected Picsart integration can expose `picsart_media_upload` or a `file` input on `picsart_drive`. For hosts that render MCP Apps, ask the agent to open the uploader and choose your file there. If the URL is not visible to the agent after upload, send a follow-up message before uploading again. Follow the tool schema in that host. A literal `"<attachment>"` string is not an upload handle.
+
 ## Upload through the CLI
 
 After `gen-ai login`, upload an existing local file:
@@ -18,6 +22,12 @@ gen-ai upload-to-drive ./photo.jpg
 
 Expect JSON containing `drive_url`. Use that URL as the next tool's input. This command supports images, video, and audio; the resource type is inferred from the file.
 
+The regular upload command also accepts `--json` for machine-readable output. Inspect the returned result and any per-file errors before using a URL:
+
+```bash
+gen-ai upload ./photo.jpg --json
+```
+
 For folders or recursive uploads:
 
 ```bash
@@ -26,10 +36,6 @@ gen-ai list --folder "Campaign" --json
 ```
 
 Inspect the returned listing to identify the file; names need not be unique.
-
-## Upload through the host
-
-If the host exposes attachments or a file-upload control, use that mechanism. For example, the connected Picsart integration can expose `picsart_media_upload` or a `file` input on `picsart_drive`. Follow the tool schema in that host. A literal `"<attachment>"` string is not an upload handle.
 
 ## Inline data
 
