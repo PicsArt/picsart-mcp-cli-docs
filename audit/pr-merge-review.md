@@ -31,3 +31,13 @@ Local checks: root and deployment-subpath builds; documentation regression tests
 GitHub CLI reads returned HTTP 401, and pushing through the configured Git credential helper failed with invalid credentials. Fixes are committed locally; remote PRs cannot be declared unblocked until the fixes are pushed, GitHub recomputes mergeability, and the new CI run completes. Refresh authentication with `gh auth login -h github.com` locally; never put a token in chat.
 
 PR #13 contains PR #5's corrected history. Merge #5 before #13 if keeping both PRs; no merge was performed during this review. GitHub Desktop's automatic stash was preserved, and work continued in the existing audit worktree to avoid branch-switch interference.
+
+## Full branch reconciliation
+
+The follow-up branch inventory found `docs/upload-widget` and `intro-media-tools` still unmerged in upstream, plus the dependency PR. Their histories are now incorporated into `docs/validated-documentation` through merge commits `60e8d01`, `0009074`, and `7823f53`. Current audited tool names and behavior take precedence over superseded examples. The local-file guide now leads with host uploads and also documents `gen-ai upload --json` without assuming a response shape.
+
+Local branches `docs/validated-documentation`, `docs/upload-widget`, `intro-media-tools`, and `pr-13-merge-ready` contain the combined release work. `docs/security-formats-errors-improvements` and `pr-5-merge-ready` contain the narrower corrected PR #5. Local main now matches upstream main. All seven local branches merge cleanly with upstream main, and all 21 local branch pairs merge without conflicts. Both already-merged upstream review branches are ancestors of main; deployment branch `gh-pages` is generated output and is not a source release branch.
+
+The rebuilt release passes count, documentation, style, and regression checks: 91 Markdown pages, 273 JSON blocks, 114 shell blocks, and 161 CLI examples. The earlier 87-page browser sweep remains evidence for the full rendering/navigation pass; this follow-up only changes local-file prose and one validated CLI example.
+
+Pushes to both the fork and upstream failed with invalid GitHub credentials. Therefore remote branch conflicts, remote CI, and final merge readiness remain unverified after these local corrections. No remote branch or release was changed. The existing GitHub Desktop stashes remain preserved; the older stash's Replit additions are already present in the release documentation.
