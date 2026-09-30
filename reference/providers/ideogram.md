@@ -122,7 +122,7 @@ Input type: `i2i`
 ## Pricing
 
 ```bash
-gen-ai pricing ideogram-v3 -n 4 --rendering-speed QUALITY
+gen-ai pricing ideogram-v3
 ```
 
 Cost scales with **count** (number of images) and **rendering speed** (`FLASH`/`TURBO` are cheaper, `QUALITY` is the most expensive).

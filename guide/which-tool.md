@@ -40,6 +40,24 @@ Typical workflow: validate the prompt in Playground, connect the agent, then gen
 
 ---
 
+## I need to build a video, deck, or captioned clip from media I already have
+
+**Use: Picsart Media Studio**
+
+A generative model is the wrong tool for this. If you need clips joined, captions burnt in, a title
+card over your own footage, a slideshow from a template, or a video reframed for a phone screen, you
+want something that assembles material you already have.
+
+[Media Studio](/guide/media-studio/) is a separate MCP connector: you ask Claude for what you want, it
+builds the piece from your files and its templates, and renders the result. It works alongside the
+generative tools rather than replacing them — make an asset with the
+[Picsart MCP server](/guide/mcp-quickstart), then build it into something here.
+
+- [Media Studio overview](/guide/media-studio/)
+- [What you can do](/guide/media-studio/tools)
+
+---
+
 ## I need to run generations on a schedule or as part of a script
 
 **Use: CLI**
@@ -50,16 +68,16 @@ Examples:
 
 ```bash
 # Scheduled catalog refresh via cron
-0 6 * * 1 gen-ai batch run /home/user/weekly-catalog.yaml
+0 6 * * 1 gen-ai batch run /home/user/weekly-catalog.json
 
 # Generate assets as a CI step
-gen-ai generate -m flux-2-pro -p "product hero" --script | jq '.results[0].url'
+gen-ai generate -m flux-2-pro -p "product hero" -s --json | jq -r '.url'
 
 # Process a folder of images
-gen-ai generate -m wan-2.7-i2v -p "subtle animation" --input-dir ./stills/
+gen-ai generate -m wan-2.7-i2v -p "subtle animation" --input-dir ./stills/ --batch
 ```
 
-You can also quote costs before a batch run, resume failed jobs, and write results directly to Picsart Drive.
+You can also quote costs before a batch run, cap a single generation's cost with `--max-cost`, and resume failed batch jobs. Single generations are saved to Picsart Drive automatically; batch runs write to a local folder.
 
 - [CLI Quickstart](/guide/cli-quickstart)
 - [Batch and Automation](/guide/batch)
@@ -93,7 +111,7 @@ If you are writing code to power a product — a web app, a mobile app, a backen
 
 ### Node.js or TypeScript
 
-Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 174 models. Results can auto-save to Picsart Drive.
+Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 201 models. Results can auto-save to Picsart Drive.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -128,6 +146,10 @@ Start at [picsart.com/ai-playground](https://picsart.com/ai-playground/). No acc
 | Iterating on a prompt until it's right | AI Playground |
 | Generating inside Claude or ChatGPT | Skills or MCP |
 | Generating inside Cursor or Windsurf | Skills or MCP |
+| Joining clips or building a slideshow | Media Studio |
+| Burning captions or titles over your own footage | Media Studio |
+| Reframing a video to vertical or square | Media Studio |
+| Transcribing speech or describing a video's content | Media Studio |
 | Batch-generating a product catalog | CLI |
 | Scheduling weekly or daily asset creation | CLI |
 | Building a CI/CD pipeline with media generation | CLI |

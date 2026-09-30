@@ -1,10 +1,10 @@
 ---
-description: "Picsart AI models on Picsart — 8 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
+description: "Picsart AI models on Picsart — 9 image model(s) including Enhance, Flux 2 Klein 4B, Picsart Change Background. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Picsart
 
-**Mode:** image · **Models:** 8
+**Modes:** image · video · **Models:** 9
 
 **Official API docs:** [docs.picsart.io](https://docs.picsart.io)
 
@@ -19,9 +19,10 @@ Picsart's own image models run on the Picsart Compute Platform (PCP). They cover
 | `picsart-enhance` | Enhance | `i2i` |
 | `picsart-qwen-image-edit` | Picsart Image Edit | `i2i` |
 | `picsart-qwen-makeup` | Picsart Makeup | `i2i` |
-| `picsart-qwen-image-edit-angle` | Picsart Angle Change | `i2i` |
 | `picsart-flux-2-klein` | Flux 2 Klein 4B | `t2i` |
 | `picsart-sana-sprint-v1` | Picsart SANA-Sprint | `t2i` |
+| `picsart-flow` | Picsart Effects | `i2i` |
+| `picsart-flow-video` | Picsart Effects Video | `i2v` |
 
 ## CLI
 
@@ -32,7 +33,7 @@ gen-ai generate -m picsart-sana-sprint-v1 \
   --ar 16:9 -s
 
 # text-to-image with Flux 2 Klein
-gen-ai generate -m picsart-flux-klein -p "isometric cozy reading nook, soft pastel palette"
+gen-ai generate -m picsart-flux-2-klein -p "isometric cozy reading nook, soft pastel palette"
 
 # task-shaped image editing
 gen-ai remove-bg -i ./portrait.jpg
@@ -128,21 +129,6 @@ Input type: `i2i`
 | `prompt` | `-p` | text | **required** |
 | `negativePrompt` | `--neg` | text | free text |
 
-### `picsart-qwen-image-edit-angle` — Picsart Angle Change
-
-[Try `picsart-qwen-image-edit-angle` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-qwen-image-edit-angle)
-
-Input type: `i2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
-| `prompt` | `-p` | text | **required** |
-| `negativePrompt` | `--neg` | text | free text |
-| `numInferenceSteps` | `--num-inference-steps` | range | `1`–`50`, step 1 (default `16`) |
-| `cfgScale` | `--cfg` | range | `1`–`10` (default `4`) |
-| `loraWeights` | `--lora-weights` | object[] | `{lora_angle, lora_angle_lighting}` |
-
 ### `picsart-flux-2-klein` — Flux 2 Klein 4B
 
 [Try `picsart-flux-2-klein` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flux-2-klein)
@@ -165,6 +151,28 @@ Input type: `t2i`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+
+### `picsart-flow` — Picsart Effects
+
+[Try `picsart-flow` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flow)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `templateId` | `--template-id` | catalog | **required** — runtime catalog; run `gen-ai models info picsart-flow --json` for current values |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
+
+### `picsart-flow-video` — Picsart Effects Video
+
+[Try `picsart-flow-video` in Playground ↗](https://picsart.com/ai-playground/?model=picsart-flow-video)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `templateId` | `--template-id` | catalog | **required** — runtime catalog; run `gen-ai models info picsart-flow-video --json` for current values |
+| `imageUrls` | `-i` | file | **required** image (up to 3) |
 
 ## Pricing
 

@@ -31,7 +31,7 @@ gen-ai generate -m runway-gen4.5 \
 gen-ai generate -m runway-gen4.5 -p "slow push in, drifting fog" --image ./start.jpg -d 5
 
 # restyle an existing clip (Aleph, video-to-video)
-gen-ai generate -m runway-gen4-aleph -p "claymation style" --video ./clip.mp4
+gen-ai generate -m runway-aleph2 -p "claymation style" --video ./clip.mp4
 ```
 
 ## MCP
@@ -117,7 +117,7 @@ Input type: `i2v`
 ## Pricing
 
 ```bash
-gen-ai pricing runway-gen4.5 -d 8 --ar 16:9
+gen-ai pricing runway-gen4.5 --duration 8
 ```
 
 Cost scales with **duration** (5 / 8 / 10 s). Gen 4.5 outputs at 1080p; aspect ratio does not change the price.

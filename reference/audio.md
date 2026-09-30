@@ -1,10 +1,10 @@
 ---
-description: "22 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
+description: "24 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
 ---
 
 # Audio generation
 
-**22 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
+**24 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
 
 ## Quick start
 
@@ -22,7 +22,7 @@ gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
 | Type | Meaning | Models |
 |---|---|---|
 | `tts` | text → speech | Eleven v3, Multilingual v2, Voice Design v3, Gemini 2.5 Flash/Pro TTS, Grok TTS |
-| `music` | music generation | MiniMax Music v2, Lyria 3 Clip/Pro, Kling T2A |
+| `music` | music generation | MiniMax Music v2, Lyria 3.5, Lyria 3 Clip/Pro, Kling T2A |
 | `sfx` | sound effects | ElevenLabs SFX v2 |
 | `sts` | speech → speech / transform | Eleven STS v2, Multilingual STS, Audio Isolation, Dubbing |
 
@@ -30,10 +30,10 @@ gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
 
 | Provider | Models | Highlights |
 |---|---|---|
-| [ElevenLabs](/reference/providers/elevenlabs) | 10 — v3, Multilingual v2, SFX, STS, Dubbing, Voice Design, Audio Isolation, Voice Previews | The most complete voice suite |
-| [Google](/reference/providers/google) | Gemini 2.5 Flash/Pro TTS, Lyria 3 Clip/Pro | High-quality TTS + music |
+| [ElevenLabs](/reference/providers/elevenlabs) | 11 — v3, Multilingual v2, SFX, STS, Dubbing, Voice Design, Audio Isolation, Voice Previews | The most complete voice suite |
+| [Google](/reference/providers/google) | Gemini 2.5 Flash/Pro TTS, Lyria 3.5, Lyria 3 Clip/Pro | High-quality TTS + music |
 | [Kling](/reference/providers/kling) | Kling T2A, V2A | Text-to-audio & video-to-audio scoring |
-| [MiniMax](/reference/providers/minimax) | MiniMax Music v2 | Full original tracks from a prompt |
+| [MiniMax](/reference/providers/minimax) | MiniMax Music v3, v2 | Full original tracks from a prompt |
 | [Grok](/reference/providers/grok) | Grok TTS | Fast natural speech |
 | [Seed Audio](/reference/providers/seedaudio) | Seed Audio, Seed Audio Multilingual | 20 languages, named voices, and voice cloning |
 

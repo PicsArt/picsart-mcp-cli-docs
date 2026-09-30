@@ -1,28 +1,27 @@
 ---
-description: "Qwen (Alibaba) AI models on Picsart — 3 image model(s) including Qwen 2, Qwen 2 Pro, Qwen Edit Plus. CLI + MCP examples, parameters, and official docs."
+description: "Qwen (Alibaba) AI models on Picsart — 2 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Qwen
 
-**Mode:** image · **Models:** 3
+**Mode:** image · **Models:** 2
 
 **Vendor:** [Qwen Cloud (Alibaba DashScope)](https://docs.qwencloud.com) · **Official API docs:** [Qwen API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-reference)
 
-Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-following. The base **Qwen 2** generates up to 1K with optional image input; **Qwen 2 Pro** adds 2K resolutions, a negative prompt, and prompt enhancement; **Qwen Edit Plus** is a dedicated image-edit model that composes from up to 3 source images.
+Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-following. The base **Qwen 2** generates up to 1K with optional image input; **Qwen 2 Pro** adds 2K resolutions, a negative prompt, prompt enhancement, and reference-guided editing from up to 3 source images.
 
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
-| `qwen-image-2` | Qwen 2 | `t2i` |
 | `qwen-image-2-pro` | Qwen 2 Pro | `t2i` |
-| `qwen-image-edit-plus` | Qwen Edit Plus | `i2i` |
+| `qwen-image-3.0-pro` | Qwen 3.0 Pro | `t2i` |
 
 ## CLI
 
 ```bash
 # text-to-image
-gen-ai generate -m qwen-image-2 \
+gen-ai generate -m qwen-image-3.0-pro \
   -p "a neon ramen shop sign at night, bold typography, rain reflections" -n 4
 
 # 2K with a negative prompt
@@ -31,7 +30,7 @@ gen-ai generate -m qwen-image-2-pro \
   --neg "clutter, watermark" -r 2048x2048
 
 # multi-image edit: compose from up to 3 sources
-gen-ai generate -m qwen-image-edit-plus \
+gen-ai generate -m qwen-image-2-pro \
   -p "place the product on the marble table, soft daylight" \
   -i ./product.png -i ./table.jpg
 ```
@@ -41,7 +40,7 @@ gen-ai generate -m qwen-image-edit-plus \
 ```json
 { "name": "picsart_generate",
   "arguments": {
-    "model": "qwen-image-2",
+    "model": "qwen-image-3.0-pro",
     "prompt": "a neon ramen shop sign at night, bold typography, rain reflections",
     "count": 4
   } }
@@ -61,18 +60,6 @@ gen-ai generate -m qwen-image-edit-plus \
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
 
-### `qwen-image-2` — Qwen 2
-
-[Try `qwen-image-2` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-
 ### `qwen-image-2-pro` — Qwen 2 Pro
 
 [Try `qwen-image-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2-pro)
@@ -88,23 +75,27 @@ Input type: `t2i`
 | `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
 | `imageUrls` | `-i` | file | image (up to 3) |
 
-### `qwen-image-edit-plus` — Qwen Edit Plus
+### `qwen-image-3.0-pro` — Qwen 3.0 Pro
 
-[Try `qwen-image-edit-plus` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-edit-plus)
+[Try `qwen-image-3.0-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-3.0-pro)
 
-Input type: `i2i`
+Input type: `t2i`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | **required** image (up to 3) |
-
-> **Notes:** `qwen-image-edit-plus` requires both `prompt` and `imageUrls` (up to 3 source images).
+| `prompt` | `-p` | text | **required** (≤800 chars) |
+| `negativePrompt` | `--neg` | text | free text |
+| `resolution` | `-r` | enum | `2048x2048` · `2688x1536` · `1536x2688` · `2368x1728` · `1728x2368` (default `2048x2048`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `imageUrls` | `-i` | file | image (up to 3) |
+| `promptExtendMode` | `--prompt-extend-mode` | enum | `direct` · `agent` (default `direct`) |
+| `enableThinking` | `--enable-thinking` | boolean | `true` · `false` (default `true`) |
 
 ## Pricing
 
 ```bash
-gen-ai pricing qwen-image-2 -n 4
+gen-ai pricing qwen-image-3.0-pro
 ```
 
 Cost scales with the number of images (**count**); on **Qwen 2 Pro** the chosen **resolution** is the other driver.

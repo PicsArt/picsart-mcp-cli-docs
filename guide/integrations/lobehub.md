@@ -1,75 +1,80 @@
 ---
-description: Connect Picsart's MCP server to LobeChat for image generation, video creation, and AI media tools inside your LobeHub workspace.
+description: Connect Picsart's hosted MCP server to LobeHub (formerly LobeChat) as a custom MCP skill with OAuth sign-in for image generation, video creation, and AI media tools.
 ---
 
-# LobeChat
+# LobeHub
 
-LobeChat is an open-source AI chat interface with a built-in MCP marketplace ([lobehub.com](https://lobehub.com)). It is available as a cloud service at [chat.lobehub.com](https://chat.lobehub.com) and as a self-hosted deployment. Picsart connects via a remote HTTP URL.
+LobeHub (formerly LobeChat) is an open-source AI chat interface with a built-in MCP marketplace ([lobehub.com](https://lobehub.com)). It is available as a cloud service and as a self-hosted deployment. Picsart connects as a remote Streamable HTTP server, and you sign in with your Picsart account. There is nothing to install.
 
 ## Prerequisites
 
-- A LobeChat account (cloud) or a running self-hosted LobeChat instance.
-- A Picsart API key. Get one at [picsart.com/ai-playground/](https://picsart.com/ai-playground/) under **API Settings**.
+- A LobeHub account (cloud) or a running self-hosted LobeHub instance, on a recent version whose custom MCP form offers **OAuth** as an auth type.
+- A Picsart account. You sign in when you connect. Generations spend credits from that account.
+- For self-hosted instances: outbound HTTPS access to `api.picsart.com` on port 443.
 
 ## Setup
 
-There are two ways to add the Picsart MCP server: via the marketplace or manually.
-
-### Option A: Marketplace one-click install
-
-1. Go to [lobehub.com/mcp](https://lobehub.com/mcp) and search for "Picsart".
-2. Click **Add to LobeChat** on the Picsart Gen AI listing.
-3. In the auth dialog, enter your Picsart API key.
-4. Confirm. The tools are immediately available in LobeChat.
-
-If the listing is not yet in the marketplace, use the manual setup below.
-
-### Option B: Manual setup
-
-1. Open LobeChat at [chat.lobehub.com](https://chat.lobehub.com) or your self-hosted URL.
-2. Go to **Settings**, then **MCP Plugins**.
-3. Click **Add MCP Server** and enter the following:
+1. Open LobeHub (cloud or your self-hosted URL).
+2. Go to **Settings**, then **Skills**.
+3. Click **Add** and choose **Add Custom MCP Skill**.
+4. Enter the following:
 
 | Field | Value |
 |---|---|
-| Name | Picsart Gen AI |
-| URL | `https://mcp.picsart.io/mcp` |
-| Auth | Bearer token: your Picsart API key |
+| MCP type | Streamable HTTP |
+| MCP name | `picsart-gen-ai` |
+| Streamable HTTP Endpoint URL | `https://api.picsart.com/gen-ai/mcp` |
+| Auth type | OAuth |
+| OAuth Client ID / Client Secret | Leave empty |
 
-4. Click **Save**. The tool list loads automatically.
-5. In chat, use the `@` mention or select Picsart tools from the tool picker.
+Leaving the client fields empty lets LobeHub register itself with Picsart automatically (dynamic client registration).
+
+5. Click **Authorize & Connect**. A Picsart sign-in window opens. Sign in and approve access.
+6. Save. The tool list loads.
+7. In chat, enable Picsart from the tool picker, then ask: "List the available Picsart video models."
+
+If your LobeHub version shows only **No auth** and **API Key** as auth types, it cannot connect to the Picsart MCP server. The server uses OAuth sign-in and does not accept API keys. Update LobeHub to a version with the OAuth option.
 
 For the full MCP plugin reference, see the [LobeHub MCP documentation](https://lobehub.com/docs/usage/features/mcp).
 
 ## Use it
 
-In any LobeChat conversation with Picsart tools enabled:
+In any LobeHub conversation with Picsart tools enabled:
 
-- `@Picsart generate a 16:9 cinematic still of a futuristic city`
-- `@Picsart create a 5-second video from this image with Kling V3`
-- `@Picsart check credit balance`
+- "Generate a 16:9 cinematic still of a futuristic city."
+- "Create a 5-second video from this image with Kling V3."
+- "What's my Picsart credit balance?"
 
 ## Troubleshooting
 
-**One-click install is not available**
-The Picsart listing may not yet be published in the marketplace. Use the manual setup in Option B above.
+**Sign-in window does not open**
+Allow pop-ups for your LobeHub address and click **Authorize & Connect** again.
 
 **Tools not appearing after adding the server**
-Reload the LobeChat page. The tool manifest is fetched on page load, not immediately on save.
+Reload the LobeHub page. If the list is still empty, open the skill's settings and run **Authorize & Connect** again.
 
-**Auth rejected**
-Confirm the Bearer token value is your API key only, with no leading or trailing spaces and no extra characters.
+**"Unauthorized" or tools stop working after a while**
+The Picsart sign-in has expired. Open the Picsart skill in **Settings**, then **Skills**, and authorize again.
+
+**"Insufficient credits"**
+Ask "What's my Picsart credit balance?" (the `picsart_credits` tool). Top up at [picsart.com](https://picsart.com).
+
+**Connection fails on a self-hosted instance**
+Your LobeHub server must reach `api.picsart.com` on port 443. Check firewall and proxy rules for outbound HTTPS.
 
 ## FAQ
 
-**Does this work on both LobeChat Cloud and self-hosted instances?**
-Yes. Both support MCP plugins. Self-hosted instances need outbound internet access to `mcp.picsart.io` on port 443.
+**Does this work on both LobeHub Cloud and self-hosted instances?**
+Both support Streamable HTTP MCP servers. The OAuth option is available on recent versions. Self-hosted instances need outbound internet access to `api.picsart.com` on port 443.
 
-**Is LobeChat free?**
-LobeChat is open-source and free to self-host. The cloud version at [chat.lobehub.com](https://chat.lobehub.com) is free with rate limits; paid tiers remove those limits.
+**Is there a Picsart listing in the LobeHub marketplace?**
+Use the custom MCP setup above. It connects to the same hosted server.
 
-**Can I use Picsart tools alongside other MCP servers in LobeChat?**
-Yes. LobeChat supports multiple simultaneous MCP servers. Each server appears as a separate tool group, and you can use tools from different servers in the same conversation.
+**Is LobeHub free?**
+LobeHub is open-source and free to self-host. The cloud version is free with rate limits; paid tiers remove those limits.
+
+**Can I use Picsart tools alongside other MCP servers in LobeHub?**
+Yes. LobeHub supports multiple simultaneous MCP servers. Each server appears as a separate tool group, and you can use tools from different servers in the same conversation.
 
 ## Start creating
 

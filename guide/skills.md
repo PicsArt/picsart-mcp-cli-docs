@@ -1,5 +1,5 @@
 ---
-description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 174 AI models."
+description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 201 AI models."
 ---
 
 # Skills
@@ -10,7 +10,7 @@ description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and Chat
 
 ## How skills relate to the CLI and MCP
 
-A skill is the **knowledge layer** — it tells the agent what Picsart can do and how to call it. The [gen-ai CLI](/guide/cli-quickstart) is the **execution engine** that runs the actual generation. Skills drive the CLI under the hood, and the whole stack speaks [MCP](/guide/mcp-quickstart) so it works natively inside agents.
+A skill is the **knowledge layer**: it tells the agent what Picsart can do and how to call it. The [gen-ai CLI](/guide/cli-quickstart) is the **execution engine** that runs the actual generation. Skills drive the CLI under the hood, so the CLI must be installed for a skill to work. The [MCP server](/guide/mcp-quickstart) is a separate, hosted option: it needs no CLI, and your agent signs in to it directly.
 
 Setup order:
 
@@ -20,7 +20,7 @@ Setup order:
 
 ## The `gen-ai-use` skill
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all **174 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
+The flagship skill, **`gen-ai-use`**, gives an agent access to all **201 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
 
 Once added, you drive it in plain English:
 
@@ -52,7 +52,7 @@ Alternatively, install via npx:
 npx skills add PicsArt/gen-ai-skills
 ```
 
-Or download the `.zip` manually from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and place it in `~/.claude/skills/`.
+Or download the `.zip` manually from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and place it in `~/.claude/skills/` — or let the CLI copy its bundled skills there with `gen-ai install-skills` (check with `gen-ai check-skills`).
 
 After installing, invoke the skill with `/gen-ai-use` or just describe a task — Claude Code picks it up automatically.
 
@@ -114,4 +114,4 @@ No. Skills call the Picsart platform for every generation. An internet connectio
 
 **Where are the generated files saved?**
 
-By default, files are downloaded to `./output` in the directory the CLI was invoked from. Pass `--save-to-drive` to push results to your Picsart Drive instead. See [Files and Drive](/guide/files-and-drive).
+By default, files are downloaded to `./output` in the directory the CLI was invoked from, and a copy is saved to your Picsart Drive (`gen-ai-cli` folder; pass `--no-save-to-drive` to skip it). See [Files and Drive](/guide/files-and-drive).

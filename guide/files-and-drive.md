@@ -10,12 +10,15 @@ Generated assets — and any files you upload — live in **Picsart Drive**, you
 
 **CLI:**
 
+The CLI saves every generation to Drive by default, in a `gen-ai-cli` folder:
+
 ```bash
-gen-ai generate -m flux-2-pro -p "a poster" --save-to-drive
-gen-ai generate -m flux-2-pro -p "a poster" --drive-folder "Campaign Q3"
+gen-ai generate -m flux-2-pro -p "a poster"                              # saved to Drive/gen-ai-cli
+gen-ai generate -m flux-2-pro -p "a poster" --drive-folder "Campaign Q3"  # a different folder
+gen-ai generate -m flux-2-pro -p "a poster" --no-save-to-drive           # local download only
 ```
 
-When saving, the CLI uses an LLM-generated descriptive filename and (for video) an ffmpeg thumbnail — matching the web app's behavior.
+When saving, the CLI uses an LLM-generated descriptive filename and (for video, when `ffmpeg` is installed) a first-frame thumbnail — matching the web app's behavior.
 
 **MCP:** generation tools write to Drive when the Drive option is enabled for the call.
 
@@ -25,6 +28,8 @@ When saving, the CLI uses an LLM-generated descriptive filename and (for video) 
 gen-ai upload ./photo.jpg                  # single file
 gen-ai upload ./assets/ -r                 # a whole folder, recursively
 gen-ai upload ./photo.jpg -f "Campaign"    # into a named Drive folder
+gen-ai upload ./assets/ -r --dry-run       # list what would be uploaded
+gen-ai upload ./photo.jpg --json           # { ok, files: [{ path, url, driveUid, error }] }
 ```
 
 Over MCP, upload is an **action of the single `picsart_drive` tool** (see below). It takes either
@@ -40,8 +45,8 @@ input image/video.
 
 ::: warning Local files need a URL first
 No MCP tool accepts a filesystem path. See **[Local files → URLs](/guide/local-files)** for the
-three ways to get one — CLI upload, a chat attachment, or (for small images) an inline `data:`
-URI.
+ways to get one: the built-in uploader, a chat attachment, a CLI upload, or (for small images) an
+inline `data:` URI.
 :::
 
 ## The `picsart_drive` tool
@@ -70,9 +75,12 @@ can render. All actions require an authenticated call — Drive content is per-u
 ## Browse & organize from the CLI
 
 ```bash
-gen-ai list --folders          # list Drive folders
-gen-ai list --json             # list files as JSON ({ name, type, url } each)
-gen-ai download <uid>          # download a Drive file
+gen-ai list --folders                          # list Drive folders
+gen-ai list --json                             # list files as JSON ({ name, type, url, … } each)
+gen-ai list -f "Campaign" --type video --json  # one folder, one media type
+gen-ai download                                # interactive file picker
+gen-ai download -f "Campaign" --all -o ./out   # everything in a folder (default ./downloads)
+gen-ai download -f "Campaign" --list --json    # list without downloading
 ```
 
 > Drive commands browse your real root folders — they are not scoped to the AI Playground folder.
@@ -90,34 +98,22 @@ the generation and render services.
 
 ## File formats
 
-**Image**
-
-Input formats: JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum file size: 1 GB.
-
-Output formats: JPEG, PNG, WEBP. HEIC is accepted as input but is not currently available as an output format.
-
-**Video**
-
-Maximum file size: 1 GB. Input containers include MP4, MOV, and WebM. Output is delivered as a URL.
-
-**Audio**
-
-Audio generation returns a URL. Accepted input formats for audio-to-audio operations vary by model. Check the model's parameter schema with `picsart_model_params` or `gen-ai models info <model-id>`.
+Accepted formats and file-size limits vary by model. Check the model schema with `picsart_model_params` or `gen-ai validate -m <model-id> --schema`. Acceptance by the upload command does not guarantee that a generation model accepts the same file.
 
 ## FAQ
 
 **What file types can I upload?**
 
-For images: JPEG, PNG, WEBP, TIFF, BMP, and HEIC are accepted. For video: MP4, MOV, and WebM. The maximum file size for uploads is 1 GB. See the File formats section above for output format details.
+`gen-ai upload` accepts images (`jpg`, `jpeg`, `png`, `webp`, `gif`, `bmp`, `tiff`, `svg`, `heic`, `heif`, `avif`), video (`mp4`, `mov`, `avi`, `mkv`, `webm`, `m4v`, `wmv`), and audio (`mp3`, `wav`, `m4a`, `aac`, `ogg`, `flac`, `wma`); other files are skipped. Filter with `-t image|video|audio`. The upload returns a URL you can immediately use as an input to a generation.
 
 **Are generated files private?**
 
-Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are signed URLs that expire after 24 hours. They do not expose your files publicly. Download or save to Drive within that 24-hour window if long-term access is needed.
+Drive listings are account-scoped, but an asset URL may be usable by anyone who receives it. Download files you need to retain; do not assume a universal 24-hour expiry. See [Security](/guide/security).
 
 **Does saving to Drive cost extra credits?**
 
 See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing details.
 
-**Can I delete files from Drive via the CLI?**
+**Can I delete files from Drive?**
 
-The current CLI and MCP do not expose a delete command. Manage deletion from the [AI Playground web app](https://picsart.com/ai-playground/).
+Over MCP, yes: `picsart_drive` with `action: "delete"` moves items to the trash, or erases them with `permanent: true`. The CLI does not have a delete command; manage deletion there from the [AI Playground web app](https://picsart.com/ai-playground/).

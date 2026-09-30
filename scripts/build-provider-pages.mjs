@@ -43,12 +43,14 @@ for (const file of readdirSync(providersDir).filter((f) => f.endsWith('.md'))) {
   }
 }
 Object.assign(flagMap, {
-  multiPrompt: '`--multi-prompt`',
+  // Multi-field object arrays become one repeatable flag per field (`--<flag>-<field>`).
+  multiPrompt: '`--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration`',
   voiceList: '`--voice-list`',
   elementList: '`--element-list`',
-  omniImageList: '`--omni-image-list`',
-  omniVideoList: '`--omni-video-list`',
+  omniImageList: '`--omni-image-list-image-url` · `--omni-image-list-type`',
+  omniVideoList: '`--omni-video-list-video-url` · `--omni-video-list-refer-type` · `--omni-video-list-keep-original-sound`',
   thinking: '`--thinking`',
+  colorDepth: 'SDK only',
 })
 const OBJECT_VALUE = {
   multiPrompt: 'up to 6 `{index, prompt, duration}`',
@@ -62,8 +64,27 @@ const code = (v) => '`' + v + '`'
 const flagFor = (key) => flagMap[key] ?? '`--' + key.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()) + '`'
 const typeCell = (p) => (p.kind === 'object' ? 'object[]' : p.kind)
 
-function valueCell(p) {
+// `catalog` params are unlike every other kind: their allowed values are not in
+// the SDK catalog at all — they are fetched at runtime from a workflow endpoint
+// (p.source.workflow, e.g. "picsart-flow/v1/catalog/templates"). Any list we
+// inline here is a snapshot that rots silently, which is why the hand-written
+// pages disagree with each other: elevenlabs/google/runway/grok enumerate every
+// id, async shows 5 examples + a discovery command, seedaudio gives a bare
+// count, openai says "dynamic value (no fixed list)".
+//
+// House style: point at the discovery command rather than snapshotting a list,
+// and show the default when there is a real one. Never rots.
+function catalogCell(p, model) {
+  const lead = p.required ? '**required** — runtime catalog' : 'runtime catalog'
+  const discover = `run ${code(`gen-ai models info ${model.id} --json`)} for current values`
+  const fallback = p.default ? ` (default ${code(p.default)})` : ''
+  return `${lead}; ${discover}${fallback}`
+}
+
+function valueCell(p, model) {
   switch (p.kind) {
+    case 'catalog':
+      return catalogCell(p, model)
     case 'text':
       return (p.required ? '**required**' : 'free text') + (p.maxLength ? ` (≤${p.maxLength} chars)` : '')
     case 'enum': {
@@ -81,7 +102,7 @@ function valueCell(p) {
     case 'file':
       return (p.required ? '**required** ' : '') + p.accept + (p.array && p.array.max ? ` (up to ${p.array.max})` : '')
     case 'object':
-      return OBJECT_VALUE[p.key] ?? `\`{${(p.fields ?? []).join(', ')}}\``
+      return OBJECT_VALUE[p.key] ?? `\`{${(Array.isArray(p.fields) ? p.fields : Object.keys(p.fields ?? {})).join(', ')}}\``
     default:
       return ''
   }
@@ -89,7 +110,7 @@ function valueCell(p) {
 
 function genParamsBlock(model) {
   const rows = (model.params ?? [])
-    .map((p) => `| ${code(p.key)} | ${flagFor(p.key)} | ${typeCell(p)} | ${valueCell(p)} |`)
+    .map((p) => `| ${code(p.key)} | ${flagFor(p.key)} | ${typeCell(p)} | ${valueCell(p, model)} |`)
     .join('\n')
   return (
     `### ${code(model.id)} — ${model.name}\n\n` +
@@ -129,8 +150,13 @@ for (const [providerId, provModels] of byProvider) {
   // header line — pages use "**Mode:**" for one mode, "**Modes:**" for several
   const modeLabel = modes.length > 1 ? 'Modes' : 'Mode'
   text = text.replace(/\*\*Modes?:\*\*[^\n]*\*\*Models:\*\*\s*\d+/, `**${modeLabel}:** ${modes.join(' · ')} · **Models:** ${count}`)
-  // frontmatter description count (number only — leave the "including …" names)
-  text = text.replace(/(\d+)(\s+(?:image|video|audio|text|media)\s+model\(s\))/, `${count}$2`)
+  // frontmatter description count (number only — leave the "including …" names).
+  // The mode list may be a single word ("6 video model(s)") or slash-joined for
+  // multi-mode providers ("17 image/video/audio/text model(s)") — match both, or
+  // multi-mode pages silently keep a stale count.
+  const MODE_WORD = '(?:image|video|audio|text|media)'
+  const descRe = new RegExp(`(\\d+)(\\s+${MODE_WORD}(?:/${MODE_WORD})*\\s+model\\(s\\))`)
+  text = text.replace(descRe, `${count}$2`)
 
   // ## Models table — standard 3-col pages only; preserve trailing curated prose
   const tableRe = /## Models\n\n\| id \| Name \| Input type \|\n\|[-| ]+\|\n(?:\|.*\n?)+/
@@ -157,7 +183,10 @@ for (const [providerId, provModels] of byProvider) {
     text = text.replace(paramsRe, `$1${blocks.join('\n\n')}\n$3`)
   }
 
-  writeFileSync(file, text)
+  // Normalise EOF to exactly one newline. The params regex captures trailing
+  // whitespace as $3 and re-emits it after a "\n", so pages whose ## Parameters
+  // is the last section would gain a blank line on every single refresh.
+  writeFileSync(file, text.replace(/\s*$/, '\n'))
   report.push(`✓ ${providerId}: ${count} models (${modes.join('/')})`)
 }
 

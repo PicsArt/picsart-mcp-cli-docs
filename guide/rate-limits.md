@@ -1,44 +1,26 @@
 ---
-description: "HTTP error codes for the Picsart gen-ai platform, with guidance on which errors are retryable and how to handle each."
+description: "Diagnose request errors and avoid duplicate generation submissions."
 ---
 
-# Error codes
+# Errors and retries
 
-This page covers the HTTP error codes you may encounter when calling the Picsart gen-ai platform through the REST API or SDK. For CLI and MCP users, most of these are handled automatically.
+Read the error message and any returned job handle before retrying. A gateway or client timeout can occur after a generation was accepted.
 
-## Error code reference
+| Status | Check |
+|---|---|
+| 400 or 422 | Required inputs, allowed parameter values, and request structure |
+| 401 | The credential or host authorization session |
+| 402 | Credit balance and account limits |
+| 403 | Account permissions and host policy |
+| 404 or 405 | Endpoint, job ID, and HTTP method |
+| 413 | Upload or model-specific size limits |
+| 429 | Rate limit response and any `Retry-After` value |
+| 500, 503, or 504 | Service state and whether the original job was accepted |
 
-| Code | Meaning | What to do |
-|---|---|---|
-| 400 | Bad request | Review required parameters and syntax |
-| 401 | Unauthorized | Verify the API key or OAuth token is present and correct |
-| 402 | Payment required | Credits exhausted or subscription limit reached |
-| 403 | Forbidden | Check API key permissions |
-| 404 | Not found | Verify the endpoint URL |
-| 405 | Method not allowed | Use the correct HTTP verb for this endpoint |
-| 413 | Request entity too large | File exceeds the 1 GB upload limit |
-| 422 | Unprocessable content | Input parameters did not pass validation |
-| 429 | Too many requests | Rate limit exceeded; wait before retrying |
-| 500 | Internal server error | Check [status.picsart.io](https://status.picsart.io) |
-| 503 | Service unavailable | Check [status.picsart.io](https://status.picsart.io) for maintenance notices |
-| 504 | Processing timeout | Use a smaller input or switch to async mode |
+These are general HTTP meanings; the response body gives the product-specific reason. Do not infer billing or a fixed upload limit from a status code alone.
 
-## Retryable vs non-retryable
+## Retry safely
 
-**Retryable:** 429, 500, 503, and 504. For 429, wait before retrying. For 500, 503, and 504, check status.picsart.io first, then retry with exponential backoff.
+Retry read-only status lookups with bounded backoff. For generation submissions, first check an existing job handle or result. Repeating a submission can create another charged job. If a 429 includes `Retry-After`, wait at least that long before retrying.
 
-**Non-retryable:** 400, 401, 402, 403, 404, 405, 413, and 422. These indicate a problem with the request itself. Retrying without fixing the request will produce the same result.
-
-## FAQ
-
-**Does a failed request consume credits?**
-
-Not for 4xx errors caused by a bad request. A 402 means credits were already exhausted before the call was processed.
-
-**What should I do on a 504?**
-
-The generation timed out at the gateway. Try a smaller input file, reduce resolution or duration if the model supports it, or use async mode if available.
-
-**Does the CLI or MCP server handle retries automatically?**
-
-Yes. The CLI and MCP server handle transient errors automatically. These codes are most relevant when calling the REST API or SDK directly.
+The CLI, SDK, and MCP may handle some transient errors, but do not assume every operation retries automatically or is safe to repeat. See [Timeouts and recovery](/guide/generating).

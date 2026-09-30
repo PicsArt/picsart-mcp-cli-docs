@@ -1,10 +1,10 @@
 ---
-description: "Kling AI models on Picsart — 19 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling AI models on Picsart — 13 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Kling
 
-**Modes:** image · video · audio · **Models:** 14
+**Modes:** image · video · audio · **Models:** 13
 
 **Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
 
@@ -24,7 +24,6 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 | `kling-avatar` | Kling Avatar | `i2v` |
 | `kling-3.0-image` | Kling 3.0 Image | `t2i` |
 | `kling-o1-image` | Kling O1 Image | `t2i` |
-| `kling-v2-new-image` | Kling V2 New Image | `t2i` |
 | `kling-video-effects` | Kling Video Effects | `i2v` |
 | `kling-t2a` | Kling T2A | `t2a` |
 | `kling-v2a` | Kling V2A | `v2a` |
@@ -90,7 +89,7 @@ Input type: `t2v`
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) · `intelligence` (AI Auto) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
+| `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
 | `voiceList` | `--voice-list` | object[] | up to 2 `{voice_id}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 | `staticMask` | `--static-mask` | file | image |
@@ -146,9 +145,9 @@ Input type: `t2v`
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) (default `customize`) |
-| `multiPrompt` | `--multi-prompt` | object[] | up to 6 `{index, prompt, duration}` |
-| `omniImageList` | `--omni-image-list` | object[] | up to 10 `{image_url, type}` |
-| `omniVideoList` | `--omni-video-list` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
+| `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
+| `omniImageList` | `--omni-image-list-image-url` · `--omni-image-list-type` | object[] | up to 10 `{image_url, type}` |
+| `omniVideoList` | `--omni-video-list-video-url` · `--omni-video-list-refer-type` · `--omni-video-list-keep-original-sound` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-video-o1` — Kling Video O1
@@ -240,23 +239,6 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 10) |
 
-### `kling-v2-new-image` — Kling V2 New Image
-
-[Try `kling-v2-new-image` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-new-image)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `16:9`) |
-| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` (default `1`) |
-| `negativePrompt` | `--neg` | text | free text |
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `imageReference` | `--image-reference` | enum | `subject` (Subject) · `face` (Face) (default `subject`) |
-| `imageWeight` | `--weight` | integer | `0`–`100`, step 5, default `50` |
-| `humanFidelity` | `--fidelity` | number | `0`–`1`, step 0.05, default `0.45` |
-
 ### `kling-video-effects` — Kling Video Effects
 
 [Try `kling-video-effects` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-effects)
@@ -292,7 +274,7 @@ Input type: `v2a`
 ## Pricing
 
 ```bash
-gen-ai pricing kling-v3 -d 5 --rendering-speed pro
+gen-ai pricing kling-v3 --duration 5
 ```
 
 Cost scales with **duration**, **rendering speed / resolution** (`std` 720p · `pro` 1080p · `4k`), and **audio**.

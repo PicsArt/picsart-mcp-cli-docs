@@ -1,117 +1,24 @@
 ---
-description: "Pika AI models on Picsart — 3 video model(s) including Pika, Pika Frames, Pika Scenes. CLI + MCP examples, parameters, and official docs."
+description: "Pika models have been retired from the Picsart catalog and are no longer available via the gen-ai CLI or MCP server."
+title: Pika (retired)
 ---
 
 # Pika
 
-**Mode:** video · **Models:** 3
+::: warning RETIRED
+Pika models were removed from the Picsart catalog and are **no longer available**
+via the [`gen-ai` CLI](/guide/cli-quickstart) or the [MCP server](/guide/mcp-quickstart).
+Requests for `pika-2.2`, `pika-2.2-scenes` and `pika-2.2-frames` will fail with an
+unknown-model error.
+:::
 
-**Vendor:** [Pika](https://pika.art/api) · **Official API docs:** [Pika API (via Fal AI)](https://pika.art/api)
+This page is kept so existing links resolve. For the capabilities Pika covered:
 
-Pika 2.2 is a video model offered through Fal AI. It covers text-to-video and image-to-video (first-frame animation) under one `pika-2.2` model, plus two specialized variants: **Pika Scenes** for multi-image scene composition and **Pika Frames** for keyframe-transition morphs. Resolutions go up to 1080p with 5- or 10-second clips.
+| You used Pika for | Use instead |
+|---|---|
+| Text-to-video and first-frame animation | [Seedance 2.5](/reference/providers/seedance), [Veo 3.1](/reference/providers/google), [Kling V3](/reference/providers/kling) |
+| Multi-image scene composition (**Pika Scenes**) | [Seedance 2.5](/reference/providers/seedance) — multi-reference input; [Wan 2.7 R2V](/reference/providers/wan) |
+| Keyframe-transition morphs (**Pika Frames**) | [Seedance 2.5](/reference/providers/seedance) — `startFrame` / `endFrame`; [Kling](/reference/providers/kling) |
 
-## Models
-
-| id | Name | Input type |
-|---|---|---|
-| `pika-2.2` | Pika | `t2v` |
-| `pika-2.2-scenes` | Pika Scenes | `i2v` |
-| `pika-2.2-frames` | Pika Frames | `i2v` |
-
-## CLI
-
-```bash
-# text-to-video
-gen-ai generate -m pika-2.2 \
-  -p "a large elegant white poodle on a yacht, golden hour" \
-  --ar 16:9 -r 720p -d 5
-
-# image-to-video: animate a still as the first frame (aspect derived from image)
-gen-ai generate -m pika-2.2 -p "gentle camera push-in, leaves drifting" -i ./still.jpg
-
-# Pika Scenes: compose multiple ingredient images into one scene
-gen-ai generate -m pika-2.2-scenes -p "the cat and the dog playing in a sunny garden" \
-  -i ./cat.jpg --image ./dog.jpg
-
-# Pika Frames: morph between a start and end keyframe
-gen-ai generate -m pika-2.2-frames -p "smooth transition" -i ./start.jpg --image ./end.jpg
-```
-
-## MCP
-
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "pika-2.2",
-    "prompt": "a large elegant white poodle on a yacht",
-    "aspectRatio": "16:9",
-    "resolution": "720p",
-    "duration": 5
-  } }
-```
-
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "pika-2.2-scenes",
-    "prompt": "the cat and the dog playing in a sunny garden",
-    "imageUrls": ["https://example.com/cat.jpg", "https://example.com/dog.jpg"],
-    "resolution": "720p",
-    "duration": 5
-  } }
-```
-
-## Parameters
-
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
-
-### `pika-2.2` — Pika
-
-[Try `pika-2.2` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:5` · `5:4` · `3:2` · `2:3` (default `16:9`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-
-### `pika-2.2-scenes` — Pika Scenes
-
-[Try `pika-2.2-scenes` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2-scenes)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:5` · `5:4` · `3:2` · `2:3` (default `16:9`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `imageUrls` | `-i` | file | **required** image (up to 4) |
-
-### `pika-2.2-frames` — Pika Frames
-
-[Try `pika-2.2-frames` in Playground ↗](https://picsart.com/ai-playground/?model=pika-2.2-frames)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `imageUrls` | `-i` | file | **required** image (up to 2) |
-
-> **Notes:** With an image input, `pika-2.2` runs image-to-video and derives aspect from the image. `pika-2.2-scenes` takes ingredient images; `pika-2.2-frames` morphs between keyframes.
-
-## Pricing
-
-```bash
-gen-ai pricing pika-2.2 -d 5 -r 720p
-```
-
-Cost scales with **duration** and **resolution**.
+Browse everything currently available in the **[Model Catalog →](/reference/catalog)**
+or the **[video model reference →](/reference/video)**.

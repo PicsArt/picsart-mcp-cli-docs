@@ -4,7 +4,7 @@ description: "Pay-per-generation credit pricing for Picsart's AI models — quot
 
 # Pricing & Credits
 
-AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 174 models.
+AI Playground uses **pay-per-generation credits** — no per-provider subscriptions, no API keys to manage. Every call shows its credit cost before you commit, and one balance covers all 201 models.
 
 ## Check your balance
 
@@ -18,13 +18,15 @@ gen-ai credits
 
 ## Quote a cost (dry run)
 
-Always free — no model is invoked and nothing is charged.
+Always free — no model is invoked and nothing is charged. `gen-ai pricing` needs a signed-in session, because prices are looked up for your account.
 
 ```bash
-gen-ai pricing seedance-2.0 -d 5 -r 1080p     # cost for a specific config
-gen-ai pricing veo-3.1 -d 8                    # 8-second Veo clip
-gen-ai pricing --mode video --json             # all video model pricing
+gen-ai pricing seedance-2.0 --duration 5 --resolution 1080p   # cost for a specific config
+gen-ai pricing veo-3.1 --duration 8 --audio                   # 8-second Veo clip with audio
+gen-ai pricing --mode video --json                            # all video model pricing
 ```
+
+`gen-ai pricing` narrows by `--duration`, `--resolution`, and `--[no-]audio`; other parameters are not part of the CLI quote.
 
 ```json
 { "name": "picsart_preflight",
@@ -51,9 +53,9 @@ Because pricing is resolved per-model and per-params, the only reliable number i
 Quote the same prompt across candidates to find the best value:
 
 ```bash
-gen-ai pricing sora-2 -d 8
-gen-ai pricing veo-3.1 -d 8
-gen-ai pricing seedance-2.0 -d 8
+gen-ai pricing seedance-2.5 --duration 8
+gen-ai pricing veo-3.1 --duration 8
+gen-ai pricing seedance-2.0 --duration 8
 ```
 
 ## FAQ
@@ -68,12 +70,12 @@ A few models do not expose per-call pricing. For those, `picsart_preflight` retu
 
 **Are there per-provider contracts or subscriptions?**
 
-No. One Picsart account covers all 32 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
+No. One Picsart account covers all 31 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
 
 **What happens if I run out of credits mid-batch?**
 
-Completed generations in the same batch are not reversed. Use `gen-ai batch resume <run-id>` to continue a batch run after topping up.
+Completed generations in the same batch are not reversed. Use `gen-ai batch resume <output-dir>` (e.g. `./batch-output`) to re-run the failed jobs after topping up.
 
 **Can I set a spending limit per run?**
 
-Not directly in the CLI today. To guard against unexpected cost, run `picsart_preflight` on representative items before starting a large batch, and estimate the total from there.
+Per generation, yes: `gen-ai generate … --max-cost <credits>` aborts before submitting if the estimated cost is higher (the same flag works on the other generation commands such as `image` and `video`). There is no total cap for a batch run — quote representative items with `gen-ai pricing` or `picsart_preflight` first and estimate the total from there.

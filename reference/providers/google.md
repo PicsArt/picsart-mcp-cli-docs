@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 18 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Imagen 4.0, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 20 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 18
+**Modes:** image · video · audio · text · **Models:** 20
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -17,23 +17,23 @@ Google contributes across all four modes: the **Veo** video family, the **Nano B
 | `veo-3.1` | Veo 3.1 | video | `t2v` |
 | `veo-3.1-fast` | Veo 3.1 Fast | video | `t2v` |
 | `veo-3.1-lite` | Veo 3.1 Lite | video | `t2v` |
-| `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
-| `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
 | `gemini-3.1-flash-image` | Nano Banana 2 | image | `t2i` |
 | `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | image | `t2i` |
+| `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
 | `gemini-2.5-flash-image` | Nano Banana | image | `t2i` |
-| `imagen-4.0` | Imagen 4.0 | image | `t2i` |
-| `imagen-4.0-ultra` | Imagen 4.0 Ultra | image | `t2i` |
-| `imagen-4.0-fast` | Imagen 4.0 Fast | image | `t2i` |
 | `gemini-2.5-flash-tts` | Gemini 2.5 Flash TTS | audio | `tts` |
 | `gemini-2.5-pro-tts` | Gemini 2.5 Pro TTS | audio | `tts` |
+| `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
+| `gemini-omni-1.1-flash-preview` | Gemini Omni 1.1 Flash | video | `t2v` |
 | `lyria-3-clip` | Lyria 3 Clip | audio | `music` |
 | `lyria-3-pro` | Lyria 3 Pro | audio | `music` |
+| `lyria-3.5` | Lyria 3.5 | audio | `music` |
 | `gemini-3-pro` | Gemini 3 Pro | text | `v2t` |
+| `gemini-3.8-flash` | Gemini 3.8 Flash | text | `i2t` |
+| `gemini-3.7-flash` | Gemini 3.7 Flash | text | `i2t` |
 | `gemini-3.6-flash` | Gemini 3.6 Flash | text | `i2t` |
 | `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | text | `i2t` |
-
-> `gen-ai models --provider google` lists the current set (18 models).
+| `gemini-2.5-flash` | Gemini 2.5 Flash | text | `i2t` |
 
 ## Veo 3.1 (video)
 
@@ -47,7 +47,7 @@ gen-ai generate -m veo-3.1 -p "a drone shot over a snowy ridge at golden hour" \
   "arguments": { "model": "veo-3.1", "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p", "generateAudio": true } }
 ```
 
-Veo clips are chainable with [`gen-ai extend`](/guide/cli-quickstart) (`+7s` per segment). Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
+Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
 
 ## Nano Banana Pro (image)
 
@@ -128,7 +128,7 @@ Input type: `t2i`
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-3.1-flash-lite-image` — Nano Banana 2 Lite
@@ -142,7 +142,7 @@ Input type: `t2i`
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `thinkingLevel` | `--thinking` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
+| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-3-pro-image` — Nano Banana Pro
@@ -213,47 +213,25 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 1) |
 | `videoUrl` | `--video` | file | video |
 
-### `imagen-4.0` — Imagen 4.0
+### `gemini-omni-1.1-flash-preview` — Gemini Omni 1.2 Flash
 
-[Try `imagen-4.0` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0)
+> The id says `1.1` and the name says `1.2`. That inconsistency is upstream's; match on `gemini-omni-1.1-flash-preview`. Despite the `-preview` suffix this is a production model.
 
-Input type: `t2i`
+[Try `gemini-omni-1.1-flash-preview` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.1-flash-preview)
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
-| `negativePrompt` | `--neg` | text | free text |
-
-### `imagen-4.0-ultra` — Imagen 4.0 Ultra
-
-[Try `imagen-4.0-ultra` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0-ultra)
-
-Input type: `t2i`
+Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
-| `negativePrompt` | `--neg` | text | free text |
-
-### `imagen-4.0-fast` — Imagen 4.0 Fast
-
-[Try `imagen-4.0-fast` in Playground ↗](https://picsart.com/ai-playground/?model=imagen-4.0-fast)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
-| `negativePrompt` | `--neg` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `360p` · `720p` · `1080p` · `4k` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` (default `8`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `videoUrl` | `--video` | file | video |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
 
 ### `lyria-3-clip` — Lyria 3 Clip
 
@@ -279,6 +257,17 @@ Input type: `music`
 
 > **Notes:** Veo audio is native (`generateAudio`); Imagen and Gemini image models differ in resolution and reasoning controls (`thinkingLevel` / `thinkingBudget`). TTS `voiceId` values are Gemini voice presets.
 
+### `lyria-3.5` — Lyria 3.5
+
+[Try `lyria-3.5` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3.5)
+
+Input type: `music`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 10) |
+
 ### `gemini-3-pro` — Gemini 3 Pro
 
 [Try `gemini-3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3-pro)
@@ -291,6 +280,30 @@ Input type: `v2t`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `videoUrl` | `--video` | file | video |
 | `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
+
+### `gemini-3.8-flash` — Gemini 3.8 Flash
+
+[Try `gemini-3.8-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gemini-3.7-flash` — Gemini 3.7 Flash
+
+[Try `gemini-3.7-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.7-flash)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ### `gemini-3.6-flash` — Gemini 3.6 Flash
 
@@ -315,5 +328,14 @@ Input type: `i2t`
 | `prompt` | `-p` | text | **required** |
 | `imageUrls` | `-i` | file | image (up to 8) |
 
+### `gemini-2.5-flash` — Gemini 2.5 Flash
 
+[Try `gemini-2.5-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash)
 
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |

@@ -15,7 +15,7 @@ from pathlib import Path
 INTEGRATIONS_DIR = Path(__file__).parent.parent / "guide" / "integrations"
 REPORT_FILE = Path(__file__).parent / "validation-report.md"
 
-PICSART_DOMAINS = {"picsart.com", "picsart.github.io", "mcp.picsart.io"}
+PICSART_DOMAINS = {"picsart.com", "api.picsart.com", "auth.picsart.com", "picsart.github.io", "mcp.picsart.io"}
 
 def extract_platform_docs_url(content: str) -> str | None:
     urls = re.findall(r'https?://[^\s\)\"\']+', content)

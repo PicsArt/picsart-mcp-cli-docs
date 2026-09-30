@@ -10,6 +10,8 @@ description: "Seedance AI models on Picsart — 12 video model(s) including Seed
 
 Seedance 2.0 (by ByteDance) is a high-quality video model with reference-image and keyframe control, native audio, and resolutions up to 1080p. It comes in a standard and a **Fast** variant, each with dedicated **video-edit** and **video-extend** workflows.
 
+SDK 6.2.3 adds `colorDepth` for Seedance 2.5: choose `8bit` for H.264 compatibility at 1080p MP4, or keep the default `10bit`. Lower resolutions are already 8-bit; MOV does not offer this choice. See the [SDK update guide](/guide/sdk-6-2-update).
+
 ## Models
 
 | id | Name | Input type |
@@ -70,11 +72,12 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `duration` | `-d` | enum | `4` · `5` · `6` · `8` · `10` · `12` · `15` · `20` · `25` · `30` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `1080p`) |
+| `duration` | `-d` | range | `4`–`30`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
+| `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `imageUrls` | `-i` | file | image (up to 30) |
 | `videoUrls` | `--video-urls` | file | video (up to 10) |
 | `audioUrls` | `--audio-urls` | file | audio (up to 10) |
@@ -91,10 +94,11 @@ Input type: `v2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `adaptive` (default `adaptive`) |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `1080p`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
+| `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `videoUrl` | `--video` | file | **required** video |
 | `imageUrls` | `-i` | file | image (up to 30) |
 
@@ -108,10 +112,11 @@ Input type: `v2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `aspectRatio` | `--ar` | enum | `adaptive` (default `adaptive`) |
-| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
-| `duration` | `-d` | enum | `4` · `5` · `6` · `8` · `10` · `12` · `15` · `20` · `25` · `30` (default `15`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
-| `outputFormat` | `--format` | enum | `mp4` · `mov` (default `mp4`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `1080p`) |
+| `duration` | `-d` | range | `4`–`30`, step 1 (default `15`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
+| `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `videoUrls` | `--video-urls` | file | **required** video (up to 10) |
 
 ### `seedance-2.0` — Seedance 2.0
@@ -273,7 +278,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing seedance-2.0 -d 8 -r 1080p
+gen-ai pricing seedance-2.0 --duration 8 --resolution 1080p
 ```
 
 Cost scales with **duration**, **resolution**, and **audio**.

@@ -4,18 +4,23 @@ description: "Anthropic Claude models on Picsart — Claude Opus 4.8, Sonnet 4.6
 
 # Anthropic
 
-**Mode:** text · **Models:** 3
+**Mode:** text · **Models:** 8
 
 **Vendor:** [Anthropic](https://www.anthropic.com) · **Official API docs:** [docs.anthropic.com](https://docs.anthropic.com)
 
-Anthropic's **Claude** models are large language models for analysis, not media generation: give them an image (and an optional question) and they return **text** — captions, OCR, classification, or a description. They power the [`gen-ai describe`](/guide/cli-quickstart#describe-an-image-or-video) command. Three tiers trade capability for speed and cost: **Opus** (most capable), **Sonnet** (balanced, the default), and **Haiku** (fastest).
+Anthropic's **Claude** models are large language models for analysis, not media generation: give them an image (and an optional question) and they return **text** — captions, OCR, classification, or a description. They power the [`gen-ai describe`](/guide/cli-quickstart#describe-an-image-or-video) command. The catalog includes **Fable**, **Opus**, **Sonnet**, and **Haiku** families; select a model to match your reasoning, latency, and cost needs.
 
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
+| `claude-fable-5-1` | Claude Fable 5.1 | `i2t` |
+| `claude-fable-5` | Claude Fable 5 | `i2t` |
+| `claude-opus-5` | Claude Opus 5 | `i2t` |
 | `claude-opus-4-8` | Claude Opus 4.8 | `i2t` |
+| `claude-sonnet-5` | Claude Sonnet 5 | `i2t` |
 | `claude-sonnet-4-6` | Claude Sonnet 4.6 | `i2t` |
+| `claude-sonnet-4-5` | Claude Sonnet 4.5 | `i2t` |
 | `claude-haiku-4-5` | Claude Haiku 4.5 | `i2t` |
 
 ## CLI
@@ -28,7 +33,7 @@ gen-ai describe -i photo.jpg
 gen-ai describe -m claude-opus-4-8 -i receipt.jpg -p "extract the total and tax"
 
 # fast, high-volume captioning — pipe clean text out
-gen-ai describe -m claude-haiku-4-5 -i product.jpg --script | pbcopy
+gen-ai describe -m claude-haiku-4-5 -i product.jpg -q | pbcopy
 ```
 
 These models return text, so they run through `gen-ai describe` (not `generate`) and print to stdout — no download or Drive save.
@@ -48,6 +53,39 @@ These models return text, so they run through `gen-ai describe` (not `generate`)
 
 Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
 
+### `claude-fable-5-1` — Claude Fable 5.1
+
+[Try `claude-fable-5-1` in Playground ↗](https://picsart.com/ai-playground/?model=claude-fable-5-1)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
+### `claude-fable-5` — Claude Fable 5
+
+[Try `claude-fable-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-fable-5)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
+### `claude-opus-5` — Claude Opus 5
+
+[Try `claude-opus-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-opus-5)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
 ### `claude-opus-4-8` — Claude Opus 4.8
 
 [Try `claude-opus-4-8` in Playground ↗](https://picsart.com/ai-playground/?model=claude-opus-4-8)
@@ -59,9 +97,31 @@ Input type: `i2t`
 | `prompt` | `-p` | text | **required** |
 | `imageUrls` | `-i` | file | image (up to 8) |
 
+### `claude-sonnet-5` — Claude Sonnet 5
+
+[Try `claude-sonnet-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-sonnet-5)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
 ### `claude-sonnet-4-6` — Claude Sonnet 4.6
 
 [Try `claude-sonnet-4-6` in Playground ↗](https://picsart.com/ai-playground/?model=claude-sonnet-4-6)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
+### `claude-sonnet-4-5` — Claude Sonnet 4.5
+
+[Try `claude-sonnet-4-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-sonnet-4-5)
 
 Input type: `i2t`
 

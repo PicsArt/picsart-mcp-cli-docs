@@ -28,6 +28,14 @@ providers = json.load(open(f'{DATA}/providers.json'))
 models = json.load(open(f'{DATA}/models.json'))
 
 
+# Providers retired from the catalog whose reference page is kept as a tombstone
+# so existing inbound links keep resolving. They are absent from providers.json
+# by definition, so the wiki has to be told about them explicitly — otherwise the
+# page is silently dropped here while it still exists on the Pages site, and any
+# link to it (e.g. from the changelog) dangles.
+RETIRED_PROVIDERS = ['pika', 'reve']
+
+
 def prov_page(pid):
     return 'Provider-' + pid.capitalize()
 
@@ -54,8 +62,8 @@ route2page = {
     '/reference/providers': 'Providers',
     '/reference/providers/': 'Providers',
 }
-for _p in providers:
-    route2page[f"/reference/providers/{_p['id']}"] = prov_page(_p['id'])
+for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+    route2page[f'/reference/providers/{_pid}'] = prov_page(_pid)
 
 src2out = {
     'changelog.md': 'Changelog.md',
@@ -75,8 +83,52 @@ src2out = {
     'reference/audio.md': 'Audio-Generation.md',
     'reference/text.md': 'Text-And-Analysis.md',
 }
-for _p in providers:
-    src2out[f"reference/providers/{_p['id']}.md"] = prov_page(_p['id']) + '.md'
+for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+    src2out[f'reference/providers/{_pid}.md'] = prov_page(_pid) + '.md'
+
+
+
+# --- Concept guides and per-agent integration guides -------------------------
+# These landed in the repo via PR and were originally hand-placed on the wiki,
+# so the generator did not know about them: regenerating would delete 26 live
+# pages and leave 31 dangling /guide/... links. The wiki page names below match
+# the ones already published, so this stays a no-op rename-wise.
+EXTRA_GUIDES = {
+    'guide/what-is-mcp.md': 'What-Is-MCP',
+    'guide/which-tool.md': 'Which-Tool',
+    'guide/rest-api.md': 'REST-API',
+    'guide/sdk.md': 'SDK',
+    'guide/sdk-6-2-update.md': 'SDK-6-2-Update',
+    'guide/local-files.md': 'Local-Files',
+    # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
+    # stability; the three sub-pages are nested sources, which route2page
+    # handles automatically because it derives the route by stripping '.md'.
+    'guide/media-studio/index.md': 'Media-Studio',
+    'guide/media-studio/tools.md': 'Media-Studio-Tools',
+    'guide/media-studio/troubleshooting.md': 'Media-Studio-Troubleshooting',
+    'guide/integrations/index.md': 'Integrations',
+}
+# Vendor slug -> wiki page suffix, where simple capitalisation would be wrong.
+INTEGRATION_NAMES = {
+    'anythingllm': 'AnythingLLM', 'chatgpt': 'ChatGPT', 'claude-code': 'Claude-Code',
+    'codex': 'Codex', 'copilot-studio': 'Copilot-Studio', 'cursor': 'Cursor',
+    'dify': 'Dify', 'gemini-cli': 'Gemini-CLI', 'goose': 'Goose', 'gumloop': 'Gumloop',
+    'hermes-agent': 'Hermes-Agent', 'librechat': 'LibreChat', 'lm-studio': 'LM-Studio',
+    'lobehub': 'LobeHub', 'n8n': 'n8n', 'nemoclaw': 'NemoClaw',
+    'open-webui': 'Open-WebUI', 'openclaw': 'OpenClaw', 'raycast': 'Raycast',
+    'vscode': 'VS-Code', 'windsurf': 'Windsurf',
+}
+for _slug, _name in INTEGRATION_NAMES.items():
+    EXTRA_GUIDES[f'guide/integrations/{_slug}.md'] = f'Integration-{_name}'
+
+for _src, _page in EXTRA_GUIDES.items():
+    route2page['/' + _src[:-3]] = _page
+    src2out[_src] = _page + '.md'
+# directory-style links, e.g. [..](/guide/integrations/)
+route2page['/guide/integrations'] = 'Integrations'
+route2page['/guide/integrations/'] = 'Integrations'
+route2page['/guide/media-studio'] = 'Media-Studio'
+route2page['/guide/media-studio/'] = 'Media-Studio'
 
 
 def strip_frontmatter(text):
@@ -166,6 +218,21 @@ home = f'''# Picsart CLI & MCP
 
 - **[Generating media](Generating-Media)** · **[Files & Drive](Files-and-Drive)** · **[Pricing & Credits](Pricing)** · **[Batch & Automation](Batch)**
 
+## Connect your agent
+
+- **[What is MCP?](What-Is-MCP)** · **[Which tool should I use?](Which-Tool)** · **[All integrations](Integrations)**
+- Popular: [Claude Code](Integration-Claude-Code) · [Cursor](Integration-Cursor) · [VS Code](Integration-VS-Code) · [ChatGPT](Integration-ChatGPT) · [Windsurf](Integration-Windsurf) · [n8n](Integration-n8n)
+
+## Build on it
+
+- **[REST API](REST-API)** · **[SDK](SDK)** · **[Local files](Local-Files)**
+
+## Picsart Media Studio
+
+Build videos, slideshows and captioned clips from your own footage and ready-made templates, by asking Claude.
+
+- **[Overview](Media-Studio)** · **[What you can do](Media-Studio-Tools)** · **[Troubleshooting](Media-Studio-Troubleshooting)**
+
 ## Model Reference
 
 - **[Model Reference](Model-Reference)** — overview
@@ -189,6 +256,13 @@ sb = ['### Picsart CLI & MCP', '',
       '- [CLI Quickstart](CLI-Quickstart)', '- [MCP Quickstart](MCP-Quickstart)', '- [Skills](Skills)', '',
       '**Concepts**', '',
       '- [Generating media](Generating-Media)', '- [Files & Drive](Files-and-Drive)', '- [Pricing](Pricing)', '- [Batch](Batch)', '',
+      '**Connect your agent**', '',
+      '- [What is MCP?](What-Is-MCP)', '- [Which tool?](Which-Tool)', '- [All integrations](Integrations)', '',
+      '**Build on it**', '',
+      '- [REST API](REST-API)', '- [SDK](SDK)', '- [Local files](Local-Files)', '',
+      '**Picsart Media Studio**', '',
+      '- [Overview](Media-Studio)', '- [What you can do](Media-Studio-Tools)',
+      '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
       '**Model Reference**', '',
       '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',
       '**Providers**', '',

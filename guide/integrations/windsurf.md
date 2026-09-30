@@ -1,18 +1,25 @@
 ---
-description: "Connect Picsart to Windsurf (Cascade) — install the gen-ai-use Skill or MCP server to generate images, video, and audio inside Windsurf."
+description: "Connect Picsart to Windsurf (Cascade): install the gen-ai-use Skill or add the hosted Picsart MCP server to generate images, video, and audio inside Windsurf."
 ---
 
 # Windsurf
 
-Windsurf (Cascade) supports both **Skills** (ZIP install) and **MCP** via the Windsurf MCP config. The setup is nearly identical to Cursor.
+Windsurf (Cascade) supports both **Skills** (ZIP install) and **MCP** via the [Cascade MCP config](https://docs.devin.ai/desktop/cascade/mcp). Skills drive the `gen-ai` CLI on your machine. MCP connects Cascade to the hosted Picsart MCP server at `https://api.picsart.com/gen-ai/mcp`, with nothing to install locally.
+
+Windsurf is now called Devin Desktop, and Cascade is its legacy agent. The steps below apply to both names.
 
 ## Prerequisites
 
-1. Install the gen-ai CLI — see [Installation](/guide/installation).
-2. Run `gen-ai login` (one-time browser OAuth).
-3. Verify: `gen-ai --version` and `gen-ai credits`.
+1. A Picsart account with credits for generations.
+2. A recent version of Windsurf (Devin Desktop).
+
+That is all for MCP: the server is hosted by Picsart and you sign in from Windsurf. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-1-skills-recommended).
 
 ## Method 1: Skills (recommended)
+
+::: info Skills need the gen-ai CLI
+Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. Check with `gen-ai --version` and `gen-ai credits`. The MCP method does not need this.
+:::
 
 ### Install
 
@@ -35,19 +42,26 @@ Cascade picks the appropriate model and runs the `gen-ai` command.
 
 ### Configure
 
-Open Windsurf's MCP settings and add:
+1. In the Cascade panel, open the `...` (Actions) menu in the top right and click **Open MCP config file** in the MCPs section.
+2. Add the Picsart server. Remote servers use the `serverUrl` key:
 
 ```json
 {
   "mcpServers": {
     "picsart-gen-ai": {
-      "command": "gen-ai-mcp"
+      "serverUrl": "https://api.picsart.com/gen-ai/mcp"
     }
   }
 }
 ```
 
-Save and restart Windsurf.
+3. Save the file. No API key or headers are needed.
+
+The file is `mcp_config.json`. Current versions keep it at `~/.config/devin/mcp_config.json` (`%APPDATA%\devin\mcp_config.json` on Windows). Older Windsurf versions use `~/.codeium/windsurf/mcp_config.json`.
+
+### Sign in to Picsart
+
+When Cascade connects to the server for the first time, it opens a browser window on the Picsart sign-in page. Sign in with your Picsart account, then return to Windsurf. The Picsart tools appear in the MCPs section of the Actions menu once sign-in completes.
 
 ### Use it
 
@@ -61,31 +75,35 @@ See the [MCP Quickstart](/guide/mcp-quickstart) for the full tool catalog.
 
 ## Troubleshooting
 
-**Windsurf cannot find `gen-ai-mcp`.**
+**The sign-in window did not open.**
 
-Use the absolute binary path:
+Open the MCPs section of the Actions menu, toggle `picsart-gen-ai` off and on, and let Cascade connect again. If no browser opens, restart Windsurf.
 
-```json
-{
-  "mcpServers": {
-    "picsart-gen-ai": {
-      "command": "/Users/you/.local/bin/gen-ai-mcp"
-    }
-  }
-}
-```
+**The server is listed but tools do not appear.**
 
-Find the path with `which gen-ai-mcp` in a terminal.
+Confirm you finished signing in. Check that `mcp_config.json` is valid JSON and uses `serverUrl`, not `url` or `command`. Then toggle the server off and on, or restart Windsurf. Cascade can use at most 100 tools at a time across all servers, so disable servers you do not need.
 
 **Generation fails with "unauthorized".**
 
-Run `gen-ai login` in a terminal and restart Windsurf.
+Your Picsart session has expired or was revoked. Toggle `picsart-gen-ai` off and on in the MCPs section and sign in again when the browser opens.
+
+**Generation fails with "insufficient credits".**
+
+Ask Cascade *"What's my Picsart credit balance?"* (it calls `picsart_credits`). Top up at [picsart.com](https://picsart.com).
+
+**The connection fails on a corporate network.**
+
+Windsurf must reach `https://api.picsart.com` over HTTPS, and your browser must reach the Picsart sign-in page. Ask your network admin to allow both. On Teams plans, an admin may also need to allow the server.
 
 ## FAQ
 
 **Is the Picsart skill the same for Windsurf and Cursor?**
 
-Yes. The `gen-ai-use` skill bundle is agent-agnostic. The only difference is the directory where you place the skill — check Windsurf's current documentation for the exact path.
+Yes. The `gen-ai-use` skill bundle is agent-agnostic. The only difference is the directory where you place the skill. Check Windsurf's current documentation for the exact path.
+
+**Do I need the gen-ai CLI for MCP?**
+
+No. The MCP server is hosted by Picsart and you sign in from Windsurf. The CLI is needed only for the Skills method.
 
 **Can I use Skills and MCP at the same time?**
 

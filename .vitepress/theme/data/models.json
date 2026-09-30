@@ -1,5 +1,19 @@
 [
   {
+    "id": "claude-fable-5",
+    "name": "Claude Fable 5",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "claude-fable-5-1",
+    "name": "Claude Fable 5.1",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "claude-haiku-4-5",
     "name": "Claude Haiku 4.5",
     "provider": "anthropic",
@@ -14,8 +28,29 @@
     "inputType": "i2t"
   },
   {
+    "id": "claude-opus-5",
+    "name": "Claude Opus 5",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "claude-sonnet-4-5",
+    "name": "Claude Sonnet 4.5",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "claude-sonnet-4-6",
     "name": "Claude Sonnet 4.6",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "claude-sonnet-5",
+    "name": "Claude Sonnet 5",
     "provider": "anthropic",
     "mode": "text",
     "inputType": "i2t"
@@ -35,8 +70,8 @@
     "inputType": "i2v"
   },
   {
-    "id": "bytedance-video-upscaler",
-    "name": "ByteDance Upscaler",
+    "id": "bytedance-video-enhance",
+    "name": "ByteDance Video Enhance",
     "provider": "bytedance",
     "mode": "video",
     "inputType": "v2v"
@@ -168,6 +203,27 @@
     "inputType": "t2i"
   },
   {
+    "id": "flux-video-edit",
+    "name": "FLUX Video Edit",
+    "provider": "flux",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "flux-video-upscale",
+    "name": "Flux Video Upscale",
+    "provider": "flux",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "gemini-2.5-flash",
+    "name": "Gemini 2.5 Flash",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "gemini-2.5-flash-image",
     "name": "Nano Banana",
     "provider": "google",
@@ -231,32 +287,32 @@
     "inputType": "i2t"
   },
   {
-    "id": "gemini-omni-flash-preview",
-    "name": "Gemini Omni",
+    "id": "gemini-3.7-flash",
+    "name": "Gemini 3.7 Flash",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gemini-3.8-flash",
+    "name": "Gemini 3.8 Flash",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gemini-omni-1.1-flash-preview",
+    "name": "Gemini Omni 1.1 Flash",
     "provider": "google",
     "mode": "video",
     "inputType": "t2v"
   },
   {
-    "id": "imagen-4.0",
-    "name": "Imagen 4.0",
+    "id": "gemini-omni-flash-preview",
+    "name": "Gemini Omni",
     "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "imagen-4.0-fast",
-    "name": "Imagen 4.0 Fast",
-    "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "imagen-4.0-ultra",
-    "name": "Imagen 4.0 Ultra",
-    "provider": "google",
-    "mode": "image",
-    "inputType": "t2i"
+    "mode": "video",
+    "inputType": "t2v"
   },
   {
     "id": "lyria-3-clip",
@@ -268,6 +324,13 @@
   {
     "id": "lyria-3-pro",
     "name": "Lyria 3 Pro",
+    "provider": "google",
+    "mode": "audio",
+    "inputType": "music"
+  },
+  {
+    "id": "lyria-3.5",
+    "name": "Lyria 3.5",
     "provider": "google",
     "mode": "audio",
     "inputType": "music"
@@ -315,6 +378,13 @@
     "inputType": "t2i"
   },
   {
+    "id": "grok-imagine-image-2.0",
+    "name": "Grok Imagine 2.0",
+    "provider": "grok",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
     "id": "grok-imagine-image-quality",
     "name": "Grok Imagine Quality",
     "provider": "grok",
@@ -333,7 +403,7 @@
     "name": "Grok Imagine 1.5",
     "provider": "grok",
     "mode": "video",
-    "inputType": "i2v"
+    "inputType": "t2v"
   },
   {
     "id": "grok-tts",
@@ -476,13 +546,6 @@
     "inputType": "t2v"
   },
   {
-    "id": "kling-v2-new-image",
-    "name": "Kling V2 New Image",
-    "provider": "kling",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
     "id": "kling-v2a",
     "name": "Kling V2A",
     "provider": "kling",
@@ -623,11 +686,11 @@
     "inputType": "t2i"
   },
   {
-    "id": "hailuo-03",
-    "name": "Hailuo 03",
-    "provider": "minimax",
-    "mode": "video",
-    "inputType": "t2v"
+    "id": "muse-image-1.0",
+    "name": "Muse Image 1.0",
+    "provider": "meta",
+    "mode": "image",
+    "inputType": "t2i"
   },
   {
     "id": "hailuo-2.3",
@@ -658,6 +721,34 @@
     "inputType": "t2v"
   },
   {
+    "id": "minimax-h3",
+    "name": "MiniMax H3",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3-max",
+    "name": "MiniMax H3 Max",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3-max-camera-controls",
+    "name": "MiniMax H3 Max Camera Controls",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "i2v"
+  },
+  {
+    "id": "minimax-h3-max-turbo",
+    "name": "MiniMax H3 Max Turbo",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "minimax-music-v2",
     "name": "MiniMax Music v2",
     "provider": "minimax",
@@ -665,8 +756,99 @@
     "inputType": "music"
   },
   {
+    "id": "minimax-music-v3",
+    "name": "MiniMax Music v3",
+    "provider": "minimax",
+    "mode": "audio",
+    "inputType": "music"
+  },
+  {
+    "id": "gpt-4.1-mini",
+    "name": "GPT-4.1 Mini",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-4.1-nano",
+    "name": "GPT-4.1 Nano",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-4o",
+    "name": "GPT-4o",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-4o-mini",
+    "name": "GPT-4o Mini",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5",
+    "name": "GPT-5",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5-mini",
+    "name": "GPT-5 Mini",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5.1",
+    "name": "GPT-5.1",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5.2",
+    "name": "GPT-5.2",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "gpt-5.5",
     "name": "GPT-5.5",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5.6-luna",
+    "name": "GPT-5.6 Luna",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5.6-sol",
+    "name": "GPT-5.6 Sol",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-5.6-terra",
+    "name": "GPT-5.6 Terra",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6-astra",
+    "name": "GPT-6 Astra",
     "provider": "openai",
     "mode": "text",
     "inputType": "i2t"
@@ -686,25 +868,18 @@
     "inputType": "t2i"
   },
   {
-    "id": "sora-2",
-    "name": "Sora 2",
+    "id": "gpt-image-2.5-flare",
+    "name": "GPT Image 2.5 Flare",
     "provider": "openai",
-    "mode": "video",
-    "inputType": "t2v"
+    "mode": "image",
+    "inputType": "t2i"
   },
   {
-    "id": "sora-2-extend",
-    "name": "Sora 2 Extend",
+    "id": "gpt-image-2.5-sunburst",
+    "name": "GPT Image 2.5 Sunburst",
     "provider": "openai",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "sora-2-pro",
-    "name": "Sora 2 Pro",
-    "provider": "openai",
-    "mode": "video",
-    "inputType": "t2v"
+    "mode": "image",
+    "inputType": "t2i"
   },
   {
     "id": "ovi",
@@ -728,6 +903,20 @@
     "inputType": "i2i"
   },
   {
+    "id": "picsart-flow",
+    "name": "Picsart Effects",
+    "provider": "picsart",
+    "mode": "image",
+    "inputType": "i2i"
+  },
+  {
+    "id": "picsart-flow-video",
+    "name": "Picsart Effects Video",
+    "provider": "picsart",
+    "mode": "video",
+    "inputType": "i2v"
+  },
+  {
     "id": "picsart-flux-2-klein",
     "name": "Flux 2 Klein 4B",
     "provider": "picsart",
@@ -737,13 +926,6 @@
   {
     "id": "picsart-qwen-image-edit",
     "name": "Picsart Image Edit",
-    "provider": "picsart",
-    "mode": "image",
-    "inputType": "i2i"
-  },
-  {
-    "id": "picsart-qwen-image-edit-angle",
-    "name": "Picsart Angle Change",
     "provider": "picsart",
     "mode": "image",
     "inputType": "i2i"
@@ -768,27 +950,6 @@
     "provider": "picsart",
     "mode": "image",
     "inputType": "i2i"
-  },
-  {
-    "id": "pika-2.2",
-    "name": "Pika",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "pika-2.2-frames",
-    "name": "Pika Frames",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "i2v"
-  },
-  {
-    "id": "pika-2.2-scenes",
-    "name": "Pika Scenes",
-    "provider": "pika",
-    "mode": "video",
-    "inputType": "i2v"
   },
   {
     "id": "pixverse-c1",
@@ -833,13 +994,6 @@
     "inputType": "i2v"
   },
   {
-    "id": "qwen-image-2",
-    "name": "Qwen 2",
-    "provider": "qwen",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
     "id": "qwen-image-2-pro",
     "name": "Qwen 2 Pro",
     "provider": "qwen",
@@ -847,11 +1001,11 @@
     "inputType": "t2i"
   },
   {
-    "id": "qwen-image-edit-plus",
-    "name": "Qwen Edit Plus",
+    "id": "qwen-image-3.0-pro",
+    "name": "Qwen 3.0 Pro",
     "provider": "qwen",
     "mode": "image",
-    "inputType": "i2i"
+    "inputType": "t2i"
   },
   {
     "id": "recraft-creative-upscale",
@@ -987,16 +1141,37 @@
     "inputType": "t2i"
   },
   {
-    "id": "recraftv4_vector",
-    "name": "Recraft V4 Vector",
+    "id": "recraftv4_styles",
+    "name": "Recraft V4 Styles",
     "provider": "recraft",
     "mode": "image",
     "inputType": "t2i"
   },
   {
-    "id": "reve",
-    "name": "Reve",
-    "provider": "reve",
+    "id": "recraftv4_styles_pro",
+    "name": "Recraft V4 Styles Pro",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles_pro_vector",
+    "name": "Recraft V4 Styles Pro Vector",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_styles_vector",
+    "name": "Recraft V4 Styles Vector",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "recraftv4_vector",
+    "name": "Recraft V4 Vector",
+    "provider": "recraft",
     "mode": "image",
     "inputType": "t2i"
   },
@@ -1216,5 +1391,19 @@
     "provider": "wan",
     "mode": "video",
     "inputType": "v2v"
+  },
+  {
+    "id": "wan-3.0-video",
+    "name": "Wan 3.0",
+    "provider": "wan",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "wan-3.0-video-prime",
+    "name": "Wan 3.0 Prime",
+    "provider": "wan",
+    "mode": "video",
+    "inputType": "t2v"
   }
 ]

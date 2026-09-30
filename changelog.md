@@ -7,6 +7,84 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-09-29
+
+**MCP docs corrected to match the live server.** The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`. Agents connect to it over HTTP and sign in to Picsart in the browser, so it needs **no gen-ai CLI, no `gen-ai login` and no API key**. Earlier pages described a local `gen-ai-mcp` command, required the CLI as a prerequisite, or pointed some integrations at a different address with an API key. All of those instructions were wrong and have been replaced on the [MCP Quickstart](/guide/mcp-quickstart), [Installation](/guide/installation), [Authentication](/guide/authentication) and every [integration guide](/guide/integrations/). The tool catalog also drops `picsart_music_studio` (not available), adds the viewing and progress tools, and fixes the `picsart_remove_bg` example (it takes one `image` URL). AnythingLLM Desktop now connects through the `mcp-remote` bridge, and the [integrations index](/guide/integrations/) lists every supported agent plus the ones that cannot connect yet (NemoClaw, AnythingLLM Docker).
+
+**CLI docs checked against `@picsart/gen-ai` 2.78.0.** Removed flags and commands the CLI does not have (`--script`, `--dry-run` and `--no-download` on `generate`, short flags on `pricing`, `gen-ai extend`), documented that generations save to Drive by default, rewrote the batch guide for the real JSON manifest format (`jobs[]` with `id`) and output folder, and added CI authentication via `PICSART_ACCESS_TOKEN` / `PICSART_USER_ID`.
+
+## 2026-09-19
+
+**SDK 6.2.3 catalog refresh — 201 models across 31 providers.** Compared with the previously published catalog: 26 additions, 6 removals; Meta joins and Reve leaves the active provider list. The SDK upgrade from 6.0.0 adds 11 text models and changes result metadata and Seedance color-depth handling. See the [complete update and migration guide](/guide/sdk-6-2-update).
+
+## 2026-09-01
+
+**Catalog refresh — now 181 models across 31 providers** (`@picsart/ai-sdk` 5.24.0). These docs were last generated from 5.19.0, so this refresh spans 5.20–5.24: three video/image models added, one renamed, none retired.
+
+### New
+
+- **Flux Video Upscale** *(video, `v2v` — added in SDK 5.20.0)* — upscales an existing clip toward 4K at `1.5x`–`3x`, in either precise (source-faithful) or creative (detail-enhancing) mode. Source clips up to 20 seconds and 2K. See [Flux](/reference/providers/flux).
+- **MiniMax H3 Max** *(video, `t2v` — added in SDK 5.22.0)* — the top tier of the H3 family: text-to-video or start/end-frame interpolation with a `promptExpansionMode` pass, up to 15s at `768p`. Image-to-video is available as an edit workflow. See [MiniMax](/reference/providers/minimax).
+- **Qwen 3.0 Pro** *(image, `t2i` — added in SDK 5.22.1)* — the GA flagship Qwen-Image 3.0 Pro, covering text-to-image and image editing with prompt-rewrite modes (`promptExtendMode`) and an optional `enableThinking` pass. See [Qwen](/reference/providers/qwen).
+
+### Changed
+
+- **Hailuo 03 is now MiniMax H3** *(SDK 5.21.1)* — the catalog id changed from `hailuo-03` to `minimax-h3`. This moves a **public identifier**: `?model=hailuo-03` deeplinks and any saved reference to the old id no longer resolve. The workflow (`minimax/v2/video-generation`) and pricing key (`minimax-h3`) are unchanged, and no parameters moved.
+- **Gemini Omni 1.2 Flash is now displayed as Gemini Omni 1.1 Flash** *(SDK 5.21.2)* — this resolves the id/name mismatch flagged in the 2026-08-27 entry above. The id was always `gemini-omni-1.1-flash-preview`; the display name has been corrected to agree with it rather than the id being changed, so nothing matching on the id is affected.
+
+---
+
+## 2026-08-27
+
+**Catalog refresh — now 178 models across 31 providers** (`@picsart/ai-sdk` 5.19.0). These docs were last generated from 5.16.0, so this refresh spans 5.17–5.19: two video models added, none retired.
+
+### New
+
+- **Wan 3.0 Prime** *(video, `t2v` — added in SDK 5.18.0)* — the same all-in-one model as Wan 3.0, up to **7x faster**. Takes image, video and audio references plus start/end frames; 5/10/15/30s at up to 1080P, adaptive aspect ratio, native audio, and an optional `--enable-thinking` pass. See [Wan](/reference/providers/wan).
+- **Gemini Omni 1.2 Flash** *(video, `t2v` — added in SDK 5.19.0)* — the more capable of the two Gemini Omni entries. Over the original it adds a `resolution` param at all (`360p` · `720p` · `1080p` · `4k`, default `720p`), start/end frame interpolation, up to 5 reference images and 3 reference videos, clip extension from a source video under 30s, and every integer duration 3–10s rather than a fixed set. See [Google](/reference/providers/google).
+
+> [!NOTE]
+> **Gemini Omni 1.2 Flash's id is `gemini-omni-1.1-flash-preview`** — the id says `1.1`, the display name says `1.2`. That mismatch comes from the upstream catalog, so anything matching on the id must use the `1.1` string. `-preview` in the id is likewise historical; the model is a production release.
+
+### Changed
+
+- **Grok Imagine 1.5** is now classified `t2v` (was `i2v`), as of SDK 5.18.0 — its image input is optional, so it generates from a prompt alone. The CLI and MCP call is unchanged; only the input-type label moved. See [Grok](/reference/providers/grok).
+
+### Docs
+
+- The provider-page generator now updates the frontmatter model count on **multi-mode** provider pages. Its regex matched only single-word mode lists, so slash-joined descriptions (`"17 image/video/audio/text model(s)"`) silently kept a stale count — Google had been carrying one across refreshes.
+- The same generator no longer appends a blank line at EOF on every run for pages whose `## Parameters` is the last section, so repeat refreshes are now byte-idempotent.
+
+---
+
+## 2026-08-25
+
+**Catalog refresh — now 176 models across 31 providers** (`@picsart/ai-sdk` 5.16.0). Eleven models added, nine retired.
+
+### New
+
+- **Wan 3.0** — an all-in-one video model taking text, image/video/audio references, and start/end frames, with adaptive ratio, intelligent duration, and audio. See [Wan](/reference/providers/wan).
+- **Picsart Effects** *(image + video)* — `picsart-flow` and `picsart-flow-video` apply curated Picsart presets as multi-step Magic Flow pipelines in one call. Preset ids come from a runtime catalog; list them with `gen-ai models info picsart-flow --json`. See [Picsart](/reference/providers/picsart).
+- **Recraft V4 Styles** — four style-reference models (**Styles**, **Styles Vector**, **Styles Pro**, **Styles Pro Vector**) with 10K-character prompts. See [Recraft](/reference/providers/recraft).
+- **Grok Imagine 2.0** — sharper detail with a low/medium quality tier. See [Grok](/reference/providers/grok).
+- **MiniMax Music v3** — text-to-music with vocals or instrumentals from a style prompt and optional lyrics, with configurable audio encoding. See [MiniMax](/reference/providers/minimax).
+- **Gemini 3.7 Flash** — low-latency multimodal text generation for [`gen-ai describe`](/reference/text). See [Google](/reference/providers/google).
+- **ByteDance Video Enhance** — now live, replacing the Video Upscaler: denoise, colour-correct and super-resolve footage up to **8K**, with frame-rate conversion. See [ByteDance](/reference/providers/bytedance).
+
+### Deprecated / retired
+
+- **Pika is retired.** `pika-2.2`, `pika-2.2-scenes` and `pika-2.2-frames` are gone and Pika is no longer a provider. The [provider page](/reference/providers/pika) is kept as a pointer to replacements — Seedance 2.5 covers multi-reference composition and start/end-frame morphs.
+- **Google Imagen 4.0 family** — `imagen-4.0`, `imagen-4.0-ultra` and `imagen-4.0-fast` removed; use the Nano Banana (Gemini Image) models instead.
+- **Also removed** — `bytedance-video-upscaler` (superseded by Video Enhance), `kling-v2-new-image`, and `qwen-image-edit-plus` (Qwen 2 Pro now covers reference-guided editing from up to 3 images).
+
+### Docs
+
+- Provider pages now render **`catalog`-kind parameters** (voice, avatar, and effect-preset pickers) instead of leaving the Values cell blank. These lists are fetched at runtime, so the docs point at `gen-ai models info <id> --json` rather than snapshotting a list that would rot.
+- The count drift guard now also covers `reference/providers/index.md` and `README.md`, and recognises the "N AI model providers" phrasing.
+- The wiki generator keeps pages for retired providers, so a tombstoned page like Pika exists on both the Pages site and the Wiki instead of silently vanishing from one.
+
+---
+
 ## 2026-08-07
 
 **Catalog refresh** — now **174 production models across 32 providers** (`@picsart/ai-sdk` 3.35.6).

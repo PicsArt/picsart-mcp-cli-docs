@@ -128,7 +128,7 @@ Input type: `i2v`
 ## Pricing
 
 ```bash
-gen-ai pricing happyhorse-1.0-t2v -d 10 -r 1080P
+gen-ai pricing happyhorse-1.0-t2v --duration 10 --resolution 1080P
 ```
 
 Cost scales with **duration** and **resolution** (1080P costs roughly 1.7× the 720P rate).

@@ -21,10 +21,10 @@ Topaz Labs provides AI image and video enhancement. `topaz-upscale-image` expose
 
 ```bash
 # upscale a low-resolution photo
-gen-ai generate -m topaz-upscale-image -i ./old-scan.jpg --model "Low Resolution V2"
+gen-ai generate -m topaz-upscale-image -i ./old-scan.jpg --model-version "Low Resolution V2"
 
 # upscale a video with the Proteus model
-gen-ai generate -m topaz-upscale-video --video ./clip.mp4 --model Proteus
+gen-ai generate -m topaz-upscale-video --video ./clip.mp4 --model-version Proteus
 ```
 
 ## MCP
@@ -59,7 +59,7 @@ Input type: `i2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `model` | `--model` | enum | `Standard V2` · `Standard MAX` · `Low Resolution V2` · `High Fidelity V2` · `CGI` · `Text Refine` · `Redefine` · `Recovery` · `Recovery V2` · `Wonder` · `Wonder 3` (default `Standard V2`) |
+| `model` | `--model-version` | enum | `Standard V2` · `Standard MAX` · `Low Resolution V2` · `High Fidelity V2` · `CGI` · `Text Refine` · `Redefine` · `Recovery` · `Recovery V2` · `Wonder` · `Wonder 3` (default `Standard V2`) |
 
 ### `topaz-upscale-video` — Topaz Video Upscale
 
@@ -70,7 +70,7 @@ Input type: `v2v`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `videoUrl` | `--video` | file | **required** video |
-| `model` | `--model` | enum | `Proteus` · `Artemis HQ` · `Artemis MQ` · `Artemis LQ` · `Nyx` · `Nyx Fast` · `Nyx XL` · `Nyx HF` · `Gaia HQ` · `Gaia CG` · `Gaia 2` · `Starlight Precise 1` · `Starlight Precise 2` · `Starlight Precise 2.5` · `Starlight HQ` · `Starlight Mini` · `Starlight Sharp` · `Starlight Fast 1` · `Starlight Fast 2` (default `Proteus`) |
+| `model` | `--model-version` | enum | `Proteus` · `Artemis HQ` · `Artemis MQ` · `Artemis LQ` · `Nyx` · `Nyx Fast` · `Nyx XL` · `Nyx HF` · `Gaia HQ` · `Gaia CG` · `Gaia 2` · `Starlight Precise 1` · `Starlight Precise 2` · `Starlight Precise 2.5` · `Starlight HQ` · `Starlight Mini` · `Starlight Sharp` · `Starlight Fast 1` · `Starlight Fast 2` (default `Proteus`) |
 
 ## Pricing
 

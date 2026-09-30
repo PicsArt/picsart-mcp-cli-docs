@@ -6,7 +6,7 @@ description: "What Picsart AI Playground is, how its access layers work, and whi
 
 ## Picsart AI Playground
 
-**Picsart AI Playground** is a platform that brings together 174 generative AI models from 32 providers under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Sora, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
+**Picsart AI Playground** is a platform that brings together 201 generative AI models from 31 providers under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Seedance, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
 
 The Playground is available on **web and mobile**. For most users and most tasks, this is the right place to work. You pick a model, write a prompt, see results, iterate. If you are generating at small scale, exploring what is possible, comparing model outputs, or doing prompt engineering, the Playground web or mobile app is the most efficient tool. No setup, no code, no configuration.
 
@@ -30,7 +30,7 @@ Once you have validated a prompt or workflow in Playground, connect Picsart to t
 
 When the connection is active, you can generate images, animate a video, remove a background, or synthesize audio **without leaving your agent conversation**. The agent handles the model selection, parameter construction, and result retrieval. You stay in Claude or ChatGPT and issue natural-language instructions: *"Generate three hero images for this brief in 16:9."*
 
-**Skills** are pre-built instruction bundles that give the agent knowledge about Picsart's models and workflows. Install once and describe tasks in plain English. **MCP** is the underlying protocol that exposes every catalog tool directly, useful when you want the agent to reason about cost, validate parameters, or chain multiple operations.
+**Skills** are pre-built instruction bundles that give the agent knowledge about Picsart's models and workflows. Install once and describe tasks in plain English. **MCP** is the protocol that exposes every catalog tool directly, useful when you want the agent to reason about cost, validate parameters, or chain multiple operations. The Picsart MCP server is hosted, so you only add its address to your agent and sign in; there is nothing to install.
 
 [Skills guide](/guide/skills) · [MCP Quickstart](/guide/mcp-quickstart) · [Integrations](/guide/integrations/)
 
@@ -46,7 +46,7 @@ The `gen-ai` CLI exposes the full catalog as a single terminal command. It is pi
 
 ```bash
 gen-ai generate -m flux-2-pro -p "product on white background" -n 4
-gen-ai batch run catalog.yaml
+gen-ai batch run catalog.json
 ```
 
 [CLI Quickstart](/guide/cli-quickstart) · [Batch and Automation](/guide/batch)
@@ -54,7 +54,7 @@ gen-ai batch run catalog.yaml
 ---
 
 ### SDK: Node.js and TypeScript applications
-If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 174 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
+If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 201 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Skills and MCP drive the `gen-ai` CLI internally. Install the CLI once, run `gen-ai login` once, and those surfaces work. The SDK and REST API authenticate with an API key from your account settings instead of OAuth.
+They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|
@@ -90,10 +90,10 @@ Most people move between these surfaces naturally. You experiment in Playground,
 
 ## What you can generate
 
-- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **64 image models.**
-- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **81 video models.**
-- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **22 audio models.**
-- **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **7 text models.**
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **66 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **84 video models.**
+- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **24 audio models.**
+- **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **27 text models.**
 
 Browse the full catalog in the [Model Reference](/reference/), filter live in the [Playground](https://picsart.com/ai-playground/), or query from the terminal:
 
@@ -109,7 +109,7 @@ gen-ai models info seedance-2.0
 
 Not sure which surface to start with? Read [Which tool is right for me?](/guide/which-tool).
 
-- **[Installation](/guide/installation)**: install the CLI and connect any surface.
+- **[Installation](/guide/installation)**: install the CLI, add Skills, or connect the MCP server.
 - **[Authentication](/guide/authentication)**: sign in once.
 - **[CLI Quickstart](/guide/cli-quickstart)** · **[MCP Quickstart](/guide/mcp-quickstart)** · **[Skills](/guide/skills)**
 - **[SDK](/guide/sdk)** · **[REST API](/guide/rest-api)**

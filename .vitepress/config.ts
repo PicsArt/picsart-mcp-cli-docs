@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills — generate image, video, and audio across 174 models from 32 providers in your terminal or any AI agent.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, and Media Studio — generate image, video, and audio across 201 models from 31 providers, and composite scenes into video, from your terminal or any AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -41,8 +41,16 @@ const sidebar = [
     items: [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
-      { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
+    ],
+  },
+  {
+    text: 'Picsart Media Studio',
+    collapsed: false,
+    items: [
+      { text: 'Overview', link: '/guide/media-studio/' },
+      { text: 'What you can do', link: '/guide/media-studio/tools' },
+      { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
     ],
   },
   {
@@ -66,12 +74,18 @@ const sidebar = [
       { text: 'LobeHub', link: '/guide/integrations/lobehub' },
       { text: 'LibreChat', link: '/guide/integrations/librechat' },
       { text: 'Hermes Agent', link: '/guide/integrations/hermes-agent' },
-      { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
       { text: 'OpenClaw', link: '/guide/integrations/openclaw' },
       { text: 'n8n', link: '/guide/integrations/n8n' },
       { text: 'Dify', link: '/guide/integrations/dify' },
       { text: 'Gumloop', link: '/guide/integrations/gumloop' },
       { text: 'Copilot Studio', link: '/guide/integrations/copilot-studio' },
+      {
+        text: 'Not supported yet',
+        collapsed: true,
+        items: [
+          { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
+        ],
+      },
     ],
   },
   {
@@ -115,15 +129,14 @@ const sidebar = [
       { text: 'Kling', link: '/reference/providers/kling' },
       { text: 'LTX (Lightricks)', link: '/reference/providers/ltx' },
       { text: 'Luma', link: '/reference/providers/luma' },
+      { text: 'Meta', link: '/reference/providers/meta' },
       { text: 'MiniMax', link: '/reference/providers/minimax' },
       { text: 'OpenAI', link: '/reference/providers/openai' },
       { text: 'OVI', link: '/reference/providers/ovi' },
       { text: 'Picsart', link: '/reference/providers/picsart' },
-      { text: 'Pika', link: '/reference/providers/pika' },
       { text: 'PixVerse', link: '/reference/providers/pixverse' },
       { text: 'Qwen (Alibaba)', link: '/reference/providers/qwen' },
       { text: 'Recraft', link: '/reference/providers/recraft' },
-      { text: 'Reve', link: '/reference/providers/reve' },
       { text: 'Runway', link: '/reference/providers/runway' },
       { text: 'Seedance', link: '/reference/providers/seedance' },
       { text: 'Seed Audio', link: '/reference/providers/seedaudio' },
@@ -163,7 +176,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 174 models, 32 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills — 201 models, 31 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
@@ -192,7 +205,7 @@ export default defineConfig({
       { text: 'Guide', link: '/guide/introduction' },
       { text: 'CLI', link: '/guide/cli-quickstart' },
       { text: 'MCP', link: '/guide/mcp-quickstart' },
-      { text: 'Media', link: '/guide/media-tools' },
+      { text: 'Media Studio', link: '/guide/media-studio/' },
       { text: 'Skills', link: '/guide/skills' },
       { text: 'Integrations', link: '/guide/integrations/' },
       { text: 'Models', link: '/reference/catalog' },
@@ -206,7 +219,7 @@ export default defineConfig({
     ],
     search: { provider: 'local' },
     footer: {
-      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Skills',
+      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Media Studio · Skills',
       copyright: '© Picsart',
     },
     editLink: {

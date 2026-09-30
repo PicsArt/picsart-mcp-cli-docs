@@ -1,11 +1,11 @@
 ---
-description: "Picsart AI Playground — generate images, video & audio with 174 AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
+description: "Picsart AI Playground — generate images, video & audio with 201 AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
 layout: home
 
 hero:
   name: Picsart AI Playground
-  text: One platform. 174 models. Every interface.
-  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 32 providers.
+  text: One platform. 201 models. Every interface.
+  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 31 providers.
   actions:
     - theme: brand
       text: Get started
@@ -28,9 +28,9 @@ features:
     details: One terminal command for the full catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
     link: /guide/cli-quickstart
   - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 174 models. Auto-save to Drive. API key auth.
+    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 201 models. Auto-save to Drive. API key auth.
     link: /guide/sdk
-  - title: 174 models, 32 providers
+  - title: 201 models, 31 providers
     details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
   - title: Error codes
@@ -98,12 +98,13 @@ Install with `npm install @picsart/ai-sdk`. Auth is an API key from your account
 
 ## Agent quickstart
 
-Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call:
+Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call. The MCP server is hosted: there is nothing to install, and you sign in to Picsart in your browser when the agent first connects.
 
 | Agent | Connect |
 |---|---|
-| Claude Code | `claude mcp add picsart-gen-ai -- gen-ai-mcp` |
-| Cursor / Windsurf / VS Code | Add `gen-ai-mcp` to MCP config |
+| Claude | Settings → Connectors → Add custom connector → `https://api.picsart.com/gen-ai/mcp` |
+| Claude Code | `claude mcp add --transport http picsart-gen-ai https://api.picsart.com/gen-ai/mcp` |
+| Cursor / Windsurf / VS Code | Add `https://api.picsart.com/gen-ai/mcp` as a remote MCP server |
 | Codex | `codex://plugins/picsart@openai-curated` |
 | ChatGPT | See [ChatGPT integration](/guide/integrations/chatgpt) |
 

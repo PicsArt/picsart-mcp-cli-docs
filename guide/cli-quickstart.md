@@ -26,7 +26,7 @@ gen-ai generate -m seedance-2.0 -p "a fox running through autumn leaves" -d 8
 gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
 ```
 
-By default the CLI submits the job, shows a progress bar, prints the result URL, and downloads the file to `./output`.
+By default the CLI submits the job, shows a progress bar, prints the result URL, downloads the file to `./output`, and saves a copy to your Picsart Drive (in a `gen-ai-cli` folder). Pass `--no-save-to-drive` to skip the Drive copy.
 
 ## Interactive mode
 
@@ -34,7 +34,7 @@ Run a command with no flags to get a guided wizard (mode → model picker → pa
 
 ```bash
 gen-ai generate         # walks you through everything
-gen-ai                  # launch the REPL with a numbered menu
+gen-ai                  # launch the interactive REPL menu
 ```
 
 ## Scripting & piping
@@ -43,28 +43,32 @@ gen-ai                  # launch the REPL with a numbered menu
 # Pipe a prompt from stdin
 echo "a neon city flyover at dusk" | gen-ai generate -m veo-3.1 -d 8 -s
 
-# Fully scripted: silent, no prompts, JSON output
-gen-ai generate -m flux-2-pro -p "a cat in a hat" --script | jq '.results[0].url'
+# Fully scripted: no prompts, JSON output
+gen-ai generate -m flux-2-pro -p "a cat in a hat" -s --json | jq -r '.url'
 ```
 
-`-s` / `--script` = `--silent --quiet --json`.
+- `-s` / `--no-input` (alias `--silent`) disables every interactive prompt and fails instead of asking. Prompts are also disabled automatically when stdin is not a terminal.
+- `--json` prints one JSON object: `{ url, model, results, durationMs }`.
+- `-q` / `--quiet` prints only the result URL.
 
 ## Common flags
 
 | Flag | Alias | Meaning |
 |---|---|---|
 | `--model` | `-m` | Model id (e.g. `flux-2-pro`) |
-| `--prompt` | `-p` | Text prompt (or pipe via stdin) |
+| `--prompt` | `-p` | Text prompt (or pipe via stdin, or `--prompt-file <path>`) |
 | `--image` | `-i` | Input image(s) — local path or URL, repeatable |
 | `--video` | `--vd` | Input video — local path or URL |
 | `--aspect-ratio` | `--ar` | e.g. `16:9`, `9:16`, `1:1` |
 | `--resolution` | `-r` | e.g. `720p`, `1080p`, `4k` |
 | `--duration` | `-d` | Video length in seconds |
 | `--count` | `-n` | Number of outputs |
-| `--download <dir>` | | Download directory (default `./output`) |
-| `--no-download` | | Print the URL only |
-| `--save-to-drive` | `--drive` | Save the result to Picsart Drive |
-| `--dry-run` | | Show the resolved payload without generating |
+| `--download <dir>` | `--out` | Download directory (default `./output`) |
+| `--[no-]save-to-drive` | `--drive` | Save the result to Picsart Drive (on by default) |
+| `--drive-folder <name>` | | Drive subfolder (default `gen-ai-cli`) |
+| `--max-cost <credits>` | | Abort before submitting if the estimated cost is higher |
+| `--poll-timeout <time>` | | How long to wait for async jobs (e.g. `45m`; default 30m for video/audio, 10m otherwise) |
+| `--no-input` | `-s` | Never prompt; fail if input is missing |
 | `--json` | | Machine-readable output |
 
 ## Explore the catalog
@@ -75,8 +79,10 @@ gen-ai models --mode video            # filter by mode
 gen-ai models --provider google       # filter by provider
 gen-ai models info seedance-2.0       # full capabilities + parameters
 gen-ai models compare kling-v3 veo-3.1
-gen-ai pricing seedance-2.0 -d 5 -r 1080p   # quote a cost before generating
+gen-ai pricing seedance-2.0 --duration 5 --resolution 1080p   # quote a cost before generating
 ```
+
+`gen-ai models` and `gen-ai pricing` show per-account pricing, so they need `gen-ai login`. `models info` and `models compare` work without signing in.
 
 ## Describe an image or video
 
@@ -95,7 +101,8 @@ gen-ai describe --video clip.mp4 -p "summarize what happens"
 
 - The prompt (`-p`) is **optional** — without it, the model gets a default "describe this" instruction.
 - Pass `-m` to pick a model (default `claude-sonnet-4-6`). Only Gemini 3 Pro accepts video, so `--video` auto-selects it unless you force a non-video model with `-m`.
-- Output goes to **stdout** (skips download/Drive). Add `--script` for clean, pipeable text — e.g. `gen-ai describe -i photo.jpg --script | pbcopy`.
+- The answer goes to **stdout** (skips download/Drive); the model/time header goes to stderr. Add `-q` to drop the header — e.g. `gen-ai describe -i photo.jpg -q | pbcopy`.
+- For a plain question with no media, use `gen-ai ask -p "..."` (image/video optional).
 
 ## More
 
@@ -112,37 +119,36 @@ Run `gen-ai models` to browse the full catalog with descriptions and pricing bad
 
 **Can I generate without downloading the file?**
 
-Yes. Add `--no-download` and the CLI prints the result URL only. Add `--script` for a clean, pipeable JSON output.
+Not with `gen-ai generate` — media results are always downloaded (to `./output`, `--download <dir>`, or the `downloadDir` you set with `gen-ai config set`). `-q` prints just the URL and `--json` returns it in a JSON object. For bulk runs, `gen-ai batch run <manifest> --no-download` records URLs in `results.json` without downloading.
 
 **How do I set the output directory?**
 
-Use `--download <path>`, e.g. `gen-ai generate -m flux-2-pro -p "x" --download ./exports`. The default is `./output`.
+Use `--download <path>`, e.g. `gen-ai generate -m flux-2-pro -p "x" --download ./exports`. The default is `./output`; change it permanently with `gen-ai config set downloadDir <path>`.
 
 **My generation is running but taking a long time. Is that normal?**
 
-The CLI shows a progress bar while polling. If it times out, the job may still be running on the server — check your Drive or retry with the same command.
+The CLI shows a progress bar while polling — up to 30 minutes for video/audio and 10 minutes for everything else (change it with `--poll-timeout`). If polling times out, the job keeps running on the server; the CLI prints its task id, and `gen-ai history` shows the entry once it finishes.
 
 **Can I pipe the result URL into another command?**
 
-Yes. Use `--script` to get clean JSON output:
+Yes. Use `--json` (or `-q` for the bare URL):
 
 ```bash
-gen-ai generate -m flux-2-pro -p "logo" --script | jq -r '.results[0].url' | xargs curl -O
+gen-ai generate -m flux-2-pro -p "logo" -s --json | jq -r '.url' | xargs curl -O
 ```
 
 **How do I generate multiple images at once?**
 
-Use `--count` (alias `-n`). Most image models accept up to 8 outputs per call:
+Use `--count` (alias `-n`). The allowed range depends on the model — check `gen-ai models info <id>`:
 
 ```bash
 gen-ai generate -m flux-2-pro -p "product concept" -n 4
 ```
 
-**What does `--dry-run` do?**
+**How do I check a request before spending credits?**
 
-It prints the resolved request payload — model, prompt, parameters — without submitting the generation or spending credits. Use it to preview what the CLI will send.
+Run `gen-ai validate -m <id>` with the payload as JSON (from stdin or `--file`) to check parameters against the model's schema, and `gen-ai pricing <id>` to quote the cost. On `generate`, `--max-cost <credits>` aborts before submitting if the estimate is higher.
 
 **Does the CLI work inside Docker or GitHub Actions?**
 
-The CLI uses an OAuth web flow that requires a browser for the initial login. For CI environments, authenticate on a developer machine first, then copy the credentials file (`~/.gen-ai/credentials.json`) to the CI environment as a secret. For REST API or SDK-based CI workflows, use an API key instead. See the [SDK](/guide/sdk) and [REST API](/guide/rest-api) pages.
-
+Yes. Install via npm in a Dockerfile, or via the install script in a CI step, and authenticate with environment variables instead of the browser login — see [Authentication](/guide/authentication#ci-and-headless-environments).

@@ -50,7 +50,7 @@ Discover the exact surface:
 
 ```bash
 gen-ai models info veo-3.1 --json          # full paramConfig
-gen-ai generate -m veo-3.1 -p "x" --dry-run  # preview the resolved payload
+gen-ai validate -m veo-3.1 --schema        # the model's parameter schema as JSON
 ```
 
 ```json
@@ -63,8 +63,8 @@ In the CLI, model-specific params are flags (`--start-frame`, `--voice`, …). V
 
 A generation returns one or more result URLs. Control delivery:
 
-- **CLI**: downloaded to `./output` by default; use `--no-download` (URL only), `--download <dir>`, or `--save-to-drive`.
-- **MCP**: `results: [{ url }]` plus a `resource_link` per output. Optionally written to Drive when enabled.
+- **CLI**: downloaded to `./output` by default (or `--download <dir>`) and saved to Picsart Drive by default (`--no-save-to-drive` to skip, `--drive-folder` to choose the folder). `-q` prints just the URL; `--json` prints `{ url, model, results, durationMs }`.
+- **MCP**: `assets: [{ id, type, url, ... }]` plus a `resource_link` per output. Media models run asynchronously by default: `picsart_generate` returns a job handle and the agent collects the result with `picsart_job_status`. Results are saved to Drive by default (`saveToDrive: false` to skip).
 
 Some models return **multiple results** from one call (e.g. an Explore model returning several images) — the result `items` array simply has more than one entry.
 
@@ -78,17 +78,11 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 { "name": "picsart_preflight", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
 ```
 
-## Supported formats
+## Formats and retention
 
-**Image inputs:** JPEG, PNG, WEBP, TIFF, BMP, HEIC. Maximum 1 GB per file.
+Accepted formats, dimensions, duration, and file-size limits vary by model. Inspect the schema with `picsart_model_params` or `gen-ai validate -m <model-id> --schema` before submitting a generation.
 
-**Image outputs:** JPEG, PNG, WEBP. HEIC is accepted as input but cannot be requested as output.
-
-**Video inputs:** MP4, MOV, WebM. Maximum 1 GB.
-
-**Result URLs:** All generated files are returned as URLs, not binary data. These URLs expire after 24 hours. If you need to keep the result, download it or save it to Picsart Drive before the window closes.
-
-For model-specific parameter constraints (aspect ratios, resolution values, duration limits), use `picsart_model_params` or `gen-ai models info <model-id>`. These vary per model and the model's schema is the authoritative source.
+Download media you need to retain. Do not assume every result URL has the same expiry or access policy. A timeout can occur after a generation was accepted; check existing jobs before resubmitting to avoid a duplicate charge. See [Errors and retries](/guide/rate-limits).
 
 ## FAQ
 
@@ -98,7 +92,7 @@ Run `gen-ai models info <id>` — it shows the input type code (`t2i`, `i2v`, et
 
 **Can I pass a local file as an input image via MCP?**
 
-MCP tools require URLs, not local file paths. Upload your file first with `picsart_drive` (action: upload, returns a Drive URL), then pass that URL as `imageUrls` in `picsart_generate`.
+MCP tools require URLs, not local file paths. Ask the agent to open the Picsart uploader (`picsart_media_upload`), or upload with `picsart_drive` (action: upload, returns a Drive URL), then pass that URL as `imageUrls` in `picsart_generate`. See [Local files → URLs](/guide/local-files).
 
 **What aspect ratios are available?**
 
@@ -114,4 +108,4 @@ When set to `true`, your prompt is rewritten by an LLM before being sent to the 
 
 **How many outputs can I request per call?**
 
-Most models accept `count` up to 8. Some models fix the output count at 1 regardless of what you pass. Check `picsart_model_params` or `gen-ai models info <id>` for the specific model.
+It depends on the model: many image models accept a `count` parameter (the CLI's `-n` takes 1–10, and each model narrows that), while others always return one output. Check `picsart_model_params` or `gen-ai models info <id>` for the specific model.
