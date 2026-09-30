@@ -19,7 +19,7 @@ REPORT_FILE = Path(__file__).parent / "validation-report.md"
 PICSART_DOMAINS = {"picsart.com", "picsart.github.io", "mcp.picsart.io", "api.picsart.com"}
 
 def extract_platform_docs_url(content: str) -> str | None:
-    match = re.search(r'Setup reference: \[[^]]+\]\((https?://[^)]+)\)', content)
+    match = re.search(r'Setup references?: \[[^]]+\]\((https?://[^)]+)\)', content)
     return match.group(1) if match else None
 
 def extract_title(content: str) -> str:

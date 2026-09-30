@@ -53,10 +53,12 @@ for(const theme of ['light','dark']) {
  await page.waitForTimeout(350)
  if(process.env.DOCS_SCREENSHOT_DIR)await page.screenshot({path:join(process.env.DOCS_SCREENSHOT_DIR,`catalog-${theme}.png`)})
 }
-await page.setViewportSize({width:390,height:844})
+for(const width of [390,768]) {
+await page.setViewportSize({width,height:844})
 for(const route of ['index.html','guide/mcp-quickstart.html','reference/providers/anthropic.html','reference/catalog.html']){
  await page.goto(new URL(route,origin).href,{waitUntil:'networkidle'})
- if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))errors.push({page:route,error:'Mobile page overflow'})
+ if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))errors.push({page:route,error:`Page overflow at ${width}px`})
+}
 }
 await browser.close()
 const report={pages:pages.map(({links,...p})=>p),localLinks,errors,textModels:expected}

@@ -20,3 +20,8 @@ assert style('Use this -- it works.')
 assert style('Launch 🚀')
 assert not style('---\ndescription: Commands\n---\nUse `--model`.\n```bash\ngen-ai generate --model flux-2-pro\n```\n|---|---|')
 print('Regression checks passed: invalid flags, missing input, enum values, prose style, preserved syntax.')
+
+extract_source=runpy.run_path(str(root/'validate-integration-docs.py'))['extract_platform_docs_url']
+for label in ('Setup reference:', 'Setup references:'):
+ assert extract_source(label+' [MCP](https://example.com/mcp)')=='https://example.com/mcp'
+print('Integration source headings: singular and plural pass.')

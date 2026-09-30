@@ -23,6 +23,14 @@ Use real command flags and model IDs. Label placeholder files, URLs, and returne
 
 Exact catalog counts are allowed when they describe the checked-in snapshot and pass `npm run check:counts`. Avoid hand-maintained counts in marketing copy. Historical release notes describe their original release, not the current catalog.
 
+## Example and output evidence
+
+Keep each example's prompt, tool payload or command, and stated aspect ratio consistent. A requested aspect ratio is not proof of the returned file's dimensions.
+
+Before adding an output gallery or a timing/credit claim, keep a reproducible generation record: date, interface and version, model ID, complete input parameters, source-asset permissions, returned job or result, output dimensions and duration, and actual credit evidence. Distinguish an estimate from a charged amount, and an observed runtime from a guarantee. Omit unknown values. Never commit credentials or private source media.
+
+Label concept artwork as illustrative. It must not be presented as a Picsart-generated result or proof of a multi-step workflow without execution evidence. Claims about brand consistency, extension length, or host coverage need their tested scope and prerequisites.
+
 ## Generated files
 
 Regenerate `.vitepress/theme/data/` and provider reference pages using the scripts documented in README. Change the generator when changing provider-page wording. `public/llms.txt` is regenerated during the build. Review generated differences alongside the source change.

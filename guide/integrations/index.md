@@ -13,7 +13,8 @@ The guides distinguish documented setup from an end-to-end sign-in test. Check t
 | [AnythingLLM](/guide/integrations/anythingllm) | Compatibility limitation documented |
 | [ChatGPT](/guide/integrations/chatgpt) | Setup checked against host documentation |
 | [Claude Code](/guide/integrations/claude-code) | Setup checked against host documentation |
-| [Codex](/guide/integrations/codex) | Setup checked against host documentation |
+| [Codex app](/guide/integrations/codex#desktop-app) | App procedure checked against host documentation |
+| [Codex CLI](/guide/integrations/codex#codex-cli) | Documentation and local command syntax checked |
 | [Copilot Studio](/guide/integrations/copilot-studio) | Setup checked against host documentation |
 | [Cursor](/guide/integrations/cursor) | Setup checked against host documentation |
 | [Dify](/guide/integrations/dify) | Setup checked against host documentation |

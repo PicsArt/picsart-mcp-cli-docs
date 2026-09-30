@@ -30,6 +30,21 @@ For another agent, first confirm its supported skill directory and format in tha
 
 [The Picsart skills page](https://picsart.com/gen-ai-skills/) describes separately distributed skills. Their names and requirements can differ from the bundled CLI skills.
 
+## Marketplace plugins are a separate installation path
+
+The bundled CLI installer above copies skill files directly. If another guide distributes skills through a Claude Code plugin marketplace, adding that marketplace only registers its source. It does not install the plugin.
+
+The [Picsart skills repository's installation guide](https://github.com/PicsArt/gen-ai-skills/blob/main/INSTALL.md) identifies `picsart@picsart` as the Claude Code plugin. To install that distribution from your terminal, complete both steps:
+
+```bash
+claude plugin marketplace add PicsArt/gen-ai-skills
+claude plugin install picsart@picsart
+```
+
+Then open `/plugin` in Claude Code and check **Installed** to confirm the plugin is present and enabled. Registration alone is not a successful install. CLI-based skills still need the Picsart CLI and its own authenticated session; plugin installation is not proof that generation is ready.
+
+The publisher's instructions and [Claude Code's plugin documentation](https://code.claude.com/docs/en/discover-plugins#install-from-your-shell) were checked September 30, 2026. Command syntax was inspected with Claude Code 2.1.278. This separate plugin distribution was not installed in a clean profile during the documentation review; the bundled CLI installer above was tested in the earlier audit.
+
 ## Verify a workflow
 
 Ask the agent to inspect the schema for `flux-2-pro` without generating. Confirm that it actually runs the installed CLI or uses a connected Picsart tool. Then ask for a cost estimate before a generation task.
