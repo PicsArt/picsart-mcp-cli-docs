@@ -18,7 +18,8 @@ for(const route of routes) {
  current=route
  if(pages.length % 20 === 0)console.log(`Opening page ${pages.length+1}/${routes.length}: ${route}`)
  const url=new URL(route,origin)
- const response=await page.goto(url.href,{waitUntil:'networkidle'})
+ const response=await page.goto(url.href,{waitUntil:'domcontentloaded'})
+ await page.locator('main, .VPHome').first().waitFor({state:'visible'})
  if(response.status()!==200)errors.push({page:route,error:'HTTP '+response.status()})
  const result=await page.evaluate(()=>({title:document.title,headings:[...document.querySelectorAll('main h1, .VPHome h1')].map(e=>e.textContent),text:document.querySelector('main, .VPHome')?.innerText.length??0,ids:[...document.querySelectorAll('[id]')].map(e=>e.id),links:[...document.querySelectorAll('a[href]')].map(e=>e.href),overflow:document.documentElement.scrollWidth>innerWidth+2}))
  if(!result.text || !result.title || !result.headings.length)errors.push({page:route,error:'Missing page title or main content'})
@@ -37,7 +38,7 @@ for(const p of pages)for(const href of p.links){
  else if(u.hash && !targets.get(key).has(decodeURIComponent(u.hash.slice(1))))errors.push({page:p.route,error:'Missing anchor '+u.pathname+u.hash})
 }
 if(process.argv[3])writeFileSync(process.argv[3],JSON.stringify({pages:pages.map(({links,...p})=>p),localLinks,errors,interactiveChecks:'pending'},null,2)+'\n')
-await page.goto(new URL('reference/catalog.html',origin).href,{waitUntil:'networkidle'})
+await page.goto(new URL('reference/catalog.html',origin).href,{waitUntil:'domcontentloaded'})
 await page.getByRole('button',{name:'text',exact:true}).click()
 const models=JSON.parse(readFileSync('.vitepress/theme/data/models.json'))
 const expected=models.filter(m=>m.mode==='text').length
@@ -56,7 +57,7 @@ for(const theme of ['light','dark']) {
 for(const width of [390,768]) {
 await page.setViewportSize({width,height:844})
 for(const route of ['index.html','guide/mcp-quickstart.html','reference/providers/anthropic.html','reference/catalog.html']){
- await page.goto(new URL(route,origin).href,{waitUntil:'networkidle'})
+ await page.goto(new URL(route,origin).href,{waitUntil:'domcontentloaded'})
  if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+2))errors.push({page:route,error:`Page overflow at ${width}px`})
 }
 }

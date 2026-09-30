@@ -8,7 +8,7 @@ NemoClaw manages MCP access for sandboxed agents. Its documented command is `nem
 
 The managed MCP setup requires a Streamable HTTP endpoint and a supported bearer credential stored through OpenShell. There is no verified procedure in this guide to provision and refresh Picsart OAuth credentials for that managed path. Do not treat the endpoint alone as a complete setup.
 
-Read [NVIDIA's managed MCP instructions](https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server) for your sandbox adapter. The Picsart endpoint is `https://api.picsart.com/gen-ai/mcp`. Configure it only after confirming the required credential flow with your deployment administrator. For interactive OAuth access now, use [Codex](/guide/integrations/codex) or [Claude Code](/guide/integrations/claude-code).
+Read [NVIDIA's managed MCP instructions](https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server) for your sandbox adapter. The Picsart endpoint is `https://api.picsart.com/gen-ai/mcp`. The documented static-credential path does not support Picsart browser OAuth. Do not substitute an SDK API key or a copied short-lived token. For interactive OAuth access now, use [Codex](/guide/integrations/codex) or [Claude Code](/guide/integrations/claude-code).
 
 ## Compatibility status
 

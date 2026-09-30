@@ -48,6 +48,14 @@ const sidebar = [
     ],
   },
   {
+    text: 'Picsart Media Studio',
+    items: [
+      { text: 'Overview', link: '/guide/media-studio/' },
+      { text: 'Tool reference', link: '/guide/media-studio/tools' },
+      { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
+    ],
+  },
+  {
     text: 'Integrations',
     collapsed: false,
     items: [

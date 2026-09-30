@@ -17,6 +17,11 @@ Catalogs can differ by release. Authenticate each interface separately and valid
 - [MCP Quickstart](https://picsart.github.io/picsart-mcp-cli-docs/guide/mcp-quickstart): connect a supported agent using hosted MCP
 - [Skills](https://picsart.github.io/picsart-mcp-cli-docs/guide/skills): instructions for agents with working execution tools
 
+## Picsart Media Studio (separate connector)
+- [Media Studio](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/): connect and compose existing assets
+- [Media Studio tools](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/tools): tool reference
+- [Media Studio troubleshooting](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-studio/troubleshooting): connection and rendering problems
+
 ## Concepts
 - [Local files](https://picsart.github.io/picsart-mcp-cli-docs/guide/local-files): upload files and supply reachable input URLs
 - [Media tools](https://picsart.github.io/picsart-mcp-cli-docs/guide/media-tools): compose, inspect, validate, and render scenes

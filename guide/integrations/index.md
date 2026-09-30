@@ -10,7 +10,7 @@ The guides distinguish documented setup from an end-to-end sign-in test. Check t
 
 | Host | Review status |
 |---|---|
-| [AnythingLLM](/guide/integrations/anythingllm) | Compatibility limitation documented |
+| [AnythingLLM Desktop](/guide/integrations/anythingllm) | OAuth bridge setup; sign-in not exercised |
 | [ChatGPT](/guide/integrations/chatgpt) | Setup checked against host documentation |
 | [Claude Code](/guide/integrations/claude-code) | Setup checked against host documentation |
 | [Codex app](/guide/integrations/codex#desktop-app) | App procedure checked against host documentation |
@@ -35,3 +35,5 @@ The guides distinguish documented setup from an end-to-end sign-in test. Check t
 | [Windsurf](/guide/integrations/windsurf) | Setup checked against host documentation |
 
 Start with a free schema check, then [validate a request before generation](/guide/mcp-quickstart).
+
+NemoClaw managed MCP requires a static credential rather than interactive OAuth. A supported Picsart connection is not established for that path or for headless AnythingLLM Docker; use an OAuth-capable host.

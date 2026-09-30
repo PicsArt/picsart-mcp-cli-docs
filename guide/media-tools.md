@@ -6,6 +6,8 @@ description: "Compose, inspect, validate, and render layered media through Picsa
 
 The `picsart_media_*` tools work with layered scene documents: media, text, timing, effects, and transitions. Use them to assemble existing assets, add captions, or render a composition. Model generation is a separate operation.
 
+These tools are also available through the separate [Media Studio connector](/guide/media-studio/). Connect and authorize that endpoint separately. Inspect each connected server's tool list rather than assuming identical availability.
+
 ## Recommended workflow
 
 1. Call `picsart_media_quickstart` for the relevant recipe.

@@ -61,6 +61,12 @@ out.push(link('MCP Quickstart', '/guide/mcp-quickstart', 'connect a supported ag
 out.push(link('Skills', '/guide/skills', 'instructions for agents with working execution tools'))
 out.push('')
 
+out.push('## Picsart Media Studio (separate connector)')
+out.push(link('Media Studio', '/guide/media-studio/', 'connect and compose existing assets'))
+out.push(link('Media Studio tools', '/guide/media-studio/tools', 'tool reference'))
+out.push(link('Media Studio troubleshooting', '/guide/media-studio/troubleshooting', 'connection and rendering problems'))
+out.push('')
+
 out.push('## Concepts')
 out.push(link('Local files', '/guide/local-files', 'upload files and supply reachable input URLs'))
 out.push(link('Media tools', '/guide/media-tools', 'compose, inspect, validate, and render scenes'))
