@@ -1,111 +1,63 @@
 ---
-description: "Picsart AI Playground — generate images, video & audio with 201 AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
 layout: home
-
+description: "Use Picsart models from a terminal, an AI agent, or an application."
 hero:
-  name: Picsart AI Playground
-  text: One platform. 201 models. Every interface.
-  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 31 providers.
+  name: Picsart CLI and MCP
+  text: Generate and edit media
+  tagline: Connect your assistant, check model inputs, and review an estimate before generating. Generation consumes Picsart credits.
   actions:
     - theme: brand
-      text: Get started
-      link: /guide/introduction
+      text: Choose an assistant
+      link: /guide/integrations/
     - theme: alt
-      text: Which tool is right for me?
-      link: /guide/which-tool
+      text: CLI quickstart
+      link: /guide/cli-quickstart
     - theme: alt
-      text: Model Catalog
+      text: Model catalog
       link: /reference/catalog
-
 features:
-  - title: AI Playground
-    details: The web and mobile app. Explore models, compare outputs, tune prompts, and generate at any scale — no setup required.
-    link: https://picsart.com/ai-playground/
-  - title: Skills and MCP
-    details: Connect Picsart to Claude, ChatGPT, Cursor, Windsurf, or any MCP-compatible agent. Generate in plain English without leaving your workflow.
+  - title: Agent tools
+    details: Connect to hosted MCP, authenticate, and validate a request before generating.
     link: /guide/integrations/
-  - title: gen-ai CLI
-    details: One terminal command for the full catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
+  - title: Terminal and scripts
+    details: Install the CLI, inspect model inputs, and run a generation or JSON batch.
     link: /guide/cli-quickstart
-  - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 201 models. Auto-save to Drive. API key auth.
+  - title: Application code
+    details: Use the TypeScript SDK or follow the HTTP API reference for your language.
     link: /guide/sdk
-  - title: 201 models, 31 providers
-    details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
+  - title: Model reference
+    details: Browse a versioned catalog and check required inputs, defaults, and limits.
     link: /reference/
+  - title: Errors and recovery
+    details: Handle authentication failures, rate limits, and jobs that outlive a client timeout.
+    link: /guide/rate-limits
+  - title: Security
+    details: Protect credentials and understand asset access and deployment requirements.
+    link: /guide/security
 ---
 
-## One platform, six ways to use it
+## Connect, verify, then create
 
-Picsart AI Playground is one model catalog — accessible from wherever you work.
+Choose your [assistant and connection guide](/guide/integrations/), complete Picsart sign-in, then ask:
 
-| Surface | Best for |
-|---|---|
-| **[AI Playground](https://picsart.com/ai-playground/)** (web / mobile) | Exploration, prompt iteration, model comparison, small-scale creative work |
-| **[Skills and MCP](/guide/integrations/)** | Generating inside Claude, ChatGPT, Cursor, Windsurf, or any AI agent |
-| **[gen-ai CLI](/guide/cli-quickstart)** | Scheduled jobs, batch catalogs, scripting, CI/CD automation |
-| **[SDK](/guide/sdk)** | Node.js/TypeScript developers building apps with type-safe, auto-polling model calls |
-| **[REST API](/guide/rest-api)** | Developers in any language (Python, Ruby, Go, PHP) building applications |
+> Use Picsart to show the parameters for flux-2-pro. Do not generate anything.
 
-All share the same model ids, the same parameters, and the same account. Discover a model in Playground, generate from a CLI script, and call it from your agent — all with the same prompt and settings.
+A schema response is a free check. Also confirm the host reports a signed-in connection; a connection link or tool listing alone does not prove authorization. Hosted MCP needs no Picsart CLI installation.
 
-Not sure which to use? Read **[Which tool is right for me?](/guide/which-tool)**
+Generation consumes Picsart credits. [Review pricing and estimate limits](/guide/pricing) before your first request; the setup check does not include a free generation or establish your client's subscription eligibility.
 
----
+## Starter requests
 
-## CLI quickstart
+Use an assistant prompt to prepare one output and review its estimate before generating:
 
-Install the CLI and generate from your terminal in under two minutes:
+- [Prepare a still image](/guide/mcp-quickstart#still-image): one ceramic-cup image at 4:3.
+- [Prepare a short video](/guide/mcp-quickstart#short-video): a five-second fox clip.
+- [Prepare spoken audio](/guide/mcp-quickstart#spoken-audio): a short welcome message.
 
-```bash
-# macOS / Linux
-curl -fsSL https://picsart.com/gen-ai-cli/install.sh | bash
+These are example requests, not a gallery of completed results. The [MCP quickstart](/guide/mcp-quickstart) explains validation, approval, and how to retrieve the resulting asset.
 
-# or npm (all platforms)
-npm install -g @picsart/gen-ai
+## Use the terminal or an application
 
-gen-ai login                        # one-time browser auth
+Follow the [CLI quickstart](/guide/cli-quickstart) for installation and terminal commands, the [TypeScript SDK guide](/guide/sdk) for application code, or the [REST API guide](/guide/rest-api) for HTTP workflows.
 
-# text to video
-gen-ai generate -m seedance-2.0 -p "a fox running through autumn leaves" -d 8
-
-# image
-gen-ai generate -m flux-2-pro -p "studio shot of a ceramic cup" --ar 4:3
-```
-
----
-
-## SDK quickstart
-
-Generate from a Node.js or TypeScript app with `@picsart/ai-sdk`:
-
-```typescript
-import { createClient } from '@picsart/ai-sdk';
-const ai = createClient({ apiKey: process.env.PICSART_API_KEY, apiUrl: 'https://api.picsart.com' });
-const result = await ai.generate('flux-2-pro', { prompt: 'studio shot of a ceramic cup', aspectRatio: '4:3' });
-console.log(result.url);
-```
-
-Install with `npm install @picsart/ai-sdk`. Auth is an API key from your account settings (not OAuth). Full details in the **[SDK guide](/guide/sdk)**.
-
----
-
-## Agent quickstart
-
-Connect Picsart to your AI agent, then generate with a natural-language instruction or a tool call. The MCP server is hosted: there is nothing to install, and you sign in to Picsart in your browser when the agent first connects.
-
-| Agent | Connect |
-|---|---|
-| Claude | Settings → Connectors → Add custom connector → `https://api.picsart.com/gen-ai/mcp` |
-| Claude Code | `claude mcp add --transport http picsart-gen-ai https://api.picsart.com/gen-ai/mcp` |
-| Cursor / Windsurf / VS Code | Add `https://api.picsart.com/gen-ai/mcp` as a remote MCP server |
-| Codex | `codex://plugins/picsart@openai-curated` |
-| ChatGPT | See [ChatGPT integration](/guide/integrations/chatgpt) |
-
-```json
-// generate an image via MCP tool call
-{ "name": "picsart_generate",
-  "arguments": { "model": "flux-2-pro", "prompt": "studio shot of a ceramic cup", "aspectRatio": "4:3" } }
-```
-
-Full details in the **[MCP Quickstart](/guide/mcp-quickstart)** and **[Integrations](/guide/integrations/)**. Browse the model catalog at **[picsart.com/ai-playground](https://picsart.com/ai-playground/)** or in the **[Model Catalog](/reference/catalog)**.
+For a browser-based creation tool, [open AI Playground](https://picsart.com/ai-playground/).

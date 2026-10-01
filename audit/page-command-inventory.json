@@ -1,0 +1,743 @@
+{
+  "counts": {
+    "pages": 87,
+    "json": 273,
+    "shell": 112,
+    "commands": 161
+  },
+  "pages": [
+    "index.md",
+    "changelog.md",
+    "guide/authentication.md",
+    "guide/batch.md",
+    "guide/cli-quickstart.md",
+    "guide/files-and-drive.md",
+    "guide/generating.md",
+    "guide/installation.md",
+    "guide/integrations/anythingllm.md",
+    "guide/integrations/chatgpt.md",
+    "guide/integrations/claude-code.md",
+    "guide/integrations/codex.md",
+    "guide/integrations/copilot-studio.md",
+    "guide/integrations/cursor.md",
+    "guide/integrations/dify.md",
+    "guide/integrations/gemini-cli.md",
+    "guide/integrations/goose.md",
+    "guide/integrations/gumloop.md",
+    "guide/integrations/hermes-agent.md",
+    "guide/integrations/index.md",
+    "guide/integrations/librechat.md",
+    "guide/integrations/lm-studio.md",
+    "guide/integrations/lobehub.md",
+    "guide/integrations/n8n.md",
+    "guide/integrations/nemoclaw.md",
+    "guide/integrations/open-webui.md",
+    "guide/integrations/openclaw.md",
+    "guide/integrations/raycast.md",
+    "guide/integrations/replit.md",
+    "guide/integrations/vscode.md",
+    "guide/integrations/windsurf.md",
+    "guide/introduction.md",
+    "guide/local-files.md",
+    "guide/mcp-quickstart.md",
+    "guide/media-tools.md",
+    "guide/pricing.md",
+    "guide/rate-limits.md",
+    "guide/rest-api.md",
+    "guide/sdk.md",
+    "guide/security.md",
+    "guide/skills.md",
+    "guide/what-is-mcp.md",
+    "guide/which-tool.md",
+    "reference/audio.md",
+    "reference/catalog.md",
+    "reference/image.md",
+    "reference/index.md",
+    "reference/providers/anthropic.md",
+    "reference/providers/async.md",
+    "reference/providers/bytedance.md",
+    "reference/providers/creatify.md",
+    "reference/providers/elevenlabs.md",
+    "reference/providers/flux.md",
+    "reference/providers/google.md",
+    "reference/providers/grok.md",
+    "reference/providers/happyhorse.md",
+    "reference/providers/heygen.md",
+    "reference/providers/hunyuan.md",
+    "reference/providers/ideogram.md",
+    "reference/providers/index.md",
+    "reference/providers/kling.md",
+    "reference/providers/ltx.md",
+    "reference/providers/luma.md",
+    "reference/providers/meta.md",
+    "reference/providers/minimax.md",
+    "reference/providers/openai.md",
+    "reference/providers/ovi.md",
+    "reference/providers/picsart.md",
+    "reference/providers/pika.md",
+    "reference/providers/pixverse.md",
+    "reference/providers/qwen.md",
+    "reference/providers/recraft.md",
+    "reference/providers/reve.md",
+    "reference/providers/runway.md",
+    "reference/providers/seedance.md",
+    "reference/providers/seedaudio.md",
+    "reference/providers/seedream.md",
+    "reference/providers/topaz.md",
+    "reference/providers/veed.md",
+    "reference/providers/videography.md",
+    "reference/providers/wan.md",
+    "reference/text.md",
+    "reference/video.md",
+    "README.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "scripts/audit-compliance-agent.md"
+  ],
+  "commands": [
+    {
+      "page": "index.md",
+      "command": "gen-ai validate -m flux-2-pro --schema"
+    },
+    {
+      "page": "guide/authentication.md",
+      "command": "gen-ai login"
+    },
+    {
+      "page": "guide/authentication.md",
+      "command": "gen-ai whoami"
+    },
+    {
+      "page": "guide/authentication.md",
+      "command": "gen-ai credits"
+    },
+    {
+      "page": "guide/authentication.md",
+      "command": "gen-ai logout"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "gen-ai batch run manifest.json --dry-run"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "gen-ai batch run manifest.json --output ./batch-output --concurrency 3"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "gen-ai batch status ./batch-output"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "gen-ai batch resume ./batch-output"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "gen-ai generate -m runway-gen4.5 -p \"subtle motion\" --input-dir ./stills/ --batch"
+    },
+    {
+      "page": "guide/batch.md",
+      "command": "  gen-ai generate -m flux-2-pro -p \"$line\" --no-input --quiet --json || break"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai validate -m flux-2-pro --schema"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai login"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai whoami"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai pricing flux-2-pro"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai generate -m flux-2-pro -p \"studio shot of a ceramic cup, soft light\" --ar 4:3"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai generate -m seedance-2.0 -p \"a fox running through autumn leaves\" -d 8"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai generate -m eleven-v3 -p \"Welcome to Picsart AI Playground.\""
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "echo \"a neon city flyover at dusk\" | gen-ai generate -m veo-3.1 -d 8 --no-input --json"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai generate -m flux-2-pro -p \"a cat in a hat\" --no-input --quiet --json"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai models --mode video"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai models --provider google"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai models info seedance-2.0 --json"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai models compare kling-v3 veo-3.1"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai pricing seedance-2.0 --duration 5 --resolution 1080p"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai describe -i photo.jpg"
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai describe -i receipt.jpg -p \"extract the total and tax\""
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "gen-ai describe --video clip.mp4 -p \"summarize what happens\""
+    },
+    {
+      "page": "guide/cli-quickstart.md",
+      "command": "echo '{\"prompt\":\"a ceramic cup\",\"aspectRatio\":\"4:3\"}' | gen-ai validate -m flux-2-pro"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai generate -m flux-2-pro -p \"a poster\" --download ./output --save-to-drive --drive-folder \"Campaign Q3\""
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai upload ./photo.jpg"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai upload ./assets/ -r"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai upload ./photo.jpg -f \"Campaign\""
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai upload-to-drive ./photo.jpg"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai list --folders"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai list --json"
+    },
+    {
+      "page": "guide/files-and-drive.md",
+      "command": "gen-ai download --folder \"Campaign\" --all --output ./downloads"
+    },
+    {
+      "page": "guide/generating.md",
+      "command": "gen-ai validate -m wan-2.7-i2v --schema"
+    },
+    {
+      "page": "guide/generating.md",
+      "command": "gen-ai generate -m wan-2.7-i2v -p \"gentle motion, drifting clouds\" --start-frame ./hero.png"
+    },
+    {
+      "page": "guide/generating.md",
+      "command": "gen-ai generate -m seedance-2.0-video-edit -p \"claymation style\" --video ./clip.mp4"
+    },
+    {
+      "page": "guide/generating.md",
+      "command": "echo '{\"prompt\":\"test\",\"duration\":99}' | gen-ai validate -m seedance-2.0"
+    },
+    {
+      "page": "guide/generating.md",
+      "command": "gen-ai history --json"
+    },
+    {
+      "page": "guide/installation.md",
+      "command": "gen-ai login"
+    },
+    {
+      "page": "guide/installation.md",
+      "command": "gen-ai whoami"
+    },
+    {
+      "page": "guide/local-files.md",
+      "command": "gen-ai upload-to-drive ./photo.jpg"
+    },
+    {
+      "page": "guide/local-files.md",
+      "command": "gen-ai upload ./assets/ -r -f \"Campaign\""
+    },
+    {
+      "page": "guide/local-files.md",
+      "command": "gen-ai list --folder \"Campaign\" --json"
+    },
+    {
+      "page": "guide/pricing.md",
+      "command": "gen-ai credits"
+    },
+    {
+      "page": "guide/pricing.md",
+      "command": "gen-ai pricing seedance-2.0 --duration 5 --resolution 1080p"
+    },
+    {
+      "page": "guide/pricing.md",
+      "command": "gen-ai pricing veo-3.1 --duration 8"
+    },
+    {
+      "page": "guide/pricing.md",
+      "command": "gen-ai pricing --mode video --json"
+    },
+    {
+      "page": "guide/skills.md",
+      "command": "gen-ai whoami"
+    },
+    {
+      "page": "guide/skills.md",
+      "command": "gen-ai install-skills"
+    },
+    {
+      "page": "guide/skills.md",
+      "command": "gen-ai check-skills"
+    },
+    {
+      "page": "reference/audio.md",
+      "command": "gen-ai models info eleven-v3 --json"
+    },
+    {
+      "page": "reference/audio.md",
+      "command": "gen-ai validate -m eleven-v3 --schema"
+    },
+    {
+      "page": "reference/audio.md",
+      "command": "gen-ai generate -m eleven-v3 -p \"Welcome to the audio guide.\""
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai models info flux-2-pro --json"
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai validate -m flux-2-pro --schema"
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai generate -m flux-2-pro -p \"A ceramic cup on a wooden table\""
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai remove-bg -i ./photo.jpg"
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai change-bg -i ./photo.jpg -p \"A sunny beach\""
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai enhance -i ./photo.jpg"
+    },
+    {
+      "page": "reference/image.md",
+      "command": "gen-ai vectorize -i ./logo.png"
+    },
+    {
+      "page": "reference/index.md",
+      "command": "gen-ai models info flux-2-pro --json"
+    },
+    {
+      "page": "reference/providers/anthropic.md",
+      "command": "gen-ai models info claude-opus-4-8 --json"
+    },
+    {
+      "page": "reference/providers/anthropic.md",
+      "command": "gen-ai validate -m claude-opus-4-8 --schema"
+    },
+    {
+      "page": "reference/providers/anthropic.md",
+      "command": "gen-ai generate -m claude-opus-4-8 --prompt \"Describe a quiet forest at sunrise in two sentences.\""
+    },
+    {
+      "page": "reference/providers/async.md",
+      "command": "gen-ai models info async-flash-v1 --json"
+    },
+    {
+      "page": "reference/providers/async.md",
+      "command": "gen-ai validate -m async-flash-v1 --schema"
+    },
+    {
+      "page": "reference/providers/async.md",
+      "command": "gen-ai generate -m async-flash-v1 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/bytedance.md",
+      "command": "gen-ai models info bytedance-omnihuman-v1.5 --json"
+    },
+    {
+      "page": "reference/providers/bytedance.md",
+      "command": "gen-ai validate -m bytedance-omnihuman-v1.5 --schema"
+    },
+    {
+      "page": "reference/providers/bytedance.md",
+      "command": "gen-ai generate -m bytedance-omnihuman-v1.5 --prompt \"A quiet forest at sunrise\" --image \"https://example.com/input.jpg\" --audio \"https://example.com/input.mp3\" --download ./output"
+    },
+    {
+      "page": "reference/providers/creatify.md",
+      "command": "gen-ai models info creatify-aurora --json"
+    },
+    {
+      "page": "reference/providers/creatify.md",
+      "command": "gen-ai validate -m creatify-aurora --schema"
+    },
+    {
+      "page": "reference/providers/creatify.md",
+      "command": "gen-ai generate -m creatify-aurora --prompt \"A quiet forest at sunrise\" --image \"https://example.com/input.jpg\" --audio \"https://example.com/input.mp3\" --download ./output"
+    },
+    {
+      "page": "reference/providers/elevenlabs.md",
+      "command": "gen-ai models info eleven-v3 --json"
+    },
+    {
+      "page": "reference/providers/elevenlabs.md",
+      "command": "gen-ai validate -m eleven-v3 --schema"
+    },
+    {
+      "page": "reference/providers/elevenlabs.md",
+      "command": "gen-ai generate -m eleven-v3 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/flux.md",
+      "command": "gen-ai models info flux-2-pro --json"
+    },
+    {
+      "page": "reference/providers/flux.md",
+      "command": "gen-ai validate -m flux-2-pro --schema"
+    },
+    {
+      "page": "reference/providers/flux.md",
+      "command": "gen-ai generate -m flux-2-pro --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/google.md",
+      "command": "gen-ai models info veo-3.1 --json"
+    },
+    {
+      "page": "reference/providers/google.md",
+      "command": "gen-ai validate -m veo-3.1 --schema"
+    },
+    {
+      "page": "reference/providers/google.md",
+      "command": "gen-ai generate -m veo-3.1 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/grok.md",
+      "command": "gen-ai models info grok-imagine-video --json"
+    },
+    {
+      "page": "reference/providers/grok.md",
+      "command": "gen-ai validate -m grok-imagine-video --schema"
+    },
+    {
+      "page": "reference/providers/grok.md",
+      "command": "gen-ai generate -m grok-imagine-video --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/happyhorse.md",
+      "command": "gen-ai models info happyhorse-1.0-t2v --json"
+    },
+    {
+      "page": "reference/providers/happyhorse.md",
+      "command": "gen-ai validate -m happyhorse-1.0-t2v --schema"
+    },
+    {
+      "page": "reference/providers/happyhorse.md",
+      "command": "gen-ai generate -m happyhorse-1.0-t2v --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/hunyuan.md",
+      "command": "gen-ai models info hunyuan-v3 --json"
+    },
+    {
+      "page": "reference/providers/hunyuan.md",
+      "command": "gen-ai validate -m hunyuan-v3 --schema"
+    },
+    {
+      "page": "reference/providers/hunyuan.md",
+      "command": "gen-ai generate -m hunyuan-v3 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/ideogram.md",
+      "command": "gen-ai models info ideogram-v4 --json"
+    },
+    {
+      "page": "reference/providers/ideogram.md",
+      "command": "gen-ai validate -m ideogram-v4 --schema"
+    },
+    {
+      "page": "reference/providers/ideogram.md",
+      "command": "gen-ai generate -m ideogram-v4 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/kling.md",
+      "command": "gen-ai models info kling-v3 --json"
+    },
+    {
+      "page": "reference/providers/kling.md",
+      "command": "gen-ai validate -m kling-v3 --schema"
+    },
+    {
+      "page": "reference/providers/kling.md",
+      "command": "gen-ai generate -m kling-v3 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/ltx.md",
+      "command": "gen-ai models info ltx-v2.3-pro --json"
+    },
+    {
+      "page": "reference/providers/ltx.md",
+      "command": "gen-ai validate -m ltx-v2.3-pro --schema"
+    },
+    {
+      "page": "reference/providers/ltx.md",
+      "command": "gen-ai generate -m ltx-v2.3-pro --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/luma.md",
+      "command": "gen-ai models info luma-ray-2 --json"
+    },
+    {
+      "page": "reference/providers/luma.md",
+      "command": "gen-ai validate -m luma-ray-2 --schema"
+    },
+    {
+      "page": "reference/providers/luma.md",
+      "command": "gen-ai generate -m luma-ray-2 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/meta.md",
+      "command": "gen-ai models info muse-image-1.0 --json"
+    },
+    {
+      "page": "reference/providers/meta.md",
+      "command": "gen-ai validate -m muse-image-1.0 --schema"
+    },
+    {
+      "page": "reference/providers/meta.md",
+      "command": "gen-ai generate -m muse-image-1.0 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/minimax.md",
+      "command": "gen-ai models info hailuo-2.3 --json"
+    },
+    {
+      "page": "reference/providers/minimax.md",
+      "command": "gen-ai validate -m hailuo-2.3 --schema"
+    },
+    {
+      "page": "reference/providers/minimax.md",
+      "command": "gen-ai generate -m hailuo-2.3 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/openai.md",
+      "command": "gen-ai models info gpt-image-2 --json"
+    },
+    {
+      "page": "reference/providers/openai.md",
+      "command": "gen-ai validate -m gpt-image-2 --schema"
+    },
+    {
+      "page": "reference/providers/openai.md",
+      "command": "gen-ai generate -m gpt-image-2 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/ovi.md",
+      "command": "gen-ai models info ovi --json"
+    },
+    {
+      "page": "reference/providers/ovi.md",
+      "command": "gen-ai validate -m ovi --schema"
+    },
+    {
+      "page": "reference/providers/ovi.md",
+      "command": "gen-ai generate -m ovi --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/picsart.md",
+      "command": "gen-ai models info picsart-change-bg --json"
+    },
+    {
+      "page": "reference/providers/picsart.md",
+      "command": "gen-ai validate -m picsart-change-bg --schema"
+    },
+    {
+      "page": "reference/providers/picsart.md",
+      "command": "gen-ai generate -m picsart-change-bg --image \"https://example.com/input.jpg\" --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/pixverse.md",
+      "command": "gen-ai models info pixverse-v6 --json"
+    },
+    {
+      "page": "reference/providers/pixverse.md",
+      "command": "gen-ai validate -m pixverse-v6 --schema"
+    },
+    {
+      "page": "reference/providers/pixverse.md",
+      "command": "gen-ai generate -m pixverse-v6 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/qwen.md",
+      "command": "gen-ai models info qwen-image-2-pro --json"
+    },
+    {
+      "page": "reference/providers/qwen.md",
+      "command": "gen-ai validate -m qwen-image-2-pro --schema"
+    },
+    {
+      "page": "reference/providers/qwen.md",
+      "command": "gen-ai generate -m qwen-image-2-pro --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/recraft.md",
+      "command": "gen-ai models info recraftv4_1 --json"
+    },
+    {
+      "page": "reference/providers/recraft.md",
+      "command": "gen-ai validate -m recraftv4_1 --schema"
+    },
+    {
+      "page": "reference/providers/recraft.md",
+      "command": "gen-ai generate -m recraftv4_1 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/runway.md",
+      "command": "gen-ai models info runway-avatar-video --json"
+    },
+    {
+      "page": "reference/providers/runway.md",
+      "command": "gen-ai validate -m runway-avatar-video --schema"
+    },
+    {
+      "page": "reference/providers/runway.md",
+      "command": "gen-ai generate -m runway-avatar-video --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/seedance.md",
+      "command": "gen-ai models info seedance-2.5 --json"
+    },
+    {
+      "page": "reference/providers/seedance.md",
+      "command": "gen-ai validate -m seedance-2.5 --schema"
+    },
+    {
+      "page": "reference/providers/seedance.md",
+      "command": "gen-ai generate -m seedance-2.5 --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/seedaudio.md",
+      "command": "gen-ai models info seed-audio-1.0-multilingual --json"
+    },
+    {
+      "page": "reference/providers/seedaudio.md",
+      "command": "gen-ai validate -m seed-audio-1.0-multilingual --schema"
+    },
+    {
+      "page": "reference/providers/seedaudio.md",
+      "command": "gen-ai generate -m seed-audio-1.0-multilingual --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/seedream.md",
+      "command": "gen-ai models info seedream-5.0-pro --json"
+    },
+    {
+      "page": "reference/providers/seedream.md",
+      "command": "gen-ai validate -m seedream-5.0-pro --schema"
+    },
+    {
+      "page": "reference/providers/seedream.md",
+      "command": "gen-ai generate -m seedream-5.0-pro --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/providers/topaz.md",
+      "command": "gen-ai models info topaz-upscale-image --json"
+    },
+    {
+      "page": "reference/providers/topaz.md",
+      "command": "gen-ai validate -m topaz-upscale-image --schema"
+    },
+    {
+      "page": "reference/providers/topaz.md",
+      "command": "gen-ai generate -m topaz-upscale-image --image \"https://example.com/input.jpg\" --download ./output"
+    },
+    {
+      "page": "reference/providers/veed.md",
+      "command": "gen-ai models info veed-fabric-v1 --json"
+    },
+    {
+      "page": "reference/providers/veed.md",
+      "command": "gen-ai validate -m veed-fabric-v1 --schema"
+    },
+    {
+      "page": "reference/providers/veed.md",
+      "command": "gen-ai generate -m veed-fabric-v1 --prompt \"A quiet forest at sunrise\" --image \"https://example.com/input.jpg\" --audio \"https://example.com/input.mp3\" --download ./output"
+    },
+    {
+      "page": "reference/providers/videography.md",
+      "command": "gen-ai models info picsart-videography --json"
+    },
+    {
+      "page": "reference/providers/videography.md",
+      "command": "gen-ai validate -m picsart-videography --schema"
+    },
+    {
+      "page": "reference/providers/videography.md",
+      "command": "gen-ai generate -m picsart-videography --image \"https://example.com/input.jpg\" --download ./output"
+    },
+    {
+      "page": "reference/providers/wan.md",
+      "command": "gen-ai models info wan-2.7-t2v --json"
+    },
+    {
+      "page": "reference/providers/wan.md",
+      "command": "gen-ai validate -m wan-2.7-t2v --schema"
+    },
+    {
+      "page": "reference/providers/wan.md",
+      "command": "gen-ai generate -m wan-2.7-t2v --prompt \"A quiet forest at sunrise\" --download ./output"
+    },
+    {
+      "page": "reference/text.md",
+      "command": "gen-ai models info claude-opus-4-8 --json"
+    },
+    {
+      "page": "reference/text.md",
+      "command": "gen-ai validate -m claude-opus-4-8 --schema"
+    },
+    {
+      "page": "reference/text.md",
+      "command": "gen-ai generate -m claude-opus-4-8 -p \"Explain the difference between a raster and a vector image.\""
+    },
+    {
+      "page": "reference/video.md",
+      "command": "gen-ai models info seedance-2.5 --json"
+    },
+    {
+      "page": "reference/video.md",
+      "command": "gen-ai validate -m seedance-2.5 --schema"
+    },
+    {
+      "page": "reference/video.md",
+      "command": "gen-ai generate -m seedance-2.5 -p \"A fox running through autumn leaves\""
+    }
+  ]
+}

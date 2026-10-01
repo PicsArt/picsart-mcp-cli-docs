@@ -1,115 +1,77 @@
 ---
-description: "Save, upload, and organize AI-generated assets in Picsart Drive from the gen-ai CLI and MCP."
+description: "Upload files, control generation delivery, and manage Picsart Drive."
 ---
 
-# Files & Drive
+# Files and Drive
 
-Generated assets — and any files you upload — live in **Picsart Drive**, your centralized cloud library. Outputs from every model land in one place, so you don't download from one tool and re-upload to another.
+Local downloads and Picsart Drive are separate destinations. Check a command's flags before assuming it saves to either destination.
 
-## Save generations to Drive
-
-**CLI:**
-
-The CLI saves every generation to Drive by default, in a `gen-ai-cli` folder:
+## Save generation results
 
 ```bash
-gen-ai generate -m flux-2-pro -p "a poster"                              # saved to Drive/gen-ai-cli
-gen-ai generate -m flux-2-pro -p "a poster" --drive-folder "Campaign Q3"  # a different folder
-gen-ai generate -m flux-2-pro -p "a poster" --no-save-to-drive           # local download only
+gen-ai generate -m flux-2-pro -p "a poster" --download ./output --save-to-drive --drive-folder "Campaign Q3"
 ```
 
-When saving, the CLI uses an LLM-generated descriptive filename and (for video, when `ffmpeg` is installed) a first-frame thumbnail — matching the web app's behavior.
+This requests a local download and a Drive save. Saving can fail independently of generation; check the result before reporting that a file was saved. Use `--no-save-to-drive` to disable Drive saving for a generation.
 
-**MCP:** generation tools write to Drive when the Drive option is enabled for the call.
+## Upload a local file
 
-## Upload
+Replace the paths with files or folders that exist:
 
 ```bash
-gen-ai upload ./photo.jpg                  # single file
-gen-ai upload ./assets/ -r                 # a whole folder, recursively
-gen-ai upload ./photo.jpg -f "Campaign"    # into a named Drive folder
-gen-ai upload ./assets/ -r --dry-run       # list what would be uploaded
-gen-ai upload ./photo.jpg --json           # { ok, files: [{ path, url, driveUid, error }] }
+gen-ai upload ./photo.jpg
+gen-ai upload ./assets/ -r
+gen-ai upload ./photo.jpg -f "Campaign"
+gen-ai upload-to-drive ./photo.jpg
 ```
 
-Over MCP, upload is an **action of the single `picsart_drive` tool** (see below). It takes either
-a chat attachment or a URL — **not a filesystem path**:
+`upload-to-drive` prints JSON with `drive_url`, `drive_uid`, and `file_name`. It infers the resource type from the file; it is not restricted to video.
 
-```json
-{ "name": "picsart_drive",
-  "arguments": { "action": "upload", "name": "Hero", "url": "https://example.com/photo.jpg" } }
+## Browse and download
+
+```bash
+gen-ai list --folders
+gen-ai list --json
+gen-ai download --folder "Campaign" --all --output ./downloads
 ```
 
-Uploading returns `result.url`, a CDN-hosted URL you can feed straight into a generation as an
-input image/video.
+The download example downloads all files in the named folder. `gen-ai download <uid>` is not supported by the tested CLI. Run `gen-ai download --help` to inspect filters and file limits.
 
-::: warning Local files need a URL first
-No MCP tool accepts a filesystem path. See **[Local files → URLs](/guide/local-files)** for the
-ways to get one: the built-in uploader, a chat attachment, a CLI upload, or (for small images) an
-inline `data:` URI.
-:::
+## MCP Drive actions
 
-## The `picsart_drive` tool
+`picsart_drive` selects an operation with `action`:
 
-There is exactly **one** Drive tool. Its behavior is selected by the required `action` parameter:
-
-| `action` | Required args | What it does |
+| Action | Inputs | Result |
 |---|---|---|
-| `list` | — | Browse a folder. `folderUid` omitted = root; `flat: true` lists every file across all folders. Paginated via `page`, `pageSize` (≤128), with optional `sort` and `type` filter |
-| `create_folder` | `name` | Create a folder. `folderUid` = parent (omit for root), optional `description` |
-| `upload` | `file` **or** `url` + `name` | Save a file. `file` is a chat attachment; `url` is an HTTPS URL or an inline `data:` URI (pushed to the CDN first). `folderUid` = destination, `type` = resource kind |
-| `move` | `itemUids` | Move items to `targetFolderUid` (omit = root) |
-| `delete` | `itemUids` | Soft-delete to trash unless `permanent: true` |
-| `update` | `itemUid`, `attributes` | Set custom key/value attributes on a file (e.g. `{ coverUrl }`) |
+| `list` | Optional `folderUid`, pagination and filters | Folder listing |
+| `create_folder` | `name`, optional parent `folderUid` | New folder |
+| `upload` | Host-provided `file`, or `url` and `name` | Saved file URL |
+| `move` | `itemUids`, optional `targetFolderUid` | Moves to destination or root |
+| `delete` | `itemUids`; `permanent` defaults to false | Moves to trash, or permanently deletes if requested |
+| `update` | `itemUid`, `attributes` | Updated file metadata |
 
-Every action returns the current folder listing (folders, files, page math) so the Drive widget
-can render. All actions require an authenticated call — Drive content is per-user.
-
-```json
-{ "name": "picsart_drive", "arguments": { "action": "list" } }
-{ "name": "picsart_drive", "arguments": { "action": "list", "folderUid": "<uid>" } }
-{ "name": "picsart_drive", "arguments": { "action": "create_folder", "name": "Campaign Q3" } }
-{ "name": "picsart_drive", "arguments": { "action": "move", "itemUids": ["<uid>"], "targetFolderUid": "<uid>" } }
-```
-
-## Browse & organize from the CLI
-
-```bash
-gen-ai list --folders                          # list Drive folders
-gen-ai list --json                             # list files as JSON ({ name, type, url, … } each)
-gen-ai list -f "Campaign" --type video --json  # one folder, one media type
-gen-ai download                                # interactive file picker
-gen-ai download -f "Campaign" --all -o ./out   # everything in a folder (default ./downloads)
-gen-ai download -f "Campaign" --list --json    # list without downloading
-```
-
-> Drive commands browse your real root folders — they are not scoped to the AI Playground folder.
-
-## Copy a remote URL into Drive
-
-To pin an asset that lives behind a short-lived or non-public URL, upload it by URL — the same
-`upload` action, with the remote URL as `url`. The returned CDN URL is stable and fetchable by
-the generation and render services.
+These actions require account authorization. The CLI has no Drive delete command; MCP does expose the `delete` action.
 
 ```json
-{ "name": "picsart_drive",
-  "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
+{"name":"picsart_drive","arguments":{"action":"list"}}
 ```
 
-## FAQ
+To save a remote file, replace the example URL with one the server can fetch:
 
-**What file types can I upload?**
+```json
+{"name":"picsart_drive","arguments":{"action":"upload","name":"ref.jpg","url":"https://example.com/ref.jpg"}}
+```
 
-`gen-ai upload` accepts images (`jpg`, `jpeg`, `png`, `webp`, `gif`, `bmp`, `tiff`, `svg`, `heic`, `heif`, `avif`), video (`mp4`, `mov`, `avi`, `mkv`, `webm`, `m4v`, `wmv`), and audio (`mp3`, `wav`, `m4a`, `aac`, `ogg`, `flac`, `wma`); other files are skipped. Filter with `-t image|video|audio`. The upload returns a URL you can immediately use as an input to a generation.
+The upload response includes `result.url`. Use it as a generation input. If `result.staleListing` is true, the folder refresh failed after the operation; check the operation result before repeating it.
 
-**Are generated files private?**
+## URL access and retention
 
-Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are time-limited signed URLs — they do not expose your files publicly. Download or save to Drive promptly if long-term access is needed.
+A URL requiring a browser login or expired signature cannot be fetched merely by copying it into a tool call. Upload the local file through the CLI or a supported host attachment, or provide a valid URL the service can access.
 
-**Does saving to Drive cost extra credits?**
+Drive listings are account-scoped. That does not guarantee that an asset URL is inaccessible to anyone holding it. Treat URLs as access-bearing data and avoid publishing private assets. Download files for retention; do not assume a universal 24-hour expiry.
 
-See [picsart.com/pricing](https://picsart.com/pricing) for current Drive pricing details.
+See [Local files and URLs](/guide/local-files) for upload choices and [Security](/guide/security) for credential handling.
 
-**Can I delete files from Drive?**
+## CLI defaults
 
-Over MCP, yes: `picsart_drive` with `action: "delete"` moves items to the trash, or erases them with `permanent: true`. The CLI does not have a delete command; manage deletion there from the [AI Playground web app](https://picsart.com/ai-playground/).
+In CLI 2.78.0, media results download to the configured `downloadDir`, or `./output` when none is configured. Drive saving is enabled by default, with folder `gen-ai-cli`. `--download` changes the local destination; `--no-save-to-drive` disables the Drive save. These settings are independent. The `generate` command in this release does not expose a `--no-download` flag, even though batch mode does.

@@ -2,17 +2,25 @@
   "name": "ai-playground-docs",
   "version": "0.1.0",
   "private": true,
-  "description": "Public developer & consumer docs for Picsart AI Playground — gen-ai CLI and MCP server reference.",
+  "description": "Public developer & consumer docs for Picsart AI Playground: gen-ai CLI and MCP server reference.",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "llms": "node scripts/build-llms.mjs",
     "check:counts": "node scripts/check-counts.mjs",
-    "build": "npm run llms && npm run check:counts && vitepress build",
+    "build": "npm run llms && npm run check:counts && npm run check:docs && npm run check:style && vitepress build",
     "preview": "vitepress preview",
-    "wiki:build": "python3 scripts/build-wiki.py"
+    "wiki:build": "python3 scripts/build-wiki.py",
+    "check:docs": "python3 scripts/check-docs.py",
+    "check:style": "python3 scripts/check-style.py",
+    "test:docs": "python3 scripts/test-doc-checks.py",
+    "check:site": "node scripts/check-site.mjs"
   },
   "devDependencies": {
+    "playwright": "1.63.0",
     "vitepress": "^1.6.3"
+  },
+  "overrides": {
+    "vite": "6.4.3"
   }
 }

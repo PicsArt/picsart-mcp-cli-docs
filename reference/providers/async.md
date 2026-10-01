@@ -1,74 +1,143 @@
 ---
-description: "Async AI on Picsart — Async Flash v1.0, a fast text-to-speech model with 100+ voices and configurable audio output. CLI + MCP examples, parameters, and official docs."
+description: "Async AI model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
-# Async
+# Async AI
 
-**Mode:** audio · **Models:** 1
+**Modes:** audio · **Models:** 1
 
-**Vendor:** Async AI · **Official API docs:** [docs.picsart.io](https://docs.picsart.io)
-
-Async AI provides **Async Flash v1.0**, a low-latency text-to-speech model with a large voice library (100+ named voices) and fine-grained control over the audio container, sample rate, encoding, and bit rate. It is exposed through Picsart's generation platform.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `async-flash-v1` | Async Flash v1.0 | `tts` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# basic text-to-speech (default voice, mp3)
-gen-ai generate -m async-flash-v1 \
-  -p "Welcome to Picsart AI Playground." -s
-
-# pick a voice and a WAV container at a higher sample rate
-gen-ai generate -m async-flash-v1 \
-  -p "Your export is ready." \
-  --voice f493c663-b272-493e-8b78-72d2262a2a8d \
-  --container wav --sample-rate 48000
+gen-ai models info async-flash-v1 --json
+gen-ai validate -m async-flash-v1 --schema
 ```
 
-> Run `gen-ai models info async-flash-v1 --json` for the full voice list (100+ voices).
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
 
-## MCP
+```bash
+gen-ai generate -m async-flash-v1 --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "async-flash-v1",
-    "prompt": "Welcome to Picsart AI Playground.",
-    "voiceId": "cca0e076-94b9-4c6d-86b7-546168f11174",
-    "container": "mp3"
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `async-flash-v1` — Async Flash v1.0
+### `async-flash-v1`
 
-[Try `async-flash-v1` in Playground ↗](https://picsart.com/ai-playground/?model=async-flash-v1)
+Async Flash v1.0; input type `tts`.
 
-Input type: `tts`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `voiceId` | `--voice` | No | catalog | Account-dependent ID; see catalog source below; default `cca0e076-b350-4966-b570-4c2fca50b525` |
+| `container` | `--container` | No | enum | `mp3`, `wav`, `raw`; default `mp3` |
+| `sampleRate` | `--sample-rate` | No | range | 8000 to 48000; default `24000` |
+| `encoding` | `--encoding` | No | enum | `pcm_s16le`, `pcm_f32le`; default `pcm_s16le` |
+| `bitRate` | `--bit-rate` | No | range | 32000 to 320000; default `192000` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `voiceId` | `--voice` | enum | 100+ voices — e.g. `cca0e076-…` (Jennie, default) · `f493c663-…` (Stella) · `317bf805-…` (Max) · `a6268eaf-…` (Elara) · `7a3ef29d-…` (Grace). Run `gen-ai models info async-flash-v1 --json` for the full list |
-| `container` | `--container` | enum | `mp3` · `wav` · `raw` (default `mp3`) |
-| `sampleRate` | `--sample-rate` | range | `8000`–`48000` (default `24000`) |
-| `encoding` | `--encoding` | enum | `pcm_s16le` · `pcm_f32le` (default `pcm_s16le`) |
-| `bitRate` | `--bit-rate` | range | `32000`–`320000` (default `192000`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-> **Notes:** `encoding` and `bitRate` apply to raw/PCM and compressed containers respectively. Voice IDs are opaque UUIDs — use the `--json` model info to map IDs to names.
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "async-ai/v1/catalog/voices"
+    },
+    "default": "cca0e076-b350-4966-b570-4c2fca50b525"
+  },
+  {
+    "key": "container",
+    "label": "Audio Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "mp3"
+      },
+      {
+        "id": "wav"
+      },
+      {
+        "id": "raw"
+      }
+    ],
+    "default": "mp3"
+  },
+  {
+    "key": "sampleRate",
+    "label": "Sample Rate",
+    "kind": "range",
+    "min": 8000,
+    "max": 48000,
+    "default": 24000
+  },
+  {
+    "key": "encoding",
+    "label": "Encoding",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "pcm_s16le"
+      },
+      {
+        "id": "pcm_f32le"
+      }
+    ],
+    "default": "pcm_s16le"
+  },
+  {
+    "key": "bitRate",
+    "label": "Bit Rate",
+    "kind": "range",
+    "min": 32000,
+    "max": 320000,
+    "default": 192000
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
 
 ## Pricing
 
-```bash
-gen-ai pricing async-flash-v1
-```
-
-Text-to-speech is priced per generation; cost is resolved per `modelId` via the backend `/options` call.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

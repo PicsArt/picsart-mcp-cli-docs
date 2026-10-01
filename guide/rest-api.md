@@ -1,22 +1,18 @@
 ---
-description: "The Picsart REST API — HTTP access to 201 models from any language. Full documentation at picsart.com/api-platform/docs/api-reference."
+description: "Find the supported Picsart HTTP API contract and authentication requirements."
 ---
 
 # REST API
 
-The Picsart REST API exposes the same 201 models as the CLI and MCP server over plain HTTP. Use it from Python, Ruby, Go, or any language that can make an HTTP request.
+Use the Picsart HTTP API when your application does not use the TypeScript SDK. Follow the [API reference](https://picsart.com/api-platform/docs/api-reference) for the current endpoint, authentication headers, workflow path, request body, and response format.
 
-Full documentation, endpoint reference, and code examples live on the API platform:
+Do not substitute a model ID for a workflow path. Models can share a workflow while requiring different parameters. Likewise, an MCP tool request is not a REST request body.
 
-**[picsart.com/api-platform/docs/api-reference](https://picsart.com/api-platform/docs/api-reference)**
+Before submitting a generation:
 
-## Quick reference
+1. Choose a workflow and copy its documented request format.
+2. Configure the credentials required by that API. A CLI login does not configure your HTTP client.
+3. Validate required media inputs and model parameters.
+4. For an asynchronous workflow, retain the returned job identifier and poll its result endpoint. Do not repeat the submission to check progress.
 
-| | |
-|---|---|
-| Base URL | `https://api.picsart.com/gw-v2` |
-| Auth | API key — `Authorization: Bearer <PICSART_API_KEY>` |
-| Sync | `POST /workflows/{workflow}/execute` |
-| Async | `POST /workflows/{workflow}/submit` + `GET /workflows/{workflow}/{id}/result` |
-
-Get your API key from [picsart.com/settings](https://picsart.com/settings). See [Authentication](/guide/authentication) for details. If you are in Node.js or TypeScript, the [SDK](/guide/sdk) wraps this API with type-safe helpers. See [Which tool is right for me?](/guide/which-tool) to compare all interfaces.
+A generation can spend credits even if your client loses the response. See [pricing](/guide/pricing), [authentication](/guide/authentication), and [timeout recovery](/guide/rate-limits) before implementing retries.

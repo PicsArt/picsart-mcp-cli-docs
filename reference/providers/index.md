@@ -1,16 +1,11 @@
 ---
-description: "All 31 AI model providers on Picsart — Google, OpenAI, Kling, ByteDance, ElevenLabs, Seed Audio, Flux, Recraft and more — with CLI and MCP examples."
-title: Providers
-aside: false
-outline: false
+description: "Browse model reference pages by provider."
 ---
 
 # Providers
 
-The **31 providers** behind Picsart AI Playground — Google, OpenAI, Kling, ByteDance, ElevenLabs, Seed Audio, Flux, Recraft and more. Each provider page lists its models with **CLI + MCP examples**, a parameters table, and links to the vendor's website and official API docs.
+These 31 providers appear in the SDK 6.18.0 snapshot. Open a page for its model IDs, inputs, examples, and parameter descriptors.
 
 <ProviderGrid />
 
----
-
-Looking for a specific model instead? Browse the full **[Model Catalog →](/reference/catalog)**.
+To find a specific model, use the [model catalog](/reference/catalog).

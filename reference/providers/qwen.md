@@ -1,101 +1,284 @@
 ---
-description: "Qwen (Alibaba) AI models on Picsart — 2 image model(s) including Qwen 2, Qwen 2 Pro. CLI + MCP examples, parameters, and official docs."
+description: "Qwen model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Qwen
 
-**Mode:** image · **Models:** 2
+**Modes:** image · **Models:** 2
 
-**Vendor:** [Qwen Cloud (Alibaba DashScope)](https://docs.qwencloud.com) · **Official API docs:** [Qwen API reference](https://www.alibabacloud.com/help/en/model-studio/qwen-api-reference)
-
-Qwen (by Alibaba) is a text-to-image family with strong typography and prompt-following. The base **Qwen 2** generates up to 1K with optional image input; **Qwen 2 Pro** adds 2K resolutions, a negative prompt, prompt enhancement, and reference-guided editing from up to 3 source images.
+This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `qwen-image-2-pro` | Qwen 2 Pro | `t2i` |
 | `qwen-image-3.0-pro` | Qwen 3.0 Pro | `t2i` |
 
-## CLI
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-# text-to-image
-gen-ai generate -m qwen-image-3.0-pro \
-  -p "a neon ramen shop sign at night, bold typography, rain reflections" -n 4
-
-# 2K with a negative prompt
-gen-ai generate -m qwen-image-2-pro \
-  -p "minimalist product poster, large serif headline" \
-  --neg "clutter, watermark" -r 2048x2048
-
-# multi-image edit: compose from up to 3 sources
-gen-ai generate -m qwen-image-2-pro \
-  -p "place the product on the marble table, soft daylight" \
-  -i ./product.png -i ./table.jpg
+gen-ai models info qwen-image-2-pro --json
+gen-ai validate -m qwen-image-2-pro --schema
 ```
 
-## MCP
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
 
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "qwen-image-3.0-pro",
-    "prompt": "a neon ramen shop sign at night, bold typography, rain reflections",
-    "count": 4
-  } }
+```bash
+gen-ai generate -m qwen-image-2-pro --prompt "A quiet forest at sunrise" --download ./output
 ```
 
+Equivalent hosted MCP request:
+
 ```json
-{ "name": "picsart_generate",
+{
+  "name": "picsart_generate",
   "arguments": {
     "model": "qwen-image-2-pro",
-    "prompt": "minimalist product poster, large serif headline",
-    "negativePrompt": "clutter, watermark",
-    "resolution": "2048x2048"
-  } }
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
+
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `qwen-image-2-pro` — Qwen 2 Pro
+### `qwen-image-2-pro`
 
-[Try `qwen-image-2-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-2-pro)
+Qwen 2 Pro; input type `t2i`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 800 characters |
+| `negativePrompt` | `--negative-prompt` | No | text | maximum 500 characters |
+| `resolution` | `--resolution` | No | enum | `2048x2048`, `2688x1536`, `1536x2688`, `2368x1728`, `1728x2368`; default `2048x2048` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`; default `1` |
+| `enhancePrompt` | `--enhance-prompt` | No | boolean | true or false; default `true` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 3 |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤800 chars) |
-| `negativePrompt` | `--neg` | text | free text |
-| `resolution` | `-r` | enum | `2048x2048` · `2688x1536` · `1536x2688` · `2368x1728` · `1728x2368` (default `2048x2048`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
-| `imageUrls` | `-i` | file | image (up to 3) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `qwen-image-3.0-pro` — Qwen 3.0 Pro
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 800
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text",
+    "maxLength": 500
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "2048x2048"
+      },
+      {
+        "id": "2688x1536"
+      },
+      {
+        "id": "1536x2688"
+      },
+      {
+        "id": "2368x1728"
+      },
+      {
+        "id": "1728x2368"
+      }
+    ],
+    "default": "2048x2048"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "enhancePrompt",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  }
+]
+```
 
-[Try `qwen-image-3.0-pro` in Playground ↗](https://picsart.com/ai-playground/?model=qwen-image-3.0-pro)
+</details>
 
-Input type: `t2i`
+### `qwen-image-3.0-pro`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤800 chars) |
-| `negativePrompt` | `--neg` | text | free text |
-| `resolution` | `-r` | enum | `2048x2048` · `2688x1536` · `1536x2688` · `2368x1728` · `1728x2368` (default `2048x2048`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
-| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
-| `imageUrls` | `-i` | file | image (up to 3) |
-| `promptExtendMode` | `--prompt-extend-mode` | enum | `direct` · `agent` (default `direct`) |
-| `enableThinking` | `--enable-thinking` | boolean | `true` · `false` (default `true`) |
+Qwen 3.0 Pro; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 800 characters |
+| `negativePrompt` | `--negative-prompt` | No | text | maximum 500 characters |
+| `resolution` | `--resolution` | No | enum | `2048x2048`, `2688x1536`, `1536x2688`, `2368x1728`, `1728x2368`; default `2048x2048` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`; default `1` |
+| `enhancePrompt` | `--enhance-prompt` | No | boolean | true or false; default `true` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 3 |
+| `seed` | `--seed` | No | range | 0 to 2147483647; step 1 |
+| `promptExtendMode` | `--prompt-extend-mode` | No | enum | `direct`, `agent`; default `direct` |
+| `enableThinking` | `--enable-thinking` | No | boolean | true or false; default `true` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 800
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text",
+    "maxLength": 500
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "2048x2048"
+      },
+      {
+        "id": "2688x1536"
+      },
+      {
+        "id": "1536x2688"
+      },
+      {
+        "id": "2368x1728"
+      },
+      {
+        "id": "1728x2368"
+      }
+    ],
+    "default": "2048x2048"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "enhancePrompt",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "promptExtendMode",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "direct"
+      },
+      {
+        "id": "agent"
+      }
+    ],
+    "default": "direct"
+  },
+  {
+    "key": "enableThinking",
+    "label": "Deep Thinking",
+    "kind": "boolean",
+    "default": true
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing qwen-image-3.0-pro
-```
-
-Cost scales with the number of images (**count**); on **Qwen 2 Pro** the chosen **resolution** is the other driver.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

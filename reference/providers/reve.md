@@ -1,7 +1,7 @@
 ---
-description: "Reve is no longer included in the current Picsart production model catalog."
+description: "Availability of reve models in the current catalog snapshot."
 ---
 
-# Reve (archived)
+# Reve
 
-Reve is not included in the production catalog exported from SDK 6.2.3. Its former model ID, `reve`, is no longer listed. This page preserves existing links; choose a current model from the [Model Catalog](/reference/catalog).
+No models from this provider appear in the `@picsart/ai-sdk 6.18.0` snapshot used by this reference. This does not establish availability in other releases. Check the [model catalog](/reference/catalog) and your connected server before choosing a replacement.

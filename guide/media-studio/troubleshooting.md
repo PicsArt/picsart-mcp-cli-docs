@@ -1,11 +1,11 @@
 ---
 title: "Media Studio troubleshooting"
-description: "What to do when Picsart Media Studio doesn't work as expected — connecting, signing in, files from your computer, blank text, credits, and previews."
+description: "What to do when Picsart Media Studio doesn't work as expected: connecting, signing in, files from your computer, blank text, credits, and previews."
 ---
 
 # Troubleshooting
 
-If something here doesn't match what you're seeing, just ask — *"why did that not work?"* Your
+If something here doesn't match what you're seeing, just ask: *"why did that not work?"* Your
 assistant can look up the recommended steps and often tell you what it hit.
 
 ## Connecting
@@ -19,7 +19,7 @@ Studio; once they have, it appears for everyone.
 **It's been added but shows as unavailable**
 
 It was most likely added to your own account on a plan that manages connectors centrally. It needs
-adding at the organization level instead — see above.
+adding at the organization level instead: see above.
 
 **Your assistant says a Media Studio tool isn't available**
 
@@ -28,7 +28,7 @@ connector's settings and sign in, then start a new conversation.
 
 **You're asked to sign in over and over**
 
-Remove the connector, add it again, and sign in once more — the second time should stick. Check the
+Reconnect through the host settings and inspect any authorization error. Check the
 address is exactly:
 
 ```
@@ -41,7 +41,7 @@ https://api.picsart.com/connectors/media-tools/mcp
 
 Ask it to **open the uploader**. Media Studio runs on Picsart's servers and has no way to reach your
 computer directly, so a file needs adding through the drop area first. Once you've dropped it in,
-ask it to carry on — the file arrives with your next message, so it may need a nudge.
+ask it to carry on: the file arrives with your next message, so it may need a nudge.
 
 **A file on your own network won't load**
 
@@ -78,23 +78,20 @@ at something that's since been replaced can quietly miss.
 
 **You got fewer preview pictures than you asked for**
 
-That's expected, not a failure — you get up to eight preview pictures per request. If you want other
-moments, ask for them in a second batch.
+Inspect the current capability limits and any warning in the response. Request other moments in a second batch.
 
 ## Credits and results
 
 **You're told you've run out of credits**
 
-Top up your Picsart account and ask again. Rendering and the video tools use credits; building,
-checking and previewing a layout don't.
+Top up your Picsart account and ask again. Check the selected tool's pricing before retrying. Confirm whether the original job was accepted before submitting another charged operation.
 
 **The result panel didn't appear**
 
-The links to the finished file are still in the reply, so you can download it from there. Files
-you've rendered are also in your Picsart Drive.
+The links to the finished file are still in the reply, so you can download it from there. Check the response for Drive-save confirmation; rendering can succeed even when saving fails.
 
 ## Still stuck?
 
-- Ask *"what can Picsart Media Studio do?"* — it can list the jobs it knows how to do
-- **[What you can do](/guide/media-studio/tools)** — every tool and what it's for
-- **[Overview](/guide/media-studio/)** — what Media Studio is, and how to connect
+- Ask *"what can Picsart Media Studio do?"*: it can list the jobs it knows how to do
+- **[What you can do](/guide/media-studio/tools)**: every tool and what it's for
+- **[Overview](/guide/media-studio/)**: what Media Studio is, and how to connect

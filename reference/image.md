@@ -1,63 +1,70 @@
 ---
-description: "66 AI image generation models on Picsart — text-to-image, editing, inpainting, vector/SVG — Nano Banana, Flux, GPT Image, Recraft, Ideogram and more."
+description: "Picsart image models, examples, and input requirements."
 ---
 
 # Image generation
 
-**66 image models** spanning text-to-image, image editing, inpainting, style transfer, background tools, upscaling, and vector/SVG output.
+The SDK 6.18.0 snapshot contains 68 image models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
 
-## Quick start
+## Inspect the inputs
 
 ```bash
-gen-ai generate -m flux-2-pro -p "studio shot of a ceramic cup, soft light" --ar 4:3
+gen-ai models info flux-2-pro --json
+gen-ai validate -m flux-2-pro --schema
+```
+
+These commands inspect metadata without submitting a generation. Follow [authentication](/guide/authentication) and [pricing](/guide/pricing) before the next step.
+
+## Generate
+
+This example consumes credits:
+
+```bash
+gen-ai generate -m flux-2-pro -p "A ceramic cup on a wooden table"
 ```
 
 ```json
-{ "name": "picsart_generate",
-  "arguments": { "model": "flux-2-pro", "prompt": "studio shot of a ceramic cup", "aspectRatio": "4:3" } }
+{
+  "name": "picsart_generate",
+  "arguments": {
+    "model": "flux-2-pro",
+    "prompt": "A ceramic cup on a wooden table",
+    "async": true
+  }
+}
 ```
 
-## Providers
+For MCP media requests, retain the returned job and [poll its status](/guide/mcp-quickstart#wait-for-the-existing-job). Replace example input paths and URLs with your own media before using an editing model.
 
-| Provider | Models | Highlights |
-|---|---|---|
-| [Google](/reference/providers/google) | Nano Banana Pro, Nano Banana 2, Nano Banana | Top-tier generation + natural-language editing, up to 4K |
-| [Flux](/reference/providers/flux) | Flux 2 Pro / Max / Flex, Flux Kontext | Crisp, controllable; reference-guided editing |
-| [OpenAI](/reference/providers/openai) | GPT Image 2.5 Flare / Sunburst, GPT Image 2, GPT Image 1.5 | Strong text rendering & instruction following |
-| [Recraft](/reference/providers/recraft) | Recraft V4.1 / V4 families incl. V4 Styles (24) | True vector / SVG output; style-reference generation |
-| [Ideogram](/reference/providers/ideogram) | P-Image, Ideogram 4.0, v3, Character | Best-in-class typography |
-| [Seedream](/reference/providers/seedream) | Seedream 5.0 Lite, 4.5 | High-detail photoreal |
-| [Qwen](/reference/providers/qwen) | Qwen 3.0 Pro, Qwen 2 Pro | Generation + reference-guided editing |
-| [Luma](/reference/providers/luma) | UNI-1, UNI-1 Max | Fast creative generation |
-| [Grok](/reference/providers/grok) | Grok Imagine 2.0, Imagine, Imagine Quality | Fast stylised generation |
-| [Hunyuan](/reference/providers/hunyuan) | Hunyuan V3 | — |
-| [Meta](/reference/providers/meta) | Muse Image 1.0 | — |
-| [Picsart](/reference/providers/picsart) | SANA-Sprint, Image Edit, Makeup, Change/Remove BG, Enhance | Picsart-native editing tools |
-| [Topaz](/reference/providers/topaz) | Topaz Image Upscale | Upscaling & restoration |
-
-## Editing shortcuts
-
-Some tasks have dedicated, task-shaped commands/tools. The MCP shortcuts auto-pick a fitting model; the CLI commands show a picker limited to fitting models (pass `-m` to choose one directly, which scripts must do):
+For CLI editing shortcuts, pass an input flag, not a positional filename:
 
 ```bash
 gen-ai remove-bg -i ./photo.jpg
-gen-ai change-bg -i ./photo.jpg -p "a sunny beach"
+gen-ai change-bg -i ./photo.jpg -p "A sunny beach"
 gen-ai enhance -i ./photo.jpg
-gen-ai vectorize -m recraft-vectorize -i ./logo.png
+gen-ai vectorize -i ./logo.png
 ```
 
-```json
-{ "name": "picsart_remove_bg", "arguments": { "imageUrls": ["https://example.com/photo.jpg"] } }
-```
+These editing commands consume credits. In MCP, use the corresponding dedicated editing tools.
 
-## Common image parameters
+## Providers
 
-| Param | CLI flag | Notes |
-|---|---|---|
-| `prompt` | `-p` | Required |
-| `aspectRatio` | `--ar` | Model-dependent set (e.g. `1:1`, `16:9`, `4:3`) |
-| `resolution` | `-r` | e.g. `1K`, `2K`, `4K` (model-dependent) |
-| `count` | `-n` | Number of outputs |
-| `imageUrls` | `-i` | Reference / input images for editing & i2i |
+- [Flux](/reference/providers/flux)
+- [Google](/reference/providers/google)
+- [Grok](/reference/providers/grok)
+- [Hunyuan](/reference/providers/hunyuan)
+- [Ideogram](/reference/providers/ideogram)
+- [Kling](/reference/providers/kling)
+- [Luma](/reference/providers/luma)
+- [Meta](/reference/providers/meta)
+- [OpenAI](/reference/providers/openai)
+- [Picsart](/reference/providers/picsart)
+- [Qwen](/reference/providers/qwen)
+- [Recraft](/reference/providers/recraft)
+- [Runway](/reference/providers/runway)
+- [Seedream](/reference/providers/seedream)
+- [Topaz](/reference/providers/topaz)
 
-Exact options vary per model — check `gen-ai models info <id>` or `picsart_model_params`.
+## Parameters
+
+Each provider page lists required inputs, accepted values, defaults, and limits for its models. A prompt is not required by every model, and counts, resolutions, duration, and file types vary. Use `picsart_model_params` for the connected server's schema and `picsart_preflight` to validate the complete request.
