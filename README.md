@@ -1,6 +1,6 @@
 # Picsart CLI & MCP — Docs
 
-Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** — generate image, video, and audio across 201 models from 31 providers, from your terminal or any AI agent. Built with [VitePress](https://vitepress.dev/).
+Public developer documentation for the **Picsart gen-ai CLI**, the **Picsart MCP server**, and drop-in **Skills** with an SDK catalog reference of 223 models from 28 providers. Built with [VitePress](https://vitepress.dev/).
 
 - **Authoritative copy:** the public repo, https://github.com/PicsArt/picsart-mcp-cli-docs — it accepts pull requests directly, so it **can and does run ahead** of the mirror below.
 - **Mirror:** `docs-site/` inside the private `ai-toolkit` monorepo. Catalog refreshes are usually authored here, but this folder goes stale the moment a PR lands publicly. **Always reconcile before publishing** — see [Publishing](#publishing).
@@ -26,7 +26,7 @@ docs-site/
   index.md                    # home (hero)
   guide/                      # getting started + CLI / MCP / Skills + concepts
   reference/                  # model reference: catalog, per-mode, per-provider
-    providers/                # one page per vendor (31)
+    providers/                # one page per vendor (28)
   public/llms.txt             # generated AI-agent site map (llmstxt.org)
   scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
   scripts/check-counts.mjs    # fails the build if prose model/provider counts drift
@@ -36,6 +36,7 @@ docs-site/
 ## Data freshness
 
 `.vitepress/theme/data/{models,providers}.json` are generated from the installed SDK catalog.
+The development dependency pins `@picsart/ai-sdk` to **6.23.0**. Run `npm ci` before export.
 Run `node scripts/export-sdk-catalog.mjs <output.json>`, then pass that file to
 `build-catalog-data.mjs` and `build-provider-pages.mjs` when the catalog changes so the Model Catalog,
 Providers grid, and the generated wiki tables stay accurate.
@@ -46,7 +47,7 @@ automatically; run it standalone with `npm run llms`. Like `robots.txt`/`sitemap
 the production GitHub Pages subpath — override with `DOCS_HOSTNAME` / `DOCS_BASE` (e.g. on a
 custom-domain move) and re-run.
 
-The hand-written counts in prose (`201 models`, `66 image models`, `31 providers`, each
+The hand-written counts in prose (`223 models`, `71 image models`, `28 providers`, each
 provider page's `**Models:** N`) are guarded by `npm run check:counts`, which recomputes the
 truth from the same JSON and fails the build on any mismatch — so a stale count can't ship.
 Run it standalone with `npm run check:counts`.

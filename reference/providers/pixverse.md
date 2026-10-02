@@ -75,8 +75,8 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
 
 ### `pixverse-v6-image` — PixVerse V6 Image
@@ -89,8 +89,8 @@ Input type: `i2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `pixverse-v6-fusion` — PixVerse V6 Fusion
@@ -103,8 +103,8 @@ Input type: `i2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
 | `imageUrls` | `-i` | file | **required** image (up to 7) |
 
@@ -118,8 +118,8 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
 
 ### `pixverse-c1-image` — PixVerse C1 Image
@@ -132,8 +132,8 @@ Input type: `i2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 
 ### `pixverse-c1-fusion` — PixVerse C1 Fusion
@@ -146,15 +146,7 @@ Input type: `i2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `quality` | `--quality` | enum | `360p` · `540p` · `720p` · `1080p` (default `540p`) |
-| `duration` | `-d` | enum | `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `5`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `4:3` · `1:1` · `3:4` · `9:16` · `2:3` · `3:2` · `21:9` (default `16:9`) |
 | `imageUrls` | `-i` | file | **required** image (up to 7) |
-
-## Pricing
-
-```bash
-gen-ai pricing pixverse-v6 --duration 8
-```
-
-Cost scales with **quality** and **duration**. Cost is resolved per `modelId` via the backend `/options` call.

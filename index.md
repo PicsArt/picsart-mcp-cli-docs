@@ -1,11 +1,11 @@
 ---
-description: "Picsart AI Playground — generate images, video & audio with 201 AI models (Sora, Veo, Kling, Flux, Nano Banana, ElevenLabs) via the web app, gen-ai CLI, MCP, TypeScript SDK, or drop-in Skills for Claude, Cursor & ChatGPT."
+description: "Picsart AI documentation for the web app, gen-ai CLI, MCP, TypeScript SDK, and Skills. Browse 223 AI models in the SDK catalog."
 layout: home
 
 hero:
   name: Picsart AI Playground
-  text: One platform. 201 models. Every interface.
-  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 31 providers.
+  text: One platform. An SDK catalog of 223 models.
+  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 28 providers.
   actions:
     - theme: brand
       text: Get started
@@ -25,13 +25,13 @@ features:
     details: Connect Picsart to Claude, ChatGPT, Cursor, Windsurf, or any MCP-compatible agent. Generate in plain English without leaving your workflow.
     link: /guide/integrations/
   - title: gen-ai CLI
-    details: One terminal command for the full catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
+    details: One terminal command for the installed CLI catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
     link: /guide/cli-quickstart
   - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. One `generate()` call for all 201 models. Auto-save to Drive. API key auth.
+    details: Type-safe model-aware calls from Node.js apps. SDK catalog coverage of 223 models. Auto-save to Drive. API key auth.
     link: /guide/sdk
-  - title: 201 models, 31 providers
-    details: Sora, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
+  - title: 223 models, 28 providers
+    details: LTX, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
 ---
 

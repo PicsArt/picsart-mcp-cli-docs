@@ -1,10 +1,10 @@
 ---
-description: "27 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
+description: "30 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
 ---
 
 # Text & analysis
 
-**27 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
+**30 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
 
 ## Quick start
 

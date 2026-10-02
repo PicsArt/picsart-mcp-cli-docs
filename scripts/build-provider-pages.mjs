@@ -62,7 +62,16 @@ const OBJECT_VALUE = {
 
 const code = (v) => '`' + v + '`'
 const flagFor = (key) => flagMap[key] ?? '`--' + key.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()) + '`'
-const typeCell = (p) => (p.kind === 'object' ? 'object[]' : p.kind)
+const typeCell = (param) => param.kind === 'object'
+  ? (param.array ? 'object[]' : 'object')
+  : param.kind
+
+function paramFlags(param) {
+  const fields = Object.keys(param.fields ?? {})
+  if (param.kind !== 'object' || fields.length < 2) return flagFor(param.key)
+  const kebab = (value) => value.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/_/g, '-').toLowerCase()
+  return fields.map((field) => code(`--${kebab(param.key)}-${kebab(field)}`)).join(' · ')
+}
 
 // `catalog` params are unlike every other kind: their allowed values are not in
 // the SDK catalog at all — they are fetched at runtime from a workflow endpoint
@@ -110,7 +119,7 @@ function valueCell(p, model) {
 
 function genParamsBlock(model) {
   const rows = (model.params ?? [])
-    .map((p) => `| ${code(p.key)} | ${flagFor(p.key)} | ${typeCell(p)} | ${valueCell(p, model)} |`)
+    .map((p) => `| ${code(p.key)} | ${paramFlags(p)} | ${typeCell(p)} | ${valueCell(p, model)} |`)
     .join('\n')
   return (
     `### ${code(model.id)} — ${model.name}\n\n` +

@@ -59,7 +59,7 @@ Claude Code picks the model, constructs the command, runs it, and returns the re
 
 ### What the skill can access
 
-The `gen-ai-use` skill gives Claude Code access to all **201 models** across image, video, and audio. Browse them at [picsart.com/ai-playground](https://picsart.com/ai-playground/) or run:
+The `gen-ai-use` skill lets Claude Code use the models available in its installed CLI. The SDK catalog reference covers **223 models**. Browse them at [picsart.com/ai-playground](https://picsart.com/ai-playground/) or run:
 
 ```bash
 gen-ai models

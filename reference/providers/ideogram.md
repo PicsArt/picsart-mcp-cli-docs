@@ -1,19 +1,24 @@
 ---
-description: "Ideogram AI models on Picsart — 4 image model(s) including Ideogram P-Image, Ideogram 4.0, and Ideogram v3. CLI + MCP examples, parameters, and official docs."
+description: "Ideogram AI models on Picsart — 6 image model(s) including Ideogram 4.5, Precise Edit, and Ideogram P-Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Ideogram
 
-**Mode:** image · **Models:** 4
+**Mode:** image · **Models:** 6
 
 **Vendor:** [Ideogram](https://ideogram.ai) · **Official API docs:** [Ideogram API Reference](https://developer.ideogram.ai/api-reference)
 
 **Ideogram P-Image** is the generally available tiered text-to-image model with outputs up to 2K and four speed/quality levels. Ideogram 4.0 and v3 provide strong typography and in-image text rendering, while **Ideogram Character** carries a reference subject across generations.
 
+Ideogram 4.5 supports image generation and iterative edits with up to four references.
+Precise Edit changes a selected area while it preserves the rest of the image.
+
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
+| `ideogram-4-5` | Ideogram 4.5 | `t2i` |
+| `ideogram-4-5-precise-edit` | Ideogram 4.5 Precise Edit | `i2i` |
 | `ideogram-v4` | Ideogram 4.0 | `t2i` |
 | `ideogram-p-image` | Ideogram P-Image | `t2i` |
 | `ideogram-v3` | Ideogram v3 | `t2i` |
@@ -59,6 +64,42 @@ gen-ai generate -m ideogram-character \
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `ideogram-4-5` — Ideogram 4.5
+
+[Try `ideogram-4-5` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-4-5)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `mask` | `--mask` | file | image |
+| `aspectRatio` | `--ar` | enum | `auto` · `source` · `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `5:4` · `4:5` · `8:5` · `5:8` · `2:1` · `1:2` · `3:1` · `1:3` (default `auto`) |
+| `resolution` | `-r` | enum | `1K` · `2K` (default `2K`) |
+| `magicPrompt` | `--magic-prompt` | enum | `auto` (Auto) · `on` (On) · `off` (Off (verbatim)) (default `auto`) |
+| `quality` | `--quality` | enum | `very_low` · `low` · `medium` · `high` (default `high`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
+
+### `ideogram-4-5-precise-edit` — Ideogram 4.5 Precise Edit
+
+[Try `ideogram-4-5-precise-edit` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-4-5-precise-edit)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `startFrame` | `--start-frame` | file | **required** image |
+| `mask` | `--mask` | file | image |
+| `imageUrls` | `-i` | file | image (up to 4) |
+| `quality` | `--quality` | enum | `very_low` · `low` · `medium` · `high` (default `medium`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `enableCopyrightDetection` | `--enable-copyright-detection` | boolean | `true` · `false` (default `false`) |
 
 ### `ideogram-v4` — Ideogram 4.0
 

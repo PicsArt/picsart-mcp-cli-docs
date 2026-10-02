@@ -7,6 +7,15 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-10-02
+
+**SDK 6.23.0 catalog refresh — 223 production models across 28 providers.**
+The comparison with the last published catalog adds 22 models and removes none.
+Additions include Flux 3 Image, Ideogram 4.5, GPT-6, LTX 2.5, Eleven v4, and Gemini 3.8 speech models.
+Seedance, Seedream, and Seed Audio now sit under ByteDance; their model IDs remain unchanged.
+Provider tables include current parameters. Preview models remain excluded.
+See the [complete model list and availability notes](/guide/sdk-6-23-update).
+
 ## 2026-09-29
 
 **MCP docs corrected to match the live server.** The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`. Agents connect to it over HTTP and sign in to Picsart in the browser, so it needs **no gen-ai CLI, no `gen-ai login` and no API key**. Earlier pages described a local `gen-ai-mcp` command, required the CLI as a prerequisite, or pointed some integrations at a different address with an API key. All of those instructions were wrong and have been replaced on the [MCP Quickstart](/guide/mcp-quickstart), [Installation](/guide/installation), [Authentication](/guide/authentication) and every [integration guide](/guide/integrations/). The tool catalog also drops `picsart_music_studio` (not available), adds the viewing and progress tools, and fixes the `picsart_remove_bg` example (it takes one `image` URL). AnythingLLM Desktop now connects through the `mcp-remote` bridge, and the [integrations index](/guide/integrations/) lists every supported agent plus the ones that cannot connect yet (NemoClaw, AnythingLLM Docker).

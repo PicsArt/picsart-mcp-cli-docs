@@ -4,7 +4,7 @@ description: "Connect Picsart to Goose: add the hosted Picsart MCP server as a r
 
 # Goose
 
-Goose is an open-source AI agent that supports MCP servers as extensions ([Goose extensions documentation](https://goose-docs.ai/docs/getting-started/using-extensions/)). The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`, so you add it to Goose as a remote (Streamable HTTP) extension. There is nothing to install locally. Add it once and Goose can generate image, video, and audio across 201 models from any session.
+Goose is an open-source AI agent that supports MCP servers as extensions ([Goose extensions documentation](https://goose-docs.ai/docs/getting-started/using-extensions/)). The Picsart MCP server is hosted at `https://api.picsart.com/gen-ai/mcp`, so you add it to Goose as a remote (Streamable HTTP) extension. There is nothing to install locally. Add it once and Goose can generate image, video, and audio with models available on the MCP server from any session.
 
 ## Prerequisites
 
@@ -128,7 +128,7 @@ Yes. Both draw from the same Picsart credit balance when you sign in with the sa
 
 **Which models work in Goose?**
 
-All 201 models in the catalog. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+Availability depends on the MCP server version. The SDK catalog reference covers 223 models. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
 
 ## Start creating
 

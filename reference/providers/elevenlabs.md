@@ -1,27 +1,33 @@
 ---
-description: "ElevenLabs AI models on Picsart — 11 audio model(s) including Eleven Audio Isolation, Eleven Dubbing, Eleven Multilingual STS v2. CLI + MCP examples, parameters, and official docs."
+description: "ElevenLabs AI models on Picsart — 17 audio and text models, including Eleven v4, Dialogue v4, Scribe v2, and Video to Music. CLI + MCP examples, parameters, and official docs."
 ---
 
 # ElevenLabs
 
-**Mode:** audio · **Models:** 11
+**Modes:** audio · text · **Models:** 17
 
 **Vendor:** [elevenlabs.io](https://elevenlabs.io) · **Official API docs:** [API reference](https://elevenlabs.io/docs/api-reference)
 
-ElevenLabs is the most complete audio suite in the catalog: expressive text-to-speech, multilingual narration, music, sound effects, voice design, dubbing, speech-to-speech conversion, and audio isolation.
+ElevenLabs supports speech, dialogue, music, sound effects, voice design, dubbing, voice conversion, audio isolation, and transcription. **Eleven v4** and **v4 Turbo** generate speech. **Dialogue v4** creates conversations with multiple speakers. **Scribe v2** transcribes audio or video. **Video to Music** creates a soundtrack for a video.
 
 ## Models
 
 | id | Name | Input type | Notes |
 |---|---|---|---|
-| `eleven-v3` | Eleven v3 | `tts` | Most expressive TTS |
-| `eleven-multilingual-v2` | Eleven Multilingual v2 | `tts` | Many languages |
+| `eleven-v4` | Eleven v4 | `tts` | Expressive speech in 90+ languages |
+| `eleven-v4-turbo` | Eleven v4 Turbo | `tts` | Faster v4 speech |
+| `eleven-v3` | Eleven v3 | `tts` | Previous-generation expressive speech |
+| `eleven-multilingual-v2` | Eleven Multilingual v2 | `tts` | Speech in 29+ languages |
+| `eleven-dialogue-v4` | Eleven Dialogue v4 | `tts` | Multi-speaker dialogue with the v4 engine |
+| `eleven-text-to-dialogue` | Eleven Dialogue v3 | `tts` | Multi-speaker dialogue with the v3 engine |
 | `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` | Sound effects |
-| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Music generation |
-| `eleven-sts-v2` | Eleven STS v2 | `sts` | Speech-to-speech |
-| `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual STS |
-| `eleven-audio-isolation` | Eleven Audio Isolation | `sts` | Isolate voice from noise |
-| `eleven-dubbing` | Eleven Dubbing | `sts` | Dub a track |
+| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Music with vocals or instrumental music |
+| `eleven-speech-to-text` | Eleven Scribe v2 | `a2t` | Transcription with word timings and speaker labels |
+| `eleven-video-to-music` | Eleven Video to Music | `v2a` | Generate a soundtrack for a video |
+| `eleven-sts-v2` | Eleven STS v2 | `sts` | Voice conversion |
+| `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual voice conversion |
+| `eleven-audio-isolation` | Eleven Audio Isolation | `sts` | Isolate vocals from noise |
+| `eleven-dubbing` | Eleven Dubbing | `sts` | Dub audio or video |
 | `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
 | `eleven-voice-design-v2` | Eleven Voice Design Multilingual v2 | `tts` | Multilingual voice design |
 | `eleven-voice-create` | Eleven Voice Previews | `tts` | Preview voices |
@@ -54,6 +60,36 @@ gen-ai generate -m elevenlabs-music-v2 -p "uplifting cinematic orchestral score"
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
 
+### `eleven-v4` — Eleven v4
+
+[Try `eleven-v4` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-v4)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-v4 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `withTimestamps` | `--with-timestamps` | boolean | `true` · `false` (default `false`) |
+
+### `eleven-v4-turbo` — Eleven v4 Turbo
+
+[Try `eleven-v4-turbo` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-v4-turbo)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-v4-turbo --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `withTimestamps` | `--with-timestamps` | boolean | `true` · `false` (default `false`) |
+
 ### `eleven-v3` — Eleven v3
 
 [Try `eleven-v3` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-v3)
@@ -63,9 +99,14 @@ Input type: `tts`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | **required** (≤500 chars) |
-| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-v3 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |
+| `speed` | `--speed` | range | `0.1`–`5`, step 0.05 |
+| `useSpeakerBoost` | `--use-speaker-boost` | boolean | `true` · `false` (default `true`) |
+| `withTimestamps` | `--with-timestamps` | boolean | `true` · `false` (default `false`) |
 
 ### `eleven-multilingual-v2` — Eleven Multilingual v2
 
@@ -75,10 +116,41 @@ Input type: `tts`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-multilingual-v2 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |
+| `speed` | `--speed` | range | `0.1`–`5`, step 0.05 |
+| `useSpeakerBoost` | `--use-speaker-boost` | boolean | `true` · `false` (default `true`) |
+| `withTimestamps` | `--with-timestamps` | boolean | `true` · `false` (default `false`) |
+
+### `eleven-dialogue-v4` — Eleven Dialogue v4
+
+[Try `eleven-dialogue-v4` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-dialogue-v4)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `dialogue` | `--dialogue-voice-id` · `--dialogue-text` | object[] | `{voiceId, text}` |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarity` | `--similarity` | range | `0`–`1`, step 0.05 |
 | `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | **required** (≤500 chars) |
-| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `seed` | `--seed` | range | `0`–`4294967295`, step 1 |
+
+### `eleven-text-to-dialogue` — Eleven Dialogue v3
+
+[Try `eleven-text-to-dialogue` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-text-to-dialogue)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `dialogue` | `--dialogue-voice-id` · `--dialogue-text` | object[] | `{voiceId, text}` |
+| `stability` | `--stability` | enum | `0` (Creative) · `0.5` (Natural) · `1` (Robust) (default `0.5`) |
+| `language` | `--language` | text | free text |
+| `seed` | `--seed` | range | `0`–`4294967295`, step 1 |
 
 ### `elevenlabs-sfx` — ElevenLabs SFX v2
 
@@ -103,6 +175,33 @@ Input type: `music`
 | `duration` | `-d` | enum | `10` · `20` · `30` · `60` · `120` · `180` · `300` · `600` (default `30`) |
 | `isInstrumental` | `--is-instrumental` | boolean | `true` · `false` (default `false`) |
 
+### `eleven-speech-to-text` — Eleven Scribe v2
+
+[Try `eleven-speech-to-text` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-speech-to-text)
+
+Input type: `a2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `audioUrl` | `-a` | file | **required** audio |
+| `language` | `--language` | text | free text |
+| `diarize` | `--diarize` | boolean | `true` · `false` (default `false`) |
+| `numSpeakers` | `--num-speakers` | range | `1`–`32`, step 1 (default `1`) |
+| `timestampsGranularity` | `--timestamps-granularity` | enum | `word` · `character` (default `word`) |
+| `tagAudioEvents` | `--tag-audio-events` | boolean | `true` · `false` (default `false`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+
+### `eleven-video-to-music` — Eleven Video to Music
+
+[Try `eleven-video-to-music` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-video-to-music)
+
+Input type: `v2a`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `videoUrls` | `--video-urls` | file | **required** video (up to 10) |
+| `prompt` | `-p` | text | free text (≤1000 chars) |
+
 ### `eleven-sts-v2` — Eleven STS v2
 
 [Try `eleven-sts-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-sts-v2)
@@ -112,8 +211,12 @@ Input type: `sts`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `audioUrl` | `-a` | file | **required** audio |
-| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
-| `removeBackgroundNoise` | `--remove-bg-noise` | boolean | `true` · `false` (default `false`) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-sts-v2 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `removeBackgroundNoise` | `--remove-background-noise` | boolean | `true` · `false` (default `false`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |
+| `speed` | `--speed` | range | `0.1`–`5`, step 0.05 |
 
 ### `eleven-multilingual-sts-v2` — Eleven Multilingual STS v2
 
@@ -124,10 +227,12 @@ Input type: `sts`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `audioUrl` | `-a` | file | **required** audio |
-| `voiceId` | `--voice` | enum | `JBFqnCBsd6RMkjVDRZzb` (George) · `EkK5I93UQWFDigLMpZcX` (James) · `RILOU7YmBhvwJGDGjNmP` (Jane) · `Z3R5wn05IrDiVCyEkUrK` (Arabella) · `NNl6r8mD7vthiJatiJt1` (Bradford) · `Bj9UqZbhQsanLzgalpEG` (Austin) · `exsUS4vynmxd379XN4yO` (Blondie) · `BpjGufoPiobT79j2vtj4` (Priyanka) · `kdmDKE6EkgrWrrykO9Qt` (Alexandra) · `1SM7GgM6IMuvQlz2BwM3` (Mark) · `ouL9IsyrSnUkCmfnD02u` (Grimblewood) · `5l5f8iK3YPeGga21rQIX` (Adeline) · `scOwDtmlUjD3prqpp97I` (Sam) · `19STyYD15bswVz51nqLf` (Samara) · `BZgkqPqms7Kj9ulSkVzn` (Eve) · `wo6udizrrtpIxWGp2qJk` (Northern Terry) · `yjJ45q8TVCrtMhEKurxY` (Dr. Von Fusion) · `gU0LNdkMOQCOrPrwtbee` (Football Announcer) · `DGzg6RaUqxGRTHSBjfgF` (Drill Sergeant) · `x70vRnQBMBu4FAYhjJbO` (Nathan Fence) (default `JBFqnCBsd6RMkjVDRZzb`) |
-| `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `removeBackgroundNoise` | `--remove-bg-noise` | boolean | `true` · `false` (default `false`) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-multilingual-sts-v2 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
+| `removeBackgroundNoise` | `--remove-background-noise` | boolean | `true` · `false` (default `false`) |
+| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
+| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
+| `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |
+| `speed` | `--speed` | range | `0.1`–`5`, step 0.05 |
 
 ### `eleven-audio-isolation` — Eleven Audio Isolation
 

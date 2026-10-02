@@ -1,10 +1,10 @@
 ---
-description: "Recraft AI models on Picsart — 24 image model(s) including Recraft Creative Upscale, Recraft Crisp Upscale, Recraft Explore. CLI + MCP examples, parameters, and official docs."
+description: "Recraft AI models on Picsart — 25 image model(s) including Recraft Creative Upscale, Recraft Crisp Upscale, Recraft Explore. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Recraft
 
-**Mode:** image · **Models:** 24
+**Mode:** image · **Models:** 25
 
 **Vendor:** [Recraft](https://www.recraft.ai) · **Official API docs:** [recraft.ai/docs](https://www.recraft.ai/docs)
 
@@ -18,6 +18,7 @@ Recraft is a design-focused image model with strong text rendering, long prompts
 | `recraftv4_1_pro` | Recraft V4.1 Pro | `t2i` |
 | `recraftv4_1_utility` | Recraft V4.1 Utility | `t2i` |
 | `recraftv4_1_utility_pro` | Recraft V4.1 Utility Pro | `t2i` |
+| `recraftv4_1_flash` | Recraft V4.1 Flash | `t2i` |
 | `recraftv4_1_vector` | Recraft V4.1 Vector | `t2i` |
 | `recraftv4_1_pro_vector` | Recraft V4.1 Pro Vector | `t2i` |
 | `recraftv4_1_utility_vector` | Recraft V4.1 Utility Vector | `t2i` |
@@ -134,6 +135,18 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 1) |
 | `imageWeight` | `--weight` | range | `0`–`100`, step 5 (default `80`) |
+
+### `recraftv4_1_flash` — Recraft V4.1 Flash
+
+[Try `recraftv4_1_flash` in Playground ↗](https://picsart.com/ai-playground/?model=recraftv4_1_flash)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤10000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `2:1` · `1:2` (default `1:1`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` (default `1`) |
 
 ### `recraftv4_1_vector` — Recraft V4.1 Vector
 

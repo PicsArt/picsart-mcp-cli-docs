@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 10 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 12 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · **Models:** 10
+**Modes:** video · audio · **Models:** 12
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -24,6 +24,8 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `minimax-h3-max` | MiniMax H3 Max | `t2v` |
 | `minimax-h3-max-turbo` | MiniMax H3 Max Turbo | `t2v` |
 | `minimax-h3-max-camera-controls` | MiniMax H3 Max Camera Controls | `i2v` |
+| `minimax-h3-max-lip-sync` | MiniMax H3 Max Lip Sync | `i2v` |
+| `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
 
 ## CLI
 
@@ -126,13 +128,14 @@ Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** |
+| `prompt` | `-p` | text | **required** (≤7000 chars) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |
-| `imageUrls` | `-i` | file | image (up to 3) |
-| `videoUrls` | `--video-urls` | file | video (up to 1) |
-| `audioUrls` | `--audio-urls` | file | audio (up to 1) |
-| `duration` | `-d` | enum | `5` · `10` · `15` (default `5`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `768P` · `2K` (default `2K`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
 | `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `adaptive`) |
 
 ### `minimax-music-v2` — MiniMax Music v2
@@ -175,13 +178,16 @@ Input type: `t2v`
 
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
-| `prompt` | `-p` | text | **required** |
+| `prompt` | `-p` | text | **required** (≤50000 chars) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |
-| `resolution` | `-r` | enum | `480p` · `768p` (default `768p`) |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` (default `768p`) |
 | `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
-| `aspectRatio` | `--ar` | enum | `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
-| `promptExpansionMode` | `--prompt-expansion-mode` | enum | `disabled` · `balanced` · `quality` (default `balanced`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `promptExpansionMode` | `--prompt-expansion-mode` | enum | `balanced` · `quality` (default `balanced`) |
 | `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
 
@@ -219,6 +225,39 @@ Input type: `i2v`
 | `promptExpansionMode` | `--prompt-expansion-mode` | enum | `balanced` · `quality` (default `balanced`) |
 | `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-max-lip-sync` — MiniMax H3 Max Lip Sync
+
+[Try `minimax-h3-max-lip-sync` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-lip-sync)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `startFrame` | `--start-frame` | file | **required** image |
+| `audioUrl` | `-a` | file | **required** audio |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` · `2k` (default `768p`) |
+| `enableTranscription` | `--enable-transcription` | boolean | `true` · `false` (default `false`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-max-extend` — MiniMax H3 Max Extend
+
+[Try `minimax-h3-max-extend` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-extend)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `videoUrl` | `--video` | file | **required** video |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `output` | `--output` | enum | `extended` (Source + continuation) · `continuation` (Continuation only) (default `extended`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `auto`) |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` · `2k` (default `768p`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 
 ## Pricing
 

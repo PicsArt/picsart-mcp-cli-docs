@@ -77,6 +77,139 @@
     "inputType": "v2v"
   },
   {
+    "id": "seed-audio-1.0",
+    "name": "Seed Audio",
+    "provider": "bytedance",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "seed-audio-1.0-multilingual",
+    "name": "Seed Audio Multilingual",
+    "provider": "bytedance",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "seedance-2.0",
+    "name": "Seedance 2.0",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "seedance-2.0-fast",
+    "name": "Seedance 2.0 Fast",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "seedance-2.0-fast-video-edit",
+    "name": "Seedance 2.0 Fast Video Edit",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.0-fast-video-extend",
+    "name": "Seedance 2.0 Fast Video Extend",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.0-mini",
+    "name": "Seedance 2.0 Mini",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "seedance-2.0-mini-video-edit",
+    "name": "Seedance 2.0 Mini Video Edit",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.0-mini-video-extend",
+    "name": "Seedance 2.0 Mini Video Extend",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.0-video-edit",
+    "name": "Seedance 2.0 Video Edit",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.0-video-extend",
+    "name": "Seedance 2.0 Video Extend",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.5",
+    "name": "Seedance 2.5",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "seedance-2.5-video-edit",
+    "name": "Seedance 2.5 Video Edit",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedance-2.5-video-extend",
+    "name": "Seedance 2.5 Video Extend",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "seedream-4.5",
+    "name": "Seedream 4.5",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-4.7",
+    "name": "Seedream 4.7",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.0-flash",
+    "name": "Seedream 5.0 Flash",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.0-lite",
+    "name": "Seedream 5.0 Lite",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.0-pro",
+    "name": "Seedream 5.0 Pro",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
     "id": "creatify-aurora",
     "name": "Creatify Aurora HD",
     "provider": "creatify",
@@ -84,11 +217,25 @@
     "inputType": "i2v"
   },
   {
+    "id": "creatify-boreal",
+    "name": "Creatify Boreal",
+    "provider": "creatify",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "eleven-audio-isolation",
     "name": "Eleven Audio Isolation",
     "provider": "elevenlabs",
     "mode": "audio",
     "inputType": "sts"
+  },
+  {
+    "id": "eleven-dialogue-v4",
+    "name": "Eleven Dialogue v4",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "tts"
   },
   {
     "id": "eleven-dubbing",
@@ -112,6 +259,13 @@
     "inputType": "tts"
   },
   {
+    "id": "eleven-speech-to-text",
+    "name": "Eleven Scribe v2",
+    "provider": "elevenlabs",
+    "mode": "text",
+    "inputType": "a2t"
+  },
+  {
     "id": "eleven-sts-v2",
     "name": "Eleven STS v2",
     "provider": "elevenlabs",
@@ -119,11 +273,39 @@
     "inputType": "sts"
   },
   {
+    "id": "eleven-text-to-dialogue",
+    "name": "Eleven Dialogue v3",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
     "id": "eleven-v3",
     "name": "Eleven v3",
     "provider": "elevenlabs",
     "mode": "audio",
     "inputType": "tts"
+  },
+  {
+    "id": "eleven-v4",
+    "name": "Eleven v4",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "eleven-v4-turbo",
+    "name": "Eleven v4 Turbo",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "eleven-video-to-music",
+    "name": "Eleven Video to Music",
+    "provider": "elevenlabs",
+    "mode": "audio",
+    "inputType": "v2a"
   },
   {
     "id": "eleven-voice-create",
@@ -177,6 +359,13 @@
   {
     "id": "flux-2-pro",
     "name": "Flux 2 Pro",
+    "provider": "flux",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "flux-3-image",
+    "name": "Flux 3 Image",
     "provider": "flux",
     "mode": "image",
     "inputType": "t2i"
@@ -299,6 +488,20 @@
     "provider": "google",
     "mode": "text",
     "inputType": "i2t"
+  },
+  {
+    "id": "gemini-3.8-flash-lite-tts",
+    "name": "Gemini 3.8 Flash Lite TTS",
+    "provider": "google",
+    "mode": "audio",
+    "inputType": "tts"
+  },
+  {
+    "id": "gemini-3.8-flash-tts",
+    "name": "Gemini 3.8 Flash TTS",
+    "provider": "google",
+    "mode": "audio",
+    "inputType": "tts"
   },
   {
     "id": "gemini-omni-1.1-flash-preview",
@@ -469,6 +672,20 @@
     "inputType": "t2i"
   },
   {
+    "id": "ideogram-4-5",
+    "name": "Ideogram 4.5",
+    "provider": "ideogram",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "ideogram-4-5-precise-edit",
+    "name": "Ideogram 4.5 Precise Edit",
+    "provider": "ideogram",
+    "mode": "image",
+    "inputType": "i2i"
+  },
+  {
     "id": "ideogram-character",
     "name": "Ideogram Character",
     "provider": "ideogram",
@@ -609,6 +826,13 @@
     "inputType": "t2v"
   },
   {
+    "id": "ltx-v2.3-outpaint",
+    "name": "LTX 2.3 Outpaint",
+    "provider": "ltx",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
     "id": "ltx-v2.3-pro",
     "name": "LTX 2.3 Pro",
     "provider": "ltx",
@@ -616,11 +840,32 @@
     "inputType": "t2v"
   },
   {
+    "id": "ltx-v2.3-reframe",
+    "name": "LTX 2.3 Reframe",
+    "provider": "ltx",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
     "id": "ltx-v2.3-retake",
     "name": "LTX 2.3 Retake",
     "provider": "ltx",
     "mode": "video",
     "inputType": "v2v"
+  },
+  {
+    "id": "ltx-v2.5-fast",
+    "name": "LTX 2.5 Fast",
+    "provider": "ltx",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "ltx-v2.5-pro",
+    "name": "LTX 2.5 Pro",
+    "provider": "ltx",
+    "mode": "video",
+    "inputType": "t2v"
   },
   {
     "id": "luma-ray-2",
@@ -742,6 +987,20 @@
     "inputType": "i2v"
   },
   {
+    "id": "minimax-h3-max-extend",
+    "name": "MiniMax H3 Max Extend",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
+    "id": "minimax-h3-max-lip-sync",
+    "name": "MiniMax H3 Max Lip Sync",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "i2v"
+  },
+  {
     "id": "minimax-h3-max-turbo",
     "name": "MiniMax H3 Max Turbo",
     "provider": "minimax",
@@ -849,6 +1108,20 @@
   {
     "id": "gpt-6-astra",
     "name": "GPT-6 Astra",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6-luna",
+    "name": "GPT-6 Luna",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6-sol",
+    "name": "GPT-6 Sol",
     "provider": "openai",
     "mode": "text",
     "inputType": "i2t"
@@ -1078,6 +1351,13 @@
     "inputType": "t2i"
   },
   {
+    "id": "recraftv4_1_flash",
+    "name": "Recraft V4.1 Flash",
+    "provider": "recraft",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
     "id": "recraftv4_1_pro",
     "name": "Recraft V4.1 Pro",
     "provider": "recraft",
@@ -1202,132 +1482,6 @@
     "provider": "runway",
     "mode": "video",
     "inputType": "t2v"
-  },
-  {
-    "id": "seedance-2.0",
-    "name": "Seedance 2.0",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "seedance-2.0-fast",
-    "name": "Seedance 2.0 Fast",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "seedance-2.0-fast-video-edit",
-    "name": "Seedance 2.0 Fast Video Edit",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.0-fast-video-extend",
-    "name": "Seedance 2.0 Fast Video Extend",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.0-mini",
-    "name": "Seedance 2.0 Mini",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "seedance-2.0-mini-video-edit",
-    "name": "Seedance 2.0 Mini Video Edit",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.0-mini-video-extend",
-    "name": "Seedance 2.0 Mini Video Extend",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.0-video-edit",
-    "name": "Seedance 2.0 Video Edit",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.0-video-extend",
-    "name": "Seedance 2.0 Video Extend",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.5",
-    "name": "Seedance 2.5",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "seedance-2.5-video-edit",
-    "name": "Seedance 2.5 Video Edit",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seedance-2.5-video-extend",
-    "name": "Seedance 2.5 Video Extend",
-    "provider": "seedance",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "seed-audio-1.0",
-    "name": "Seed Audio",
-    "provider": "seedaudio",
-    "mode": "audio",
-    "inputType": "tts"
-  },
-  {
-    "id": "seed-audio-1.0-multilingual",
-    "name": "Seed Audio Multilingual",
-    "provider": "seedaudio",
-    "mode": "audio",
-    "inputType": "tts"
-  },
-  {
-    "id": "seedream-4.5",
-    "name": "Seedream 4.5",
-    "provider": "seedream",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "seedream-4.7",
-    "name": "Seedream 4.7",
-    "provider": "seedream",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "seedream-5.0-lite",
-    "name": "Seedream 5.0 Lite",
-    "provider": "seedream",
-    "mode": "image",
-    "inputType": "t2i"
-  },
-  {
-    "id": "seedream-5.0-pro",
-    "name": "Seedream 5.0 Pro",
-    "provider": "seedream",
-    "mode": "image",
-    "inputType": "t2i"
   },
   {
     "id": "topaz-upscale-image",

@@ -1,10 +1,10 @@
 ---
-description: "Creatify AI models on Picsart — 1 video model(s) including Creatify Aurora HD. CLI + MCP examples, parameters, and official docs."
+description: "Creatify AI models on Picsart — 2 video model(s) including Creatify Aurora HD. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Creatify
 
-**Mode:** video · **Models:** 1
+**Mode:** video · **Models:** 2
 
 **Vendor:** [Creatify](https://docs.creatify.ai/introduction) · **Official API docs:** [Creatify Aurora](https://docs.creatify.ai/api-documentation/aurora/aurora)
 
@@ -15,6 +15,7 @@ Creatify Aurora is an audio-driven avatar model: feed it a single portrait and a
 | id | Name | Input type |
 |---|---|---|
 | `creatify-aurora` | Creatify Aurora HD | `i2v` |
+| `creatify-boreal` | Creatify Boreal | `t2v` |
 
 ## CLI
 
@@ -53,6 +54,23 @@ Input type: `i2v`
 | `audioUrl` | `-a` | file | **required** audio |
 
 > **Notes:** Aurora is audio-driven — it exposes no resolution, duration, or aspect-ratio params; output length equals the audio length.
+
+### `creatify-boreal` — Creatify Boreal
+
+[Try `creatify-boreal` in Playground ↗](https://picsart.com/ai-playground/?model=creatify-boreal)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤5000 chars) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+| `audioUrl` | `-a` | file | audio |
+| `negativePrompt` | `--neg` | text | free text |
+| `resolution` | `-r` | enum | `720p` · `1080p` · `2k` (default `720p`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `16:9` · `9:16` · `1:1` · `4:3` · `3:4` (default `auto`) |
+| `duration` | `-d` | range | `1`–`20`, step 1 (default `10`) |
+| `manifestDisclosure` | `--manifest-disclosure` | boolean | `true` · `false` (default `false`) |
 
 ## Pricing
 

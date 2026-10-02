@@ -82,7 +82,7 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤2500 chars) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
+| `duration` | `-d` | range | `3`–`15`, step 1 (default `5`) |
 | `startFrame` | `--start-frame` | file | image |
 | `endFrame` | `--end-frame` | file | image |
 | `negativePrompt` | `--neg` | text | free text |
@@ -92,8 +92,7 @@ Input type: `t2v`
 | `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
 | `voiceList` | `--voice-list` | object[] | up to 2 `{voice_id}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
-| `staticMask` | `--static-mask` | file | image |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) · `4k` (4K) (default `std`) |
+| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) · `4k` (4K) (default `4k`) |
 
 ### `kling-v3-turbo` — Kling V3 Turbo
 
@@ -105,11 +104,10 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤2500 chars) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
-| `negativePrompt` | `--neg-prompt` | text | free text |
+| `duration` | `-d` | range | `3`–`15`, step 1 (default `5`) |
+| `negativePrompt` | `--neg` | text | free text |
 | `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
 | `startFrame` | `--start-frame` | file | image |
-| `staticMask` | `--static-mask` | file | image |
 
 ### `kling-v2-6` — Kling V2.6
 
@@ -139,15 +137,18 @@ Input type: `t2v`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** (≤2500 chars) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `8` · `10` · `12` · `15` (default `5`) |
+| `duration` | `-d` | range | `3`–`15`, step 1 (default `5`) |
 | `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 7) |
+| `videoUrl` | `--video` | file | video |
+| `referType` | `--refer-type` | enum | `feature` (Feature Reference) · `base` (Base Edit) (default `feature`) |
+| `keepOriginalSound` | `--keep-audio` | enum | `yes` (Yes) · `no` (No) (default `yes`) |
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) (default `customize`) |
 | `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
-| `omniImageList` | `--omni-image-list-image-url` · `--omni-image-list-type` | object[] | up to 10 `{image_url, type}` |
-| `omniVideoList` | `--omni-video-list-video-url` · `--omni-video-list-refer-type` · `--omni-video-list-keep-original-sound` | object[] | up to 1 `{video_url, refer_type, keep_original_sound}` |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-video-o1` — Kling Video O1
@@ -161,9 +162,8 @@ Input type: `t2v`
 | `prompt` | `-p` | text | **required** (≤2500 chars) |
 | `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
 | `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
 | `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `false`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 
 ### `kling-motion-control-v3` — Kling Motion Control V3
 

@@ -1,10 +1,10 @@
 ---
-description: "OpenAI AI models on Picsart — 17 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI AI models on Picsart — 19 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
 ---
 
 # OpenAI
 
-**Modes:** image · text · **Models:** 17
+**Modes:** image · text · **Models:** 19
 
 **Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/image-generation)
 
@@ -19,6 +19,8 @@ OpenAI provides GPT Image generation and GPT text and image-understanding models
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
 | `gpt-6-astra` | GPT-6 Astra | `i2t` |
+| `gpt-6-sol` | GPT-6 Sol | `i2t` |
+| `gpt-6-luna` | GPT-6 Luna | `i2t` |
 | `gpt-5.6-sol` | GPT-5.6 Sol | `i2t` |
 | `gpt-5.6-terra` | GPT-5.6 Terra | `i2t` |
 | `gpt-5.6-luna` | GPT-5.6 Luna | `i2t` |
@@ -120,6 +122,30 @@ Input type: `t2i`
 ### `gpt-6-astra` — GPT-6 Astra
 
 [Try `gpt-6-astra` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6-astra)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gpt-6-sol` — GPT-6 Sol
+
+[Try `gpt-6-sol` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6-sol)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gpt-6-luna` — GPT-6 Luna
+
+[Try `gpt-6-luna` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6-luna)
 
 Input type: `i2t`
 

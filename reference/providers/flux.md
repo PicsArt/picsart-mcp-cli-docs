@@ -1,27 +1,28 @@
 ---
-description: "Flux (Black Forest Labs) AI models on Picsart — 7 image and video model(s) including Flux 2 Flex, Flux 2 Max, Flux 3 Video. CLI + MCP examples, parameters, and official docs."
+description: "Flux (Black Forest Labs) AI models on Picsart — 9 image and video models, including Flux 3 Image and Flux 3 Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Flux
 
-**Modes:** image · video · **Models:** 8
+**Modes:** image · video · **Models:** 9
 
 **Vendor:** [Black Forest Labs](https://blackforestlabs.ai) · **Official API docs:** [docs.bfl.ml](https://docs.bfl.ml)
 
-Flux (by Black Forest Labs) is a family of high-quality text-to-image models with crisp detail and strong prompt adherence. The **Kontext** models add reference-guided editing — generate from a prompt *and* one or more input images. **Flux 3 Video** extends the family to motion: text-to-video and image-to-video up to 20 seconds at FHD, with native audio.
+Flux (by Black Forest Labs) supports image generation, image editing, and video. **Flux 3 Image** accepts up to 10 reference images and produces images up to 4K. **Kontext** provides image editing from references. **Flux 3 Video** supports text and image inputs, synchronized audio, and video continuation.
 
 ## Models
 
 | id | Name | Input type | Notes |
 |---|---|---|---|
-| `flux-2-pro` | Flux 2 Pro | `t2i` | Multi-image input, up to 2K |
-| `flux-2-max` | Flux 2 Max | `t2i` | Highest quality |
-| `flux-2-flex` | Flux 2 Flex | `t2i` | Flexible / cost-aware |
-| `flux-kontext-max` | Flux Kontext Max | `t2i` | Reference-guided editing |
-| `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Reference-guided editing |
-| `flux-3-video` | Flux 3 Video | `t2v` | Text-to-video with native audio |
-| `flux-video-upscale` | Flux Video Upscale | `v2v` | Upscales an existing video up to 3x |
-| `flux-video-edit` | FLUX Video Edit | `v2v` | Edit videos with a text instruction — change objects, styles or scenes while preserving motion, timing and audio. Source clips up to 15 seconds; output at 24 fps, up to 720p. |
+| `flux-2-pro` | Flux 2 Pro | `t2i` | Multi-image input, up to 4K |
+| `flux-2-max` | Flux 2 Max | `t2i` | Detailed compositions |
+| `flux-2-flex` | Flux 2 Flex | `t2i` | Varied styles, up to 4K |
+| `flux-kontext-max` | Flux Kontext Max | `t2i` | Edit with up to 4 references |
+| `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Edit with one reference |
+| `flux-3-image` | Flux 3 Image | `t2i` | Generate and edit with up to 10 references, up to 4K |
+| `flux-3-video` | Flux 3 Video | `t2v` | Video with synchronized audio |
+| `flux-video-upscale` | Flux Video Upscale | `v2v` | Upscale video by 1.5x–3x |
+| `flux-video-edit` | FLUX Video Edit | `v2v` | Edit video with a text instruction |
 
 ## CLI
 
@@ -115,6 +116,21 @@ Input type: `t2i`
 | `imageUrls` | `-i` | file | image (up to 1) |
 
 > **Notes:** Flux 2 Pro and Flux Kontext Max accept up to 4 reference images; Flux 2 Max / Flex and Flux Kontext Pro accept 1. Kontext models use `imageUrls` as the edit reference.
+
+### `flux-3-image` — Flux 3 Image
+
+[Try `flux-3-image` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-image)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `3:2` · `7:5` · `4:3` · `5:4` · `1:1` · `4:5` · `3:4` · `5:7` · `2:3` · `9:16` · `1:2` (default `auto`) |
+| `resolution` | `-r` | enum | `512sq` · `768sq` · `1k` · `2k` · `4k` (default `1k`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
 
 ### `flux-3-video` — Flux 3 Video
 

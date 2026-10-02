@@ -1,5 +1,5 @@
 ---
-description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with 201 AI models."
+description: "Drop-in Picsart Skills for Claude Code, Cursor, Windsurf, and ChatGPT — generate heroes, reels, and batch catalogs in plain English with Picsart AI models."
 ---
 
 # Skills
@@ -20,7 +20,7 @@ Setup order:
 
 ## The `gen-ai-use` skill
 
-The flagship skill, **`gen-ai-use`**, gives an agent access to all **201 models** across image, video, and audio generation. It works with Claude Code, Cursor, and Windsurf.
+The flagship skill, **`gen-ai-use`**, lets an agent use the models available in its installed CLI. The SDK catalog reference covers **223 models**. It works with Claude Code, Cursor, and Windsurf.
 
 Once added, you drive it in plain English:
 

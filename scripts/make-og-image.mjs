@@ -47,13 +47,13 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
   <div class="brand"><div class="dot"></div><b>Picsart</b><span>Developer Docs</span></div>
   <div>
     <h1>gen-ai <em>CLI · MCP · Skills</em></h1>
-    <p class="sub">Generate image, video &amp; audio from your terminal or any AI agent — one id, every model.</p>
+    <p class="sub">Explore the Picsart SDK catalog for image, video, audio, and text.</p>
   </div>
   <div class="row">
     <div class="term"><span class="p">$</span> gen-ai generate -m flux-2-pro -p "a neon city"</div>
     <div class="stats">
-      <div class="stat"><b>150+</b><span>models</span></div>
-      <div class="stat"><b>30+</b><span>providers</span></div>
+      <div class="stat"><b>223</b><span>models</span></div>
+      <div class="stat"><b>28</b><span>providers</span></div>
     </div>
   </div>
 </body></html>`

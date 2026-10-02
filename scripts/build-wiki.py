@@ -28,12 +28,8 @@ providers = json.load(open(f'{DATA}/providers.json'))
 models = json.load(open(f'{DATA}/models.json'))
 
 
-# Providers retired from the catalog whose reference page is kept as a tombstone
-# so existing inbound links keep resolving. They are absent from providers.json
-# by definition, so the wiki has to be told about them explicitly — otherwise the
-# page is silently dropped here while it still exists on the Pages site, and any
-# link to it (e.g. from the changelog) dangles.
-RETIRED_PROVIDERS = ['pika', 'reve']
+# Keep retired and regrouped provider routes so existing links still work.
+LEGACY_PROVIDERS = ['pika', 'reve', 'seedance', 'seedream', 'seedaudio']
 
 
 def prov_page(pid):
@@ -62,7 +58,7 @@ route2page = {
     '/reference/providers': 'Providers',
     '/reference/providers/': 'Providers',
 }
-for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+for _pid in [p['id'] for p in providers] + LEGACY_PROVIDERS:
     route2page[f'/reference/providers/{_pid}'] = prov_page(_pid)
 
 src2out = {
@@ -83,7 +79,7 @@ src2out = {
     'reference/audio.md': 'Audio-Generation.md',
     'reference/text.md': 'Text-And-Analysis.md',
 }
-for _pid in [p['id'] for p in providers] + RETIRED_PROVIDERS:
+for _pid in [p['id'] for p in providers] + LEGACY_PROVIDERS:
     src2out[f'reference/providers/{_pid}.md'] = prov_page(_pid) + '.md'
 
 
@@ -99,6 +95,7 @@ EXTRA_GUIDES = {
     'guide/rest-api.md': 'REST-API',
     'guide/sdk.md': 'SDK',
     'guide/sdk-6-2-update.md': 'SDK-6-2-Update',
+    'guide/sdk-6-23-update.md': 'SDK-6-23-Update',
     'guide/local-files.md': 'Local-Files',
     # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
     # stability; the three sub-pages are nested sources, which route2page
@@ -176,7 +173,7 @@ INPUT_LABELS = {'t2i': 'Text→Image', 'i2i': 'Image→Image', 't2v': 'Text→Vi
 plabel = {p['id']: p['label'] for p in providers}
 
 cat = ['# Model Catalog', '',
-       f'All **{len(models)} models** from **{len(providers)} providers**. Every model works from both the [CLI Quickstart](CLI-Quickstart) and [MCP Quickstart](MCP-Quickstart) with the same id. Click a provider for CLI + MCP examples and parameters.', '']
+       f'All **{len(models)} models** from **{len(providers)} providers**. This lists the SDK production catalog. CLI and MCP availability depends on the installed or deployed version. Click a provider for CLI + MCP examples and parameters.', '']
 for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio'), ('text', 'Text & Analysis')]:
     ms = [m for m in models if m['mode'] == mode]
     cat += [f'## {title} ({len(ms)})', '', '| Model | id | Provider | Type |', '|---|---|---|---|']

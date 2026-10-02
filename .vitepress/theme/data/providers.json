@@ -18,15 +18,17 @@
   {
     "id": "bytedance",
     "label": "ByteDance",
-    "count": 2,
+    "count": 21,
     "modes": [
-      "video"
+      "image",
+      "video",
+      "audio"
     ]
   },
   {
     "id": "creatify",
     "label": "Creatify",
-    "count": 1,
+    "count": 2,
     "modes": [
       "video"
     ]
@@ -34,15 +36,16 @@
   {
     "id": "elevenlabs",
     "label": "ElevenLabs",
-    "count": 11,
+    "count": 17,
     "modes": [
-      "audio"
+      "audio",
+      "text"
     ]
   },
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 8,
+    "count": 9,
     "modes": [
       "image",
       "video"
@@ -51,7 +54,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 20,
+    "count": 22,
     "modes": [
       "image",
       "video",
@@ -96,7 +99,7 @@
   {
     "id": "ideogram",
     "label": "Ideogram",
-    "count": 4,
+    "count": 6,
     "modes": [
       "image"
     ]
@@ -114,7 +117,7 @@
   {
     "id": "ltx",
     "label": "LTX (Lightricks)",
-    "count": 5,
+    "count": 9,
     "modes": [
       "video"
     ]
@@ -139,7 +142,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 10,
+    "count": 12,
     "modes": [
       "video",
       "audio"
@@ -148,7 +151,7 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 17,
+    "count": 19,
     "modes": [
       "image",
       "text"
@@ -190,7 +193,7 @@
   {
     "id": "recraft",
     "label": "Recraft",
-    "count": 24,
+    "count": 25,
     "modes": [
       "image"
     ]
@@ -202,30 +205,6 @@
     "modes": [
       "image",
       "video"
-    ]
-  },
-  {
-    "id": "seedance",
-    "label": "Seedance",
-    "count": 12,
-    "modes": [
-      "video"
-    ]
-  },
-  {
-    "id": "seedaudio",
-    "label": "Seed Audio",
-    "count": 2,
-    "modes": [
-      "audio"
-    ]
-  },
-  {
-    "id": "seedream",
-    "label": "Seedream",
-    "count": 4,
-    "modes": [
-      "image"
     ]
   },
   {

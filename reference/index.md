@@ -1,10 +1,10 @@
 ---
-description: "The full Picsart AI model catalog — 201 models from 31 providers across image, video, audio, and text analysis, usable from the gen-ai CLI and MCP."
+description: "The Picsart SDK model catalog — 223 models from 28 providers across image, video, audio, and text analysis."
 ---
 
 # Model Reference
 
-The full Picsart AI Playground catalog: **201 models** from **31 providers**, across image, video, audio, and text. Every model is usable from both the [gen-ai CLI](/guide/cli-quickstart) and the [MCP server](/guide/mcp-quickstart) with the same id.
+The SDK 6.23.0 catalog: **223 models** from **28 providers**, across image, video, audio, and text. Availability and parameters depend on the installed SDK, CLI, or MCP server version. Check `gen-ai models` or `picsart_model_catalog` before use.
 
 <div class="reference-cta">
 
@@ -16,14 +16,14 @@ The full Picsart AI Playground catalog: **201 models** from **31 providers**, ac
 
 | Mode | Models | Browse |
 |---|---|---|
-| 🖼️ Image | 67 | [Image generation](/reference/image) |
-| 🎬 Video | 74 | [Video generation](/reference/video) |
-| 🔊 Audio | 19 | [Audio generation](/reference/audio) |
-| 📝 Text | 5 | [Text & analysis](/reference/text) |
+| 🖼️ Image | 71 | [Image generation](/reference/image) |
+| 🎬 Video | 91 | [Video generation](/reference/video) |
+| 🔊 Audio | 31 | [Audio generation](/reference/audio) |
+| 📝 Text | 30 | [Text & analysis](/reference/text) |
 
 ## Providers
 
-All **31 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
+All **28 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
 
 ## How to read a provider page
 

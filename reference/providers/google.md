@@ -1,14 +1,14 @@
 ---
-description: "Google AI models on Picsart — 20 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 22 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 20
+**Modes:** image · video · audio · text · **Models:** 22
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
-Google contributes across all four modes: the **Veo** video family, the **Nano Banana** (Gemini Image) family, **Gemini TTS**, **Lyria** music, and the **Gemini 3** text-analysis family.
+Google supports image, video, audio, and text. Its catalog includes **Veo**, **Gemini Omni**, **Nano Banana**, **Gemini TTS**, **Lyria**, and **Gemini** text models. **Gemini 3.8 Flash TTS** and **Gemini 3.8 Flash Lite TTS** add speech with controllable delivery.
 
 ## Models
 
@@ -23,6 +23,8 @@ Google contributes across all four modes: the **Veo** video family, the **Nano B
 | `gemini-2.5-flash-image` | Nano Banana | image | `t2i` |
 | `gemini-2.5-flash-tts` | Gemini 2.5 Flash TTS | audio | `tts` |
 | `gemini-2.5-pro-tts` | Gemini 2.5 Pro TTS | audio | `tts` |
+| `gemini-3.8-flash-tts` | Gemini 3.8 Flash TTS | audio | `tts` |
+| `gemini-3.8-flash-lite-tts` | Gemini 3.8 Flash Lite TTS | audio | `tts` |
 | `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
 | `gemini-omni-1.1-flash-preview` | Gemini Omni 1.1 Flash | video | `t2v` |
 | `lyria-3-clip` | Lyria 3 Clip | audio | `music` |
@@ -47,7 +49,7 @@ gen-ai generate -m veo-3.1 -p "a drone shot over a snowy ridge at golden hour" \
   "arguments": { "model": "veo-3.1", "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p", "generateAudio": true } }
 ```
 
-Full params for every Veo / Gemini / Imagen / Lyria model are in [Parameters](#parameters) below.
+Full params for every Veo / Gemini / Lyria model are in [Parameters](#parameters) below.
 
 ## Nano Banana Pro (image)
 
@@ -125,9 +127,10 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` · `auto` (default `1:1`) |
 | `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 | `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
@@ -140,8 +143,9 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` (default `1:1`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` · `auto` (default `1:1`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 | `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
@@ -154,10 +158,11 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` (default `1:1`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `1:1`) |
 | `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `thinkingBudget` | `--thinking-budget` | integer | `128`–`32768`, step 128, default `128` |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `thinkingBudget` | `--thinking-budget` | range | `128`–`24576`, step 128 (default `128`) |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-2.5-flash-image` — Nano Banana
@@ -169,8 +174,9 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` (default `16:9`) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `16:9`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 | `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-2.5-flash-tts` — Gemini 2.5 Flash TTS
@@ -183,8 +189,10 @@ Input type: `tts`
 |---|---|---|---|
 | `language` | `--language` | text | free text |
 | `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `voiceId` | `--voice` | enum | `Aoede` · `Charon` · `Fenrir` · `Kore` · `Leda` · `Orus` · `Puck` · `Zephyr` · `Achernar` · `Achird` · `Algenib` · `Algieba` · `Alnilam` · `Autonoe` · `Despina` · `Enceladus` · `Erinome` · `Gacrux` · `Iapetus` · `Laomedeia` · `Pulcherrima` · `Rasalgethi` · `Sadachbia` · `Sadaltager` · `Schedar` · `Sulafat` · `Umbriel` · `Vindemiatrix` · `Zubenelgenubi` (default `Kore`) |
+| `prompt` | `-p` | text | free text (≤6000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-2.5-flash-tts --json` for current values (default `Kore`) |
+| `parts` | `--parts-text` · `--parts-speaker` | object[] | `{text, speaker}` |
+| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
 
 ### `gemini-2.5-pro-tts` — Gemini 2.5 Pro TTS
 
@@ -196,8 +204,42 @@ Input type: `tts`
 |---|---|---|---|
 | `language` | `--language` | text | free text |
 | `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
-| `voiceId` | `--voice` | enum | `Aoede` · `Charon` · `Fenrir` · `Kore` · `Leda` · `Orus` · `Puck` · `Zephyr` · `Achernar` · `Achird` · `Algenib` · `Algieba` · `Alnilam` · `Autonoe` · `Despina` · `Enceladus` · `Erinome` · `Gacrux` · `Iapetus` · `Laomedeia` · `Pulcherrima` · `Rasalgethi` · `Sadachbia` · `Sadaltager` · `Schedar` · `Sulafat` · `Umbriel` · `Vindemiatrix` · `Zubenelgenubi` (default `Kore`) |
+| `prompt` | `-p` | text | free text (≤6000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-2.5-pro-tts --json` for current values (default `Kore`) |
+| `parts` | `--parts-text` · `--parts-speaker` | object[] | `{text, speaker}` |
+| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+
+### `gemini-3.8-flash-tts` — Gemini 3.8 Flash TTS
+
+[Try `gemini-3.8-flash-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash-tts)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | free text (≤6000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-3.8-flash-tts --json` for current values (default `Kore`) |
+| `style` | `--style` | text | free text (≤500 chars) |
+| `parts` | `--parts-text` · `--parts-speaker` · `--parts-style` | object[] | `{text, speaker, style}` |
+| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+
+### `gemini-3.8-flash-lite-tts` — Gemini 3.8 Flash Lite TTS
+
+[Try `gemini-3.8-flash-lite-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash-lite-tts)
+
+Input type: `tts`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `language` | `--language` | text | free text |
+| `accent` | `--accent` | text | free text |
+| `prompt` | `-p` | text | free text (≤6000 chars) |
+| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-3.8-flash-lite-tts --json` for current values (default `Kore`) |
+| `style` | `--style` | text | free text (≤500 chars) |
+| `parts` | `--parts-text` · `--parts-speaker` · `--parts-style` | object[] | `{text, speaker, style}` |
+| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
 
 ### `gemini-omni-flash-preview` — Gemini Omni
 

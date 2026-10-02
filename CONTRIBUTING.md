@@ -25,11 +25,11 @@ Do not write exact numbers for model or provider counts. Use the approved approx
 
 | Metric | Approved wording |
 |---|---|
-| Total models | 201 models |
-| Total providers | 31 providers |
-| Video models | 70+ video |
+| Total models | 223 models |
+| Total providers | 28 providers |
+| Video models | 90+ video |
 | Image models | 70+ image |
-| Audio models | 20+ audio |
+| Audio models | 30+ audio |
 
 **Reason:** The catalog updates continuously. An exact number is wrong within days of writing it. Approximate thresholds stay accurate across multiple catalog releases.
 

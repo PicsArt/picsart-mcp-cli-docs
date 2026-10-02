@@ -4,7 +4,7 @@ description: "Connect the hosted Picsart MCP server to Claude, Claude Code, Curs
 
 # MCP Quickstart
 
-The Picsart MCP server exposes the full model catalog as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio across 201 models using natural language or structured tool calls.
+The Picsart MCP server exposes its available models as [Model Context Protocol](https://modelcontextprotocol.io) tools. Connect it to any MCP-compatible agent and that agent can generate image, video, and audio with available models using natural language or structured tool calls.
 
 New to MCP? Start with [What is MCP?](/guide/what-is-mcp) first.
 
@@ -284,7 +284,7 @@ Make sure you finished signing in, then restart or reload the agent. Most agents
 
 **Which models work via MCP?**
 
-All 201 models in the catalog. There is no MCP-specific subset. Use `picsart_model_catalog` or `picsart_list_models` to filter by mode, provider, or purpose, or browse the [Model Catalog](/reference/catalog).
+The SDK catalog reference covers 223 models. MCP availability depends on the server version. Use `picsart_model_catalog` or `picsart_list_models` to filter by mode, provider, or purpose, or browse the [Model Catalog](/reference/catalog).
 
 **Where do generated files go?**
 

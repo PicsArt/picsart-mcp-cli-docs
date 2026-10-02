@@ -14,7 +14,7 @@ Picsart has one model catalog and several ways to reach it. The right surface de
 
 The Playground is the fastest way to run a generation. No setup, no install, no config. Open a browser or the mobile app, pick a model, type a prompt, see the result. You can compare two models side by side, adjust parameters with sliders, and save results to your Drive.
 
-If you are evaluating whether a model fits your creative brief, or iterating on a prompt to get it right, start here. Everything you learn in Playground transfers directly to the CLI, MCP, SDK, and REST API. The model ids and parameters are identical.
+If you are evaluating whether a model fits your creative brief, or iterating on a prompt to get it right, start here. Check model availability and parameters in the CLI, MCP, SDK, or REST API version you use.
 
 [picsart.com/ai-playground](https://picsart.com/ai-playground/)
 
@@ -111,7 +111,7 @@ If you are writing code to power a product — a web app, a mobile app, a backen
 
 ### Node.js or TypeScript
 
-Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 201 models. Results can auto-save to Picsart Drive.
+Use `@picsart/ai-sdk`. It is type-safe, model-aware, and handles async polling automatically. The SDK 6.23.0 catalog covers 223 models. Results can auto-save to Picsart Drive.
 
 ```bash
 npm install @picsart/ai-sdk

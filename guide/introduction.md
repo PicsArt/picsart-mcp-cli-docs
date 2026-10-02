@@ -6,7 +6,7 @@ description: "What Picsart AI Playground is, how its access layers work, and whi
 
 ## Picsart AI Playground
 
-**Picsart AI Playground** is a platform that brings together 201 generative AI models from 31 providers under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Seedance, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
+**Picsart AI Playground** brings together AI models under one account: one credit balance, no separate subscriptions, no per-provider API keys. You can generate images, video, and audio using models like Flux, Seedance, Veo, Kling, ElevenLabs, Recraft, Seedance, and others, and switch between them freely.
 
 The Playground is available on **web and mobile**. For most users and most tasks, this is the right place to work. You pick a model, write a prompt, see results, iterate. If you are generating at small scale, exploring what is possible, comparing model outputs, or doing prompt engineering, the Playground web or mobile app is the most efficient tool. No setup, no code, no configuration.
 
@@ -54,7 +54,7 @@ gen-ai batch run catalog.json
 ---
 
 ### SDK: Node.js and TypeScript applications
-If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. One `generate()` call covers all 201 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
+If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. The SDK 6.23.0 catalog covers 223 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share the same model catalog, the same account, and the same credit balance. A model you discover in Playground is reachable by the same id from the CLI, MCP, SDK, and REST API. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
+They share an account and credit balance. The SDK 6.23.0 catalog covers 223 models from 28 providers. Model availability and parameters depend on the installed SDK, CLI, or server version. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|
@@ -90,10 +90,10 @@ Most people move between these surfaces naturally. You experiment in Playground,
 
 ## What you can generate
 
-- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **66 image models.**
-- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **84 video models.**
-- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **24 audio models.**
-- **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **27 text models.**
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **71 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **91 video models.**
+- **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **31 audio models.**
+- **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **30 text models.**
 
 Browse the full catalog in the [Model Reference](/reference/), filter live in the [Playground](https://picsart.com/ai-playground/), or query from the terminal:
 
