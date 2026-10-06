@@ -126,8 +126,8 @@ Input type: `t2i`
 | Param | CLI flag | Type | Values |
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `3:2` · `7:5` · `4:3` · `5:4` · `1:1` · `4:5` · `3:4` · `5:7` · `2:3` · `9:16` · `1:2` (default `auto`) |
-| `resolution` | `-r` | enum | `512sq` · `768sq` · `1k` · `2k` · `4k` (default `1k`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `3:2` · `7:5` · `4:3` · `5:4` · `1:1` · `4:5` · `3:4` · `5:7` · `2:3` · `9:16` · `9:21` · `1:2` (default `auto`) |
+| `resolution` | `-r` | enum | `768sq` · `1k` · `1.5k` · `2k` · `4k` (default `1k`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 10) |
 | `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |

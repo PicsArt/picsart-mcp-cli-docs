@@ -1,10 +1,10 @@
 ---
-description: "The Picsart SDK model catalog — 223 models from 28 providers across image, video, audio, and text analysis."
+description: "The Picsart SDK model catalog — 222 models from 29 providers across image, video, audio, text, and JSON analysis."
 ---
 
 # Model Reference
 
-The SDK 6.23.0 catalog: **223 models** from **28 providers**, across image, video, audio, and text. Availability and parameters depend on the installed SDK, CLI, or MCP server version. Check `gen-ai models` or `picsart_model_catalog` before use.
+The SDK 6.29.0 catalog: **222 models** from **29 providers**, across image, video, audio, text, and JSON. Availability and parameters depend on the installed SDK, CLI, or MCP server version. Check `gen-ai models` or `picsart_model_catalog` before use.
 
 <div class="reference-cta">
 
@@ -16,14 +16,15 @@ The SDK 6.23.0 catalog: **223 models** from **28 providers**, across image, vide
 
 | Mode | Models | Browse |
 |---|---|---|
-| 🖼️ Image | 71 | [Image generation](/reference/image) |
-| 🎬 Video | 91 | [Video generation](/reference/video) |
+| 🖼️ Image | 72 | [Image generation](/reference/image) |
+| 🎬 Video | 88 | [Video generation](/reference/video) |
 | 🔊 Audio | 31 | [Audio generation](/reference/audio) |
 | 📝 Text | 30 | [Text & analysis](/reference/text) |
+| JSON | 1 | [Structured evaluation](/reference/json) |
 
 ## Providers
 
-All **28 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
+All **29 providers** have a dedicated reference page. Browse them as cards on the **[Providers →](/reference/providers/)** page, or pick a model directly from the **[Model Catalog →](/reference/catalog)**.
 
 ## How to read a provider page
 

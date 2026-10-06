@@ -2,7 +2,7 @@
 import { withBase } from 'vitepress'
 import providers from '../data/providers.json'
 
-const MODE_ORDER = { image: 0, video: 1, audio: 2 }
+const MODE_ORDER = { image: 0, video: 1, audio: 2, text: 3, json: 4 }
 const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
 </script>
 
@@ -20,7 +20,7 @@ const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.locale
       </div>
       <div class="pc-modes">
         <span
-          v-for="m in [...p.modes].sort((a,b)=>MODE_ORDER[a]-MODE_ORDER[b])"
+          v-for="m in [...p.modes].sort((a,b)=>(MODE_ORDER[a] ?? 5) - (MODE_ORDER[b] ?? 5) || a.localeCompare(b))"
           :key="m"
           class="pc-mode"
           :class="`mode-${m}`"
@@ -50,10 +50,12 @@ const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.locale
 .pc-modes { display: flex; gap: 6px; flex-wrap: wrap; }
 .pc-mode {
   font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
-  padding: 3px 8px; border-radius: 999px; color: #fff;
+  padding: 3px 8px; border-radius: 999px; color: #fff; background: #64748b;
 }
 .pc-mode.mode-image { background: #10b981; }
 .pc-mode.mode-video { background: #3b82f6; }
 .pc-mode.mode-audio { background: #ec4899; }
+.pc-mode.mode-text { background: #8b5cf6; }
+.pc-mode.mode-json { background: #b45309; }
 .pc-link { font-size: 13px; font-weight: 500; color: var(--vp-c-brand-1); margin-top: auto; }
 </style>

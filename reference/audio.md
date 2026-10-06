@@ -30,7 +30,7 @@ gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
 
 | Provider | Models | Highlights |
 |---|---|---|
-| [ElevenLabs](/reference/providers/elevenlabs) | 11 — v3, Multilingual v2, SFX, STS, Dubbing, Voice Design, Audio Isolation, Voice Previews | The most complete voice suite |
+| [ElevenLabs](/reference/providers/elevenlabs) | 16 — v4, v4 Turbo, v3, Multilingual v2, SFX, STS, Dubbing, Voice Design, Audio Isolation, Voice Previews | The most complete voice suite |
 | [Google](/reference/providers/google) | Gemini 2.5 Flash/Pro TTS, Lyria 3.5, Lyria 3 Clip/Pro | High-quality TTS + music |
 | [Kling](/reference/providers/kling) | Kling T2A, V2A | Text-to-audio & video-to-audio scoring |
 | [MiniMax](/reference/providers/minimax) | MiniMax Music v3, v2 | Full original tracks from a prompt |

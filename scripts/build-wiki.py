@@ -55,6 +55,7 @@ route2page = {
     '/reference/video': 'Video-Generation',
     '/reference/audio': 'Audio-Generation',
     '/reference/text': 'Text-And-Analysis',
+    '/reference/json': 'Structured-JSON',
     '/reference/providers': 'Providers',
     '/reference/providers/': 'Providers',
 }
@@ -78,6 +79,7 @@ src2out = {
     'reference/video.md': 'Video-Generation.md',
     'reference/audio.md': 'Audio-Generation.md',
     'reference/text.md': 'Text-And-Analysis.md',
+    'reference/json.md': 'Structured-JSON.md',
 }
 for _pid in [p['id'] for p in providers] + LEGACY_PROVIDERS:
     src2out[f'reference/providers/{_pid}.md'] = prov_page(_pid) + '.md'
@@ -96,6 +98,7 @@ EXTRA_GUIDES = {
     'guide/sdk.md': 'SDK',
     'guide/sdk-6-2-update.md': 'SDK-6-2-Update',
     'guide/sdk-6-23-update.md': 'SDK-6-23-Update',
+    'guide/sdk-6-29-update.md': 'SDK-6-29-Update',
     'guide/local-files.md': 'Local-Files',
     # Media Studio: the hub keeps the `Media-Tools` page name for wiki link
     # stability; the three sub-pages are nested sources, which route2page
@@ -169,12 +172,15 @@ for src, out in src2out.items():
 INPUT_LABELS = {'t2i': 'Text→Image', 'i2i': 'Image→Image', 't2v': 'Text→Video',
                 'i2v': 'Image→Video', 'v2v': 'Video→Video', 'a2v': 'Audio→Video',
                 'tts': 'Text→Speech', 'sts': 'Speech→Speech', 'sfx': 'Sound FX', 'music': 'Music',
-                'i2t': 'Image→Text', 'v2t': 'Video→Text'}
+                'i2t': 'Image→Text', 'v2t': 'Video→Text', 'a2t': 'Audio→Text', 't2t': 'Text→Text'}
 plabel = {p['id']: p['label'] for p in providers}
 
 cat = ['# Model Catalog', '',
        f'All **{len(models)} models** from **{len(providers)} providers**. This lists the SDK production catalog. CLI and MCP availability depends on the installed or deployed version. Click a provider for CLI + MCP examples and parameters.', '']
-for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio'), ('text', 'Text & Analysis')]:
+mode_titles = {'image': 'Image', 'video': 'Video', 'audio': 'Audio', 'text': 'Text & Analysis', 'json': 'Structured JSON'}
+mode_order = list(mode_titles)
+for mode in sorted({m['mode'] for m in models}, key=lambda m: (mode_order.index(m) if m in mode_order else len(mode_order), m)):
+    title = mode_titles.get(mode, mode.title())
     ms = [m for m in models if m['mode'] == mode]
     cat += [f'## {title} ({len(ms)})', '', '| Model | id | Provider | Type |', '|---|---|---|---|']
     for m in sorted(ms, key=lambda x: (x['provider'], x['name'])):
@@ -235,13 +241,13 @@ Build videos, slideshows and captioned clips from your own footage and ready-mad
 - **[Model Reference](Model-Reference)** — overview
 - **[Model Catalog](Model-Catalog)** — all {len(models)} models
 - **[Providers](Providers)** — all {len(providers)} providers
-- By mode: [Image](Image-Generation) · [Video](Video-Generation) · [Audio](Audio-Generation)
+- By mode: [Image](Image-Generation) · [Video](Video-Generation) · [Audio](Audio-Generation) · [Text](Text-And-Analysis) · [JSON](Structured-JSON)
 
 ## Changelog
 
 - **[Changelog](Changelog)** — new models, providers, and docs updates
 
-> **Prefer a visual UI?** The [AI Playground app](https://picsart.com/ai-playground/) is the point-and-click web app for the same catalog.
+> **Prefer a visual UI?** The [AI Playground app](https://picsart.com/ai-playground/) provides a point-and-click interface for supported models; JSON evaluation uses the SDK.
 '''
 open(f'{WIKI}/Home.md', 'w').write(home)
 written.append('Home.md')
@@ -261,7 +267,7 @@ sb = ['### Picsart CLI & MCP', '',
       '- [Overview](Media-Studio)', '- [What you can do](Media-Studio-Tools)',
       '- [Troubleshooting](Media-Studio-Troubleshooting)', '',
       '**Model Reference**', '',
-      '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '',
+      '- [Overview](Model-Reference)', '- [Model Catalog](Model-Catalog)', '- [Image](Image-Generation)', '- [Video](Video-Generation)', '- [Audio](Audio-Generation)', '- [Text](Text-And-Analysis)', '- [JSON](Structured-JSON)', '',
       '**Providers**', '',
       '- [All providers](Providers)']
 for p in sorted(providers, key=lambda x: x['label'].lower()):

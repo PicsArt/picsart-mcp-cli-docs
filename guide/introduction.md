@@ -54,7 +54,7 @@ gen-ai batch run catalog.json
 ---
 
 ### SDK: Node.js and TypeScript applications
-If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. The SDK 6.23.0 catalog covers 223 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
+If you are building a Node.js or TypeScript application, `@picsart/ai-sdk` is the fastest path. It is type-safe, model-aware, and handles async polling automatically. The SDK 6.29.0 catalog covers 222 models. Results can auto-save to Picsart Drive. Auth is an API key (not OAuth), retrieved from your account settings.
 
 ```bash
 npm install @picsart/ai-sdk
@@ -73,7 +73,7 @@ If you are building in Python, Ruby, Go, PHP, or any other language, call the RE
 
 ## How the surfaces relate
 
-They share an account and credit balance. The SDK 6.23.0 catalog covers 223 models from 28 providers. Model availability and parameters depend on the installed SDK, CLI, or server version. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
+They share an account and credit balance. The SDK 6.29.0 catalog covers 222 models from 29 providers. Model availability and parameters depend on the installed SDK, CLI, or server version. Each surface signs in its own way: the CLI and Skills use `gen-ai login` (Skills run the CLI internally), the MCP server is hosted by Picsart and your agent signs you in through your browser with nothing to install, and the SDK and REST API use an API key from your account settings.
 
 | Surface | Who it is for | Typical use |
 |---|---|---|
@@ -90,8 +90,8 @@ Most people move between these surfaces naturally. You experiment in Playground,
 
 ## What you can generate
 
-- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **71 image models.**
-- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **91 video models.**
+- **Image** — text-to-image, image editing, inpainting, style transfer, background removal/replacement, upscaling, and vector/SVG output. **72 image models.**
+- **Video** — text-to-video, image-to-video, video-to-video editing, and clip extension. **88 video models.**
 - **Audio** — text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech. **31 audio models.**
 - **Text analysis** — describe, caption, OCR, and summarize images and video using Claude, GPT, or Gemini. **30 text models.**
 
@@ -114,3 +114,5 @@ Not sure which surface to start with? Read [Which tool is right for me?](/guide/
 - **[CLI Quickstart](/guide/cli-quickstart)** · **[MCP Quickstart](/guide/mcp-quickstart)** · **[Skills](/guide/skills)**
 - **[SDK](/guide/sdk)** · **[REST API](/guide/rest-api)**
 - **[Integrations](/guide/integrations/)**: per-agent setup guides for Claude Code, Cursor, Windsurf, ChatGPT, Codex, VS Code.
+
+Structured evaluation is also available through the SDK: **1 JSON model** uses `ai.run()` and returns named answers. See [JSON & evaluation](/reference/json).

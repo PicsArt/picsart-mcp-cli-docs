@@ -134,7 +134,7 @@ function modelsTable(provModels) {
   return `## Models\n\n| id | Name | Input type |\n|---|---|---|\n${rows}\n`
 }
 
-const MODE_ORDER = ['image', 'video', 'audio', 'text']
+const MODE_ORDER = ['image', 'video', 'audio', 'text', 'json']
 const byProvider = new Map()
 for (const m of models) {
   if (!byProvider.has(m.provider.id)) byProvider.set(m.provider.id, [])
@@ -153,7 +153,9 @@ for (const [providerId, provModels] of byProvider) {
     continue
   }
 
-  const modes = MODE_ORDER.filter((mode) => provModels.some((m) => m.mode === mode))
+  const modes = [...new Set(provModels.map((m) => m.mode))].sort((a, b) =>
+    (MODE_ORDER.indexOf(a) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(a)) -
+    (MODE_ORDER.indexOf(b) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(b)) || a.localeCompare(b))
   const count = provModels.length
 
   // header line — pages use "**Mode:**" for one mode, "**Modes:**" for several
@@ -163,7 +165,7 @@ for (const [providerId, provModels] of byProvider) {
   // The mode list may be a single word ("6 video model(s)") or slash-joined for
   // multi-mode providers ("17 image/video/audio/text model(s)") — match both, or
   // multi-mode pages silently keep a stale count.
-  const MODE_WORD = '(?:image|video|audio|text|media)'
+  const MODE_WORD = '(?:image|video|audio|text|json|media)'
   const descRe = new RegExp(`(\\d+)(\\s+${MODE_WORD}(?:/${MODE_WORD})*\\s+model\\(s\\))`)
   text = text.replace(descRe, `${count}$2`)
 

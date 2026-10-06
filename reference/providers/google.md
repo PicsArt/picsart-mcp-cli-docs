@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 22 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 23 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 22
+**Modes:** image · video · audio · text · **Models:** 23
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -17,6 +17,7 @@ Google supports image, video, audio, and text. Its catalog includes **Veo**, **G
 | `veo-3.1` | Veo 3.1 | video | `t2v` |
 | `veo-3.1-fast` | Veo 3.1 Fast | video | `t2v` |
 | `veo-3.1-lite` | Veo 3.1 Lite | video | `t2v` |
+| `gemini-nano-banana-2.1` | Nano Banana 2.1 | image | `t2i` |
 | `gemini-3.1-flash-image` | Nano Banana 2 | image | `t2i` |
 | `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | image | `t2i` |
 | `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
@@ -117,6 +118,22 @@ Input type: `t2v`
 | `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
 | `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
 | `startFrame` | `--start-frame` | file | image |
+
+### `gemini-nano-banana-2.1` — Nano Banana 2.1
+
+[Try `gemini-nano-banana-2.1` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-nano-banana-2.1)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `medium` (Medium (balanced)) · `high` (High (more reasoning)) (default `minimal`) |
+| `imageUrls` | `-i` | file | image (up to 14) |
 
 ### `gemini-3.1-flash-image` — Nano Banana 2
 

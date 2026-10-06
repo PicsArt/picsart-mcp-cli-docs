@@ -54,7 +54,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 22,
+    "count": 23,
     "modes": [
       "image",
       "video",
@@ -83,7 +83,7 @@
   {
     "id": "heygen",
     "label": "HeyGen",
-    "count": 2,
+    "count": 3,
     "modes": [
       "video"
     ]
@@ -125,7 +125,7 @@
   {
     "id": "luma",
     "label": "Luma",
-    "count": 9,
+    "count": 5,
     "modes": [
       "image",
       "video"
@@ -214,6 +214,14 @@
     "modes": [
       "image",
       "video"
+    ]
+  },
+  {
+    "id": "typesafe",
+    "label": "TypeSafe",
+    "count": 1,
+    "modes": [
+      "json"
     ]
   },
   {

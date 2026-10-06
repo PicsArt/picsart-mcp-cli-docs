@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 223 models from 28 providers.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 222 models from 29 providers.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -43,7 +43,7 @@ const sidebar = [
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
       { text: 'TypeScript SDK', link: '/guide/sdk' },
-      { text: 'SDK 6.23.0 update', link: '/guide/sdk-6-23-update' },
+      { text: 'SDK 6.29.0 update', link: '/guide/sdk-6-29-update' },
     ],
   },
   {
@@ -108,6 +108,7 @@ const sidebar = [
       { text: 'Video generation', link: '/reference/video' },
       { text: 'Audio generation', link: '/reference/audio' },
       { text: 'Text & analysis', link: '/reference/text' },
+      { text: 'JSON & evaluation', link: '/reference/json' },
     ],
   },
   {
@@ -140,6 +141,7 @@ const sidebar = [
       { text: 'Recraft', link: '/reference/providers/recraft' },
       { text: 'Runway', link: '/reference/providers/runway' },
       { text: 'Topaz', link: '/reference/providers/topaz' },
+      { text: 'TypeSafe', link: '/reference/providers/typesafe' },
       { text: 'VEED', link: '/reference/providers/veed' },
       { text: 'Videography', link: '/reference/providers/videography' },
       { text: 'Wan (Alibaba)', link: '/reference/providers/wan' },
@@ -174,7 +176,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 223 models, 28 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 222 models, 29 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],

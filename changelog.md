@@ -7,6 +7,14 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-10-07
+
+**SDK 6.29.0 catalog refresh — 222 production models across 29 providers.**
+Adds Nano Banana 2.1, HeyGen Video, and TypeSafe Jev structured evaluation.
+Four older Luma Ray 2 / Flash 2 entries leave the production catalog.
+The catalog and navigation now include JSON output; Jev uses the SDK’s `ai.run()` API.
+See the [complete update and availability notes](/guide/sdk-6-29-update).
+
 ## 2026-10-02
 
 **SDK 6.23.0 catalog refresh — 223 production models across 28 providers.**

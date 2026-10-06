@@ -504,6 +504,13 @@
     "inputType": "tts"
   },
   {
+    "id": "gemini-nano-banana-2.1",
+    "name": "Nano Banana 2.1",
+    "provider": "google",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
     "id": "gemini-omni-1.1-flash-preview",
     "name": "Gemini Omni 1.1 Flash",
     "provider": "google",
@@ -656,6 +663,13 @@
     "provider": "heygen",
     "mode": "video",
     "inputType": "i2v"
+  },
+  {
+    "id": "heygen-video-1",
+    "name": "HeyGen Video",
+    "provider": "heygen",
+    "mode": "video",
+    "inputType": "t2v"
   },
   {
     "id": "heygen-video-avatar",
@@ -868,20 +882,6 @@
     "inputType": "t2v"
   },
   {
-    "id": "luma-ray-2",
-    "name": "Luma Ray 2",
-    "provider": "luma",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
-    "id": "luma-ray-2-reframe-video",
-    "name": "Luma Ray 2 Reframe",
-    "provider": "luma",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
     "id": "luma-ray-3.2",
     "name": "Luma Ray 3.2",
     "provider": "luma",
@@ -898,20 +898,6 @@
   {
     "id": "luma-ray-3.2-reframe-video",
     "name": "Luma Ray 3.2 Reframe",
-    "provider": "luma",
-    "mode": "video",
-    "inputType": "v2v"
-  },
-  {
-    "id": "luma-ray-flash-2",
-    "name": "Luma Flash 2",
-    "provider": "luma",
-    "mode": "video",
-    "inputType": "i2v"
-  },
-  {
-    "id": "luma-ray-flash-2-reframe-video",
-    "name": "Luma Flash 2 Reframe",
     "provider": "luma",
     "mode": "video",
     "inputType": "v2v"
@@ -1496,6 +1482,13 @@
     "provider": "topaz",
     "mode": "video",
     "inputType": "v2v"
+  },
+  {
+    "id": "typesafe-evaluate",
+    "name": "Jev",
+    "provider": "typesafe",
+    "mode": "json",
+    "inputType": "t2t"
   },
   {
     "id": "veed-fabric-v1",

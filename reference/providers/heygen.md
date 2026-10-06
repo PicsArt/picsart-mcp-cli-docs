@@ -1,10 +1,10 @@
 ---
-description: "HeyGen AI models on Picsart — 2 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
+description: "HeyGen AI models on Picsart — 3 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
 ---
 
 # HeyGen
 
-**Mode:** video · **Models:** 2
+**Mode:** video · **Models:** 3
 
 **Official API docs:** [developers.heygen.com](https://developers.heygen.com)
 
@@ -16,6 +16,7 @@ HeyGen turns a written script into a lip-synced presenter video. **Talking Photo
 |---|---|---|
 | `heygen-talking-photo` | HeyGen Talking Photo | `i2v` |
 | `heygen-video-avatar` | HeyGen Video Avatar | `t2v` |
+| `heygen-video-1` | HeyGen Video | `t2v` |
 
 ## CLI
 
@@ -83,6 +84,25 @@ Input type: `t2v`
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 
 > **Notes:** `videoId` selects a HeyGen avatar and `voiceId` a HeyGen voice; both id sets are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
+
+### `heygen-video-1` — HeyGen Video
+
+[Try `heygen-video-1` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-video-1)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480p` · `768p` (default `768p`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `promptEnhancement` | `--prompt-enhancement` | enum | `turbo` · `quality` · `disabled` (default `turbo`) |
+| `seed` | `--seed` | range | `0`–`4294967295`, step 1 |
 
 ## Pricing
 

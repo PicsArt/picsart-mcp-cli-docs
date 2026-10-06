@@ -34,9 +34,10 @@ const total = models.length
 const providerCount = providers.length
 
 // Stable, human-friendly mode ordering for the provider summaries.
-const MODE_ORDER = ['image', 'video', 'audio', 'text']
+const MODE_ORDER = ['image', 'video', 'audio', 'text', 'json']
 const orderModes = (modes) =>
-  [...modes].sort((a, b) => MODE_ORDER.indexOf(a) - MODE_ORDER.indexOf(b)).join(', ')
+  [...modes].sort((a, b) => (MODE_ORDER.indexOf(a) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(a)) -
+    (MODE_ORDER.indexOf(b) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(b)) || a.localeCompare(b)).join(', ')
 
 const link = (label, path, desc) => `- [${label}](${url(path)})${desc ? `: ${desc}` : ''}`
 
@@ -45,14 +46,15 @@ out.push('# Picsart gen-ai CLI, MCP & Skills')
 out.push('')
 out.push(
   `> Developer docs for driving Picsart's AI catalog — ${total} models from ${providerCount} ` +
-    `providers across image (${byMode.image}), video (${byMode.video}), audio (${byMode.audio}), and text (${byMode.text}) — ` +
+    `providers across ${orderModes(Object.keys(byMode)).split(', ').map((mode) => `${mode} (${byMode[mode]})`).join(', ')} — ` +
     'from your terminal with the gen-ai CLI, or from any AI agent via Skills and the hosted MCP server. ' +
     'CLI and MCP model availability depends on the installed or deployed version.',
 )
 out.push('')
 out.push(
-  'The same model registry powers three interfaces (CLI, Skills, MCP). Every model has a stable ' +
-    'id usable identically from `gen-ai generate -m <id>` and the `picsart_generate` MCP tool. ' +
+  'Models have stable IDs, but execution methods and availability differ by interface. ' +
+    'Use `gen-ai generate -m <id>` or `picsart_generate` for supported media models. ' +
+    'Structured JSON models use the SDK’s `ai.run()` method; verify CLI, MCP, and Playground support separately. ' +
     'The MCP server is hosted at https://api.picsart.com/gen-ai/mcp: agents connect over HTTP and sign in ' +
     'with Picsart OAuth in the browser, so it needs no CLI install, no `gen-ai login` and no API key. ' +
     'Skills run the gen-ai CLI and need `gen-ai login`. ' +
@@ -63,7 +65,7 @@ out.push('')
 out.push('## Getting started')
 out.push(link('Introduction', '/guide/introduction', 'what this is and the three interfaces'))
 out.push(link('Installation', '/guide/installation', 'install the gen-ai CLI, add Skills, or connect the hosted MCP server'))
-out.push(link('SDK 6.23.0 catalog update', '/guide/sdk-6-23-update', '22 new production models and current parameters'))
+out.push(link('SDK 6.29.0 catalog update', '/guide/sdk-6-29-update', '3 additions, 4 removals, and structured JSON output'))
 out.push(link('Authentication', '/guide/authentication', '`gen-ai login` for the CLI and Skills; in-agent OAuth for MCP; API key for the SDK'))
 out.push('')
 
@@ -101,6 +103,8 @@ out.push(link('Model Catalog', '/reference/catalog', 'searchable, filterable cat
 out.push(link('Image generation', '/reference/image', `${byMode.image} image models`))
 out.push(link('Video generation', '/reference/video', `${byMode.video} video models`))
 out.push(link('Audio generation', '/reference/audio', `${byMode.audio} audio models`))
+out.push(link('Text & analysis', '/reference/text', `${byMode.text} text models`))
+out.push(link('Structured JSON output', '/reference/json', `${byMode.json ?? 0} JSON models`))
 out.push('')
 
 out.push('## Providers')

@@ -33,6 +33,18 @@ const providerCountById = Object.fromEntries(providers.map((p) => [p.id, p.count
 const failures = []
 const checked = { global: 0, provider: 0, media: 0 }
 
+// Every model mode must survive the provider projection, including future modes.
+for (const provider of providers) {
+  const owned = models.filter((model) => model.provider === provider.id)
+  const actualModes = [...new Set(owned.map((model) => model.mode))].sort()
+  if (provider.count !== owned.length || JSON.stringify([...provider.modes].sort()) !== JSON.stringify(actualModes)) {
+    failures.push(`${provider.id}: provider counts/modes disagree with models.json`)
+  }
+}
+for (const model of models) {
+  if (!(model.provider in providerCountById)) failures.push(`${model.id}: missing provider ${model.provider}`)
+}
+
 // --- Global counts: overview pages that describe the whole catalog. ---------
 // Provider pages are excluded here — their numbers are per-provider and checked
 // separately below.
@@ -58,6 +70,7 @@ const GLOBAL_FILES = [
   'reference/video.md',
   'reference/audio.md',
   'reference/text.md',
+  'reference/json.md',
   // Every per-agent integration guide quotes the catalog size in its intro.
   ...readdirSync(join(root, 'guide', 'integrations'))
     .filter((f) => f.endsWith('.md'))
@@ -73,6 +86,7 @@ const GLOBAL_PATTERNS = [
   { label: 'video models', re: /(\d+)\s+(?:AI\s+)?video(?:\s+generation)?\s+models/gi, expected: () => modeCount.video },
   { label: 'audio models', re: /(\d+)\s+(?:AI\s+)?audio\s+models/gi, expected: () => modeCount.audio },
   { label: 'text models', re: /(\d+)\s+(?:AI\s+)?text\s+models/gi, expected: () => modeCount.text },
+  { label: 'JSON models', re: /(\d+)\s+(?:structured\s+)?JSON\s+models?\b/gi, expected: () => modeCount.json ?? 0 },
   { label: 'total models', re: /(\d+)\+?\s+(?:(?:Picsart\s+AI|generative\s+AI|AI)\s+)?models\b/g, expected: () => total },
   { label: 'N-model catalog', re: /(\d+)-model\b/g, expected: () => total },
   { label: 'provider count', re: /(\d+)\s+(?:AI\s+model\s+)?providers\b/gi, expected: () => providerCount },
@@ -207,7 +221,7 @@ for (const file of MEDIA_PAGES) {
 
 const summary =
   `Counts: ${total} models, ${providerCount} providers ` +
-  `(image ${modeCount.image}, video ${modeCount.video}, audio ${modeCount.audio}, text ${modeCount.text}). ` +
+  `(${Object.entries(modeCount).map(([mode, count]) => `${mode} ${count}`).join(', ')}). ` +
   `Checked ${checked.global} global + ${checked.provider} provider claims, ` +
   `plus ${checked.media} Media Studio tool claims against ${MEDIA_ALLOWED.size} GA tools.`
 

@@ -1,23 +1,19 @@
 ---
-description: "Luma AI models on Picsart — 9 image/video model(s) including Luma Ray 3.2, Luma UNI-1 Max, Luma Flash 2. CLI + MCP examples, parameters, and official docs."
+description: "Luma AI models on Picsart — 5 image/video model(s) including Luma Ray 3.2, Luma UNI-1 Max. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Luma
 
-**Modes:** image · video · **Models:** 9
+**Modes:** image · video · **Models:** 5
 
 **Vendor:** [Luma AI](https://lumalabs.ai) · **Official API docs:** [Luma Dream Machine API](https://docs.lumalabs.ai/docs/api)
 
-Luma's Dream Machine line covers both video and image. **Ray 3.2** (with **Ray 2** and the faster **Flash 2**) generates video from text or a start/end frame at up to 4K, with dedicated **edit** and **reframe** workflows for changing a clip's aspect ratio. **UNI-1** (and **UNI-1 Max**) is the image model, with multi-image reference input, edit, and style controls.
+Luma's Dream Machine line covers both video and image. **Ray 3.2** generates video from text or a start/end frame at up to 1080p, with dedicated **edit** and **reframe** workflows for changing a clip's aspect ratio. **UNI-1** (and **UNI-1 Max**) is the image model, with multi-image reference input, edit, and style controls.
 
 ## Models
 
 | id | Name | Input type |
 |---|---|---|
-| `luma-ray-2` | Luma Ray 2 | `t2v` |
-| `luma-ray-flash-2` | Luma Flash 2 | `i2v` |
-| `luma-ray-2-reframe-video` | Luma Ray 2 Reframe | `v2v` |
-| `luma-ray-flash-2-reframe-video` | Luma Flash 2 Reframe | `v2v` |
 | `luma-uni-1` | Luma UNI-1 | `t2i` |
 | `luma-uni-1-max` | Luma UNI-1 Max | `t2i` |
 | `luma-ray-3.2` | Luma Ray 3.2 | `t2v` |
@@ -27,16 +23,16 @@ Luma's Dream Machine line covers both video and image. **Ray 3.2** (with **Ray 2
 ## CLI
 
 ```bash
-# text-to-video at 4K
-gen-ai generate -m luma-ray-2 \
+# text-to-video at 1080p
+gen-ai generate -m luma-ray-3.2 \
   -p "a paper boat drifting down a rain-soaked city gutter, cinematic" \
-  --ar 16:9 -r 4k -d 9
+  --ar 16:9 -r 1080p -d 10
 
 # image-to-video from a start frame
-gen-ai generate -m luma-ray-2 -p "slow zoom out, drifting clouds" --start-frame ./hero.jpg
+gen-ai generate -m luma-ray-3.2 -p "slow zoom out, drifting clouds" --start-frame ./hero.jpg
 
 # reframe an existing clip to vertical
-gen-ai generate -m luma-ray-2-reframe-video --video ./clip.mp4 --ar 9:16
+gen-ai generate -m luma-ray-3.2-reframe-video --video ./clip.mp4 --ar 9:16 -p "Reframe to keep the subject centered"
 
 # text-to-image with a reference
 gen-ai generate -m luma-uni-1 -p "a fox in a moss-green raincoat, storybook" --ar 1:1 -i ./ref.jpg
@@ -47,11 +43,11 @@ gen-ai generate -m luma-uni-1 -p "a fox in a moss-green raincoat, storybook" --a
 ```json
 { "name": "picsart_generate",
   "arguments": {
-    "model": "luma-ray-2",
+    "model": "luma-ray-3.2",
     "prompt": "a paper boat drifting down a rain-soaked city gutter, cinematic",
     "aspectRatio": "16:9",
-    "resolution": "4k",
-    "duration": 9
+    "resolution": "1080p",
+    "duration": 10
   } }
 ```
 
@@ -68,60 +64,6 @@ gen-ai generate -m luma-uni-1 -p "a fox in a moss-green raincoat, storybook" --a
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
-
-### `luma-ray-2` — Luma Ray 2
-
-[Try `luma-ray-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `9` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-
-### `luma-ray-flash-2` — Luma Flash 2
-
-[Try `luma-ray-flash-2` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2)
-
-Input type: `i2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `resolution` | `-r` | enum | `540p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `5` · `9` (default `5`) |
-| `startFrame` | `--start-frame` | file | **required** image |
-| `endFrame` | `--end-frame` | file | image |
-
-### `luma-ray-2-reframe-video` — Luma Ray 2 Reframe
-
-[Try `luma-ray-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-2-reframe-video)
-
-Input type: `v2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `videoUrl` | `--video` | file | **required** video |
-
-### `luma-ray-flash-2-reframe-video` — Luma Flash 2 Reframe
-
-[Try `luma-ray-flash-2-reframe-video` in Playground ↗](https://picsart.com/ai-playground/?model=luma-ray-flash-2-reframe-video)
-
-Input type: `v2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | free text |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `9:21` (default `16:9`) |
-| `videoUrl` | `--video` | file | **required** video |
 
 ### `luma-uni-1` — Luma UNI-1
 
@@ -201,7 +143,7 @@ Input type: `v2v`
 ## Pricing
 
 ```bash
-gen-ai pricing luma-ray-2 --duration 9 --resolution 4k
+gen-ai pricing luma-ray-3.2 --duration 10 --resolution 1080p
 ```
 
 Video cost scales with **duration** and **resolution**. UNI-1 image cost is per generation.
