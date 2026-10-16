@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 12 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 14 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · **Models:** 12
+**Modes:** video · audio · text · **Models:** 14
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -26,6 +26,8 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `minimax-h3-max-camera-controls` | MiniMax H3 Max Camera Controls | `i2v` |
 | `minimax-h3-max-lip-sync` | MiniMax H3 Max Lip Sync | `i2v` |
 | `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
+| `minimax-h3-max-relight` | MiniMax H3 Max Relight | `v2v` |
+| `minimax-h3-context-ir` | MiniMax H3 Context IR | `v2t` |
 
 ## CLI
 
@@ -258,6 +260,38 @@ Input type: `v2v`
 | `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
 | `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+
+### `minimax-h3-max-relight` — MiniMax H3 Max Relight
+
+[Try `minimax-h3-max-relight` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-relight)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | **required** image (up to 1) |
+| `resolution` | `-r` | enum | `480p` · `768p` · `1080p` · `2k` (default `768p`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-context-ir` — MiniMax H3 Context IR
+
+[Try `minimax-h3-context-ir` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-context-ir)
+
+Input type: `v2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `duration` | `-d` | range | `4`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `adaptive`) |
 
 ## Pricing
 

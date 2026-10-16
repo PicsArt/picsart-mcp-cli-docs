@@ -1,10 +1,10 @@
 ---
-description: "ByteDance AI models on Picsart — 21 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
+description: "ByteDance AI models on Picsart — 22 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
 ---
 
 # ByteDance
 
-**Modes:** image · video · audio · **Models:** 21
+**Modes:** image · video · audio · **Models:** 22
 
 **Vendor:** [BytePlus](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [OmniHuman 1.5 overview](https://docs.byteplus.com/en/docs/byteplus-vision/omnihuman1_5overview)
 
@@ -18,6 +18,7 @@ Seedream 5.0 Flash adds a fast image generation tier.
 | id | Name | Input type |
 |---|---|---|
 | `bytedance-omnihuman-v1.5` | ByteDance OmniHuman | `i2v` |
+| `bytedance-omnihuman-v2.0` | ByteDance OmniHuman 2.0 | `i2v` |
 | `bytedance-video-enhance` | ByteDance Video Enhance | `v2v` |
 | `seedance-2.5` | Seedance 2.5 | `t2v` |
 | `seedance-2.5-video-edit` | Seedance 2.5 Video Edit | `v2v` |
@@ -92,6 +93,19 @@ Input type: `i2v`
 | `audioUrl` | `-a` | file | **required** audio |
 
 > **Notes:** OmniHuman 1.5 derives emotion and lip-sync from the audio, so `prompt` is optional and only steers camera/motion. Video Enhance needs only a source video; every other param refines the restore.
+
+### `bytedance-omnihuman-v2.0` — ByteDance OmniHuman 2.0
+
+[Try `bytedance-omnihuman-v2.0` in Playground ↗](https://picsart.com/ai-playground/?model=bytedance-omnihuman-v2.0)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+| `audioUrl` | `-a` | file | **required** audio |
+| `enableWatermark` | `--enable-watermark` | boolean | `true` · `false` (default `true`) |
 
 ### `bytedance-video-enhance` — ByteDance Video Enhance
 

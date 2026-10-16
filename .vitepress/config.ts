@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 222 models from 29 providers.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 238 models from 32 providers.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -120,6 +120,7 @@ const sidebar = [
       { text: 'Async', link: '/reference/providers/async' },
       { text: 'ByteDance', link: '/reference/providers/bytedance' },
       { text: 'Creatify', link: '/reference/providers/creatify' },
+      { text: 'Depth Anything', link: '/reference/providers/depth-anything' },
       { text: 'ElevenLabs', link: '/reference/providers/elevenlabs' },
       { text: 'Flux', link: '/reference/providers/flux' },
       { text: 'Google', link: '/reference/providers/google' },
@@ -128,11 +129,13 @@ const sidebar = [
       { text: 'HeyGen', link: '/reference/providers/heygen' },
       { text: 'Hunyuan', link: '/reference/providers/hunyuan' },
       { text: 'Ideogram', link: '/reference/providers/ideogram' },
+      { text: 'Kimi (Moonshot)', link: '/reference/providers/kimi' },
       { text: 'Kling', link: '/reference/providers/kling' },
       { text: 'LTX (Lightricks)', link: '/reference/providers/ltx' },
       { text: 'Luma', link: '/reference/providers/luma' },
       { text: 'Meta', link: '/reference/providers/meta' },
       { text: 'MiniMax', link: '/reference/providers/minimax' },
+      { text: 'Mirelo', link: '/reference/providers/mirelo' },
       { text: 'OpenAI', link: '/reference/providers/openai' },
       { text: 'OVI', link: '/reference/providers/ovi' },
       { text: 'Picsart', link: '/reference/providers/picsart' },
@@ -176,7 +179,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 222 models, 29 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 238 models, 32 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],

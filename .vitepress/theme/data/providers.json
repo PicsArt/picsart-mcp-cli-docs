@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 8,
+    "count": 9,
     "modes": [
       "text"
     ]
@@ -18,7 +18,7 @@
   {
     "id": "bytedance",
     "label": "ByteDance",
-    "count": 21,
+    "count": 22,
     "modes": [
       "image",
       "video",
@@ -29,6 +29,14 @@
     "id": "creatify",
     "label": "Creatify",
     "count": 2,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "depth-anything",
+    "label": "Depth Anything",
+    "count": 1,
     "modes": [
       "video"
     ]
@@ -45,7 +53,7 @@
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 9,
+    "count": 10,
     "modes": [
       "image",
       "video"
@@ -54,7 +62,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 23,
+    "count": 24,
     "modes": [
       "image",
       "video",
@@ -65,11 +73,12 @@
   {
     "id": "grok",
     "label": "Grok (xAI)",
-    "count": 8,
+    "count": 10,
     "modes": [
       "image",
       "video",
-      "audio"
+      "audio",
+      "text"
     ]
   },
   {
@@ -105,9 +114,17 @@
     ]
   },
   {
+    "id": "kimi",
+    "label": "Kimi",
+    "count": 1,
+    "modes": [
+      "text"
+    ]
+  },
+  {
     "id": "kling",
     "label": "Kling",
-    "count": 13,
+    "count": 15,
     "modes": [
       "image",
       "video",
@@ -134,15 +151,26 @@
   {
     "id": "meta",
     "label": "Meta",
-    "count": 1,
+    "count": 2,
     "modes": [
-      "image"
+      "image",
+      "video"
     ]
   },
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 12,
+    "count": 14,
+    "modes": [
+      "video",
+      "audio",
+      "text"
+    ]
+  },
+  {
+    "id": "mirelo",
+    "label": "Mirelo",
+    "count": 3,
     "modes": [
       "video",
       "audio"

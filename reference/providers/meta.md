@@ -4,7 +4,7 @@ description: "Meta Muse Image 1.0 on Picsart — image generation with CLI and M
 
 # Meta
 
-**Mode:** image · **Models:** 1
+**Modes:** image · video · **Models:** 2
 
 Meta's Muse Image 1.0 is available in the production catalog. Discover its current inputs before generating.
 
@@ -13,6 +13,7 @@ Meta's Muse Image 1.0 is available in the production catalog. Discover its curre
 | id | Name | Input type |
 |---|---|---|
 | `muse-image-1.0` | Muse Image 1.0 | `t2i` |
+| `sam-3-video` | SAM 3 Video | `v2v` |
 
 ## CLI
 
@@ -47,3 +48,17 @@ Input type: `t2i`
 | `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |
+
+### `sam-3-video` — SAM 3 Video
+
+[Try `sam-3-video` in Playground ↗](https://picsart.com/ai-playground/?model=sam-3-video)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `videoUrl` | `--video` | file | **required** video |
+| `detectionThreshold` | `--detection-threshold` | range | `0`–`1`, step 0.05 (default `0.5`) |
+| `applyMask` | `--apply-mask` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `webm` (default `mp4`) |

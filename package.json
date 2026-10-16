@@ -13,7 +13,7 @@
     "wiki:build": "python3 scripts/build-wiki.py"
   },
   "devDependencies": {
-    "@picsart/ai-sdk": "6.29.0",
+    "@picsart/ai-sdk": "6.48.1",
     "vitepress": "^1.6.3"
   }
 }

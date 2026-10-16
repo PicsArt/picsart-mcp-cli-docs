@@ -1,10 +1,10 @@
 ---
-description: "30 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
+description: "35 AI text models on Picsart — analyze images and video with Claude, GPT, and Gemini via the gen-ai describe command. Captioning, OCR, classification, and summarization."
 ---
 
 # Text & analysis
 
-**30 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
+**35 text models** that read an image or video and return **text** — captioning, OCR, classification, Q&A, and summarization. Unlike every other mode, these LLMs **analyze** media instead of generating it.
 
 ## Quick start
 
@@ -38,7 +38,8 @@ Only Gemini 3 Pro accepts video, so `gen-ai describe --video …` auto-selects i
 |---|---|---|
 | [Anthropic](/reference/providers/anthropic) | Claude Fable, Opus, Sonnet, Haiku | Opus for hard reasoning; Haiku for high-volume |
 | [OpenAI](/reference/providers/openai) | GPT-6 Astra, GPT-5.6 family, GPT-5 and GPT-4 families | Strong general image understanding |
-| [Google](/reference/providers/google) | Gemini 3 Pro, Gemini 3.8 / 3.7 / 3.6 Flash, 3.5 Flash Lite, 2.5 Flash | Pro reads video; Flash tiers handle image analysis |
+| [Google](/reference/providers/google) | Gemini 4 Argon, Gemini 3 Pro, Gemini 3.8 / 3.7 / 3.6 Flash, 3.5 Flash Lite, 2.5 Flash | Argon and Pro read video; Flash tiers handle image analysis |
+| [Kimi](/reference/providers/kimi) · [Grok](/reference/providers/grok) · [MiniMax](/reference/providers/minimax) | Kimi K3, Grok 4.7, MiniMax H3 Context IR | Deep reasoning with 500K–1M context; Context IR enhances video prompts |
 
 ## Common parameters
 

@@ -1,10 +1,10 @@
 ---
-description: "72 AI image generation models on Picsart — text-to-image, editing, inpainting, vector/SVG — Nano Banana, Flux, GPT Image, Recraft, Ideogram and more."
+description: "73 AI image generation models on Picsart — text-to-image, editing, inpainting, vector/SVG — Nano Banana, Flux, GPT Image, Recraft, Ideogram and more."
 ---
 
 # Image generation
 
-**72 image models** spanning text-to-image, image editing, inpainting, style transfer, background tools, upscaling, and vector/SVG output.
+**73 image models** spanning text-to-image, image editing, inpainting, style transfer, background tools, upscaling, and vector/SVG output.
 
 ## Quick start
 
@@ -22,7 +22,7 @@ gen-ai generate -m flux-2-pro -p "studio shot of a ceramic cup, soft light" --ar
 | Provider | Models | Highlights |
 |---|---|---|
 | [Google](/reference/providers/google) | Nano Banana Pro, Nano Banana 2.1, Nano Banana 2, Nano Banana | Top-tier generation + natural-language editing, up to 4K |
-| [Flux](/reference/providers/flux) | Flux 2 Pro / Max / Flex, Flux Kontext | Crisp, controllable; reference-guided editing |
+| [Flux](/reference/providers/flux) | Flux 3 Image / Klein, Flux 2 Pro / Max / Flex, Flux Kontext | Crisp, controllable; up to 10 references, 4K |
 | [OpenAI](/reference/providers/openai) | GPT Image 2.5 Flare / Sunburst, GPT Image 2, GPT Image 1.5 | Strong text rendering & instruction following |
 | [Recraft](/reference/providers/recraft) | Recraft V4.1 / V4 families incl. V4 Styles (25) | True vector / SVG output; style-reference generation |
 | [Ideogram](/reference/providers/ideogram) | P-Image, Ideogram 4.0, v3, Character | Best-in-class typography |

@@ -1,10 +1,10 @@
 ---
-description: "Kling AI models on Picsart — 13 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling AI models on Picsart — 15 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Kling
 
-**Modes:** image · video · audio · **Models:** 13
+**Modes:** image · video · audio · **Models:** 15
 
 **Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
 
@@ -16,8 +16,10 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 |---|---|---|
 | `kling-v3` | Kling V3 | `t2v` |
 | `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
+| `kling-v4` | Kling 4.0 | `t2v` |
 | `kling-v2-6` | Kling V2.6 | `t2v` |
 | `kling-v3-omni` | Kling V3 Omni | `t2v` |
+| `kling-v4-omni` | Kling 4.0 Omni | `t2v` |
 | `kling-video-o1` | Kling Video O1 | `t2v` |
 | `kling-motion-control-v3` | Kling Motion Control V3 | `i2v` |
 | `kling-motion-control` | Kling Motion Control 2.6 | `i2v` |
@@ -109,6 +111,22 @@ Input type: `t2v`
 | `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
 | `startFrame` | `--start-frame` | file | image |
 
+### `kling-v4` — Kling 4.0
+
+[Try `kling-v4` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v4)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤26000 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` (default `16:9`) |
+| `duration` | `-d` | range | `3`–`30`, step 1 (default `5`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `startFrame` | `--start-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `endFrame` | `--end-frame` | file | image |
+
 ### `kling-v2-6` — Kling V2.6
 
 [Try `kling-v2-6` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-6)
@@ -149,6 +167,25 @@ Input type: `t2v`
 | `multiShot` | `--multi-shot` | boolean | `true` · `false` (default `false`) |
 | `shotType` | `--shot-type` | enum | `customize` (Customize) (default `customize`) |
 | `multiPrompt` | `--multi-prompt-index` · `--multi-prompt-prompt` · `--multi-prompt-duration` | object[] | up to 6 `{index, prompt, duration}` |
+| `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
+
+### `kling-v4-omni` — Kling 4.0 Omni
+
+[Try `kling-v4-omni` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v4-omni)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤26000 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `adaptive` (default `16:9`) |
+| `duration` | `-d` | range | `3`–`30`, step 1 (default `5`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `videoUrl` | `--video` | file | video |
+| `referType` | `--refer-type` | enum | `feature` (Feature Reference) · `base` (Base Edit) (default `feature`) |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-video-o1` — Kling Video O1

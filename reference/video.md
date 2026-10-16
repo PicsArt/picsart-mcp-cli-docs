@@ -1,10 +1,10 @@
 ---
-description: "88 video generation models on Picsart — text-to-video, image-to-video, and video editing — Veo, Kling, Seedance, Wan, Runway and more."
+description: "96 video generation models on Picsart — text-to-video, image-to-video, and video editing — Veo, Kling, Seedance, Wan, Runway and more."
 ---
 
 # Video generation
 
-**88 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
+**96 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
 
 ## Quick start
 
@@ -35,7 +35,7 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 |---|---|---|
 | [Seedance](/reference/providers/seedance) | Seedance 2.5 / 2.0 (+ Fast, Edit, Extend) | Reference image, keyframes, native audio; 2.5 supports 4–30s |
 | [Google](/reference/providers/google) | Veo 3.1 / Fast / Lite, Gemini Omni | 1080p+, native audio; Omni adds 4K + video extension |
-| [Kling](/reference/providers/kling) | Kling V3, Video O1, Motion Control, Avatar, Effects | High-motion; motion control from a still |
+| [Kling](/reference/providers/kling) | Kling 4.0, 4.0 Omni, V3, Video O1, Motion Control, Avatar, Effects | Up to 30s at 1080p; motion control from a still |
 | [Wan](/reference/providers/wan) | Wan 3.0, Wan 3.0 Prime, Wan 2.7 (t2v/i2v/r2v/edit) | Versatile, crisp detail; Prime is up to 7x faster |
 | [Runway](/reference/providers/runway) | Gen 4.5, Aleph, Gen4 Ref, Avatar | Editing & reference workflows |
 | [MiniMax](/reference/providers/minimax) | MiniMax H3, H3 Max (+ Turbo / Camera Controls), Hailuo 2.3 | Up to 2K; multimodal references |
@@ -44,7 +44,8 @@ gen-ai generate -m kling-motion-control-v3 -p "slow push in" -i ./portrait.jpg
 | [Picsart](/reference/providers/picsart) | Picsart Effects Video | Curated one-tap effect presets |
 | [Grok](/reference/providers/grok) | Imagine Video, Edit, Extend | — |
 | [VEED](/reference/providers/veed) · [HeyGen](/reference/providers/heygen) · [Creatify](/reference/providers/creatify) | Fabric, Talking Photo, Aurora | Avatar / talking-photo |
-| [ByteDance](/reference/providers/bytedance) · [OVI](/reference/providers/ovi) · [Videography](/reference/providers/videography) · [HappyHorse](/reference/providers/happyhorse) | Video Enhance, OmniHuman, OVI, Videography, Happy Horse | Specialized |
+| [ByteDance](/reference/providers/bytedance) · [OVI](/reference/providers/ovi) · [Videography](/reference/providers/videography) · [HappyHorse](/reference/providers/happyhorse) | Video Enhance, OmniHuman 2.0, OVI, Videography, Happy Horse | Specialized |
+| [Meta](/reference/providers/meta) · [Depth Anything](/reference/providers/depth-anything) · [Mirelo](/reference/providers/mirelo) | SAM 3 Video, Video Depth Anything, Mirelo SFX 2.0 (Video to Video) | Segmentation, depth maps, synced soundtracks |
 
 ## Extending clips
 

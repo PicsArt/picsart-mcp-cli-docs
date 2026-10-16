@@ -1,10 +1,10 @@
 ---
-description: "31 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
+description: "33 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
 ---
 
 # Audio generation
 
-**31 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
+**33 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
 
 ## Quick start
 
@@ -36,6 +36,7 @@ gen-ai generate -m eleven-v3 -p "Welcome to Picsart AI Playground."
 | [MiniMax](/reference/providers/minimax) | MiniMax Music v3, v2 | Full original tracks from a prompt |
 | [Grok](/reference/providers/grok) | Grok TTS | Fast natural speech |
 | [Seed Audio](/reference/providers/seedaudio) | Seed Audio, Seed Audio Multilingual | 20 languages, named voices, and voice cloning |
+| [Mirelo](/reference/providers/mirelo) | Mirelo SFX 2.0 (Text to Audio, Video to Audio) | Sound effects and video-synced soundtracks |
 
 ## Common audio parameters
 

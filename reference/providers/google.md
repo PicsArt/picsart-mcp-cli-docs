@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 23 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 24 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 23
+**Modes:** image · video · audio · text · **Models:** 24
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -31,6 +31,7 @@ Google supports image, video, audio, and text. Its catalog includes **Veo**, **G
 | `lyria-3-clip` | Lyria 3 Clip | audio | `music` |
 | `lyria-3-pro` | Lyria 3 Pro | audio | `music` |
 | `lyria-3.5` | Lyria 3.5 | audio | `music` |
+| `gemini-4-argon` | Gemini 4 Argon | text | `v2t` |
 | `gemini-3-pro` | Gemini 3 Pro | text | `v2t` |
 | `gemini-3.8-flash` | Gemini 3.8 Flash | text | `i2t` |
 | `gemini-3.7-flash` | Gemini 3.7 Flash | text | `i2t` |
@@ -326,6 +327,19 @@ Input type: `music`
 |---|---|---|---|
 | `prompt` | `-p` | text | **required** |
 | `imageUrls` | `-i` | file | image (up to 10) |
+
+### `gemini-4-argon` — Gemini 4 Argon
+
+[Try `gemini-4-argon` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-4-argon)
+
+Input type: `v2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `videoUrl` | `--video` | file | video |
+| `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
 
 ### `gemini-3-pro` — Gemini 3 Pro
 

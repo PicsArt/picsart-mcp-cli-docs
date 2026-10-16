@@ -70,7 +70,7 @@ A few models do not expose per-call pricing. For those, `picsart_preflight` retu
 
 **Are there per-provider contracts or subscriptions?**
 
-No. One Picsart account covers all 29 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
+No. One Picsart account covers all 32 providers. There are no separate subscriptions, no per-provider API keys, and no vendor invoices.
 
 **What happens if I run out of credits mid-batch?**
 

@@ -1,11 +1,11 @@
 ---
-description: "Picsart AI documentation for the web app, gen-ai CLI, MCP, TypeScript SDK, and Skills. Browse 222 AI models in the SDK catalog."
+description: "Picsart AI documentation for the web app, gen-ai CLI, MCP, TypeScript SDK, and Skills. Browse 238 AI models in the SDK catalog."
 layout: home
 
 hero:
   name: Picsart AI Playground
-  text: One platform. An SDK catalog of 222 models.
-  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 29 providers.
+  text: One platform. An SDK catalog of 238 models.
+  tagline: Generate image, video, and audio in the browser, inside your AI agent, or from the terminal. One account, one credit balance, 32 providers.
   actions:
     - theme: brand
       text: Get started
@@ -28,9 +28,9 @@ features:
     details: One terminal command for the installed CLI catalog. Scriptable, pipe-friendly, built for batch jobs, cron schedules, and CI/CD pipelines.
     link: /guide/cli-quickstart
   - title: TypeScript SDK
-    details: Type-safe model-aware calls from Node.js apps. SDK catalog coverage of 222 models. Auto-save to Drive. API key auth.
+    details: Type-safe model-aware calls from Node.js apps. SDK catalog coverage of 238 models. Auto-save to Drive. API key auth.
     link: /guide/sdk
-  - title: 222 models, 29 providers
+  - title: 238 models, 32 providers
     details: LTX, Veo, Kling, Seedance, Nano Banana, Flux, ElevenLabs, Recraft, and more — one pay-per-generation credit balance, no stacked subscriptions.
     link: /reference/
 ---

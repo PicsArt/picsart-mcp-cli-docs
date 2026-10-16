@@ -128,7 +128,7 @@ Yes. Both draw from the same Picsart credit balance when you sign in with the sa
 
 **Which models work in Goose?**
 
-Availability depends on the MCP server version. The SDK catalog reference covers 222 models. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
+Availability depends on the MCP server version. The SDK catalog reference covers 238 models. Use `picsart_list_models` to filter by mode or provider, or browse the [Model Catalog](/reference/catalog).
 
 ## Start creating
 

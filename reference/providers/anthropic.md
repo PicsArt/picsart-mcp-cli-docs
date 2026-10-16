@@ -4,7 +4,7 @@ description: "Anthropic Claude models on Picsart — Claude Opus 4.8, Sonnet 4.6
 
 # Anthropic
 
-**Mode:** text · **Models:** 8
+**Mode:** text · **Models:** 9
 
 **Vendor:** [Anthropic](https://www.anthropic.com) · **Official API docs:** [docs.anthropic.com](https://docs.anthropic.com)
 
@@ -21,6 +21,7 @@ Anthropic's **Claude** models are large language models for analysis, not media 
 | `claude-sonnet-5` | Claude Sonnet 5 | `i2t` |
 | `claude-sonnet-4-6` | Claude Sonnet 4.6 | `i2t` |
 | `claude-sonnet-4-5` | Claude Sonnet 4.5 | `i2t` |
+| `claude-haiku-5-5` | Claude Haiku 5.5 | `i2t` |
 | `claude-haiku-4-5` | Claude Haiku 4.5 | `i2t` |
 
 ## CLI
@@ -122,6 +123,17 @@ Input type: `i2t`
 ### `claude-sonnet-4-5` — Claude Sonnet 4.5
 
 [Try `claude-sonnet-4-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-sonnet-4-5)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
+### `claude-haiku-5-5` — Claude Haiku 5.5
+
+[Try `claude-haiku-5-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-haiku-5-5)
 
 Input type: `i2t`
 

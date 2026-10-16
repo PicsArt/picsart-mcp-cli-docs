@@ -1,10 +1,10 @@
 ---
-description: "Grok (xAI) AI models on Picsart — 8 audio/image/video model(s) including Grok Imagine 2.0, Grok Imagine 1.5, Grok TTS. CLI + MCP examples, parameters, and official docs."
+description: "Grok (xAI) AI models on Picsart — 10 audio/image/video model(s) including Grok Imagine 2.0, Grok Imagine 1.5, Grok TTS. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Grok
 
-**Modes:** image · video · audio · **Models:** 8
+**Modes:** image · video · audio · text · **Models:** 10
 
 **Vendor:** [xAI](https://x.ai) · **Official API docs:** [docs.x.ai](https://docs.x.ai/docs)
 
@@ -16,12 +16,14 @@ Grok Imagine (by xAI) is a multi-mode family on a single API: a fast image-to-vi
 |---|---|---|
 | `grok-imagine-video` | Grok Imagine 1.0 | `t2v` |
 | `grok-imagine-video-1.5` | Grok Imagine 1.5 | `t2v` |
+| `grok-imagine-video-1.5-lite` | Grok Imagine 1.5 Lite | `t2v` |
 | `grok-edit-video` | Grok Edit Video | `v2v` |
 | `grok-extend-video` | Grok Extend Video | `v2v` |
 | `grok-imagine-image` | Grok Imagine | `t2i` |
 | `grok-imagine-image-quality` | Grok Imagine Quality | `t2i` |
 | `grok-imagine-image-2.0` | Grok Imagine 2.0 | `t2i` |
 | `grok-tts` | Grok TTS | `tts` |
+| `grok-4.7` | Grok 4.7 | `i2t` |
 
 ## CLI
 
@@ -113,6 +115,20 @@ Input type: `i2v`
 
 > **Notes:** `grok-imagine-video` also backs image-to-video (pass `-i`); the edit / extend variants take a `--video` input and retain the source duration.
 
+### `grok-imagine-video-1.5-lite` — Grok Imagine 1.5 Lite
+
+[Try `grok-imagine-video-1.5-lite` in Playground ↗](https://picsart.com/ai-playground/?model=grok-imagine-video-1.5-lite)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤4096 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` · `12` · `15` (default `8`) |
+| `imageUrls` | `-i` | file | image (up to 1) |
+
 ### `grok-edit-video` — Grok Edit Video
 
 [Try `grok-edit-video` in Playground ↗](https://picsart.com/ai-playground/?model=grok-edit-video)
@@ -191,6 +207,18 @@ Input type: `tts`
 | `accent` | `--accent` | text | free text |
 | `prompt` | `-p` | text | **required** (≤15000 chars) |
 | `voiceId` | `--voice` | enum | `eve` (Eve) · `ara` (Ara) · `rex` (Rex) · `sal` (Sal) · `leo` (Leo) (default `eve`) |
+
+### `grok-4.7` — Grok 4.7
+
+[Try `grok-4.7` in Playground ↗](https://picsart.com/ai-playground/?model=grok-4.7)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `low` · `medium` · `high` (default `high`) |
 
 ## Pricing
 

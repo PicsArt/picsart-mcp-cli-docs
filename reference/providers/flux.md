@@ -1,10 +1,10 @@
 ---
-description: "Flux (Black Forest Labs) AI models on Picsart — 9 image and video models, including Flux 3 Image and Flux 3 Video. CLI + MCP examples, parameters, and official docs."
+description: "Flux (Black Forest Labs) AI models on Picsart — 10 image and video models, including Flux 3 Image and Flux 3 Video. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Flux
 
-**Modes:** image · video · **Models:** 9
+**Modes:** image · video · **Models:** 10
 
 **Vendor:** [Black Forest Labs](https://blackforestlabs.ai) · **Official API docs:** [docs.bfl.ml](https://docs.bfl.ml)
 
@@ -20,8 +20,9 @@ Flux (by Black Forest Labs) supports image generation, image editing, and video.
 | `flux-kontext-max` | Flux Kontext Max | `t2i` | Edit with up to 4 references |
 | `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Edit with one reference |
 | `flux-3-image` | Flux 3 Image | `t2i` | Generate and edit with up to 10 references, up to 4K |
+| `flux-3-image-klein` | Flux 3 Image Klein | `t2i` | Distilled, faster Flux 3 Image with a steps control, up to 4K |
 | `flux-3-video` | Flux 3 Video | `t2v` | Video with synchronized audio |
-| `flux-video-upscale` | Flux Video Upscale | `v2v` | Upscale video by 1.5x–3x |
+| `flux-video-upscale` | Flux 3 Video Upscale | `v2v` | Upscale video by 1.5x–3x |
 | `flux-video-edit` | FLUX Video Edit | `v2v` | Edit video with a text instruction |
 
 ## CLI
@@ -131,6 +132,22 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 10) |
 | `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
+
+### `flux-3-image-klein` — Flux 3 Image Klein
+
+[Try `flux-3-image-klein` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-image-klein)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `3:2` · `7:5` · `4:3` · `5:4` · `1:1` · `4:5` · `3:4` · `5:7` · `2:3` · `9:16` · `9:21` · `1:2` (default `auto`) |
+| `resolution` | `-r` | enum | `768sq` · `1k` · `1.5k` · `2k` · `4k` (default `1k`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `steps` | `--steps` | range | `1`–`16` (default `16`) |
+| `safetyTolerance` | `--safety-tolerance` | range | `0`–`7` (default `2`) |
 
 ### `flux-3-video` — Flux 3 Video
 
