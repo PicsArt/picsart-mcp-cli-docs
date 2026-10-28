@@ -13,6 +13,7 @@ These guides cover the exact setup for each agent.
 | Agent | Guide | Notes |
 |---|---|---|
 | Claude Code | [Claude Code](/guide/integrations/claude-code) | |
+| Replit | [Replit](/guide/integrations/replit) | |
 | Cursor | [Cursor](/guide/integrations/cursor) | |
 | Windsurf | [Windsurf](/guide/integrations/windsurf) | Now called Devin Desktop |
 | ChatGPT | [ChatGPT](/guide/integrations/chatgpt) | Needs developer mode on a paid plan |

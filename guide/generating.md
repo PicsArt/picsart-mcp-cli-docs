@@ -78,6 +78,12 @@ echo '{"prompt":"test","duration":99}' | gen-ai validate -m seedance-2.0
 { "name": "picsart_preflight", "arguments": { "model": "seedance-2.0", "params": { "duration": 99 } } }
 ```
 
+## Formats and retention
+
+Accepted formats, dimensions, duration, and file-size limits vary by model. Inspect the schema with `picsart_model_params` or `gen-ai validate -m <model-id> --schema` before submitting a generation.
+
+Download media you need to retain. Do not assume every result URL has the same expiry or access policy. A timeout can occur after a generation was accepted; check existing jobs before resubmitting to avoid a duplicate charge. See [Errors and retries](/guide/rate-limits).
+
 ## FAQ
 
 **How do I know which input type a model needs?**
