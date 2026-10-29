@@ -4,18 +4,14 @@ description: "Luma model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Luma
 
-**Modes:** image, video · **Models:** 9
+**Modes:** image, video · **Models:** 5
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
 | ID | Name | Input type |
 |---|---|---|
-| `luma-ray-2` | Luma Ray 2 | `t2v` |
-| `luma-ray-flash-2` | Luma Flash 2 | `i2v` |
-| `luma-ray-2-reframe-video` | Luma Ray 2 Reframe | `v2v` |
-| `luma-ray-flash-2-reframe-video` | Luma Flash 2 Reframe | `v2v` |
 | `luma-uni-1` | Luma UNI-1 | `t2i` |
 | `luma-uni-1-max` | Luma UNI-1 Max | `t2i` |
 | `luma-ray-3.2` | Luma Ray 3.2 | `t2v` |
@@ -27,14 +23,14 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 First inspect the model without generating media:
 
 ```bash
-gen-ai models info luma-ray-2 --json
-gen-ai validate -m luma-ray-2 --schema
+gen-ai models info luma-uni-1 --json
+gen-ai validate -m luma-uni-1 --schema
 ```
 
 The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
 
 ```bash
-gen-ai generate -m luma-ray-2 --prompt "A quiet forest at sunrise" --download ./output
+gen-ai generate -m luma-uni-1 --prompt "A quiet forest at sunrise" --download ./output
 ```
 
 Equivalent hosted MCP request:
@@ -43,7 +39,7 @@ Equivalent hosted MCP request:
 {
   "name": "picsart_generate",
   "arguments": {
-    "model": "luma-ray-2",
+    "model": "luma-uni-1",
     "prompt": "A quiet forest at sunrise",
     "async": true
   }
@@ -55,350 +51,6 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 ## Parameters
 
 Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
-
-### `luma-ray-2`
-
-Luma Ray 2; input type `t2v`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
-| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`, `4k`; default `720p` |
-| `duration` | `--duration` | No | enum | `5`, `9`; default `5` |
-| `startFrame` | `--start-frame` | No | file | image input |
-| `endFrame` | `--end-frame` | No | file | image input |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text",
-    "maxLength": 5000
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "resolution",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "540p"
-      },
-      {
-        "id": "720p"
-      },
-      {
-        "id": "1080p"
-      },
-      {
-        "id": "4k"
-      }
-    ],
-    "default": "720p"
-  },
-  {
-    "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 9
-      }
-    ],
-    "default": 5
-  },
-  {
-    "key": "startFrame",
-    "label": "Start Frame",
-    "required": false,
-    "category": "asset",
-    "kind": "file",
-    "accept": "image"
-  },
-  {
-    "key": "endFrame",
-    "label": "End Frame",
-    "category": "asset",
-    "kind": "file",
-    "accept": "image"
-  }
-]
-```
-
-</details>
-
-### `luma-ray-flash-2`
-
-Luma Flash 2; input type `i2v`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
-| `resolution` | `--resolution` | No | enum | `540p`, `720p`, `1080p`, `4k`; default `720p` |
-| `duration` | `--duration` | No | enum | `5`, `9`; default `5` |
-| `startFrame` | `--start-frame` | Yes | file | image input |
-| `endFrame` | `--end-frame` | No | file | image input |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text",
-    "maxLength": 5000
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "resolution",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "540p"
-      },
-      {
-        "id": "720p"
-      },
-      {
-        "id": "1080p"
-      },
-      {
-        "id": "4k"
-      }
-    ],
-    "default": "720p"
-  },
-  {
-    "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 9
-      }
-    ],
-    "default": 5
-  },
-  {
-    "key": "startFrame",
-    "label": "Start Frame",
-    "required": true,
-    "category": "asset",
-    "kind": "file",
-    "accept": "image"
-  },
-  {
-    "key": "endFrame",
-    "label": "End Frame",
-    "category": "asset",
-    "kind": "file",
-    "accept": "image"
-  }
-]
-```
-
-</details>
-
-### `luma-ray-2-reframe-video`
-
-Luma Ray 2 Reframe; input type `v2v`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | No | text | maximum 5000 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
-| `videoUrl` | `--video` | Yes | file | video input |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": false,
-    "kind": "text",
-    "maxLength": 5000
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "videoUrl",
-    "label": "Source Video",
-    "required": true,
-    "category": "reference",
-    "kind": "file",
-    "accept": "video"
-  }
-]
-```
-
-</details>
-
-### `luma-ray-flash-2-reframe-video`
-
-Luma Flash 2 Reframe; input type `v2v`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | No | text | maximum 5000 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `21:9`, `9:21`; default `16:9` |
-| `videoUrl` | `--video` | Yes | file | video input |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": false,
-    "kind": "text",
-    "maxLength": 5000
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "videoUrl",
-    "label": "Source Video",
-    "required": true,
-    "category": "reference",
-    "kind": "file",
-    "accept": "video"
-  }
-]
-```
-
-</details>
 
 ### `luma-uni-1`
 

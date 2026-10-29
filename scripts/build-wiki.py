@@ -102,7 +102,7 @@ plabel = {p['id']: p['label'] for p in providers}
 
 cat = ['# Model Catalog', '',
        f'All **{len(models)} models** from **{len(providers)} providers**. This is the versioned SDK snapshot. Availability differs in the CLI and hosted MCP server; inspect the connected catalog before submitting. See the [CLI Quickstart](CLI-Quickstart) and [MCP Quickstart](MCP-Quickstart).', '']
-for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio'), ('text', 'Text & Analysis')]:
+for mode, title in [('image', 'Image'), ('video', 'Video'), ('audio', 'Audio'), ('text', 'Text & Analysis'), ('json', 'Structured JSON')]:
     ms = [m for m in models if m['mode'] == mode]
     cat += [f'## {title} ({len(ms)})', '', '| Model | id | Provider | Type |', '|---|---|---|---|']
     for m in sorted(ms, key=lambda x: (x['provider'], x['name'])):

@@ -4,9 +4,9 @@ description: "Grok model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Grok
 
-**Modes:** image, video, audio · **Models:** 8
+**Modes:** image, video, audio, text · **Models:** 10
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -14,12 +14,14 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 |---|---|---|
 | `grok-imagine-video` | Grok Imagine 1.0 | `t2v` |
 | `grok-imagine-video-1.5` | Grok Imagine 1.5 | `t2v` |
+| `grok-imagine-video-1.5-lite` | Grok Imagine 1.5 Lite | `t2v` |
 | `grok-edit-video` | Grok Edit Video | `v2v` |
 | `grok-extend-video` | Grok Extend Video | `v2v` |
 | `grok-imagine-image` | Grok Imagine | `t2i` |
 | `grok-imagine-image-quality` | Grok Imagine Quality | `t2i` |
 | `grok-imagine-image-2.0` | Grok Imagine 2.0 | `t2i` |
 | `grok-tts` | Grok TTS | `tts` |
+| `grok-4.7` | Grok 4.7 | `i2t` |
 
 ## Example
 
@@ -178,6 +180,121 @@ Grok Imagine 1.5; input type `t2v`.
 | `resolution` | `--resolution` | No | enum | `480p`, `720p`, `1080p`; default `720p` |
 | `duration` | `--duration` | No | enum | `3`, `5`, `6`, `8`, `10`, `12`, `15`; default `8` |
 | `imageUrls` | `--image` | No | file | image input; array; maximum 1 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 4096
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "480p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 15
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "imageUrls",
+    "label": "Input Image",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  }
+]
+```
+
+</details>
+
+### `grok-imagine-video-1.5-lite`
+
+Grok Imagine 1.5 Lite; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 4096 characters |
+| `aspectRatio` | Use SDK or MCP | No | enum | `16:9`, `9:16`, `1:1`, `4:3`, `3:4`, `3:2`, `2:3`; default `16:9` |
+| `resolution` | Use SDK or MCP | No | enum | `480p`, `720p`, `1080p`; default `720p` |
+| `duration` | Use SDK or MCP | No | enum | `3`, `5`, `6`, `8`, `10`, `12`, `15`; default `8` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 1 |
 
 <details>
 <summary>Full parameter descriptors</summary>
@@ -793,6 +910,61 @@ Grok TTS; input type `tts`.
 </details>
 
 Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `grok-4.7`
+
+Grok 4.7; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `low`, `medium`, `high`; default `high` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "high"
+  }
+]
+```
+
+</details>
 
 ## Pricing
 

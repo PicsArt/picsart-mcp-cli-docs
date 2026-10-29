@@ -4,9 +4,9 @@ description: "MiniMax model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # MiniMax
 
-**Modes:** video, audio · **Models:** 12
+**Modes:** video, audio, text · **Models:** 14
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -24,6 +24,8 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 | `minimax-h3-max-camera-controls` | MiniMax H3 Max Camera Controls | `i2v` |
 | `minimax-h3-max-lip-sync` | MiniMax H3 Max Lip Sync | `i2v` |
 | `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
+| `minimax-h3-max-relight` | MiniMax H3 Max Relight | `v2v` |
+| `minimax-h3-context-ir` | MiniMax H3 Context IR | `v2t` |
 
 ## Example
 
@@ -1293,6 +1295,228 @@ MiniMax H3 Max Extend; input type `v2v`.
     "min": 0,
     "max": 2147483647,
     "step": 1
+  }
+]
+```
+
+</details>
+
+### `minimax-h3-max-relight`
+
+MiniMax H3 Max Relight; input type `v2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `videoUrl` | Use SDK or MCP | Yes | file | video input |
+| `imageUrls` | Use SDK or MCP | Yes | file | image input; array; maximum 1 |
+| `resolution` | Use SDK or MCP | No | enum | `480p`, `768p`, `1080p`, `2k`; default `768p` |
+| `aspectRatio` | Use SDK or MCP | No | enum | `adaptive`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`; default `16:9` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `enableSafetyChecker` | Use SDK or MCP | No | boolean | true or false; default `true` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 15
+  },
+  {
+    "key": "imageUrls",
+    "label": "Lighting Reference",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "480p"
+      },
+      {
+        "id": "768p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "2k"
+      }
+    ],
+    "default": "768p"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "adaptive"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "enableSafetyChecker",
+    "label": "Safety Checker",
+    "kind": "boolean",
+    "default": true
+  }
+]
+```
+
+</details>
+
+### `minimax-h3-context-ir`
+
+MiniMax H3 Context IR; input type `v2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `startFrame` | Use SDK or MCP | No | file | image input |
+| `endFrame` | Use SDK or MCP | No | file | image input |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 9 |
+| `videoUrls` | Use SDK or MCP | No | file | video input; array; maximum 3 |
+| `audioUrls` | Use SDK or MCP | No | file | audio input; array; maximum 3 |
+| `duration` | Use SDK or MCP | No | range | 4 to 15; step 1; default `5` |
+| `aspectRatio` | Use SDK or MCP | No | enum | `adaptive`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`; default `adaptive` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  },
+  {
+    "key": "videoUrls",
+    "label": "Reference Videos",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "audioUrls",
+    "label": "Reference Audios",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "audio",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 4,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "adaptive"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "adaptive"
   }
 ]
 ```

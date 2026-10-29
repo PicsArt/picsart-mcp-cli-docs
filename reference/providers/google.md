@@ -4,9 +4,9 @@ description: "Google model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Google
 
-**Modes:** image, video, audio, text · **Models:** 22
+**Modes:** image, video, audio, text · **Models:** 24
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -15,6 +15,7 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 | `veo-3.1` | Veo 3.1 | `t2v` |
 | `veo-3.1-fast` | Veo 3.1 Fast | `t2v` |
 | `veo-3.1-lite` | Veo 3.1 Lite | `t2v` |
+| `gemini-nano-banana-2.1` | Nano Banana 2.1 | `t2i` |
 | `gemini-3.1-flash-image` | Nano Banana 2 | `t2i` |
 | `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | `t2i` |
 | `gemini-3-pro-image` | Nano Banana Pro | `t2i` |
@@ -28,6 +29,7 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 | `lyria-3-clip` | Lyria 3 Clip | `music` |
 | `lyria-3-pro` | Lyria 3 Pro | `music` |
 | `lyria-3.5` | Lyria 3.5 | `music` |
+| `gemini-4-argon` | Gemini 4 Argon | `v2t` |
 | `gemini-3-pro` | Gemini 3 Pro | `v2t` |
 | `gemini-3.8-flash` | Gemini 3.8 Flash | `i2t` |
 | `gemini-3.7-flash` | Gemini 3.7 Flash | `i2t` |
@@ -379,6 +381,151 @@ Veo 3.1 Lite; input type `t2v`.
     "category": "asset",
     "kind": "file",
     "accept": "image"
+  }
+]
+```
+
+</details>
+
+### `gemini-nano-banana-2.1`
+
+Nano Banana 2.1; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `21:9`, `auto`; default `1:1` |
+| `resolution` | Use SDK or MCP | No | enum | `1K`, `2K`, `4K`; default `1K` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `thinkingLevel` | Use SDK or MCP | No | enum | `minimal`, `medium`, `high`; default `minimal` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 14 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "1K"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "thinkingLevel",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "minimal",
+        "label": "Minimal (faster)"
+      },
+      {
+        "id": "medium",
+        "label": "Medium (balanced)"
+      },
+      {
+        "id": "high",
+        "label": "High (more reasoning)"
+      }
+    ],
+    "default": "minimal"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
   }
 ]
 ```
@@ -1671,6 +1818,70 @@ Lyria 3.5; input type `music`.
     "array": {
       "max": 10
     }
+  }
+]
+```
+
+</details>
+
+### `gemini-4-argon`
+
+Gemini 4 Argon; input type `v2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `videoUrl` | Use SDK or MCP | No | file | video input |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Video",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
   }
 ]
 ```

@@ -4,7 +4,7 @@ description: "Picsart video models, examples, and input requirements."
 
 # Video generation
 
-The SDK 6.18.0 snapshot contains 91 video models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
+The SDK 6.48.1 snapshot contains 96 video models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
 
 ## Inspect the inputs
 

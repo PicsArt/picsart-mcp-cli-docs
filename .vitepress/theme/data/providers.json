@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 8,
+    "count": 9,
     "modes": [
       "text"
     ]
@@ -18,15 +18,25 @@
   {
     "id": "bytedance",
     "label": "ByteDance",
-    "count": 2,
+    "count": 22,
     "modes": [
-      "video"
+      "image",
+      "video",
+      "audio"
     ]
   },
   {
     "id": "creatify",
     "label": "Creatify",
     "count": 2,
+    "modes": [
+      "video"
+    ]
+  },
+  {
+    "id": "depth-anything",
+    "label": "Depth Anything",
+    "count": 1,
     "modes": [
       "video"
     ]
@@ -43,7 +53,7 @@
   {
     "id": "flux",
     "label": "Flux (Black Forest Labs)",
-    "count": 8,
+    "count": 10,
     "modes": [
       "image",
       "video"
@@ -52,7 +62,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 22,
+    "count": 24,
     "modes": [
       "image",
       "video",
@@ -63,11 +73,12 @@
   {
     "id": "grok",
     "label": "Grok (xAI)",
-    "count": 8,
+    "count": 10,
     "modes": [
       "image",
       "video",
-      "audio"
+      "audio",
+      "text"
     ]
   },
   {
@@ -81,7 +92,7 @@
   {
     "id": "heygen",
     "label": "HeyGen",
-    "count": 2,
+    "count": 3,
     "modes": [
       "video"
     ]
@@ -97,15 +108,23 @@
   {
     "id": "ideogram",
     "label": "Ideogram",
-    "count": 4,
+    "count": 6,
     "modes": [
       "image"
     ]
   },
   {
+    "id": "kimi",
+    "label": "Kimi",
+    "count": 1,
+    "modes": [
+      "text"
+    ]
+  },
+  {
     "id": "kling",
     "label": "Kling",
-    "count": 13,
+    "count": 15,
     "modes": [
       "image",
       "video",
@@ -123,7 +142,7 @@
   {
     "id": "luma",
     "label": "Luma",
-    "count": 9,
+    "count": 5,
     "modes": [
       "image",
       "video"
@@ -132,15 +151,26 @@
   {
     "id": "meta",
     "label": "Meta",
-    "count": 1,
+    "count": 2,
     "modes": [
-      "image"
+      "image",
+      "video"
     ]
   },
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 12,
+    "count": 14,
+    "modes": [
+      "video",
+      "audio",
+      "text"
+    ]
+  },
+  {
+    "id": "mirelo",
+    "label": "Mirelo",
+    "count": 3,
     "modes": [
       "video",
       "audio"
@@ -206,36 +236,20 @@
     ]
   },
   {
-    "id": "seedance",
-    "label": "Seedance",
-    "count": 12,
-    "modes": [
-      "video"
-    ]
-  },
-  {
-    "id": "seedaudio",
-    "label": "Seed Audio",
-    "count": 2,
-    "modes": [
-      "audio"
-    ]
-  },
-  {
-    "id": "seedream",
-    "label": "Seedream",
-    "count": 5,
-    "modes": [
-      "image"
-    ]
-  },
-  {
     "id": "topaz",
     "label": "Topaz",
     "count": 2,
     "modes": [
       "image",
       "video"
+    ]
+  },
+  {
+    "id": "typesafe",
+    "label": "TypeSafe",
+    "count": 1,
+    "modes": [
+      "json"
     ]
   },
   {

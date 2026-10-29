@@ -6,7 +6,7 @@ description: "PixVerse model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** video · **Models:** 6
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -61,8 +61,8 @@ PixVerse V6; input type `t2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 
 <details>
@@ -99,49 +99,16 @@ PixVerse V6; input type `t2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "aspectRatio",
@@ -188,8 +155,8 @@ PixVerse V6 Image; input type `i2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
 <details>
@@ -226,49 +193,16 @@ PixVerse V6 Image; input type `i2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "imageUrls",
@@ -294,8 +228,8 @@ PixVerse V6 Fusion; input type `i2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 | `imageUrls` | `--image` | Yes | file | image input; array; maximum 7 |
 
@@ -333,49 +267,16 @@ PixVerse V6 Fusion; input type `i2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "aspectRatio",
@@ -433,8 +334,8 @@ PixVerse C1; input type `t2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 
 <details>
@@ -471,49 +372,16 @@ PixVerse C1; input type `t2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "aspectRatio",
@@ -560,8 +428,8 @@ PixVerse C1 Image; input type `i2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
 
 <details>
@@ -598,49 +466,16 @@ PixVerse C1 Image; input type `i2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "imageUrls",
@@ -666,8 +501,8 @@ PixVerse C1 Fusion; input type `i2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
 | `quality` | `--quality` | No | enum | `360p`, `540p`, `720p`, `1080p`; default `540p` |
-| `duration` | `--duration` | No | enum | `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`; default `5` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `duration` | `--duration` | No | range | 5 to 15; step 1; default `5` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; default `16:9` |
 | `imageUrls` | `--image` | Yes | file | image input; array; maximum 7 |
 
@@ -705,49 +540,16 @@ PixVerse C1 Fusion; input type `i2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "aspectRatio",

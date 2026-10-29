@@ -4,15 +4,16 @@ description: "Meta model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Meta
 
-**Modes:** image · **Models:** 1
+**Modes:** image, video · **Models:** 2
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
 | ID | Name | Input type |
 |---|---|---|
 | `muse-image-1.0` | Muse Image 1.0 | `t2i` |
+| `sam-3-video` | SAM 3 Video | `v2v` |
 
 ## Example
 
@@ -210,6 +211,73 @@ Muse Image 1.0; input type `t2i`.
     "array": {
       "max": 5
     }
+  }
+]
+```
+
+</details>
+
+### `sam-3-video`
+
+SAM 3 Video; input type `v2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `videoUrl` | Use SDK or MCP | Yes | file | video input |
+| `detectionThreshold` | Use SDK or MCP | No | range | 0 to 1; step 0.05; default `0.5` |
+| `applyMask` | Use SDK or MCP | No | boolean | true or false; default `true` |
+| `outputFormat` | Use SDK or MCP | No | enum | `mp4`, `webm`; default `mp4` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "placeholder": "person, cloth"
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "detectionThreshold",
+    "label": "Detection Threshold",
+    "kind": "range",
+    "min": 0,
+    "max": 1,
+    "step": 0.05,
+    "default": 0.5
+  },
+  {
+    "key": "applyMask",
+    "label": "Apply Mask",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "outputFormat",
+    "label": "Format",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "mp4"
+      },
+      {
+        "id": "webm"
+      }
+    ],
+    "default": "mp4"
   }
 ]
 ```

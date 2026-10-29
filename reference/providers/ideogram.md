@@ -4,14 +4,16 @@ description: "Ideogram model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Ideogram
 
-**Modes:** image · **Models:** 4
+**Modes:** image · **Models:** 6
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
 | ID | Name | Input type |
 |---|---|---|
+| `ideogram-4-5` | Ideogram 4.5 | `t2i` |
+| `ideogram-4-5-precise-edit` | Ideogram 4.5 Precise Edit | `i2i` |
 | `ideogram-v4` | Ideogram 4.0 | `t2i` |
 | `ideogram-p-image` | Ideogram P-Image | `t2i` |
 | `ideogram-v3` | Ideogram v3 | `t2i` |
@@ -50,6 +52,357 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 ## Parameters
 
 Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+
+### `ideogram-4-5`
+
+Ideogram 4.5; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 10000 characters |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 5 |
+| `mask` | Use SDK or MCP | No | file | image input |
+| `aspectRatio` | Use SDK or MCP | No | enum | 17 choices; see descriptor below; default `auto` |
+| `resolution` | Use SDK or MCP | No | enum | `1K`, `2K`; default `2K` |
+| `magicPrompt` | Use SDK or MCP | No | enum | `auto`, `on`, `off`; default `auto` |
+| `quality` | Use SDK or MCP | No | enum | `very_low`, `low`, `medium`, `high`; default `high` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `enableCopyrightDetection` | Use SDK or MCP | No | boolean | true or false; default `false` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 10000
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 5
+    },
+    "minAspectRatio": 0.16666666666666666,
+    "maxAspectRatio": 6,
+    "maxBytes": 26214400
+  },
+  {
+    "key": "mask",
+    "label": "Mask",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "minAspectRatio": 0.16666666666666666,
+    "maxAspectRatio": 6,
+    "maxBytes": 26214400
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto"
+      },
+      {
+        "id": "source"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "8:5"
+      },
+      {
+        "id": "5:8"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "1:2"
+      },
+      {
+        "id": "3:1"
+      },
+      {
+        "id": "1:3"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      }
+    ],
+    "default": "2K"
+  },
+  {
+    "key": "magicPrompt",
+    "label": "Magic Prompt",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto",
+        "label": "Auto"
+      },
+      {
+        "id": "on",
+        "label": "On"
+      },
+      {
+        "id": "off",
+        "label": "Off (verbatim)"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "very_low"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "high"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "enableCopyrightDetection",
+    "label": "Copyright Detection",
+    "kind": "boolean",
+    "default": false
+  }
+]
+```
+
+</details>
+
+### `ideogram-4-5-precise-edit`
+
+Ideogram 4.5 Precise Edit; input type `i2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 10000 characters |
+| `startFrame` | Use SDK or MCP | Yes | file | image input |
+| `mask` | Use SDK or MCP | No | file | image input |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 4 |
+| `quality` | Use SDK or MCP | No | enum | `very_low`, `low`, `medium`, `high`; default `medium` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `enableCopyrightDetection` | Use SDK or MCP | No | boolean | true or false; default `false` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 10000
+  },
+  {
+    "key": "startFrame",
+    "label": "Source Image",
+    "required": true,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "minAspectRatio": 0.16666666666666666,
+    "maxAspectRatio": 6,
+    "maxBytes": 26214400
+  },
+  {
+    "key": "mask",
+    "label": "Mask",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "minAspectRatio": 0.16666666666666666,
+    "maxAspectRatio": 6,
+    "maxBytes": 26214400
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 4
+    },
+    "minAspectRatio": 0.16666666666666666,
+    "maxAspectRatio": 6,
+    "maxBytes": 26214400
+  },
+  {
+    "key": "quality",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "very_low"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "medium"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "enableCopyrightDetection",
+    "label": "Copyright Detection",
+    "kind": "boolean",
+    "default": false
+  }
+]
+```
+
+</details>
 
 ### `ideogram-v4`
 

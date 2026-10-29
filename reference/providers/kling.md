@@ -4,9 +4,9 @@ description: "Kling model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Kling
 
-**Modes:** image, video, audio · **Models:** 13
+**Modes:** image, video, audio · **Models:** 15
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -14,8 +14,10 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 |---|---|---|
 | `kling-v3` | Kling V3 | `t2v` |
 | `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
+| `kling-v4` | Kling 4.0 | `t2v` |
 | `kling-v2-6` | Kling V2.6 | `t2v` |
 | `kling-v3-omni` | Kling V3 Omni | `t2v` |
+| `kling-v4-omni` | Kling 4.0 Omni | `t2v` |
 | `kling-video-o1` | Kling Video O1 | `t2v` |
 | `kling-motion-control-v3` | Kling Motion Control V3 | `i2v` |
 | `kling-motion-control` | Kling Motion Control 2.6 | `i2v` |
@@ -68,7 +70,7 @@ Kling V3; input type `t2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
-| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
 | `startFrame` | `--start-frame` | No | file | image input |
 | `endFrame` | `--end-frame` | No | file | image input |
 | `negativePrompt` | `--negative-prompt` | No | text | Text |
@@ -111,49 +113,10 @@ Kling V3; input type `t2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 3
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
@@ -284,7 +247,7 @@ Kling V3 Turbo; input type `t2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
-| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
 | `negativePrompt` | `--negative-prompt` | No | text | Text |
 | `resolution` | `--resolution` | No | enum | `720p`, `1080p`; default `720p` |
 | `startFrame` | `--start-frame` | No | file | image input |
@@ -320,49 +283,10 @@ Kling V3 Turbo; input type `t2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 3
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
@@ -388,6 +312,105 @@ Kling V3 Turbo; input type `t2v`.
     "key": "startFrame",
     "label": "Start Frame",
     "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
+
+</details>
+
+### `kling-v4`
+
+Kling 4.0; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 26000 characters |
+| `aspectRatio` | Use SDK or MCP | No | enum | `16:9`, `9:16`, `1:1`, `21:9`; default `16:9` |
+| `duration` | Use SDK or MCP | No | range | 3 to 30; step 1; default `5` |
+| `resolution` | Use SDK or MCP | No | enum | `720p`, `1080p`; default `720p` |
+| `startFrame` | Use SDK or MCP | No | file | image input |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `endFrame` | Use SDK or MCP | No | file | image input |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 26000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "21:9"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 30,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Middle Frames",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
     "category": "asset",
     "kind": "file",
     "accept": "image"
@@ -490,9 +513,9 @@ Kling V3 Omni; input type `t2v`.
 |---|---|---|---|---|
 | `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
-| `duration` | `--duration` | No | enum | 13 choices; see descriptor below; default `5` |
+| `duration` | `--duration` | No | range | 3 to 15; step 1; default `5` |
 | `resolution` | `--resolution` | No | enum | `720p`, `1080p`, `4k`; default `720p` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 | `startFrame` | `--start-frame` | No | file | image input |
 | `endFrame` | `--end-frame` | No | file | image input |
 | `imageUrls` | `--image` | No | file | image input; array; maximum 7 |
@@ -535,49 +558,10 @@ Kling V3 Omni; input type `t2v`.
   },
   {
     "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 3
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 15
-      }
-    ],
+    "kind": "range",
+    "min": 3,
+    "max": 15,
+    "step": 1,
     "default": 5
   },
   {
@@ -600,7 +584,7 @@ Kling V3 Omni; input type `t2v`.
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   },
   {
     "key": "startFrame",
@@ -634,7 +618,11 @@ Kling V3 Omni; input type `t2v`.
     "required": false,
     "category": "reference",
     "kind": "file",
-    "accept": "video"
+    "accept": "video",
+    "maxDurationSec": 15.5,
+    "minDurationSec": 3,
+    "minSidePixels": 700,
+    "maxSidePixels": 4553
   },
   {
     "key": "referType",
@@ -730,6 +718,149 @@ Kling V3 Omni; input type `t2v`.
 
 </details>
 
+### `kling-v4-omni`
+
+Kling 4.0 Omni; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 26000 characters |
+| `aspectRatio` | Use SDK or MCP | No | enum | `16:9`, `9:16`, `1:1`, `21:9`, `adaptive`; default `16:9` |
+| `duration` | Use SDK or MCP | No | range | 3 to 30; step 1; default `5` |
+| `resolution` | Use SDK or MCP | No | enum | `720p`, `1080p`; default `720p` |
+| `startFrame` | Use SDK or MCP | No | file | image input |
+| `endFrame` | Use SDK or MCP | No | file | image input |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `videoUrl` | Use SDK or MCP | No | file | video input |
+| `referType` | Use SDK or MCP | No | enum | `feature`, `base`; default `feature` |
+| `elementList` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; maximum 7 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 26000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "adaptive"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 3,
+    "max": 30,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "startFrame",
+    "label": "First Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Reference Video",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "referType",
+    "label": "Reference Video Mode",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "feature",
+        "label": "Feature Reference"
+      },
+      {
+        "id": "base",
+        "label": "Base Edit"
+      }
+    ],
+    "default": "feature"
+  },
+  {
+    "key": "elementList",
+    "label": "Element References",
+    "kind": "object",
+    "array": {
+      "max": 7
+    },
+    "fields": {
+      "element_id": {
+        "kind": "text"
+      }
+    }
+  }
+]
+```
+
+</details>
+
 ### `kling-video-o1`
 
 Kling Video O1; input type `t2v`.
@@ -740,7 +871,7 @@ Kling Video O1; input type `t2v`.
 | `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
 | `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
 | `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `false` |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
 
 <details>
 <summary>Full parameter descriptors</summary>
@@ -804,7 +935,7 @@ Kling Video O1; input type `t2v`.
   {
     "key": "generateAudio",
     "kind": "boolean",
-    "default": false
+    "default": true
   }
 ]
 ```
@@ -895,7 +1026,12 @@ Kling Motion Control V3; input type `i2v`.
     "accept": "image",
     "array": {
       "max": 1
-    }
+    },
+    "minSidePixels": 300,
+    "maxSidePixels": 65536,
+    "minAspectRatio": 0.4,
+    "maxAspectRatio": 2.5,
+    "maxBytes": 10485760
   },
   {
     "key": "videoUrl",
@@ -903,7 +1039,12 @@ Kling Motion Control V3; input type `i2v`.
     "required": true,
     "category": "reference",
     "kind": "file",
-    "accept": "video"
+    "accept": "video",
+    "maxDurationSec": 30,
+    "minDurationSec": 3,
+    "minSidePixels": 340,
+    "maxSidePixels": 3850,
+    "maxBytes": 104857600
   }
 ]
 ```
@@ -994,7 +1135,12 @@ Kling Motion Control 2.6; input type `i2v`.
     "accept": "image",
     "array": {
       "max": 1
-    }
+    },
+    "minSidePixels": 300,
+    "maxSidePixels": 65536,
+    "minAspectRatio": 0.4,
+    "maxAspectRatio": 2.5,
+    "maxBytes": 10485760
   },
   {
     "key": "videoUrl",
@@ -1002,7 +1148,12 @@ Kling Motion Control 2.6; input type `i2v`.
     "required": true,
     "category": "reference",
     "kind": "file",
-    "accept": "video"
+    "accept": "video",
+    "maxDurationSec": 30,
+    "minDurationSec": 3,
+    "minSidePixels": 340,
+    "maxSidePixels": 3850,
+    "maxBytes": 104857600
   }
 ]
 ```
@@ -1066,7 +1217,8 @@ Kling Avatar; input type `i2v`.
     "required": true,
     "category": "asset",
     "kind": "file",
-    "accept": "audio"
+    "accept": "audio",
+    "maxDurationSec": 300
   },
   {
     "key": "audioId",

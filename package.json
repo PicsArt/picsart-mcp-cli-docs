@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "playwright": "1.63.0",
-    "vitepress": "^1.6.3"
+    "vitepress": "^1.6.3",
+    "@picsart/ai-sdk": "6.48.1"
   },
   "overrides": {
     "vite": "6.4.3"

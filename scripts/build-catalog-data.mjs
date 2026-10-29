@@ -61,13 +61,15 @@ for (const m of sourceModels) {
   entry.modes.add(m.mode)
   entry.count++
 }
-const MODE_ORDER = ['image', 'video', 'audio', 'text']
+const MODE_ORDER = ['image', 'video', 'audio', 'text', 'json']
 const providers = [...byProvider.values()]
   .map((p) => ({
     id: p.id,
     label: curatedLabel.get(p.id) ?? p.name,
     count: p.count,
-    modes: MODE_ORDER.filter((mode) => p.modes.has(mode)),
+    modes: [...p.modes].sort((a, b) =>
+      (MODE_ORDER.indexOf(a) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(a)) -
+      (MODE_ORDER.indexOf(b) < 0 ? MODE_ORDER.length : MODE_ORDER.indexOf(b)) || a.localeCompare(b)),
   }))
   .sort((a, b) => a.id.localeCompare(b.id))
 
@@ -77,6 +79,6 @@ writeFileSync(join(dataDir, 'providers.json'), JSON.stringify(providers, null, 2
 const modeCount = models.reduce((acc, m) => ((acc[m.mode] = (acc[m.mode] || 0) + 1), acc), {})
 console.log(`✓ Wrote catalog data from ${catalog.sdkVersion ?? 'catalog.json'}`)
 console.log(`  ${models.length} models · ${providers.length} providers`)
-console.log(`  modes: ${MODE_ORDER.filter((m) => modeCount[m]).map((m) => `${m} ${modeCount[m]}`).join(', ')}`)
+console.log(`  modes: ${Object.keys(modeCount).map((m) => `${m} ${modeCount[m]}`).join(', ')}`)
 const newProviders = providers.filter((p) => !curatedLabel.has(p.id)).map((p) => p.id)
 if (newProviders.length) console.log(`  new providers: ${newProviders.join(', ')}`)

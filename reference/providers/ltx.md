@@ -6,7 +6,7 @@ description: "LTX model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** video · **Models:** 9
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -598,8 +598,8 @@ LTX 2.3 Outpaint; input type `v2v`.
 | `negativePrompt` | Use SDK or MCP | No | text | Text |
 | `aspectRatio` | Use SDK or MCP | No | enum | `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `9:21`; default `21:9` |
 | `resolution` | Use SDK or MCP | No | enum | `480p`, `720p`, `1080p`; default `720p` |
-| `numFrames` | Use SDK or MCP | No | range | 9 to 481; default `121` |
-| `fps` | Use SDK or MCP | No | range | 1 to 60; default `24` |
+| `duration` | Use SDK or MCP | No | enum | 20 choices; see descriptor below; default `6` |
+| `fps` | Use SDK or MCP | No | range | 1 to 60; step 1; default `24` |
 | `sourceScale` | Use SDK or MCP | No | range | 0.25 to 1; step 0.05; default `1` |
 | `videoStrength` | Use SDK or MCP | No | range | 0 to 1; step 0.05; default `1` |
 | `cfgScale` | Use SDK or MCP | No | range | 1 to 20; default `1` |
@@ -683,12 +683,72 @@ LTX 2.3 Outpaint; input type `v2v`.
     "default": "720p"
   },
   {
-    "key": "numFrames",
-    "label": "Frames",
-    "kind": "range",
-    "min": 9,
-    "max": 481,
-    "default": 121
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      },
+      {
+        "id": 16
+      },
+      {
+        "id": 17
+      },
+      {
+        "id": 18
+      },
+      {
+        "id": 19
+      },
+      {
+        "id": 20
+      }
+    ],
+    "default": 6
   },
   {
     "key": "fps",
@@ -696,6 +756,7 @@ LTX 2.3 Outpaint; input type `v2v`.
     "kind": "range",
     "min": 1,
     "max": 60,
+    "step": 1,
     "default": 24
   },
   {

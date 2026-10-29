@@ -4,9 +4,9 @@ description: "Flux model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Flux
 
-**Modes:** image, video · **Models:** 8
+**Modes:** image, video · **Models:** 10
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -17,8 +17,10 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 | `flux-2-flex` | Flux 2 Flex | `t2i` |
 | `flux-kontext-max` | Flux Kontext Max | `t2i` |
 | `flux-kontext-pro` | Flux Kontext Pro | `t2i` |
+| `flux-3-image` | Flux 3 Image | `t2i` |
+| `flux-3-image-klein` | Flux 3 Image Klein | `t2i` |
 | `flux-3-video` | Flux 3 Video | `t2v` |
-| `flux-video-upscale` | Flux Video Upscale | `v2v` |
+| `flux-video-upscale` | Flux 3 Video Upscale | `v2v` |
 | `flux-video-edit` | FLUX Video Edit | `v2v` |
 
 ## Example
@@ -574,6 +576,321 @@ Flux Kontext Pro; input type `t2i`.
 
 </details>
 
+### `flux-3-image`
+
+Flux 3 Image; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `aspectRatio` | Use SDK or MCP | No | enum | 16 choices; see descriptor below; default `auto` |
+| `resolution` | Use SDK or MCP | No | enum | `768sq`, `1k`, `1.5k`, `2k`, `4k`; default `1k` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 10 |
+| `safetyTolerance` | Use SDK or MCP | No | range | 0 to 4; default `2` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "7:5"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "5:7"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "9:21"
+      },
+      {
+        "id": "1:2"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "768sq"
+      },
+      {
+        "id": "1k"
+      },
+      {
+        "id": "1.5k"
+      },
+      {
+        "id": "2k"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "1k"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  },
+  {
+    "key": "safetyTolerance",
+    "label": "Safety Tolerance",
+    "kind": "range",
+    "min": 0,
+    "max": 4,
+    "default": 2
+  }
+]
+```
+
+</details>
+
+### `flux-3-image-klein`
+
+Flux 3 Image Klein; input type `t2i`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `aspectRatio` | Use SDK or MCP | No | enum | 16 choices; see descriptor below; default `auto` |
+| `resolution` | Use SDK or MCP | No | enum | `768sq`, `1k`, `1.5k`, `2k`, `4k`; default `1k` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 10 |
+| `steps` | Use SDK or MCP | No | range | 1 to 16; default `16` |
+| `safetyTolerance` | Use SDK or MCP | No | range | 0 to 7; default `2` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "auto"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "2:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "7:5"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "5:7"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "9:21"
+      },
+      {
+        "id": "1:2"
+      }
+    ],
+    "default": "auto"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "768sq"
+      },
+      {
+        "id": "1k"
+      },
+      {
+        "id": "1.5k"
+      },
+      {
+        "id": "2k"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "1k"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  },
+  {
+    "key": "steps",
+    "label": "Steps",
+    "kind": "range",
+    "min": 1,
+    "max": 16,
+    "default": 16
+  },
+  {
+    "key": "safetyTolerance",
+    "label": "Safety Tolerance",
+    "kind": "range",
+    "min": 0,
+    "max": 7,
+    "default": 2
+  }
+]
+```
+
+</details>
+
 ### `flux-3-video`
 
 Flux 3 Video; input type `t2v`.
@@ -717,7 +1034,7 @@ Flux 3 Video; input type `t2v`.
 
 ### `flux-video-upscale`
 
-Flux Video Upscale; input type `v2v`.
+Flux 3 Video Upscale; input type `v2v`.
 
 | Parameter | CLI flag | Required | Type | Values and constraints |
 |---|---|---|---|---|

@@ -6,7 +6,7 @@ description: "OpenAI model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** image, text · **Models:** 19
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -74,6 +74,8 @@ GPT Image 2.5 Sunburst; input type `t2i`.
 |---|---|---|---|---|
 | `prompt` | Use SDK or MCP | Yes | text | maximum 32000 characters |
 | `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`, `auto`; default `1:1` |
+| `resolution` | Use SDK or MCP | No | enum | `1K`, `2K`, `4K`; default `1K` |
+| `size` | Use SDK or MCP | No | text | Text |
 | `quality` | Use SDK or MCP | No | enum | `max`, `xhigh`, `high`, `medium`, `low`; default `high` |
 | `background` | Use SDK or MCP | No | enum | `opaque`, `transparent`; default `opaque` |
 | `outputFormat` | Use SDK or MCP | No | enum | `png`, `jpeg`, `webp`; default `png` |
@@ -123,6 +125,29 @@ GPT Image 2.5 Sunburst; input type `t2i`.
       }
     ],
     "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "1K"
+  },
+  {
+    "key": "size",
+    "label": "Custom Size",
+    "kind": "text",
+    "placeholder": "WIDTHxHEIGHT, e.g. 2048x1152"
   },
   {
     "key": "quality",
@@ -230,6 +255,8 @@ GPT Image 2.5 Flare; input type `t2i`.
 |---|---|---|---|---|
 | `prompt` | Use SDK or MCP | Yes | text | maximum 32000 characters |
 | `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:3`, `3:4`, `auto`; default `1:1` |
+| `resolution` | Use SDK or MCP | No | enum | `1K`, `2K`, `4K`; default `1K` |
+| `size` | Use SDK or MCP | No | text | Text |
 | `quality` | Use SDK or MCP | No | enum | `max`, `xhigh`, `high`, `medium`, `low`; default `high` |
 | `background` | Use SDK or MCP | No | enum | `opaque`, `transparent`; default `opaque` |
 | `outputFormat` | Use SDK or MCP | No | enum | `png`, `jpeg`, `webp`; default `png` |
@@ -279,6 +306,29 @@ GPT Image 2.5 Flare; input type `t2i`.
       }
     ],
     "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "1K"
+  },
+  {
+    "key": "size",
+    "label": "Custom Size",
+    "kind": "text",
+    "placeholder": "WIDTHxHEIGHT, e.g. 2048x1152"
   },
   {
     "key": "quality",

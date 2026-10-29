@@ -33,7 +33,7 @@ const total = models.length
 const providerCount = providers.length
 
 // Stable, human-friendly mode ordering for the provider summaries.
-const MODE_ORDER = ['image', 'video', 'audio', 'text']
+const MODE_ORDER = ['image', 'video', 'audio', 'text', 'json']
 const orderModes = (modes) =>
   [...modes].sort((a, b) => MODE_ORDER.indexOf(a) - MODE_ORDER.indexOf(b)).join(', ')
 
@@ -84,6 +84,7 @@ out.push(link('Model Catalog', '/reference/catalog', 'searchable, filterable cat
 out.push(link('Image generation', '/reference/image', `${byMode.image} image models`))
 out.push(link('Video generation', '/reference/video', `${byMode.video} video models`))
 out.push(link('Audio generation', '/reference/audio', `${byMode.audio} audio models`))
+out.push(link('Structured JSON', '/reference/json', `${byMode.json} JSON models`))
 out.push(link('Text and analysis', '/reference/text', `${byMode.text} text models`))
 out.push('')
 out.push('## Providers')

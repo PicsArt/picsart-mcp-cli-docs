@@ -44,6 +44,7 @@ const sidebar = [
       { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
       { text: 'TypeScript SDK', link: '/guide/sdk' },
+      { text: 'SDK 6.29.0 update', link: '/guide/sdk-6-29-update' },
       { text: 'REST API', link: '/guide/rest-api' },
     ],
   },
@@ -105,6 +106,7 @@ const sidebar = [
       { text: 'Video generation', link: '/reference/video' },
       { text: 'Audio generation', link: '/reference/audio' },
       { text: 'Text & analysis', link: '/reference/text' },
+      { text: 'JSON & evaluation', link: '/reference/json' },
     ],
   },
   {
@@ -112,6 +114,10 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'All providers', link: '/reference/providers/' },
+      { text: 'Depth Anything', link: '/reference/providers/depth-anything' },
+      { text: 'Kimi (Moonshot)', link: '/reference/providers/kimi' },
+      { text: 'Mirelo', link: '/reference/providers/mirelo' },
+      { text: 'TypeSafe', link: '/reference/providers/typesafe' },
       { text: 'Anthropic', link: '/reference/providers/anthropic' },
       { text: 'Async', link: '/reference/providers/async' },
       { text: 'ByteDance', link: '/reference/providers/bytedance' },

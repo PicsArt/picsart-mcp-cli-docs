@@ -7,6 +7,50 @@ title: Changelog
 
 Historical release notes follow. Their counts and availability describe the named release, not today's runtime.
 
+## 2026-10-16
+
+**SDK 6.48.1 catalog refresh: 238 production models across 32 providers.**
+Compared with the last published catalog (6.29.0): 16 models added, none removed; Kimi, Depth Anything and Mirelo join the provider list.
+
+### New
+
+- **Kling 4.0** and **Kling 4.0 Omni** *(video, `t2v`)*: up to 30s at 720p or 1080p; 4.0 takes start, middle and end keyframes, Omni adds reference images, a reference or base video, and elements. See [Kling](/reference/providers/kling).
+- **ByteDance OmniHuman 2.0** *(video, `i2v`)*: animates one or more subjects with realistic body movement driven by audio. See [ByteDance](/reference/providers/bytedance).
+- **Grok Imagine 1.5 Lite** *(video, `t2v`)*: faster, lower-cost video with audio, up to 15s. **Grok 4.7** *(text, `i2t`)*: xAI's flagship reasoning model with a 500K-token context. See [Grok](/reference/providers/grok).
+- **Flux 3 Image Klein** *(image, `t2i`)*: a distilled, faster Flux 3 Image with up to 10 references, a `steps` control and native 4K. See [Flux](/reference/providers/flux).
+- **MiniMax H3 Max Relight** *(video, `v2v`)*: relights an existing clip from a sphere-render reference image. **MiniMax H3 Context IR** *(text, `v2t`)*: enhances a video prompt from text plus optional frames, references, videos and audio; returns a prompt, not a video. See [MiniMax](/reference/providers/minimax).
+- **Claude Haiku 5.5** *(text, `i2t`)*: fast, lightweight Claude for high-volume text tasks. See [Anthropic](/reference/providers/anthropic).
+- **Gemini 4 Argon** *(text, `v2t`)*: Google's flagship Gemini 4 reasoning model with image and video input and a 1M-token context. See [Google](/reference/providers/google).
+- **Kimi K3** *(text, `i2t`)*: Moonshot's flagship reasoning model with a 1M-token context. New provider: [Kimi](/reference/providers/kimi).
+- **SAM 3 Video** *(video, `v2v`)*: segments and tracks named objects through a clip from a text prompt. See [Meta](/reference/providers/meta).
+- **Video Depth Anything** *(video, `v2v`)*: temporally consistent per-frame depth maps, grayscale or color-mapped, optionally side by side. New provider: [Depth Anything](/reference/providers/depth-anything).
+- **Mirelo SFX 2.0** *(Text to Audio `t2a`, Video to Audio `v2a`, Video to Video `v2v`)*: sound effects from a prompt, or a soundtrack synced to your video returned as audio or muxed onto the clip. New provider: [Mirelo](/reference/providers/mirelo). Not selectable in the AI Playground app.
+
+### Changed
+
+- **Flux Video Upscale is now displayed as Flux 3 Video Upscale.** The id `flux-video-upscale` is unchanged.
+
+### Availability
+
+The published `@picsart/gen-ai` CLI (2.82.0) and the hosted MCP server still run an older catalog. Of the models above, only MiniMax H3 Max Relight, Claude Haiku 5.5 and Video Depth Anything are callable from them today; the rest become reachable when the CLI and MCP server move to SDK 6.48.1. The SDK itself exposes every model listed.
+
+## 2026-10-07
+
+**SDK 6.29.0 catalog refresh: 222 production models across 29 providers.**
+Adds Nano Banana 2.1, HeyGen Video, and TypeSafe Jev structured evaluation.
+Four older Luma Ray 2 / Flash 2 entries leave the production catalog.
+The catalog and navigation now include JSON output; Jev uses the SDK’s `ai.run()` API.
+See the [complete update and availability notes](/guide/sdk-6-29-update).
+
+## 2026-10-02
+
+**SDK 6.23.0 catalog refresh: 223 production models across 28 providers.**
+The comparison with the last published catalog adds 22 models and removes none.
+Additions include Flux 3 Image, Ideogram 4.5, GPT-6, LTX 2.5, Eleven v4, and Gemini 3.8 speech models.
+Seedance, Seedream, and Seed Audio now sit under ByteDance; their model IDs remain unchanged.
+Provider tables include current parameters. Preview models remain excluded.
+See the [complete model list and availability notes](/guide/sdk-6-23-update).
+
 ## 2026-09-29
 
 Documentation checked against CLI 2.78.0, SDK 6.18.0, and the connected hosted MCP tool schemas. Corrected authentication, command flags, JSON batch manifests, host configurations, and timeout recovery. Regenerated the model reference from the versioned SDK snapshot. The SDK, CLI, and hosted catalogs can differ.

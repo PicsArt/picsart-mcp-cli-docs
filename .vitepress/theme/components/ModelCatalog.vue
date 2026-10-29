@@ -18,7 +18,7 @@ const query = ref('')
 const mode = ref('all')
 const provider = ref('all')
 
-const modes = ['all', 'image', 'video', 'audio', 'text']
+const modes = ['all', 'image', 'video', 'audio', 'text', 'json']
 
 const filtered = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -142,4 +142,8 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
 .card-id { font-family: var(--vp-font-family-mono); font-size: 12px; color: var(--vp-c-text-3); margin-top: 2px; }
 .card-provider { font-size: 13px; color: var(--vp-c-brand-1); margin-top: 8px; font-weight: 500; }
 .empty { color: var(--vp-c-text-2); padding: 32px 0; text-align: center; }
+</style>
+
+<style scoped>
+.tag.mode-json { background: #b45309; }
 </style>

@@ -4,9 +4,9 @@ description: "Anthropic model IDs, parameters, and CLI and MCP usage on Picsart.
 
 # Anthropic
 
-**Modes:** text · **Models:** 8
+**Modes:** text · **Models:** 9
 
-This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -19,6 +19,7 @@ This reference uses the `@picsart/ai-sdk 6.18.0` catalog snapshot. The hosted MC
 | `claude-sonnet-5` | Claude Sonnet 5 | `i2t` |
 | `claude-sonnet-4-6` | Claude Sonnet 4.6 | `i2t` |
 | `claude-sonnet-4-5` | Claude Sonnet 4.5 | `i2t` |
+| `claude-haiku-5-5` | Claude Haiku 5.5 | `i2t` |
 | `claude-haiku-4-5` | Claude Haiku 4.5 | `i2t` |
 
 ## Example
@@ -273,6 +274,42 @@ Claude Sonnet 4.6; input type `i2t`.
 ### `claude-sonnet-4-5`
 
 Claude Sonnet 4.5; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `claude-haiku-5-5`
+
+Claude Haiku 5.5; input type `i2t`.
 
 | Parameter | CLI flag | Required | Type | Values and constraints |
 |---|---|---|---|---|

@@ -4,7 +4,7 @@ description: "Picsart audio models, examples, and input requirements."
 
 # Audio generation
 
-The SDK 6.18.0 snapshot contains 31 audio models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
+The SDK 6.48.1 snapshot contains 33 audio models. Availability and parameters can differ in the CLI or hosted MCP release. Inspect the selected model before generating.
 
 ## Inspect the inputs
 

@@ -49,7 +49,7 @@ const byProvider = new Map()
 for(const model of catalog.models) {if(!byProvider.has(model.provider.id)) byProvider.set(model.provider.id, []);byProvider.get(model.provider.id).push(model)}
 for(const [id,models] of byProvider) {
  const name=models[0].provider.name
- const modes=['image','video','audio','text'].filter(mode=>models.some(m=>m.mode===mode))
+ const modes=['image','video','audio','text','json'].filter(mode=>models.some(m=>m.mode===mode))
  const preferred=[...models].sort((a,b)=>Number(b.params.some(p=>p.key==='prompt'))-Number(a.params.some(p=>p.key==='prompt')))
  const selected=preferred.find(m=>cliModels[m.id] && !cliModels[m.id].disabled && sample(m)!==null && m.params.filter(p=>p.required).every(p=>flags(p).length===1))
  let examples=''

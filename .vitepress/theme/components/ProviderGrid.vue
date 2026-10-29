@@ -2,7 +2,7 @@
 import { withBase } from 'vitepress'
 import providers from '../data/providers.json'
 
-const MODE_ORDER = { image: 0, video: 1, audio: 2, text: 3 }
+const MODE_ORDER = { image: 0, video: 1, audio: 2, text: 3, json: 4 }
 const sorted = [...providers].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
 </script>
 
