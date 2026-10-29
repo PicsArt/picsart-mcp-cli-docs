@@ -1,0 +1,446 @@
+[
+  {
+    "page": "guide/cli-quickstart.md",
+    "model": "flux-2-pro",
+    "params": {
+      "prompt": "studio shot of a ceramic cup, soft light",
+      "aspectRatio": "4:3"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Flux 2 Pro (flux-2-pro)"
+  },
+  {
+    "page": "guide/cli-quickstart.md",
+    "model": "seedance-2.0",
+    "params": {
+      "prompt": "a fox running through autumn leaves",
+      "duration": 8
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seedance 2.0 (seedance-2.0)"
+  },
+  {
+    "page": "guide/cli-quickstart.md",
+    "model": "eleven-v3",
+    "params": {
+      "prompt": "Welcome to Picsart AI Playground."
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Eleven v3 (eleven-v3)"
+  },
+  {
+    "page": "guide/cli-quickstart.md",
+    "model": "veo-3.1",
+    "params": {
+      "duration": 8,
+      "prompt": "a neon city flyover at dusk"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Veo 3.1 (veo-3.1)"
+  },
+  {
+    "page": "guide/cli-quickstart.md",
+    "model": "flux-2-pro",
+    "params": {
+      "prompt": "a cat in a hat"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Flux 2 Pro (flux-2-pro)"
+  },
+  {
+    "page": "guide/files-and-drive.md",
+    "model": "flux-2-pro",
+    "params": {
+      "prompt": "a poster"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Flux 2 Pro (flux-2-pro)"
+  },
+  {
+    "page": "guide/generating.md",
+    "model": "wan-2.7-i2v",
+    "params": {
+      "prompt": "gentle motion, drifting clouds",
+      "startFrame": "./hero.png"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Wan 2.7 Image-to-Video (wan-2.7-i2v)"
+  },
+  {
+    "page": "guide/generating.md",
+    "model": "seedance-2.0-video-edit",
+    "params": {
+      "prompt": "claymation style",
+      "videoUrl": "./clip.mp4"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seedance 2.0 Video Edit (seedance-2.0-video-edit)"
+  },
+  {
+    "page": "reference/audio.md",
+    "model": "eleven-v3",
+    "params": {
+      "prompt": "Welcome to the audio guide."
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Eleven v3 (eleven-v3)"
+  },
+  {
+    "page": "reference/image.md",
+    "model": "flux-2-pro",
+    "params": {
+      "prompt": "A ceramic cup on a wooden table"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Flux 2 Pro (flux-2-pro)"
+  },
+  {
+    "page": "reference/providers/anthropic.md",
+    "model": "claude-opus-4-8",
+    "params": {
+      "prompt": "Describe a quiet forest at sunrise in two sentences."
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Claude Opus 4.8 (claude-opus-4-8)"
+  },
+  {
+    "page": "reference/providers/async.md",
+    "model": "async-flash-v1",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Async Flash v1.0 (async-flash-v1)"
+  },
+  {
+    "page": "reference/providers/bytedance.md",
+    "model": "bytedance-omnihuman-v1.5",
+    "params": {
+      "prompt": "A quiet forest at sunrise",
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ],
+      "audioUrl": "https://example.com/input.mp3"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for ByteDance OmniHuman (bytedance-omnihuman-v1.5)"
+  },
+  {
+    "page": "reference/providers/creatify.md",
+    "model": "creatify-aurora",
+    "params": {
+      "prompt": "A quiet forest at sunrise",
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ],
+      "audioUrl": "https://example.com/input.mp3"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Creatify Aurora HD (creatify-aurora)"
+  },
+  {
+    "page": "reference/providers/elevenlabs.md",
+    "model": "eleven-v3",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Eleven v3 (eleven-v3)"
+  },
+  {
+    "page": "reference/providers/flux.md",
+    "model": "flux-2-pro",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Flux 2 Pro (flux-2-pro)"
+  },
+  {
+    "page": "reference/providers/google.md",
+    "model": "veo-3.1",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Veo 3.1 (veo-3.1)"
+  },
+  {
+    "page": "reference/providers/grok.md",
+    "model": "grok-imagine-video",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Grok Imagine 1.0 (grok-imagine-video)"
+  },
+  {
+    "page": "reference/providers/happyhorse.md",
+    "model": "happyhorse-1.0-t2v",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Happy Horse 1.0 (happyhorse-1.0-t2v)"
+  },
+  {
+    "page": "reference/providers/hunyuan.md",
+    "model": "hunyuan-v3",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Hunyuan V3 (hunyuan-v3)"
+  },
+  {
+    "page": "reference/providers/ideogram.md",
+    "model": "ideogram-v4",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Ideogram 4.0 (ideogram-v4)"
+  },
+  {
+    "page": "reference/providers/kling.md",
+    "model": "kling-v3",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Kling V3 (kling-v3)"
+  },
+  {
+    "page": "reference/providers/ltx.md",
+    "model": "ltx-v2.3-pro",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for LTX 2.3 Pro (ltx-v2.3-pro)"
+  },
+  {
+    "page": "reference/providers/luma.md",
+    "model": "luma-ray-2",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Luma Ray 2 (luma-ray-2)"
+  },
+  {
+    "page": "reference/providers/meta.md",
+    "model": "muse-image-1.0",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Muse Image 1.0 (muse-image-1.0)"
+  },
+  {
+    "page": "reference/providers/minimax.md",
+    "model": "hailuo-2.3",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Hailuo 2.3 (hailuo-2.3)"
+  },
+  {
+    "page": "reference/providers/openai.md",
+    "model": "gpt-image-2",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for GPT Image 2 (gpt-image-2)"
+  },
+  {
+    "page": "reference/providers/ovi.md",
+    "model": "ovi",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for OVI (ovi)"
+  },
+  {
+    "page": "reference/providers/picsart.md",
+    "model": "picsart-change-bg",
+    "params": {
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ],
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Picsart Change Background (picsart-change-bg)"
+  },
+  {
+    "page": "reference/providers/pixverse.md",
+    "model": "pixverse-v6",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for PixVerse V6 (pixverse-v6)"
+  },
+  {
+    "page": "reference/providers/qwen.md",
+    "model": "qwen-image-2-pro",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Qwen 2 Pro (qwen-image-2-pro)"
+  },
+  {
+    "page": "reference/providers/recraft.md",
+    "model": "recraftv4_1",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Recraft V4.1 (recraftv4_1)"
+  },
+  {
+    "page": "reference/providers/runway.md",
+    "model": "runway-avatar-video",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Runway Avatar (runway-avatar-video)"
+  },
+  {
+    "page": "reference/providers/seedance.md",
+    "model": "seedance-2.5",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seedance 2.5 (seedance-2.5)"
+  },
+  {
+    "page": "reference/providers/seedaudio.md",
+    "model": "seed-audio-1.0-multilingual",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seed Audio Multilingual (seed-audio-1.0-multilingual)"
+  },
+  {
+    "page": "reference/providers/seedream.md",
+    "model": "seedream-5.0-pro",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seedream 5.0 Pro (seedream-5.0-pro)"
+  },
+  {
+    "page": "reference/providers/topaz.md",
+    "model": "topaz-upscale-image",
+    "params": {
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ]
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Topaz Image Upscale (topaz-upscale-image)"
+  },
+  {
+    "page": "reference/providers/veed.md",
+    "model": "veed-fabric-v1",
+    "params": {
+      "prompt": "A quiet forest at sunrise",
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ],
+      "audioUrl": "https://example.com/input.mp3"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for VEED Fabric 1.0 (veed-fabric-v1)"
+  },
+  {
+    "page": "reference/providers/videography.md",
+    "model": "picsart-videography",
+    "params": {
+      "imageUrls": [
+        "https://example.com/input.jpg"
+      ]
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Videography (picsart-videography)"
+  },
+  {
+    "page": "reference/providers/wan.md",
+    "model": "wan-2.7-t2v",
+    "params": {
+      "prompt": "A quiet forest at sunrise"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Wan 2.7 (wan-2.7-t2v)"
+  },
+  {
+    "page": "reference/text.md",
+    "model": "claude-opus-4-8",
+    "params": {
+      "prompt": "Explain the difference between a raster and a vector image."
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Claude Opus 4.8 (claude-opus-4-8)"
+  },
+  {
+    "page": "reference/video.md",
+    "model": "seedance-2.5",
+    "params": {
+      "prompt": "A fox running through autumn leaves"
+    },
+    "exit": 0,
+    "result": "",
+    "stderr": "\u2713 Valid payload for Seedance 2.5 (seedance-2.5)"
+  }
+]

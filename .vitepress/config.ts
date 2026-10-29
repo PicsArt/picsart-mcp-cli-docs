@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 238 models from 32 providers.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, and Skills: generate image, video, and audio across the versioned model catalog in your terminal or a supported AI agent.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -41,17 +41,18 @@ const sidebar = [
     items: [
       { text: 'CLI Quickstart', link: '/guide/cli-quickstart' },
       { text: 'MCP Quickstart', link: '/guide/mcp-quickstart' },
+      { text: 'Media Tools (MCP)', link: '/guide/media-tools' },
       { text: 'Skills (AI agents)', link: '/guide/skills' },
       { text: 'TypeScript SDK', link: '/guide/sdk' },
       { text: 'SDK 6.29.0 update', link: '/guide/sdk-6-29-update' },
+      { text: 'REST API', link: '/guide/rest-api' },
     ],
   },
   {
     text: 'Picsart Media Studio',
-    collapsed: false,
     items: [
       { text: 'Overview', link: '/guide/media-studio/' },
-      { text: 'What you can do', link: '/guide/media-studio/tools' },
+      { text: 'Tool reference', link: '/guide/media-studio/tools' },
       { text: 'Troubleshooting', link: '/guide/media-studio/troubleshooting' },
     ],
   },
@@ -64,10 +65,11 @@ const sidebar = [
       { text: 'Cursor', link: '/guide/integrations/cursor' },
       { text: 'Windsurf', link: '/guide/integrations/windsurf' },
       { text: 'ChatGPT', link: '/guide/integrations/chatgpt' },
-      { text: 'Codex', link: '/guide/integrations/codex' },
+      { text: 'Codex app and CLI', link: '/guide/integrations/codex' },
       { text: 'VS Code', link: '/guide/integrations/vscode' },
       { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
       { text: 'Goose', link: '/guide/integrations/goose' },
+      { text: 'Replit', link: '/guide/integrations/replit' },
       { text: 'Raycast', link: '/guide/integrations/raycast' },
       { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
       { text: 'Open WebUI', link: '/guide/integrations/open-webui' },
@@ -75,18 +77,12 @@ const sidebar = [
       { text: 'LobeHub', link: '/guide/integrations/lobehub' },
       { text: 'LibreChat', link: '/guide/integrations/librechat' },
       { text: 'Hermes Agent', link: '/guide/integrations/hermes-agent' },
+      { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
       { text: 'OpenClaw', link: '/guide/integrations/openclaw' },
       { text: 'n8n', link: '/guide/integrations/n8n' },
       { text: 'Dify', link: '/guide/integrations/dify' },
       { text: 'Gumloop', link: '/guide/integrations/gumloop' },
       { text: 'Copilot Studio', link: '/guide/integrations/copilot-studio' },
-      {
-        text: 'Not supported yet',
-        collapsed: true,
-        items: [
-          { text: 'NemoClaw', link: '/guide/integrations/nemoclaw' },
-        ],
-      },
     ],
   },
   {
@@ -96,6 +92,8 @@ const sidebar = [
       { text: 'Local files → URLs', link: '/guide/local-files' },
       { text: 'Files & Drive', link: '/guide/files-and-drive' },
       { text: 'Pricing & Credits', link: '/guide/pricing' },
+      { text: 'Errors and rate limits', link: '/guide/rate-limits' },
+      { text: 'Security', link: '/guide/security' },
       { text: 'Batch & Automation', link: '/guide/batch' },
     ],
   },
@@ -116,11 +114,14 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'All providers', link: '/reference/providers/' },
+      { text: 'Depth Anything', link: '/reference/providers/depth-anything' },
+      { text: 'Kimi (Moonshot)', link: '/reference/providers/kimi' },
+      { text: 'Mirelo', link: '/reference/providers/mirelo' },
+      { text: 'TypeSafe', link: '/reference/providers/typesafe' },
       { text: 'Anthropic', link: '/reference/providers/anthropic' },
       { text: 'Async', link: '/reference/providers/async' },
       { text: 'ByteDance', link: '/reference/providers/bytedance' },
       { text: 'Creatify', link: '/reference/providers/creatify' },
-      { text: 'Depth Anything', link: '/reference/providers/depth-anything' },
       { text: 'ElevenLabs', link: '/reference/providers/elevenlabs' },
       { text: 'Flux', link: '/reference/providers/flux' },
       { text: 'Google', link: '/reference/providers/google' },
@@ -129,22 +130,24 @@ const sidebar = [
       { text: 'HeyGen', link: '/reference/providers/heygen' },
       { text: 'Hunyuan', link: '/reference/providers/hunyuan' },
       { text: 'Ideogram', link: '/reference/providers/ideogram' },
-      { text: 'Kimi (Moonshot)', link: '/reference/providers/kimi' },
       { text: 'Kling', link: '/reference/providers/kling' },
       { text: 'LTX (Lightricks)', link: '/reference/providers/ltx' },
       { text: 'Luma', link: '/reference/providers/luma' },
       { text: 'Meta', link: '/reference/providers/meta' },
       { text: 'MiniMax', link: '/reference/providers/minimax' },
-      { text: 'Mirelo', link: '/reference/providers/mirelo' },
       { text: 'OpenAI', link: '/reference/providers/openai' },
       { text: 'OVI', link: '/reference/providers/ovi' },
       { text: 'Picsart', link: '/reference/providers/picsart' },
+      { text: 'Pika', link: '/reference/providers/pika' },
       { text: 'PixVerse', link: '/reference/providers/pixverse' },
       { text: 'Qwen (Alibaba)', link: '/reference/providers/qwen' },
       { text: 'Recraft', link: '/reference/providers/recraft' },
+      { text: 'Reve', link: '/reference/providers/reve' },
       { text: 'Runway', link: '/reference/providers/runway' },
+      { text: 'Seedance', link: '/reference/providers/seedance' },
+      { text: 'Seed Audio', link: '/reference/providers/seedaudio' },
+      { text: 'Seedream', link: '/reference/providers/seedream' },
       { text: 'Topaz', link: '/reference/providers/topaz' },
-      { text: 'TypeSafe', link: '/reference/providers/typesafe' },
       { text: 'VEED', link: '/reference/providers/veed' },
       { text: 'Videography', link: '/reference/providers/videography' },
       { text: 'Wan (Alibaba)', link: '/reference/providers/wan' },
@@ -163,7 +166,7 @@ export default defineConfig({
   description: SITE_DESC,
   cleanUrls: true,
   lastUpdated: true,
-  srcExclude: ['README.md', '**/README.md'],
+  srcExclude: ['README.md', '**/README.md', 'CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'scripts/**', 'audit/**'],
   sitemap: {
     hostname: HOSTNAME + base,
     // page urls are absolute (/guide/x); make them relative so the base subpath
@@ -175,11 +178,11 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Picsart CLI & MCP' }],
     // Absolute social-share image (1200x630). Regenerate with
-    // `node docs-site/scripts/make-og-image.mjs`.
+    // `node scripts/make-og-image.mjs`.
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 238 models, 32 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart gen-ai CLI, MCP & Skills: model reference' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
@@ -206,15 +209,17 @@ export default defineConfig({
     siteTitle: 'Picsart CLI & MCP',
     nav: [
       { text: 'Guide', link: '/guide/introduction' },
-      { text: 'CLI', link: '/guide/cli-quickstart' },
-      { text: 'MCP', link: '/guide/mcp-quickstart' },
-      { text: 'Media Studio', link: '/guide/media-studio/' },
-      { text: 'Skills', link: '/guide/skills' },
-      { text: 'Integrations', link: '/guide/integrations/' },
-      { text: 'Models', link: '/reference/catalog' },
-      { text: 'Providers', link: '/reference/providers/' },
-      { text: 'Changelog', link: '/changelog' },
-      { text: 'Playground App ↗', link: 'https://picsart.com/ai-playground/' },
+      { text: 'Connect', link: '/guide/integrations/' },
+      { text: 'Reference', items: [
+        { text: 'CLI quickstart', link: '/guide/cli-quickstart' },
+        { text: 'MCP quickstart', link: '/guide/mcp-quickstart' },
+        { text: 'Media tools', link: '/guide/media-tools' },
+        { text: 'Skills', link: '/guide/skills' },
+        { text: 'Model catalog', link: '/reference/catalog' },
+        { text: 'Providers', link: '/reference/providers/' },
+        { text: 'Changelog', link: '/changelog' },
+      ] },
+      { text: 'AI Playground', link: 'https://picsart.com/ai-playground/' },
     ],
     sidebar,
     socialLinks: [
@@ -222,7 +227,7 @@ export default defineConfig({
     ],
     search: { provider: 'local' },
     footer: {
-      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Media Studio · Skills',
+      message: 'Built on @picsart/ai-sdk · gen-ai CLI · Picsart MCP · Skills',
       copyright: '© Picsart',
     },
     editLink: {

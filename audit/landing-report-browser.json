@@ -1,0 +1,588 @@
+{
+  "pages": [
+    {
+      "route": "changelog.html",
+      "title": "Changelog | Picsart CLI & MCP",
+      "heading": [
+        "Changelog ​"
+      ]
+    },
+    {
+      "route": "guide/authentication.html",
+      "title": "Authentication | Picsart CLI & MCP",
+      "heading": [
+        "Authentication ​"
+      ]
+    },
+    {
+      "route": "guide/batch.html",
+      "title": "Batch and automation | Picsart CLI & MCP",
+      "heading": [
+        "Batch and automation ​"
+      ]
+    },
+    {
+      "route": "guide/cli-quickstart.html",
+      "title": "CLI quickstart | Picsart CLI & MCP",
+      "heading": [
+        "CLI quickstart ​"
+      ]
+    },
+    {
+      "route": "guide/files-and-drive.html",
+      "title": "Files and Drive | Picsart CLI & MCP",
+      "heading": [
+        "Files and Drive ​"
+      ]
+    },
+    {
+      "route": "guide/generating.html",
+      "title": "Generating media | Picsart CLI & MCP",
+      "heading": [
+        "Generating media ​"
+      ]
+    },
+    {
+      "route": "guide/installation.html",
+      "title": "Installation | Picsart CLI & MCP",
+      "heading": [
+        "Installation ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/anythingllm.html",
+      "title": "AnythingLLM | Picsart CLI & MCP",
+      "heading": [
+        "AnythingLLM ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/chatgpt.html",
+      "title": "ChatGPT | Picsart CLI & MCP",
+      "heading": [
+        "ChatGPT ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/claude-code.html",
+      "title": "Claude Code | Picsart CLI & MCP",
+      "heading": [
+        "Claude Code ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/codex.html",
+      "title": "Codex app and CLI | Picsart CLI & MCP",
+      "heading": [
+        "Codex app and CLI ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/copilot-studio.html",
+      "title": "Copilot Studio | Picsart CLI & MCP",
+      "heading": [
+        "Copilot Studio ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/cursor.html",
+      "title": "Cursor | Picsart CLI & MCP",
+      "heading": [
+        "Cursor ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/dify.html",
+      "title": "Dify | Picsart CLI & MCP",
+      "heading": [
+        "Dify ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/gemini-cli.html",
+      "title": "Gemini CLI | Picsart CLI & MCP",
+      "heading": [
+        "Gemini CLI ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/goose.html",
+      "title": "Goose | Picsart CLI & MCP",
+      "heading": [
+        "Goose ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/gumloop.html",
+      "title": "Gumloop | Picsart CLI & MCP",
+      "heading": [
+        "Gumloop ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/hermes-agent.html",
+      "title": "Hermes Agent | Picsart CLI & MCP",
+      "heading": [
+        "Hermes Agent ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/index.html",
+      "title": "Integrations | Picsart CLI & MCP",
+      "heading": [
+        "Integrations ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/librechat.html",
+      "title": "LibreChat | Picsart CLI & MCP",
+      "heading": [
+        "LibreChat ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/lm-studio.html",
+      "title": "LM Studio | Picsart CLI & MCP",
+      "heading": [
+        "LM Studio ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/lobehub.html",
+      "title": "LobeHub | Picsart CLI & MCP",
+      "heading": [
+        "LobeHub ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/n8n.html",
+      "title": "n8n | Picsart CLI & MCP",
+      "heading": [
+        "n8n ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/nemoclaw.html",
+      "title": "NemoClaw | Picsart CLI & MCP",
+      "heading": [
+        "NemoClaw ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/open-webui.html",
+      "title": "Open WebUI | Picsart CLI & MCP",
+      "heading": [
+        "Open WebUI ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/openclaw.html",
+      "title": "OpenClaw | Picsart CLI & MCP",
+      "heading": [
+        "OpenClaw ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/raycast.html",
+      "title": "Raycast | Picsart CLI & MCP",
+      "heading": [
+        "Raycast ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/replit.html",
+      "title": "Replit | Picsart CLI & MCP",
+      "heading": [
+        "Replit ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/vscode.html",
+      "title": "VS Code | Picsart CLI & MCP",
+      "heading": [
+        "VS Code ​"
+      ]
+    },
+    {
+      "route": "guide/integrations/windsurf.html",
+      "title": "Windsurf | Picsart CLI & MCP",
+      "heading": [
+        "Windsurf ​"
+      ]
+    },
+    {
+      "route": "guide/introduction.html",
+      "title": "Introduction | Picsart CLI & MCP",
+      "heading": [
+        "Introduction ​"
+      ]
+    },
+    {
+      "route": "guide/local-files.html",
+      "title": "Local files and URLs | Picsart CLI & MCP",
+      "heading": [
+        "Local files and URLs ​"
+      ]
+    },
+    {
+      "route": "guide/mcp-quickstart.html",
+      "title": "MCP quickstart | Picsart CLI & MCP",
+      "heading": [
+        "MCP quickstart ​"
+      ]
+    },
+    {
+      "route": "guide/media-tools.html",
+      "title": "Media tools | Picsart CLI & MCP",
+      "heading": [
+        "Media tools ​"
+      ]
+    },
+    {
+      "route": "guide/pricing.html",
+      "title": "Pricing and credits | Picsart CLI & MCP",
+      "heading": [
+        "Pricing and credits ​"
+      ]
+    },
+    {
+      "route": "guide/rate-limits.html",
+      "title": "Errors and retries | Picsart CLI & MCP",
+      "heading": [
+        "Errors and retries ​"
+      ]
+    },
+    {
+      "route": "guide/rest-api.html",
+      "title": "REST API | Picsart CLI & MCP",
+      "heading": [
+        "REST API ​"
+      ]
+    },
+    {
+      "route": "guide/sdk.html",
+      "title": "TypeScript SDK | Picsart CLI & MCP",
+      "heading": [
+        "TypeScript SDK ​"
+      ]
+    },
+    {
+      "route": "guide/security.html",
+      "title": "Security | Picsart CLI & MCP",
+      "heading": [
+        "Security ​"
+      ]
+    },
+    {
+      "route": "guide/skills.html",
+      "title": "Skills | Picsart CLI & MCP",
+      "heading": [
+        "Skills ​"
+      ]
+    },
+    {
+      "route": "guide/what-is-mcp.html",
+      "title": "What is MCP? | Picsart CLI & MCP",
+      "heading": [
+        "What is MCP? ​"
+      ]
+    },
+    {
+      "route": "guide/which-tool.html",
+      "title": "Which tool is right for me? | Picsart CLI & MCP",
+      "heading": [
+        "Which tool is right for me? ​"
+      ]
+    },
+    {
+      "route": "index.html",
+      "title": "Picsart CLI & MCP",
+      "heading": [
+        "Picsart CLI and MCPGenerate and edit media"
+      ]
+    },
+    {
+      "route": "reference/audio.html",
+      "title": "Audio generation | Picsart CLI & MCP",
+      "heading": [
+        "Audio generation ​"
+      ]
+    },
+    {
+      "route": "reference/catalog.html",
+      "title": "Model catalog | Picsart CLI & MCP",
+      "heading": [
+        "Model catalog ​"
+      ]
+    },
+    {
+      "route": "reference/image.html",
+      "title": "Image generation | Picsart CLI & MCP",
+      "heading": [
+        "Image generation ​"
+      ]
+    },
+    {
+      "route": "reference/index.html",
+      "title": "Model reference | Picsart CLI & MCP",
+      "heading": [
+        "Model reference ​"
+      ]
+    },
+    {
+      "route": "reference/providers/anthropic.html",
+      "title": "Anthropic | Picsart CLI & MCP",
+      "heading": [
+        "Anthropic ​"
+      ]
+    },
+    {
+      "route": "reference/providers/async.html",
+      "title": "Async AI | Picsart CLI & MCP",
+      "heading": [
+        "Async AI ​"
+      ]
+    },
+    {
+      "route": "reference/providers/bytedance.html",
+      "title": "ByteDance | Picsart CLI & MCP",
+      "heading": [
+        "ByteDance ​"
+      ]
+    },
+    {
+      "route": "reference/providers/creatify.html",
+      "title": "Creatify | Picsart CLI & MCP",
+      "heading": [
+        "Creatify ​"
+      ]
+    },
+    {
+      "route": "reference/providers/elevenlabs.html",
+      "title": "ElevenLabs | Picsart CLI & MCP",
+      "heading": [
+        "ElevenLabs ​"
+      ]
+    },
+    {
+      "route": "reference/providers/flux.html",
+      "title": "Flux | Picsart CLI & MCP",
+      "heading": [
+        "Flux ​"
+      ]
+    },
+    {
+      "route": "reference/providers/google.html",
+      "title": "Google | Picsart CLI & MCP",
+      "heading": [
+        "Google ​"
+      ]
+    },
+    {
+      "route": "reference/providers/grok.html",
+      "title": "Grok | Picsart CLI & MCP",
+      "heading": [
+        "Grok ​"
+      ]
+    },
+    {
+      "route": "reference/providers/happyhorse.html",
+      "title": "Happy Horse | Picsart CLI & MCP",
+      "heading": [
+        "Happy Horse ​"
+      ]
+    },
+    {
+      "route": "reference/providers/heygen.html",
+      "title": "HeyGen | Picsart CLI & MCP",
+      "heading": [
+        "HeyGen ​"
+      ]
+    },
+    {
+      "route": "reference/providers/hunyuan.html",
+      "title": "Hunyuan | Picsart CLI & MCP",
+      "heading": [
+        "Hunyuan ​"
+      ]
+    },
+    {
+      "route": "reference/providers/ideogram.html",
+      "title": "Ideogram | Picsart CLI & MCP",
+      "heading": [
+        "Ideogram ​"
+      ]
+    },
+    {
+      "route": "reference/providers/index.html",
+      "title": "Providers | Picsart CLI & MCP",
+      "heading": [
+        "Providers ​"
+      ]
+    },
+    {
+      "route": "reference/providers/kling.html",
+      "title": "Kling | Picsart CLI & MCP",
+      "heading": [
+        "Kling ​"
+      ]
+    },
+    {
+      "route": "reference/providers/ltx.html",
+      "title": "LTX | Picsart CLI & MCP",
+      "heading": [
+        "LTX ​"
+      ]
+    },
+    {
+      "route": "reference/providers/luma.html",
+      "title": "Luma | Picsart CLI & MCP",
+      "heading": [
+        "Luma ​"
+      ]
+    },
+    {
+      "route": "reference/providers/meta.html",
+      "title": "Meta | Picsart CLI & MCP",
+      "heading": [
+        "Meta ​"
+      ]
+    },
+    {
+      "route": "reference/providers/minimax.html",
+      "title": "MiniMax | Picsart CLI & MCP",
+      "heading": [
+        "MiniMax ​"
+      ]
+    },
+    {
+      "route": "reference/providers/openai.html",
+      "title": "OpenAI | Picsart CLI & MCP",
+      "heading": [
+        "OpenAI ​"
+      ]
+    },
+    {
+      "route": "reference/providers/ovi.html",
+      "title": "OVI | Picsart CLI & MCP",
+      "heading": [
+        "OVI ​"
+      ]
+    },
+    {
+      "route": "reference/providers/picsart.html",
+      "title": "Picsart | Picsart CLI & MCP",
+      "heading": [
+        "Picsart ​"
+      ]
+    },
+    {
+      "route": "reference/providers/pika.html",
+      "title": "Pika | Picsart CLI & MCP",
+      "heading": [
+        "Pika ​"
+      ]
+    },
+    {
+      "route": "reference/providers/pixverse.html",
+      "title": "PixVerse | Picsart CLI & MCP",
+      "heading": [
+        "PixVerse ​"
+      ]
+    },
+    {
+      "route": "reference/providers/qwen.html",
+      "title": "Qwen | Picsart CLI & MCP",
+      "heading": [
+        "Qwen ​"
+      ]
+    },
+    {
+      "route": "reference/providers/recraft.html",
+      "title": "Recraft | Picsart CLI & MCP",
+      "heading": [
+        "Recraft ​"
+      ]
+    },
+    {
+      "route": "reference/providers/reve.html",
+      "title": "Reve | Picsart CLI & MCP",
+      "heading": [
+        "Reve ​"
+      ]
+    },
+    {
+      "route": "reference/providers/runway.html",
+      "title": "Runway | Picsart CLI & MCP",
+      "heading": [
+        "Runway ​"
+      ]
+    },
+    {
+      "route": "reference/providers/seedance.html",
+      "title": "Seedance | Picsart CLI & MCP",
+      "heading": [
+        "Seedance ​"
+      ]
+    },
+    {
+      "route": "reference/providers/seedaudio.html",
+      "title": "Seed Audio | Picsart CLI & MCP",
+      "heading": [
+        "Seed Audio ​"
+      ]
+    },
+    {
+      "route": "reference/providers/seedream.html",
+      "title": "Seedream | Picsart CLI & MCP",
+      "heading": [
+        "Seedream ​"
+      ]
+    },
+    {
+      "route": "reference/providers/topaz.html",
+      "title": "Topaz | Picsart CLI & MCP",
+      "heading": [
+        "Topaz ​"
+      ]
+    },
+    {
+      "route": "reference/providers/veed.html",
+      "title": "VEED | Picsart CLI & MCP",
+      "heading": [
+        "VEED ​"
+      ]
+    },
+    {
+      "route": "reference/providers/videography.html",
+      "title": "Videography | Picsart CLI & MCP",
+      "heading": [
+        "Videography ​"
+      ]
+    },
+    {
+      "route": "reference/providers/wan.html",
+      "title": "Wan | Picsart CLI & MCP",
+      "heading": [
+        "Wan ​"
+      ]
+    },
+    {
+      "route": "reference/text.html",
+      "title": "Text and analysis | Picsart CLI & MCP",
+      "heading": [
+        "Text and analysis ​"
+      ]
+    },
+    {
+      "route": "reference/video.html",
+      "title": "Video generation | Picsart CLI & MCP",
+      "heading": [
+        "Video generation ​"
+      ]
+    }
+  ],
+  "localLinks": 9183,
+  "errors": [],
+  "textModels": 30
+}

@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 .vitepress/dist/
 .vitepress/cache/
 .wiki/
@@ -6,3 +6,9 @@ wiki-build/
 
 # macOS
 .DS_Store
+
+# Generated review checklist
+scripts/validation-report.md
+
+# Python script caches
+__pycache__/

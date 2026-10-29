@@ -1,144 +1,50 @@
 ---
-description: "No Picsart MCP tool accepts a filesystem path — here are the ways to turn a local file into a URL, for both the gen-ai MCP server and Picsart Media Studio."
+description: "Turn a local file into an input URL using the CLI or a host upload integration."
 ---
 
-# Local files → URLs
+# Local files and URLs
 
-::: danger No MCP tool accepts a filesystem path
-Every file input across the whole MCP contract — `imageUrls`, `videoUrl`, the media tools' asset
-references, `picsart_drive`'s `url` — is an **HTTP(S) URL**. There is no `filePath` parameter
-anywhere. `/Users/me/photo.jpg` will never work.
+Hosted generation tools cannot read an arbitrary path on your computer. Their model inputs, such as `imageUrls`, `videoUrl`, and `extra.startFrame`, need reachable URLs.
 
-Some gen-ai tools additionally accept an inline `data:` URI. Both the gen-ai MCP server and
-[Picsart Media Studio](/guide/media-studio/) also have a built-in uploader that produces the URL for
-you, which is route **D** below.
-:::
+Some host integrations accept a local path in a `file` attachment parameter and upload the file before calling the server. This is a host capability, not permission for a remote model to read your filesystem.
 
-This is not an oversight. An MCP server runs somewhere else (Picsart's infrastructure); it has no
-access to the filesystem of the machine the agent is running on. So before any local file can be
-used as a generation input, **something on your side has to give it a URL.**
+## Upload through the host
 
-Pick by which connector you are using, and by what your agent host can do.
+If the host exposes attachments or a file-upload control, use that mechanism. For example, the connected Picsart integration can expose `picsart_media_upload` or a `file` input on `picsart_drive`. For hosts that render MCP Apps, ask the agent to open the uploader and choose your file there. If the URL is not visible to the agent after upload, send a follow-up message before uploading again. Follow the tool schema in that host. A literal `"<attachment>"` string is not an upload handle.
 
-::: tip The easiest route: the built-in uploader
-Ask your agent to open the Picsart uploader (route **D** below). It works on both the gen-ai MCP
-server and Media Studio, and needs no shell or CLI.
-:::
+## Upload through the CLI
 
-## Comparison
-
-| Path | Needs | Good for | Cost |
-|---|---|---|---|
-| **A. Picsart CLI upload** | Shell access | Anything — the general answer | Free, no tokens |
-| **B. Chat attachment** | A host that forwards attachments (e.g. the ChatGPT app) | Files the user drags into the chat | Free, no tokens |
-| **C. `data:` URI** | Nothing | Small images only, as a stopgap | **Very expensive in tokens** |
-| **D. Built-in uploader (`picsart_media_upload`)** | The gen-ai MCP server or the [Media Studio](/guide/media-studio/) connector, in a host that shows interactive panels | Any local file, dropped in from your browser | Free, no tokens |
-
-## A. Shell-capable agent → the Picsart CLI
-
-If your agent can run shell commands (Claude Code, Cursor, Codex, a CI job) and you have the
-[CLI](/guide/cli-quickstart) installed, you can upload with it, then hand the resulting URL to any
-MCP tool. The CLI is optional: MCP itself never needs it.
+After `gen-ai login`, upload an existing local file:
 
 ```bash
-gen-ai upload ./photo.jpg                 # single file
-gen-ai upload ./renders/ -r               # a folder, recursively
-gen-ai upload ./photo.jpg -f "Campaign"   # into a named Drive folder
+gen-ai upload-to-drive ./photo.jpg
 ```
 
-Add `--json` to get the resulting URL back — `gen-ai upload` prints
-`{ ok, files: [{ path, url, driveUid, error }] }`:
+Expect JSON containing `drive_url`. Use that URL as the next tool's input. This command supports images, video, and audio; the resource type is inferred from the file.
+
+The regular upload command also accepts `--json` for machine-readable output. Inspect the returned result and any per-file errors before using a URL:
 
 ```bash
-gen-ai upload ./photo.jpg --json | jq -r '.files[0].url'
+gen-ai upload ./photo.jpg --json
 ```
 
-For a single file, `gen-ai upload-to-drive` always prints a one-line JSON result:
+For folders or recursive uploads:
 
 ```bash
-gen-ai upload-to-drive ./clip.mp4
-# {"status":"ok","drive_url":"https://cdn.../clip.mp4","drive_uid":"...","file_name":"clip.mp4","elapsed_ms":812}
+gen-ai upload ./assets/ -r -f "Campaign"
+gen-ai list --folder "Campaign" --json
 ```
 
-It sets the Drive resource type (photo, video, or audio) from the file extension; `--name` sets
-the display name and `--folder` the Drive folder.
+Inspect the returned listing to identify the file; names need not be unique.
 
-Then pass the URL straight through:
+## Inline data
 
-```json
-{ "name": "picsart_remove_bg",
-  "arguments": { "image": "https://cdn.picsart.com/.../photo.jpg" } }
-```
+Where `picsart_drive` accepts a data URI in `url`, it can upload a small encoded file. The URI must contain the complete, valid base64 payload and MIME type. Truncated example strings are not usable files.
 
-The CLI requires `gen-ai login` once, see [Authentication](/guide/authentication). This sign-in is for the CLI only.
+Base64 adds roughly one third to the byte length. If the content passes through an agent's context, it can consume many tokens; the exact count depends on the tokenizer. Prefer a file-upload mechanism for large media.
 
-## B. Chat attachment → `picsart_drive` upload
+## Remote files requiring authentication
 
-Hosts that expose user attachments to MCP tools (notably the **ChatGPT app**) can pass the
-attachment handle directly to `picsart_drive`. Nothing has to touch a filesystem:
+Use a still-valid URL the service can fetch, or download the file with an authorized client and upload it through the CLI. A Drive upload cannot bypass authentication required by the original URL.
 
-```json
-{ "name": "picsart_drive",
-  "arguments": { "action": "upload", "file": "<attachment>" } }
-```
-
-The result's `result.url` is a CDN-hosted URL, ready to pass to `picsart_generate`'s `imageUrls`
-or any media tool. Add `folderUid` to choose a destination folder and `type` to set the resource
-kind.
-
-This is the best experience where it's available — the user drags a file into the conversation
-and the agent does the rest. It is **not** available in hosts that keep attachments out of tool
-arguments, which includes most desktop MCP clients today.
-
-## C. `data:` URI → `picsart_drive` upload
-
-`picsart_drive`'s `upload` action accepts an inline `data:` URI in its `url` parameter (the server
-pushes it to the Picsart CDN first and returns the resulting URL). So an agent that can read the
-file into its own context — but has no shell — can inline it:
-
-```json
-{ "name": "picsart_drive",
-  "arguments": {
-    "action": "upload",
-    "name": "logo.png",
-    "url": "data:image/png;base64,iVBORw0KGgoAAAANS..."
-  } }
-```
-
-::: danger This costs real model-context tokens
-Base64 inflates the file by ~33%, and every character of it passes through the model's context
-window. A **1 MB file is roughly 350,000 tokens** — likely more than the context window allows,
-and billed as model input on the agent's side even when it fits.
-
-Use this only for **small images** (icons, logos, thumbnails — tens of KB), and only when
-neither path A nor path B is available. It is a stopgap, not a general solution. Never do this
-for video.
-:::
-
-## What about remote URLs behind auth?
-
-If the asset already lives on a URL the render service can't reach (a short-lived signed URL, or
-a host requiring auth), copy it into Drive first with the same `upload` action, passing the
-remote URL instead of a `data:` URI:
-
-```json
-{ "name": "picsart_drive",
-  "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
-```
-
-The returned CDN URL is stable and publicly fetchable by the generation and render services.
-
-## D. The built-in uploader
-
-The gen-ai MCP server and [Picsart Media Studio](/guide/media-studio/) both include an uploader
-(`picsart_media_upload`). Ask your agent to open it, drop the file in, and carry on. It uploads
-straight from your browser, and you can also pick a file already in your Picsart Drive.
-
-Nothing to install, and no URL to produce yourself. It needs a host that can show interactive
-panels in the conversation, such as Claude or ChatGPT.
-
-## More
-
-- **[Files & Drive](/guide/files-and-drive)** — the rest of the Drive surface
-- **[MCP Quickstart](/guide/mcp-quickstart)** — the full tool catalog
-- **[CLI Quickstart](/guide/cli-quickstart)** — installing and using `gen-ai`
+Continue with [Files and Drive](/guide/files-and-drive) or [Generating media](/guide/generating).

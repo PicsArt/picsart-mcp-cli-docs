@@ -1,28 +1,30 @@
 ---
-description: "The @picsart/ai-sdk TypeScript SDK — generate images, video, and audio from Node.js apps. Full documentation at picsart.com/api-platform/docs/sdk."
+description: "Use the Picsart TypeScript SDK from an application."
 ---
 
 # TypeScript SDK
 
-`@picsart/ai-sdk` gives Node.js and TypeScript applications type-safe access to AI models. This reference uses the SDK 6.29.0 catalog baseline of 238 models. Model availability depends on the installed SDK or server version. If you are building a product rather than running scripts or working inside an AI agent, this is the right surface.
+Use `@picsart/ai-sdk` to call Picsart from a Node.js or TypeScript application. This reference's model snapshot comes from version 6.48.1. The CLI and hosted MCP server can use different releases, so do not assume their catalogs match exactly.
 
-Full documentation, install instructions, and code examples live on the API platform:
+```bash
+npm install @picsart/ai-sdk@6.48.1
+```
 
-**[picsart.com/api-platform/docs/sdk](https://picsart.com/api-platform/docs/sdk)**
+The package requires Node.js 20 or newer and uses ESM. Follow the [SDK documentation](https://picsart.com/api-platform/docs/sdk) for client initialization, authentication, generation, and result handling.
 
-## Quick reference
+You can inspect the installed catalog without submitting a generation:
 
-| | |
-|---|---|
-| Install | `npm install @picsart/ai-sdk` |
-| Node.js | 20+ required, ESM-only |
-| Auth | API key from [picsart.com/settings](https://picsart.com/settings) — not the CLI's OAuth |
-| Models | 238 models in the SDK 6.29.0 catalog |
+```js
+import { catalog } from '@picsart/ai-sdk'
 
-See [Authentication](/guide/authentication) for the difference between API key (SDK/REST) and OAuth (CLI/MCP). See [Which tool is right for me?](/guide/which-tool) to compare all interfaces.
+const model = catalog.all().find(model => model.id === 'flux-2-pro')
+if (!model) throw new Error('Model is unavailable in this SDK version')
+console.log(model.params().all())
+console.log(model.validate({ prompt: 'A ceramic cup on a wooden table' }))
+```
 
-## Version updates
+A successful validation reports `valid: true`; it does not check account authorization, reserve credits, or generate an image. Review [authentication](/guide/authentication) before adding a client. Keep server credentials out of browser bundles and committed files.
 
-See [Updating to SDK 6.29.0](/guide/sdk-6-29-update) for the latest catalog changes.
+## Earlier catalog updates
 
-See [Updating to SDK 6.2.3](/guide/sdk-6-2-update) for model additions, result metadata changes, and Seedance output compatibility.
+See the [SDK 6.29.0 update](/guide/sdk-6-29-update) for structured JSON output and the [SDK 6.23.0 update](/guide/sdk-6-23-update) for earlier catalog changes.

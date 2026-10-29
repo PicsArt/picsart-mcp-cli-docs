@@ -4,7 +4,7 @@ description: "What changed in Picsart AI SDK 6.2.3: model additions, result meta
 
 # Updating to AI SDK 6.2.3
 
-This update compares two baselines: the application SDK moves from **6.0.0 to 6.2.3**, while the published documentation last listed the **5.24.0** catalog. The current production catalog contains **201 models across 31 providers**: 66 image, 84 video, 24 audio, and 27 text.
+This update compares two baselines: the application SDK moves from **6.0.0 to 6.2.3**, while the published documentation last listed the **5.24.0** catalog. At the 6.2.3 release, the production catalog contained **201 models across 31 providers**: 66 image, 84 video, 24 audio, and 27 text.
 
 ## SDK changes since 6.0.0
 
@@ -88,4 +88,4 @@ The published catalog grows from 181 to 201 entries: **26 added and 6 removed**.
 
 `picsart-qwen-image-edit-angle`, `qwen-image-2`, `reve`, `sora-2`, `sora-2-extend`, `sora-2-pro`. These IDs are no longer listed by the SDK's production catalog; this does not imply that a vendor discontinued the underlying model.
 
-Provider tables and model parameter sections reflect the current catalog. For current discovery, use the [Model Catalog](/reference/catalog) or `gen-ai models info <id> --json`.
+This page records the historical 6.2.3 migration. Provider tables now reflect the newer versioned snapshot documented in the catalog. For current discovery, use the [Model Catalog](/reference/catalog) or `gen-ai models info <id> --json`.

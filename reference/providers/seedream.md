@@ -1,12 +1,7 @@
 ---
-description: "Seedream models now appear under ByteDance in the Picsart SDK catalog."
-title: Seedream
+description: "Availability of seedream models in the current catalog snapshot."
 ---
 
 # Seedream
 
-The SDK now groups **Seedream** models under **ByteDance**.
-The model IDs remain unchanged. The models have not been removed.
-
-See the [ByteDance model and parameter reference](/reference/providers/bytedance).
-This page preserves existing links.
+No models from this provider appear in the `@picsart/ai-sdk 6.48.1` snapshot used by this reference. This does not establish availability in other releases. Check the [model catalog](/reference/catalog) and your connected server before choosing a replacement.

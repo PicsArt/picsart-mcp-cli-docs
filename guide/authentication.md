@@ -1,102 +1,56 @@
 ---
-description: "Authenticate the Picsart gen-ai CLI with OAuth web login, the SDK with an API key, and the hosted MCP server and Picsart Media Studio by signing in through your agent."
+description: "Choose the authentication method for the CLI, hosted MCP, SDK, or REST API."
 ---
 
 # Authentication
 
-Every interface authenticates against your Picsart account, and all of them draw on the same credit balance. Which mechanism you use depends on the interface. Generation spends credits, so it always requires sign-in; browsing the catalog and inspecting models does not.
+Authentication depends on the interface. A shared Picsart account does not mean credentials are shared between applications.
 
-## Three authentication methods
+| Interface | Authentication |
+|---|---|
+| CLI and CLI-based skills | Browser sign-in with `gen-ai login` |
+| Hosted MCP | Picsart authorization through the MCP client's OAuth flow |
+| SDK and REST API | A supported API credential supplied to your application |
 
-How you authenticate depends on which interface you're using.
-
-**SDK and REST API: API key**
-
-The [SDK](/guide/sdk) and [REST API](/guide/rest-api) authenticate with an API key (bearer token). Get your key from [picsart.com/settings](https://picsart.com/settings) and set it as the `PICSART_API_KEY` environment variable. There is no login flow; every request carries the key in the `Authorization` header.
-
-**CLI and Skills: OAuth web login**
-
-The [CLI](/guide/installation) and [Skills](/guide/skills) use OAuth web login via `gen-ai login`. You authorize once in your browser and the CLI stores a secure session token locally. No key to copy or rotate.
-
-**MCP server and Picsart Media Studio: sign in through your agent**
-
-The [MCP server](/guide/mcp-quickstart) and [Media Studio](/guide/media-studio/) run on Picsart's servers rather than on your machine, so they do not use the CLI at all. You add the server to your agent once and sign in to Picsart in the browser window the agent opens. There is nothing to install, **no `gen-ai login` step**, and no API key.
-
-All three methods draw from the same Picsart account and the same credit balance.
-
-## Sign in
+## CLI sign-in
 
 ```bash
-gen-ai login      # OAuth web login — opens your browser to confirm your identity
-gen-ai whoami     # shows the current user
-gen-ai credits    # remaining credits on your account
-gen-ai logout     # clears credentials
+gen-ai login
+gen-ai whoami
+gen-ai credits
 ```
 
-`gen-ai login` runs the OAuth web flow: the CLI opens your browser, you authorize once, and a secure token is stored locally — no password is saved and no credentials are exposed. Credentials are kept at `~/.gen-ai/credentials.json` (permissions `600`). The CLI refreshes the access token automatically when it is about to expire; if refresh fails, run `gen-ai login` again. If you run a command while signed out in an interactive terminal, the CLI starts the login flow for you.
-
-This sign-in covers the CLI and [Skills](/guide/skills), because Skills run the same CLI. It does not apply to MCP.
-
-## CI and headless environments
-
-Where no browser is available (CI, Docker, a remote shell), skip `gen-ai login` and set two environment variables instead:
+`whoami` reports authentication status; `credits` reads your balance. Neither generates media. To remove the stored CLI session:
 
 ```bash
-export PICSART_ACCESS_TOKEN="<access token>"
-export PICSART_USER_ID="<picsart user id>"
-gen-ai whoami     # confirms the env credentials are picked up
+gen-ai logout
 ```
 
-These take priority over `~/.gen-ai/credentials.json`. The CLI cannot refresh an env-supplied token, so replace it when it expires. In a non-interactive shell with neither env vars nor stored credentials, commands fail with `Not authenticated` instead of opening a browser.
+The CLI stores credentials under `~/.gen-ai/`. The default API host uses `credentials.json`; alternate API hosts use separate files. Keep these files out of source control and shared project folders.
 
-## Agents (Skills & MCP)
+For non-interactive execution, CLI 2.78.0 accepts `PICSART_ACCESS_TOKEN` and `PICSART_USER_ID` together. Supply them through your runner's secret store. They are session credentials and can expire. `PICSART_API_KEY` is not a CLI authentication variable. Logging out removes the stored session but does not unset environment credentials.
 
-**Skills** run the CLI, so they use the CLI's session. After installing the CLI, run `gen-ai login` once on the machine; the agent then generates using that authorized session.
+## Hosted MCP
 
-**MCP** does not use the CLI or its credentials file. The first time your agent (Claude, Claude Code, Cursor, VS Code, Codex, ChatGPT, and others) connects to `https://api.picsart.com/gen-ai/mcp`, the server tells it sign-in is required. The agent opens Picsart's sign-in page in your browser, you approve access, and the agent stores the session and sends it with every tool call. If the session expires, re-authenticate the server from your agent's MCP or connector settings. See the [MCP Quickstart](/guide/mcp-quickstart) and the per-agent [integration guides](/guide/integrations/).
+Connect to `https://api.picsart.com/gen-ai/mcp` and follow the client's Picsart authorization prompt. The client manages this connection's token. Running `gen-ai login` on your laptop does not sign in ChatGPT, a workflow server, or another hosted client.
 
-[Media Studio](/guide/media-studio/) works the same way as MCP: the agent signs in to it directly and `gen-ai login` plays no part.
+Use an OAuth-capable MCP client. If a host only offers a static API-key header, do not assume an SDK key is accepted by this endpoint. See the [host guides](/guide/integrations/) for compatibility and setup.
 
-## What needs sign-in?
+## SDK and REST API
 
-| Action | CLI | MCP tool | Sign-in |
-|---|---|---|---|
-| Browse catalog | `gen-ai models` | `picsart_list_models` | CLI: ✅ yes¹ · MCP: ❌ no |
-| Inspect a model | `gen-ai models info <id>` | `picsart_model_params` | ❌ no |
-| Validate params | `gen-ai validate -m <id>` | `picsart_preflight` | ❌ no |
-| Quote a cost | `gen-ai pricing <model>` | `picsart_preflight` | ✅ yes² |
-| Generate | `gen-ai generate` | `picsart_generate` | ✅ yes |
-| Drive upload/list | `gen-ai upload` / `list` | `picsart_drive` | ✅ yes |
+The SDK supports an `apiKey` setting or an authenticated `fetch` implementation. The API credential is sent as a bearer token. Follow the [Picsart API authentication documentation](https://picsart.com/api-platform/docs/authentication) for credential provisioning; access may depend on your account.
 
-¹ The CLI's `gen-ai models` list includes per-account credit prices, so it needs a session. `gen-ai models info` and `gen-ai models compare` do not.
-² `picsart_preflight` validates params without sign-in; the credit quote is a per-user lookup, so unauthenticated calls return `credits: null`.
+`PICSART_API_KEY` is an application environment-variable convention in these examples. Read it in your code and pass it to the SDK. Never put credentials in browser code, public repositories, or example URLs.
 
-In practice, agents sign in when they first connect to the MCP server, so every MCP tool call is made as you. The table shows which calls actually need your account.
+## What can I check without generating?
 
-For the **SDK and REST API**, a valid `PICSART_API_KEY` is required on every request. There is no unauthenticated mode.
+| Check | Command or tool | Authentication |
+|---|---|---|
+| Installed version | `gen-ai --version` | No |
+| Bundled model schema | `gen-ai validate -m flux-2-pro --schema` | No |
+| CLI catalog and pricing | `gen-ai models`, `gen-ai pricing flux-2-pro` | CLI session in the tested release |
+| MCP catalog and schema | `picsart_model_catalog`, `picsart_model_params` | Client connection policy applies; tools support anonymous lookup |
+| MCP parameter validation | `picsart_preflight` | Validation can work without sign-in; a price may be unavailable |
+| Credit balance or Drive | CLI account commands or connected tools | Yes |
 
-## FAQ
-
-**Do the SDK and CLI use the same credentials?**
-
-No. The SDK and REST API use an API key (bearer token) from your account settings. The CLI uses an OAuth session from `gen-ai login`. The MCP server uses an OAuth session your agent obtains when it connects. All of them draw from the same Picsart account and the same credit balance.
-
-**Do I need a separate API key for MCP or Skills?**
-
-No. The MCP server and [Media Studio](/guide/media-studio/) sign you in through your agent; they need neither the CLI nor an API key. Skills use the CLI's `gen-ai login` session.
-
-**Where are my credentials stored?**
-
-At `~/.gen-ai/credentials.json` with permissions `600` (readable only by your user). The CLI auto-refreshes the access token when it expires. If refresh fails, run `gen-ai login` again. `PICSART_ACCESS_TOKEN` + `PICSART_USER_ID`, when set, override the file.
-
-**Can multiple users share one machine?**
-
-Each user account has its own `~/.gen-ai/credentials.json` under their home directory. Credentials are not shared across OS users.
-
-**How do I log out?**
-
-Run `gen-ai logout`. This deletes the local credential file. The next command that needs a session starts the login flow again (in an interactive terminal). If `PICSART_ACCESS_TOKEN` and `PICSART_USER_ID` are set, the shell stays authenticated until you unset them.
-
-**What does `gen-ai whoami` show?**
-
-The email address and user ID (UID) of the currently authenticated account, or "Not logged in". Add `--json` for `{ "email", "uid" }`.
+All checks above avoid media generation. A missing price is not a zero-credit quote.

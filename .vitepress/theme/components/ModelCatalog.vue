@@ -9,19 +9,16 @@ const providerLabel = Object.fromEntries(providers.map((p) => [p.id, p.label]))
 const INPUT_LABELS = {
   t2i: 'Text → Image', i2i: 'Image → Image',
   t2v: 'Text → Video', i2v: 'Image → Video', v2v: 'Video → Video', a2v: 'Audio → Video',
-  i2t: 'Image → Text', v2t: 'Video → Text', a2t: 'Audio → Text', t2t: 'Text → Text',
   tts: 'Text → Speech', sts: 'Speech → Speech', sfx: 'Sound FX', music: 'Music',
+  t2t: 'Text → Text', i2t: 'Image → Text', v2t: 'Video → Text', a2t: 'Audio → Text',
+  t2a: 'Text → Audio', v2a: 'Video → Audio', a2a: 'Audio → Audio',
 }
 
 const query = ref('')
 const mode = ref('all')
 const provider = ref('all')
 
-const modeOrder = ['image', 'video', 'audio', 'text', 'json']
-const modes = ['all', ...new Set(models.map((model) => model.mode))].sort((a, b) => {
-  const rank = (value) => value === 'all' ? -1 : modeOrder.includes(value) ? modeOrder.indexOf(value) : modeOrder.length
-  return rank(a) - rank(b) || a.localeCompare(b)
-})
+const modes = ['all', 'image', 'video', 'audio', 'text', 'json']
 
 const filtered = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -43,7 +40,7 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
         class="catalog-search"
         v-model="query"
         type="search"
-        :placeholder="`Search ${models.length} models — name, id, or provider…`"
+        placeholder="Search catalog models: name, id, or provider…"
         aria-label="Search models"
       />
       <div class="catalog-pills">
@@ -78,7 +75,6 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
           <div class="card-provider">{{ providerLabel[m.provider] || m.provider }}</div>
         </a>
         <a
-          v-if="m.mode !== 'json'"
           class="card-try"
           :href="`https://picsart.com/ai-playground/?model=${m.id}`"
           target="_blank"
@@ -135,16 +131,19 @@ function reset() { query.value = ''; mode.value = 'all'; provider.value = 'all' 
 .card-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
 .tag {
   font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em;
-  padding: 3px 8px; border-radius: 999px; color: #fff; background: #64748b;
+  padding: 3px 8px; border-radius: 999px; color: #fff;
 }
 .tag.mode-image { background: #10b981; }
 .tag.mode-video { background: #3b82f6; }
+.tag.mode-text { background: #7c3aed; }
 .tag.mode-audio { background: #ec4899; }
-.tag.mode-text { background: #8b5cf6; }
-.tag.mode-json { background: #b45309; }
 .tag.io { background: transparent; color: var(--vp-c-text-2); border: 1px solid var(--vp-c-border); text-transform: none; font-weight: 500; }
 .card-name { font-weight: 600; font-size: 15px; color: var(--vp-c-text-1); }
 .card-id { font-family: var(--vp-font-family-mono); font-size: 12px; color: var(--vp-c-text-3); margin-top: 2px; }
 .card-provider { font-size: 13px; color: var(--vp-c-brand-1); margin-top: 8px; font-weight: 500; }
 .empty { color: var(--vp-c-text-2); padding: 32px 0; text-align: center; }
+</style>
+
+<style scoped>
+.tag.mode-json { background: #b45309; }
 </style>

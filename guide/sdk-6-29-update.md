@@ -23,10 +23,10 @@ Jev adds the **JSON output mode** for structured content evaluation. Use the SDK
 
 ## Removed from the production catalog
 
-- `luma-ray-2` — Luma Ray 2
-- `luma-ray-2-reframe-video` — Luma Ray 2 Reframe
-- `luma-ray-flash-2` — Luma Flash 2
-- `luma-ray-flash-2-reframe-video` — Luma Flash 2 Reframe
+- `luma-ray-2`: Luma Ray 2
+- `luma-ray-2-reframe-video`: Luma Ray 2 Reframe
+- `luma-ray-flash-2`: Luma Flash 2
+- `luma-ray-flash-2-reframe-video`: Luma Flash 2 Reframe
 
 The [Luma reference](/reference/providers/luma) now uses the remaining Ray 3.2 family. Its current generation settings are 540p/720p/1080p and 5 or 10 seconds; old Ray 2 settings should not be copied unchanged.
 

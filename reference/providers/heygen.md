@@ -1,113 +1,392 @@
 ---
-description: "HeyGen AI models on Picsart — 3 video model(s) including HeyGen Talking Photo. CLI + MCP examples, parameters, and official docs."
+description: "HeyGen model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # HeyGen
 
-**Mode:** video · **Models:** 3
+**Modes:** video · **Models:** 3
 
-**Official API docs:** [developers.heygen.com](https://developers.heygen.com)
-
-HeyGen turns a written script into a lip-synced presenter video. **Talking Photo** animates a single portrait image you supply; **Video Avatar** instead uses one of HeyGen's own avatars, selected by `videoId`, so it needs no input image and renders up to 4K. Both read the script aloud with a HeyGen voice and animate the face to match. Generation is asynchronous, in landscape or vertical.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `heygen-talking-photo` | HeyGen Talking Photo | `i2v` |
 | `heygen-video-avatar` | HeyGen Video Avatar | `t2v` |
 | `heygen-video-1` | HeyGen Video | `t2v` |
 
-## CLI
-
-```bash
-# animate a portrait into a talking avatar (script must be at least 20 chars)
-gen-ai generate -m heygen-talking-photo \
-  -i ./portrait.jpg \
-  -p "Hi there! Welcome to Picsart, where you can create anything you imagine." \
-  --voice <voice-id> \
-  --ar 16:9 -r 720p
-
-# vertical short
-gen-ai generate -m heygen-talking-photo \
-  -i ./portrait.jpg \
-  -p "Three quick tips to level up your edits — let's dive in." \
-  --voice <voice-id> --ar 9:16 -r 1080p
-```
-
-## MCP
-
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "heygen-talking-photo",
-    "prompt": "Hi there! Welcome to Picsart, where you can create anything you imagine.",
-    "imageUrls": ["https://example.com/portrait.jpg"],
-    "voiceId": "<voice-id>",
-    "aspectRatio": "16:9",
-    "resolution": "720p"
-  } }
-```
-
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `heygen-talking-photo` — HeyGen Talking Photo
+### `heygen-talking-photo`
 
-[Try `heygen-talking-photo` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-talking-photo)
+HeyGen Talking Photo; input type `i2v`.
 
-Input type: `i2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `imageUrls` | `--image` | Yes | file | image input; array; maximum 1 |
+| `resolution` | `--resolution` | No | enum | `4k`, `1080p`, `720p`; default `720p` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `4:5`, `5:4`, `1:1`, `auto`; default `16:9` |
+| `voiceId` | `--voice` | Yes | catalog | Account-dependent ID; see catalog source below |
+| `prompt` | `--prompt` | Yes | text | minimum 20 characters; maximum 5000 characters |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `imageUrls` | `-i` | file | **required** image (up to 1) |
-| `resolution` | `-r` | enum | `1080p` · `720p` (default `720p`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `voiceId` | `--voice` | enum | **required** |
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-> **Notes:** Voice ids are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
+```json
+[
+  {
+    "key": "imageUrls",
+    "label": "Portrait Image",
+    "required": true,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "4k"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "720p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "required": true,
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "heygen/v1/catalog/voices"
+    },
+    "default": ""
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "minLength": 20,
+    "maxLength": 5000,
+    "placeholder": "Write the script your avatar will speak (at least 20 characters)..."
+  }
+]
+```
 
-### `heygen-video-avatar` — HeyGen Video Avatar
+</details>
 
-[Try `heygen-video-avatar` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-video-avatar)
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
 
-Input type: `t2v`
+### `heygen-video-avatar`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `videoId` | `--video-id` | enum |  (default ``) |
-| `resolution` | `-r` | enum | `4k` · `1080p` · `720p` (default `720p`) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `voiceId` | `--voice` | enum |  (default ``) |
-| `prompt` | `-p` | text | **required** (≤5000 chars) |
+HeyGen Video Avatar; input type `t2v`.
 
-> **Notes:** `videoId` selects a HeyGen avatar and `voiceId` a HeyGen voice; both id sets are dynamic — list them at runtime rather than hard-coding. Generation is asynchronous; the result URL is polled in the background.
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `videoId` | `--video-id` | Yes | catalog | Account-dependent ID; see catalog source below |
+| `engine` | Use SDK or MCP | No | enum | `avatar_iv`, `avatar_v`; default `avatar_iv` |
+| `resolution` | `--resolution` | No | enum | `4k`, `1080p`, `720p`; default `720p` |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `4:5`, `5:4`, `1:1`, `auto`; default `16:9` |
+| `voiceId` | `--voice` | Yes | catalog | Account-dependent ID; see catalog source below |
+| `prompt` | `--prompt` | Yes | text | minimum 20 characters; maximum 5000 characters |
 
-### `heygen-video-1` — HeyGen Video
+<details>
+<summary>Full parameter descriptors</summary>
 
-[Try `heygen-video-1` in Playground ↗](https://picsart.com/ai-playground/?model=heygen-video-1)
+```json
+[
+  {
+    "key": "videoId",
+    "label": "Avatar",
+    "required": true,
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "heygen/v1/catalog/avatars"
+    },
+    "default": ""
+  },
+  {
+    "key": "engine",
+    "label": "Engine",
+    "required": false,
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "avatar_iv",
+        "label": "Avatar IV"
+      },
+      {
+        "id": "avatar_v",
+        "label": "Avatar V"
+      }
+    ],
+    "default": "avatar_iv"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "4k"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "720p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "required": true,
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "heygen/v1/catalog/voices"
+    },
+    "default": ""
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "minLength": 20,
+    "maxLength": 5000,
+    "placeholder": "Write the script your avatar will speak (at least 20 characters)..."
+  }
+]
+```
 
-Input type: `t2v`
+</details>
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤32000 chars) |
-| `startFrame` | `--start-frame` | file | image |
-| `imageUrls` | `-i` | file | image (up to 9) |
-| `videoUrls` | `--video-urls` | file | video (up to 3) |
-| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
-| `resolution` | `-r` | enum | `480p` · `768p` (default `768p`) |
-| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
-| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
-| `promptEnhancement` | `--prompt-enhancement` | enum | `turbo` · `quality` · `disabled` (default `turbo`) |
-| `seed` | `--seed` | range | `0`–`4294967295`, step 1 |
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `heygen-video-1`
+
+HeyGen Video; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | maximum 32000 characters |
+| `startFrame` | Use SDK or MCP | No | file | image input |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 9 |
+| `videoUrls` | Use SDK or MCP | No | file | video input; array; maximum 3 |
+| `audioUrls` | Use SDK or MCP | No | file | audio input; array; maximum 3 |
+| `resolution` | Use SDK or MCP | No | enum | `480p`, `768p`; default `768p` |
+| `duration` | Use SDK or MCP | No | range | 5 to 15; step 1; default `5` |
+| `aspectRatio` | Use SDK or MCP | No | enum | `adaptive`, `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, `9:16`; default `16:9` |
+| `promptEnhancement` | Use SDK or MCP | No | enum | `turbo`, `quality`, `disabled`; default `turbo` |
+| `seed` | Use SDK or MCP | No | range | 0 to 4294967295; step 1 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 32000
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 9
+    }
+  },
+  {
+    "key": "videoUrls",
+    "label": "Reference Videos",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "audioUrls",
+    "label": "Reference Audios",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "audio",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "480p"
+      },
+      {
+        "id": "768p"
+      }
+    ],
+    "default": "768p"
+  },
+  {
+    "key": "duration",
+    "kind": "range",
+    "min": 5,
+    "max": 15,
+    "step": 1,
+    "default": 5
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "adaptive"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "promptEnhancement",
+    "label": "Prompt Enhancement",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "turbo"
+      },
+      {
+        "id": "quality"
+      },
+      {
+        "id": "disabled"
+      }
+    ],
+    "default": "turbo"
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 4294967295,
+    "step": 1
+  }
+]
+```
+
+</details>
 
 ## Pricing
 
-```bash
-gen-ai pricing heygen-talking-photo --resolution 720p
-```
-
-Cost scales with **resolution** and the **length of the generated video** (driven by your script). Trial/free credits burn a HeyGen watermark into the output and may cap resolution — production videos require paid credits.
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

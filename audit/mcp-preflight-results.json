@@ -1,0 +1,290 @@
+[
+  {
+    "page": "reference/providers/qwen.md",
+    "result": {
+      "model": "qwen-image-2-pro",
+      "valid": true,
+      "credits": 3
+    }
+  },
+  {
+    "page": "reference/providers/wan.md",
+    "result": {
+      "model": "wan-2.7-t2v",
+      "valid": true,
+      "credits": 15
+    }
+  },
+  {
+    "page": "reference/providers/seedance.md",
+    "result": {
+      "model": "seedance-2.5",
+      "valid": true,
+      "credits": 90
+    }
+  },
+  {
+    "page": "reference/providers/bytedance.md",
+    "result": {
+      "model": "bytedance-omnihuman-v1.5",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/providers/anthropic.md",
+    "result": {
+      "model": "claude-opus-4-8",
+      "valid": true,
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/providers/seedream.md",
+    "result": {
+      "model": "seedream-5.0-pro",
+      "valid": true,
+      "credits": 2
+    }
+  },
+  {
+    "page": "reference/providers/creatify.md",
+    "result": {
+      "model": "creatify-aurora",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/providers/openai.md",
+    "result": {
+      "model": "gpt-image-2",
+      "valid": true,
+      "credits": 5
+    }
+  },
+  {
+    "page": "reference/providers/luma.md",
+    "result": {
+      "model": "luma-ray-2",
+      "valid": true,
+      "credits": 15
+    }
+  },
+  {
+    "page": "reference/providers/meta.md",
+    "result": {
+      "model": "muse-image-1.0",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "page": "reference/providers/veed.md",
+    "result": {
+      "model": "veed-fabric-v1",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/providers/ideogram.md",
+    "result": {
+      "model": "ideogram-v4",
+      "valid": true,
+      "credits": 2
+    }
+  },
+  {
+    "page": "reference/providers/flux.md",
+    "result": {
+      "model": "flux-2-pro",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "page": "reference/providers/async.md",
+    "result": {
+      "model": "async-flash-v1",
+      "valid": true,
+      "credits": 0.030555
+    }
+  },
+  {
+    "page": "reference/providers/recraft.md",
+    "result": {
+      "model": "recraftv4_1",
+      "valid": true,
+      "credits": 2
+    }
+  },
+  {
+    "page": "reference/providers/elevenlabs.md",
+    "result": {
+      "model": "eleven-v3",
+      "valid": true,
+      "credits": 3
+    }
+  },
+  {
+    "page": "reference/providers/pixverse.md",
+    "result": {
+      "model": "pixverse-v6",
+      "valid": true,
+      "credits": 5
+    }
+  },
+  {
+    "page": "reference/providers/picsart.md",
+    "result": {
+      "model": "picsart-change-bg",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": 1
+    }
+  },
+  {
+    "page": "reference/providers/ltx.md",
+    "result": {
+      "model": "ltx-v2.3-pro",
+      "valid": true,
+      "credits": 18
+    }
+  },
+  {
+    "page": "reference/providers/minimax.md",
+    "result": {
+      "model": "hailuo-2.3",
+      "valid": true,
+      "credits": 12
+    }
+  },
+  {
+    "page": "reference/providers/seedaudio.md",
+    "result": {
+      "model": "seed-audio-1.0-multilingual",
+      "valid": true,
+      "credits": 5
+    }
+  },
+  {
+    "page": "reference/providers/happyhorse.md",
+    "result": {
+      "model": "happyhorse-1.0-t2v",
+      "valid": true,
+      "credits": 25
+    }
+  },
+  {
+    "page": "reference/providers/hunyuan.md",
+    "result": {
+      "model": "hunyuan-v3",
+      "valid": true,
+      "credits": 3
+    }
+  },
+  {
+    "page": "reference/providers/kling.md",
+    "result": {
+      "model": "kling-v3",
+      "valid": true,
+      "credits": 15
+    }
+  },
+  {
+    "page": "reference/providers/google.md",
+    "result": {
+      "model": "veo-3.1",
+      "valid": true,
+      "credits": 96
+    }
+  },
+  {
+    "page": "reference/providers/ovi.md",
+    "result": {
+      "model": "ovi",
+      "valid": true,
+      "credits": 6
+    }
+  },
+  {
+    "page": "reference/providers/runway.md",
+    "result": {
+      "model": "runway-avatar-video",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "page": "reference/providers/topaz.md",
+    "result": {
+      "model": "topaz-upscale-image",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/providers/videography.md",
+    "result": {
+      "model": "picsart-videography",
+      "valid": true,
+      "images": [
+        {
+          "index": 1,
+          "role": "imageUrls",
+          "url": "https://example.com/input.jpg",
+          "probed": false
+        }
+      ],
+      "credits": 50
+    }
+  },
+  {
+    "page": "reference/providers/grok.md",
+    "result": {
+      "model": "grok-imagine-video",
+      "valid": true,
+      "credits": 18
+    }
+  }
+]

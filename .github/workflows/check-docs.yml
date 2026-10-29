@@ -1,0 +1,47 @@
+name: Check documentation
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    env:
+      DOCS_BASE: /picsart-mcp-cli-docs/
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run test:docs
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Check rendered pages
+        shell: bash
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 &
+          preview_pid=$!
+          trap 'kill "$preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/picsart-mcp-cli-docs/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          npm run check:site -- http://127.0.0.1:4173/picsart-mcp-cli-docs/ /tmp/docs-browser-report.json
+      - name: Preserve browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: docs-browser-report
+          path: /tmp/docs-browser-report.json
+          if-no-files-found: warn

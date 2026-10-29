@@ -1,0 +1,316 @@
+[
+  {
+    "url": "https://www.contributor-covenant.org",
+    "pages": [
+      "CODE_OF_CONDUCT.md"
+    ],
+    "status": 200,
+    "final": "https://www.contributor-covenant.org"
+  },
+  {
+    "url": "https://github.com/mozilla/diversity",
+    "pages": [
+      "CODE_OF_CONDUCT.md"
+    ],
+    "status": 200,
+    "final": "https://github.com/mozilla/inclusion"
+  },
+  {
+    "url": "https://picsart.github.io/picsart-mcp-cli-docs/",
+    "pages": [
+      "README.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.github.io/picsart-mcp-cli-docs/"
+  },
+  {
+    "url": "https://picsart.github.io/picsart-mcp-cli-docs/guide/cli-quickstart",
+    "pages": [
+      "README.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.github.io/picsart-mcp-cli-docs/guide/cli-quickstart"
+  },
+  {
+    "url": "https://picsart.github.io/picsart-mcp-cli-docs/guide/mcp-quickstart",
+    "pages": [
+      "README.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.github.io/picsart-mcp-cli-docs/guide/mcp-quickstart"
+  },
+  {
+    "url": "https://picsart.com/ai-playground/",
+    "pages": [
+      "index.md",
+      "guide/introduction.md",
+      "guide/which-tool.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/ai-playground/"
+  },
+  {
+    "url": "https://picsart.com/pricing",
+    "pages": [
+      "guide/pricing.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/pricing/"
+  },
+  {
+    "url": "https://picsart.com/api-platform/docs/authentication",
+    "pages": [
+      "guide/authentication.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/api-platform/docs/authentication"
+  },
+  {
+    "url": "https://modelcontextprotocol.io/",
+    "pages": [
+      "guide/what-is-mcp.md"
+    ],
+    "status": 200,
+    "final": "https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro"
+  },
+  {
+    "url": "https://picsart.com/api-platform/docs/sdk",
+    "pages": [
+      "guide/sdk.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/api-platform/docs/sdk"
+  },
+  {
+    "url": "https://picsart.com/gen-ai-skills/",
+    "pages": [
+      "guide/skills.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/gen-ai-skills/"
+  },
+  {
+    "url": "https://picsart.com/privacy-policy",
+    "pages": [
+      "guide/security.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/privacy-policy/"
+  },
+  {
+    "url": "https://picsart.com/security-policy",
+    "pages": [
+      "guide/security.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/security-policy/"
+  },
+  {
+    "url": "https://picsart.com/api-platform/docs/api-reference",
+    "pages": [
+      "guide/rest-api.md"
+    ],
+    "status": 200,
+    "final": "https://picsart.com/api-platform/docs/api-reference"
+  },
+  {
+    "url": "https://chatgpt.com/plugins",
+    "pages": [
+      "guide/integrations/chatgpt.md"
+    ],
+    "status": 200,
+    "final": "https://chatgpt.com/plugins"
+  },
+  {
+    "url": "https://developers.openai.com/plugins/deploy/connect-chatgpt",
+    "pages": [
+      "guide/integrations/chatgpt.md"
+    ],
+    "status": 200,
+    "final": "https://developers.openai.com/plugins/deploy/connect-chatgpt"
+  },
+  {
+    "url": "https://code.claude.com/docs/en/mcp",
+    "pages": [
+      "guide/integrations/claude-code.md"
+    ],
+    "status": 200,
+    "final": "https://code.claude.com/docs/en/mcp"
+  },
+  {
+    "url": "https://docs.devin.ai/desktop/cascade/mcp",
+    "pages": [
+      "guide/integrations/windsurf.md"
+    ],
+    "status": 200,
+    "final": "https://docs.devin.ai/desktop/cascade/mcp"
+  },
+  {
+    "url": "https://replit.com/integrations",
+    "pages": [
+      "guide/integrations/replit.md"
+    ],
+    "status": 200,
+    "final": "https://replit.com/integrations"
+  },
+  {
+    "url": "https://docs.replit.com/build/connect-via-mcp",
+    "pages": [
+      "guide/integrations/replit.md"
+    ],
+    "status": 200,
+    "final": "https://docs.replit.com/build/connect-via-mcp"
+  },
+  {
+    "url": "https://cursor.com/docs/mcp",
+    "pages": [
+      "guide/integrations/cursor.md"
+    ],
+    "status": 200,
+    "final": "https://cursor.com/docs/mcp"
+  },
+  {
+    "url": "https://manual.raycast.com/ai/model-context-protocol",
+    "pages": [
+      "guide/integrations/raycast.md"
+    ],
+    "status": 200,
+    "final": "https://manual.raycast.com/ai/model-context-protocol"
+  },
+  {
+    "url": "https://docs.openclaw.ai/cli/mcp/registry",
+    "pages": [
+      "guide/integrations/openclaw.md"
+    ],
+    "status": 200,
+    "final": "https://docs.openclaw.ai/cli/mcp/registry"
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent",
+    "pages": [
+      "guide/integrations/copilot-studio.md"
+    ],
+    "status": 200,
+    "final": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent"
+  },
+  {
+    "url": "https://docs.anythingllm.com/mcp-compatibility/overview",
+    "pages": [
+      "guide/integrations/anythingllm.md"
+    ],
+    "status": 200,
+    "final": "https://docs.anythingllm.com/mcp-compatibility/overview"
+  },
+  {
+    "url": "https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server",
+    "pages": [
+      "guide/integrations/nemoclaw.md"
+    ],
+    "status": 200,
+    "final": "https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/manage-sandboxes/mcp-servers/add-an-mcp-server"
+  },
+  {
+    "url": "https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/reference/commands",
+    "pages": [
+      "guide/integrations/nemoclaw.md"
+    ],
+    "status": 200,
+    "final": "https://docs.nvidia.com/nemoclaw/latest/user-guide/openclaw/reference/commands"
+  },
+  {
+    "url": "https://lmstudio.ai/docs/app/mcp",
+    "pages": [
+      "guide/integrations/lm-studio.md"
+    ],
+    "status": 200,
+    "final": "https://lmstudio.ai/docs/app/mcp"
+  },
+  {
+    "url": "https://developers.openai.com/codex/mcp",
+    "pages": [
+      "guide/integrations/codex.md"
+    ],
+    "status": 200,
+    "final": "https://learn.chatgpt.com/docs/extend/mcp?surface=cli"
+  },
+  {
+    "url": "https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/mcp_servers",
+    "pages": [
+      "guide/integrations/librechat.md"
+    ],
+    "status": 200,
+    "final": "https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/mcp_servers"
+  },
+  {
+    "url": "https://goose-docs.ai/docs/getting-started/using-extensions/",
+    "pages": [
+      "guide/integrations/goose.md"
+    ],
+    "status": 200,
+    "final": "https://goose-docs.ai/docs/getting-started/using-extensions/"
+  },
+  {
+    "url": "https://github.com/lobehub/lobehub",
+    "pages": [
+      "guide/integrations/lobehub.md"
+    ],
+    "status": 200,
+    "final": "https://github.com/lobehub/lobehub"
+  },
+  {
+    "url": "https://geminicli.com/docs/tools/mcp-server/",
+    "pages": [
+      "guide/integrations/gemini-cli.md"
+    ],
+    "status": 200,
+    "final": "https://geminicli.com/docs/tools/mcp-server/"
+  },
+  {
+    "url": "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp",
+    "pages": [
+      "guide/integrations/hermes-agent.md"
+    ],
+    "status": 200,
+    "final": "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
+  },
+  {
+    "url": "https://code.visualstudio.com/docs/agent-customization/mcp-servers",
+    "pages": [
+      "guide/integrations/vscode.md"
+    ],
+    "status": 200,
+    "final": "https://code.visualstudio.com/docs/agent-customization/mcp-servers"
+  },
+  {
+    "url": "https://docs.openwebui.com/features/extensibility/mcp/",
+    "pages": [
+      "guide/integrations/open-webui.md"
+    ],
+    "status": 200,
+    "final": "https://docs.openwebui.com/features/extensibility/mcp/"
+  },
+  {
+    "url": "https://docs.gumloop.com/nodes/mcp/custom_mcp_servers",
+    "pages": [
+      "guide/integrations/gumloop.md"
+    ],
+    "status": 200,
+    "final": "https://docs.gumloop.com/nodes/mcp/custom_mcp_servers"
+  },
+  {
+    "url": "https://dify.ai/blog/v1-6-0-built-in-two-way-mcp-support",
+    "pages": [
+      "guide/integrations/dify.md"
+    ],
+    "status": 200,
+    "final": "https://dify.ai/blog/v1-6-0-built-in-two-way-mcp-support"
+  },
+  {
+    "url": "https://docs.n8n.io/integrations/builtin/credentials/mcp/",
+    "pages": [
+      "guide/integrations/n8n.md"
+    ],
+    "status": 200,
+    "final": "https://docs.n8n.io/integrations/builtin/credentials/mcp"
+  }
+]

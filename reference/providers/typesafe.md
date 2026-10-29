@@ -1,57 +1,86 @@
 ---
-description: "TypeSafe Jev on Picsart — structured content evaluation with the SDK's ai.run() API."
+description: "TypeSafe model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # TypeSafe
 
-**Mode:** json · **Models:** 1
+**Modes:** json · **Models:** 1
 
-Jev evaluates content against named yes/no, choice, or score questions and returns structured answers.
+This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| id | Name | Input type |
+| ID | Name | Input type |
 |---|---|---|
 | `typesafe-evaluate` | Jev | `t2t` |
 
-## SDK
-
-JSON models use `ai.run()`. They are not supported by `generate()`, `generateText()`, or the SDK's async lifecycle methods.
-
-```typescript
-import { createClient, Models } from '@picsart/ai-sdk'
-
-const ai = createClient({ apiKey: process.env.PICSART_API_KEY! })
-const { result } = await ai.run(Models.TypesafeEvaluate, {
-  state: 'The weather is lovely and everyone is having a great time.',
-  questions: {
-    tone: {
-      type: 'choice',
-      instructions: 'Pick the tone.',
-      options: ['positive', 'neutral', 'negative'],
-    },
-  },
-})
-console.log(result)
-```
-
-`run()` returns `{ result, status, usage, id }` without media extraction or automatic Drive saving.
-
 ## Parameters
 
-Parameters from the SDK 6.29.0 catalog.
+Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
 
-### `typesafe-evaluate` — Jev
+### `typesafe-evaluate`
 
-Input type: `t2t`; output mode: `json`.
+Jev; input type `t2t`.
 
-| Param | Type | Values |
-|---|---|---|
-| `state` | text | **required** — content to evaluate |
-| `questions` | object | **required** — caller-named questions, each with `type` and `instructions` |
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `state` | Use SDK or MCP | Yes | text | Text |
+| `questions` | Use SDK or MCP | Yes | object | Structured input; see descriptor below |
 
-Question `type` is `noul` (yes/no), `choice`, or `score`. Type-specific fields, such as choice `options`, are passed through to the evaluator.
+<details>
+<summary>Full parameter descriptors</summary>
 
-## Availability
+```json
+[
+  {
+    "key": "state",
+    "label": "Content",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "questions",
+    "label": "Questions",
+    "required": true,
+    "kind": "object",
+    "additionalProperties": {
+      "kind": "object",
+      "fields": {
+        "type": {
+          "kind": "enum",
+          "valueType": "string",
+          "default": "noul",
+          "required": true,
+          "options": [
+            {
+              "id": "noul",
+              "label": "Yes/No"
+            },
+            {
+              "id": "choice",
+              "label": "Choice"
+            },
+            {
+              "id": "score",
+              "label": "Score"
+            }
+          ]
+        },
+        "instructions": {
+          "kind": "unknown",
+          "required": true
+        }
+      },
+      "additionalProperties": {
+        "kind": "unknown"
+      }
+    }
+  }
+]
+```
 
-This reference describes the SDK catalog. Do not assume that `gen-ai generate`, `picsart_generate`, or the Playground supports structured evaluation merely because the model is listed here. Inspect the interface's model discovery and supported execution methods before use.
+</details>
+
+## Pricing
+
+[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

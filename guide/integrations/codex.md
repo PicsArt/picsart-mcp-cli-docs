@@ -1,107 +1,42 @@
 ---
-description: "Connect Picsart to OpenAI Codex: add the hosted Picsart MCP server or install Skills to generate images, video, and audio inside Codex."
+description: "Connect the Codex desktop app or CLI to Picsart through hosted MCP."
 ---
 
-# Codex (OpenAI)
+# Codex app and CLI
 
-[Codex](https://developers.openai.com/codex/mcp) supports Picsart through two paths: **MCP** (the primary method for direct tool-call access) and **Skills** (for a conversational generation experience). MCP connects Codex to the hosted Picsart MCP server at `https://api.picsart.com/gen-ai/mcp`, with nothing to install locally. Skills drive the `gen-ai` CLI on your machine.
+Choose the surface you are using. These instructions configure a remote Picsart connection; they do not require the Picsart CLI. You need access to Codex, permission to add an MCP server on the selected host, and a Picsart account for OAuth. Generation uses Picsart credits; check [pricing](/guide/pricing) before submitting.
 
-## Prerequisites
+## Desktop app
 
-1. A Picsart account with credits for generations.
-2. A recent version of the Codex CLI. Remote MCP servers and OAuth sign-in need a current release, so update Codex if `codex mcp login` is not available.
+In the desktop app's settings, open **MCP servers**, select **Add server**, and choose **Streamable HTTP**. Name the server `picsart` and enter `https://api.picsart.com/gen-ai/mcp`. Save, restart the server when prompted, and select **Authenticate** to complete Picsart sign-in.
 
-That is all for MCP: the server is hosted by Picsart and you sign in from Codex. You do not need the gen-ai CLI or `gen-ai login`. Those are needed only for the [Skills method](#method-2-skills).
+The app, Codex CLI, and IDE extension share MCP configuration for the same Codex host. If you use a remote host, configure and verify that host rather than assuming your local connection is available there. A ChatGPT web plugin listing is a separate setup path; use the [ChatGPT guide](/guide/integrations/chatgpt) for that surface.
 
-## Method 1: MCP (recommended)
+## Codex CLI
 
-### Configure
+Add the remote server, then sign in:
 
 ```bash
-codex mcp add picsart-gen-ai --url https://api.picsart.com/gen-ai/mcp
+codex mcp add picsart --url https://api.picsart.com/gen-ai/mcp
+codex mcp login picsart
+codex mcp list
 ```
 
-Or add it manually to `~/.codex/config.toml`:
+Alternatively, merge this entry into `~/.codex/config.toml` and run the login command:
 
 ```toml
-[mcp_servers.picsart-gen-ai]
+[mcp_servers.picsart]
 url = "https://api.picsart.com/gen-ai/mcp"
 ```
 
-No API key or bearer token is needed. Older Codex versions also required `experimental_use_rmcp_client = true` in `config.toml`. Update Codex instead of adding that flag.
+The configuration format is TOML. Preserve existing server entries. Use `/mcp` in Codex CLI to inspect the connection and tools.
 
-### Sign in to Picsart
+## Verify the connection
 
-```bash
-codex mcp login picsart-gen-ai
-```
+Ask the agent: “Use Picsart to show the parameters for `flux-2-pro`. Do not generate anything.” Expect a model schema from `picsart_model_params`; this check spends no generation credits. Confirm the host also reports a signed-in connection, since schema discovery alone does not prove authorization.
 
-A browser window opens on the Picsart sign-in page. Sign in with your Picsart account, then return to the terminal. Run `/mcp` inside Codex to confirm `picsart-gen-ai` is connected and its tools are listed.
+Then follow [preflight and generation](/guide/mcp-quickstart#validate-and-estimate). Generation spends Picsart credits. A timeout is not proof that a job failed; poll its returned handle before considering another submission.
 
-### Use it
+If tools are missing, inspect the host's connection status, tool permissions, and authentication errors. A plain HTTP GET to the endpoint does not test MCP initialization.
 
-Once connected, Codex can call any Picsart MCP tool:
-
-- *"Generate a 16:9 hero image for a Q4 campaign using Flux 2 Pro."*
-- *"Create a 9:16 social clip from this product image using Wan 2.7."*
-- *"Quote the credit cost of an 8-second Veo 3.1 clip at 1080p."*
-
-See `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, `picsart_credits`, and the full tool list in the [MCP Quickstart](/guide/mcp-quickstart).
-
-## Method 2: Skills
-
-::: info Skills need the gen-ai CLI
-Skills run the `gen-ai` CLI on your machine. Before adding a skill, [install the CLI](/guide/installation) and run `gen-ai login` once. Check with `gen-ai --version` and `gen-ai credits`. The MCP method does not need this.
-:::
-
-Add the skill via npx:
-
-```bash
-npx skills add PicsArt/gen-ai-skills
-```
-
-Or download the `.zip` from [picsart.com/gen-ai-skills](https://picsart.com/gen-ai-skills/) and attach it to your Codex session.
-
-## Troubleshooting
-
-**The sign-in window did not open.**
-
-Run `codex mcp login picsart-gen-ai` again. If the browser still does not open, copy the sign-in URL Codex prints and open it manually.
-
-**The server is configured but tools do not appear.**
-
-Run `/mcp` in Codex to check the server status. If it needs authentication, run `codex mcp login picsart-gen-ai`. Then restart Codex so it reloads the tool list. Check that `config.toml` uses `url`, not `command`.
-
-**Generation fails with "unauthorized".**
-
-Your Picsart session has expired or was revoked. Run `codex mcp logout picsart-gen-ai`, then `codex mcp login picsart-gen-ai`, and restart Codex.
-
-**Generation fails with "insufficient credits".**
-
-Ask Codex *"What's my Picsart credit balance?"* (it calls `picsart_credits`). Top up at [picsart.com](https://picsart.com).
-
-**The connection fails on a corporate network.**
-
-Codex must reach `https://api.picsart.com` over HTTPS, and your browser must reach the Picsart sign-in page. Ask your network admin to allow both.
-
-## FAQ
-
-**What is the difference between MCP and Skills in Codex?**
-
-MCP gives Codex direct tool-call access to the full Picsart catalog through the hosted Picsart MCP server. It is precise and scriptable. Skills give the agent pre-built generation instructions and run the `gen-ai` CLI locally, so you can drive it in plain English. Both draw from the same Picsart credit balance.
-
-**Do I need the gen-ai CLI for MCP?**
-
-No. The CLI and `gen-ai login` are needed only for the Skills method.
-
-**Does connecting Picsart to Codex cost extra?**
-
-No. The MCP server and Skills are free to add. Generations consume Picsart credits.
-
-## Start creating
-
-Click below to open ChatGPT with a ready-to-run Picsart prompt. It works once the Picsart connector is added to ChatGPT. See [ChatGPT](/guide/integrations/chatgpt).
-
-::: tip Ready to generate?
-[Start creating in Codex](https://chatgpt.com/?q=Use%20Picsart%20MCP%20to%20generate%20a%20photorealistic%20product%20shot%20on%20a%20white%20background%20with%20natural%20lighting%20using%20Flux%202%20Pro){ .btn-primary target="_blank" rel="noopener" }
-:::
+Setup references: [MCP configuration](https://learn.chatgpt.com/docs/extend/mcp) and [desktop developer settings](https://learn.chatgpt.com/docs/developer-settings), checked September 30, 2026. CLI command syntax was checked with `codex-cli 0.158.0-alpha.2`. The app procedure was checked against official documentation, not a version-specific signed-in UI test. Menu labels can differ by app release.
