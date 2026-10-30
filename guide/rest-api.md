@@ -14,7 +14,7 @@ Full documentation, endpoint reference, and code examples live on the API platfo
 
 | | |
 |---|---|
-| Base URL | `https://api.picsart.com/gw-v2` |
+| Base URL | `https://api.picsart.com` |
 | Auth | API key — `Authorization: Bearer <PICSART_API_KEY>` |
 | Sync | `POST /workflows/{workflow}/execute` |
 | Async | `POST /workflows/{workflow}/submit` + `GET /workflows/{workflow}/{id}/result` |

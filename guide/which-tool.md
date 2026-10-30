@@ -123,7 +123,7 @@ Auth is an API key (not the CLI's OAuth flow). Retrieve it from [picsart.com/set
 
 ### Python, Ruby, Go, or any other language
 
-Use the REST API directly. HTTP POST to `https://api.picsart.com/gw-v2`. Same model ids and parameters as every other surface. Auth is an API key from [picsart.com/settings](https://picsart.com/settings).
+Use the REST API directly. HTTP POST to `https://api.picsart.com`. Same model ids and parameters as every other surface. Auth is an API key from [picsart.com/settings](https://picsart.com/settings).
 
 [REST API guide](/guide/rest-api) · [API Reference](https://picsart.com/api-platform/docs/api-reference)
 

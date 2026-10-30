@@ -65,7 +65,7 @@ npm install @picsart/ai-sdk
 ---
 
 ### REST API: any language
-If you are building in Python, Ruby, Go, PHP, or any other language, call the REST API directly. HTTP POST to `https://api.picsart.com/gw-v2`. Same model ids and parameters as every other surface. Auth is an API key from your account settings.
+If you are building in Python, Ruby, Go, PHP, or any other language, call the REST API directly. HTTP POST to `https://api.picsart.com`. Same model ids and parameters as every other surface. Auth is an API key from your account settings.
 
 [REST API guide](/guide/rest-api) · [API Reference](https://picsart.com/api-platform/docs/api-reference)
 
