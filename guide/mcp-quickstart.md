@@ -284,7 +284,7 @@ Make sure you finished signing in, then restart or reload the agent. Most agents
 
 **Which models work via MCP?**
 
-The SDK catalog reference covers 238 models. MCP availability depends on the server version. Use `picsart_model_catalog` or `picsart_list_models` to filter by mode, provider, or purpose, or browse the [Model Catalog](/reference/catalog).
+The SDK catalog reference covers 243 models. MCP availability depends on the server version. Use `picsart_model_catalog` or `picsart_list_models` to filter by mode, provider, or purpose, or browse the [Model Catalog](/reference/catalog).
 
 **Where do generated files go?**
 

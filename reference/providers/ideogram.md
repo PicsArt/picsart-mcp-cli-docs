@@ -1,10 +1,10 @@
 ---
-description: "Ideogram AI models on Picsart — 6 image model(s) including Ideogram 4.5, Precise Edit, and Ideogram P-Image. CLI + MCP examples, parameters, and official docs."
+description: "Ideogram AI models on Picsart — 8 image model(s) including Ideogram 4.5, Precise Edit, and Ideogram P-Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Ideogram
 
-**Mode:** image · **Models:** 6
+**Mode:** image · **Models:** 8
 
 **Vendor:** [Ideogram](https://ideogram.ai) · **Official API docs:** [Ideogram API Reference](https://developer.ideogram.ai/api-reference)
 
@@ -17,6 +17,8 @@ Precise Edit changes a selected area while it preserves the rest of the image.
 
 | id | Name | Input type |
 |---|---|---|
+| `ideogram-vector-1` | Ideogram Vector | `t2i` |
+| `ideogram-vector-1-vectorize` | Ideogram Vectorize | `i2i` |
 | `ideogram-4-5` | Ideogram 4.5 | `t2i` |
 | `ideogram-4-5-precise-edit` | Ideogram 4.5 Precise Edit | `i2i` |
 | `ideogram-v4` | Ideogram 4.0 | `t2i` |
@@ -64,6 +66,32 @@ gen-ai generate -m ideogram-character \
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `ideogram-vector-1` — Ideogram Vector
+
+[Try `ideogram-vector-1` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-vector-1)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤9500 chars) |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `5:4` · `4:5` · `16:10` · `10:16` · `2:1` · `1:2` · `3:1` · `1:3` · `4:1` · `1:4` (default `auto`) |
+| `quality` | `--quality` | enum | `low` · `medium` · `high` (default `medium`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+
+### `ideogram-vector-1-vectorize` — Ideogram Vectorize
+
+[Try `ideogram-vector-1-vectorize` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-vector-1-vectorize)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `startFrame` | `--start-frame` | file | **required** image |
+| `mode` | `--mode` | enum | `default` (Detailed) · `simple` (Simple) (default `default`) |
 
 ### `ideogram-4-5` — Ideogram 4.5
 

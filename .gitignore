@@ -4,5 +4,9 @@ node_modules/
 .wiki/
 wiki-build/
 
+# Local secrets — never commit (holds PICSART_API_KEY for catalog export)
+.env
+.env.local
+
 # macOS
 .DS_Store

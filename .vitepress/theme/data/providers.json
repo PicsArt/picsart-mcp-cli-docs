@@ -44,7 +44,7 @@
   {
     "id": "elevenlabs",
     "label": "ElevenLabs",
-    "count": 17,
+    "count": 16,
     "modes": [
       "audio",
       "text"
@@ -108,7 +108,7 @@
   {
     "id": "ideogram",
     "label": "Ideogram",
-    "count": 6,
+    "count": 8,
     "modes": [
       "image"
     ]
@@ -116,7 +116,7 @@
   {
     "id": "kimi",
     "label": "Kimi",
-    "count": 1,
+    "count": 3,
     "modes": [
       "text"
     ]
@@ -124,7 +124,7 @@
   {
     "id": "kling",
     "label": "Kling",
-    "count": 15,
+    "count": 13,
     "modes": [
       "image",
       "video",
@@ -160,7 +160,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 14,
+    "count": 16,
     "modes": [
       "video",
       "audio",
@@ -179,7 +179,7 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 19,
+    "count": 21,
     "modes": [
       "image",
       "text"

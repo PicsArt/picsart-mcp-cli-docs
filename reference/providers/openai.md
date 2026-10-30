@@ -1,10 +1,10 @@
 ---
-description: "OpenAI AI models on Picsart — 19 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI AI models on Picsart — 21 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
 ---
 
 # OpenAI
 
-**Modes:** image · text · **Models:** 19
+**Modes:** image · text · **Models:** 21
 
 **Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/image-generation)
 
@@ -18,6 +18,8 @@ OpenAI provides GPT Image generation and GPT text and image-understanding models
 | `gpt-image-2.5-flare` | GPT Image 2.5 Flare | `t2i` |
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
+| `gpt-6.1-sol` | GPT-6.1 Sol | `i2t` |
+| `gpt-6.1-terra` | GPT-6.1 Terra | `i2t` |
 | `gpt-6-astra` | GPT-6 Astra | `i2t` |
 | `gpt-6-sol` | GPT-6 Sol | `i2t` |
 | `gpt-6-luna` | GPT-6 Luna | `i2t` |
@@ -118,6 +120,30 @@ Input type: `t2i`
 | `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 5) |
+
+### `gpt-6.1-sol` — GPT-6.1 Sol
+
+[Try `gpt-6.1-sol` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.1-sol)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gpt-6.1-terra` — GPT-6.1 Terra
+
+[Try `gpt-6.1-terra` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.1-terra)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ### `gpt-6-astra` — GPT-6 Astra
 

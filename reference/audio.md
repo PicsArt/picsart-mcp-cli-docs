@@ -1,10 +1,10 @@
 ---
-description: "33 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
+description: "32 AI audio models on Picsart — text-to-speech, music, and sound effects — ElevenLabs, Seed Audio, Gemini TTS, Lyria, MiniMax Music and more."
 ---
 
 # Audio generation
 
-**33 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
+**32 audio models** for text-to-speech, music, sound effects, voice design, dubbing, and speech-to-speech.
 
 ## Quick start
 
