@@ -4,7 +4,7 @@ description: "ElevenLabs AI models on Picsart — 17 audio and text models, incl
 
 # ElevenLabs
 
-**Modes:** audio · text · **Models:** 17
+**Modes:** audio · text · **Models:** 16
 
 **Vendor:** [elevenlabs.io](https://elevenlabs.io) · **Official API docs:** [API reference](https://elevenlabs.io/docs/api-reference)
 
@@ -101,23 +101,6 @@ Input type: `tts`
 | `language` | `--language` | text | free text |
 | `prompt` | `-p` | text | **required** (≤5000 chars) |
 | `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-v3 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
-| `stability` | `--stability` | range | `0`–`1`, step 0.05 |
-| `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
-| `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |
-| `speed` | `--speed` | range | `0.1`–`5`, step 0.05 |
-| `useSpeakerBoost` | `--use-speaker-boost` | boolean | `true` · `false` (default `true`) |
-| `withTimestamps` | `--with-timestamps` | boolean | `true` · `false` (default `false`) |
-
-### `eleven-multilingual-v2` — Eleven Multilingual v2
-
-[Try `eleven-multilingual-v2` in Playground ↗](https://picsart.com/ai-playground/?model=eleven-multilingual-v2)
-
-Input type: `tts`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤10000 chars) |
-| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info eleven-multilingual-v2 --json` for current values (default `JBFqnCBsd6RMkjVDRZzb`) |
 | `stability` | `--stability` | range | `0`–`1`, step 0.05 |
 | `similarityBoost` | `--similarity-boost` | range | `0`–`1`, step 0.05 |
 | `styleExaggeration` | `--style-exaggeration` | range | `0`–`1`, step 0.05 |

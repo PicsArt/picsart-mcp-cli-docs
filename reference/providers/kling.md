@@ -1,10 +1,10 @@
 ---
-description: "Kling AI models on Picsart — 15 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling AI models on Picsart — 13 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Kling
 
-**Modes:** image · video · audio · **Models:** 15
+**Modes:** image · video · audio · **Models:** 13
 
 **Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
 
@@ -17,10 +17,8 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 | `kling-v3` | Kling V3 | `t2v` |
 | `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
 | `kling-v4` | Kling 4.0 | `t2v` |
-| `kling-v2-6` | Kling V2.6 | `t2v` |
 | `kling-v3-omni` | Kling V3 Omni | `t2v` |
 | `kling-v4-omni` | Kling 4.0 Omni | `t2v` |
-| `kling-video-o1` | Kling Video O1 | `t2v` |
 | `kling-motion-control-v3` | Kling Motion Control V3 | `i2v` |
 | `kling-motion-control` | Kling Motion Control 2.6 | `i2v` |
 | `kling-avatar` | Kling Avatar | `i2v` |
@@ -127,24 +125,6 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `endFrame` | `--end-frame` | file | image |
 
-### `kling-v2-6` — Kling V2.6
-
-[Try `kling-v2-6` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v2-6)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-| `negativePrompt` | `--neg` | text | free text |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `cfgScale` | `--cfg` | number | `0`–`1`, step 0.1, default `0.5` |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-
 ### `kling-v3-omni` — Kling V3 Omni
 
 [Try `kling-v3-omni` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v3-omni)
@@ -187,20 +167,6 @@ Input type: `t2v`
 | `videoUrl` | `--video` | file | video |
 | `referType` | `--refer-type` | enum | `feature` (Feature Reference) · `base` (Base Edit) (default `feature`) |
 | `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
-
-### `kling-video-o1` — Kling Video O1
-
-[Try `kling-video-o1` in Playground ↗](https://picsart.com/ai-playground/?model=kling-video-o1)
-
-Input type: `t2v`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** (≤2500 chars) |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` (default `16:9`) |
-| `duration` | `-d` | enum | `5` · `10` (default `5`) |
-| `renderingSpeed` | `--speed` | enum | `std` (Standard) · `pro` (Pro) (default `std`) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 
 ### `kling-motion-control-v3` — Kling Motion Control V3
 

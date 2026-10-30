@@ -9,7 +9,7 @@ const base = process.env.DOCS_BASE || '/'
 // DOCS_HOSTNAME when moving to a custom domain.
 const HOSTNAME = process.env.DOCS_HOSTNAME || 'https://picsart.github.io'
 const SITE_DESC =
-  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 238 models from 32 providers.'
+  'Developer docs for the Picsart gen-ai CLI, MCP server, Skills, SDK, and Media Studio. The SDK catalog reference covers 243 models from 32 providers.'
 
 const SOFTWARE_LD = {
   '@context': 'https://schema.org',
@@ -179,7 +179,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: `${HOSTNAME}${base}og.png` }],
     ['meta', { property: 'og:image:width', content: '1200' }],
     ['meta', { property: 'og:image:height', content: '630' }],
-    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 238 models, 32 providers' }],
+    ['meta', { property: 'og:image:alt', content: 'Picsart SDK catalog — 243 models, 32 providers' }],
     ['meta', { name: 'twitter:site', content: '@picsart' }],
     ['meta', { name: 'twitter:image', content: `${HOSTNAME}${base}og.png` }],
     ['script', { type: 'application/ld+json' }, JSON.stringify(SOFTWARE_LD)],
