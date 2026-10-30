@@ -15,7 +15,7 @@ PixVerse is a video model family with text-to-video, image-to-video (start-frame
 | id | Name | Input type |
 |---|---|---|
 | `pixverse-v6` | PixVerse V6 | `t2v` |
-| `pixverse-v6-image` | PixVerse V6 Image | `i2v` |
+| `pixverse-v6-image` | PixVerse V6 Image- | `i2v` |
 | `pixverse-v6-fusion` | PixVerse V6 Fusion | `i2v` |
 | `pixverse-c1` | PixVerse C1 | `t2v` |
 | `pixverse-c1-image` | PixVerse C1 Image | `i2v` |

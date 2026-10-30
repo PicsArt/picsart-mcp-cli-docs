@@ -1394,7 +1394,7 @@
   },
   {
     "id": "pixverse-v6-image",
-    "name": "PixVerse V6 Image",
+    "name": "PixVerse V6 Image-",
     "provider": "pixverse",
     "mode": "video",
     "inputType": "i2v"
