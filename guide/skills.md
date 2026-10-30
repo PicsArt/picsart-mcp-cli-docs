@@ -20,7 +20,7 @@ Setup order:
 
 ## The `gen-ai-use` skill
 
-The flagship skill, **`gen-ai-use`**, lets an agent use the models available in its installed CLI. The SDK catalog reference covers **238 models**. It works with Claude Code, Cursor, and Windsurf.
+The flagship skill, **`gen-ai-use`**, lets an agent use the models available in its installed CLI. The SDK catalog reference covers **243 models**. It works with Claude Code, Cursor, and Windsurf.
 
 Once added, you drive it in plain English:
 

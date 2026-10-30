@@ -7,6 +7,32 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-10-30
+
+**SDK 7.0.0 catalog refresh — 243 production models across 32 providers.**
+Compared with the previous catalog: 10 models added, 5 removed.
+
+### New
+
+- **Flux 3 Max** *(video, `t2v`)* — Text-to-video with synchronized audio, or image-to-video from a start (and optional end) frame. Up to 20s at 1080p. See [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Flux 3 Max Keyframes** *(video, `i2v`)* — Animate a video between up to 10 positioned keyframe images, with synchronized audio. Up to 20s at 1080p. See [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Ideogram Vector** *(image, `t2i`)* — Ideogram Vector — SVG logos, icons and illustrations from a prompt, optionally guided by up to 5 reference images. See [Ideogram](/reference/providers/ideogram).
+- **Ideogram Vectorize** *(image, `i2i`)* — Ideogram Vectorize — convert a raster image (JPEG, PNG or WebP) into an SVG. See [Ideogram](/reference/providers/ideogram).
+- **Kimi K3.1 Pro** *(text, `i2t`)* — Moonshot’s most capable Kimi model — post-trained K3 with deep reasoning and a 1M-token context. See [Kimi](/reference/providers/kimi).
+- **Kimi K3.1 Pro Highspeed** *(text, `i2t`)* — Kimi K3.1 Pro at 2–3× the speed — same capabilities, faster responses. See [Kimi](/reference/providers/kimi).
+- **MiniMax M3** *(text, `i2t`)* — MiniMax’s flagship model — adaptive reasoning with a 1M-token context. See [MiniMax](/reference/providers/minimax).
+- **MiniMax M3.1 Flash** *(text, `i2t`)* — Fast, low-cost MiniMax model — always-on reasoning with a 1M-token context. See [MiniMax](/reference/providers/minimax).
+- **GPT-6.1 Sol** *(text, `i2t`)* — OpenAI’s most capable GPT-6.1 model for deep reasoning and complex tasks, with a 1M-token context. See [OpenAI](/reference/providers/openai).
+- **GPT-6.1 Terra** *(text, `i2t`)* — Balanced GPT-6.1 model — strong general-purpose quality at half the price of Sol, with a 1M-token context. See [OpenAI](/reference/providers/openai).
+
+### Removed
+
+- **Eleven Multilingual v2** *(audio)* leaves [ElevenLabs](/reference/providers/elevenlabs).
+- **Flux Kontext Max** *(image)* leaves [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Flux Kontext Pro** *(image)* leaves [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Kling V2.6** *(video)* leaves [Kling](/reference/providers/kling).
+- **Kling Video O1** *(video)* leaves [Kling](/reference/providers/kling).
+
 ## 2026-10-16
 
 **SDK 6.48.1 catalog refresh — 238 production models across 32 providers.**

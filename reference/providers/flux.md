@@ -90,34 +90,6 @@ Input type: `t2i`
 | `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
 | `imageUrls` | `-i` | file | image (up to 1) |
 
-### `flux-kontext-max` — Flux Kontext Max
-
-[Try `flux-kontext-max` in Playground ↗](https://picsart.com/ai-playground/?model=flux-kontext-max)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `21:9` · `9:21` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 4) |
-
-### `flux-kontext-pro` — Flux Kontext Pro
-
-[Try `flux-kontext-pro` in Playground ↗](https://picsart.com/ai-playground/?model=flux-kontext-pro)
-
-Input type: `t2i`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `21:9` · `9:21` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-
-> **Notes:** Flux 2 Pro and Flux Kontext Max accept up to 4 reference images; Flux 2 Max / Flex and Flux Kontext Pro accept 1. Kontext models use `imageUrls` as the edit reference.
-
 ### `flux-3-image` — Flux 3 Image
 
 [Try `flux-3-image` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-image)
@@ -194,6 +166,41 @@ Input type: `v2v`
 | `videoUrl` | `--video` | file | **required** video |
 | `prompt` | `-p` | text | **required** (≤4096 chars) |
 | `safetyTolerance` | `--safety-tolerance` | range | `0`–`4` (default `2`) |
+
+### `flux-3-max` — Flux 3 Max
+
+[Try `flux-3-max` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-max)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | range | `5`–`20`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `reasoningLevel` | `--reasoning-level` | enum | `low` · `high` (default `high`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+
+### `flux-3-max-keyframes` — Flux 3 Max Keyframes
+
+[Try `flux-3-max-keyframes` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-max-keyframes)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | **required** image (up to 10) |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | range | `5`–`20`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `reasoningLevel` | `--reasoning-level` | enum | `low` · `high` (default `high`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
 
 ## Pricing
 
