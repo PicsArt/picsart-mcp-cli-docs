@@ -8,12 +8,16 @@
     "dev": "vitepress dev",
     "llms": "node scripts/build-llms.mjs",
     "check:counts": "node scripts/check-counts.mjs",
+    "fix:counts": "node scripts/fix-counts.mjs",
+    "export:catalog": "node scripts/export-sdk-catalog.mjs .sdk-catalog.json",
+    "refresh:catalog": "npm run export:catalog && node scripts/build-catalog-data.mjs .sdk-catalog.json && node scripts/build-provider-pages.mjs .sdk-catalog.json && npm run fix:counts",
+    "draft:changelog": "node scripts/draft-changelog.mjs --catalog .sdk-catalog.json",
     "build": "npm run llms && npm run check:counts && vitepress build",
     "preview": "vitepress preview",
     "wiki:build": "python3 scripts/build-wiki.py"
   },
   "devDependencies": {
-    "@picsart/ai-sdk": "6.48.1",
+    "@picsart/ai-sdk": "7.0.0",
     "vitepress": "^1.6.3"
   }
 }

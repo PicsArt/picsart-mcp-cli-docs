@@ -10,25 +10,14 @@
 //   node scripts/check-counts.mjs
 //
 // Runs as part of `npm run build`, so a stale count blocks the deploy. When you
-// add a new global-count phrase, make sure it matches one of the patterns below
-// (or add a pattern) so it stays guarded.
-import { readFileSync, readdirSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
-import { dirname, join } from 'node:path'
+// add a new global-count phrase, make sure it matches one of the patterns in
+// scripts/lib/counts.mjs (or add a pattern) so it stays guarded — fix-counts.mjs
+// reads the same patterns, so both scripts stay in lockstep.
+import { read, json, loadCounts, GLOBAL_FILES, globalPatterns, PROVIDER_HEADER_RE } from './lib/counts.mjs'
 
-const here = dirname(fileURLToPath(import.meta.url))
-const root = join(here, '..')
-const read = (p) => readFileSync(join(root, p), 'utf8')
-const json = (p) => JSON.parse(read(p))
-
-const models = json('.vitepress/theme/data/models.json')
-const providers = json('.vitepress/theme/data/providers.json')
+const counts = loadCounts()
+const { models, providers, total, providerCount, modeCount, providerCountById } = counts
 const mediaTools = json('.vitepress/theme/data/media-tools.json')
-
-const total = models.length
-const providerCount = providers.length
-const modeCount = models.reduce((acc, m) => ((acc[m.mode] = (acc[m.mode] || 0) + 1), acc), {})
-const providerCountById = Object.fromEntries(providers.map((p) => [p.id, p.count]))
 
 const failures = []
 const checked = { global: 0, provider: 0, media: 0 }
@@ -46,61 +35,19 @@ for (const model of models) {
 }
 
 // --- Global counts: overview pages that describe the whole catalog. ---------
-// Provider pages are excluded here — their numbers are per-provider and checked
-// separately below.
-const GLOBAL_FILES = [
-  'index.md',
-  '.vitepress/config.ts',
-  '.vitepress/theme/components/ModelCatalog.vue',
-  'CONTRIBUTING.md',
-  'guide/introduction.md',
-  'guide/installation.md',
-  'guide/skills.md',
-  'guide/mcp-quickstart.md',
-  'guide/what-is-mcp.md',
-  'guide/which-tool.md',
-  'guide/pricing.md',
-  'guide/sdk.md',
-  'guide/rest-api.md',
-  'reference/index.md',
-  'reference/catalog.md',
-  'reference/providers/index.md',
-  'README.md',
-  'reference/image.md',
-  'reference/video.md',
-  'reference/audio.md',
-  'reference/text.md',
-  'reference/json.md',
-  // Every per-agent integration guide quotes the catalog size in its intro.
-  ...readdirSync(join(root, 'guide', 'integrations'))
-    .filter((f) => f.endsWith('.md'))
-    .map((f) => `guide/integrations/${f}`),
-]
-
-// Each pattern captures a number that must equal `expected`. Patterns are
-// shaped so per-mode phrases ("77 image models") and bare totals ("176 models")
-// never collide: a bare total requires the digit to sit immediately before
-// "models", which a per-mode phrase (digit … mode … models) never does.
-const GLOBAL_PATTERNS = [
-  { label: 'image models', re: /(\d+)\s+(?:AI\s+)?image(?:\s+generation)?\s+models/gi, expected: () => modeCount.image },
-  { label: 'video models', re: /(\d+)\s+(?:AI\s+)?video(?:\s+generation)?\s+models/gi, expected: () => modeCount.video },
-  { label: 'audio models', re: /(\d+)\s+(?:AI\s+)?audio\s+models/gi, expected: () => modeCount.audio },
-  { label: 'text models', re: /(\d+)\s+(?:AI\s+)?text\s+models/gi, expected: () => modeCount.text },
-  { label: 'JSON models', re: /(\d+)\s+(?:structured\s+)?JSON\s+models?\b/gi, expected: () => modeCount.json ?? 0 },
-  { label: 'total models', re: /(\d+)\+?\s+(?:(?:Picsart\s+AI|generative\s+AI|AI)\s+)?models\b/g, expected: () => total },
-  { label: 'N-model catalog', re: /(\d+)-model\b/g, expected: () => total },
-  { label: 'provider count', re: /(\d+)\s+(?:AI\s+model\s+)?providers\b/gi, expected: () => providerCount },
-]
+// GLOBAL_FILES and the patterns live in scripts/lib/counts.mjs so fix-counts.mjs
+// guards (and rewrites) exactly the same set. Provider pages are excluded here —
+// their numbers are per-provider and checked separately below.
+const GLOBAL_PATTERNS = globalPatterns(counts)
 
 for (const file of GLOBAL_FILES) {
   const text = read(file)
   for (const { label, re, expected } of GLOBAL_PATTERNS) {
-    const want = expected()
     for (const match of text.matchAll(re)) {
       checked.global++
       const got = Number(match[1])
-      if (got !== want) {
-        failures.push(`${file}: "${match[0].trim()}" — ${label} should be ${want}, found ${got}`)
+      if (got !== expected) {
+        failures.push(`${file}: "${match[0].trim()}" — ${label} should be ${expected}, found ${got}`)
       }
     }
   }
@@ -116,7 +63,7 @@ for (const provider of providers) {
     failures.push(`${file}: provider page missing (${provider.id} is in providers.json)`)
     continue
   }
-  const match = text.match(/\*\*Models:\*\*\s*(\d+)/)
+  const match = text.match(PROVIDER_HEADER_RE)
   if (!match) {
     failures.push(`${file}: no "**Models:** N" header found`)
     continue

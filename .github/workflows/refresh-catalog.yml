@@ -1,0 +1,98 @@
+name: Refresh model catalog
+
+# Syncs the committed catalog snapshot with the LIVE models-hub catalog, then opens
+# a PR. SDK 7.0.0+ is dynamic-only: models are added/removed in models-hub without
+# an SDK release, and `npm run refresh:catalog` fetches that live catalog at runtime.
+# So the common case — a model added dynamically — needs NO version bump: leave the
+# version input blank and the current SDK pin is kept, only the catalog is re-fetched.
+# Pass a version only when you actually want to move the SDK (code/param changes).
+#
+# A human reviews the PR, pastes the drafted changelog (in the PR body) into
+# changelog.md, and merges. When nothing changed, the refresh is a no-op and no PR
+# is opened.
+#
+# Requires the repo secret PICSART_API_KEY (prod, ideally catalog-read-scoped) and
+# "Allow GitHub Actions to create and approve pull requests" enabled in settings.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "SDK version to pin (blank = keep current pin, just re-fetch the live catalog)"
+        required: false
+        default: ""
+  schedule:
+    - cron: "0 11 * * *" # daily 11:00 UTC — picks up catalog changes
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-catalog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      # Only when an SDK version is explicitly requested — a dynamic model add
+      # keeps the current pin and relies on the live fetch below.
+      - name: Pin @picsart/ai-sdk@${{ github.event.inputs.version }}
+        if: ${{ github.event.inputs.version != '' }}
+        run: npm install --save-dev --save-exact "@picsart/ai-sdk@${{ github.event.inputs.version }}"
+
+      - name: Refresh catalog (export + data + pages + fix counts)
+        env:
+          PICSART_API_KEY: ${{ secrets.PICSART_API_KEY }}
+        run: npm run refresh:catalog
+
+      - name: Verify build
+        env:
+          DOCS_BASE: /${{ github.event.repository.name }}/
+        run: npm run build
+
+      - name: Collect counts + date
+        id: meta
+        run: |
+          echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+          echo "models=$(node -e "console.log(require('./.vitepress/theme/data/models.json').length)")" >> "$GITHUB_OUTPUT"
+          echo "providers=$(node -e "console.log(require('./.vitepress/theme/data/providers.json').length)")" >> "$GITHUB_OUTPUT"
+          echo "sdk=$(node -e "console.log(require('./package.json').devDependencies['@picsart/ai-sdk'])")" >> "$GITHUB_OUTPUT"
+
+      - name: Build PR body with drafted changelog
+        run: |
+          {
+            echo "Automated catalog refresh — **${{ steps.meta.outputs.models }} models across ${{ steps.meta.outputs.providers }} providers** (@picsart/ai-sdk ${{ steps.meta.outputs.sdk }})."
+            echo
+            echo "Fetched live from models-hub by \`npm run refresh:catalog\`. Prose counts auto-fixed; \`npm run build\` passed."
+            echo
+            echo "### Before merging"
+            echo "- [ ] Paste/trim the drafted changelog below into \`changelog.md\`."
+            echo "- [ ] Bump current-catalog version strings only if the SDK baseline moved (dynamic model adds keep the same version)."
+            echo "- [ ] Spot-check curated provider pages (google, flux, elevenlabs)."
+            echo
+            echo "<details><summary>Drafted changelog entry (edit before pasting)</summary>"
+            echo
+            node scripts/draft-changelog.mjs --base HEAD --catalog .sdk-catalog.json --date "${{ steps.meta.outputs.date }}" 2>/dev/null
+            echo
+            echo "</details>"
+          } > "${RUNNER_TEMP}/pr-body.md"
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/catalog-refresh-${{ steps.meta.outputs.date }}
+          base: main
+          title: "docs: refresh catalog (${{ steps.meta.outputs.models }} models, ${{ steps.meta.outputs.providers }} providers)"
+          body-path: ${{ runner.temp }}/pr-body.md
+          commit-message: "docs: refresh catalog (${{ steps.meta.outputs.models }} models, ${{ steps.meta.outputs.providers }} providers)"
+          labels: catalog-refresh
+          delete-branch: true
