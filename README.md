@@ -30,16 +30,43 @@ docs-site/
   public/llms.txt             # generated AI-agent site map (llmstxt.org)
   scripts/build-llms.mjs      # generates public/llms.txt from the catalog data
   scripts/check-counts.mjs    # fails the build if prose model/provider counts drift
+  scripts/fix-counts.mjs      # rewrites drifted counts (counterpart to check-counts)
+  scripts/draft-changelog.mjs # prints a draft changelog entry from the catalog diff
+  scripts/lib/counts.mjs      # shared count patterns used by check/fix-counts
   scripts/build-wiki.py       # converts these docs → GitHub Wiki markdown
+  .github/workflows/refresh-catalog.yml  # bump SDK → refresh → build → open PR
 ```
 
 ## Data freshness
 
 `.vitepress/theme/data/{models,providers}.json` are generated from the installed SDK catalog.
-The development dependency pins `@picsart/ai-sdk` to **6.29.0**. Run `npm ci` before export.
-Run `node scripts/export-sdk-catalog.mjs <output.json>`, then pass that file to
-`build-catalog-data.mjs` and `build-provider-pages.mjs` when the catalog changes so the Model Catalog,
-Providers grid, and the generated wiki tables stay accurate.
+The development dependency pins `@picsart/ai-sdk` to **7.0.0**.
+
+**Refreshing the catalog — one command.** Bump the SDK pin in `package.json`, `npm install`, then:
+
+```bash
+export PICSART_API_KEY=<prod-key>   # SDK 7.0.0+ fetches the catalog from models-hub; a .env is auto-read
+npm run refresh:catalog             # export → build-catalog-data → build-provider-pages → fix-counts
+npm run draft:changelog -- --base HEAD   # prints a changelog draft to paste into changelog.md
+npm run build                       # verify (llms + check:counts + vitepress)
+```
+
+`refresh:catalog` writes a transient `.sdk-catalog.json` (gitignored) and regenerates the Model
+Catalog, Providers grid, provider pages, and wiki tables; `fix:counts` then rewrites any drifted
+prose counts so `check:counts` passes. Still hand-edited after a refresh: the curated changelog
+prose and the "SDK X.Y.Z catalog" baseline version strings.
+
+**Or let CI do it.** `.github/workflows/refresh-catalog.yml` runs the whole chain, verifies the
+build, and opens a PR — **daily**, or on demand from the Actions tab. SDK 7.0.0+ is dynamic-only,
+so models added in models-hub appear with no SDK release: leave the version input **blank** and the
+refresh just re-fetches the live catalog against the current pin (pass a version only to move the
+SDK itself). When nothing changed it's a no-op and opens no PR. It needs the repo secret
+`PICSART_API_KEY` and "Allow GitHub Actions to create … pull requests" enabled. You review the PR,
+paste the drafted changelog from the PR body, and merge.
+
+To run the generator steps by hand instead: `node scripts/export-sdk-catalog.mjs <output.json>`
+(needs `PICSART_API_KEY`), then pass that file to `build-catalog-data.mjs` and
+`build-provider-pages.mjs`.
 
 `public/llms.txt` (the [llmstxt.org](https://llmstxt.org) agent map) is generated from those
 same JSON files, so it tracks the real model/provider counts. `npm run build` regenerates it
@@ -75,12 +102,10 @@ base and your change is a diff on top of it, rather than a replacement of it.
 git clone https://github.com/PicsArt/picsart-mcp-cli-docs.git /tmp/pubdocs
 cd /tmp/pubdocs
 
-# apply the change here — for a catalog refresh, run the generator chain:
-node scripts/export-sdk-catalog.mjs /tmp/catalog.json   # from a dir with @picsart/ai-sdk installed
-node scripts/build-catalog-data.mjs   /tmp/catalog.json
-node scripts/build-provider-pages.mjs /tmp/catalog.json
-
-npm ci && npm run build          # runs check:counts; VitePress fails on dead links
+# apply the change here — for a catalog refresh, one command does the chain:
+npm ci
+PICSART_API_KEY=<prod-key> npm run refresh:catalog   # export → data → pages → fix-counts
+npm run build                    # runs check:counts; VitePress fails on dead links
 ```
 
 **Before committing, prove you are not deleting anything:**
