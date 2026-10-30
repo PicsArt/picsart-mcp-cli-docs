@@ -56,13 +56,16 @@ Catalog, Providers grid, provider pages, and wiki tables; `fix:counts` then rewr
 prose counts so `check:counts` passes. Still hand-edited after a refresh: the curated changelog
 prose and the "SDK X.Y.Z catalog" baseline version strings.
 
-**Or let CI do it.** `.github/workflows/refresh-catalog.yml` runs the whole chain, verifies the
-build, and opens a PR — **daily**, or on demand from the Actions tab. SDK 7.0.0+ is dynamic-only,
-so models added in models-hub appear with no SDK release: leave the version input **blank** and the
-refresh just re-fetches the live catalog against the current pin (pass a version only to move the
-SDK itself). When nothing changed it's a no-op and opens no PR. It needs the repo secret
-`PICSART_API_KEY` and "Allow GitHub Actions to create … pull requests" enabled. You review the PR,
-paste the drafted changelog from the PR body, and merge.
+**Or let CI do it — fully hands-off.** `.github/workflows/refresh-catalog.yml` runs the whole
+chain **daily** (or on demand from the Actions tab): fetch the live catalog, regenerate, auto-fix
+counts, **write the changelog entry**, open a PR, **auto-merge it**, and let the Pages deploy run.
+SDK 7.0.0+ is dynamic-only, so models added in models-hub appear with no SDK release: leave the
+version input **blank** and the refresh re-fetches the live catalog against the current pin (pass a
+version only to move the SDK itself). When nothing changed it's a no-op — no PR. The auto-written
+changelog is the raw catalog descriptions, not editorial prose; tidy it in a follow-up if you care.
+Needs two secrets — `PICSART_API_KEY` (live fetch) and `CATALOG_PAT` (a PAT used to merge, so the
+merge push triggers the deploy; `GITHUB_TOKEN` can't) — plus "Allow GitHub Actions to create …
+pull requests" enabled.
 
 To run the generator steps by hand instead: `node scripts/export-sdk-catalog.mjs <output.json>`
 (needs `PICSART_API_KEY`), then pass that file to `build-catalog-data.mjs` and

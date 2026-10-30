@@ -2,7 +2,7 @@
 // Print a DRAFT changelog entry for a catalog refresh — the added/removed model
 // list a human then edits into prose.
 //
-//   node scripts/draft-changelog.mjs [--base <git-ref>] [--catalog <catalog.json>] [--date YYYY-MM-DD]
+//   node scripts/draft-changelog.mjs [--base <git-ref>] [--catalog <catalog.json>] [--date YYYY-MM-DD] [--write]
 //
 // It compares the working-tree .vitepress/theme/data/models.json (just rewritten
 // by build-catalog-data) against the same file at a git ref (default HEAD), so in
@@ -10,11 +10,13 @@
 // committed. Pass the exported SDK catalog (--catalog) to enrich new models with
 // their one-line descriptions; without it you get names + modes and a TODO.
 //
-// This is a SCAFFOLD, never the final text: the real changelog groups related
-// models, picks what is noteworthy, and explains behaviour changes. It prints to
-// stdout — nothing is written. Paste the useful parts into changelog.md.
+// Default mode is a SCAFFOLD printed to stdout — the human edits it into prose.
+// --write inserts the entry straight into changelog.md (newest-first, below the
+// intro). That is for the unattended auto-merge flow where no human polishes it;
+// the prose is the raw catalog descriptions. When there are no additions or
+// removals, --write makes no change (there is nothing notable to log).
 import { execSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -31,6 +33,7 @@ const argOf = (flag, fallback) => {
 const baseRef = argOf('--base', 'HEAD')
 const catalogPath = argOf('--catalog', null)
 const date = argOf('--date', 'YYYY-MM-DD') // Date.now() is unavailable in some runners; let the caller pass it
+const writeMode = argv.includes('--write')
 
 // ---- load new / old catalog data -------------------------------------------
 const json = (p) => JSON.parse(readFileSync(join(root, p), 'utf8'))
@@ -111,6 +114,25 @@ if (removed.length) {
 }
 
 out.push('')
-const banner = catalogPath ? '' : '\n(Tip: pass --catalog <exported.json> to fill in model descriptions.)'
-console.error(`— draft only; edit before committing —${banner}\n`)
-console.log(out.join('\n'))
+
+if (writeMode) {
+  // Unattended flow: splice the entry into changelog.md, newest-first, right
+  // before the first existing "## " entry (i.e. under the intro paragraph).
+  if (!added.length && !removed.length) {
+    console.error('draft-changelog: no additions or removals — changelog.md left unchanged.')
+  } else {
+    const changelogPath = 'changelog.md'
+    const existing = readFileSync(join(root, changelogPath), 'utf8')
+    const entry = out.join('\n').replace(/\s+$/, '') + '\n'
+    const at = existing.search(/^## /m)
+    const updated = at >= 0
+      ? existing.slice(0, at) + entry + '\n' + existing.slice(at)
+      : existing.replace(/\s+$/, '') + '\n\n' + entry
+    writeFileSync(join(root, changelogPath), updated)
+    console.error(`✓ Wrote ${date} changelog entry into ${changelogPath} (${added.length} new, ${removed.length} removed).`)
+  }
+} else {
+  const banner = catalogPath ? '' : '\n(Tip: pass --catalog <exported.json> to fill in model descriptions.)'
+  console.error(`— draft only; edit before committing —${banner}\n`)
+  console.log(out.join('\n'))
+}

@@ -1,18 +1,23 @@
 name: Refresh model catalog
 
-# Syncs the committed catalog snapshot with the LIVE models-hub catalog, then opens
-# a PR. SDK 7.0.0+ is dynamic-only: models are added/removed in models-hub without
-# an SDK release, and `npm run refresh:catalog` fetches that live catalog at runtime.
-# So the common case — a model added dynamically — needs NO version bump: leave the
-# version input blank and the current SDK pin is kept, only the catalog is re-fetched.
-# Pass a version only when you actually want to move the SDK (code/param changes).
+# Fully hands-off catalog sync. Daily (or on demand) it fetches the LIVE models-hub
+# catalog, regenerates the docs, auto-fixes prose counts, writes a changelog entry,
+# opens a PR, MERGES it, and lets the Pages deploy run. When nothing changed it is a
+# no-op and no PR is opened.
 #
-# A human reviews the PR, pastes the drafted changelog (in the PR body) into
-# changelog.md, and merges. When nothing changed, the refresh is a no-op and no PR
-# is opened.
+# SDK 7.0.0+ is dynamic-only: models are added/removed in models-hub without an SDK
+# release. The common case — a model added dynamically — needs NO version bump:
+# leave the version input blank and the current pin is kept, only the catalog is
+# re-fetched. Pass a version only to move the SDK itself (code/param changes).
 #
-# Requires the repo secret PICSART_API_KEY (prod, ideally catalog-read-scoped) and
-# "Allow GitHub Actions to create and approve pull requests" enabled in settings.
+# Secrets / settings:
+#   - PICSART_API_KEY — prod models-hub token (catalog read) for the live fetch.
+#   - CATALOG_PAT — a PAT (repo scope) used to MERGE the PR. Must be a PAT, not the
+#     default GITHUB_TOKEN: a merge pushed by GITHUB_TOKEN does NOT trigger the Pages
+#     deploy workflow (GitHub blocks that to avoid loops), so the site would not
+#     rebuild. The PAT-authored merge push triggers deploy-docs.yml normally.
+#   - "Allow GitHub Actions to create and approve pull requests" must be enabled
+#     (the create step uses GITHUB_TOKEN).
 
 on:
   workflow_dispatch:
@@ -54,11 +59,6 @@ jobs:
           PICSART_API_KEY: ${{ secrets.PICSART_API_KEY }}
         run: npm run refresh:catalog
 
-      - name: Verify build
-        env:
-          DOCS_BASE: /${{ github.event.repository.name }}/
-        run: npm run build
-
       - name: Collect counts + date
         id: meta
         run: |
@@ -67,26 +67,26 @@ jobs:
           echo "providers=$(node -e "console.log(require('./.vitepress/theme/data/providers.json').length)")" >> "$GITHUB_OUTPUT"
           echo "sdk=$(node -e "console.log(require('./package.json').devDependencies['@picsart/ai-sdk'])")" >> "$GITHUB_OUTPUT"
 
-      - name: Build PR body with drafted changelog
+      # Unattended flow: commit the changelog entry rather than drafting it into the
+      # PR body. No-op when there are no model additions/removals.
+      - name: Write changelog entry
+        run: node scripts/draft-changelog.mjs --base HEAD --catalog .sdk-catalog.json --date "${{ steps.meta.outputs.date }}" --write
+
+      - name: Verify build
+        env:
+          DOCS_BASE: /${{ github.event.repository.name }}/
+        run: npm run build
+
+      - name: Compose PR body
         run: |
           {
-            echo "Automated catalog refresh — **${{ steps.meta.outputs.models }} models across ${{ steps.meta.outputs.providers }} providers** (@picsart/ai-sdk ${{ steps.meta.outputs.sdk }})."
+            echo "Automated, **auto-merged** catalog refresh — **${{ steps.meta.outputs.models }} models across ${{ steps.meta.outputs.providers }} providers** (@picsart/ai-sdk ${{ steps.meta.outputs.sdk }})."
             echo
-            echo "Fetched live from models-hub by \`npm run refresh:catalog\`. Prose counts auto-fixed; \`npm run build\` passed."
-            echo
-            echo "### Before merging"
-            echo "- [ ] Paste/trim the drafted changelog below into \`changelog.md\`."
-            echo "- [ ] Bump current-catalog version strings only if the SDK baseline moved (dynamic model adds keep the same version)."
-            echo "- [ ] Spot-check curated provider pages (google, flux, elevenlabs)."
-            echo
-            echo "<details><summary>Drafted changelog entry (edit before pasting)</summary>"
-            echo
-            node scripts/draft-changelog.mjs --base HEAD --catalog .sdk-catalog.json --date "${{ steps.meta.outputs.date }}" 2>/dev/null
-            echo
-            echo "</details>"
+            echo "Fetched live from models-hub, prose counts auto-fixed, changelog entry written, \`npm run build\` passed. Merged by the workflow; Pages deploy follows."
           } > "${RUNNER_TEMP}/pr-body.md"
 
       - name: Open pull request
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           branch: chore/catalog-refresh-${{ steps.meta.outputs.date }}
@@ -96,3 +96,22 @@ jobs:
           commit-message: "docs: refresh catalog (${{ steps.meta.outputs.models }} models, ${{ steps.meta.outputs.providers }} providers)"
           labels: catalog-refresh
           delete-branch: true
+
+      # Merge with the PAT (NOT GITHUB_TOKEN) so the merge push triggers deploy-docs.
+      # A freshly-opened PR can take a moment to become mergeable, so retry briefly.
+      - name: Auto-merge the refresh PR
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.CATALOG_PAT }}
+        run: |
+          PR="${{ steps.cpr.outputs.pull-request-number }}"
+          for attempt in 1 2 3 4 5 6; do
+            if gh pr merge "$PR" --squash --delete-branch; then
+              echo "Merged PR #$PR."
+              exit 0
+            fi
+            echo "PR #$PR not mergeable yet (attempt $attempt) — waiting 10s…"
+            sleep 10
+          done
+          echo "::error::Failed to merge PR #$PR after retries."
+          exit 1
