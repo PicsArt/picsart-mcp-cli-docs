@@ -39,7 +39,7 @@ console.log(result)
 
 ## Parameters
 
-Parameters from the SDK 6.29.0 catalog.
+Parameters from the SDK 7.0.0 catalog.
 
 ### `typesafe-evaluate` — Jev
 

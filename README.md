@@ -36,7 +36,7 @@ docs-site/
 ## Data freshness
 
 `.vitepress/theme/data/{models,providers}.json` are generated from the installed SDK catalog.
-The development dependency pins `@picsart/ai-sdk` to **6.29.0**. Run `npm ci` before export.
+The development dependency pins `@picsart/ai-sdk` to **7.0.0**. Run `npm ci` before export.
 Run `node scripts/export-sdk-catalog.mjs <output.json>`, then pass that file to
 `build-catalog-data.mjs` and `build-provider-pages.mjs` when the catalog changes so the Model Catalog,
 Providers grid, and the generated wiki tables stay accurate.

@@ -4,7 +4,7 @@ description: "The Picsart SDK model catalog — 243 models from 32 providers acr
 
 # Model Reference
 
-The SDK 6.29.0 catalog: **243 models** from **32 providers**, across image, video, audio, text, and JSON. Availability and parameters depend on the installed SDK, CLI, or MCP server version. Check `gen-ai models` or `picsart_model_catalog` before use.
+The SDK 7.0.0 catalog: **243 models** from **32 providers**, across image, video, audio, text, and JSON. Availability and parameters depend on the installed SDK, CLI, or MCP server version. Check `gen-ai models` or `picsart_model_catalog` before use.
 
 <div class="reference-cta">
 

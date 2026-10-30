@@ -7,6 +7,27 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-10-30
+
+**SDK 7.0.0 catalog refresh — 243 production models across 32 providers.**
+Compared with the last published catalog (6.48.1): 10 models added, 5 removed; the provider list is unchanged.
+
+SDK 7.0.0 is **dynamic-only** — the SDK no longer bundles the model catalog. The `Model()` / `catalog.*` accessors now load it from models-hub at runtime via `await ai.initModelCatalog()`, and generation resolves model ids server-side. Model ids are still plain strings; CLI and MCP usage is unchanged.
+
+### New
+
+- **Flux 3 Max** *(video, `t2v`)* and **Flux 3 Max Keyframes** *(video, `i2v`)* — text-to-video with synchronized audio, or animation between up to 10 positioned keyframe images; up to 20s at 1080p. See [Flux](/reference/providers/flux).
+- **Ideogram Vector** *(image, `t2i`)* and **Ideogram Vectorize** *(image, `i2i`)* — SVG logos, icons and illustrations from a prompt, and raster-to-SVG conversion. See [Ideogram](/reference/providers/ideogram).
+- **Kimi K3.1 Pro** *(text, `i2t`)* and **Kimi K3.1 Pro Highspeed** *(text, `i2t`)* — Moonshot's most capable Kimi with deep reasoning and a 1M-token context, plus a 2–3× faster variant. See [Kimi](/reference/providers/kimi).
+- **MiniMax M3** *(text, `i2t`)* and **MiniMax M3.1 Flash** *(text, `i2t`)* — MiniMax's flagship adaptive-reasoning model and a fast, low-cost variant, both with a 1M-token context. See [MiniMax](/reference/providers/minimax).
+- **GPT-6.1 Sol** *(text, `i2t`)* and **GPT-6.1 Terra** *(text, `i2t`)* — OpenAI's most capable GPT-6.1 for deep reasoning, and a balanced variant at half the price, both with a 1M-token context. See [OpenAI](/reference/providers/openai).
+
+### Removed
+
+- **Eleven Multilingual v2** *(audio)* leaves [ElevenLabs](/reference/providers/elevenlabs).
+- **Flux Kontext Max** and **Flux Kontext Pro** *(image)* leave [Flux](/reference/providers/flux).
+- **Kling V2.6** and **Kling Video O1** *(video)* leave [Kling](/reference/providers/kling).
+
 ## 2026-10-16
 
 **SDK 6.48.1 catalog refresh — 238 production models across 32 providers.**
