@@ -1,9 +1,10 @@
 name: Refresh model catalog
 
-# Fully hands-off catalog sync. Daily (or on demand) it fetches the LIVE models-hub
+# Hands-off catalog sync to main. Daily (or on demand) it fetches the LIVE models-hub
 # catalog, regenerates the docs, auto-fixes prose counts, writes a changelog entry,
-# opens a PR, MERGES it, and lets the Pages deploy run. When nothing changed it is a
-# no-op and no PR is opened.
+# opens a PR, and MERGES it to main. It does NOT deploy — publishing to the live
+# Pages site stays a separate manual step. When nothing changed it is a no-op and no
+# PR is opened.
 #
 # SDK 7.0.0+ is dynamic-only: models are added/removed in models-hub without an SDK
 # release. The common case — a model added dynamically — needs NO version bump:
@@ -12,12 +13,12 @@ name: Refresh model catalog
 #
 # Secrets / settings:
 #   - PICSART_API_KEY — prod models-hub token (catalog read) for the live fetch.
-#   - CATALOG_PAT — a PAT (repo scope) used to MERGE the PR. Must be a PAT, not the
-#     default GITHUB_TOKEN: a merge pushed by GITHUB_TOKEN does NOT trigger the Pages
-#     deploy workflow (GitHub blocks that to avoid loops), so the site would not
-#     rebuild. The PAT-authored merge push triggers deploy-docs.yml normally.
-#   - "Allow GitHub Actions to create and approve pull requests" must be enabled
-#     (the create step uses GITHUB_TOKEN).
+#   - "Allow GitHub Actions to create and approve pull requests" must be enabled.
+#
+# The PR is merged with GITHUB_TOKEN, which intentionally does NOT trigger the Pages
+# deploy (a GITHUB_TOKEN push never starts another workflow). So main updates
+# automatically; to publish to the live site, run deploy-docs.yml (Actions tab) or
+# push to main yourself.
 
 on:
   workflow_dispatch:
@@ -82,7 +83,7 @@ jobs:
           {
             echo "Automated, **auto-merged** catalog refresh — **${{ steps.meta.outputs.models }} models across ${{ steps.meta.outputs.providers }} providers** (@picsart/ai-sdk ${{ steps.meta.outputs.sdk }})."
             echo
-            echo "Fetched live from models-hub, prose counts auto-fixed, changelog entry written, \`npm run build\` passed. Merged by the workflow; Pages deploy follows."
+            echo "Fetched live from models-hub, prose counts auto-fixed, changelog entry written, \`npm run build\` passed. Merged by the workflow. Deploy to Pages stays manual."
           } > "${RUNNER_TEMP}/pr-body.md"
 
       - name: Open pull request
@@ -97,12 +98,13 @@ jobs:
           labels: catalog-refresh
           delete-branch: true
 
-      # Merge with the PAT (NOT GITHUB_TOKEN) so the merge push triggers deploy-docs.
-      # A freshly-opened PR can take a moment to become mergeable, so retry briefly.
+      # Merge with GITHUB_TOKEN. This deliberately does NOT trigger the Pages deploy
+      # (a GITHUB_TOKEN push starts no workflow) — publishing stays manual. A freshly
+      # opened PR can take a moment to become mergeable, so retry briefly.
       - name: Auto-merge the refresh PR
         if: steps.cpr.outputs.pull-request-number
         env:
-          GH_TOKEN: ${{ secrets.CATALOG_PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR="${{ steps.cpr.outputs.pull-request-number }}"
           for attempt in 1 2 3 4 5 6; do
