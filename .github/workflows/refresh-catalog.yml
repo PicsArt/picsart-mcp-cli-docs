@@ -1,10 +1,9 @@
 name: Refresh model catalog
 
-# Hands-off catalog sync to main. Daily (or on demand) it fetches the LIVE models-hub
+# Fully hands-off catalog sync. Daily (or on demand) it fetches the LIVE models-hub
 # catalog, regenerates the docs, auto-fixes prose counts, writes a changelog entry,
-# opens a PR, and MERGES it to main. It does NOT deploy — publishing to the live
-# Pages site stays a separate manual step. When nothing changed it is a no-op and no
-# PR is opened.
+# opens a PR, MERGES it to main, and DEPLOYS the site to GitHub Pages. When nothing
+# changed it is a no-op: no PR, no merge, no deploy.
 #
 # SDK 7.0.0+ is dynamic-only: models are added/removed in models-hub without an SDK
 # release. The common case — a model added dynamically — needs NO version bump:
@@ -15,10 +14,9 @@ name: Refresh model catalog
 #   - PICSART_API_KEY — prod models-hub token (catalog read) for the live fetch.
 #   - "Allow GitHub Actions to create and approve pull requests" must be enabled.
 #
-# The PR is merged with GITHUB_TOKEN, which intentionally does NOT trigger the Pages
-# deploy (a GITHUB_TOKEN push never starts another workflow). So main updates
-# automatically; to publish to the live site, run deploy-docs.yml (Actions tab) or
-# push to main yourself.
+# No PAT needed. The PR is merged with GITHUB_TOKEN; because a GITHUB_TOKEN push does
+# not trigger deploy-docs.yml, the final step dispatches that deploy explicitly
+# (workflow_dispatch is the exception GITHUB_TOKEN is allowed to fire).
 
 on:
   workflow_dispatch:
@@ -33,6 +31,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: write # to dispatch deploy-docs.yml after merge
 
 concurrency:
   group: refresh-catalog
@@ -98,9 +97,9 @@ jobs:
           labels: catalog-refresh
           delete-branch: true
 
-      # Merge with GITHUB_TOKEN. This deliberately does NOT trigger the Pages deploy
-      # (a GITHUB_TOKEN push starts no workflow) — publishing stays manual. A freshly
-      # opened PR can take a moment to become mergeable, so retry briefly.
+      # Merge with GITHUB_TOKEN. A GITHUB_TOKEN push does not trigger deploy-docs on
+      # its own, so the next step dispatches it explicitly. A freshly opened PR can
+      # take a moment to become mergeable, so retry briefly.
       - name: Auto-merge the refresh PR
         if: steps.cpr.outputs.pull-request-number
         env:
@@ -117,3 +116,12 @@ jobs:
           done
           echo "::error::Failed to merge PR #$PR after retries."
           exit 1
+
+      # Publish the just-merged main to GitHub Pages. deploy-docs.yml has a
+      # workflow_dispatch trigger, and workflow_dispatch is the exception GITHUB_TOKEN
+      # *can* fire (unlike the push trigger). Runs only when a PR was merged.
+      - name: Deploy to Pages
+        if: steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy-docs.yml --ref main
