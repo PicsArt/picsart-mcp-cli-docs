@@ -42,6 +42,13 @@
     "inputType": "i2t"
   },
   {
+    "id": "claude-opus-5-5",
+    "name": "Claude Opus 5.5",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "claude-sonnet-4-5",
     "name": "Claude Sonnet 4.5",
     "provider": "anthropic",

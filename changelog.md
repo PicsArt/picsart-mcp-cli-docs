@@ -7,6 +7,15 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-02
+
+**SDK 7.0.0 catalog refresh — 244 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Claude Opus 5.5** *(text, `i2t`)* — Anthropic’s latest Opus model — top-tier reasoning for complex, long-form tasks. See [Anthropic](/reference/providers/anthropic).
+
 ## 2026-10-30
 
 **SDK 7.0.0 catalog refresh — 243 production models across 32 providers.**
