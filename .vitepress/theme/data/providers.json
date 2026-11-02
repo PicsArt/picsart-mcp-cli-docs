@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 9,
+    "count": 10,
     "modes": [
       "text"
     ]
