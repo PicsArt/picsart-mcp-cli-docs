@@ -160,7 +160,7 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 16,
+    "count": 19,
     "modes": [
       "video",
       "audio",

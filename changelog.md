@@ -7,6 +7,17 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-03
+
+**SDK 7.0.0 catalog refresh — 247 production models across 32 providers.**
+Compared with the previous catalog: 3 models added.
+
+### New
+
+- **MiniMax H3 Highspeed** *(video, `t2v`)* — MiniMax H3 Highspeed — balanced quality and speed: 768p video from text, start/last frame, or image/video/audio references. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Lite** *(video, `t2v`)* — MiniMax H3 Lite — fastest and cheapest H3: 480p/768p video from text, start/last frame, or image/video/audio references. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Max Recast** *(video, `v2v`)* — Recast the people in a video with MiniMax H3 Max — one reference photo per new person, replacing the main people left to right while keeping the source motion, camera, cuts, and sound. Sources of 5-30s with no single shot over 15s, output up to 1080p. See [MiniMax](/reference/providers/minimax).
+
 ## 2026-11-02
 
 **SDK 7.0.0 catalog refresh — 244 production models across 32 providers.**
