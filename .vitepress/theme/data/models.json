@@ -1057,6 +1057,20 @@
     "inputType": "v2t"
   },
   {
+    "id": "minimax-h3-highspeed",
+    "name": "MiniMax H3 Highspeed",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3-lite",
+    "name": "MiniMax H3 Lite",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "minimax-h3-max",
     "name": "MiniMax H3 Max",
     "provider": "minimax",
@@ -1083,6 +1097,13 @@
     "provider": "minimax",
     "mode": "video",
     "inputType": "i2v"
+  },
+  {
+    "id": "minimax-h3-max-recast",
+    "name": "MiniMax H3 Max Recast",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "v2v"
   },
   {
     "id": "minimax-h3-max-relight",

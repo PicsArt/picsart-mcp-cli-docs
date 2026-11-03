@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 16 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 19 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · text · **Models:** 16
+**Modes:** video · audio · text · **Models:** 19
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -19,6 +19,8 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `hailuo-2.3-fast` | Hailuo 2.3 Fast | `i2v` |
 | `hailuo-2.3-fast-pro` | Hailuo 2.3 Fast Pro | `i2v` |
 | `minimax-h3` | MiniMax H3 | `t2v` |
+| `minimax-h3-highspeed` | MiniMax H3 Highspeed | `t2v` |
+| `minimax-h3-lite` | MiniMax H3 Lite | `t2v` |
 | `minimax-music-v2` | MiniMax Music v2 | `music` |
 | `minimax-music-v3` | MiniMax Music v3 | `music` |
 | `minimax-h3-max` | MiniMax H3 Max | `t2v` |
@@ -27,6 +29,7 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `minimax-h3-max-lip-sync` | MiniMax H3 Max Lip Sync | `i2v` |
 | `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
 | `minimax-h3-max-relight` | MiniMax H3 Max Relight | `v2v` |
+| `minimax-h3-max-recast` | MiniMax H3 Max Recast | `v2v` |
 | `minimax-m3` | MiniMax M3 | `i2t` |
 | `minimax-m3.1-flash` | MiniMax M3.1 Flash | `i2t` |
 | `minimax-h3-context-ir` | MiniMax H3 Context IR | `v2t` |
@@ -141,6 +144,42 @@ Input type: `t2v`
 | `resolution` | `-r` | enum | `768P` · `2K` (default `2K`) |
 | `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
 | `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `adaptive`) |
+
+### `minimax-h3-highspeed` — MiniMax H3 Highspeed
+
+[Try `minimax-h3-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-highspeed)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤7000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480P` · `768P` (default `768P`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `adaptive`) |
+
+### `minimax-h3-lite` — MiniMax H3 Lite
+
+[Try `minimax-h3-lite` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-lite)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤7000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480P` · `768P` (default `768P`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
 
 ### `minimax-music-v2` — MiniMax Music v2
 
@@ -275,6 +314,22 @@ Input type: `v2v`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 | `resolution` | `-r` | enum | `480p` · `768p` · `1080p` · `2k` (default `768p`) |
 | `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-max-recast` — MiniMax H3 Max Recast
+
+[Try `minimax-h3-max-recast` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-recast)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text (≤2000 chars) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+| `resolution` | `-r` | enum | `768p` · `1080p` (default `1080p`) |
+| `enhanceRealism` | `--enhance-realism` | boolean | `true` · `false` (default `false`) |
 | `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
 
