@@ -124,7 +124,7 @@
   {
     "id": "kling",
     "label": "Kling",
-    "count": 13,
+    "count": 15,
     "modes": [
       "image",
       "video",
@@ -179,7 +179,7 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 21,
+    "count": 23,
     "modes": [
       "image",
       "text"

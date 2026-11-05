@@ -889,6 +889,20 @@
     "inputType": "t2v"
   },
   {
+    "id": "kling-v4-flash",
+    "name": "Kling 4.0 Flash",
+    "provider": "kling",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "kling-v4-flash-omni",
+    "name": "Kling 4.0 Flash Omni",
+    "provider": "kling",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "kling-v4-omni",
     "name": "Kling 4.0 Omni",
     "provider": "kling",
@@ -1311,6 +1325,20 @@
   {
     "id": "gpt-image-2.5-sunburst",
     "name": "GPT Image 2.5 Sunburst",
+    "provider": "openai",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "gpt-image-2.6-flare",
+    "name": "GPT Image 2.6 Flare",
+    "provider": "openai",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "gpt-image-2.6-sunburst",
+    "name": "GPT Image 2.6 Sunburst",
     "provider": "openai",
     "mode": "image",
     "inputType": "t2i"

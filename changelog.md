@@ -7,6 +7,18 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-05
+
+**SDK 7.0.0 catalog refresh — 251 production models across 32 providers.**
+Compared with the previous catalog: 4 models added.
+
+### New
+
+- **Kling 4.0 Flash** *(video, `t2v`)* — Kling 4.0 Flash — fast 720p video up to 20s from text or a start frame. See [Kling](/reference/providers/kling).
+- **Kling 4.0 Flash Omni** *(video, `t2v`)* — Kling 4.0 Flash Omni — fast 720p video up to 20s from text, a first frame, reference images, a reference or base video, and elements. See [Kling](/reference/providers/kling).
+- **GPT Image 2.6 Flare** *(image, `t2i`)* — GPT Image 2.6 Flare — smaller, faster tier tuned by reasoning effort and temperature rather than quality. Quick, precise edits and generation. See [OpenAI](/reference/providers/openai).
+- **GPT Image 2.6 Sunburst** *(image, `t2i`)* — GPT Image 2.6 Sunburst — base tier tuned by reasoning effort and temperature rather than quality. Strong text rendering and complex layouts. See [OpenAI](/reference/providers/openai).
+
 ## 2026-11-03
 
 **SDK 7.0.0 catalog refresh — 247 production models across 32 providers.**
