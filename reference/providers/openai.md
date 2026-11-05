@@ -1,10 +1,10 @@
 ---
-description: "OpenAI AI models on Picsart — 21 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI AI models on Picsart — 23 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
 ---
 
 # OpenAI
 
-**Modes:** image · text · **Models:** 21
+**Modes:** image · text · **Models:** 23
 
 **Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/image-generation)
 
@@ -14,6 +14,8 @@ OpenAI provides GPT Image generation and GPT text and image-understanding models
 
 | id | Name | Input type |
 |---|---|---|
+| `gpt-image-2.6-sunburst` | GPT Image 2.6 Sunburst | `t2i` |
+| `gpt-image-2.6-flare` | GPT Image 2.6 Flare | `t2i` |
 | `gpt-image-2.5-sunburst` | GPT Image 2.5 Sunburst | `t2i` |
 | `gpt-image-2.5-flare` | GPT Image 2.5 Flare | `t2i` |
 | `gpt-image-2` | GPT Image 2 | `t2i` |
@@ -57,6 +59,44 @@ gen-ai describe -m gpt-5.5 -i receipt.jpg -p "Extract the total and tax"
 ## Parameters
 
 Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `gpt-image-2.6-sunburst` — GPT Image 2.6 Sunburst
+
+[Try `gpt-image-2.6-sunburst` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2.6-sunburst)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
+| `size` | `--size` | text | free text |
+| `reasoningEffort` | `--reasoning-effort` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
+| `temperature` | `--temperature` | range | `0`–`2`, step 0.1 (default `1`) |
+| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
+
+### `gpt-image-2.6-flare` — GPT Image 2.6 Flare
+
+[Try `gpt-image-2.6-flare` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2.6-flare)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
+| `size` | `--size` | text | free text |
+| `reasoningEffort` | `--reasoning-effort` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
+| `temperature` | `--temperature` | range | `0`–`2`, step 0.1 (default `1`) |
+| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
 
 ### `gpt-image-2.5-sunburst` — GPT Image 2.5 Sunburst
 
