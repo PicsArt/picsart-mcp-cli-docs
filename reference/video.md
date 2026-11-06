@@ -1,10 +1,10 @@
 ---
-description: "101 video generation models on Picsart — text-to-video, image-to-video, and video editing — Veo, Kling, Seedance, Wan, Runway and more."
+description: "102 video generation models on Picsart — text-to-video, image-to-video, and video editing — Veo, Kling, Seedance, Wan, Runway and more."
 ---
 
 # Video generation
 
-**101 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
+**102 video models** across text-to-video, image-to-video, video-to-video editing, and clip extension.
 
 ## Quick start
 

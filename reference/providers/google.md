@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 24 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 25 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · **Models:** 24
+**Modes:** image · video · audio · text · **Models:** 25
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -292,6 +292,25 @@ Input type: `t2v`
 | `imageUrls` | `-i` | file | image (up to 5) |
 | `videoUrl` | `--video` | file | video |
 | `videoUrls` | `--video-urls` | file | video (up to 3) |
+
+### `gemini-omni-1.2-flash` — Gemini Omni 1.2 Flash
+
+[Try `gemini-omni-1.2-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.2-flash)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `360p` · `720p` · `1080p` · `4k` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `8`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `videoUrl` | `--video` | file | video |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `task` | `--task` | enum | `edit` · `extend` (default `edit`) |
 
 ### `lyria-3-clip` — Lyria 3 Clip
 
