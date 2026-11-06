@@ -553,6 +553,13 @@
     "inputType": "t2v"
   },
   {
+    "id": "gemini-omni-1.2-flash",
+    "name": "Gemini Omni 1.2 Flash",
+    "provider": "google",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "gemini-omni-flash-preview",
     "name": "Gemini Omni",
     "provider": "google",

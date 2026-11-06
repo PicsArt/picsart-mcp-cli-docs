@@ -7,6 +7,15 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-06
+
+**SDK 7.0.0 catalog refresh — 252 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Gemini Omni 1.2 Flash** *(video, `t2v`)* — Gemini Omni 1.2 Flash — multimodal video with frame interpolation, extension, reference-guided generation, and up to 4K output. See [Google](/reference/providers/google).
+
 ## 2026-11-05
 
 **SDK 7.0.0 catalog refresh — 251 production models across 32 providers.**
