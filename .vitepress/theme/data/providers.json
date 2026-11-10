@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 10,
+    "count": 11,
     "modes": [
       "text"
     ]
@@ -18,7 +18,7 @@
   {
     "id": "bytedance",
     "label": "ByteDance",
-    "count": 22,
+    "count": 23,
     "modes": [
       "image",
       "video",

@@ -7,6 +7,16 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-10
+
+**SDK 7.0.0 catalog refresh — 254 production models across 32 providers.**
+Compared with the previous catalog: 2 models added.
+
+### New
+
+- **Claude Fable 5.2** *(text, `i2t`)* — Anthropic’s most capable model — frontier reasoning and long-horizon agentic work. See [Anthropic](/reference/providers/anthropic).
+- **Seedream 5.5** *(image, `t2i`)* — Realistic images with clear text, stable multi-turn edits and native transparent backgrounds. See [ByteDance](/reference/providers/bytedance).
+
 ## 2026-11-06
 
 **SDK 7.0.0 catalog refresh — 252 production models across 32 providers.**
