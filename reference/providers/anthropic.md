@@ -4,7 +4,7 @@ description: "Anthropic Claude models on Picsart — Claude Opus 4.8, Sonnet 4.6
 
 # Anthropic
 
-**Mode:** text · **Models:** 10
+**Mode:** text · **Models:** 11
 
 **Vendor:** [Anthropic](https://www.anthropic.com) · **Official API docs:** [docs.anthropic.com](https://docs.anthropic.com)
 
@@ -14,6 +14,7 @@ Anthropic's **Claude** models are large language models for analysis, not media 
 
 | id | Name | Input type |
 |---|---|---|
+| `claude-fable-5-2` | Claude Fable 5.2 | `i2t` |
 | `claude-fable-5-1` | Claude Fable 5.1 | `i2t` |
 | `claude-fable-5` | Claude Fable 5 | `i2t` |
 | `claude-opus-5-5` | Claude Opus 5.5 | `i2t` |
@@ -54,6 +55,17 @@ These models return text, so they run through `gen-ai describe` (not `generate`)
 ## Parameters
 
 Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `claude-fable-5-2` — Claude Fable 5.2
+
+[Try `claude-fable-5-2` in Playground ↗](https://picsart.com/ai-playground/?model=claude-fable-5-2)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
 
 ### `claude-fable-5-1` — Claude Fable 5.1
 

@@ -14,6 +14,13 @@
     "inputType": "i2t"
   },
   {
+    "id": "claude-fable-5-2",
+    "name": "Claude Fable 5.2",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "claude-haiku-4-5",
     "name": "Claude Haiku 4.5",
     "provider": "anthropic",
@@ -226,6 +233,13 @@
   {
     "id": "seedream-5.0-pro",
     "name": "Seedream 5.0 Pro",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.5",
+    "name": "Seedream 5.5",
     "provider": "bytedance",
     "mode": "image",
     "inputType": "t2i"

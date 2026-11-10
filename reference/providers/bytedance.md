@@ -1,10 +1,10 @@
 ---
-description: "ByteDance AI models on Picsart — 22 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
+description: "ByteDance AI models on Picsart — 23 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
 ---
 
 # ByteDance
 
-**Modes:** image · video · audio · **Models:** 22
+**Modes:** image · video · audio · **Models:** 23
 
 **Vendor:** [BytePlus](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [OmniHuman 1.5 overview](https://docs.byteplus.com/en/docs/byteplus-vision/omnihuman1_5overview)
 
@@ -32,6 +32,7 @@ Seedream 5.0 Flash adds a fast image generation tier.
 | `seedance-2.0-video-extend` | Seedance 2.0 Video Extend | `v2v` |
 | `seedance-2.0-fast-video-extend` | Seedance 2.0 Fast Video Extend | `v2v` |
 | `seedance-2.0-mini-video-extend` | Seedance 2.0 Mini Video Extend | `v2v` |
+| `seedream-5.5` | Seedream 5.5 | `t2i` |
 | `seedream-5.0-flash` | Seedream 5.0 Flash | `t2i` |
 | `seedream-5.0-pro` | Seedream 5.0 Pro | `t2i` |
 | `seedream-5.0-lite` | Seedream 5.0 Lite | `t2i` |
@@ -339,6 +340,21 @@ Input type: `v2v`
 | `duration` | `-d` | enum | `-1` (Auto) · `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `15`) |
 | `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
 | `videoUrls` | `--video-urls` | file | **required** video (up to 3) |
+
+### `seedream-5.5` — Seedream 5.5
+
+[Try `seedream-5.5` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-5.5)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `1K` · `1.5K` · `2K` (default `1K`) |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `negativePrompt` | `--neg` | text | free text |
+| `background` | `--background` | enum | `auto` · `transparent` · `opaque` (default `auto`) |
 
 ### `seedream-5.0-flash` — Seedream 5.0 Flash
 
