@@ -85,6 +85,10 @@ No. The SDK and REST API use an API key (bearer token) from your account setting
 
 No. The MCP server and [Media Studio](/guide/media-studio/) sign you in through your agent; they need neither the CLI nor an API key. Skills use the CLI's `gen-ai login` session.
 
+**How do I rotate or revoke an API key?**
+
+If a credential is exposed, revoke it through the service that issued it and update affected integrations. CLI and hosted MCP authorization are separate; see [Security](/guide/security).
+
 **Where are my credentials stored?**
 
 At `~/.gen-ai/credentials.json` with permissions `600` (readable only by your user). The CLI auto-refreshes the access token when it expires. If refresh fails, run `gen-ai login` again. `PICSART_ACCESS_TOKEN` + `PICSART_USER_ID`, when set, override the file.

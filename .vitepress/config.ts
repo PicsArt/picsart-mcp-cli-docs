@@ -68,6 +68,7 @@ const sidebar = [
       { text: 'VS Code', link: '/guide/integrations/vscode' },
       { text: 'Gemini CLI', link: '/guide/integrations/gemini-cli' },
       { text: 'Goose', link: '/guide/integrations/goose' },
+      { text: 'Replit', link: '/guide/integrations/replit' },
       { text: 'Raycast', link: '/guide/integrations/raycast' },
       { text: 'LM Studio', link: '/guide/integrations/lm-studio' },
       { text: 'Open WebUI', link: '/guide/integrations/open-webui' },
@@ -163,7 +164,7 @@ export default defineConfig({
   description: SITE_DESC,
   cleanUrls: true,
   lastUpdated: true,
-  srcExclude: ['README.md', '**/README.md'],
+  srcExclude: ['README.md', '**/README.md', 'CODE_OF_CONDUCT.md', 'CONTRIBUTING.md', 'scripts/**'],
   sitemap: {
     hostname: HOSTNAME + base,
     // page urls are absolute (/guide/x); make them relative so the base subpath
