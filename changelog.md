@@ -7,6 +7,16 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-11
+
+**SDK 7.0.0 catalog refresh — 256 production models across 32 providers.**
+Compared with the previous catalog: 2 models added.
+
+### New
+
+- **MiniMax H3 Image** *(image, `t2i`)* — Detailed images up to 4K with precise prompt following — or edit and combine up to 16 reference images. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Image Highspeed** *(image, `t2i`)* — Faster H3 Image — images up to 4K from text, or edits combining up to 16 reference images. See [MiniMax](/reference/providers/minimax).
+
 ## 2026-11-10
 
 **SDK 7.0.0 catalog refresh — 254 production models across 32 providers.**

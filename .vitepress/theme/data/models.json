@@ -1099,6 +1099,20 @@
     "inputType": "t2v"
   },
   {
+    "id": "minimax-h3-image",
+    "name": "MiniMax H3 Image",
+    "provider": "minimax",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "minimax-h3-image-highspeed",
+    "name": "MiniMax H3 Image Highspeed",
+    "provider": "minimax",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
     "id": "minimax-h3-lite",
     "name": "MiniMax H3 Lite",
     "provider": "minimax",

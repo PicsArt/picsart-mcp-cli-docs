@@ -1,10 +1,10 @@
 ---
-description: "MiniMax AI models on Picsart — 19 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
+description: "MiniMax AI models on Picsart — 21 audio/video model(s) including MiniMax H3, Hailuo 2.3, and MiniMax Music v3. CLI + MCP examples, parameters, and official docs."
 ---
 
 # MiniMax
 
-**Modes:** video · audio · text · **Models:** 19
+**Modes:** image · video · audio · text · **Models:** 21
 
 **Vendor:** [MiniMax](https://platform.minimax.io/docs) · **Official API docs:** [MiniMax Platform — Video Generation](https://platform.minimax.io/docs/guides/video-generation)
 
@@ -30,6 +30,8 @@ MiniMax provides **MiniMax H3** (formerly Hailuo 03) for text-to-video and image
 | `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
 | `minimax-h3-max-relight` | MiniMax H3 Max Relight | `v2v` |
 | `minimax-h3-max-recast` | MiniMax H3 Max Recast | `v2v` |
+| `minimax-h3-image` | MiniMax H3 Image | `t2i` |
+| `minimax-h3-image-highspeed` | MiniMax H3 Image Highspeed | `t2i` |
 | `minimax-m3` | MiniMax M3 | `i2t` |
 | `minimax-m3.1-flash` | MiniMax M3.1 Flash | `i2t` |
 | `minimax-h3-context-ir` | MiniMax H3 Context IR | `v2t` |
@@ -332,6 +334,38 @@ Input type: `v2v`
 | `enhanceRealism` | `--enhance-realism` | boolean | `true` · `false` (default `false`) |
 | `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
 | `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-image` — MiniMax H3 Image
+
+[Try `minimax-h3-image` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-image)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `21:9` · `3:1` · `1:3` (default `auto`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `jpeg` · `png` · `webp` (default `jpeg`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
+
+### `minimax-h3-image-highspeed` — MiniMax H3 Image Highspeed
+
+[Try `minimax-h3-image-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-image-highspeed)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `21:9` · `3:1` · `1:3` (default `auto`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `jpeg` · `png` · `webp` (default `jpeg`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
 
 ### `minimax-m3` — MiniMax M3
 
