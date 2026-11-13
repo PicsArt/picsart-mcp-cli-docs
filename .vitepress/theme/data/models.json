@@ -553,6 +553,20 @@
     "inputType": "v2t"
   },
   {
+    "id": "gemini-4-carbon",
+    "name": "Gemini 4 Carbon",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "v2t"
+  },
+  {
+    "id": "gemini-decision-1",
+    "name": "Gemini Decision 1",
+    "provider": "google",
+    "mode": "json",
+    "inputType": "i2t"
+  },
+  {
     "id": "gemini-nano-banana-2.1",
     "name": "Nano Banana 2.1",
     "provider": "google",
@@ -1313,6 +1327,13 @@
     "name": "GPT-6 Luna",
     "provider": "openai",
     "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6-luna-decisions",
+    "name": "GPT-6 Luna Decisions",
+    "provider": "openai",
+    "mode": "json",
     "inputType": "i2t"
   },
   {

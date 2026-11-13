@@ -25,7 +25,7 @@ Do not write exact numbers for model or provider counts. Use the approved approx
 
 | Metric | Approved wording |
 |---|---|
-| Total models | 256 models |
+| Total models | 259 models |
 | Total providers | 32 providers |
 | Video models | 90+ video |
 | Image models | 70+ image |

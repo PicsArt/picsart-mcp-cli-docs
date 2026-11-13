@@ -7,6 +7,17 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-13
+
+**SDK 7.0.0 catalog refresh — 259 production models across 32 providers.**
+Compared with the previous catalog: 3 models added.
+
+### New
+
+- **Gemini 4 Carbon** *(text, `v2t`)* — Deep-reasoning LLM for long coding, research and multimodal tasks, with a 1M-token context. See [Google](/reference/providers/google).
+- **Gemini Decision 1** *(json, `i2t`)* — Classifier for yes/no, choice and score questions over text and images, in under 250 ms. See [Google](/reference/providers/google).
+- **GPT-6 Luna Decisions** *(json, `i2t`)* — Classifier for yes/no, choice and score questions over text and images, in under 200 ms. See [OpenAI](/reference/providers/openai).
+
 ## 2026-11-11
 
 **SDK 7.0.0 catalog refresh — 256 production models across 32 providers.**

@@ -62,12 +62,13 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 25,
+    "count": 27,
     "modes": [
       "image",
       "video",
       "audio",
-      "text"
+      "text",
+      "json"
     ]
   },
   {
@@ -180,10 +181,11 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 23,
+    "count": 24,
     "modes": [
       "image",
-      "text"
+      "text",
+      "json"
     ]
   },
   {
