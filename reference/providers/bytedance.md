@@ -1,10 +1,10 @@
 ---
-description: "ByteDance AI models on Picsart — 23 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
+description: "ByteDance AI models on Picsart — 24 image/video/audio model(s) including Seedance, Seedream, Seed Audio, OmniHuman, and Video Enhance. CLI + MCP examples, parameters, and official docs."
 ---
 
 # ByteDance
 
-**Modes:** image · video · audio · **Models:** 23
+**Modes:** image · video · audio · **Models:** 24
 
 **Vendor:** [BytePlus](https://www.byteplus.com/en/product/seedance) · **Official API docs:** [OmniHuman 1.5 overview](https://docs.byteplus.com/en/docs/byteplus-vision/omnihuman1_5overview)
 
@@ -23,6 +23,7 @@ Seedream 5.0 Flash adds a fast image generation tier.
 | `seedance-2.5` | Seedance 2.5 | `t2v` |
 | `seedance-2.5-video-edit` | Seedance 2.5 Video Edit | `v2v` |
 | `seedance-2.5-video-extend` | Seedance 2.5 Video Extend | `v2v` |
+| `seedance-2.5-flash` | Seedance 2.5 Flash | `t2v` |
 | `seedance-2.0` | Seedance 2.0 | `t2v` |
 | `seedance-2.0-fast` | Seedance 2.0 Fast | `t2v` |
 | `seedance-2.0-mini` | Seedance 2.0 Mini | `t2v` |
@@ -184,6 +185,28 @@ Input type: `v2v`
 | `colorDepth` | SDK only | enum | `10bit` · `8bit` (default `10bit`) |
 | `draft` | `--draft` | boolean | `true` · `false` (default `false`) |
 | `videoUrls` | `--video-urls` | file | **required** video (up to 10) |
+
+### `seedance-2.5-flash` — Seedance 2.5 Flash
+
+[Try `seedance-2.5-flash` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.5-flash)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `-1` (Auto) · `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` · `16` · `17` · `18` · `19` · `20` · `21` · `22` · `23` · `24` · `25` · `26` · `27` · `28` · `29` · `30` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
+| `omniReferenceTaskType` | `--omni-reference-task-type` | enum | `auto` (Auto) · `reference` (Reference) · `edit` (Edit) · `extend` (Extend) (default `auto`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `videoUrls` | `--video-urls` | file | video (up to 5) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 5) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
 
 ### `seedance-2.0` — Seedance 2.0
 

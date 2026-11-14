@@ -12,7 +12,7 @@ Jev evaluates content against named yes/no, choice, or score questions and retur
 
 | id | Name | Input type |
 |---|---|---|
-| `typesafe-evaluate` | Jev | `t2t` |
+| `typesafe-evaluate` | Jev | `i2t` |
 
 ## SDK
 
