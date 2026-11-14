@@ -189,6 +189,13 @@
     "inputType": "t2v"
   },
   {
+    "id": "seedance-2.5-flash",
+    "name": "Seedance 2.5 Flash",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "seedance-2.5-video-edit",
     "name": "Seedance 2.5 Video Edit",
     "provider": "bytedance",
@@ -1747,7 +1754,7 @@
     "name": "Jev",
     "provider": "typesafe",
     "mode": "json",
-    "inputType": "t2t"
+    "inputType": "i2t"
   },
   {
     "id": "veed-fabric-v1",

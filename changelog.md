@@ -7,6 +7,15 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-14
+
+**SDK 7.0.0 catalog refresh — 260 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Seedance 2.5 Flash** *(video, `t2v`)* — Fast video generation, editing and extension up to 30s at 720p with audio and reference inputs. See [ByteDance](/reference/providers/bytedance).
+
 ## 2026-11-13
 
 **SDK 7.0.0 catalog refresh — 259 production models across 32 providers.**
