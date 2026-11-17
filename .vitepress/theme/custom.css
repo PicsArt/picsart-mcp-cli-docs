@@ -17,3 +17,10 @@
   --vp-c-brand-2: #d946a8;
   --vp-c-brand-3: #c01f86;
 }
+
+/* Leave room for navigation when the platform uses the wider Ctrl K hint. */
+@media (min-width: 768px) and (max-width: 959px) {
+  .VPNavBarSearch .DocSearch-Button .DocSearch-Button-Keys {
+    display: none;
+  }
+}

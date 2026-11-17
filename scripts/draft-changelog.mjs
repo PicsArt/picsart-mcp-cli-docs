@@ -79,7 +79,7 @@ const label = (id) => providerLabel.get(id) ?? id
 const link = (id) => `[${label(id)}](/reference/providers/${id})`
 const bullet = (m, { withDesc }) => {
   const desc = withDesc ? (descById.get(m.id) ?? '_TODO: describe_') : '_TODO: describe_'
-  return `- **${m.name}** *(${m.mode}, \`${m.inputType}\`)* — ${desc} See ${link(m.provider)}.`
+  return `- **${m.name}** *(${m.mode}, \`${m.inputType}\`)*; ${desc} See ${link(m.provider)}.`
 }
 
 const addedCount = added.length
@@ -89,7 +89,7 @@ const sdkLabel = sdkVersion ? `SDK ${sdkVersion}` : 'SDK (version?)'
 const out = []
 out.push(`## ${date}`)
 out.push('')
-out.push(`**${sdkLabel} catalog refresh — ${newModels.length} production models across ${newProviders.length} providers.**`)
+out.push(`**${sdkLabel} catalog refresh: ${newModels.length} production models across ${newProviders.length} providers.**`)
 const deltaBits = []
 if (addedCount) deltaBits.push(`${addedCount} model${addedCount === 1 ? '' : 's'} added`)
 if (removedCount) deltaBits.push(`${removedCount} removed`)

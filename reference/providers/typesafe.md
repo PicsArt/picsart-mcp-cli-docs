@@ -1,12 +1,12 @@
 ---
-description: "TypeSafe Jev on Picsart — structured content evaluation with the SDK's ai.run() API."
+description: "TypeSafe model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # TypeSafe
 
-**Mode:** json · **Models:** 1
+**Modes:** json · **Models:** 1
 
-Jev evaluates content against named yes/no, choice, or score questions and returns structured answers.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -14,43 +14,72 @@ Jev evaluates content against named yes/no, choice, or score questions and retur
 |---|---|---|
 | `typesafe-evaluate` | Jev | `i2t` |
 
-## SDK
-
-JSON models use `ai.run()`. They are not supported by `generate()`, `generateText()`, or the SDK's async lifecycle methods.
-
-```typescript
-import { createClient, Models } from '@picsart/ai-sdk'
-
-const ai = createClient({ apiKey: process.env.PICSART_API_KEY! })
-const { result } = await ai.run(Models.TypesafeEvaluate, {
-  state: 'The weather is lovely and everyone is having a great time.',
-  questions: {
-    tone: {
-      type: 'choice',
-      instructions: 'Pick the tone.',
-      options: ['positive', 'neutral', 'negative'],
-    },
-  },
-})
-console.log(result)
-```
-
-`run()` returns `{ result, status, usage, id }` without media extraction or automatic Drive saving.
-
 ## Parameters
 
 Parameters from the SDK 6.29.0 catalog.
 
-### `typesafe-evaluate` — Jev
+### `typesafe-evaluate`
 
-Input type: `t2t`; output mode: `json`.
+Jev; input type `t2t`.
 
-| Param | Type | Values |
-|---|---|---|
-| `state` | text | **required** — content to evaluate |
-| `questions` | object | **required** — caller-named questions, each with `type` and `instructions` |
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `state` | Use SDK or MCP | Yes | text | Text |
+| `questions` | Use SDK or MCP | Yes | object | Structured input; see descriptor below |
 
-Question `type` is `noul` (yes/no), `choice`, or `score`. Type-specific fields, such as choice `options`, are passed through to the evaluator.
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "state",
+    "label": "Content",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "questions",
+    "label": "Questions",
+    "required": true,
+    "kind": "object",
+    "additionalProperties": {
+      "kind": "object",
+      "fields": {
+        "type": {
+          "kind": "enum",
+          "valueType": "string",
+          "default": "noul",
+          "required": true,
+          "options": [
+            {
+              "id": "noul",
+              "label": "Yes/No"
+            },
+            {
+              "id": "choice",
+              "label": "Choice"
+            },
+            {
+              "id": "score",
+              "label": "Score"
+            }
+          ]
+        },
+        "instructions": {
+          "kind": "unknown",
+          "required": true
+        }
+      },
+      "additionalProperties": {
+        "kind": "unknown"
+      }
+    }
+  }
+]
+```
+
+</details>
 
 ## Availability
 

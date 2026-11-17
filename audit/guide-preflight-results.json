@@ -1,0 +1,72 @@
+[
+  {
+    "page": "guide/generating.md",
+    "result": {
+      "model": "wan-2.7-i2v",
+      "valid": true,
+      "images": [
+        {
+          "role": "startFrame",
+          "url": "https://example.com/hero.png",
+          "probed": false
+        }
+      ],
+      "credits": 15
+    }
+  },
+  {
+    "page": "guide/mcp-quickstart.md",
+    "result": {
+      "model": "flux-2-pro",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "page": "guide/mcp-quickstart.md",
+    "result": {
+      "model": "wan-2.7-i2v",
+      "valid": true,
+      "images": [
+        {
+          "role": "startFrame",
+          "url": "https://example.com/frame.jpg",
+          "probed": false
+        }
+      ],
+      "credits": 15
+    }
+  },
+  {
+    "page": "reference/text.md",
+    "result": {
+      "model": "claude-opus-4-8",
+      "valid": true,
+      "credits": null
+    }
+  },
+  {
+    "page": "reference/image.md",
+    "result": {
+      "model": "flux-2-pro",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "page": "reference/video.md",
+    "result": {
+      "model": "seedance-2.5",
+      "valid": true,
+      "credits": 90
+    }
+  },
+  {
+    "page": "reference/audio.md",
+    "result": {
+      "model": "eleven-v3",
+      "valid": true,
+      "credits": 3
+    }
+  }
+]

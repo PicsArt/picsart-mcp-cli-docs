@@ -1,14 +1,12 @@
 ---
-description: "Kimi (Moonshot AI) on Picsart — Kimi K3, a flagship reasoning text model with a 1M-token context and image input. CLI + MCP examples, parameters, and official docs."
+description: "Kimi model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
-# Kimi (Moonshot)
+# Kimi
 
-**Vendor:** [Moonshot AI](https://www.moonshot.ai) · **Official API docs:** [platform.moonshot.ai](https://platform.moonshot.ai/docs)
+**Modes:** text · **Models:** 3
 
-Kimi K3 is Moonshot AI's flagship text model — **deep reasoning with a 1M-token context**, and it accepts up to 8 images alongside the prompt. Use it for long-document analysis, image understanding and multi-step reasoning. Like every text model in the catalog it is driven with `gen-ai ask` rather than `gen-ai generate`.
-
-**Mode:** text · **Models:** 3
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -18,44 +16,63 @@ Kimi K3 is Moonshot AI's flagship text model — **deep reasoning with a 1M-toke
 | `kimi-k3.1-pro` | Kimi K3.1 Pro | `i2t` |
 | `kimi-k3.1-pro-highspeed` | Kimi K3.1 Pro Highspeed | `i2t` |
 
-## CLI
-
-```bash
-# reasoning over a long prompt (thinking defaults to high)
-gen-ai ask -m kimi-k3 -p "Summarize the key risks in this plan and rank them"
-
-# image understanding, with a faster thinking budget
-gen-ai ask -m kimi-k3 -p "What does this chart show?" -i ./chart.png --thinking low
-```
-
-## MCP
-
-```json
-{ "name": "picsart_generate",
-  "arguments": {
-    "model": "kimi-k3",
-    "prompt": "Summarize the key risks in this plan and rank them",
-    "thinking": "high"
-  } }
-```
-
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
-### `kimi-k3` — Kimi K3
+### `kimi-k3`
 
-[Try `kimi-k3` in Playground ↗](https://picsart.com/ai-playground/?model=kimi-k3)
+Kimi K3; input type `i2t`.
 
-Input type: `i2t`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `low`, `high`; default `high` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `low` · `high` (default `high`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `kimi-k3.1-pro` — Kimi K3.1 Pro
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "low"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "high"
+  }
+]
+```
+
+</details>
+
+### `kimi-k3.1-pro`: Kimi K3.1 Pro
 
 [Try `kimi-k3.1-pro` in Playground ↗](https://picsart.com/ai-playground/?model=kimi-k3.1-pro)
 
@@ -67,7 +84,7 @@ Input type: `i2t`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `thinking` | `--thinking` | enum | `low` · `high` (default `high`) |
 
-### `kimi-k3.1-pro-highspeed` — Kimi K3.1 Pro Highspeed
+### `kimi-k3.1-pro-highspeed`: Kimi K3.1 Pro Highspeed
 
 [Try `kimi-k3.1-pro-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=kimi-k3.1-pro-highspeed)
 

@@ -1,75 +1,39 @@
 ---
-description: "Connect Picsart to Claude Code, Cursor, Windsurf, ChatGPT, Codex, or VS Code — generate images, video, and audio without leaving your AI agent."
+description: "Choose a host and configure a Picsart MCP connection."
 ---
 
 # Integrations
 
-Once you have validated a prompt or workflow in the [AI Playground](https://picsart.com/ai-playground/), you can bring Picsart into the AI agent or coding assistant you already work in. Generate images, animate a video, remove a background, or synthesize audio without switching windows.
+Use Picsart's hosted endpoint with a client that supports Streamable HTTP and OAuth. No CLI installation is required for a remote connection. CLI skills require a separate execution environment and CLI login.
 
-These guides cover the exact setup for each agent.
+The guides distinguish documented setup from an end-to-end sign-in test. Check the limitation noted on a host's page before configuring it.
 
-## Supported agents
+| Host | Review status |
+|---|---|
+| [AnythingLLM Desktop](/guide/integrations/anythingllm) | OAuth bridge setup; sign-in not exercised |
+| [ChatGPT](/guide/integrations/chatgpt) | Setup checked against host documentation |
+| [Claude Code](/guide/integrations/claude-code) | Setup checked against host documentation |
+| [Codex app](/guide/integrations/codex#desktop-app) | App procedure checked against host documentation |
+| [Codex CLI](/guide/integrations/codex#codex-cli) | Documentation and local command syntax checked |
+| [Copilot Studio](/guide/integrations/copilot-studio) | Setup checked against host documentation |
+| [Cursor](/guide/integrations/cursor) | Setup checked against host documentation |
+| [Dify](/guide/integrations/dify) | Setup checked against host documentation |
+| [Gemini CLI](/guide/integrations/gemini-cli) | Setup checked against host documentation |
+| [Goose](/guide/integrations/goose) | Setup checked against host documentation |
+| [Gumloop](/guide/integrations/gumloop) | Setup checked against host documentation |
+| [Hermes Agent](/guide/integrations/hermes-agent) | Setup checked against host documentation |
+| [LibreChat](/guide/integrations/librechat) | Setup checked against host documentation |
+| [LM Studio](/guide/integrations/lm-studio) | Compatibility limitation documented |
+| [LobeHub](/guide/integrations/lobehub) | Compatibility limitation documented |
+| [n8n](/guide/integrations/n8n) | Setup checked against host documentation |
+| [NemoClaw](/guide/integrations/nemoclaw) | Compatibility limitation documented |
+| [Open WebUI](/guide/integrations/open-webui) | Setup checked against host documentation |
+| [OpenClaw](/guide/integrations/openclaw) | Setup checked against host documentation |
+| [Raycast](/guide/integrations/raycast) | Setup checked against host documentation |
+| [Replit](/guide/integrations/replit) | Setup checked against host documentation |
+| [VS Code](/guide/integrations/vscode) | Setup checked against host documentation |
+| [Windsurf](/guide/integrations/windsurf) | Setup checked against host documentation |
 
-| Agent | Guide | Notes |
-|---|---|---|
-| Claude Code | [Claude Code](/guide/integrations/claude-code) | |
-| Cursor | [Cursor](/guide/integrations/cursor) | |
-| Windsurf | [Windsurf](/guide/integrations/windsurf) | Now called Devin Desktop |
-| ChatGPT | [ChatGPT](/guide/integrations/chatgpt) | Needs developer mode on a paid plan |
-| Codex (OpenAI) | [Codex](/guide/integrations/codex) | |
-| VS Code Copilot | [VS Code](/guide/integrations/vscode) | VS Code 1.101 or later |
-| Gemini CLI | [Gemini CLI](/guide/integrations/gemini-cli) | |
-| Goose | [Goose](/guide/integrations/goose) | |
-| Raycast | [Raycast](/guide/integrations/raycast) | |
-| LM Studio | [LM Studio](/guide/integrations/lm-studio) | 0.4.10 or later (0.4.12 on Windows) |
-| Open WebUI | [Open WebUI](/guide/integrations/open-webui) | 0.6.31 or later |
-| AnythingLLM | [AnythingLLM](/guide/integrations/anythingllm) | Desktop only, through the `mcp-remote` bridge |
-| LobeHub | [LobeHub](/guide/integrations/lobehub) | Needs a version with the OAuth auth type |
-| LibreChat | [LibreChat](/guide/integrations/librechat) | |
-| Hermes Agent | [Hermes Agent](/guide/integrations/hermes-agent) | |
-| OpenClaw | [OpenClaw](/guide/integrations/openclaw) | |
-| n8n | [n8n](/guide/integrations/n8n) | |
-| Dify | [Dify](/guide/integrations/dify) | 1.6.0 or later |
-| Gumloop | [Gumloop](/guide/integrations/gumloop) | |
-| Copilot Studio | [Copilot Studio](/guide/integrations/copilot-studio) | |
+Start with a free schema check, then [validate a request before generation](/guide/mcp-quickstart).
 
-## Not supported yet
-
-These agents cannot connect to the Picsart MCP server today, because they cannot run the Picsart sign-in (OAuth) for a remote server. The Picsart MCP server does not accept API keys, so there is no header-based workaround.
-
-| Agent | Why | Use instead |
-|---|---|---|
-| [NemoClaw](/guide/integrations/nemoclaw) | Accepts remote servers only with one static credential, and cannot run a local bridge | [OpenClaw](/guide/integrations/openclaw), which NemoClaw is built on |
-| AnythingLLM (Docker) | No browser inside the container to complete sign-in | [AnythingLLM Desktop](/guide/integrations/anythingllm) with the bridge |
-
-## Skills vs MCP: which to connect
-
-Both connect Picsart to an agent, but they work differently.
-
-**Skills** are pre-built instruction bundles. Install a skill and the agent already knows how to use Picsart — you just describe the task in plain English. Fastest to set up. Best when you want to generate from a conversation without managing tool schemas.
-
-**MCP** exposes every catalog tool directly: `picsart_generate`, `picsart_preflight`, `picsart_remove_bg`, and more. Use MCP when you want the agent to inspect cost before generating, validate parameters, or chain multiple operations in one turn.
-
-You can use both at the same time — they do not conflict.
-
-| | Skills | MCP |
-|---|---|---|
-| Install | One command or ZIP, plus the gen-ai CLI | One config block, nothing to install |
-| Agent knows Picsart | Yes, pre-built | Via tool schema only |
-| Can quote cost before generating | No | Yes |
-| Can chain tools | No | Yes |
-| Best for | Conversational generation | Workflow automation inside the agent |
-
-## Prerequisites
-
-**For MCP** you need only a Picsart account. The server is hosted by Picsart at `https://api.picsart.com/gen-ai/mcp`, so there is nothing to install. Your agent opens a browser window the first time it connects, and you sign in to Picsart there. Your agent must support remote (HTTP) MCP servers with OAuth sign-in.
-
-You do not need the gen-ai CLI, `gen-ai login`, or an API key for MCP.
-
-**For Skills only:** Skills run the gen-ai CLI, so [install the CLI](/guide/installation) and run `gen-ai login` once before adding a skill.
-
-## Not using an agent?
-
-- **Want to experiment first?** Use the [AI Playground](https://picsart.com/ai-playground/) — no install required.
-- **Need scheduled or batch generation?** Use the [CLI](/guide/cli-quickstart).
-- **Building a product?** Use the [SDK](/guide/sdk) or the [REST API](/guide/rest-api).
+NemoClaw managed MCP requires a static credential rather than interactive OAuth. A supported Picsart connection is not established for that path or for headless AnythingLLM Docker; use an OAuth-capable host.

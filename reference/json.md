@@ -1,5 +1,5 @@
 ---
-description: "Structured JSON evaluation in the Picsart SDK — Jev content evaluation through ai.run()."
+description: "Structured JSON evaluation in the Picsart SDK: Jev content evaluation through ai.run()."
 ---
 
 # JSON & evaluation
@@ -8,7 +8,7 @@ description: "Structured JSON evaluation in the Picsart SDK — Jev content eval
 
 | Model | Provider | Purpose |
 |---|---|---|
-| `typesafe-evaluate` — Jev | [TypeSafe](/reference/providers/typesafe) | Evaluate named yes/no, choice, and score questions |
+| `typesafe-evaluate`: Jev | [TypeSafe](/reference/providers/typesafe) | Evaluate named yes/no, choice, and score questions |
 
 ## Execution
 

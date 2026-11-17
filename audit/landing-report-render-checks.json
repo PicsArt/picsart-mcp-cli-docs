@@ -1,0 +1,69 @@
+{
+  "evidence": [
+    {
+      "route": "",
+      "javaScript": false,
+      "expected": "Choose an assistant",
+      "present": true
+    },
+    {
+      "route": "guide/mcp-quickstart",
+      "javaScript": false,
+      "expected": "Before connecting",
+      "present": true
+    },
+    {
+      "route": "guide/integrations/codex",
+      "javaScript": false,
+      "expected": "Desktop app",
+      "present": true
+    },
+    {
+      "route": "",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "guide/mcp-quickstart",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "guide/integrations/codex",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "guide/mcp-quickstart",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "guide/integrations/codex",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "guide/mcp-quickstart",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "guide/integrations/codex",
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "keyboardDisclosure": "passed",
+  "errors": []
+}

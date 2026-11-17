@@ -1,14 +1,12 @@
 ---
-description: "Google AI models on Picsart — 27 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google model IDs, parameters, and CLI and MCP usage on Picsart."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · json · **Models:** 27
+**Modes:** image, video, audio, text · **Models:** 27
 
-**Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
-
-Google supports image, video, audio, and text. Its catalog includes **Veo**, **Gemini Omni**, **Nano Banana**, **Gemini TTS**, **Lyria**, and **Gemini** text models. **Gemini 3.8 Flash TTS** and **Gemini 3.8 Flash Lite TTS** add speech with controllable delivery.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
@@ -39,261 +37,1682 @@ Google supports image, video, audio, and text. Its catalog includes **Veo**, **G
 | `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | text | `i2t` |
 | `gemini-2.5-flash` | Gemini 2.5 Flash | text | `i2t` |
 
-## Veo 3.1 (video)
+## Example
+
+First inspect the model without generating media:
 
 ```bash
-gen-ai generate -m veo-3.1 -p "a drone shot over a snowy ridge at golden hour" \
-  --ar 16:9 -r 1080p -d 8 --audio-gen
+gen-ai models info veo-3.1 --json
+gen-ai validate -m veo-3.1 --schema
 ```
+
+The following requests generate media and consume credits. Replace any `example.com` input URL with your own directly accessible asset. Check the [price](/guide/pricing) before submitting.
+
+```bash
+gen-ai generate -m veo-3.1 --prompt "A quiet forest at sunrise" --download ./output
+```
+
+Equivalent hosted MCP request:
 
 ```json
-{ "name": "picsart_generate",
-  "arguments": { "model": "veo-3.1", "prompt": "a drone shot over a snowy ridge", "duration": 8, "resolution": "1080p", "generateAudio": true } }
+{
+  "name": "picsart_generate",
+  "arguments": {
+    "model": "veo-3.1",
+    "prompt": "A quiet forest at sunrise",
+    "async": true
+  }
+}
 ```
 
-Full params for every Veo / Gemini / Lyria model are in [Parameters](#parameters) below.
-
-## Nano Banana Pro (image)
-
-```bash
-gen-ai generate -m gemini-3-pro-image -p "a cinematic product render of a smart speaker" --ar 16:9 -r 4K
-```
-
-## Gemini TTS & Lyria (audio)
-
-```bash
-gen-ai generate -m gemini-2.5-pro-tts -p "Here is your daily briefing."   # speech
-gen-ai generate -m lyria-3-pro -p "uplifting cinematic orchestral score"  # music
-```
+If the response contains a job, use [job status](/guide/mcp-quickstart) to wait for that job. Do not submit the generation again to poll it.
 
 ## Parameters
 
-Full parameter surface for every model, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
-### `veo-3.1` — Veo 3.1
+### `veo-3.1`
 
-[Try `veo-3.1` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1)
+Veo 3.1; input type `t2v`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 4000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `duration` | `--duration` | No | enum | `4`, `6`, `8`; default `8` |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`, `4k`; default `720p` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 3 |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
-| `imageUrls` | `-i` | file | image (up to 3) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `negativePrompt` | `--neg` | text | free text |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `veo-3.1-fast` — Veo 3.1 Fast
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 4000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-[Try `veo-3.1-fast` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1-fast)
+</details>
 
-Input type: `t2v`
+### `veo-3.1-fast`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` · `4k` (default `720p`) |
-| `imageUrls` | `-i` | file | image (up to 3) |
-| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
-| `negativePrompt` | `--neg` | text | free text |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
+Veo 3.1 Fast; input type `t2v`.
 
-### `veo-3.1-lite` — Veo 3.1 Lite
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 4000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `duration` | `--duration` | No | enum | `4`, `6`, `8`; default `8` |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`, `4k`; default `720p` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 3 |
+| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
+| `negativePrompt` | `--negative-prompt` | No | text | Text |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
 
-[Try `veo-3.1-lite` in Playground ↗](https://picsart.com/ai-playground/?model=veo-3.1-lite)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `t2v`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 4000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 3
+    }
+  },
+  {
+    "key": "generateAudio",
+    "kind": "boolean",
+    "default": true
+  },
+  {
+    "key": "negativePrompt",
+    "label": "Negative Prompt",
+    "kind": "text"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `duration` | `-d` | enum | `4` · `6` · `8` (default `8`) |
-| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
-| `startFrame` | `--start-frame` | file | image |
+</details>
 
-### `gemini-nano-banana-2.1` — Nano Banana 2.1
+### `veo-3.1-lite`
 
-[Try `gemini-nano-banana-2.1` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-nano-banana-2.1)
+Veo 3.1 Lite; input type `t2v`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 4000 characters |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `duration` | `--duration` | No | enum | `4`, `6`, `8`; default `8` |
+| `resolution` | `--resolution` | No | enum | `720p`, `1080p`; default `720p` |
+| `startFrame` | `--start-frame` | No | file | image input |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `1:1`) |
-| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
-| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `medium` (Medium (balanced)) · `high` (High (more reasoning)) (default `minimal`) |
-| `imageUrls` | `-i` | file | image (up to 14) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-3.1-flash-image` — Nano Banana 2
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 4000
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  }
+]
+```
 
-[Try `gemini-3.1-flash-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.1-flash-image)
+</details>
 
-Input type: `t2i`
+### `gemini-nano-banana-2.1`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` · `auto` (default `1:1`) |
-| `resolution` | `-r` | enum | `0.5K` · `1K` · `2K` · `4K` (default `1K`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
-| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
-| `imageUrls` | `-i` | file | image (up to 14) |
+Nano Banana 2.1; input type `t2i`.
 
-### `gemini-3.1-flash-lite-image` — Nano Banana 2 Lite
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `aspectRatio` | Use SDK or MCP | No | enum | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `21:9`, `auto`; default `1:1` |
+| `resolution` | Use SDK or MCP | No | enum | `1K`, `2K`, `4K`; default `1K` |
+| `count` | Use SDK or MCP | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `thinkingLevel` | Use SDK or MCP | No | enum | `minimal`, `medium`, `high`; default `minimal` |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 14 |
 
-[Try `gemini-3.1-flash-lite-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.1-flash-lite-image)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `t2i`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "1K"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "thinkingLevel",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "minimal",
+        "label": "Minimal (faster)"
+      },
+      {
+        "id": "medium",
+        "label": "Medium (balanced)"
+      },
+      {
+        "id": "high",
+        "label": "High (more reasoning)"
+      }
+    ],
+    "default": "minimal"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `3:2` · `2:3` · `4:5` · `5:4` · `4:1` · `1:4` · `8:1` · `1:8` · `21:9` · `auto` (default `1:1`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
-| `thinkingLevel` | `--thinking-level` | enum | `minimal` (Minimal (faster)) · `high` (High (more reasoning)) (default `minimal`) |
-| `imageUrls` | `-i` | file | image (up to 14) |
+</details>
 
-### `gemini-3-pro-image` — Nano Banana Pro
+### `gemini-3.1-flash-image`
 
-[Try `gemini-3-pro-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3-pro-image)
+Nano Banana 2; input type `t2i`.
 
-Input type: `t2i`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | 15 choices; see descriptor below; default `1:1` |
+| `resolution` | `--resolution` | No | enum | `0.5K`, `1K`, `2K`, `4K`; default `1K` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `thinkingLevel` | `--thinking-level` | No | enum | `minimal`, `high`; default `minimal` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 14 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `1:1`) |
-| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
-| `thinkingBudget` | `--thinking-budget` | range | `128`–`24576`, step 128 (default `128`) |
-| `imageUrls` | `-i` | file | image (up to 14) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-2.5-flash-image` — Nano Banana
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "4:1"
+      },
+      {
+        "id": "1:4"
+      },
+      {
+        "id": "8:1"
+      },
+      {
+        "id": "1:8"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "0.5K"
+      },
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "1K"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "thinkingLevel",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "minimal",
+        "label": "Minimal (faster)"
+      },
+      {
+        "id": "high",
+        "label": "High (more reasoning)"
+      }
+    ],
+    "default": "minimal"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
+  }
+]
+```
 
-[Try `gemini-2.5-flash-image` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash-image)
+</details>
 
-Input type: `t2i`
+### `gemini-3.1-flash-lite-image`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `1:1` · `16:9` · `9:16` · `3:4` · `4:3` · `2:3` · `21:9` · `auto` (default `16:9`) |
-| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
-| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
-| `imageUrls` | `-i` | file | image (up to 14) |
+Nano Banana 2 Lite; input type `t2i`.
 
-### `gemini-2.5-flash-tts` — Gemini 2.5 Flash TTS
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | 15 choices; see descriptor below; default `1:1` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `thinkingLevel` | `--thinking-level` | No | enum | `minimal`, `high`; default `minimal` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 14 |
 
-[Try `gemini-2.5-flash-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash-tts)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `tts`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "3:2"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "4:5"
+      },
+      {
+        "id": "5:4"
+      },
+      {
+        "id": "4:1"
+      },
+      {
+        "id": "1:4"
+      },
+      {
+        "id": "8:1"
+      },
+      {
+        "id": "1:8"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "thinkingLevel",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "minimal",
+        "label": "Minimal (faster)"
+      },
+      {
+        "id": "high",
+        "label": "High (more reasoning)"
+      }
+    ],
+    "default": "minimal"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | free text (≤6000 chars) |
-| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-2.5-flash-tts --json` for current values (default `Kore`) |
-| `parts` | `--parts-text` · `--parts-speaker` | object[] | `{text, speaker}` |
-| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+</details>
 
-### `gemini-2.5-pro-tts` — Gemini 2.5 Pro TTS
+### `gemini-3-pro-image`
 
-[Try `gemini-2.5-pro-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-pro-tts)
+Nano Banana Pro; input type `t2i`.
 
-Input type: `tts`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `21:9`, `auto`; default `1:1` |
+| `resolution` | `--resolution` | No | enum | `1K`, `2K`, `4K`; default `2K` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `thinkingBudget` | `--thinking-budget` | No | range | 128 to 24576; step 128; default `128` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 14 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | free text (≤6000 chars) |
-| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-2.5-pro-tts --json` for current values (default `Kore`) |
-| `parts` | `--parts-text` · `--parts-speaker` | object[] | `{text, speaker}` |
-| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-3.8-flash-tts` — Gemini 3.8 Flash TTS
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "1:1"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1K"
+      },
+      {
+        "id": "2K"
+      },
+      {
+        "id": "4K"
+      }
+    ],
+    "default": "2K"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "thinkingBudget",
+    "label": "Thinking Budget",
+    "kind": "range",
+    "min": 128,
+    "max": 24576,
+    "step": 128,
+    "default": 128
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
+  }
+]
+```
 
-[Try `gemini-3.8-flash-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash-tts)
+</details>
 
-Input type: `tts`
+### `gemini-2.5-flash-image`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | free text (≤6000 chars) |
-| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-3.8-flash-tts --json` for current values (default `Kore`) |
-| `style` | `--style` | text | free text (≤500 chars) |
-| `parts` | `--parts-text` · `--parts-speaker` · `--parts-style` | object[] | `{text, speaker, style}` |
-| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+Nano Banana; input type `t2i`.
 
-### `gemini-3.8-flash-lite-tts` — Gemini 3.8 Flash Lite TTS
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `2:3`, `21:9`, `auto`; default `16:9` |
+| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
+| `seed` | Use SDK or MCP | No | range | 0 to 2147483647; step 1 |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 14 |
 
-[Try `gemini-3.8-flash-lite-tts` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash-lite-tts)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `tts`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "1:1"
+      },
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      },
+      {
+        "id": "3:4"
+      },
+      {
+        "id": "4:3"
+      },
+      {
+        "id": "2:3"
+      },
+      {
+        "id": "21:9"
+      },
+      {
+        "id": "auto"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "count",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 1
+  },
+  {
+    "key": "seed",
+    "label": "Seed",
+    "kind": "range",
+    "min": 0,
+    "max": 2147483647,
+    "step": 1
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 14
+    }
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `language` | `--language` | text | free text |
-| `accent` | `--accent` | text | free text |
-| `prompt` | `-p` | text | free text (≤6000 chars) |
-| `voiceId` | `--voice` | catalog | runtime catalog; run `gen-ai models info gemini-3.8-flash-lite-tts --json` for current values (default `Kore`) |
-| `style` | `--style` | text | free text (≤500 chars) |
-| `parts` | `--parts-text` · `--parts-speaker` · `--parts-style` | object[] | `{text, speaker, style}` |
-| `multiSpeakerVoiceConfigs` | `--multi-speaker-voice-configs-speaker` · `--multi-speaker-voice-configs-voice-name` | object[] | `{speaker, voiceName}` |
+</details>
 
-### `gemini-omni-flash-preview` — Gemini Omni
+### `gemini-2.5-flash-tts`
 
-[Try `gemini-omni-flash-preview` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-flash-preview)
+Gemini 2.5 Flash TTS; input type `tts`.
 
-Input type: `t2v`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `language` | `--language` | No | text | Text |
+| `accent` | `--accent` | No | text | Text |
+| `prompt` | `--prompt` | No | text | maximum 6000 characters |
+| `voiceId` | `--voice` | No | catalog | Account-dependent ID; see catalog source below; default `Kore` |
+| `parts` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 200 |
+| `multiSpeakerVoiceConfigs` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 2 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `duration` | `-d` | enum | `3` · `5` · `6` · `8` · `10` (default `8`) |
-| `imageUrls` | `-i` | file | image (up to 1) |
-| `videoUrl` | `--video` | file | video |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-omni-1.1-flash-preview` — Gemini Omni 1.2 Flash
+```json
+[
+  {
+    "key": "language",
+    "label": "Language",
+    "kind": "text"
+  },
+  {
+    "key": "accent",
+    "label": "Accent",
+    "kind": "text"
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 6000
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "gemini/v1/catalog/voices"
+    },
+    "default": "Kore"
+  },
+  {
+    "key": "parts",
+    "label": "Spoken Parts",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 200
+    },
+    "fields": {
+      "text": {
+        "label": "Text",
+        "kind": "text",
+        "maxLength": 6000
+      },
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "required": false
+      }
+    }
+  },
+  {
+    "key": "multiSpeakerVoiceConfigs",
+    "label": "Speakers",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 2
+    },
+    "fields": {
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "placeholder": "Speaker 1"
+      },
+      "voiceName": {
+        "label": "Voice",
+        "kind": "text",
+        "placeholder": "Kore"
+      }
+    }
+  }
+]
+```
 
-> The id says `1.1` and the name says `1.2`. That inconsistency is upstream's; match on `gemini-omni-1.1-flash-preview`. Despite the `-preview` suffix this is a production model.
+</details>
 
-[Try `gemini-omni-1.1-flash-preview` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.1-flash-preview)
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
 
-Input type: `t2v`
+### `gemini-2.5-pro-tts`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
-| `resolution` | `-r` | enum | `360p` · `720p` · `1080p` · `4k` (default `720p`) |
-| `duration` | `-d` | enum | `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` (default `8`) |
-| `startFrame` | `--start-frame` | file | image |
-| `endFrame` | `--end-frame` | file | image |
-| `imageUrls` | `-i` | file | image (up to 5) |
-| `videoUrl` | `--video` | file | video |
-| `videoUrls` | `--video-urls` | file | video (up to 3) |
+Gemini 2.5 Pro TTS; input type `tts`.
 
-### `gemini-omni-1.2-flash` — Gemini Omni 1.2 Flash
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `language` | `--language` | No | text | Text |
+| `accent` | `--accent` | No | text | Text |
+| `prompt` | `--prompt` | No | text | maximum 6000 characters |
+| `voiceId` | `--voice` | No | catalog | Account-dependent ID; see catalog source below; default `Kore` |
+| `parts` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 200 |
+| `multiSpeakerVoiceConfigs` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 2 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "language",
+    "label": "Language",
+    "kind": "text"
+  },
+  {
+    "key": "accent",
+    "label": "Accent",
+    "kind": "text"
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 6000
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "gemini/v1/catalog/voices"
+    },
+    "default": "Kore"
+  },
+  {
+    "key": "parts",
+    "label": "Spoken Parts",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 200
+    },
+    "fields": {
+      "text": {
+        "label": "Text",
+        "kind": "text",
+        "maxLength": 6000
+      },
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "required": false
+      }
+    }
+  },
+  {
+    "key": "multiSpeakerVoiceConfigs",
+    "label": "Speakers",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 2
+    },
+    "fields": {
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "placeholder": "Speaker 1"
+      },
+      "voiceName": {
+        "label": "Voice",
+        "kind": "text",
+        "placeholder": "Kore"
+      }
+    }
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `gemini-3.8-flash-tts`
+
+Gemini 3.8 Flash TTS; input type `tts`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `language` | Use SDK or MCP | No | text | Text |
+| `accent` | Use SDK or MCP | No | text | Text |
+| `prompt` | Use SDK or MCP | No | text | maximum 6000 characters |
+| `voiceId` | Use SDK or MCP | No | catalog | Account-dependent ID; see catalog source below; default `Kore` |
+| `style` | Use SDK or MCP | No | text | maximum 500 characters |
+| `parts` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 200 |
+| `multiSpeakerVoiceConfigs` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 2 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "language",
+    "label": "Language",
+    "kind": "text"
+  },
+  {
+    "key": "accent",
+    "label": "Accent",
+    "kind": "text"
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 6000
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "gemini/v1/catalog/voices"
+    },
+    "default": "Kore"
+  },
+  {
+    "key": "style",
+    "label": "Style",
+    "kind": "text",
+    "maxLength": 500,
+    "placeholder": "e.g. warm, unhurried; a bedtime story"
+  },
+  {
+    "key": "parts",
+    "label": "Spoken Parts",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 200
+    },
+    "fields": {
+      "text": {
+        "label": "Text",
+        "kind": "text",
+        "maxLength": 6000
+      },
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "required": false
+      },
+      "style": {
+        "label": "Style",
+        "kind": "text",
+        "maxLength": 500,
+        "required": false
+      }
+    }
+  },
+  {
+    "key": "multiSpeakerVoiceConfigs",
+    "label": "Speakers",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 2
+    },
+    "fields": {
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "placeholder": "Speaker 1"
+      },
+      "voiceName": {
+        "label": "Voice",
+        "kind": "text",
+        "placeholder": "Kore"
+      }
+    }
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `gemini-3.8-flash-lite-tts`
+
+Gemini 3.8 Flash Lite TTS; input type `tts`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `language` | Use SDK or MCP | No | text | Text |
+| `accent` | Use SDK or MCP | No | text | Text |
+| `prompt` | Use SDK or MCP | No | text | maximum 6000 characters |
+| `voiceId` | Use SDK or MCP | No | catalog | Account-dependent ID; see catalog source below; default `Kore` |
+| `style` | Use SDK or MCP | No | text | maximum 500 characters |
+| `parts` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 200 |
+| `multiSpeakerVoiceConfigs` | Use SDK or MCP | No | object | Structured input; see descriptor below; array; minimum 1; maximum 2 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "language",
+    "label": "Language",
+    "kind": "text"
+  },
+  {
+    "key": "accent",
+    "label": "Accent",
+    "kind": "text"
+  },
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": false,
+    "kind": "text",
+    "maxLength": 6000
+  },
+  {
+    "key": "voiceId",
+    "label": "Voice",
+    "catalogOptions": [],
+    "kind": "catalog",
+    "source": {
+      "workflow": "gemini/v1/catalog/voices"
+    },
+    "default": "Kore"
+  },
+  {
+    "key": "style",
+    "label": "Style",
+    "kind": "text",
+    "maxLength": 500,
+    "placeholder": "e.g. warm, unhurried; a bedtime story"
+  },
+  {
+    "key": "parts",
+    "label": "Spoken Parts",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 200
+    },
+    "fields": {
+      "text": {
+        "label": "Text",
+        "kind": "text",
+        "maxLength": 6000
+      },
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "required": false
+      },
+      "style": {
+        "label": "Style",
+        "kind": "text",
+        "maxLength": 500,
+        "required": false
+      }
+    }
+  },
+  {
+    "key": "multiSpeakerVoiceConfigs",
+    "label": "Speakers",
+    "kind": "object",
+    "array": {
+      "min": 1,
+      "max": 2
+    },
+    "fields": {
+      "speaker": {
+        "label": "Speaker",
+        "kind": "text",
+        "placeholder": "Speaker 1"
+      },
+      "voiceName": {
+        "label": "Voice",
+        "kind": "text",
+        "placeholder": "Kore"
+      }
+    }
+  }
+]
+```
+
+</details>
+
+Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
+
+### `gemini-omni-flash-preview`
+
+Gemini Omni; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `duration` | `--duration` | No | enum | `3`, `5`, `6`, `8`, `10`; default `8` |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 1 |
+| `videoUrl` | `--video` | No | file | video input |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "duration",
+    "label": "Duration (seconds)",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "imageUrls",
+    "label": "Source Image",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 1
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video"
+  }
+]
+```
+
+</details>
+
+### `gemini-omni-1.1-flash-preview`
+
+Gemini Omni 1.1 Flash; input type `t2v`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`; default `16:9` |
+| `resolution` | `--resolution` | No | enum | `360p`, `720p`, `1080p`, `4k`; default `720p` |
+| `duration` | `--duration` | No | enum | `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`; default `8` |
+| `startFrame` | `--start-frame` | No | file | image input |
+| `endFrame` | `--end-frame` | No | file | image input |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 5 |
+| `videoUrl` | `--video` | No | file | video input |
+| `videoUrls` | `--video-urls` | No | file | video input; array; maximum 3 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "aspectRatio",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "16:9"
+      },
+      {
+        "id": "9:16"
+      }
+    ],
+    "default": "16:9"
+  },
+  {
+    "key": "resolution",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "360p"
+      },
+      {
+        "id": "720p"
+      },
+      {
+        "id": "1080p"
+      },
+      {
+        "id": "4k"
+      }
+    ],
+    "default": "720p"
+  },
+  {
+    "key": "duration",
+    "kind": "enum",
+    "valueType": "number",
+    "options": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      }
+    ],
+    "default": 8
+  },
+  {
+    "key": "startFrame",
+    "label": "Start Frame",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "endFrame",
+    "label": "End Frame",
+    "category": "asset",
+    "kind": "file",
+    "accept": "image"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Reference Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 5
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Source Video",
+    "required": false,
+    "category": "asset",
+    "kind": "file",
+    "accept": "video",
+    "maxDurationSec": 30
+  },
+  {
+    "key": "videoUrls",
+    "label": "Reference Videos",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video",
+    "array": {
+      "max": 3
+    }
+  }
+]
+```
+
+</details>
+
+### `gemini-omni-1.2-flash`: Gemini Omni 1.2 Flash
 
 [Try `gemini-omni-1.2-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.2-flash)
 
@@ -312,7 +1731,7 @@ Input type: `t2v`
 | `videoUrls` | `--video-urls` | file | video (up to 3) |
 | `task` | `--task` | enum | `edit` · `extend` (default `edit`) |
 
-### `gemini-decision-1` — Gemini Decision 1
+### `gemini-decision-1`: Gemini Decision 1
 
 [Try `gemini-decision-1` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-decision-1)
 
@@ -324,42 +1743,119 @@ Input type: `i2t`
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `questions` | `--questions` | object | `{}` |
 
-### `lyria-3-clip` — Lyria 3 Clip
+### `lyria-3-clip`
 
-[Try `lyria-3-clip` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3-clip)
+Lyria 3 Clip; input type `music`.
 
-Input type: `music`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 10 |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 1) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `lyria-3-pro` — Lyria 3 Pro
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000
+  },
+  {
+    "key": "imageUrls",
+    "label": "Mood Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  }
+]
+```
 
-[Try `lyria-3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3-pro)
+</details>
 
-Input type: `music`
+### `lyria-3-pro`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 1) |
+Lyria 3 Pro; input type `music`.
 
-> **Notes:** Veo audio is native (`generateAudio`); Imagen and Gemini image models differ in resolution and reasoning controls (`thinkingLevel` / `thinkingBudget`). TTS `voiceId` values are Gemini voice presets.
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | maximum 5000 characters |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 10 |
 
-### `lyria-3.5` — Lyria 3.5
+<details>
+<summary>Full parameter descriptors</summary>
 
-[Try `lyria-3.5` in Playground ↗](https://picsart.com/ai-playground/?model=lyria-3.5)
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "maxLength": 5000,
+    "placeholder": "Generate voiceover, music and sound effects"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Mood Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  }
+]
+```
 
-Input type: `music`
+</details>
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 10) |
+### `lyria-3.5`
 
-### `gemini-4-carbon` — Gemini 4 Carbon
+Lyria 3.5; input type `music`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 10 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text",
+    "placeholder": "Generate voiceover, music and sound effects"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Mood Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 10
+    }
+  }
+]
+```
+
+</details>
+
+### `gemini-4-carbon`: Gemini 4 Carbon
 
 [Try `gemini-4-carbon` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-4-carbon)
 
@@ -372,87 +1868,398 @@ Input type: `v2t`
 | `videoUrl` | `--video` | file | video |
 | `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
-### `gemini-4-argon` — Gemini 4 Argon
+### `gemini-4-argon`
 
-[Try `gemini-4-argon` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-4-argon)
+Gemini 4 Argon; input type `v2t`.
 
-Input type: `v2t`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `videoUrl` | Use SDK or MCP | No | file | video input |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `high`; default `off` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `videoUrl` | `--video` | file | video |
-| `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-3-pro` — Gemini 3 Pro
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Video",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
 
-[Try `gemini-3-pro` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3-pro)
+</details>
 
-Input type: `v2t`
+### `gemini-3-pro`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `videoUrl` | `--video` | file | video |
-| `thinking` | `--thinking` | enum | `off` · `low` · `high` (default `off`) |
+Gemini 3 Pro; input type `v2t`.
 
-### `gemini-3.8-flash` — Gemini 3.8 Flash
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `videoUrl` | `--video` | No | file | video input |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `high`; default `off` |
 
-[Try `gemini-3.8-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.8-flash)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2t`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "videoUrl",
+    "label": "Video",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "video"
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+</details>
 
-### `gemini-3.7-flash` — Gemini 3.7 Flash
+### `gemini-3.8-flash`
 
-[Try `gemini-3.7-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.7-flash)
+Gemini 3.8 Flash; input type `i2t`.
 
-Input type: `i2t`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+<details>
+<summary>Full parameter descriptors</summary>
 
-### `gemini-3.6-flash` — Gemini 3.6 Flash
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
 
-[Try `gemini-3.6-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.6-flash)
+</details>
 
-Input type: `i2t`
+### `gemini-3.7-flash`
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+Gemini 3.7 Flash; input type `i2t`.
 
-### `gemini-3.5-flash-lite` — Gemini 3.5 Flash Lite
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
 
-[Try `gemini-3.5-flash-lite` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.5-flash-lite)
+<details>
+<summary>Full parameter descriptors</summary>
 
-Input type: `i2t`
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
+</details>
 
-### `gemini-2.5-flash` — Gemini 2.5 Flash
+### `gemini-3.6-flash`
 
-[Try `gemini-2.5-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-2.5-flash)
+Gemini 3.6 Flash; input type `i2t`.
 
-Input type: `i2t`
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+| `thinking` | `--thinking` | No | enum | `off`, `low`, `medium`, `high`; default `off` |
 
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>
+
+### `gemini-3.5-flash-lite`
+
+Gemini 3.5 Flash Lite; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | `--prompt` | Yes | text | Text |
+| `imageUrls` | `--image` | No | file | image input; array; maximum 8 |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  }
+]
+```
+
+</details>
+
+### `gemini-2.5-flash`
+
+Gemini 2.5 Flash; input type `i2t`.
+
+| Parameter | CLI flag | Required | Type | Values and constraints |
+|---|---|---|---|---|
+| `prompt` | Use SDK or MCP | Yes | text | Text |
+| `imageUrls` | Use SDK or MCP | No | file | image input; array; maximum 8 |
+| `thinking` | Use SDK or MCP | No | enum | `off`, `low`, `medium`, `high`; default `off` |
+
+<details>
+<summary>Full parameter descriptors</summary>
+
+```json
+[
+  {
+    "key": "prompt",
+    "label": "Prompt",
+    "required": true,
+    "kind": "text"
+  },
+  {
+    "key": "imageUrls",
+    "label": "Images",
+    "required": false,
+    "category": "reference",
+    "kind": "file",
+    "accept": "image",
+    "array": {
+      "max": 8
+    }
+  },
+  {
+    "key": "thinking",
+    "label": "Thinking",
+    "kind": "enum",
+    "valueType": "string",
+    "options": [
+      {
+        "id": "off"
+      },
+      {
+        "id": "low"
+      },
+      {
+        "id": "medium"
+      },
+      {
+        "id": "high"
+      }
+    ],
+    "default": "off"
+  }
+]
+```
+
+</details>

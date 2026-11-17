@@ -1,28 +1,32 @@
 ---
-description: "The @picsart/ai-sdk TypeScript SDK — generate images, video, and audio from Node.js apps. Full documentation at picsart.com/api-platform/docs/sdk."
+description: "Use the Picsart TypeScript SDK and load its dynamic model catalog."
 ---
 
 # TypeScript SDK
 
-`@picsart/ai-sdk` gives Node.js and TypeScript applications type-safe access to AI models. This reference uses the SDK 6.29.0 catalog baseline of 260 models. Model availability depends on the installed SDK or server version. If you are building a product rather than running scripts or working inside an AI agent, this is the right surface.
+Use `@picsart/ai-sdk` in a Node.js or TypeScript application. This documentation pins SDK 7.0.0. Its catalog is fetched at runtime, so model availability can change without an SDK release. CLI and hosted MCP releases can expose different catalogs.
 
-Full documentation, install instructions, and code examples live on the API platform:
+```bash
+npm install @picsart/ai-sdk@7.0.0
+```
 
-**[picsart.com/api-platform/docs/sdk](https://picsart.com/api-platform/docs/sdk)**
+The package uses ESM. Configure `PICSART_API_KEY` in your server environment, then initialize the catalog before inspecting models:
 
-## Quick reference
+```js
+import { createClient, catalog } from '@picsart/ai-sdk'
 
-| | |
-|---|---|
-| Install | `npm install @picsart/ai-sdk` |
-| Node.js | 20+ required, ESM-only |
-| Auth | API key from [picsart.com/settings](https://picsart.com/settings) — not the CLI's OAuth |
-| Models | 260 models in the SDK 6.29.0 catalog |
+const ai = createClient({
+  apiKey: process.env.PICSART_API_KEY,
+  apiUrl: 'https://api.picsart.com',
+})
+await ai.initModelCatalog()
+const model = catalog.all().find(model => model.id === 'flux-2-pro')
+if (!model) throw new Error('Model is unavailable in this catalog')
+console.log(model.params().all())
+```
 
-See [Authentication](/guide/authentication) for the difference between API key (SDK/REST) and OAuth (CLI/MCP). See [Which tool is right for me?](/guide/which-tool) to compare all interfaces.
+Loading the catalog does not submit a generation. Follow the [SDK documentation](https://picsart.com/api-platform/docs/sdk) for authentication, generation, and result handling. Keep credentials out of browser bundles and committed files.
 
-## Version updates
+## Earlier catalog updates
 
-See [Updating to SDK 6.29.0](/guide/sdk-6-29-update) for the latest catalog changes.
-
-See [Updating to SDK 6.2.3](/guide/sdk-6-2-update) for model additions, result metadata changes, and Seedance output compatibility.
+The [SDK 6.29.0 update](/guide/sdk-6-29-update) and [SDK 6.23.0 update](/guide/sdk-6-23-update) describe historical catalog changes.

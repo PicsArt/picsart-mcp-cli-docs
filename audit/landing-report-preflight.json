@@ -1,0 +1,44 @@
+[
+  {
+    "request": {
+      "model": "flux-2-pro",
+      "params": {
+        "prompt": "A ceramic cup on a wooden table",
+        "aspectRatio": "4:3",
+        "count": 1
+      }
+    },
+    "result": {
+      "model": "flux-2-pro",
+      "valid": true,
+      "credits": 1
+    }
+  },
+  {
+    "request": {
+      "model": "seedance-2.5",
+      "params": {
+        "prompt": "A fox running through autumn leaves",
+        "duration": 5
+      }
+    },
+    "result": {
+      "model": "seedance-2.5",
+      "valid": true,
+      "credits": 90
+    }
+  },
+  {
+    "request": {
+      "model": "eleven-v3",
+      "params": {
+        "prompt": "Welcome to the show."
+      }
+    },
+    "result": {
+      "model": "eleven-v3",
+      "valid": true,
+      "credits": 3
+    }
+  }
+]
