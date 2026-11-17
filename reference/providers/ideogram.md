@@ -4,14 +4,16 @@ description: "Ideogram model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Ideogram
 
-**Modes:** image · **Models:** 6
+**Modes:** image · **Models:** 8
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
+| `ideogram-vector-1` | Ideogram Vector | `t2i` |
+| `ideogram-vector-1-vectorize` | Ideogram Vectorize | `i2i` |
 | `ideogram-4-5` | Ideogram 4.5 | `t2i` |
 | `ideogram-4-5-precise-edit` | Ideogram 4.5 Precise Edit | `i2i` |
 | `ideogram-v4` | Ideogram 4.0 | `t2i` |
@@ -51,7 +53,33 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
+
+### `ideogram-vector-1`: Ideogram Vector
+
+[Try `ideogram-vector-1` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-vector-1)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤9500 chars) |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `16:9` · `9:16` · `4:3` · `3:4` · `3:2` · `2:3` · `5:4` · `4:5` · `16:10` · `10:16` · `2:1` · `1:2` · `3:1` · `1:3` · `4:1` · `1:4` (default `auto`) |
+| `quality` | `--quality` | enum | `low` · `medium` · `high` (default `medium`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` (default `1`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+
+### `ideogram-vector-1-vectorize`: Ideogram Vectorize
+
+[Try `ideogram-vector-1-vectorize` in Playground ↗](https://picsart.com/ai-playground/?model=ideogram-vector-1-vectorize)
+
+Input type: `i2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `startFrame` | `--start-frame` | file | **required** image |
+| `mode` | `--mode` | enum | `default` (Detailed) · `simple` (Simple) (default `default`) |
 
 ### `ideogram-4-5`
 
@@ -1053,4 +1081,8 @@ Ideogram Character; input type `i2i`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing ideogram-v3
+```
+
+Cost scales with **count** (number of images) and **rendering speed** (`FLASH`/`TURBO` are cheaper, `QUALITY` is the most expensive).

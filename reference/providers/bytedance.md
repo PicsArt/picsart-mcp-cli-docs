@@ -4,13 +4,13 @@ description: "ByteDance model IDs, parameters, and CLI and MCP usage on Picsart.
 
 # ByteDance
 
-**Modes:** image, video, audio · **Models:** 22
+**Modes:** image, video, audio · **Models:** 24
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
 | `bytedance-omnihuman-v1.5` | ByteDance OmniHuman | `i2v` |
 | `bytedance-omnihuman-v2.0` | ByteDance OmniHuman 2.0 | `i2v` |
@@ -18,6 +18,7 @@ This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MC
 | `seedance-2.5` | Seedance 2.5 | `t2v` |
 | `seedance-2.5-video-edit` | Seedance 2.5 Video Edit | `v2v` |
 | `seedance-2.5-video-extend` | Seedance 2.5 Video Extend | `v2v` |
+| `seedance-2.5-flash` | Seedance 2.5 Flash | `t2v` |
 | `seedance-2.0` | Seedance 2.0 | `t2v` |
 | `seedance-2.0-fast` | Seedance 2.0 Fast | `t2v` |
 | `seedance-2.0-mini` | Seedance 2.0 Mini | `t2v` |
@@ -27,6 +28,7 @@ This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MC
 | `seedance-2.0-video-extend` | Seedance 2.0 Video Extend | `v2v` |
 | `seedance-2.0-fast-video-extend` | Seedance 2.0 Fast Video Extend | `v2v` |
 | `seedance-2.0-mini-video-extend` | Seedance 2.0 Mini Video Extend | `v2v` |
+| `seedream-5.5` | Seedream 5.5 | `t2i` |
 | `seedream-5.0-flash` | Seedream 5.0 Flash | `t2i` |
 | `seedream-5.0-pro` | Seedream 5.0 Pro | `t2i` |
 | `seedream-5.0-lite` | Seedream 5.0 Lite | `t2i` |
@@ -73,7 +75,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `bytedance-omnihuman-v1.5`
 
@@ -1038,6 +1040,28 @@ Seedance 2.5 Video Extend; input type `v2v`.
 ```
 
 </details>
+
+### `seedance-2.5-flash`: Seedance 2.5 Flash
+
+[Try `seedance-2.5-flash` in Playground ↗](https://picsart.com/ai-playground/?model=seedance-2.5-flash)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `4:3` · `3:4` · `21:9` · `adaptive` (default `16:9`) |
+| `resolution` | `-r` | enum | `480p` · `720p` (default `720p`) |
+| `duration` | `-d` | enum | `-1` (Auto) · `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` · `16` · `17` · `18` · `19` · `20` · `21` · `22` · `23` · `24` · `25` · `26` · `27` · `28` · `29` · `30` (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `returnLastFrame` | `--return-last-frame` | boolean | `true` · `false` (default `false`) |
+| `outputFormat` | `--output-format` | enum | `mp4` · `mov` (default `mp4`) |
+| `omniReferenceTaskType` | `--omni-reference-task-type` | enum | `auto` (Auto) · `reference` (Reference) · `edit` (Edit) · `extend` (Extend) (default `auto`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `videoUrls` | `--video-urls` | file | video (up to 5) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 5) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
 
 ### `seedance-2.0`
 
@@ -2650,6 +2674,21 @@ Seedance 2.0 Mini Video Extend; input type `v2v`.
 
 </details>
 
+### `seedream-5.5`: Seedream 5.5
+
+[Try `seedream-5.5` in Playground ↗](https://picsart.com/ai-playground/?model=seedream-5.5)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `resolution` | `-r` | enum | `1K` · `1.5K` · `2K` (default `1K`) |
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `1:1` · `4:3` · `3:4` · `16:9` · `9:16` · `3:2` · `2:3` · `21:9` (default `16:9`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `negativePrompt` | `--neg` | text | free text |
+| `background` | `--background` | enum | `auto` · `transparent` · `opaque` (default `auto`) |
+
 ### `seedream-5.0-flash`
 
 Seedream 5.0 Flash; input type `t2i`.
@@ -3480,4 +3519,8 @@ Catalog parameters require an ID returned by the named catalog workflow for your
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing bytedance-omnihuman-v1.5
+```
+
+Cost scales with the **duration** of the generated video (driven by the length of the input audio clip).

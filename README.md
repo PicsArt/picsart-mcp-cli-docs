@@ -19,17 +19,19 @@ The development server prints its local URL. The production build is written to 
 
 ## Catalog data
 
-`scripts/data/catalog.json` records the SDK version and exported model descriptors. The CLI command and model snapshots alongside it document the release used for example validation. The hosted server can differ from both.
+The current model and provider lists are generated from SDK 7.0.0's live catalog. `scripts/data/catalog.json` retains the older SDK 6.48.1 descriptors used for the audit; do not use that historical snapshot to refresh the current catalog. CLI command and model snapshots record the separate release used to validate examples.
 
-Regenerate the catalog and provider pages with:
+With `PICSART_API_KEY` set in your environment, run:
 
 ```bash
-node scripts/build-catalog-data.mjs scripts/data/catalog.json
-node scripts/build-provider-pages.mjs scripts/data/catalog.json
+npm run refresh:catalog
+npm run draft:changelog -- --base HEAD
 npm run build
 ```
 
-The provider generator replaces generated provider pages. Edit its templates to change those pages. To obtain a new SDK snapshot, install the intended `@picsart/ai-sdk` version in a development environment, then run `node scripts/export-sdk-catalog.mjs scripts/data/catalog.json`. Review the version, model changes, CLI compatibility, and examples before accepting the update.
+The refresh writes a temporary `.sdk-catalog.json`, regenerates the catalog and provider references, and updates prose counts. It does not generate media. Review model changes, CLI compatibility, and examples before committing. Edit the provider generator's templates to change generated pages.
+
+The scheduled catalog workflow fetches the live catalog daily, opens and merges its refresh PR, and dispatches the Pages deployment. It requires the repository's configured API secret and Actions permissions. The SDK pin only needs to change when upgrading the SDK itself.
 
 ## Publishing
 

@@ -4,11 +4,11 @@ description: "Search the versioned Picsart SDK model catalog."
 
 # Model catalog
 
-Browse the 238 models from 32 providers in SDK 6.48.1. This is a snapshot, not a live server inventory. Confirm availability in your CLI or MCP connection before using an ID.
+Browse the 260 models from 32 providers in SDK 7.0.0. This is a snapshot, not a live server inventory. Confirm availability in your CLI or MCP connection before using an ID.
 
 ## What the counts mean
 
-The snapshot was inspected on October 29, 2026. Counts come from `scripts/data/catalog.json`, exported from `@picsart/ai-sdk 6.48.1`; the catalog and provider tables are generated from that file.
+Counts come from the checked-in catalog data, refreshed from the live model registry using SDK 7.0.0. The older descriptor snapshot in `scripts/data/catalog.json` is retained as historical audit evidence.
 
 - A model is one distinct catalog `id`. Image, editing, fast, or video variants count separately when they have different IDs. Presets or parameter choices within an ID do not add models.
 - A provider is one distinct `provider.id` assigned by the catalog. These are catalog groups, not a count of independent parent companies.

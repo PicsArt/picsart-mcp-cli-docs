@@ -11,6 +11,8 @@ const files = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.
 const routes = files(root).filter(p=>p.endsWith('.html') && !p.endsWith('/404.html')).map(p=>relative(root,p))
 const browser = await chromium.launch({ executablePath: process.env.DOCS_BROWSER_EXECUTABLE || undefined })
 const page = await browser.newPage({ viewport: {width:1440,height:1000} })
+// Exercise the wider Ctrl K hint even when these checks run on macOS.
+await page.addInitScript(() => Object.defineProperty(navigator, 'platform', { get: () => 'Linux x86_64' }))
 let current;const errors=[];const pages=[];const targets=new Map()
 async function ready() {
  await page.waitForFunction(() => Boolean(document.querySelector('#app')?.__vue_app__))
@@ -66,7 +68,7 @@ for(const theme of ['light','dark']) {
  await page.waitForTimeout(350)
  if(process.env.DOCS_SCREENSHOT_DIR)await page.screenshot({path:join(process.env.DOCS_SCREENSHOT_DIR,`catalog-${theme}.png`)})
 }
-for(const width of [390,768]) {
+for(const width of [390,768,820,959,960]) {
 await page.setViewportSize({width,height:844})
 for(const route of ['index.html','guide/mcp-quickstart.html','reference/providers/anthropic.html','reference/catalog.html']){
  await page.goto(new URL(route,origin).href,{waitUntil:'domcontentloaded'})

@@ -4,18 +4,23 @@ description: "OpenAI model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # OpenAI
 
-**Modes:** image, text · **Models:** 19
+**Modes:** image, text · **Models:** 24
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
+| `gpt-image-2.6-sunburst` | GPT Image 2.6 Sunburst | `t2i` |
+| `gpt-image-2.6-flare` | GPT Image 2.6 Flare | `t2i` |
 | `gpt-image-2.5-sunburst` | GPT Image 2.5 Sunburst | `t2i` |
 | `gpt-image-2.5-flare` | GPT Image 2.5 Flare | `t2i` |
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
+| `gpt-6-luna-decisions` | GPT-6 Luna Decisions | `i2t` |
+| `gpt-6.1-sol` | GPT-6.1 Sol | `i2t` |
+| `gpt-6.1-terra` | GPT-6.1 Terra | `i2t` |
 | `gpt-6-astra` | GPT-6 Astra | `i2t` |
 | `gpt-6-sol` | GPT-6 Sol | `i2t` |
 | `gpt-6-luna` | GPT-6 Luna | `i2t` |
@@ -64,7 +69,45 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
+
+### `gpt-image-2.6-sunburst`: GPT Image 2.6 Sunburst
+
+[Try `gpt-image-2.6-sunburst` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2.6-sunburst)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
+| `size` | `--size` | text | free text |
+| `reasoningEffort` | `--reasoning-effort` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
+| `temperature` | `--temperature` | range | `0`–`2`, step 0.1 (default `1`) |
+| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
+
+### `gpt-image-2.6-flare`: GPT Image 2.6 Flare
+
+[Try `gpt-image-2.6-flare` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-image-2.6-flare)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `aspectRatio` | `--ar` | enum | `1:1` · `3:2` · `2:3` · `16:9` · `9:16` · `4:3` · `3:4` · `auto` (default `1:1`) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `1K`) |
+| `size` | `--size` | text | free text |
+| `reasoningEffort` | `--reasoning-effort` | enum | `max` · `xhigh` · `high` · `medium` · `low` (default `high`) |
+| `temperature` | `--temperature` | range | `0`–`2`, step 0.1 (default `1`) |
+| `background` | `--background` | enum | `opaque` · `transparent` (default `opaque`) |
+| `outputFormat` | `--output-format` | enum | `png` · `jpeg` · `webp` (default `png`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
 
 ### `gpt-image-2.5-sunburst`
 
@@ -708,6 +751,42 @@ GPT Image 1.5; input type `t2i`.
 ```
 
 </details>
+
+### `gpt-6-luna-decisions`: GPT-6 Luna Decisions
+
+[Try `gpt-6-luna-decisions` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6-luna-decisions)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `input` | `--input` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `questions` | `--questions-type` · `--questions-name` · `--questions-instructions` · `--questions-choices` · `--questions-levels` | object[] | `{type, name, instructions, choices, levels}` |
+
+### `gpt-6.1-sol`: GPT-6.1 Sol
+
+[Try `gpt-6.1-sol` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.1-sol)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gpt-6.1-terra`: GPT-6.1 Terra
+
+[Try `gpt-6.1-terra` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.1-terra)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ### `gpt-6-astra`
 
@@ -1493,4 +1572,10 @@ GPT-4.1 Nano; input type `i2t`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+Check current model pricing before generating:
+
+```bash
+gen-ai pricing gpt-image-2
+```
+
+Image cost depends on the model and output settings. See [Pricing](/guide/pricing).

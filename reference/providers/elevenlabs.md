@@ -4,31 +4,31 @@ description: "ElevenLabs model IDs, parameters, and CLI and MCP usage on Picsart
 
 # ElevenLabs
 
-**Modes:** audio, text · **Models:** 17
+**Modes:** audio, text · **Models:** 16
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
-|---|---|---|
-| `eleven-v4` | Eleven v4 | `tts` |
-| `eleven-v4-turbo` | Eleven v4 Turbo | `tts` |
-| `eleven-v3` | Eleven v3 | `tts` |
-| `eleven-multilingual-v2` | Eleven Multilingual v2 | `tts` |
-| `eleven-dialogue-v4` | Eleven Dialogue v4 | `tts` |
-| `eleven-text-to-dialogue` | Eleven Dialogue v3 | `tts` |
-| `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` |
-| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` |
-| `eleven-speech-to-text` | Eleven Scribe v2 | `a2t` |
-| `eleven-video-to-music` | Eleven Video to Music | `v2a` |
-| `eleven-sts-v2` | Eleven STS v2 | `sts` |
-| `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` |
-| `eleven-audio-isolation` | Eleven Audio Isolation | `sts` |
-| `eleven-dubbing` | Eleven Dubbing | `sts` |
-| `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` |
-| `eleven-voice-design-v2` | Eleven Voice Design Multilingual v2 | `tts` |
-| `eleven-voice-create` | Eleven Voice Previews | `tts` |
+| id | Name | Input type | Notes |
+|---|---|---|---|
+| `eleven-v4` | Eleven v4 | `tts` | Expressive speech in 90+ languages |
+| `eleven-v4-turbo` | Eleven v4 Turbo | `tts` | Faster v4 speech |
+| `eleven-v3` | Eleven v3 | `tts` | Previous-generation expressive speech |
+| `eleven-multilingual-v2` | Eleven Multilingual v2 | `tts` | Speech in 29+ languages |
+| `eleven-dialogue-v4` | Eleven Dialogue v4 | `tts` | Multi-speaker dialogue with the v4 engine |
+| `eleven-text-to-dialogue` | Eleven Dialogue v3 | `tts` | Multi-speaker dialogue with the v3 engine |
+| `elevenlabs-sfx` | ElevenLabs SFX v2 | `sfx` | Sound effects |
+| `elevenlabs-music-v2` | ElevenLabs Music v2 | `music` | Music with vocals or instrumental music |
+| `eleven-speech-to-text` | Eleven Scribe v2 | `a2t` | Transcription with word timings and speaker labels |
+| `eleven-video-to-music` | Eleven Video to Music | `v2a` | Generate a soundtrack for a video |
+| `eleven-sts-v2` | Eleven STS v2 | `sts` | Voice conversion |
+| `eleven-multilingual-sts-v2` | Eleven Multilingual STS v2 | `sts` | Multilingual voice conversion |
+| `eleven-audio-isolation` | Eleven Audio Isolation | `sts` | Isolate vocals from noise |
+| `eleven-dubbing` | Eleven Dubbing | `sts` | Dub audio or video |
+| `eleven-voice-design-v3` | Eleven Voice Design v3 | `tts` | Design a new voice |
+| `eleven-voice-design-v2` | Eleven Voice Design Multilingual v2 | `tts` | Multilingual voice design |
+| `eleven-voice-create` | Eleven Voice Previews | `tts` | Preview voices |
 
 ## Example
 
@@ -62,7 +62,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `eleven-v4`
 
@@ -234,94 +234,6 @@ Eleven v3; input type `tts`.
     "required": true,
     "kind": "text",
     "maxLength": 5000
-  },
-  {
-    "key": "voiceId",
-    "label": "Voice",
-    "catalogOptions": [],
-    "kind": "catalog",
-    "source": {
-      "workflow": "elevenlabs/v1/catalog/voices"
-    },
-    "default": "JBFqnCBsd6RMkjVDRZzb"
-  },
-  {
-    "key": "stability",
-    "label": "Stability",
-    "kind": "range",
-    "min": 0,
-    "max": 1,
-    "step": 0.05
-  },
-  {
-    "key": "similarityBoost",
-    "label": "Similarity",
-    "kind": "range",
-    "min": 0,
-    "max": 1,
-    "step": 0.05
-  },
-  {
-    "key": "styleExaggeration",
-    "label": "Style Exaggeration",
-    "kind": "range",
-    "min": 0,
-    "max": 1,
-    "step": 0.05
-  },
-  {
-    "key": "speed",
-    "label": "Speed",
-    "kind": "range",
-    "min": 0.1,
-    "max": 5,
-    "step": 0.05
-  },
-  {
-    "key": "useSpeakerBoost",
-    "label": "Speaker Boost",
-    "kind": "boolean",
-    "default": true
-  },
-  {
-    "key": "withTimestamps",
-    "label": "Character Timings",
-    "kind": "boolean",
-    "default": false
-  }
-]
-```
-
-</details>
-
-Catalog parameters require an ID returned by the named catalog workflow for your account. The workflow name in the descriptor is not an ID. This reference does not provide a verified standalone CLI lookup for those workflows; obtain the ID through a supported account interface before generating.
-
-### `eleven-multilingual-v2`
-
-Eleven Multilingual v2; input type `tts`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | maximum 10000 characters |
-| `voiceId` | `--voice` | No | catalog | Account-dependent ID; see catalog source below; default `JBFqnCBsd6RMkjVDRZzb` |
-| `stability` | Use SDK or MCP | No | range | 0 to 1; step 0.05 |
-| `similarityBoost` | Use SDK or MCP | No | range | 0 to 1; step 0.05 |
-| `styleExaggeration` | Use SDK or MCP | No | range | 0 to 1; step 0.05 |
-| `speed` | Use SDK or MCP | No | range | 0.1 to 5; step 0.05 |
-| `useSpeakerBoost` | Use SDK or MCP | No | boolean | true or false; default `true` |
-| `withTimestamps` | Use SDK or MCP | No | boolean | true or false; default `false` |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text",
-    "maxLength": 10000
   },
   {
     "key": "voiceId",
@@ -1055,4 +967,8 @@ Eleven Voice Previews; input type `tts`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing eleven-v3
+```
+
+Cost scales with the **length** of the generated audio.

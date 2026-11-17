@@ -2,7 +2,7 @@
   {
     "id": "anthropic",
     "label": "Anthropic",
-    "count": 9,
+    "count": 11,
     "modes": [
       "text"
     ]
@@ -18,7 +18,7 @@
   {
     "id": "bytedance",
     "label": "ByteDance",
-    "count": 22,
+    "count": 24,
     "modes": [
       "image",
       "video",
@@ -44,7 +44,7 @@
   {
     "id": "elevenlabs",
     "label": "ElevenLabs",
-    "count": 17,
+    "count": 16,
     "modes": [
       "audio",
       "text"
@@ -62,12 +62,13 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 24,
+    "count": 27,
     "modes": [
       "image",
       "video",
       "audio",
-      "text"
+      "text",
+      "json"
     ]
   },
   {
@@ -108,7 +109,7 @@
   {
     "id": "ideogram",
     "label": "Ideogram",
-    "count": 6,
+    "count": 8,
     "modes": [
       "image"
     ]
@@ -116,7 +117,7 @@
   {
     "id": "kimi",
     "label": "Kimi",
-    "count": 1,
+    "count": 3,
     "modes": [
       "text"
     ]
@@ -160,8 +161,9 @@
   {
     "id": "minimax",
     "label": "MiniMax",
-    "count": 14,
+    "count": 21,
     "modes": [
+      "image",
       "video",
       "audio",
       "text"
@@ -179,10 +181,11 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 19,
+    "count": 24,
     "modes": [
       "image",
-      "text"
+      "text",
+      "json"
     ]
   },
   {

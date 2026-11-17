@@ -4,19 +4,21 @@ description: "MiniMax model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # MiniMax
 
-**Modes:** video, audio, text · **Models:** 14
+**Modes:** video, audio, text · **Models:** 21
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
 | `hailuo-2.3` | Hailuo 2.3 | `t2v` |
 | `hailuo-2.3-pro` | Hailuo 2.3 Pro | `t2v` |
 | `hailuo-2.3-fast` | Hailuo 2.3 Fast | `i2v` |
 | `hailuo-2.3-fast-pro` | Hailuo 2.3 Fast Pro | `i2v` |
 | `minimax-h3` | MiniMax H3 | `t2v` |
+| `minimax-h3-highspeed` | MiniMax H3 Highspeed | `t2v` |
+| `minimax-h3-lite` | MiniMax H3 Lite | `t2v` |
 | `minimax-music-v2` | MiniMax Music v2 | `music` |
 | `minimax-music-v3` | MiniMax Music v3 | `music` |
 | `minimax-h3-max` | MiniMax H3 Max | `t2v` |
@@ -25,6 +27,11 @@ This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MC
 | `minimax-h3-max-lip-sync` | MiniMax H3 Max Lip Sync | `i2v` |
 | `minimax-h3-max-extend` | MiniMax H3 Max Extend | `v2v` |
 | `minimax-h3-max-relight` | MiniMax H3 Max Relight | `v2v` |
+| `minimax-h3-max-recast` | MiniMax H3 Max Recast | `v2v` |
+| `minimax-h3-image` | MiniMax H3 Image | `t2i` |
+| `minimax-h3-image-highspeed` | MiniMax H3 Image Highspeed | `t2i` |
+| `minimax-m3` | MiniMax M3 | `i2t` |
+| `minimax-m3.1-flash` | MiniMax M3.1 Flash | `i2t` |
 | `minimax-h3-context-ir` | MiniMax H3 Context IR | `v2t` |
 
 ## Example
@@ -59,7 +66,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `hailuo-2.3`
 
@@ -412,6 +419,42 @@ MiniMax H3; input type `t2v`.
 ```
 
 </details>
+
+### `minimax-h3-highspeed`: MiniMax H3 Highspeed
+
+[Try `minimax-h3-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-highspeed)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤7000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480P` · `768P` (default `768P`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `adaptive`) |
+
+### `minimax-h3-lite`: MiniMax H3 Lite
+
+[Try `minimax-h3-lite` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-lite)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤7000 chars) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `audioUrls` | `--audio-urls` | file | audio (up to 3) |
+| `resolution` | `-r` | enum | `480P` · `768P` (default `768P`) |
+| `duration` | `-d` | range | `5`–`15`, step 1 (default `5`) |
+| `aspectRatio` | `--ar` | enum | `adaptive` · `21:9` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
 
 ### `minimax-music-v2`
 
@@ -1407,6 +1450,77 @@ MiniMax H3 Max Relight; input type `v2v`.
 
 </details>
 
+### `minimax-h3-max-recast`: MiniMax H3 Max Recast
+
+[Try `minimax-h3-max-recast` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-max-recast)
+
+Input type: `v2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | free text (≤2000 chars) |
+| `videoUrl` | `--video` | file | **required** video |
+| `imageUrls` | `-i` | file | **required** image (up to 4) |
+| `resolution` | `-r` | enum | `768p` · `1080p` (default `1080p`) |
+| `enhanceRealism` | `--enhance-realism` | boolean | `true` · `false` (default `false`) |
+| `seed` | `--seed` | range | `0`–`2147483647`, step 1 |
+| `enableSafetyChecker` | `--enable-safety-checker` | boolean | `true` · `false` (default `true`) |
+
+### `minimax-h3-image`: MiniMax H3 Image
+
+[Try `minimax-h3-image` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-image)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `21:9` · `3:1` · `1:3` (default `auto`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `jpeg` · `png` · `webp` (default `jpeg`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
+
+### `minimax-h3-image-highspeed`: MiniMax H3 Image Highspeed
+
+[Try `minimax-h3-image-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-h3-image-highspeed)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤32000 chars) |
+| `resolution` | `-r` | enum | `1K` · `2K` · `4K` (default `2K`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `1:1` · `4:3` · `3:4` · `3:2` · `2:3` · `16:9` · `9:16` · `21:9` · `3:1` · `1:3` (default `auto`) |
+| `count` | `-n` | enum | `1` · `2` · `4` · `6` · `8` · `10` (default `1`) |
+| `enhancePrompt` | `--enhance-prompt` | boolean | `true` · `false` (default `true`) |
+| `outputFormat` | `--output-format` | enum | `jpeg` · `png` · `webp` (default `jpeg`) |
+| `imageUrls` | `-i` | file | image (up to 16) |
+
+### `minimax-m3`: MiniMax M3
+
+[Try `minimax-m3` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-m3)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+
+### `minimax-m3.1-flash`: MiniMax M3.1 Flash
+
+[Try `minimax-m3.1-flash` in Playground ↗](https://picsart.com/ai-playground/?model=minimax-m3.1-flash)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `low` · `medium` · `high` (default `high`) |
+
 ### `minimax-h3-context-ir`
 
 MiniMax H3 Context IR; input type `v2t`.
@@ -1525,4 +1639,8 @@ MiniMax H3 Context IR; input type `v2t`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing hailuo-2.3 --duration 10
+```
+
+Cost scales with **duration** and **resolution** (the Pro variants run at 1080p; 10s is 768p only). Music is priced per generated track.

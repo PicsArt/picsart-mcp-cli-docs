@@ -7,6 +7,113 @@ title: Changelog
 
 Historical release notes follow. Their counts and availability describe the named release, not today's runtime.
 
+## 2026-11-14
+
+**SDK 7.0.0 catalog refresh: 260 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Seedance 2.5 Flash** *(video, `t2v`)*: Fast video generation, editing and extension up to 30s at 720p with audio and reference inputs. See [ByteDance](/reference/providers/bytedance).
+
+## 2026-11-13
+
+**SDK 7.0.0 catalog refresh: 259 production models across 32 providers.**
+Compared with the previous catalog: 3 models added.
+
+### New
+
+- **Gemini 4 Carbon** *(text, `v2t`)*: Deep-reasoning LLM for long coding, research and multimodal tasks, with a 1M-token context. See [Google](/reference/providers/google).
+- **Gemini Decision 1** *(json, `i2t`)*: Classifier for yes/no, choice and score questions over text and images, in under 250 ms. See [Google](/reference/providers/google).
+- **GPT-6 Luna Decisions** *(json, `i2t`)*: Classifier for yes/no, choice and score questions over text and images, in under 200 ms. See [OpenAI](/reference/providers/openai).
+
+## 2026-11-11
+
+**SDK 7.0.0 catalog refresh: 256 production models across 32 providers.**
+Compared with the previous catalog: 2 models added.
+
+### New
+
+- **MiniMax H3 Image** *(image, `t2i`)*: Detailed images up to 4K with precise prompt following: or edit and combine up to 16 reference images. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Image Highspeed** *(image, `t2i`)*: Faster H3 Image: images up to 4K from text, or edits combining up to 16 reference images. See [MiniMax](/reference/providers/minimax).
+
+## 2026-11-10
+
+**SDK 7.0.0 catalog refresh: 254 production models across 32 providers.**
+Compared with the previous catalog: 2 models added.
+
+### New
+
+- **Claude Fable 5.2** *(text, `i2t`)*: Anthropic’s most capable model: frontier reasoning and long-horizon agentic work. See [Anthropic](/reference/providers/anthropic).
+- **Seedream 5.5** *(image, `t2i`)*: Realistic images with clear text, stable multi-turn edits and native transparent backgrounds. See [ByteDance](/reference/providers/bytedance).
+
+## 2026-11-06
+
+**SDK 7.0.0 catalog refresh: 252 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Gemini Omni 1.2 Flash** *(video, `t2v`)*: Gemini Omni 1.2 Flash: multimodal video with frame interpolation, extension, reference-guided generation, and up to 4K output. See [Google](/reference/providers/google).
+
+## 2026-11-05
+
+**SDK 7.0.0 catalog refresh: 251 production models across 32 providers.**
+Compared with the previous catalog: 4 models added.
+
+### New
+
+- **Kling 4.0 Flash** *(video, `t2v`)*: Kling 4.0 Flash: fast 720p video up to 20s from text or a start frame. See [Kling](/reference/providers/kling).
+- **Kling 4.0 Flash Omni** *(video, `t2v`)*: Kling 4.0 Flash Omni: fast 720p video up to 20s from text, a first frame, reference images, a reference or base video, and elements. See [Kling](/reference/providers/kling).
+- **GPT Image 2.6 Flare** *(image, `t2i`)*: GPT Image 2.6 Flare: smaller, faster tier tuned by reasoning effort and temperature rather than quality. Quick, precise edits and generation. See [OpenAI](/reference/providers/openai).
+- **GPT Image 2.6 Sunburst** *(image, `t2i`)*: GPT Image 2.6 Sunburst: base tier tuned by reasoning effort and temperature rather than quality. Strong text rendering and complex layouts. See [OpenAI](/reference/providers/openai).
+
+## 2026-11-03
+
+**SDK 7.0.0 catalog refresh: 247 production models across 32 providers.**
+Compared with the previous catalog: 3 models added.
+
+### New
+
+- **MiniMax H3 Highspeed** *(video, `t2v`)*: MiniMax H3 Highspeed: balanced quality and speed: 768p video from text, start/last frame, or image/video/audio references. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Lite** *(video, `t2v`)*: MiniMax H3 Lite: fastest and cheapest H3: 480p/768p video from text, start/last frame, or image/video/audio references. See [MiniMax](/reference/providers/minimax).
+- **MiniMax H3 Max Recast** *(video, `v2v`)*: Recast the people in a video with MiniMax H3 Max: one reference photo per new person, replacing the main people left to right while keeping the source motion, camera, cuts, and sound. Sources of 5-30s with no single shot over 15s, output up to 1080p. See [MiniMax](/reference/providers/minimax).
+
+## 2026-11-02
+
+**SDK 7.0.0 catalog refresh: 244 production models across 32 providers.**
+Compared with the previous catalog: 1 model added.
+
+### New
+
+- **Claude Opus 5.5** *(text, `i2t`)*: Anthropic’s latest Opus model: top-tier reasoning for complex, long-form tasks. See [Anthropic](/reference/providers/anthropic).
+
+## 2026-10-30
+
+**SDK 7.0.0 catalog refresh: 243 production models across 32 providers.**
+Compared with the previous catalog: 10 models added, 5 removed.
+
+### New
+
+- **Flux 3 Max** *(video, `t2v`)*: Text-to-video with synchronized audio, or image-to-video from a start (and optional end) frame. Up to 20s at 1080p. See [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Flux 3 Max Keyframes** *(video, `i2v`)*: Animate a video between up to 10 positioned keyframe images, with synchronized audio. Up to 20s at 1080p. See [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Ideogram Vector** *(image, `t2i`)*: Ideogram Vector: SVG logos, icons and illustrations from a prompt, optionally guided by up to 5 reference images. See [Ideogram](/reference/providers/ideogram).
+- **Ideogram Vectorize** *(image, `i2i`)*: Ideogram Vectorize: convert a raster image (JPEG, PNG or WebP) into an SVG. See [Ideogram](/reference/providers/ideogram).
+- **Kimi K3.1 Pro** *(text, `i2t`)*: Moonshot’s most capable Kimi model: post-trained K3 with deep reasoning and a 1M-token context. See [Kimi](/reference/providers/kimi).
+- **Kimi K3.1 Pro Highspeed** *(text, `i2t`)*: Kimi K3.1 Pro at 2–3× the speed: same capabilities, faster responses. See [Kimi](/reference/providers/kimi).
+- **MiniMax M3** *(text, `i2t`)*: MiniMax’s flagship model: adaptive reasoning with a 1M-token context. See [MiniMax](/reference/providers/minimax).
+- **MiniMax M3.1 Flash** *(text, `i2t`)*: Fast, low-cost MiniMax model: always-on reasoning with a 1M-token context. See [MiniMax](/reference/providers/minimax).
+- **GPT-6.1 Sol** *(text, `i2t`)*: OpenAI’s most capable GPT-6.1 model for deep reasoning and complex tasks, with a 1M-token context. See [OpenAI](/reference/providers/openai).
+- **GPT-6.1 Terra** *(text, `i2t`)*: Balanced GPT-6.1 model: strong general-purpose quality at half the price of Sol, with a 1M-token context. See [OpenAI](/reference/providers/openai).
+
+### Removed
+
+- **Eleven Multilingual v2** *(audio)* leaves [ElevenLabs](/reference/providers/elevenlabs).
+- **Flux Kontext Max** *(image)* leaves [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Flux Kontext Pro** *(image)* leaves [Flux (Black Forest Labs)](/reference/providers/flux).
+- **Kling V2.6** *(video)* leaves [Kling](/reference/providers/kling).
+- **Kling Video O1** *(video)* leaves [Kling](/reference/providers/kling).
+
 ## 2026-10-16
 
 **SDK 6.48.1 catalog refresh: 238 production models across 32 providers.**

@@ -8,6 +8,8 @@ Use the Picsart HTTP API when your application does not use the TypeScript SDK. 
 
 Do not substitute a model ID for a workflow path. Models can share a workflow while requiring different parameters. Likewise, an MCP tool request is not a REST request body.
 
+The API base URL is `https://api.picsart.com`.
+
 Before submitting a generation:
 
 1. Choose a workflow and copy its documented request format.

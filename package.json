@@ -14,12 +14,16 @@
     "check:docs": "python3 scripts/check-docs.py",
     "check:style": "python3 scripts/check-style.py",
     "test:docs": "python3 scripts/test-doc-checks.py",
-    "check:site": "node scripts/check-site.mjs"
+    "check:site": "node scripts/check-site.mjs",
+    "fix:counts": "node scripts/fix-counts.mjs",
+    "export:catalog": "node scripts/export-sdk-catalog.mjs .sdk-catalog.json",
+    "refresh:catalog": "npm run export:catalog && node -e \"require('node:fs').copyFileSync('.sdk-catalog.json', 'scripts/data/catalog.json')\" && node scripts/build-catalog-data.mjs .sdk-catalog.json && node scripts/build-provider-pages.mjs .sdk-catalog.json && npm run fix:counts",
+    "draft:changelog": "node scripts/draft-changelog.mjs --catalog .sdk-catalog.json"
   },
   "devDependencies": {
     "playwright": "1.63.0",
     "vitepress": "^1.6.3",
-    "@picsart/ai-sdk": "6.48.1"
+    "@picsart/ai-sdk": "7.0.0"
   },
   "overrides": {
     "vite": "6.4.3"

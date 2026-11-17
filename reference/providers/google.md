@@ -4,38 +4,38 @@ description: "Google model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Google
 
-**Modes:** image, video, audio, text · **Models:** 24
+**Modes:** image, video, audio, text · **Models:** 27
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
-|---|---|---|
-| `veo-3.1` | Veo 3.1 | `t2v` |
-| `veo-3.1-fast` | Veo 3.1 Fast | `t2v` |
-| `veo-3.1-lite` | Veo 3.1 Lite | `t2v` |
-| `gemini-nano-banana-2.1` | Nano Banana 2.1 | `t2i` |
-| `gemini-3.1-flash-image` | Nano Banana 2 | `t2i` |
-| `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | `t2i` |
-| `gemini-3-pro-image` | Nano Banana Pro | `t2i` |
-| `gemini-2.5-flash-image` | Nano Banana | `t2i` |
-| `gemini-2.5-flash-tts` | Gemini 2.5 Flash TTS | `tts` |
-| `gemini-2.5-pro-tts` | Gemini 2.5 Pro TTS | `tts` |
-| `gemini-3.8-flash-tts` | Gemini 3.8 Flash TTS | `tts` |
-| `gemini-3.8-flash-lite-tts` | Gemini 3.8 Flash Lite TTS | `tts` |
-| `gemini-omni-flash-preview` | Gemini Omni | `t2v` |
-| `gemini-omni-1.1-flash-preview` | Gemini Omni 1.1 Flash | `t2v` |
-| `lyria-3-clip` | Lyria 3 Clip | `music` |
-| `lyria-3-pro` | Lyria 3 Pro | `music` |
-| `lyria-3.5` | Lyria 3.5 | `music` |
-| `gemini-4-argon` | Gemini 4 Argon | `v2t` |
-| `gemini-3-pro` | Gemini 3 Pro | `v2t` |
-| `gemini-3.8-flash` | Gemini 3.8 Flash | `i2t` |
-| `gemini-3.7-flash` | Gemini 3.7 Flash | `i2t` |
-| `gemini-3.6-flash` | Gemini 3.6 Flash | `i2t` |
-| `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | `i2t` |
-| `gemini-2.5-flash` | Gemini 2.5 Flash | `i2t` |
+| id | Name | Mode | Input |
+|---|---|---|---|
+| `veo-3.1` | Veo 3.1 | video | `t2v` |
+| `veo-3.1-fast` | Veo 3.1 Fast | video | `t2v` |
+| `veo-3.1-lite` | Veo 3.1 Lite | video | `t2v` |
+| `gemini-nano-banana-2.1` | Nano Banana 2.1 | image | `t2i` |
+| `gemini-3.1-flash-image` | Nano Banana 2 | image | `t2i` |
+| `gemini-3.1-flash-lite-image` | Nano Banana 2 Lite | image | `t2i` |
+| `gemini-3-pro-image` | Nano Banana Pro | image | `t2i` |
+| `gemini-2.5-flash-image` | Nano Banana | image | `t2i` |
+| `gemini-2.5-flash-tts` | Gemini 2.5 Flash TTS | audio | `tts` |
+| `gemini-2.5-pro-tts` | Gemini 2.5 Pro TTS | audio | `tts` |
+| `gemini-3.8-flash-tts` | Gemini 3.8 Flash TTS | audio | `tts` |
+| `gemini-3.8-flash-lite-tts` | Gemini 3.8 Flash Lite TTS | audio | `tts` |
+| `gemini-omni-flash-preview` | Gemini Omni | video | `t2v` |
+| `gemini-omni-1.1-flash-preview` | Gemini Omni 1.1 Flash | video | `t2v` |
+| `lyria-3-clip` | Lyria 3 Clip | audio | `music` |
+| `lyria-3-pro` | Lyria 3 Pro | audio | `music` |
+| `lyria-3.5` | Lyria 3.5 | audio | `music` |
+| `gemini-4-argon` | Gemini 4 Argon | text | `v2t` |
+| `gemini-3-pro` | Gemini 3 Pro | text | `v2t` |
+| `gemini-3.8-flash` | Gemini 3.8 Flash | text | `i2t` |
+| `gemini-3.7-flash` | Gemini 3.7 Flash | text | `i2t` |
+| `gemini-3.6-flash` | Gemini 3.6 Flash | text | `i2t` |
+| `gemini-3.5-flash-lite` | Gemini 3.5 Flash Lite | text | `i2t` |
+| `gemini-2.5-flash` | Gemini 2.5 Flash | text | `i2t` |
 
 ## Example
 
@@ -69,7 +69,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `veo-3.1`
 
@@ -1712,6 +1712,37 @@ Gemini Omni 1.1 Flash; input type `t2v`.
 
 </details>
 
+### `gemini-omni-1.2-flash`: Gemini Omni 1.2 Flash
+
+[Try `gemini-omni-1.2-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-omni-1.2-flash)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `360p` · `720p` · `1080p` · `4k` (default `720p`) |
+| `duration` | `-d` | enum | `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` · `11` · `12` · `13` · `14` · `15` (default `8`) |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 5) |
+| `videoUrl` | `--video` | file | video |
+| `videoUrls` | `--video-urls` | file | video (up to 3) |
+| `task` | `--task` | enum | `edit` · `extend` (default `edit`) |
+
+### `gemini-decision-1`: Gemini Decision 1
+
+[Try `gemini-decision-1` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-decision-1)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `input` | `--input` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `questions` | `--questions` | object | `{}` |
+
 ### `lyria-3-clip`
 
 Lyria 3 Clip; input type `music`.
@@ -1823,6 +1854,19 @@ Lyria 3.5; input type `music`.
 ```
 
 </details>
+
+### `gemini-4-carbon`: Gemini 4 Carbon
+
+[Try `gemini-4-carbon` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-4-carbon)
+
+Input type: `v2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `videoUrl` | `--video` | file | video |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ### `gemini-4-argon`
 
@@ -2219,7 +2263,3 @@ Gemini 2.5 Flash; input type `i2t`.
 ```
 
 </details>
-
-## Pricing
-
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.

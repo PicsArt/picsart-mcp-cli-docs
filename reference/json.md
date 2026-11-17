@@ -4,7 +4,7 @@ description: "Structured JSON evaluation in the Picsart SDK: Jev content evaluat
 
 # JSON & evaluation
 
-**1 JSON model** evaluates content and returns structured answers.
+**3 JSON model** evaluates content and returns structured answers.
 
 | Model | Provider | Purpose |
 |---|---|---|

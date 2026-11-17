@@ -6,17 +6,17 @@ description: "TypeSafe model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** json · **Models:** 1
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
-| `typesafe-evaluate` | Jev | `t2t` |
+| `typesafe-evaluate` | Jev | `i2t` |
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters from the SDK 6.29.0 catalog.
 
 ### `typesafe-evaluate`
 
@@ -81,6 +81,6 @@ Jev; input type `t2t`.
 
 </details>
 
-## Pricing
+## Availability
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+This reference describes the SDK catalog. Do not assume that `gen-ai generate`, `picsart_generate`, or the Playground supports structured evaluation merely because the model is listed here. Inspect the interface's model discovery and supported execution methods before use.

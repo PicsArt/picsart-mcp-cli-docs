@@ -6,19 +6,19 @@ description: "Kling model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** image, video, audio · **Models:** 15
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
 | `kling-v3` | Kling V3 | `t2v` |
 | `kling-v3-turbo` | Kling V3 Turbo | `t2v` |
 | `kling-v4` | Kling 4.0 | `t2v` |
-| `kling-v2-6` | Kling V2.6 | `t2v` |
+| `kling-v4-flash` | Kling 4.0 Flash | `t2v` |
 | `kling-v3-omni` | Kling V3 Omni | `t2v` |
 | `kling-v4-omni` | Kling 4.0 Omni | `t2v` |
-| `kling-video-o1` | Kling Video O1 | `t2v` |
+| `kling-v4-flash-omni` | Kling 4.0 Flash Omni | `t2v` |
 | `kling-motion-control-v3` | Kling Motion Control V3 | `i2v` |
 | `kling-motion-control` | Kling Motion Control 2.6 | `i2v` |
 | `kling-avatar` | Kling Avatar | `i2v` |
@@ -60,7 +60,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `kling-v3`
 
@@ -420,90 +420,18 @@ Kling 4.0; input type `t2v`.
 
 </details>
 
-### `kling-v2-6`
+### `kling-v4-flash`: Kling 4.0 Flash
 
-Kling V2.6; input type `t2v`.
+[Try `kling-v4-flash` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v4-flash)
 
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
-| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
-| `startFrame` | `--start-frame` | No | file | image input |
-| `endFrame` | `--end-frame` | No | file | image input |
-| `negativePrompt` | `--negative-prompt` | No | text | Text |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
+Input type: `t2v`
 
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text",
-    "maxLength": 2500
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 10
-      }
-    ],
-    "default": 5
-  },
-  {
-    "key": "startFrame",
-    "label": "Start Frame",
-    "required": false,
-    "kind": "file",
-    "accept": "image"
-  },
-  {
-    "key": "endFrame",
-    "label": "End Frame",
-    "kind": "file",
-    "accept": "image"
-  },
-  {
-    "key": "negativePrompt",
-    "label": "Negative Prompt",
-    "kind": "text"
-  },
-  {
-    "key": "generateAudio",
-    "kind": "boolean",
-    "default": true
-  }
-]
-```
-
-</details>
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤26000 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` (default `16:9`) |
+| `duration` | `-d` | range | `3`–`20`, step 1 (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
 
 ### `kling-v3-omni`
 
@@ -861,86 +789,22 @@ Kling 4.0 Omni; input type `t2v`.
 
 </details>
 
-### `kling-video-o1`
+### `kling-v4-flash-omni`: Kling 4.0 Flash Omni
 
-Kling Video O1; input type `t2v`.
+[Try `kling-v4-flash-omni` in Playground ↗](https://picsart.com/ai-playground/?model=kling-v4-flash-omni)
 
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | maximum 2500 characters |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `16:9`, `9:16`, `1:1`; default `16:9` |
-| `duration` | `--duration` | No | enum | `5`, `10`; default `5` |
-| `renderingSpeed` | `--rendering-speed` | No | enum | `std`, `pro`; default `std` |
-| `generateAudio` | `--generate-audio` | No | boolean | true or false; default `true` |
+Input type: `t2v`
 
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text",
-    "maxLength": 2500
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "1:1"
-      }
-    ],
-    "default": "16:9"
-  },
-  {
-    "key": "duration",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 5
-      },
-      {
-        "id": 10
-      }
-    ],
-    "default": 5
-  },
-  {
-    "key": "renderingSpeed",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "std",
-        "label": "Standard"
-      },
-      {
-        "id": "pro",
-        "label": "Pro"
-      }
-    ],
-    "default": "std"
-  },
-  {
-    "key": "generateAudio",
-    "kind": "boolean",
-    "default": true
-  }
-]
-```
-
-</details>
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤26000 chars) |
+| `aspectRatio` | `--ar` | enum | `16:9` · `9:16` · `1:1` · `21:9` · `adaptive` (default `16:9`) |
+| `duration` | `-d` | range | `3`–`20`, step 1 (default `5`) |
+| `startFrame` | `--start-frame` | file | image |
+| `imageUrls` | `-i` | file | image (up to 9) |
+| `videoUrl` | `--video` | file | video |
+| `referType` | `--refer-type` | enum | `feature` (Feature Reference) · `base` (Base Edit) (default `feature`) |
+| `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-motion-control-v3`
 
@@ -1583,4 +1447,8 @@ Kling V2A; input type `v2a`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing kling-v3 --duration 5
+```
+
+Cost scales with **duration**, **rendering speed / resolution** (`std` 720p · `pro` 1080p · `4k`), and **audio**.

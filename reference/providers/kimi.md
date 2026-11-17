@@ -4,19 +4,21 @@ description: "Kimi model IDs, parameters, and CLI and MCP usage on Picsart."
 
 # Kimi
 
-**Modes:** text · **Models:** 1
+**Modes:** text · **Models:** 3
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
 | `kimi-k3` | Kimi K3 | `i2t` |
+| `kimi-k3.1-pro` | Kimi K3.1 Pro | `i2t` |
+| `kimi-k3.1-pro-highspeed` | Kimi K3.1 Pro Highspeed | `i2t` |
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `kimi-k3`
 
@@ -70,6 +72,26 @@ Kimi K3; input type `i2t`.
 
 </details>
 
-## Pricing
+### `kimi-k3.1-pro`: Kimi K3.1 Pro
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+[Try `kimi-k3.1-pro` in Playground ↗](https://picsart.com/ai-playground/?model=kimi-k3.1-pro)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `low` · `high` (default `high`) |
+
+### `kimi-k3.1-pro-highspeed`: Kimi K3.1 Pro Highspeed
+
+[Try `kimi-k3.1-pro-highspeed` in Playground ↗](https://picsart.com/ai-playground/?model=kimi-k3.1-pro-highspeed)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `low` · `high` (default `high`) |

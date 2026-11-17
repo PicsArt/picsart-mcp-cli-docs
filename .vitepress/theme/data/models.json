@@ -14,6 +14,13 @@
     "inputType": "i2t"
   },
   {
+    "id": "claude-fable-5-2",
+    "name": "Claude Fable 5.2",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
     "id": "claude-haiku-4-5",
     "name": "Claude Haiku 4.5",
     "provider": "anthropic",
@@ -37,6 +44,13 @@
   {
     "id": "claude-opus-5",
     "name": "Claude Opus 5",
+    "provider": "anthropic",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "claude-opus-5-5",
+    "name": "Claude Opus 5.5",
     "provider": "anthropic",
     "mode": "text",
     "inputType": "i2t"
@@ -175,6 +189,13 @@
     "inputType": "t2v"
   },
   {
+    "id": "seedance-2.5-flash",
+    "name": "Seedance 2.5 Flash",
+    "provider": "bytedance",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "seedance-2.5-video-edit",
     "name": "Seedance 2.5 Video Edit",
     "provider": "bytedance",
@@ -219,6 +240,13 @@
   {
     "id": "seedream-5.0-pro",
     "name": "Seedream 5.0 Pro",
+    "provider": "bytedance",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "seedream-5.5",
+    "name": "Seedream 5.5",
     "provider": "bytedance",
     "mode": "image",
     "inputType": "t2i"
@@ -271,13 +299,6 @@
     "provider": "elevenlabs",
     "mode": "audio",
     "inputType": "sts"
-  },
-  {
-    "id": "eleven-multilingual-v2",
-    "name": "Eleven Multilingual v2",
-    "provider": "elevenlabs",
-    "mode": "audio",
-    "inputType": "tts"
   },
   {
     "id": "eleven-speech-to-text",
@@ -399,25 +420,25 @@
     "inputType": "t2i"
   },
   {
-    "id": "flux-3-video",
-    "name": "Flux 3 Video",
+    "id": "flux-3-max",
+    "name": "Flux 3 Max",
     "provider": "flux",
     "mode": "video",
     "inputType": "t2v"
   },
   {
-    "id": "flux-kontext-max",
-    "name": "Flux Kontext Max",
+    "id": "flux-3-max-keyframes",
+    "name": "Flux 3 Max Keyframes",
     "provider": "flux",
-    "mode": "image",
-    "inputType": "t2i"
+    "mode": "video",
+    "inputType": "i2v"
   },
   {
-    "id": "flux-kontext-pro",
-    "name": "Flux Kontext Pro",
+    "id": "flux-3-video",
+    "name": "Flux 3 Video",
     "provider": "flux",
-    "mode": "image",
-    "inputType": "t2i"
+    "mode": "video",
+    "inputType": "t2v"
   },
   {
     "id": "flux-video-edit",
@@ -539,6 +560,20 @@
     "inputType": "v2t"
   },
   {
+    "id": "gemini-4-carbon",
+    "name": "Gemini 4 Carbon",
+    "provider": "google",
+    "mode": "text",
+    "inputType": "v2t"
+  },
+  {
+    "id": "gemini-decision-1",
+    "name": "Gemini Decision 1",
+    "provider": "google",
+    "mode": "json",
+    "inputType": "i2t"
+  },
+  {
     "id": "gemini-nano-banana-2.1",
     "name": "Nano Banana 2.1",
     "provider": "google",
@@ -548,6 +583,13 @@
   {
     "id": "gemini-omni-1.1-flash-preview",
     "name": "Gemini Omni 1.1 Flash",
+    "provider": "google",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "gemini-omni-1.2-flash",
+    "name": "Gemini Omni 1.2 Flash",
     "provider": "google",
     "mode": "video",
     "inputType": "t2v"
@@ -777,8 +819,36 @@
     "inputType": "t2i"
   },
   {
+    "id": "ideogram-vector-1",
+    "name": "Ideogram Vector",
+    "provider": "ideogram",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "ideogram-vector-1-vectorize",
+    "name": "Ideogram Vectorize",
+    "provider": "ideogram",
+    "mode": "image",
+    "inputType": "i2i"
+  },
+  {
     "id": "kimi-k3",
     "name": "Kimi K3",
+    "provider": "kimi",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "kimi-k3.1-pro",
+    "name": "Kimi K3.1 Pro",
+    "provider": "kimi",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "kimi-k3.1-pro-highspeed",
+    "name": "Kimi K3.1 Pro Highspeed",
     "provider": "kimi",
     "mode": "text",
     "inputType": "i2t"
@@ -826,13 +896,6 @@
     "inputType": "t2a"
   },
   {
-    "id": "kling-v2-6",
-    "name": "Kling V2.6",
-    "provider": "kling",
-    "mode": "video",
-    "inputType": "t2v"
-  },
-  {
     "id": "kling-v2a",
     "name": "Kling V2A",
     "provider": "kling",
@@ -868,6 +931,20 @@
     "inputType": "t2v"
   },
   {
+    "id": "kling-v4-flash",
+    "name": "Kling 4.0 Flash",
+    "provider": "kling",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "kling-v4-flash-omni",
+    "name": "Kling 4.0 Flash Omni",
+    "provider": "kling",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "kling-v4-omni",
     "name": "Kling 4.0 Omni",
     "provider": "kling",
@@ -880,13 +957,6 @@
     "provider": "kling",
     "mode": "video",
     "inputType": "i2v"
-  },
-  {
-    "id": "kling-video-o1",
-    "name": "Kling Video O1",
-    "provider": "kling",
-    "mode": "video",
-    "inputType": "t2v"
   },
   {
     "id": "ltx-2.3-a2v",
@@ -1043,6 +1113,34 @@
     "inputType": "v2t"
   },
   {
+    "id": "minimax-h3-highspeed",
+    "name": "MiniMax H3 Highspeed",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
+    "id": "minimax-h3-image",
+    "name": "MiniMax H3 Image",
+    "provider": "minimax",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "minimax-h3-image-highspeed",
+    "name": "MiniMax H3 Image Highspeed",
+    "provider": "minimax",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "minimax-h3-lite",
+    "name": "MiniMax H3 Lite",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "t2v"
+  },
+  {
     "id": "minimax-h3-max",
     "name": "MiniMax H3 Max",
     "provider": "minimax",
@@ -1071,6 +1169,13 @@
     "inputType": "i2v"
   },
   {
+    "id": "minimax-h3-max-recast",
+    "name": "MiniMax H3 Max Recast",
+    "provider": "minimax",
+    "mode": "video",
+    "inputType": "v2v"
+  },
+  {
     "id": "minimax-h3-max-relight",
     "name": "MiniMax H3 Max Relight",
     "provider": "minimax",
@@ -1083,6 +1188,20 @@
     "provider": "minimax",
     "mode": "video",
     "inputType": "t2v"
+  },
+  {
+    "id": "minimax-m3",
+    "name": "MiniMax M3",
+    "provider": "minimax",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "minimax-m3.1-flash",
+    "name": "MiniMax M3.1 Flash",
+    "provider": "minimax",
+    "mode": "text",
+    "inputType": "i2t"
   },
   {
     "id": "minimax-music-v2",
@@ -1218,8 +1337,29 @@
     "inputType": "i2t"
   },
   {
+    "id": "gpt-6-luna-decisions",
+    "name": "GPT-6 Luna Decisions",
+    "provider": "openai",
+    "mode": "json",
+    "inputType": "i2t"
+  },
+  {
     "id": "gpt-6-sol",
     "name": "GPT-6 Sol",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6.1-sol",
+    "name": "GPT-6.1 Sol",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6.1-terra",
+    "name": "GPT-6.1 Terra",
     "provider": "openai",
     "mode": "text",
     "inputType": "i2t"
@@ -1248,6 +1388,20 @@
   {
     "id": "gpt-image-2.5-sunburst",
     "name": "GPT Image 2.5 Sunburst",
+    "provider": "openai",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "gpt-image-2.6-flare",
+    "name": "GPT Image 2.6 Flare",
+    "provider": "openai",
+    "mode": "image",
+    "inputType": "t2i"
+  },
+  {
+    "id": "gpt-image-2.6-sunburst",
+    "name": "GPT Image 2.6 Sunburst",
     "provider": "openai",
     "mode": "image",
     "inputType": "t2i"
@@ -1600,7 +1754,7 @@
     "name": "Jev",
     "provider": "typesafe",
     "mode": "json",
-    "inputType": "t2t"
+    "inputType": "i2t"
   },
   {
     "id": "veed-fabric-v1",

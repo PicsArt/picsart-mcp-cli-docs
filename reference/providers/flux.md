@@ -6,22 +6,22 @@ description: "Flux model IDs, parameters, and CLI and MCP usage on Picsart."
 
 **Modes:** image, video · **Models:** 10
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
-|---|---|---|
-| `flux-2-pro` | Flux 2 Pro | `t2i` |
-| `flux-2-max` | Flux 2 Max | `t2i` |
-| `flux-2-flex` | Flux 2 Flex | `t2i` |
-| `flux-kontext-max` | Flux Kontext Max | `t2i` |
-| `flux-kontext-pro` | Flux Kontext Pro | `t2i` |
-| `flux-3-image` | Flux 3 Image | `t2i` |
-| `flux-3-image-klein` | Flux 3 Image Klein | `t2i` |
-| `flux-3-video` | Flux 3 Video | `t2v` |
-| `flux-video-upscale` | Flux 3 Video Upscale | `v2v` |
-| `flux-video-edit` | FLUX Video Edit | `v2v` |
+| id | Name | Input type | Notes |
+|---|---|---|---|
+| `flux-2-pro` | Flux 2 Pro | `t2i` | Multi-image input, up to 4K |
+| `flux-2-max` | Flux 2 Max | `t2i` | Detailed compositions |
+| `flux-2-flex` | Flux 2 Flex | `t2i` | Varied styles, up to 4K |
+| `flux-kontext-max` | Flux Kontext Max | `t2i` | Edit with up to 4 references |
+| `flux-kontext-pro` | Flux Kontext Pro | `t2i` | Edit with one reference |
+| `flux-3-image` | Flux 3 Image | `t2i` | Generate and edit with up to 10 references, up to 4K |
+| `flux-3-image-klein` | Flux 3 Image Klein | `t2i` | Distilled, faster Flux 3 Image with a steps control, up to 4K |
+| `flux-3-video` | Flux 3 Video | `t2v` | Video with synchronized audio |
+| `flux-video-upscale` | Flux 3 Video Upscale | `v2v` | Upscale video by 1.5x–3x |
+| `flux-video-edit` | FLUX Video Edit | `v2v` | Edit video with a text instruction |
 
 ## Example
 
@@ -55,7 +55,7 @@ If the response contains a job, use [job status](/guide/mcp-quickstart) to wait 
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Parameters come from the SDK catalog export. CLI support depends on the installed release; inspect the model and command help before using a listed flag.
 
 ### `flux-2-pro`
 
@@ -347,192 +347,6 @@ Flux 2 Flex; input type `t2i`.
       }
     ],
     "default": "1K"
-  },
-  {
-    "key": "count",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 1
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 10
-      }
-    ],
-    "default": 1
-  },
-  {
-    "key": "imageUrls",
-    "label": "Source Image",
-    "required": false,
-    "category": "reference",
-    "kind": "file",
-    "accept": "image",
-    "array": {
-      "max": 1
-    }
-  }
-]
-```
-
-</details>
-
-### `flux-kontext-max`
-
-Flux Kontext Max; input type `t2i`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | Text |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `21:9`, `9:21`; default `1:1` |
-| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
-| `imageUrls` | `--image` | No | file | image input; array; maximum 4 |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text"
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "1:1"
-  },
-  {
-    "key": "count",
-    "kind": "enum",
-    "valueType": "number",
-    "options": [
-      {
-        "id": 1
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 10
-      }
-    ],
-    "default": 1
-  },
-  {
-    "key": "imageUrls",
-    "label": "Source Images",
-    "required": false,
-    "category": "reference",
-    "kind": "file",
-    "accept": "image",
-    "array": {
-      "max": 4
-    }
-  }
-]
-```
-
-</details>
-
-### `flux-kontext-pro`
-
-Flux Kontext Pro; input type `t2i`.
-
-| Parameter | CLI flag | Required | Type | Values and constraints |
-|---|---|---|---|---|
-| `prompt` | `--prompt` | Yes | text | Text |
-| `aspectRatio` | `--aspect-ratio` | No | enum | `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `21:9`, `9:21`; default `1:1` |
-| `count` | `--count` | No | enum | `1`, `2`, `4`, `6`, `8`, `10`; default `1` |
-| `imageUrls` | `--image` | No | file | image input; array; maximum 1 |
-
-<details>
-<summary>Full parameter descriptors</summary>
-
-```json
-[
-  {
-    "key": "prompt",
-    "label": "Prompt",
-    "required": true,
-    "kind": "text"
-  },
-  {
-    "key": "aspectRatio",
-    "kind": "enum",
-    "valueType": "string",
-    "options": [
-      {
-        "id": "1:1"
-      },
-      {
-        "id": "16:9"
-      },
-      {
-        "id": "9:16"
-      },
-      {
-        "id": "4:3"
-      },
-      {
-        "id": "3:4"
-      },
-      {
-        "id": "21:9"
-      },
-      {
-        "id": "9:21"
-      }
-    ],
-    "default": "1:1"
   },
   {
     "key": "count",
@@ -1150,6 +964,45 @@ FLUX Video Edit; input type `v2v`.
 
 </details>
 
+### `flux-3-max`: Flux 3 Max
+
+[Try `flux-3-max` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-max)
+
+Input type: `t2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `startFrame` | `--start-frame` | file | image |
+| `endFrame` | `--end-frame` | file | image |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | range | `5`–`20`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `reasoningLevel` | `--reasoning-level` | enum | `low` · `high` (default `high`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+
+### `flux-3-max-keyframes`: Flux 3 Max Keyframes
+
+[Try `flux-3-max-keyframes` in Playground ↗](https://picsart.com/ai-playground/?model=flux-3-max-keyframes)
+
+Input type: `i2v`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | **required** image (up to 10) |
+| `aspectRatio` | `--ar` | enum | `auto` · `21:9` · `2:1` · `16:9` · `4:3` · `1:1` · `3:4` · `9:16` (default `16:9`) |
+| `resolution` | `-r` | enum | `720p` · `1080p` (default `720p`) |
+| `duration` | `-d` | range | `5`–`20`, step 1 (default `5`) |
+| `generateAudio` | `--audio-gen` | boolean | `true` · `false` (default `true`) |
+| `reasoningLevel` | `--reasoning-level` | enum | `low` · `high` (default `high`) |
+| `seed` | `--seed` | range | `-1`–`2147483647` (default `-1`) |
+
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing flux-2-pro
+```
+
+Cost scales with **resolution/quality** and the **number of outputs** (`count`).

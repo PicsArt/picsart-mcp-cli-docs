@@ -4,16 +4,18 @@ description: "Anthropic model IDs, parameters, and CLI and MCP usage on Picsart.
 
 # Anthropic
 
-**Modes:** text · **Models:** 9
+**Modes:** text · **Models:** 11
 
-This reference uses the `@picsart/ai-sdk 6.48.1` catalog snapshot. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
+This reference uses the current catalog export fetched with `@picsart/ai-sdk 7.0.0`. The hosted MCP server and your CLI version can expose different models. Check `picsart_model_catalog` or `gen-ai models info` before submitting a request.
 
 ## Models
 
-| ID | Name | Input type |
+| id | Name | Input type |
 |---|---|---|
+| `claude-fable-5-2` | Claude Fable 5.2 | `i2t` |
 | `claude-fable-5-1` | Claude Fable 5.1 | `i2t` |
 | `claude-fable-5` | Claude Fable 5 | `i2t` |
+| `claude-opus-5-5` | Claude Opus 5.5 | `i2t` |
 | `claude-opus-5` | Claude Opus 5 | `i2t` |
 | `claude-opus-4-8` | Claude Opus 4.8 | `i2t` |
 | `claude-sonnet-5` | Claude Sonnet 5 | `i2t` |
@@ -53,7 +55,18 @@ Text results are returned synchronously.
 
 ## Parameters
 
-Required inputs and defaults below describe the model, not every command that calls it. For example, `gen-ai describe` can supply its own question. CLI flags are checked against version 2.78.0. Model-specific MCP parameters belong in `extra`; see [the request format](/guide/mcp-quickstart).
+Full parameter surface, sourced from `gen-ai models info <id> --json`. CLI flags show the primary short form; the canonical `--kebab-case` long form always works too.
+
+### `claude-fable-5-2`: Claude Fable 5.2
+
+[Try `claude-fable-5-2` in Playground ↗](https://picsart.com/ai-playground/?model=claude-fable-5-2)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
 
 ### `claude-fable-5-1`
 
@@ -126,6 +139,17 @@ Claude Fable 5; input type `i2t`.
 ```
 
 </details>
+
+### `claude-opus-5-5`: Claude Opus 5.5
+
+[Try `claude-opus-5-5` in Playground ↗](https://picsart.com/ai-playground/?model=claude-opus-5-5)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
 
 ### `claude-opus-5`
 
@@ -381,4 +405,8 @@ Claude Haiku 4.5; input type `i2t`.
 
 ## Pricing
 
-[Inspect pricing and validate the complete request](/guide/pricing) before generation. A missing estimate does not mean the operation is free.
+```bash
+gen-ai pricing claude-sonnet-4-6
+```
+
+Claude analysis is priced per generation; cost is resolved per `modelId` via the backend `/options` call.
