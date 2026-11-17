@@ -96,6 +96,10 @@ the generation and render services.
   "arguments": { "action": "upload", "name": "ref.jpg", "url": "https://example.com/ref.jpg" } }
 ```
 
+## File formats
+
+Accepted formats and file-size limits vary by model. Check the model schema with `picsart_model_params` or `gen-ai validate -m <model-id> --schema`. Acceptance by the upload command does not guarantee that a generation model accepts the same file.
+
 ## FAQ
 
 **What file types can I upload?**
@@ -104,7 +108,7 @@ the generation and render services.
 
 **Are generated files private?**
 
-Yes. Files in your Drive are scoped to your account. The result URLs returned by generation tools are time-limited signed URLs — they do not expose your files publicly. Download or save to Drive promptly if long-term access is needed.
+Drive listings are account-scoped, but an asset URL may be usable by anyone who receives it. Download files you need to retain; do not assume a universal 24-hour expiry. See [Security](/guide/security).
 
 **Does saving to Drive cost extra credits?**
 
