@@ -62,7 +62,7 @@
   {
     "id": "google",
     "label": "Google",
-    "count": 27,
+    "count": 26,
     "modes": [
       "image",
       "video",
@@ -125,7 +125,7 @@
   {
     "id": "kling",
     "label": "Kling",
-    "count": 15,
+    "count": 16,
     "modes": [
       "image",
       "video",
@@ -181,7 +181,7 @@
   {
     "id": "openai",
     "label": "OpenAI",
-    "count": 24,
+    "count": 26,
     "modes": [
       "image",
       "text",

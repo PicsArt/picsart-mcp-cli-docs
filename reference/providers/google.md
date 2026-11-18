@@ -1,10 +1,10 @@
 ---
-description: "Google AI models on Picsart — 27 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
+description: "Google AI models on Picsart — 26 image/video/audio/text model(s) including Veo 3.1, Nano Banana Pro, Nano Banana 2, Gemini 3.8 TTS, and Gemini 4 Argon text analysis. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Google
 
-**Modes:** image · video · audio · text · json · **Models:** 27
+**Modes:** image · video · audio · text · json · **Models:** 26
 
 **Vendor:** [Google AI for Developers](https://ai.google.dev/) · [Vertex AI](https://cloud.google.com/vertex-ai) · **Official API docs:** [Image](https://ai.google.dev/gemini-api/docs/image-generation) · [Video (Veo)](https://ai.google.dev/gemini-api/docs/video) · [Music (Lyria)](https://cloud.google.com/vertex-ai/generative-ai/docs/music/generate-music)
 
@@ -413,18 +413,6 @@ Input type: `i2t`
 ### `gemini-3.7-flash` — Gemini 3.7 Flash
 
 [Try `gemini-3.7-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.7-flash)
-
-Input type: `i2t`
-
-| Param | CLI flag | Type | Values |
-|---|---|---|---|
-| `prompt` | `-p` | text | **required** |
-| `imageUrls` | `-i` | file | image (up to 8) |
-| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
-
-### `gemini-3.6-flash` — Gemini 3.6 Flash
-
-[Try `gemini-3.6-flash` in Playground ↗](https://picsart.com/ai-playground/?model=gemini-3.6-flash)
 
 Input type: `i2t`
 
