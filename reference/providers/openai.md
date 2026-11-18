@@ -1,10 +1,10 @@
 ---
-description: "OpenAI AI models on Picsart — 24 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
+description: "OpenAI AI models on Picsart — 26 image/text model(s) including GPT Image 2.5, GPT Image 2, and GPT text models. CLI + MCP examples, parameters, and official docs."
 ---
 
 # OpenAI
 
-**Modes:** image · text · json · **Models:** 24
+**Modes:** image · text · json · **Models:** 26
 
 **Vendor:** [OpenAI](https://developers.openai.com/docs/guides/image-generation) · **Official API docs:** [OpenAI Developer Docs](https://developers.openai.com/docs/guides/image-generation)
 
@@ -21,6 +21,8 @@ OpenAI provides GPT Image generation and GPT text and image-understanding models
 | `gpt-image-2` | GPT Image 2 | `t2i` |
 | `gpt-image-1.5` | GPT Image 1.5 | `t2i` |
 | `gpt-6-luna-decisions` | GPT-6 Luna Decisions | `i2t` |
+| `gpt-6.2-astra` | GPT-6.2 Astra | `i2t` |
+| `gpt-6.2-sol` | GPT-6.2 Sol | `i2t` |
 | `gpt-6.1-sol` | GPT-6.1 Sol | `i2t` |
 | `gpt-6.1-terra` | GPT-6.1 Terra | `i2t` |
 | `gpt-6-astra` | GPT-6 Astra | `i2t` |
@@ -173,6 +175,30 @@ Input type: `i2t`
 | `input` | `--input` | text | **required** |
 | `imageUrls` | `-i` | file | image (up to 8) |
 | `questions` | `--questions-type` · `--questions-name` · `--questions-instructions` · `--questions-choices` · `--questions-levels` | object[] | `{type, name, instructions, choices, levels}` |
+
+### `gpt-6.2-astra` — GPT-6.2 Astra
+
+[Try `gpt-6.2-astra` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.2-astra)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
+
+### `gpt-6.2-sol` — GPT-6.2 Sol
+
+[Try `gpt-6.2-sol` in Playground ↗](https://picsart.com/ai-playground/?model=gpt-6.2-sol)
+
+Input type: `i2t`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** |
+| `imageUrls` | `-i` | file | image (up to 8) |
+| `thinking` | `--thinking` | enum | `off` · `low` · `medium` · `high` (default `off`) |
 
 ### `gpt-6.1-sol` — GPT-6.1 Sol
 

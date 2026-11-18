@@ -1,10 +1,10 @@
 ---
-description: "Kling AI models on Picsart — 15 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
+description: "Kling AI models on Picsart — 16 audio/image/video model(s) including Kling V3 Turbo, Kling V2A, Kling 3.0 Image. CLI + MCP examples, parameters, and official docs."
 ---
 
 # Kling
 
-**Modes:** image · video · audio · **Models:** 15
+**Modes:** image · video · audio · **Models:** 16
 
 **Vendor:** [Kling (Kuaishou)](https://klingai.com/global/dev) · **Official API docs:** [Kling API](https://app.klingai.com/global/dev/document-api/quickStart/productIntroduction/overview)
 
@@ -24,6 +24,7 @@ Kling (by Kuaishou) is a video-first model family with text-to-video, image-to-v
 | `kling-motion-control-v3` | Kling Motion Control V3 | `i2v` |
 | `kling-motion-control` | Kling Motion Control 2.6 | `i2v` |
 | `kling-avatar` | Kling Avatar | `i2v` |
+| `kling-image-4.0` | Kling Image 4.0 | `t2i` |
 | `kling-3.0-image` | Kling 3.0 Image | `t2i` |
 | `kling-o1-image` | Kling O1 Image | `t2i` |
 | `kling-video-effects` | Kling Video Effects | `i2v` |
@@ -245,6 +246,26 @@ Input type: `i2v`
 | `imageUrls` | `-i` | file | **required** image (up to 1) |
 | `audioUrl` | `-a` | file | **required** audio |
 | `audioId` | `--audio-id` | text | free text |
+
+### `kling-image-4.0` — Kling Image 4.0
+
+[Try `kling-image-4.0` in Playground ↗](https://picsart.com/ai-playground/?model=kling-image-4.0)
+
+Input type: `t2i`
+
+| Param | CLI flag | Type | Values |
+|---|---|---|---|
+| `prompt` | `-p` | text | **required** (≤166000 chars) |
+| `resultType` | `--result-type` | enum | `single` (Images) · `series` (Image Series) · `long_image` (Long Image) (default `single`) |
+| `aspectRatio` | `--ar` | enum | `auto` · `16:9` · `9:16` · `1:1` · `21:9` · `4:3` · `3:2` · `2:3` · `3:4` (default `auto`) |
+| `resolution` | `-r` | enum | `1k` · `2k` · `4k` · `8k` (default `2k`) |
+| `count` | `-n` | enum | `1` · `2` · `3` · `4` · `5` · `6` · `7` · `8` · `9` · `10` (default `1`) |
+| `skill` | `--skill` | enum | `ecommerce` (Product Detail Page) · `webpage` (Webpage Design) (default `ecommerce`) |
+| `length` | `--length` | enum | `short` (Short (2-5 sections)) · `medium` (Medium (6-10 sections)) · `long` (Long (11-18 sections)) (default `medium`) |
+| `imageUrls` | `-i` | file | image (up to 10) |
+| `styleImageUrl` | `--style-image-url` | file | image |
+| `subjectImageUrl` | `--subject-image-url` | file | image |
+| `elementList` | `--element-list` | object[] | up to 3 `{element_id}` |
 
 ### `kling-3.0-image` — Kling 3.0 Image
 

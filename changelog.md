@@ -7,6 +7,21 @@ title: Changelog
 
 Notable changes to the Picsart model catalog and these docs. Newest first. The catalog is served by `@picsart/ai-sdk`; the same models are reachable from the [CLI](/guide/cli-quickstart), the [MCP server](/guide/mcp-quickstart), and [Skills](/guide/skills).
 
+## 2026-11-18
+
+**SDK 7.0.0 catalog refresh — 262 production models across 32 providers.**
+Compared with the previous catalog: 3 models added, 1 removed.
+
+### New
+
+- **Kling Image 4.0** *(image, `t2i`)* — Realistic images up to 8K with crisp typography, consistent series and long page images. See [Kling](/reference/providers/kling).
+- **GPT-6.2 Astra** *(text, `i2t`)* — LLM for advanced reasoning and multimodal tasks, with image input and a 1M-token context. See [OpenAI](/reference/providers/openai).
+- **GPT-6.2 Sol** *(text, `i2t`)* — LLM for deep reasoning and complex tasks, with image input and a 1M-token context. See [OpenAI](/reference/providers/openai).
+
+### Removed
+
+- **Gemini 3.6 Flash** *(text)* leaves [Google](/reference/providers/google).
+
 ## 2026-11-14
 
 **SDK 7.0.0 catalog refresh — 260 production models across 32 providers.**

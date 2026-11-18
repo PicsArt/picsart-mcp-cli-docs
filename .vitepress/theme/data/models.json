@@ -518,13 +518,6 @@
     "inputType": "i2t"
   },
   {
-    "id": "gemini-3.6-flash",
-    "name": "Gemini 3.6 Flash",
-    "provider": "google",
-    "mode": "text",
-    "inputType": "i2t"
-  },
-  {
     "id": "gemini-3.7-flash",
     "name": "Gemini 3.7 Flash",
     "provider": "google",
@@ -866,6 +859,13 @@
     "provider": "kling",
     "mode": "video",
     "inputType": "i2v"
+  },
+  {
+    "id": "kling-image-4.0",
+    "name": "Kling Image 4.0",
+    "provider": "kling",
+    "mode": "image",
+    "inputType": "t2i"
   },
   {
     "id": "kling-motion-control",
@@ -1360,6 +1360,20 @@
   {
     "id": "gpt-6.1-terra",
     "name": "GPT-6.1 Terra",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6.2-astra",
+    "name": "GPT-6.2 Astra",
+    "provider": "openai",
+    "mode": "text",
+    "inputType": "i2t"
+  },
+  {
+    "id": "gpt-6.2-sol",
+    "name": "GPT-6.2 Sol",
     "provider": "openai",
     "mode": "text",
     "inputType": "i2t"
